@@ -5,17 +5,12 @@
 
     public class Presenter : IOutputBoundary
     {
-        private IActionResult result;
-
-        public Result Build()
-        {
-            return new Result();
-        }
-        
-        public void Handle(Response response)
+        public IActionResult ViewModel { get; private set; }
+               
+        public void Populate(ResponseModel response)
         {
             if (response != null)
-                result = new OkResult();
+                ViewModel = new OkResult();
         }
     }
 }

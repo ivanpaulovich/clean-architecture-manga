@@ -2,13 +2,13 @@
 {
     using System;
 
-    public class Request
+    public class ResponseModel
     {
         public Guid AccountId { get; private set; }
 
-        public Request(Guid guid)
+        public ResponseModel()
         {
-            this.AccountId = guid;
+
         }
     }
 }

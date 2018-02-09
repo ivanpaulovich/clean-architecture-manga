@@ -2,6 +2,6 @@
 {
     public interface IOutputBoundary
     {
-        void Handle(Response response);
+        void Populate(ResponseModel response);
     }
 }

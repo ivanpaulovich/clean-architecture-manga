@@ -44,6 +44,7 @@
 
             builder.RegisterType<Presenter>()
                 .As<IOutputBoundary>()
+                .As<Presenter>()
                 .InstancePerLifetimeScope();
         }
     }

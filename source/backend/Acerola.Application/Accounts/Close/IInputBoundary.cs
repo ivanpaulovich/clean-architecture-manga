@@ -4,6 +4,6 @@
 
     public interface IInputBoundary
     {
-        Task Handle(Request request);
+        Task Handle(RequestModel request);
     }
 }
