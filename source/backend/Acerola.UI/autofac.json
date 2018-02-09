@@ -1,0 +1,24 @@
+﻿{
+  "defaultAssembly": "Acerola.UI",
+  "modules": [
+    {
+      "type": "Acerola.UI.Modules.ApplicationModule",
+      "properties": {
+        "ConnectionString": "mongodb://10.0.75.1:27017",
+        "DatabaseName": "AcerolaV01"
+      }
+    },
+    {
+      "type": "Acerola.UI.Modules.QueriesModule",
+      "properties": {
+        "ConnectionString": "mongodb://10.0.75.1:27017",
+        "DatabaseName": "AcerolaV01"
+      }
+    },
+    {
+      "type": "Acerola.UI.Modules.AutoMapperModule",
+      "properties": {
+      }
+    }
+  ]
+}
