@@ -55,6 +55,8 @@
                     Description = "The Acerola HTTP API",
                     TermsOfService = "Terms Of Service"
                 });
+
+                options.CustomSchemaIds(x => x.FullName);
             });
         }
 

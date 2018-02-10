@@ -37,14 +37,4 @@
     <ProjectReference Include="..\Acerola.Infrastructure\Acerola.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UseCases\Accounts\Deposit\" />
-    <Folder Include="UseCases\Accounts\ListAll\" />
-    <Folder Include="UseCases\Accounts\Details\" />
-    <Folder Include="UseCases\Accounts\Withdraw\" />
-    <Folder Include="UseCases\Customers\Details\" />
-    <Folder Include="UseCases\Customers\List\" />
-    <Folder Include="UseCases\Customers\Register\" />
-  </ItemGroup>
-
 </Project>

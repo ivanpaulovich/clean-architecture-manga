@@ -6,10 +6,12 @@
     using Acerola.Domain.Customers;
     using Acerola.Domain.Accounts;
     using Acerola.Infrastructure.DataAccess.Repositories.Accounts;
-    using Acerola.Application.Accounts.Close;
-    using Acerola.UI.UseCases.Accounts.Close;
+    using Acerola.Application;
+    using System.Reflection;
+    using Acerola.Application.Customers.Register;
+    using Acerola.UI.UseCases.Customers.Register;
 
-    public class ApplicationModule : Module
+    public class ApplicationModule : Autofac.Module
     {
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }
@@ -38,14 +40,23 @@
                 .As<IAccountWriteOnlyRepository>()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterType<Interactor>()
-                .As<IInputBoundary>()
+            builder.RegisterAssemblyTypes(typeof(Application.Customers.Register.Interactor).Assembly)
+                .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterType<Presenter>()
-                .As<IOutputBoundary>()
-                .As<Presenter>()
+            builder.RegisterAssemblyTypes(typeof(UseCases.Customers.Register.Presenter).Assembly)
+                .AsClosedTypesOf(typeof(IOutputBoundary<>))
                 .InstancePerLifetimeScope();
+
+
+            //builder.RegisterType<Interactor>()
+            //    .AsImplementedInterfaces()
+            //    .InstancePerLifetimeScope();
+
+            //builder.RegisterType<Presenter>()
+            //    .As<IOutputBoundary<Response>>()
+            //    .As<Presenter>()
+            //    .InstancePerLifetimeScope();
         }
     }
 }
