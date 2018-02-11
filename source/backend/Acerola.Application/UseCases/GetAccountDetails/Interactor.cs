@@ -2,31 +2,28 @@
 {
     using System.Threading.Tasks;
     using Acerola.Domain.Accounts;
-    using System.Collections.Generic;
+    using Acerola.Application.Responses;
 
     public class Interactor : IInputBoundary<Request>
     {
         private readonly IAccountReadOnlyRepository accountReadOnlyRepository;
-        private readonly IOutputBoundary<Response> outputBoundary;
+        private readonly IOutputBoundary<AccountResponse> outputBoundary;
+        private readonly IResponseConverter responseConverter;
 
         public Interactor(
             IAccountReadOnlyRepository accountReadOnlyRepository,
-            IOutputBoundary<Response> outputBoundary)
+            IOutputBoundary<AccountResponse> outputBoundary,
+            IResponseConverter responseConverter)
         {
             this.accountReadOnlyRepository = accountReadOnlyRepository;
             this.outputBoundary = outputBoundary;
+            this.responseConverter = responseConverter;
         }
 
         public async Task Handle(Request message)
         {
-            Account account = await this.accountReadOnlyRepository.Get(message.AccountId);
-
-            Response response = new Response(
-                account.Id,
-                account.CustomerId,
-                account.CurrentBalance.Value,
-                new List<Transaction>());
-
+            var account = await accountReadOnlyRepository.Get(message.AccountId);
+            AccountResponse response = responseConverter.Map<AccountResponse>(account);
             outputBoundary.Populate(response);
         }
     }

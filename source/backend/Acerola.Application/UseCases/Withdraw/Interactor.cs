@@ -9,15 +9,18 @@
         private readonly IAccountReadOnlyRepository accountReadOnlyRepository;
         private readonly IAccountWriteOnlyRepository accountWriteOnlyRepository;
         private readonly IOutputBoundary<Response> outputBoundary;
-
+        private readonly IResponseConverter responseConverter;
+        
         public Interactor(
             IAccountReadOnlyRepository accountReadOnlyRepository,
             IAccountWriteOnlyRepository accountWriteOnlyRepository,
-            IOutputBoundary<Response> outputBoundary)
+            IOutputBoundary<Response> outputBoundary,
+            IResponseConverter responseConverter)
         {
             this.accountReadOnlyRepository = accountReadOnlyRepository;
             this.accountWriteOnlyRepository = accountWriteOnlyRepository;
             this.outputBoundary = outputBoundary;
+            this.responseConverter = responseConverter;
         }
 
         public async Task Handle(Request request)
@@ -32,16 +35,9 @@
             await accountWriteOnlyRepository.Update(account);
 
             Account updatedAccount = await accountReadOnlyRepository.Get(request.AccountId);
-            if (updatedAccount == null)
-                throw new AccountNotFoundException($"The account {request.AccountId} does not exists or is already closed.");
 
-            outputBoundary.Populate(
-                new Response(
-                    debit.Amount.Value, 
-                    updatedAccount.CurrentBalance.Value, 
-                    debit.Description,
-                    debit.TransactionDate
-                ));
+            Response response = responseConverter.Map<Response>(debit);
+            outputBoundary.Populate(response);
         }
     }
 }

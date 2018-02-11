@@ -1,7 +1,7 @@
 ﻿namespace Acerola.UI.Api.Presenters
 {
     using Acerola.Application;
-    using Acerola.Application.UseCases.CloseAccount;
+    using Acerola.Application.UseCases.ListAllAccounts;
     using Microsoft.AspNetCore.Mvc;
 
     public class ListAllAccountsPresenter : IOutputBoundary<Response>

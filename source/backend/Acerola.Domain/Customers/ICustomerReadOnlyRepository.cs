@@ -7,6 +7,6 @@
     public interface ICustomerReadOnlyRepository
     {
         Task<Customer> Get(Guid id);
-        Task<IEnumerable<Customer>> GetAll();
+        Task<IEnumerable<Customer>> ListAll();
     }
 }

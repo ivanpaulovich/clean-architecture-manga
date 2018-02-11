@@ -1,14 +1,16 @@
-﻿namespace Acerola.Application.UseCases.GetCustomerDetails
+﻿namespace Acerola.Application.Responses
 {
     using System;
+    using System.Collections.Generic;
 
-    public class Response
+    public class CustomerResponse
     {
         public Guid CustomerId { get; private set; }
         public string Personnummer { get; private set; }
         public string Name { get; private set; }
+        public IReadOnlyList<AccountResponse> Accounts { get; private set; }
 
-        public Response(Guid customerId, string personnummer, string name)
+        public CustomerResponse(Guid customerId, string personnummer, string name)
         {
             CustomerId = customerId;
             Personnummer = personnummer;

@@ -1,20 +1,20 @@
-﻿namespace Acerola.Application.UseCases.GetAccountDetails
+﻿namespace Acerola.Application.Responses
 {
     using System;
     using System.Collections.Generic;
 
-    public class Response
+    public class AccountResponse
     {
         public Guid AccountId { get; private set; }
         public Guid CustomerId { get; private set; }
         public double CurrentBalance { get; private set; }
-        public IReadOnlyList<Transaction> Transactions { get; private set; }
+        public IReadOnlyList<TransactionResponse> Transactions { get; private set; }
 
-        public Response(
+        public AccountResponse(
             Guid accountId, 
             Guid customerId, 
             double currentBalance,
-            List<Transaction> transactions)
+            List<TransactionResponse> transactions)
         {
             this.AccountId = accountId;
             this.CustomerId = customerId;

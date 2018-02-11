@@ -7,9 +7,7 @@
     using Acerola.Domain.Accounts;
     using Acerola.Infrastructure.DataAccess.Repositories.Accounts;
     using Acerola.Application;
-    using System.Reflection;
-    using Acerola.Application.Customers.Register;
-    using Acerola.UI.UseCases.Customers.Register;
+    using Acerola.UI.Api.Presenters;
 
     public class ApplicationModule : Autofac.Module
     {
@@ -40,23 +38,13 @@
                 .As<IAccountWriteOnlyRepository>()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterAssemblyTypes(typeof(Application.Customers.Register.Interactor).Assembly)
+            builder.RegisterAssemblyTypes(typeof(Application.UseCases.Register.Interactor).Assembly)
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterAssemblyTypes(typeof(UseCases.Customers.Register.Presenter).Assembly)
+            builder.RegisterAssemblyTypes(typeof(RegisterPresenter).Assembly)
                 .AsClosedTypesOf(typeof(IOutputBoundary<>))
                 .InstancePerLifetimeScope();
-
-
-            //builder.RegisterType<Interactor>()
-            //    .AsImplementedInterfaces()
-            //    .InstancePerLifetimeScope();
-
-            //builder.RegisterType<Presenter>()
-            //    .As<IOutputBoundary<Response>>()
-            //    .As<Presenter>()
-            //    .InstancePerLifetimeScope();
         }
     }
 }

@@ -3,6 +3,7 @@
     using Acerola.Domain.Accounts;
     using MongoDB.Driver;
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public class AccountReadOnlyRepository : IAccountReadOnlyRepository
@@ -17,6 +18,15 @@
         public async Task<Account> Get(Guid id)
         {
             return await _mongoContext.Accounts.Find(e => e.Id == id).SingleOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<Account>> ListAll()
+        {
+            IEnumerable<Account> data = await this._mongoContext.Accounts
+                .Find(e => true)
+                .ToListAsync();
+
+            return data;
         }
     }
 }

@@ -1,14 +1,14 @@
 ﻿namespace Acerola.UI.Api.Presenters
 {
     using Acerola.Application;
-    using Acerola.Application.UseCases.CloseAccount;
+    using Acerola.Application.UseCases.GetCustomerDetails;
     using Microsoft.AspNetCore.Mvc;
 
-    public class GetCustomerDetailsPresenter : IOutputBoundary<Response>
+    public class GetCustomerDetailsPresenter : IOutputBoundary<Customer>
     {
         public IActionResult ViewModel { get; private set; }
                
-        public void Populate(Response response)
+        public void Populate(Customer response)
         {
             if (response == null)
                 ViewModel = new ContentResult();

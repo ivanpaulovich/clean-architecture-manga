@@ -8,7 +8,7 @@
     using System.Threading.Tasks;
 
     [Route("api/[controller]")]
-    public class Controller : Microsoft.AspNetCore.Mvc.Controller
+    public class CustomersController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly IInputBoundary<Application.UseCases.ListAllCustomers.Request> listAllCustomersInput;
         private readonly IInputBoundary<Application.UseCases.Register.Request> registerInput;
@@ -18,16 +18,20 @@
         private readonly RegisterPresenter registerPresenter;
         private readonly GetAccountDetailsPresenter getCustomerDetailsPresenter;
 
-        public Controller(
+        public CustomersController(
             IInputBoundary<Application.UseCases.ListAllCustomers.Request> listAllCustomersInput,
             IInputBoundary<Application.UseCases.Register.Request> registerInput,
+            IInputBoundary<Application.UseCases.GetCustomerDetails.Request> getCustomerInput,
             ListAllCustomersPresenter listAllCustomersPresenter,
-            RegisterPresenter registerPresenter)
+            RegisterPresenter registerPresenter,
+            GetAccountDetailsPresenter getCustomerDetailsPresenter)
         {
             this.listAllCustomersInput = listAllCustomersInput;
             this.registerInput = registerInput;
+            this.getCustomerInput = getCustomerInput;
             this.listAllCustomersPresenter = listAllCustomersPresenter;
             this.registerPresenter = registerPresenter;
+            this.getCustomerDetailsPresenter = getCustomerDetailsPresenter;
         }
 
         /// <summary>

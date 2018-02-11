@@ -10,36 +10,35 @@
         private readonly ICustomerWriteOnlyRepository customerWriteOnlyRepository;
         private readonly IAccountWriteOnlyRepository accountWriteOnlyRepository;
         private readonly IOutputBoundary<Response> outputBoundary;
-
+        private readonly IResponseConverter responseConverter;
+        
         public Interactor(
             ICustomerWriteOnlyRepository customerWriteOnlyRepository,
             IAccountWriteOnlyRepository accountWriteOnlyRepository,
-            IOutputBoundary<Response> outputBoundary)
+            IOutputBoundary<Response> outputBoundary,
+            IResponseConverter responseConverter)
         {
             this.customerWriteOnlyRepository = customerWriteOnlyRepository;
             this.accountWriteOnlyRepository = accountWriteOnlyRepository;
             this.outputBoundary = outputBoundary;
+            this.responseConverter = responseConverter;
         }
 
         public async Task Handle(Request message)
         {
-            Customer customer = Customer.Create(
-                PIN.Create(message.PIN),
-                Name.Create(message.Name));
+            Customer customer = Customer.Create(PIN.Create(message.PIN), Name.Create(message.Name));
 
             Account account = Account.Create(customer);
             customer.Register(account);
 
-            await customerWriteOnlyRepository.Add(customer);
-
             Credit credit = Credit.Create(Amount.Create(message.InitialAmount));
             account.Deposit(credit);
 
+            await customerWriteOnlyRepository.Add(customer);
             await accountWriteOnlyRepository.Add(account);
 
-            outputBoundary.Populate(
-                new Response(customer.Id, customer.PIN.Text, customer.Name.Text)
-            );
+            Response response = responseConverter.Map<Response>(customer);
+            outputBoundary.Populate(response);
         }
     }
 }
