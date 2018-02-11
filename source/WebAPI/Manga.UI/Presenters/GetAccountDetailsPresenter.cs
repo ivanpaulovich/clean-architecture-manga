@@ -3,6 +3,7 @@
     using Manga.Application;
     using Manga.Application.Responses;
     using Microsoft.AspNetCore.Mvc;
+    using System.Collections.Generic;
 
     public class GetAccountDetailsPresenter : IOutputBoundary<AccountResponse>
     {
@@ -14,9 +15,32 @@
             Response = response;
 
             if (response == null)
-                ViewModel = new OkResult();
+            {
+                ViewModel = new NoContentResult();
+                return;
+            }
 
-            ViewModel = new OkResult();
+            List<dynamic> transactions = new List<dynamic>();
+
+            foreach (var item in response.Transactions)
+            {
+                var transaction = new
+                {
+                    Amount = item.Amount,
+                    Description = item.Description,
+                    TransactionDate = item.TransactionDate
+                };
+
+                transactions.Add(transaction);
+            }
+
+            ViewModel = new ObjectResult(new
+            {
+                AccountId = response.AccountId,
+                CurrentBalance = response.CurrentBalance,
+                CustomerId = response.CustomerId,
+                Transactions = transactions
+            });
         }
     }
 }

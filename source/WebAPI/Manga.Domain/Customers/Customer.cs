@@ -20,8 +20,6 @@
             }
             private set
             {
-                if (value == null)
-                    value = new List<Account>();
                 accounts = value.ToList();
             }
         }
@@ -52,6 +50,18 @@
                 throw new ArgumentNullException(nameof(account));
 
             accounts.Add(account);
+        }
+
+        public void RemoveAccount(Guid accountID)
+        {
+            Account account = FindAccount(accountID);
+            accounts.Remove(account);
+        }
+
+        public Account FindAccount(Guid accountID)
+        {
+            Account account = Accounts.Where(e => e.Id == accountID).First();
+            return account;
         }
     }
 }

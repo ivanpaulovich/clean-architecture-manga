@@ -3,6 +3,8 @@
     using Manga.Application;
     using Manga.Application.UseCases.Register;
     using Microsoft.AspNetCore.Mvc;
+    using System.Net;
+    using System.Net.Http;
 
     public class RegisterPresenter : IOutputBoundary<Response>
     {
@@ -15,7 +17,10 @@
             Response = response;
 
             if (response == null)
-                ViewModel = new NotFoundResult();
+            {
+                ViewModel = new NoContentResult();
+                return;
+            }
 
             ViewModel = new ObjectResult(new
             {

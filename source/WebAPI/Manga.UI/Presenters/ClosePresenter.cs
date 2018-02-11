@@ -15,7 +15,10 @@
             Response = response;
 
             if (response == null)
-                ViewModel = new OkResult();
+            {
+                ViewModel = new NoContentResult();
+                return;
+            }
 
             ViewModel = new OkResult();
         }

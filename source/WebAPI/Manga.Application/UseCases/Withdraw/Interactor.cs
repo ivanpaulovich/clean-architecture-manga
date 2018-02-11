@@ -3,41 +3,45 @@
     using System.Threading.Tasks;
     using Manga.Application.Responses;
     using Manga.Domain.Accounts;
+    using Manga.Domain.Customers;
     using Manga.Domain.ValueObjects;
 
     public class Interactor : IInputBoundary<Request>
     {
-        private readonly IAccountReadOnlyRepository accountReadOnlyRepository;
-        private readonly IAccountWriteOnlyRepository accountWriteOnlyRepository;
+        private readonly ICustomerReadOnlyRepository customerReadOnlyRepository;
+        private readonly ICustomerWriteOnlyRepository customerWriteOnlyRepository;
         private readonly IOutputBoundary<Response> outputBoundary;
         private readonly IResponseConverter responseConverter;
         
         public Interactor(
-            IAccountReadOnlyRepository accountReadOnlyRepository,
-            IAccountWriteOnlyRepository accountWriteOnlyRepository,
+            ICustomerReadOnlyRepository customerReadOnlyRepository,
+            ICustomerWriteOnlyRepository customerWriteOnlyRepository,
             IOutputBoundary<Response> outputBoundary,
             IResponseConverter responseConverter)
         {
-            this.accountReadOnlyRepository = accountReadOnlyRepository;
-            this.accountWriteOnlyRepository = accountWriteOnlyRepository;
+            this.customerReadOnlyRepository = customerReadOnlyRepository;
+            this.customerWriteOnlyRepository = customerWriteOnlyRepository;
             this.outputBoundary = outputBoundary;
             this.responseConverter = responseConverter;
         }
 
         public async Task Handle(Request request)
         {
-            Account account = await accountReadOnlyRepository.Get(request.AccountId);
-            if (account == null)
+            Customer customer = await customerReadOnlyRepository.GetByAccount(request.AccountId);
+            if (customer == null)
                 throw new AccountNotFoundException($"The account {request.AccountId} does not exists or is already closed.");
 
             Debit debit = new Debit(new Amount(request.Amount));
+            Account account = customer.FindAccount(request.AccountId);
             account.Withdraw(debit);
 
-            await accountWriteOnlyRepository.Update(account);
+            await customerWriteOnlyRepository.Update(customer);
 
-            Account updatedAccount = await accountReadOnlyRepository.Get(request.AccountId);
             TransactionResponse transactionResponse = responseConverter.Map<TransactionResponse>(debit);
-            Response response = new Response(transactionResponse, updatedAccount.CurrentBalance.Value);
+            Response response = new Response(
+                transactionResponse,
+                account.CurrentBalance.Value
+            );
 
             outputBoundary.Populate(response);
         }

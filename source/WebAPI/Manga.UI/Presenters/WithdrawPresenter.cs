@@ -15,9 +15,18 @@
             Response = response;
 
             if (response == null)
-                ViewModel = new OkResult();
+            {
+                ViewModel = new NoContentResult();
+                return;
+            }
 
-            ViewModel = new OkResult();
+            ViewModel = new ObjectResult(new
+            {
+                Amount = response.Transaction.Amount,
+                Description = response.Transaction.Description,
+                TransactionDate = response.Transaction.TransactionDate,
+                UpdateBalance = response.UpdatedBalance,
+            });
         }
     }
 }

@@ -8,19 +8,19 @@
 
     public class Interactor : IInputBoundary<Request>
     {
+        private readonly ICustomerWriteOnlyRepository customerReadOnlyRepository;
         private readonly ICustomerWriteOnlyRepository customerWriteOnlyRepository;
-        private readonly IAccountWriteOnlyRepository accountWriteOnlyRepository;
         private readonly IOutputBoundary<Response> outputBoundary;
         private readonly IResponseConverter responseConverter;
         
         public Interactor(
+            ICustomerWriteOnlyRepository customerReadOnlyRepository,
             ICustomerWriteOnlyRepository customerWriteOnlyRepository,
-            IAccountWriteOnlyRepository accountWriteOnlyRepository,
             IOutputBoundary<Response> outputBoundary,
             IResponseConverter responseConverter)
         {
             this.customerWriteOnlyRepository = customerWriteOnlyRepository;
-            this.accountWriteOnlyRepository = accountWriteOnlyRepository;
+            this.customerWriteOnlyRepository = customerWriteOnlyRepository;
             this.outputBoundary = outputBoundary;
             this.responseConverter = responseConverter;
         }
@@ -30,13 +30,12 @@
             Customer customer = Customer.Create(PIN.Create(message.PIN), Name.Create(message.Name));
 
             Account account = Account.Create(customer);
-            customer.Register(account);
-
             Credit credit = new Credit(new Amount(message.InitialAmount));
             account.Deposit(credit);
 
+            customer.Register(account);
+
             await customerWriteOnlyRepository.Add(customer);
-            await accountWriteOnlyRepository.Add(account);
 
             CustomerResponse customerResponse = responseConverter.Map<CustomerResponse>(customer);
             AccountResponse accountResponse = responseConverter.Map<AccountResponse>(account);

@@ -1,28 +1,35 @@
 ﻿namespace Manga.Application.UseCases.GetAccountDetails
 {
     using System.Threading.Tasks;
-    using Manga.Domain.Accounts;
     using Manga.Application.Responses;
+    using Manga.Domain.Customers;
 
     public class Interactor : IInputBoundary<Request>
     {
-        private readonly IAccountReadOnlyRepository accountReadOnlyRepository;
+        private readonly ICustomerReadOnlyRepository customerReadOnlyRepository;
         private readonly IOutputBoundary<AccountResponse> outputBoundary;
         private readonly IResponseConverter responseConverter;
 
         public Interactor(
-            IAccountReadOnlyRepository accountReadOnlyRepository,
+            ICustomerReadOnlyRepository customerReadOnlyRepository,
             IOutputBoundary<AccountResponse> outputBoundary,
             IResponseConverter responseConverter)
         {
-            this.accountReadOnlyRepository = accountReadOnlyRepository;
+            this.customerReadOnlyRepository = customerReadOnlyRepository;
             this.outputBoundary = outputBoundary;
             this.responseConverter = responseConverter;
         }
 
         public async Task Handle(Request message)
         {
-            var account = await accountReadOnlyRepository.Get(message.AccountId);
+            var customer = await customerReadOnlyRepository.GetByAccount(message.AccountId);
+            if (customer == null)
+            {
+                outputBoundary.Populate(null);
+                return;
+            }
+
+            var account = customer.FindAccount(message.AccountId);
             AccountResponse response = responseConverter.Map<AccountResponse>(account);
             outputBoundary.Populate(response);
         }
