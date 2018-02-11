@@ -3,11 +3,11 @@
     using Acerola.Application;
     using AutoMapper;
 
-    public class DTOMapper : IResponseConverter
+    public class ResponseConverter : IResponseConverter
     {
         private readonly IMapper mapper;
 
-        public DTOMapper()
+        public ResponseConverter()
         {
             mapper = new MapperConfiguration(cfg => {
                 cfg.AddProfile<AccountsProfile>();

@@ -1,4 +1,4 @@
-﻿namespace Acerola.UI.Api.Presenters
+﻿namespace Acerola.UI.Presenters
 {
     using Acerola.Application;
     using Acerola.Application.UseCases.CloseAccount;
@@ -7,11 +7,15 @@
     public class ClosePresenter : IOutputBoundary<Response>
     {
         public IActionResult ViewModel { get; private set; }
-               
+
+        public Response Response { get; private set; }
+
         public void Populate(Response response)
         {
+            Response = response;
+
             if (response == null)
-                ViewModel = new ContentResult();
+                ViewModel = new OkResult();
 
             ViewModel = new OkResult();
         }

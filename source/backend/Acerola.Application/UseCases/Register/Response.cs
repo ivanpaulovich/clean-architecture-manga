@@ -1,17 +1,20 @@
 ﻿namespace Acerola.Application.UseCases.Register
 {
-    using System;
+    using Acerola.Application.Responses;
     public class Response
     {
-        public Guid CustomerId { get; private set; }
-        public string Personnummer { get; private set; }
-        public string Name { get; private set; }
+        public CustomerResponse Customer { get; private set; }
+        public AccountResponse Account { get; private set; }
 
-        public Response(Guid customerId, string personnummer, string name)
+        public Response()
         {
-            CustomerId = customerId;
-            Personnummer = personnummer;
-            Name = name;
+
+        }
+
+        public Response(CustomerResponse customer, AccountResponse account)
+        {
+            Customer = customer;
+            Account = account;
         }
     }
 }

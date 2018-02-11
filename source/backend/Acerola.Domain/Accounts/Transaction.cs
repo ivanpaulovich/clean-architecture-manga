@@ -5,12 +5,18 @@
 
     public abstract class Transaction : Entity
     {
-        public Amount Amount { get; protected set; }
+        public Amount Amount { get; private set; }
         public abstract string Description { get; }
-        public DateTime TransactionDate { get; set; }
+        public DateTime TransactionDate { get; private set; }
 
-        protected Transaction()
+        public Transaction()
         {
+
+        }
+
+        protected Transaction(Amount amount)
+        {
+            Amount = amount;
             TransactionDate = DateTime.Now;
         }
     }

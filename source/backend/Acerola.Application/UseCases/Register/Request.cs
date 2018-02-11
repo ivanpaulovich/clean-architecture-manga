@@ -2,9 +2,9 @@
 {
     public class Request
     {
-        public string PIN { get; }
-        public string Name { get; }
-        public double InitialAmount { get; }
+        public string PIN { get; private set; }
+        public string Name { get; private set; }
+        public double InitialAmount { get; private set; }
 
         public Request(string pin, string name, double initialAmount)
         {

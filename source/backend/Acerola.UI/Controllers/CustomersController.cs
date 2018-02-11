@@ -1,7 +1,7 @@
-﻿namespace Acerola.UI.UseCases.Customers.Register
+﻿namespace Acerola.UI.Controllers
 {
     using Acerola.Application;
-    using Acerola.UI.Api.Presenters;
+    using Acerola.UI.Presenters;
     using Acerola.UI.Requests;
     using Microsoft.AspNetCore.Mvc;
     using System;
@@ -10,26 +10,20 @@
     [Route("api/[controller]")]
     public class CustomersController : Microsoft.AspNetCore.Mvc.Controller
     {
-        private readonly IInputBoundary<Application.UseCases.ListAllCustomers.Request> listAllCustomersInput;
         private readonly IInputBoundary<Application.UseCases.Register.Request> registerInput;
         private readonly IInputBoundary<Application.UseCases.GetCustomerDetails.Request> getCustomerInput;
 
-        private readonly ListAllCustomersPresenter listAllCustomersPresenter;
         private readonly RegisterPresenter registerPresenter;
-        private readonly GetAccountDetailsPresenter getCustomerDetailsPresenter;
+        private readonly GetCustomerDetailsPresenter getCustomerDetailsPresenter;
 
         public CustomersController(
-            IInputBoundary<Application.UseCases.ListAllCustomers.Request> listAllCustomersInput,
             IInputBoundary<Application.UseCases.Register.Request> registerInput,
             IInputBoundary<Application.UseCases.GetCustomerDetails.Request> getCustomerInput,
-            ListAllCustomersPresenter listAllCustomersPresenter,
             RegisterPresenter registerPresenter,
-            GetAccountDetailsPresenter getCustomerDetailsPresenter)
+            GetCustomerDetailsPresenter getCustomerDetailsPresenter)
         {
-            this.listAllCustomersInput = listAllCustomersInput;
             this.registerInput = registerInput;
             this.getCustomerInput = getCustomerInput;
-            this.listAllCustomersPresenter = listAllCustomersPresenter;
             this.registerPresenter = registerPresenter;
             this.getCustomerDetailsPresenter = getCustomerDetailsPresenter;
         }
@@ -54,17 +48,6 @@
             var request = new Application.UseCases.GetCustomerDetails.Request(id);
             await this.getCustomerInput.Handle(request);
             return this.getCustomerDetailsPresenter.ViewModel;
-        }
-
-        /// <summary>
-        /// List all customers
-        /// </summary>
-        [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            var request = new Application.UseCases.ListAllCustomers.Request();
-            await this.listAllCustomersInput.Handle(request);
-            return this.listAllCustomersPresenter.ViewModel;
         }
     }
 }

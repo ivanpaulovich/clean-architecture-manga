@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
@@ -15,7 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Acerola.Application\Acerola.Application.csproj" />
     <ProjectReference Include="..\Acerola.Domain\Acerola.Domain.csproj" />
+    <ProjectReference Include="..\Acerola.Infrastructure\Acerola.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

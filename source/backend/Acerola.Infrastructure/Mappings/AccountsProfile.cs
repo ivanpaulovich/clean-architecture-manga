@@ -9,9 +9,9 @@
         public AccountsProfile()
         {
             CreateMap<Account, AccountResponse>()
-                    .ForMember(dest => dest.AccountId, opt => opt.MapFrom(src => src.Id))
-                    .ForMember(dest => dest.CurrentBalance, opt => opt.MapFrom(src => src.CurrentBalance.Value))
-                    .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.CustomerId));
+                .ForMember(dest => dest.AccountId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.CurrentBalance, opt => opt.MapFrom(src => src.CurrentBalance.Value))
+                .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.CustomerId));
 
             CreateMap<Debit, TransactionResponse>()
                 .ForMember(dest => dest.Amount, opt => opt.MapFrom(src => src.Amount.Value))

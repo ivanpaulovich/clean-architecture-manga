@@ -36,21 +36,22 @@ namespace Acerola.IntegrationTests
         [Fact]
         public async Task ListCustomers()
         {
-            var response = await client.GetAsync("/api/Customers");
+            var response = await client.GetAsync("/api/Customers/c728e8e3-cde1-4565-b2f5-cd72d26325b5");
             response.EnsureSuccessStatusCode();
         }
 
         [Fact]
         public async Task ListAccounts()
         {
-            var response = await client.GetAsync("/api/Accounts");
+            var response = await client.GetAsync("/api/Accounts/c728e8e3-cde1-4565-b2f5-cd72d26325b5");
             response.EnsureSuccessStatusCode();
         }
 
         [Fact]
         public async Task Register_Then_GetDetails()
         {
-            var command = new {
+            var command = new
+            {
                 pin = "08724050601",
                 name = "Ivan Paulovich",
                 initialAmount = "1200"

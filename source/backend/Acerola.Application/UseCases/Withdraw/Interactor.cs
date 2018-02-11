@@ -1,6 +1,7 @@
 ﻿namespace Acerola.Application.UseCases.Withdraw
 {
     using System.Threading.Tasks;
+    using Acerola.Application.Responses;
     using Acerola.Domain.Accounts;
     using Acerola.Domain.ValueObjects;
 
@@ -29,14 +30,15 @@
             if (account == null)
                 throw new AccountNotFoundException($"The account {request.AccountId} does not exists or is already closed.");
 
-            Debit debit = Debit.Create(Amount.Create(request.Amount));
+            Debit debit = new Debit(new Amount(request.Amount));
             account.Withdraw(debit);
 
             await accountWriteOnlyRepository.Update(account);
 
             Account updatedAccount = await accountReadOnlyRepository.Get(request.AccountId);
+            TransactionResponse transactionResponse = responseConverter.Map<TransactionResponse>(debit);
+            Response response = new Response(transactionResponse, updatedAccount.CurrentBalance.Value);
 
-            Response response = responseConverter.Map<Response>(debit);
             outputBoundary.Populate(response);
         }
     }

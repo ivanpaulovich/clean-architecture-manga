@@ -10,6 +10,11 @@
         public double CurrentBalance { get; private set; }
         public IReadOnlyList<TransactionResponse> Transactions { get; private set; }
 
+        public AccountResponse()
+        {
+
+        }
+
         public AccountResponse(
             Guid accountId, 
             Guid customerId, 

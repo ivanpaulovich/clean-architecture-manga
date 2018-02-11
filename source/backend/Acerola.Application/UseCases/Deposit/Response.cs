@@ -1,21 +1,19 @@
 ﻿namespace Acerola.Application.UseCases.Deposit
 {
-    using System;
-
+    using Acerola.Application.Responses;
     public class Response
     {
-        public double DepositedAmount { get; private set; }
+        public TransactionResponse Transaction { get; private set; }
         public double UpdatedBalance { get; private set; }
-        public string Description { get; private set; }
-        public DateTime TransactionDate { get; private set; }
-
-        public Response(double depositedAmount, double updatedBalance,
-            string description, DateTime transactionDate)
+        public Response()
         {
-            this.DepositedAmount = depositedAmount;
+
+        }
+
+        public Response(TransactionResponse transaction, double updatedBalance)
+        {
+            this.Transaction = transaction;
             this.UpdatedBalance = updatedBalance;
-            this.Description = description;
-            this.TransactionDate = transactionDate;
         }
     }
 }

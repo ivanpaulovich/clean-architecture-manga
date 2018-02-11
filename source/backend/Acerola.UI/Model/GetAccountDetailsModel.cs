@@ -1,4 +1,4 @@
-﻿namespace Acerola.UI.UseCases.Accounts.Close
+﻿namespace Acerola.UI.Model
 {
     using Microsoft.AspNetCore.Mvc;
 

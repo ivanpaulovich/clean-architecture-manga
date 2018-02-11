@@ -13,7 +13,7 @@ namespace Acerola.Domain.UnitTests
             //
             // Arrange
             Account sut = Substitute.For<Account>();
-            Credit credit = Credit.Create(Amount.Create(100.0));
+            Credit credit = new Credit(new Amount(100.0));
 
             //
             // Act
@@ -30,10 +30,10 @@ namespace Acerola.Domain.UnitTests
             //
             // Arrange
             Account sut = Substitute.For<Account>();
-            Credit credit = Credit.Create(Amount.Create(1000.0));
+            Credit credit = new Credit(new Amount(1000.0));
             sut.Deposit(credit);
 
-            Debit transaction = Debit.Create(Amount.Create(100.0));
+            Debit transaction = new Debit(new Amount(100.0));
 
             //
             // Act
@@ -66,7 +66,7 @@ namespace Acerola.Domain.UnitTests
             //
             // Arrange
             Account sut = Substitute.For<Account>();
-            Credit credit = Credit.Create(Amount.Create(100));
+            Credit credit = new Credit(new Amount(100));
             sut.Deposit(credit);
 
             //
@@ -82,10 +82,10 @@ namespace Acerola.Domain.UnitTests
             //
             // Arrange
             Account sut = Substitute.For<Account>();
-            Credit credit = Credit.Create(Amount.Create(200));
+            Credit credit = new Credit(new Amount(200));
             sut.Deposit(credit);
 
-            Debit debit = Debit.Create(Amount.Create(5000.0));
+            Debit debit = new Debit(new Amount(5000.0));
 
             //
             // Act and Assert

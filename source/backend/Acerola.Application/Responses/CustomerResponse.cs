@@ -10,11 +10,18 @@
         public string Name { get; private set; }
         public IReadOnlyList<AccountResponse> Accounts { get; private set; }
 
-        public CustomerResponse(Guid customerId, string personnummer, string name)
+        public CustomerResponse()
+        {
+
+        }
+
+        public CustomerResponse(Guid customerId, string personnummer, string name,
+            List<AccountResponse> accounts)
         {
             CustomerId = customerId;
             Personnummer = personnummer;
             Name = name;
+            Accounts = accounts;
         }
     }
 }

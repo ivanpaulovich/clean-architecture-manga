@@ -9,11 +9,6 @@
     <NoWarn>1701;1702;1705;NU1701;CS1591</NoWarn>
     <DocumentationFile>bin\Debug\netcoreapp2.0\Acerola.UI.xml</DocumentationFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="logs\**" />
-    <EmbeddedResource Remove="logs\**" />
-  </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="Autofac.Configuration" Version="4.0.1" />

@@ -4,7 +4,7 @@
 
     public class Request
     {
-        public Guid CustomerId { get; }
+        public Guid CustomerId { get; private set; }
         public Request(Guid customerId)
         {
             this.CustomerId = customerId;

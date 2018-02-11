@@ -7,7 +7,7 @@
     using Acerola.Domain.Accounts;
     using Acerola.Infrastructure.DataAccess.Repositories.Accounts;
     using Acerola.Application;
-    using Acerola.UI.Api.Presenters;
+    using Acerola.UI.Presenters;
 
     public class ApplicationModule : Autofac.Module
     {

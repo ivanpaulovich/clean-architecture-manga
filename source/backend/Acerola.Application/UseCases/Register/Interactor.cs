@@ -4,6 +4,7 @@
     using Acerola.Domain.Customers;
     using Acerola.Domain.ValueObjects;
     using Acerola.Domain.Accounts;
+    using Acerola.Application.Responses;
 
     public class Interactor : IInputBoundary<Request>
     {
@@ -31,13 +32,16 @@
             Account account = Account.Create(customer);
             customer.Register(account);
 
-            Credit credit = Credit.Create(Amount.Create(message.InitialAmount));
+            Credit credit = new Credit(new Amount(message.InitialAmount));
             account.Deposit(credit);
 
             await customerWriteOnlyRepository.Add(customer);
             await accountWriteOnlyRepository.Add(account);
 
-            Response response = responseConverter.Map<Response>(customer);
+            CustomerResponse customerResponse = responseConverter.Map<CustomerResponse>(customer);
+            AccountResponse accountResponse = responseConverter.Map<AccountResponse>(account);
+            Response response = new Response(customerResponse, accountResponse);
+
             outputBoundary.Populate(response);
         }
     }

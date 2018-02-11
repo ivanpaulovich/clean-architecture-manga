@@ -1,7 +1,7 @@
-﻿namespace Acerola.UI.Api.Controllers
+﻿namespace Acerola.UI.Controllers
 {
     using Acerola.Application;
-    using Acerola.UI.Api.Presenters;
+    using Acerola.UI.Presenters;
     using Acerola.UI.Requests;
     using Microsoft.AspNetCore.Mvc;
     using System;
@@ -14,37 +14,31 @@
         private readonly IInputBoundary<Application.UseCases.Deposit.Request> depositInput;
         private readonly IInputBoundary<Application.UseCases.Withdraw.Request> withdrawInput;
         private readonly IInputBoundary<Application.UseCases.GetAccountDetails.Request> getAccountDetailsInput;
-        private readonly IInputBoundary<Application.UseCases.ListAllAccounts.Request> listAllAccountsInput;
 
         private readonly ClosePresenter closePresenter;
         private readonly DepositPresenter depositPresenter;
         private readonly WithdrawPresenter withdrawPresenter;
         private readonly GetAccountDetailsPresenter getAccountDetailsPresenter;
-        private readonly ListAllAccountsPresenter listAllAccountsPresenter;
 
         public AccountsController(
             IInputBoundary<Application.UseCases.CloseAccount.Request> closeAccountnput,
             IInputBoundary<Application.UseCases.Deposit.Request> depositnput,
             IInputBoundary<Application.UseCases.Withdraw.Request> withdrawInput,
             IInputBoundary<Application.UseCases.GetAccountDetails.Request> getAccountDetailsInput,
-            IInputBoundary<Application.UseCases.ListAllAccounts.Request> listAllAccountsInput,
             ClosePresenter closePresenter,
             DepositPresenter depositPresenter,
             WithdrawPresenter withdrawPresenter,
-            GetAccountDetailsPresenter getAccountDetailsPresenter,
-            ListAllAccountsPresenter listAllAccountsPresenter)
+            GetAccountDetailsPresenter getAccountDetailsPresenter)
         {
             this.closeAccountInput = closeAccountnput;
             this.depositInput = depositnput;
             this.withdrawInput = withdrawInput;
             this.getAccountDetailsInput = getAccountDetailsInput;
-            this.listAllAccountsInput = listAllAccountsInput;
 
             this.closePresenter = closePresenter;
             this.depositPresenter = depositPresenter;
             this.withdrawPresenter = withdrawPresenter;
             this.getAccountDetailsPresenter = getAccountDetailsPresenter;
-            this.listAllAccountsPresenter = listAllAccountsPresenter;
         }
 
         /// <summary>
@@ -100,19 +94,6 @@
 
             await getAccountDetailsInput.Handle(request);
             return getAccountDetailsPresenter.ViewModel;
-        }
-
-        /// <summary>
-        /// List all accounts
-        /// </summary>
-        [HttpGet]
-        public async Task<IActionResult> List([FromQuery]Guid? customerId)
-        {
-            var request = new Application.UseCases.ListAllAccounts.Request(
-                customerId);
-
-            await listAllAccountsInput.Handle(request);
-            return listAllAccountsPresenter.ViewModel;
         }
     }
 }

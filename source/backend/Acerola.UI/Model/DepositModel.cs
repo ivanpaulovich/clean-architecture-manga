@@ -1,4 +1,4 @@
-﻿namespace Acerola.UI.UseCases.Accounts.Deposit
+﻿namespace Acerola.UI.Model
 {
     using Microsoft.AspNetCore.Mvc;
 

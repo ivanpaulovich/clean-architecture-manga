@@ -1,11 +1,16 @@
 ﻿namespace Acerola.Domain.Accounts
 {
     using Acerola.Domain.ValueObjects;
-    using System;
 
     public class Credit : Transaction
     {
-        private Credit()
+        public Credit()
+        {
+
+        }
+
+        public Credit(Amount amount)
+            : base(amount)
         {
 
         }
@@ -16,16 +21,6 @@
             {
                 return "Credit";
             }
-        }
-
-        public static Credit Create(Amount amount)
-        {
-            if (amount == null)
-                throw new ArgumentNullException(nameof(amount));
-
-            Credit credit = new Credit();
-            credit.Amount = amount;
-            return credit;
         }
     }
 }
