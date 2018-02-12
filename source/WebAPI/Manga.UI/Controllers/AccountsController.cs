@@ -1,6 +1,10 @@
 ﻿namespace Manga.UI.Controllers
 {
     using Manga.Application;
+    using Manga.Application.UseCases.CloseAccount;
+    using Manga.Application.UseCases.Deposit;
+    using Manga.Application.UseCases.GetAccountDetails;
+    using Manga.Application.UseCases.Withdraw;
     using Manga.UI.Presenters;
     using Manga.UI.Requests;
     using Microsoft.AspNetCore.Mvc;
@@ -10,10 +14,10 @@
     [Route("api/[controller]")]
     public class AccountsController : Controller
     {
-        private readonly IInputBoundary<Application.UseCases.CloseAccount.Request> closeAccountInput;
-        private readonly IInputBoundary<Application.UseCases.Deposit.Request> depositInput;
-        private readonly IInputBoundary<Application.UseCases.Withdraw.Request> withdrawInput;
-        private readonly IInputBoundary<Application.UseCases.GetAccountDetails.Request> getAccountDetailsInput;
+        private readonly IInputBoundary<CloseCommand> closeAccountInput;
+        private readonly IInputBoundary<DepositCommand> depositInput;
+        private readonly IInputBoundary<WithdrawCommand> withdrawInput;
+        private readonly IInputBoundary<GetAccountDetailsCommand> getAccountDetailsInput;
 
         private readonly ClosePresenter closePresenter;
         private readonly DepositPresenter depositPresenter;
@@ -21,10 +25,10 @@
         private readonly GetAccountDetailsPresenter getAccountDetailsPresenter;
 
         public AccountsController(
-            IInputBoundary<Application.UseCases.CloseAccount.Request> closeAccountnput,
-            IInputBoundary<Application.UseCases.Deposit.Request> depositnput,
-            IInputBoundary<Application.UseCases.Withdraw.Request> withdrawInput,
-            IInputBoundary<Application.UseCases.GetAccountDetails.Request> getAccountDetailsInput,
+            IInputBoundary<CloseCommand> closeAccountnput,
+            IInputBoundary<DepositCommand> depositnput,
+            IInputBoundary<WithdrawCommand> withdrawInput,
+            IInputBoundary<GetAccountDetailsCommand> getAccountDetailsInput,
             ClosePresenter closePresenter,
             DepositPresenter depositPresenter,
             WithdrawPresenter withdrawPresenter,
@@ -47,8 +51,7 @@
         [HttpDelete]
         public async Task<IActionResult> Close([FromBody]CloseRequest message)
         {
-            var request = new Application.UseCases.CloseAccount.Request(
-                message.AccountId);
+            var request = new CloseCommand(message.AccountId);
 
             await closeAccountInput.Handle(request);
             return closePresenter.ViewModel;
@@ -60,9 +63,7 @@
         [HttpPatch("Deposit")]
         public async Task<IActionResult> Deposit([FromBody]DepositRequest message)
         {
-            var request = new Application.UseCases.Deposit.Request(
-                message.AccountId,
-                message.Amount);
+            var request = new DepositCommand(message.AccountId, message.Amount);
 
             await depositInput.Handle(request);
             return depositPresenter.ViewModel;
@@ -74,9 +75,7 @@
         [HttpPatch("Withdraw")]
         public async Task<IActionResult> Withdraw([FromBody]WithdrawRequest message)
         {
-            var request = new Application.UseCases.Withdraw.Request(
-                message.AccountId,
-                message.Amount);
+            var request = new WithdrawCommand(message.AccountId, message.Amount);
 
             await withdrawInput.Handle(request);
             return withdrawPresenter.ViewModel;
@@ -89,8 +88,7 @@
         [HttpGet("{id}", Name = "GetAccount")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var request = new Application.UseCases.GetAccountDetails.Request(
-                id);
+            var request = new GetAccountDetailsCommand(id);
 
             await getAccountDetailsInput.Handle(request);
             return getAccountDetailsPresenter.ViewModel;

@@ -4,13 +4,13 @@
     using Manga.Application.Responses;
     using Manga.Domain.Customers;
 
-    public class Interactor : IInputBoundary<Request>
+    public class GetAccountDetailsInteractor : IInputBoundary<GetAccountDetailsCommand>
     {
         private readonly ICustomerReadOnlyRepository customerReadOnlyRepository;
         private readonly IOutputBoundary<AccountResponse> outputBoundary;
         private readonly IResponseConverter responseConverter;
 
-        public Interactor(
+        public GetAccountDetailsInteractor(
             ICustomerReadOnlyRepository customerReadOnlyRepository,
             IOutputBoundary<AccountResponse> outputBoundary,
             IResponseConverter responseConverter)
@@ -20,7 +20,7 @@
             this.responseConverter = responseConverter;
         }
 
-        public async Task Handle(Request message)
+        public async Task Handle(GetAccountDetailsCommand message)
         {
             var customer = await customerReadOnlyRepository.GetByAccount(message.AccountId);
             if (customer == null)

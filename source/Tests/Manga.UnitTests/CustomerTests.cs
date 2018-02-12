@@ -4,6 +4,7 @@ namespace Manga.Domain.UnitTests
     using Manga.Domain.Customers;
     using NSubstitute;
     using Manga.Domain.Customers.Accounts;
+    using Manga.Domain.ValueObjects;
 
     public class CustomerTests
     {
@@ -12,7 +13,7 @@ namespace Manga.Domain.UnitTests
         {
             //
             // Arrange
-            Customer sut = Substitute.For<Customer>();
+            Customer sut = new Customer(new PIN("08724050601"), new Name("Ivan Paulovich"));
             Account account = Substitute.For<Account>();
 
             //

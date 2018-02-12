@@ -1,10 +1,10 @@
 ﻿namespace Manga.Application.UseCases.GetAccountDetails
 {
     using System;
-    public class Request
+    public class GetAccountDetailsCommand
     {
         public Guid AccountId { get; private set; }
-        public Request(Guid accountId)
+        public GetAccountDetailsCommand(Guid accountId)
         {
             this.AccountId = accountId;
         }

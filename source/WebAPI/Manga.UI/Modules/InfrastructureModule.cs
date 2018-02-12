@@ -2,7 +2,6 @@
 {
     using Autofac;
     using Manga.Infrastructure.DataAccess;
-    using Manga.Infrastructure.DataAccessomers;
 
     public class InfrastructureModule : Autofac.Module
     {

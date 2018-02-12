@@ -29,15 +29,15 @@ namespace Manga.Domain.UnitTests
         [InlineData("08724050", "Ivan Paulovich", 300)]
         public async void Register_Valid_User_Account(string personnummer, string name, double amount)
         {
-            var output = Substitute.For<CustomPresenter<Application.UseCases.Register.Response>>();
+            var output = Substitute.For<CustomPresenter<Application.UseCases.Register.RegisterResponse>>();
 
-            var registerUseCase = new Application.UseCases.Register.Interactor(
+            var registerUseCase = new Application.UseCases.Register.RegisterInteractor(
                 customerWriteOnlyRepository,
                 output,
                 converter
             );
 
-            var request = new Application.UseCases.Register.Request(
+            var request = new Application.UseCases.Register.RegisterCommand(
                 personnummer,
                 name,
                 amount

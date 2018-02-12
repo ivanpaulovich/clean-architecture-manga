@@ -2,15 +2,16 @@
 {
     using Manga.Application;
     using Manga.Application.UseCases.Deposit;
+    using Manga.UI.Model;
     using Microsoft.AspNetCore.Mvc;
 
-    public class DepositPresenter : IOutputBoundary<Response>
+    public class DepositPresenter : IOutputBoundary<DepositResponse>
     {
         public IActionResult ViewModel { get; private set; }
 
-        public Response Response { get; private set; }
+        public DepositResponse Response { get; private set; }
 
-        public void Populate(Response response)
+        public void Populate(DepositResponse response)
         {
             Response = response;
 
@@ -20,13 +21,12 @@
                 return;
             }
 
-            ViewModel = new ObjectResult(new
-            {
-                Amount = response.Transaction.Amount,
-                Description = response.Transaction.Description,
-                TransactionDate = response.Transaction.TransactionDate,
-                UpdateBalance = response.UpdatedBalance,
-            });
+            ViewModel = new ObjectResult(new DepositModel(
+                response.Transaction.Amount,
+                response.Transaction.Description,
+                response.Transaction.TransactionDate,
+                response.UpdatedBalance
+            ));
         }
     }
 }

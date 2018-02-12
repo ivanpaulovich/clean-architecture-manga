@@ -12,7 +12,7 @@
             //
             // Register all Types in Manga.Application
             //
-            builder.RegisterAssemblyTypes(typeof(Application.UseCases.Register.Interactor).Assembly)
+            builder.RegisterAssemblyTypes(typeof(Application.UseCases.Register.RegisterInteractor).Assembly)
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
         }

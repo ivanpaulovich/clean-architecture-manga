@@ -2,10 +2,10 @@
 {
     using System;
 
-    public class Request
+    public class GetCustomerDetaisCommand
     {
         public Guid CustomerId { get; private set; }
-        public Request(Guid customerId)
+        public GetCustomerDetaisCommand(Guid customerId)
         {
             this.CustomerId = customerId;
         }

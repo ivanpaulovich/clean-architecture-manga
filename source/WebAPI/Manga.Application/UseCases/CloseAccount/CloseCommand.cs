@@ -1,10 +1,10 @@
 ﻿namespace Manga.Application.UseCases.CloseAccount
 {
     using System;
-    public class Request
+    public class CloseCommand
     {
         public Guid AccountId { get; private set; }
-        public Request(Guid guid)
+        public CloseCommand(Guid guid)
         {
             this.AccountId = guid;
         }

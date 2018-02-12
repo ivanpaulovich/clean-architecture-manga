@@ -1,12 +1,12 @@
 ﻿namespace Manga.Application.UseCases.Withdraw
 {
     using System;
-    public class Request
+    public class WithdrawCommand
     {
         public Guid AccountId { get; }
         public Double Amount { get; }
 
-        public Request(Guid accountId, double amount)
+        public WithdrawCommand(Guid accountId, double amount)
         {
             AccountId = accountId;
             Amount = amount;

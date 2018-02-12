@@ -2,17 +2,18 @@
 {
     using Manga.Application;
     using Manga.Application.UseCases.Register;
+    using Manga.UI.Model;
     using Microsoft.AspNetCore.Mvc;
     using System.Net;
     using System.Net.Http;
 
-    public class RegisterPresenter : IOutputBoundary<Response>
+    public class RegisterPresenter : IOutputBoundary<RegisterResponse>
     {
         public IActionResult ViewModel { get; private set; }
 
-        public Response Response { get; private set; }
+        public RegisterResponse Response { get; private set; }
 
-        public void Populate(Response response)
+        public void Populate(RegisterResponse response)
         {
             Response = response;
 
@@ -22,12 +23,11 @@
                 return;
             }
 
-            ViewModel = new ObjectResult(new
-            {
-                CustomerId = response.Customer.CustomerId,
-                Personnummer = response.Customer.Personnummer,
-                Name = response.Customer.Name
-            });
+            ViewModel = new ObjectResult(new RegisterModel(
+                response.Customer.CustomerId,
+                response.Customer.Personnummer,
+                response.Customer.Name
+            ));
         }
     }
 }

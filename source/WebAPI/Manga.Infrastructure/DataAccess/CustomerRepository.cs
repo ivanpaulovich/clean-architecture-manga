@@ -1,4 +1,4 @@
-﻿namespace Manga.Infrastructure.DataAccessomers
+﻿namespace Manga.Infrastructure.DataAccess
 {
     using Manga.Domain.Customers;
     using Manga.Infrastructure.DataAccess;

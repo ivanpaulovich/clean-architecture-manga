@@ -4,13 +4,13 @@
     using Manga.Application.UseCases.Withdraw;
     using Microsoft.AspNetCore.Mvc;
 
-    public class WithdrawPresenter : IOutputBoundary<Response>
+    public class WithdrawPresenter : IOutputBoundary<WithdrawResponse>
     {
         public IActionResult ViewModel { get; private set; }
 
-        public Response Response { get; private set; }
+        public WithdrawResponse Response { get; private set; }
 
-        public void Populate(Response response)
+        public void Populate(WithdrawResponse response)
         {
             Response = response;
 

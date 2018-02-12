@@ -3,6 +3,11 @@
     using System;
     public class CloseRequest
     {
-        public Guid AccountId { get; set; }
+        public Guid AccountId { get; }
+
+        public CloseRequest(Guid accountId)
+        {
+            AccountId = AccountId;
+        }
     }
 }

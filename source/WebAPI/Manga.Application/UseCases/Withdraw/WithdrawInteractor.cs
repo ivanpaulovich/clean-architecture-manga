@@ -6,17 +6,17 @@
     using Manga.Domain.Customers.Accounts;
     using Manga.Domain.ValueObjects;
 
-    public class Interactor : IInputBoundary<Request>
+    public class WithdrawInteractor : IInputBoundary<WithdrawCommand>
     {
         private readonly ICustomerReadOnlyRepository customerReadOnlyRepository;
         private readonly ICustomerWriteOnlyRepository customerWriteOnlyRepository;
-        private readonly IOutputBoundary<Response> outputBoundary;
+        private readonly IOutputBoundary<WithdrawResponse> outputBoundary;
         private readonly IResponseConverter responseConverter;
         
-        public Interactor(
+        public WithdrawInteractor(
             ICustomerReadOnlyRepository customerReadOnlyRepository,
             ICustomerWriteOnlyRepository customerWriteOnlyRepository,
-            IOutputBoundary<Response> outputBoundary,
+            IOutputBoundary<WithdrawResponse> outputBoundary,
             IResponseConverter responseConverter)
         {
             this.customerReadOnlyRepository = customerReadOnlyRepository;
@@ -25,7 +25,7 @@
             this.responseConverter = responseConverter;
         }
 
-        public async Task Handle(Request request)
+        public async Task Handle(WithdrawCommand request)
         {
             Customer customer = await customerReadOnlyRepository.GetByAccount(request.AccountId);
             if (customer == null)
@@ -38,7 +38,7 @@
             await customerWriteOnlyRepository.Update(customer);
 
             TransactionResponse transactionResponse = responseConverter.Map<TransactionResponse>(debit);
-            Response response = new Response(
+            WithdrawResponse response = new WithdrawResponse(
                 transactionResponse,
                 account.CurrentBalance.Value
             );
