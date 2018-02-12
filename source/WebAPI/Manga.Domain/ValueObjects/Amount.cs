@@ -12,11 +12,6 @@
             this.Value = value;
         }
 
-        public static Amount Create(double value)
-        {
-            return new Amount(value);
-        }
-
         public override string ToString()
         {
             return Value.ToString();

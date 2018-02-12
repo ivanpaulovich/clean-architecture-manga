@@ -1,8 +1,8 @@
-﻿namespace Manga.Domain.Accounts
+﻿namespace Manga.Domain.Customers.Accounts
 {
     public class InsuficientFundsException : DomainException
     {
-        public InsuficientFundsException(string message)
+        internal InsuficientFundsException(string message)
             : base(message)
         { }
     }

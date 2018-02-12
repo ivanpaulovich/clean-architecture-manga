@@ -6,7 +6,7 @@
     {
         public Guid Id { get; protected set; }
 
-        public Entity()
+        protected Entity()
         {
             Id = Guid.NewGuid();
         }

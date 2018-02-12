@@ -1,7 +1,6 @@
 ﻿namespace Manga.Application.UseCases.CloseAccount
 {
     using System.Threading.Tasks;
-    using Manga.Domain.Accounts;
     using Manga.Domain.Customers;
 
     public class Interactor : IInputBoundary<Request>

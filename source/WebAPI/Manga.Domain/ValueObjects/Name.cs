@@ -12,11 +12,6 @@
             this.Text = text;
         }
 
-        public static Name Create(string text)
-        {
-            return new Name(text);
-        }
-
         public override string ToString()
         {
             return Text.ToString();

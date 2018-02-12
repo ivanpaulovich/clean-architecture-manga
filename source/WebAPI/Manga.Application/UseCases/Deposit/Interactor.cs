@@ -2,8 +2,8 @@
 {
     using System.Threading.Tasks;
     using Manga.Application.Responses;
-    using Manga.Domain.Accounts;
     using Manga.Domain.Customers;
+    using Manga.Domain.Customers.Accounts;
     using Manga.Domain.ValueObjects;
 
     public class Interactor : IInputBoundary<Request>

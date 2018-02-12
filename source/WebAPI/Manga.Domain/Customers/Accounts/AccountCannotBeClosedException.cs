@@ -1,8 +1,8 @@
-﻿namespace Manga.Domain.Accounts
+﻿namespace Manga.Domain.Customers.Accounts
 {
     public class AccountCannotBeClosedException : DomainException
     {
-        public AccountCannotBeClosedException(string message)
+        internal AccountCannotBeClosedException(string message)
             : base(message)
         { }
     }

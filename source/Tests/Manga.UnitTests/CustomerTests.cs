@@ -1,9 +1,9 @@
 namespace Manga.Domain.UnitTests
 {
     using Xunit;
-    using Manga.Domain.Accounts;
     using Manga.Domain.Customers;
     using NSubstitute;
+    using Manga.Domain.Customers.Accounts;
 
     public class CustomerTests
     {

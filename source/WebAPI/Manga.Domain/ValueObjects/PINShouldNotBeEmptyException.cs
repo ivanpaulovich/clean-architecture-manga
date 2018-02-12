@@ -2,7 +2,7 @@
 {
     public class PINShouldNotBeEmptyException : DomainException
     {
-        public PINShouldNotBeEmptyException(string message)
+        internal PINShouldNotBeEmptyException(string message)
             : base(message)
         { }
     }

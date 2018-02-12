@@ -15,7 +15,7 @@ namespace Manga.Domain.UnitTests
             //
             // Act and Assert
             Assert.Throws<AmountShouldBePositiveException>(
-                () => Amount.Create(negative));
+                () => new Amount(negative));
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace Manga.Domain.UnitTests
 
             //
             // Act
-            Amount amount = Amount.Create(positive);
+            Amount amount = new Amount(positive);
 
             //
             // Assert

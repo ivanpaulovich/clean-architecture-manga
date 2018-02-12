@@ -1,8 +1,8 @@
 ﻿namespace Manga.Infrastructure.Mappings
 {
     using Manga.Application.Responses;
-    using Manga.Domain.Accounts;
     using AutoMapper;
+    using Manga.Domain.Customers.Accounts;
 
     public class AccountsProfile : Profile
     {
@@ -10,8 +10,7 @@
         {
             CreateMap<Account, AccountResponse>()
                 .ForMember(dest => dest.AccountId, opt => opt.MapFrom(src => src.Id))
-                .ForMember(dest => dest.CurrentBalance, opt => opt.MapFrom(src => src.CurrentBalance.Value))
-                .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.CustomerId));
+                .ForMember(dest => dest.CurrentBalance, opt => opt.MapFrom(src => src.CurrentBalance.Value));
 
             CreateMap<Debit, TransactionResponse>()
                 .ForMember(dest => dest.Amount, opt => opt.MapFrom(src => src.Amount.Value))

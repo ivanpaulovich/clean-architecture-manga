@@ -4,14 +4,14 @@
 
     public class MangaException : Exception
     {
-        public MangaException()
+        internal MangaException()
         { }
 
-        public MangaException(string message)
+        internal MangaException(string message)
             : base(message)
         { }
 
-        public MangaException(string message, Exception innerException)
+        internal MangaException(string message, Exception innerException)
             : base(message, innerException)
         { }
     }

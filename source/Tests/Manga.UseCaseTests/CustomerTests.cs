@@ -1,7 +1,6 @@
 namespace Manga.Domain.UnitTests
 {
     using Xunit;
-    using Manga.Domain.Accounts;
     using Manga.Domain.Customers;
     using NSubstitute;
     using Manga.Application;
@@ -14,17 +13,12 @@ namespace Manga.Domain.UnitTests
         public ICustomerReadOnlyRepository customerReadOnlyRepository;
         public ICustomerWriteOnlyRepository customerWriteOnlyRepository;
 
-        public IAccountReadOnlyRepository accountReadOnlyRepository;
-        public IAccountWriteOnlyRepository accountWriteOnlyRepository;
-
         public IResponseConverter converter;
 
         public CustomerTests()
         {
             customerReadOnlyRepository = Substitute.For<ICustomerReadOnlyRepository>();
             customerWriteOnlyRepository = Substitute.For<ICustomerWriteOnlyRepository>();
-            accountReadOnlyRepository = Substitute.For<IAccountReadOnlyRepository>();
-            accountWriteOnlyRepository = Substitute.For<IAccountWriteOnlyRepository>();
             converter = new ResponseConverter();
         }
 
@@ -39,7 +33,6 @@ namespace Manga.Domain.UnitTests
 
             var registerUseCase = new Application.UseCases.Register.Interactor(
                 customerWriteOnlyRepository,
-                accountWriteOnlyRepository,
                 output,
                 converter
             );

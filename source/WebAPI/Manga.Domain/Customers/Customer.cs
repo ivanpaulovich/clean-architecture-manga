@@ -3,10 +3,10 @@
     using System.Collections.Generic;
     using System;
     using Manga.Domain.ValueObjects;
-    using Manga.Domain.Accounts;
+    using Manga.Domain.Customers.Accounts;
     using System.Linq;
 
-    public class Customer : AggregateRoot
+    public class Customer : Entity, IAggregateRoot
     {
         public Name Name { get; private set; }
         public PIN PIN { get; private set; }
@@ -24,12 +24,13 @@
             }
         }
 
-        public Customer()
+        protected Customer()
         {
             accounts = new List<Account>();
         }
 
-        public static Customer Create(PIN pin, Name name)
+        public Customer(PIN pin, Name name)
+            : this()
         {
             if (pin == null)
                 throw new ArgumentNullException(nameof(pin));
@@ -37,14 +38,11 @@
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
 
-            Customer customer = new Customer();
-            customer.PIN = pin;
-            customer.Name = name;
-
-            return customer;
+            PIN = pin;
+            Name = name;
         }
 
-        public void Register(Account account)
+        public virtual void Register(Account account)
         {
             if (account == null)
                 throw new ArgumentNullException(nameof(account));
@@ -52,15 +50,15 @@
             accounts.Add(account);
         }
 
-        public void RemoveAccount(Guid accountID)
+        public virtual void RemoveAccount(Guid accountID)
         {
             Account account = FindAccount(accountID);
             accounts.Remove(account);
         }
 
-        public Account FindAccount(Guid accountID)
+        public virtual Account FindAccount(Guid accountID)
         {
-            Account account = Accounts.Where(e => e.Id == accountID).First();
+            Account account = Accounts.Where(e => e.Id == accountID).FirstOrDefault();
             return account;
         }
     }

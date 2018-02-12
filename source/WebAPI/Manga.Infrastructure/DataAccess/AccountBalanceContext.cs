@@ -1,8 +1,8 @@
 ﻿namespace Manga.Infrastructure.DataAccess
 {
     using Manga.Domain;
-    using Manga.Domain.Accounts;
     using Manga.Domain.Customers;
+    using Manga.Domain.Customers.Accounts;
     using MongoDB.Bson.Serialization;
     using MongoDB.Driver;
 
@@ -33,11 +33,6 @@
                 cm.AutoMap();
             });
 
-            BsonClassMap.RegisterClassMap<AggregateRoot>(cm =>
-            {
-                cm.AutoMap();
-            });
-
             BsonClassMap.RegisterClassMap<Account>(cm =>
             {
                 cm.AutoMap();
@@ -50,9 +45,6 @@
                 cm.AddKnownType(typeof(Debit));
                 cm.AddKnownType(typeof(Credit));
             });
-
-            BsonClassMap.RegisterClassMap<Credit>();
-            BsonClassMap.RegisterClassMap<Debit>();
 
             BsonClassMap.RegisterClassMap<Customer>(cm =>
             {

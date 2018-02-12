@@ -2,7 +2,7 @@
 {
     public class AmountShouldBePositiveException : DomainException
     {
-        public AmountShouldBePositiveException(string message)
+        internal AmountShouldBePositiveException(string message)
             : base(message)
         { }
     }

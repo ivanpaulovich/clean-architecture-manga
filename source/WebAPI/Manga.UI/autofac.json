@@ -15,7 +15,7 @@
       "type": "Manga.UI.Modules.InfrastructureModule",
       "properties": {
         "ConnectionString": "mongodb://10.0.75.1:27017",
-        "DatabaseName": "MangaV01"
+        "DatabaseName": "Manga-V01"
       }
     }
   ]

@@ -2,7 +2,7 @@
 {
     public class DomainException : MangaException
     {
-        public string BusinessMessage { get; set; }
+        public string BusinessMessage { get; private set; }
 
         public DomainException(string businessMessage)
         {

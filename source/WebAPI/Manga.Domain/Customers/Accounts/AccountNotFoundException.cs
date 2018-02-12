@@ -1,4 +1,4 @@
-﻿namespace Manga.Domain.Accounts
+﻿namespace Manga.Domain.Customers.Accounts
 {
     public class AccountNotFoundException : DomainException
     {

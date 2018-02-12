@@ -1,20 +1,17 @@
-﻿namespace Manga.Domain.Accounts
+﻿namespace Manga.Domain.Customers.Accounts
 {
-    using Manga.Domain.Customers;
     using Manga.Domain.ValueObjects;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    public class Account : AggregateRoot
+    public class Account : Entity, IAggregate
     {
-        public Guid CustomerId { get; private set; }
         public Amount CurrentBalance { get; private set; }
 
         public Account()
         {
             transactions = new List<Transaction>();
-            CurrentBalance = Amount.Create(0);
+            CurrentBalance = new Amount(0);
         }
 
         private List<Transaction> transactions;
@@ -26,19 +23,8 @@
             }
             private set
             {
-                if (value == null)
-                    value = new List<Transaction>();
-
                 transactions = value.ToList();
             }
-        }
-
-        public static Account Create(Customer customer)
-        {
-            Account account = new Account();
-            account.CustomerId = customer.Id;
-
-            return account;
         }
 
         public void Deposit(Credit transaction)
@@ -60,7 +46,7 @@
 
         public void Close()
         {
-            if (CurrentBalance > Amount.Create(0))
+            if (CurrentBalance > new Amount(0))
                 throw new AccountCannotBeClosedException($"The account {Id} can not be closed because it has funds.");
         }
     }

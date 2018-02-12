@@ -15,7 +15,7 @@ namespace Manga.Domain.UnitTests
             //
             // Act and Assert
             Assert.Throws<PINShouldNotBeEmptyException>(
-                () => PIN.Create(empty));
+                () => new PIN(empty));
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace Manga.Domain.UnitTests
 
             //
             // Act
-            PIN pin = PIN.Create(valid);
+            PIN pin = new PIN(valid);
 
             // Assert
             Assert.Equal(valid, pin.Text);

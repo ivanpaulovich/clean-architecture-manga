@@ -12,11 +12,6 @@
             this.Text = text;
         }
 
-        public static PIN Create(string text)
-        {
-            return new PIN(text);
-        }
-
         public override string ToString()
         {
             return Text.ToString();

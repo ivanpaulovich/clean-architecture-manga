@@ -15,7 +15,7 @@ namespace Manga.Domain.UnitTests
             //
             // Act and Assert
             Assert.Throws<NameShouldNotBeEmptyException>(
-                () => Name.Create(empty));
+                () => new Name(empty));
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace Manga.Domain.UnitTests
 
             //
             // Act
-            Name name = Name.Create(valid);
+            Name name = new Name(valid);
 
             //
             // Assert

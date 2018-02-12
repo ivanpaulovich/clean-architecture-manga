@@ -1,13 +1,12 @@
-using Manga.Application;
-using Manga.Application.Responses;
-using Manga.Domain.Accounts;
-using Manga.Domain.ValueObjects;
-using Manga.Infrastructure.Mappings;
-using System;
-using Xunit;
-
 namespace Manga.MappingsTests
 {
+    using Manga.Application;
+    using Manga.Application.Responses;
+    using Manga.Domain.Customers.Accounts;
+    using Manga.Domain.ValueObjects;
+    using Manga.Infrastructure.Mappings;
+    using Xunit;
+
     public class ConversionTests
     {
         public IResponseConverter converter;

@@ -1,30 +1,26 @@
 namespace Manga.UseCaseTests
 {
     using Xunit;
-    using Manga.Domain.Accounts;
     using Manga.Domain.Customers;
     using NSubstitute;
     using Manga.Application;
     using Manga.Infrastructure.Mappings;
     using System;
     using Manga.Domain.ValueObjects;
+    using Manga.Domain.Customers.Accounts;
+    using System.Collections.Generic;
 
     public class AccountTests
     {
         public ICustomerReadOnlyRepository customerReadOnlyRepository;
         public ICustomerWriteOnlyRepository customerWriteOnlyRepository;
 
-        public IAccountReadOnlyRepository accountReadOnlyRepository;
-        public IAccountWriteOnlyRepository accountWriteOnlyRepository;
-
         public IResponseConverter converter;
 
         public AccountTests()
         {
             customerReadOnlyRepository = Substitute.For<ICustomerReadOnlyRepository>();
-            customerWriteOnlyRepository = Substitute.For<ICustomerWriteOnlyRepository>();
-            accountReadOnlyRepository = Substitute.For<IAccountReadOnlyRepository>();
-            accountWriteOnlyRepository = Substitute.For<IAccountWriteOnlyRepository>();        
+            customerWriteOnlyRepository = Substitute.For<ICustomerWriteOnlyRepository>();  
             converter = new ResponseConverter();
         }
 
@@ -39,7 +35,6 @@ namespace Manga.UseCaseTests
 
             var registerUseCase = new Application.UseCases.Register.Interactor(
                 customerWriteOnlyRepository,
-                accountWriteOnlyRepository,
                 output,
                 converter
             );
@@ -60,18 +55,23 @@ namespace Manga.UseCaseTests
 
 
         [Theory]
-        [InlineData("c725315a-1de6-4bf7-aecf-3af8f0083681", 100)]
-        public async void Deposit_Valid_Amount(string accountId, double amount)
+        [InlineData("08724050601", "Ivan Paulovich", "c725315a-1de6-4bf7-aecf-3af8f0083681", 100)]
+        public async void Deposit_Valid_Amount(string pin, string name,string accountId, double amount)
         {
-            accountReadOnlyRepository
-                .Get(Guid.Parse(accountId))
-                .Returns(new Account());
+            var account = Substitute.For<Account>();
+            var customer = Substitute.For<Customer>();
+            customer.FindAccount(Arg.Any<Guid>())
+                .Returns(account);
+
+            customerReadOnlyRepository
+                .GetByAccount(Guid.Parse(accountId))
+                .Returns(customer);
 
             var output = Substitute.For<CustomPresenter<Application.UseCases.Deposit.Response>>();
 
             var depositUseCase = new Application.UseCases.Deposit.Interactor(
-                accountReadOnlyRepository,
-                accountWriteOnlyRepository,
+                customerReadOnlyRepository,
+                customerWriteOnlyRepository,
                 output,
                 converter
             );
@@ -86,6 +86,11 @@ namespace Manga.UseCaseTests
             Assert.Equal(request.Amount, output.Response.Transaction.Amount);
         }
 
+        private int IList<T>()
+        {
+            throw new NotImplementedException();
+        }
+
         [Theory]
         [InlineData("c725315a-1de6-4bf7-aecf-3af8f0083681", 100)]
         public async void Withdraw_Valid_Amount(string accountId, double amount)
@@ -93,15 +98,19 @@ namespace Manga.UseCaseTests
             Account account = Substitute.For<Account>();
             account.Deposit(new Credit(new Amount(1000)));
 
-            accountReadOnlyRepository
-                .Get(Guid.Parse(accountId))
+            var customer = Substitute.For<Customer>();
+            customer.FindAccount(Arg.Any<Guid>())
                 .Returns(account);
+
+            customerReadOnlyRepository
+                .GetByAccount(Guid.Parse(accountId))
+                .Returns(customer);
 
             var output = Substitute.For<CustomPresenter<Application.UseCases.Withdraw.Response>>();
 
             var depositUseCase = new Application.UseCases.Withdraw.Interactor(
-                accountReadOnlyRepository,
-                accountWriteOnlyRepository,
+                customerReadOnlyRepository,
+                customerWriteOnlyRepository,
                 output,
                 converter
             );
