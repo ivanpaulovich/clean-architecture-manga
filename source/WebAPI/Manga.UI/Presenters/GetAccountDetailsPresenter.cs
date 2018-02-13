@@ -2,6 +2,7 @@
 {
     using Manga.Application;
     using Manga.Application.Responses;
+    using Manga.UI.Model;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
 
@@ -20,27 +21,22 @@
                 return;
             }
 
-            List<dynamic> transactions = new List<dynamic>();
+            List<TransactionModel> transactions = new List<TransactionModel>();
 
             foreach (var item in response.Transactions)
             {
-                var transaction = new
-                {
-                    Amount = item.Amount,
-                    Description = item.Description,
-                    TransactionDate = item.TransactionDate
-                };
+                var transaction = new TransactionModel(
+                    item.Amount,
+                    item.Description,
+                    item.TransactionDate);
 
                 transactions.Add(transaction);
             }
 
-            ViewModel = new ObjectResult(new
-            {
-                AccountId = response.AccountId,
-                CurrentBalance = response.CurrentBalance,
-                CustomerId = response.CustomerId,
-                Transactions = transactions
-            });
+            ViewModel = new ObjectResult(new AccountDetailsModel(
+                response.AccountId,
+                response.CurrentBalance,
+                transactions));
         }
     }
 }

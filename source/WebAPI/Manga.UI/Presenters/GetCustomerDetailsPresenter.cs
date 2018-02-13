@@ -2,6 +2,7 @@
 {
     using Manga.Application;
     using Manga.Application.Responses;
+    using Manga.UI.Model;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
 
@@ -20,39 +21,36 @@
                 return;
             }
 
-            List<dynamic> accounts = new List<dynamic>();
+            List<AccountDetailsModel> accounts = new List<AccountDetailsModel>();
 
             foreach (var account in response.Accounts)
             {
-                List<dynamic> transactions = new List<dynamic>();
+                List<TransactionModel> transactions = new List<TransactionModel>();
 
                 foreach (var item in account.Transactions)
                 {
-                    var transaction = new
-                    {
-                        Amount = item.Amount,
-                        Description = item.Description,
-                        TransactionDate = item.TransactionDate
-                    };
+                    var transaction = new TransactionModel(
+                        item.Amount,
+                        item.Description,
+                        item.TransactionDate);
 
                     transactions.Add(transaction);
                 }
 
-                accounts.Add(new
-                {
-                    AccountId = account.AccountId,
-                    CurrentBalance = account.CurrentBalance,
-                    Transactions = account.Transactions
-                });
+                accounts.Add(new AccountDetailsModel(
+                    account.AccountId,
+                    account.CurrentBalance,
+                    transactions));
             }
 
-            ViewModel = new ObjectResult(new
-            {
-                CustomerId = response.CustomerId,
-                Personnummer = response.Personnummer,
-                Name = response.Name,
-                Accounts = accounts
-            });
+            CustomerDetailsModel model = new CustomerDetailsModel(
+                response.CustomerId,
+                response.Personnummer,
+                response.Name,
+                accounts
+            );
+
+            ViewModel = new ObjectResult(model);
         }
     }
 }

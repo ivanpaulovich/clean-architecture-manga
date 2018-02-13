@@ -55,8 +55,8 @@ namespace Manga.UseCaseTests
 
 
         [Theory]
-        [InlineData("08724050601", "Ivan Paulovich", "c725315a-1de6-4bf7-aecf-3af8f0083681", 100)]
-        public async void Deposit_Valid_Amount(string pin, string name,string accountId, double amount)
+        [InlineData("c725315a-1de6-4bf7-aecf-3af8f0083681", 100)]
+        public async void Deposit_Valid_Amount(string accountId, double amount)
         {
             var account = Substitute.For<Account>();
             var customer = Substitute.For<Customer>();
