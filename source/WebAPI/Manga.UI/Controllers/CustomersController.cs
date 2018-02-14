@@ -44,10 +44,10 @@
         /// <summary>
         /// Get a Customer details 
         /// </summary>
-        [HttpGet("{id}", Name = "GetCustomer")]
-        public async Task<IActionResult> GetCustomer(Guid id)
+        [HttpGet("{customerId}", Name = "GetCustomer")]
+        public async Task<IActionResult> GetCustomer(Guid customerId)
         {
-            var request = new GetCustomerDetaisCommand(id);
+            var request = new GetCustomerDetaisCommand(customerId);
             await this.getCustomerInput.Handle(request);
             return this.getCustomerDetailsPresenter.ViewModel;
         }
