@@ -41,12 +41,14 @@
             List<AccountDetailsModel> accounts = new List<AccountDetailsModel>();
             accounts.Add(account);
 
-            ViewModel = new ObjectResult(new RegisterModel(
+            RegisterModel model = new RegisterModel(
                 response.Customer.CustomerId,
                 response.Customer.Personnummer,
                 response.Customer.Name,
                 accounts
-            ));
+            );
+
+            ViewModel = new CreatedAtRouteResult("GetCustomer", new { customerId = model.CustomerId }, model);
         }
     }
 }
