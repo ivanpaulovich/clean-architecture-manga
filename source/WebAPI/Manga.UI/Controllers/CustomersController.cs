@@ -16,13 +16,13 @@
         private readonly IInputBoundary<GetCustomerDetaisCommand> getCustomerInput;
 
         private readonly RegisterPresenter registerPresenter;
-        private readonly GetCustomerDetailsPresenter getCustomerDetailsPresenter;
+        private readonly CustomerDetailsPresenter getCustomerDetailsPresenter;
 
         public CustomersController(
             IInputBoundary<RegisterCommand> registerInput,
             IInputBoundary<GetCustomerDetaisCommand> getCustomerInput,
             RegisterPresenter registerPresenter,
-            GetCustomerDetailsPresenter getCustomerDetailsPresenter)
+            CustomerDetailsPresenter getCustomerDetailsPresenter)
         {
             this.registerInput = registerInput;
             this.getCustomerInput = getCustomerInput;

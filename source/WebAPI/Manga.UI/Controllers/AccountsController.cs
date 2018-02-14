@@ -22,7 +22,7 @@
         private readonly ClosePresenter closePresenter;
         private readonly DepositPresenter depositPresenter;
         private readonly WithdrawPresenter withdrawPresenter;
-        private readonly GetAccountDetailsPresenter getAccountDetailsPresenter;
+        private readonly AccountDetailsPresenter getAccountDetailsPresenter;
 
         public AccountsController(
             IInputBoundary<CloseCommand> closeAccountnput,
@@ -32,7 +32,7 @@
             ClosePresenter closePresenter,
             DepositPresenter depositPresenter,
             WithdrawPresenter withdrawPresenter,
-            GetAccountDetailsPresenter getAccountDetailsPresenter)
+            AccountDetailsPresenter getAccountDetailsPresenter)
         {
             this.closeAccountInput = closeAccountnput;
             this.depositInput = depositnput;

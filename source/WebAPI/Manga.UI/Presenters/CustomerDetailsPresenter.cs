@@ -6,7 +6,7 @@
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
 
-    public class GetCustomerDetailsPresenter : IOutputBoundary<CustomerResponse>
+    public class CustomerDetailsPresenter : IOutputBoundary<CustomerResponse>
     {
         public IActionResult ViewModel { get; private set; }
         public CustomerResponse Response { get; private set; }
