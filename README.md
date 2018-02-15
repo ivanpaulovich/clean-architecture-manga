@@ -33,3 +33,16 @@ ba28cf144478        mongo               "docker-entrypoint..."   2 days ago     
 ```
 
 If everything goes well MongoDB will be running with the `mongodb://10.0.75.1:27017` connection string.
+
+# Running the latest Docker Build ![Authorization](https://dockerbuildbadges.quelltext.eu/status.svg?organization=ivanpaulovich&repository=acerola)
+
+If you like to run a Docker container for this project use the latest image:
+
+```
+docker run -p 8000:80 \
+		-e modules__2__properties__ConnectionString=mongodb://10.0.75.1:27017 \
+		-d \
+		--name manga-backend \
+		ivanpaulovich/manga:latest
+```
+Then navigate to http://localhost:8000/swagger and play with de API.
