@@ -1,6 +1,8 @@
 # Manga: Clean Architecture
 A solution with Use Cases as first class.
 
+![Flow of Control: Customer Registration](Flow-Of-Control.png)
+
 # Requirements
 * [Visual Studio 2017 with Update 3](https://www.visualstudio.com/en-us/news/releasenotes/vs2017-relnotes)
 * [.NET SDK 2.0](https://www.microsoft.com/net/download/core)
