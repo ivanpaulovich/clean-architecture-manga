@@ -76,7 +76,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 ba28cf144478        mongo               "docker-entrypoint..."   2 days ago          Up 2 days           0.0.0.0:27017->27017/tcp                         setup_mongodb_1
 ```
 
-If everything goes well MongoDB will be running with the `mongodb://10.0.75.1:27017` connection string.
+If everything goes well MongoDB will be running with the following connection string `mongodb://10.0.75.1:27017`.
 
 # Running the latest Docker Build ![Authorization](https://dockerbuildbadges.quelltext.eu/status.svg?organization=ivanpaulovich&repository=manga)
 
