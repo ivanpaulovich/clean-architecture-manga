@@ -3,6 +3,32 @@ A solution with Use Cases as first class.
 
 ![Flow of Control: Customer Registration](Flow-Of-Control.png)
 
+# Main Concepts
+
+## DDD
+Soon..
+
+## TDD
+Soon..
+
+## CQRS
+Soon..
+
+## SOLID
+Soon..
+
+## Entity-Boundary-Interactor (EBI)
+Soon..
+
+## Microservice
+Soon..
+
+## Docker
+Soon..
+
+## .NET Core 2.0
+Soon..
+
 # Requirements
 * [Visual Studio 2017 with Update 3](https://www.visualstudio.com/en-us/news/releasenotes/vs2017-relnotes)
 * [.NET SDK 2.0](https://www.microsoft.com/net/download/core)
@@ -47,3 +73,9 @@ $ docker run -p 8000:80 -d \
 		ivanpaulovich/manga:latest
 ```
 Then navigate to http://localhost:8000/swagger and play with de API.
+
+# We are live on Azure
+
+![Live on Azure](Swagger.png)
+
+You can play with the latest build by navigating to [the Swagger client](http://grape.westus2.cloudapp.azure.com:8800/swagger "Manga Swagger") (All data is restored weekly)
