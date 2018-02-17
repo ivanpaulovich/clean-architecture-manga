@@ -8,7 +8,6 @@ namespace Manga.UseCaseTests
     using System;
     using Manga.Domain.ValueObjects;
     using Manga.Domain.Customers.Accounts;
-    using System.Collections.Generic;
 
     public class AccountTests
     {
@@ -123,6 +122,17 @@ namespace Manga.UseCaseTests
             await depositUseCase.Handle(request);
 
             Assert.Equal(request.Amount, output.Response.Transaction.Amount);
+        }
+
+        [Theory]
+        [InlineData(100)]
+        public void Account_With_Credits_Should_Not_Allow_Close(double amount)
+        {
+            var account = new Account();
+            account.Deposit(new Credit(new Amount(100)));
+
+            Assert.Throws<AccountCannotBeClosedException>(
+                () => account.Close());
         }
     }
 }

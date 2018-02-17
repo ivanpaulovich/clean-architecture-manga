@@ -53,6 +53,7 @@
         public virtual void RemoveAccount(Guid accountID)
         {
             Account account = FindAccount(accountID);
+            account.Close();
             accounts.Remove(account);
         }
 

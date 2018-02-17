@@ -12,7 +12,6 @@ namespace Manga.IntegrationTests
     using System.Text;
     using Newtonsoft.Json.Linq;
     using System;
-    using System.Diagnostics;
 
     public class CustomerRegistration
     {
@@ -36,13 +35,16 @@ namespace Manga.IntegrationTests
         }
 
         [Fact]
-        public async Task Register_Then_GetDetails()
+        public async Task Register_Deposit_Withdraw_Close()
         {
-            Tuple<string, string> customerId_accountId = await Register();
+            Tuple<string, string> customerId_accountId = await Register(100);
             await GetCustomer(customerId_accountId.Item1);
             await GetAccount(customerId_accountId.Item2);
+            await Withdraw(customerId_accountId.Item2, 100);
+            await GetCustomer(customerId_accountId.Item1);
             await Deposit(customerId_accountId.Item2, 500);
             await Deposit(customerId_accountId.Item2, 400);
+            await GetCustomer(customerId_accountId.Item1);
             await Withdraw(customerId_accountId.Item2, 400);
             await Withdraw(customerId_accountId.Item2, 500);
             await Close(customerId_accountId.Item2);
@@ -58,13 +60,13 @@ namespace Manga.IntegrationTests
             string result = await client.GetStringAsync("/api/Accounts/" + accountId);
         }
 
-        private async Task<Tuple<string, string>> Register()
+        private async Task<Tuple<string, string>> Register(double initialAmount)
         {
             var register = new
             {
                 pin = "08724050601",
                 name = "Ivan Paulovich",
-                initialAmount = "1200"
+                initialAmount = initialAmount
             };
 
             string registerData = JsonConvert.SerializeObject(register);
@@ -90,13 +92,14 @@ namespace Manga.IntegrationTests
             var json = new
             {
                 accountId = account,
-                name = amount,
+                amount = amount,
             };
 
             string data = JsonConvert.SerializeObject(json);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
             var response = await client.PatchAsync("api/Accounts/Deposit", content);
+            string result = await response.Content.ReadAsStringAsync();
 
             response.EnsureSuccessStatusCode();
         }
@@ -106,13 +109,14 @@ namespace Manga.IntegrationTests
             var json = new
             {
                 accountId = account,
-                name = amount,
+                amount = amount,
             };
 
             string data = JsonConvert.SerializeObject(json);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
             var response = await client.PatchAsync("api/Accounts/Withdraw", content);
+            string result = await response.Content.ReadAsStringAsync();
 
             response.EnsureSuccessStatusCode();
         }
@@ -139,4 +143,3 @@ namespace Manga.IntegrationTests
         }
     }
 }
-
