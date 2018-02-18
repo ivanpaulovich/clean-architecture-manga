@@ -27,7 +27,7 @@ The use cases of this project is to manage an account balance with deposit and c
 From the beginning of the project we developed Unit Tests and that helped us to enforce the business rules and to create an application that prevents bugs intead of finding them. We also have Use Case tests and Mapping Tests and a more sophistecated Integration Tests. 
 
 ## SOLID
-The SOLID principles are all over the the solution. Knoleadge of SOLID is not a prerequisite to understand and run the solution but it is highly recommended.
+The SOLID principles are all over the the solution. Knowledge of SOLID is not a prerequisite to understand and run the solution but it is highly recommended.
 
 ## Entity-Boundary-Interactor (EBI)
 The goal of EBI architecture is to produce a software implementation agnostic to technology, framework and to have a focus on the use cases and input/output. 
