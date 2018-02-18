@@ -1,12 +1,12 @@
 ![Flow of Control: Customer Registration](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/logo.png)
 
 # Architectural Style
-A solution with Use Cases as first class.
+In this project the usecases are first-class modules, when you open the source code you will see that the system looks like an Account Balance Application.  
 
 ![Flow of Control: Customer Registration](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/Flow-Of-Control.png)
 
 # Main Architectural Concepts
-On of the goals of the clean architecture is to encapsulate the business logic in an clean way, with no dependencies to details like (UI, Database version or Frameworks). And by building a software that looks like your Business Domain at the first look of the source code. The architecture must put Use Cases as first class modules.
+On of the goals of the clean architecture is to encapsulate the business logic in an clean way, with no dependencies to details like (UI, Database version or Frameworks). And by building a software that looks like your Business Domain at the first look of the source code.
 
 If you are interested check out [The Clean Architecture post by Uncle Bob](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html) or his latest book [Clean Architecture](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164/ref=sr_1_1?ie=UTF8&qid=1518796865&sr=8-1&keywords=clean+architecture).
 
