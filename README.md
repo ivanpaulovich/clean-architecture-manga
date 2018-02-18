@@ -1,9 +1,9 @@
-![Flow of Control: Customer Registration](https://github.com/ivanpaulovich/manga/blob/master/logo.png)
+![Flow of Control: Customer Registration](https://raw.githubusercontent.com/ivanpaulovich/manga/master/logo.png)
 
 # Architectural Style
 A solution with Use Cases as first class.
 
-![Flow of Control: Customer Registration](https://github.com/ivanpaulovich/manga/blob/master/Flow-Of-Control.png)
+![Flow of Control: Customer Registration](https://raw.githubusercontent.com/ivanpaulovich/manga/master/Flow-Of-Control.png)
 
 # Main Architectural Concepts
 On of the goals of the clean architecture is to encapsulate the business logic in an clean way, with no dependencies to details like (UI, Database version or Frameworks). And by building a software that looks like your Business Domain at the first look of the source code. The architecture must put Use Cases as first class modules.
@@ -18,7 +18,7 @@ By following Uncle Bob material, we developed this project to have this Dimensio
 * Independent of Database. 
 * Independent of any external agency.
 
-![Clean Architecture by Uncle Bob](https://github.com/ivanpaulovich/manga/blob/master/CleanArchitecture-Uncle-Bob.jpg)
+![Clean Architecture by Uncle Bob](https://raw.githubusercontent.com/ivanpaulovich/manga/master/CleanArchitecture-Uncle-Bob.jpg)
 
 ## DDD
 The use cases of this project is to manage an account balance with deposit and credits and its concepts is enforced by the Domain and Application. Also we use the Eric Evans terms like Entities, Value Object, Aggregates, Aggregate Root and etc. And everything is on a single Bounded Context.
@@ -94,7 +94,7 @@ Then navigate to http://localhost:8000/swagger and play with de API.
 
 # We are live on Azure
 
-![Live on Azure](https://github.com/ivanpaulovich/manga/blob/master/Swagger.png)
+![Live on Azure](https://raw.githubusercontent.com/ivanpaulovich/manga/master/Swagger.png)
 
 You can play with the latest build by navigating to [the Swagger client](http://grape.westus2.cloudapp.azure.com:8800/swagger "Manga Swagger").
 
