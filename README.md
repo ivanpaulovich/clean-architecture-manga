@@ -1,4 +1,6 @@
-# Manga: Clean Architecture
+![Flow of Control: Customer Registration](https://github.com/ivanpaulovich/manga/blob/master/logo.png)
+
+# Architectural Style
 A solution with Use Cases as first class.
 
 ![Flow of Control: Customer Registration](https://github.com/ivanpaulovich/manga/blob/master/Flow-Of-Control.png)
