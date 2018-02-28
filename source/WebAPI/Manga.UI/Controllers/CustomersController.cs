@@ -12,15 +12,15 @@
     [Route("api/[controller]")]
     public class CustomersController : Controller
     {
-        private readonly IInputBoundary<RegisterCommand> registerInput;
-        private readonly IInputBoundary<GetCustomerDetaisCommand> getCustomerInput;
+        private readonly IInputBoundary<RegisterInput> registerInput;
+        private readonly IInputBoundary<GetCustomerDetaisInput> getCustomerInput;
 
         private readonly RegisterPresenter registerPresenter;
         private readonly CustomerDetailsPresenter getCustomerDetailsPresenter;
 
         public CustomersController(
-            IInputBoundary<RegisterCommand> registerInput,
-            IInputBoundary<GetCustomerDetaisCommand> getCustomerInput,
+            IInputBoundary<RegisterInput> registerInput,
+            IInputBoundary<GetCustomerDetaisInput> getCustomerInput,
             RegisterPresenter registerPresenter,
             CustomerDetailsPresenter getCustomerDetailsPresenter)
         {
@@ -36,7 +36,7 @@
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]RegisterRequest message)
         {
-            var request = new RegisterCommand(message.PIN, message.Name, message.InitialAmount);
+            var request = new RegisterInput(message.PIN, message.Name, message.InitialAmount);
             await registerInput.Handle(request);
             return registerPresenter.ViewModel;
         }
@@ -47,7 +47,7 @@
         [HttpGet("{customerId}", Name = "GetCustomer")]
         public async Task<IActionResult> GetCustomer(Guid customerId)
         {
-            var request = new GetCustomerDetaisCommand(customerId);
+            var request = new GetCustomerDetaisInput(customerId);
             await this.getCustomerInput.Handle(request);
             return this.getCustomerDetailsPresenter.ViewModel;
         }

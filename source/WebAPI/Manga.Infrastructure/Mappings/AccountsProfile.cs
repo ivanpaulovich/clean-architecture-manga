@@ -23,7 +23,7 @@
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
                 .ForMember(dest => dest.TransactionDate, opt => opt.MapFrom(src => src.TransactionDate));
 
-            CreateMap<Account, CloseResponse>()
+            CreateMap<Account, CloseOutput>()
                 .ForMember(dest => dest.AccountId, opt => opt.MapFrom(src => src.Id));
         }
     }

@@ -4,13 +4,13 @@
     using Manga.Application.UseCases.CloseAccount;
     using Microsoft.AspNetCore.Mvc;
 
-    public class ClosePresenter : IOutputBoundary<CloseResponse>
+    public class ClosePresenter : IOutputBoundary<CloseOutput>
     {
         public IActionResult ViewModel { get; private set; }
 
-        public CloseResponse Response { get; private set; }
+        public CloseOutput Response { get; private set; }
 
-        public void Populate(CloseResponse response)
+        public void Populate(CloseOutput response)
         {
             Response = response;
 

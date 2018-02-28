@@ -4,7 +4,7 @@
     using Manga.Application.Responses;
     using Manga.Domain.Customers;
 
-    public class GetCustomerDetailsInteractor : IInputBoundary<GetCustomerDetaisCommand>
+    public class GetCustomerDetailsInteractor : IInputBoundary<GetCustomerDetaisInput>
     {
         private readonly ICustomerReadOnlyRepository customerReadOnlyRepository;
         private readonly IOutputBoundary<CustomerResponse> outputBoundary;
@@ -20,7 +20,7 @@
             this.responseConverter = responseConverter;
         }
 
-        public async Task Handle(GetCustomerDetaisCommand message)
+        public async Task Handle(GetCustomerDetaisInput message)
         {
             Domain.Customers.Customer customer = await this.customerReadOnlyRepository.Get(message.CustomerId);
             CustomerResponse response = responseConverter.Map<CustomerResponse>(customer);

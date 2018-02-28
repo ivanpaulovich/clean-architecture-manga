@@ -5,13 +5,13 @@
     using Manga.UI.Model;
     using Microsoft.AspNetCore.Mvc;
 
-    public class DepositPresenter : IOutputBoundary<DepositResponse>
+    public class DepositPresenter : IOutputBoundary<DepositOutput>
     {
         public IActionResult ViewModel { get; private set; }
 
-        public DepositResponse Response { get; private set; }
+        public DepositOutput Response { get; private set; }
 
-        public void Populate(DepositResponse response)
+        public void Populate(DepositOutput response)
         {
             Response = response;
 

@@ -30,7 +30,7 @@ namespace Manga.UseCaseTests
         [InlineData("08724050", "Ivan Paulovich", 300)]
         public async void Register_Valid_User_Account(string personnummer, string name, double amount)
         {
-            var output = Substitute.For<CustomPresenter<Application.UseCases.Register.RegisterResponse>>();
+            var output = Substitute.For<CustomPresenter<Application.UseCases.Register.RegisterOutput>>();
 
             var registerUseCase = new Application.UseCases.Register.RegisterInteractor(
                 customerWriteOnlyRepository,
@@ -38,7 +38,7 @@ namespace Manga.UseCaseTests
                 converter
             );
 
-            var request = new Application.UseCases.Register.RegisterCommand(
+            var request = new Application.UseCases.Register.RegisterInput(
                 personnummer,
                 name,
                 amount
@@ -66,7 +66,7 @@ namespace Manga.UseCaseTests
                 .GetByAccount(Guid.Parse(accountId))
                 .Returns(customer);
 
-            var output = Substitute.For<CustomPresenter<Application.UseCases.Deposit.DepositResponse>>();
+            var output = Substitute.For<CustomPresenter<Application.UseCases.Deposit.DepositOutput>>();
 
             var depositUseCase = new Application.UseCases.Deposit.DepositInteractor(
                 customerReadOnlyRepository,
@@ -75,7 +75,7 @@ namespace Manga.UseCaseTests
                 converter
             );
 
-            var request = new Application.UseCases.Deposit.DepositCommand(
+            var request = new Application.UseCases.Deposit.DepositInput(
                 Guid.Parse(accountId),
                 amount
             );
@@ -105,7 +105,7 @@ namespace Manga.UseCaseTests
                 .GetByAccount(Guid.Parse(accountId))
                 .Returns(customer);
 
-            var output = Substitute.For<CustomPresenter<Application.UseCases.Withdraw.WithdrawResponse>>();
+            var output = Substitute.For<CustomPresenter<Application.UseCases.Withdraw.WithdrawOutput>>();
 
             var depositUseCase = new Application.UseCases.Withdraw.WithdrawInteractor(
                 customerReadOnlyRepository,
@@ -114,7 +114,7 @@ namespace Manga.UseCaseTests
                 converter
             );
 
-            var request = new Application.UseCases.Withdraw.WithdrawCommand(
+            var request = new Application.UseCases.Withdraw.WithdrawInput(
                 Guid.Parse(accountId),
                 amount
             );

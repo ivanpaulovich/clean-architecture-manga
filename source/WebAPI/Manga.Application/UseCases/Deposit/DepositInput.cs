@@ -2,12 +2,12 @@
 {
     using System;
 
-    public class DepositCommand
+    public class DepositInput
     {
         public Guid AccountId { get; private set; }
         public Double Amount { get; private set; }
 
-        public DepositCommand(Guid accountId, double amount)
+        public DepositInput(Guid accountId, double amount)
         {
             AccountId = accountId;
             Amount = amount;

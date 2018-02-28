@@ -6,12 +6,12 @@
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
 
-    public class RegisterPresenter : IOutputBoundary<RegisterResponse>
+    public class RegisterPresenter : IOutputBoundary<RegisterOutput>
     {
         public IActionResult ViewModel { get; private set; }
-        public RegisterResponse Response { get; private set; }
+        public RegisterOutput Response { get; private set; }
 
-        public void Populate(RegisterResponse response)
+        public void Populate(RegisterOutput response)
         {
             Response = response;
 

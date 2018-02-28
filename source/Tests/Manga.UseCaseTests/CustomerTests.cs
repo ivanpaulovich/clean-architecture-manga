@@ -29,7 +29,7 @@ namespace Manga.Domain.UnitTests
         [InlineData("08724050", "Ivan Paulovich", 300)]
         public async void Register_Valid_User_Account(string personnummer, string name, double amount)
         {
-            var output = Substitute.For<CustomPresenter<Application.UseCases.Register.RegisterResponse>>();
+            var output = Substitute.For<CustomPresenter<Application.UseCases.Register.RegisterOutput>>();
 
             var registerUseCase = new Application.UseCases.Register.RegisterInteractor(
                 customerWriteOnlyRepository,
@@ -37,7 +37,7 @@ namespace Manga.Domain.UnitTests
                 converter
             );
 
-            var request = new Application.UseCases.Register.RegisterCommand(
+            var request = new Application.UseCases.Register.RegisterInput(
                 personnummer,
                 name,
                 amount

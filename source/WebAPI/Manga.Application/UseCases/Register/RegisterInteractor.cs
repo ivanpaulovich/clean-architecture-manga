@@ -6,15 +6,15 @@
     using Manga.Application.Responses;
     using Manga.Domain.Customers.Accounts;
 
-    public class RegisterInteractor : IInputBoundary<RegisterCommand>
+    public class RegisterInteractor : IInputBoundary<RegisterInput>
     {
         private readonly ICustomerWriteOnlyRepository customerWriteOnlyRepository;
-        private readonly IOutputBoundary<RegisterResponse> outputBoundary;
+        private readonly IOutputBoundary<RegisterOutput> outputBoundary;
         private readonly IResponseConverter responseConverter;
         
         public RegisterInteractor(
             ICustomerWriteOnlyRepository customerWriteOnlyRepository,
-            IOutputBoundary<RegisterResponse> outputBoundary,
+            IOutputBoundary<RegisterOutput> outputBoundary,
             IResponseConverter responseConverter)
         {
             this.customerWriteOnlyRepository = customerWriteOnlyRepository;
@@ -22,7 +22,7 @@
             this.responseConverter = responseConverter;
         }
 
-        public async Task Handle(RegisterCommand message)
+        public async Task Handle(RegisterInput message)
         {
             Customer customer = new Customer(new PIN(message.PIN), new Name(message.Name));
 
@@ -36,7 +36,7 @@
 
             CustomerResponse customerResponse = responseConverter.Map<CustomerResponse>(customer);
             AccountResponse accountResponse = responseConverter.Map<AccountResponse>(account);
-            RegisterResponse response = new RegisterResponse(customerResponse, accountResponse);
+            RegisterOutput response = new RegisterOutput(customerResponse, accountResponse);
 
             outputBoundary.Populate(response);
         }

@@ -6,17 +6,17 @@
     using Manga.Domain.Customers.Accounts;
     using Manga.Domain.ValueObjects;
 
-    public class DepositInteractor : IInputBoundary<DepositCommand>
+    public class DepositInteractor : IInputBoundary<DepositInput>
     {
         private readonly ICustomerReadOnlyRepository customerReadOnlyRepository;
         private readonly ICustomerWriteOnlyRepository customerWriteOnlyRepository;
-        private readonly IOutputBoundary<DepositResponse> outputBoundary;
+        private readonly IOutputBoundary<DepositOutput> outputBoundary;
         private readonly IResponseConverter responseConverter;
 
         public DepositInteractor(
             ICustomerReadOnlyRepository customerReadOnlyRepository,
             ICustomerWriteOnlyRepository customerWriteOnlyRepository,
-            IOutputBoundary<DepositResponse> outputBoundary,
+            IOutputBoundary<DepositOutput> outputBoundary,
             IResponseConverter responseConverter)
         {
             this.customerReadOnlyRepository = customerReadOnlyRepository;
@@ -25,7 +25,7 @@
             this.responseConverter = responseConverter;
         }
 
-        public async Task Handle(DepositCommand command)
+        public async Task Handle(DepositInput command)
         {
             Customer customer = await customerReadOnlyRepository.GetByAccount(command.AccountId);
             if (customer == null)
@@ -38,7 +38,7 @@
             await customerWriteOnlyRepository.Update(customer);
 
             TransactionResponse transactionResponse = responseConverter.Map<TransactionResponse>(credit);
-            DepositResponse response = new DepositResponse(transactionResponse, account.CurrentBalance.Value);
+            DepositOutput response = new DepositOutput(transactionResponse, account.CurrentBalance.Value);
 
             outputBoundary.Populate(response);
         }

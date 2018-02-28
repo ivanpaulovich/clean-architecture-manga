@@ -4,17 +4,17 @@
     using Manga.Domain.Customers;
     using Manga.Domain.Customers.Accounts;
 
-    public class CloseInteractor : IInputBoundary<CloseCommand>
+    public class CloseInteractor : IInputBoundary<CloseInput>
     {
         private readonly ICustomerReadOnlyRepository customerReadOnlyRepository;
         private readonly ICustomerWriteOnlyRepository customerWriteOnlyRepository;
-        private readonly IOutputBoundary<CloseResponse> outputBoundary;
+        private readonly IOutputBoundary<CloseOutput> outputBoundary;
         private readonly IResponseConverter responseConverter;
 
         public CloseInteractor(
             ICustomerReadOnlyRepository customerReadOnlyRepository,
             ICustomerWriteOnlyRepository customerWriteOnlyRepository,
-            IOutputBoundary<CloseResponse> outputBoundary,
+            IOutputBoundary<CloseOutput> outputBoundary,
             IResponseConverter responseConverter)
         {
             this.customerReadOnlyRepository = customerReadOnlyRepository;
@@ -23,7 +23,7 @@
             this.responseConverter = responseConverter;
         }
 
-        public async Task Handle(CloseCommand request)
+        public async Task Handle(CloseInput request)
         {
             Customer customer = await customerReadOnlyRepository.GetByAccount(request.AccountId);
             Account account = customer.FindAccount(request.AccountId);
@@ -31,7 +31,7 @@
             customer.RemoveAccount(request.AccountId);
             await customerWriteOnlyRepository.Update(customer);
 
-            CloseResponse response = responseConverter.Map<CloseResponse>(account);
+            CloseOutput response = responseConverter.Map<CloseOutput>(account);
             this.outputBoundary.Populate(response);
         }
     }
