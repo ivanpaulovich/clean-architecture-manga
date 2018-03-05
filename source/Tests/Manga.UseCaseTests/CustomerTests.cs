@@ -7,19 +7,20 @@ namespace Manga.Domain.UnitTests
     using Manga.Infrastructure.Mappings;
     using Manga.UseCaseTests;
     using System;
+    using Manga.Application.Repositories;
 
     public class CustomerTests
     {
         public ICustomerReadOnlyRepository customerReadOnlyRepository;
         public ICustomerWriteOnlyRepository customerWriteOnlyRepository;
 
-        public IResponseConverter converter;
+        public IOutputConverter converter;
 
         public CustomerTests()
         {
             customerReadOnlyRepository = Substitute.For<ICustomerReadOnlyRepository>();
             customerWriteOnlyRepository = Substitute.For<ICustomerWriteOnlyRepository>();
-            converter = new ResponseConverter();
+            converter = new OutputConverter();
         }
 
         [Theory]
@@ -43,12 +44,12 @@ namespace Manga.Domain.UnitTests
                 amount
             );
 
-            await registerUseCase.Handle(request);
+            await registerUseCase.Process(request);
 
-            Assert.Equal(request.PIN, output.Response.Customer.Personnummer);
-            Assert.Equal(request.Name, output.Response.Customer.Name);
-            Assert.True(output.Response.Customer.CustomerId != Guid.Empty);
-            Assert.True(output.Response.Account.AccountId != Guid.Empty);
+            Assert.Equal(request.PIN, output.Output.Customer.Personnummer);
+            Assert.Equal(request.Name, output.Output.Customer.Name);
+            Assert.True(output.Output.Customer.CustomerId != Guid.Empty);
+            Assert.True(output.Output.Account.AccountId != Guid.Empty);
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     public interface IOutputBoundary<T>
     {
-        T Response { get; }
+        T Output { get; }
         void Populate(T response);
     }
 }

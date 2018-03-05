@@ -1,36 +1,35 @@
 ﻿namespace Manga.Application.UseCases.GetAccountDetails
 {
     using System.Threading.Tasks;
-    using Manga.Application.Responses;
-    using Manga.Domain.Customers;
+    using Manga.Application.Repositories;
+    using Manga.Application.Outputs;
 
     public class GetAccountDetailsInteractor : IInputBoundary<GetAccountDetailsInput>
     {
-        private readonly ICustomerReadOnlyRepository customerReadOnlyRepository;
-        private readonly IOutputBoundary<AccountResponse> outputBoundary;
-        private readonly IResponseConverter responseConverter;
+        private readonly IAccountReadOnlyRepository accountReadOnlyRepository;
+        private readonly IOutputBoundary<AccountOutput> outputBoundary;
+        private readonly IOutputConverter outputConverter;
 
         public GetAccountDetailsInteractor(
-            ICustomerReadOnlyRepository customerReadOnlyRepository,
-            IOutputBoundary<AccountResponse> outputBoundary,
-            IResponseConverter responseConverter)
+            IAccountReadOnlyRepository accountReadOnlyRepository,
+            IOutputBoundary<AccountOutput> outputBoundary,
+            IOutputConverter outputConverter)
         {
-            this.customerReadOnlyRepository = customerReadOnlyRepository;
+            this.accountReadOnlyRepository = accountReadOnlyRepository;
             this.outputBoundary = outputBoundary;
-            this.responseConverter = responseConverter;
+            this.outputConverter = outputConverter;
         }
 
-        public async Task Handle(GetAccountDetailsInput message)
+        public async Task Process(GetAccountDetailsInput message)
         {
-            var customer = await customerReadOnlyRepository.GetByAccount(message.AccountId);
-            if (customer == null)
+            var account = await accountReadOnlyRepository.Get(message.AccountId);
+            if (account == null)
             {
                 outputBoundary.Populate(null);
                 return;
             }
 
-            var account = customer.FindAccount(message.AccountId);
-            AccountResponse response = responseConverter.Map<AccountResponse>(account);
+            AccountOutput response = outputConverter.Map<AccountOutput>(account);
             outputBoundary.Populate(response);
         }
     }

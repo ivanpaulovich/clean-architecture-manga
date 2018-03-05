@@ -1,9 +1,9 @@
 ﻿namespace Manga.Application.UseCases.Withdraw
 {
-    using Manga.Application.Responses;
+    using Manga.Application.Outputs;
     public class WithdrawOutput
     {
-        public TransactionResponse Transaction { get; private set; }
+        public TransactionOutput Transaction { get; private set; }
         public double UpdatedBalance { get; private set; }
 
         public WithdrawOutput()
@@ -11,7 +11,7 @@
 
         }
 
-        public WithdrawOutput(TransactionResponse transaction, double updatedBalance)
+        public WithdrawOutput(TransactionOutput transaction, double updatedBalance)
         {
             this.Transaction = transaction;
             this.UpdatedBalance = updatedBalance;

@@ -4,7 +4,7 @@
     using Manga.Application;
     using Manga.UI.Presenters;
 
-    public class UIModuley : Autofac.Module
+    public class UIModule : Autofac.Module
     {
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }

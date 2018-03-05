@@ -3,11 +3,11 @@
     using Manga.Application;
     using AutoMapper;
 
-    public class ResponseConverter : IResponseConverter
+    public class OutputConverter : IOutputConverter
     {
         private readonly IMapper mapper;
 
-        public ResponseConverter()
+        public OutputConverter()
         {
             mapper = new MapperConfiguration(cfg => {
                 cfg.AddProfile<AccountsProfile>();

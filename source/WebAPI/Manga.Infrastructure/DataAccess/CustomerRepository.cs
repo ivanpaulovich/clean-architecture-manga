@@ -1,7 +1,7 @@
 ﻿namespace Manga.Infrastructure.DataAccess
 {
+    using Manga.Application.Repositories;
     using Manga.Domain.Customers;
-    using Manga.Infrastructure.DataAccess;
     using MongoDB.Driver;
     using System;
     using System.Threading.Tasks;
@@ -34,15 +34,6 @@
         {
             await mongoContext.Customers
                 .ReplaceOneAsync(e => e.Id == customer.Id, customer);
-        }
-
-        public async Task<Customer> GetByAccount(Guid accountId)
-        {
-            Customer customer = await mongoContext.Customers
-                .Find(Builders<Customer>.Filter.ElemMatch(x => x.Accounts, e => e.Id == accountId))
-                .SingleOrDefaultAsync();
-
-            return customer;
         }
     }
 }

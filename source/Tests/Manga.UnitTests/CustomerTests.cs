@@ -3,7 +3,7 @@ namespace Manga.Domain.UnitTests
     using Xunit;
     using Manga.Domain.Customers;
     using NSubstitute;
-    using Manga.Domain.Customers.Accounts;
+    using Manga.Domain.Accounts;
     using Manga.Domain.ValueObjects;
 
     public class CustomerTests
@@ -18,11 +18,11 @@ namespace Manga.Domain.UnitTests
 
             //
             // Act
-            sut.Register(account);
+            sut.Register(account.Id);
 
             //
             // Assert
-            Assert.Equal(1, sut.Accounts.Count);
+            Assert.Equal(1, sut.Accounts.Items.Count);
         }
     }
 }

@@ -7,20 +7,26 @@ namespace Manga.UseCaseTests
     using Manga.Infrastructure.Mappings;
     using System;
     using Manga.Domain.ValueObjects;
-    using Manga.Domain.Customers.Accounts;
+    using Manga.Domain.Accounts;
+    using Manga.Application.Repositories;
 
     public class AccountTests
     {
+        public IAccountReadOnlyRepository accountReadOnlyRepository;
+        public IAccountWriteOnlyRepository accountWriteOnlyRepository;
         public ICustomerReadOnlyRepository customerReadOnlyRepository;
         public ICustomerWriteOnlyRepository customerWriteOnlyRepository;
 
-        public IResponseConverter converter;
+        public IOutputConverter converter;
 
         public AccountTests()
         {
+            accountReadOnlyRepository = Substitute.For<IAccountReadOnlyRepository>();
+            accountWriteOnlyRepository = Substitute.For<IAccountWriteOnlyRepository>();
             customerReadOnlyRepository = Substitute.For<ICustomerReadOnlyRepository>();
-            customerWriteOnlyRepository = Substitute.For<ICustomerWriteOnlyRepository>();  
-            converter = new ResponseConverter();
+            customerWriteOnlyRepository = Substitute.For<ICustomerWriteOnlyRepository>();
+
+            converter = new OutputConverter();
         }
 
         [Theory]
@@ -44,12 +50,12 @@ namespace Manga.UseCaseTests
                 amount
             );
 
-            await registerUseCase.Handle(request);
+            await registerUseCase.Process(request);
 
-            Assert.Equal(request.PIN, output.Response.Customer.Personnummer);
-            Assert.Equal(request.Name, output.Response.Customer.Name);
-            Assert.True(Guid.Empty != output.Response.Customer.CustomerId);
-            Assert.True(Guid.Empty != output.Response.Account.AccountId);
+            Assert.Equal(request.PIN, output.Output.Customer.Personnummer);
+            Assert.Equal(request.Name, output.Output.Customer.Name);
+            Assert.True(Guid.Empty != output.Output.Customer.CustomerId);
+            Assert.True(Guid.Empty != output.Output.Account.AccountId);
         }
 
 
@@ -59,18 +65,16 @@ namespace Manga.UseCaseTests
         {
             var account = Substitute.For<Account>();
             var customer = Substitute.For<Customer>();
-            customer.FindAccount(Arg.Any<Guid>())
-                .Returns(account);
 
-            customerReadOnlyRepository
-                .GetByAccount(Guid.Parse(accountId))
-                .Returns(customer);
+            accountReadOnlyRepository
+                .Get(Guid.Parse(accountId))
+                .Returns(account);
 
             var output = Substitute.For<CustomPresenter<Application.UseCases.Deposit.DepositOutput>>();
 
             var depositUseCase = new Application.UseCases.Deposit.DepositInteractor(
-                customerReadOnlyRepository,
-                customerWriteOnlyRepository,
+                accountReadOnlyRepository,
+                accountWriteOnlyRepository,
                 output,
                 converter
             );
@@ -80,9 +84,9 @@ namespace Manga.UseCaseTests
                 amount
             );
 
-            await depositUseCase.Handle(request);
+            await depositUseCase.Process(request);
 
-            Assert.Equal(request.Amount, output.Response.Transaction.Amount);
+            Assert.Equal(request.Amount, output.Output.Transaction.Amount);
         }
 
         private int IList<T>()
@@ -97,19 +101,15 @@ namespace Manga.UseCaseTests
             Account account = Substitute.For<Account>();
             account.Deposit(new Credit(new Amount(1000)));
 
-            var customer = Substitute.For<Customer>();
-            customer.FindAccount(Arg.Any<Guid>())
+            accountReadOnlyRepository
+                .Get(Guid.Parse(accountId))
                 .Returns(account);
-
-            customerReadOnlyRepository
-                .GetByAccount(Guid.Parse(accountId))
-                .Returns(customer);
 
             var output = Substitute.For<CustomPresenter<Application.UseCases.Withdraw.WithdrawOutput>>();
 
             var depositUseCase = new Application.UseCases.Withdraw.WithdrawInteractor(
-                customerReadOnlyRepository,
-                customerWriteOnlyRepository,
+                accountReadOnlyRepository,
+                accountWriteOnlyRepository,
                 output,
                 converter
             );
@@ -119,9 +119,9 @@ namespace Manga.UseCaseTests
                 amount
             );
 
-            await depositUseCase.Handle(request);
+            await depositUseCase.Process(request);
 
-            Assert.Equal(request.Amount, output.Response.Transaction.Amount);
+            Assert.Equal(request.Amount, output.Output.Transaction.Amount);
         }
 
         [Theory]
@@ -129,7 +129,7 @@ namespace Manga.UseCaseTests
         public void Account_With_Credits_Should_Not_Allow_Close(double amount)
         {
             var account = new Account();
-            account.Deposit(new Credit(new Amount(100)));
+            account.Deposit(new Credit(new Amount(amount)));
 
             Assert.Throws<AccountCannotBeClosedException>(
                 () => account.Close());

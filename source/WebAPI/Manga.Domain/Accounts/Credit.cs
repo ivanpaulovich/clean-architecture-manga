@@ -1,4 +1,4 @@
-﻿namespace Manga.Domain.Customers.Accounts
+﻿namespace Manga.Domain.Accounts
 {
     using Manga.Domain.ValueObjects;
 

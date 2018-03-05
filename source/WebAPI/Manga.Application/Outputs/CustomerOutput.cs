@@ -1,22 +1,25 @@
-﻿namespace Manga.Application.Responses
+﻿namespace Manga.Application.Outputs
 {
     using System;
     using System.Collections.Generic;
 
-    public class CustomerResponse
+    public class CustomerOutput
     {
         public Guid CustomerId { get; private set; }
         public string Personnummer { get; private set; }
         public string Name { get; private set; }
-        public IReadOnlyList<AccountResponse> Accounts { get; private set; }
+        public IReadOnlyList<AccountOutput> Accounts { get; private set; }
 
-        public CustomerResponse()
+        public CustomerOutput()
         {
 
         }
 
-        public CustomerResponse(Guid customerId, string personnummer, string name,
-            List<AccountResponse> accounts)
+        public CustomerOutput(
+            Guid customerId,
+            string personnummer,
+            string name,
+            List<AccountOutput> accounts)
         {
             CustomerId = customerId;
             Personnummer = personnummer;

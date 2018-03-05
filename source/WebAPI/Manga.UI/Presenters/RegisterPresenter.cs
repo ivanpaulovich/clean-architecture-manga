@@ -9,11 +9,11 @@
     public class RegisterPresenter : IOutputBoundary<RegisterOutput>
     {
         public IActionResult ViewModel { get; private set; }
-        public RegisterOutput Response { get; private set; }
+        public RegisterOutput Output { get; private set; }
 
         public void Populate(RegisterOutput response)
         {
-            Response = response;
+            Output = response;
 
             if (response == null)
             {

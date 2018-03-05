@@ -1,35 +1,34 @@
 ﻿namespace Manga.Application.UseCases.CloseAccount
 {
     using System.Threading.Tasks;
-    using Manga.Domain.Customers;
-    using Manga.Domain.Customers.Accounts;
+    using Manga.Application.Repositories;
+    using Manga.Domain.Accounts;
 
     public class CloseInteractor : IInputBoundary<CloseInput>
     {
-        private readonly ICustomerReadOnlyRepository customerReadOnlyRepository;
-        private readonly ICustomerWriteOnlyRepository customerWriteOnlyRepository;
+        private readonly IAccountReadOnlyRepository accountReadOnlyRepository;
+        private readonly IAccountWriteOnlyRepository accountWriteOnlyRepository;
         private readonly IOutputBoundary<CloseOutput> outputBoundary;
-        private readonly IResponseConverter responseConverter;
+        private readonly IOutputConverter responseConverter;
 
         public CloseInteractor(
-            ICustomerReadOnlyRepository customerReadOnlyRepository,
-            ICustomerWriteOnlyRepository customerWriteOnlyRepository,
+            IAccountReadOnlyRepository accountReadOnlyRepository,
+            IAccountWriteOnlyRepository accountWriteOnlyRepository,
             IOutputBoundary<CloseOutput> outputBoundary,
-            IResponseConverter responseConverter)
+            IOutputConverter responseConverter)
         {
-            this.customerReadOnlyRepository = customerReadOnlyRepository;
-            this.customerWriteOnlyRepository = customerWriteOnlyRepository;
+            this.accountReadOnlyRepository = accountReadOnlyRepository;
+            this.accountWriteOnlyRepository = accountWriteOnlyRepository;
             this.outputBoundary = outputBoundary;
             this.responseConverter = responseConverter;
         }
 
-        public async Task Handle(CloseInput request)
+        public async Task Process(CloseInput request)
         {
-            Customer customer = await customerReadOnlyRepository.GetByAccount(request.AccountId);
-            Account account = customer.FindAccount(request.AccountId);
+            Account account = await accountReadOnlyRepository.Get(request.AccountId);
+            account.Close();
 
-            customer.RemoveAccount(request.AccountId);
-            await customerWriteOnlyRepository.Update(customer);
+            await accountWriteOnlyRepository.Delete(account);
 
             CloseOutput response = responseConverter.Map<CloseOutput>(account);
             this.outputBoundary.Populate(response);

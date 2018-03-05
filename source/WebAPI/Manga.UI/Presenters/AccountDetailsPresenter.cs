@@ -1,21 +1,21 @@
 ﻿namespace Manga.UI.Presenters
 {
     using Manga.Application;
-    using Manga.Application.Responses;
+    using Manga.Application.Outputs;
     using Manga.UI.Model;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
 
-    public class AccountDetailsPresenter : IOutputBoundary<AccountResponse>
+    public class AccountDetailsPresenter : IOutputBoundary<AccountOutput>
     {
         public IActionResult ViewModel { get; private set; }
-        public AccountResponse Response { get; private set; }
+        public AccountOutput Output { get; private set; }
 
-        public void Populate(AccountResponse response)
+        public void Populate(AccountOutput output)
         {
-            Response = response;
+            Output = output;
 
-            if (response == null)
+            if (output == null)
             {
                 ViewModel = new NoContentResult();
                 return;
@@ -23,7 +23,7 @@
 
             List<TransactionModel> transactions = new List<TransactionModel>();
 
-            foreach (var item in response.Transactions)
+            foreach (var item in output.Transactions)
             {
                 var transaction = new TransactionModel(
                     item.Amount,
@@ -34,8 +34,8 @@
             }
 
             ViewModel = new ObjectResult(new AccountDetailsModel(
-                response.AccountId,
-                response.CurrentBalance,
+                output.AccountId,
+                output.CurrentBalance,
                 transactions));
         }
     }

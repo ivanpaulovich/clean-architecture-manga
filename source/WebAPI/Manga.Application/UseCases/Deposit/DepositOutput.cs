@@ -1,19 +1,20 @@
-﻿namespace Manga.Application.UseCases.Deposit
+﻿using Manga.Application.Outputs;
+
+namespace Manga.Application.UseCases.Deposit
 {
-    using Manga.Application.Responses;
     public class DepositOutput
     {
-        public TransactionResponse Transaction { get; private set; }
+        public TransactionOutput Transaction { get; private set; }
         public double UpdatedBalance { get; private set; }
         public DepositOutput()
         {
 
         }
 
-        public DepositOutput(TransactionResponse transaction, double updatedBalance)
+        public DepositOutput(TransactionOutput transaction, double updatedBalance)
         {
-            this.Transaction = transaction;
-            this.UpdatedBalance = updatedBalance;
+            Transaction = transaction;
+            UpdatedBalance = updatedBalance;
         }
     }
 }

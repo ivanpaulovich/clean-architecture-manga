@@ -1,19 +1,19 @@
 namespace Manga.MappingsTests
 {
     using Manga.Application;
-    using Manga.Application.Responses;
-    using Manga.Domain.Customers.Accounts;
+    using Manga.Application.Outputs;
+    using Manga.Domain.Accounts;
     using Manga.Domain.ValueObjects;
     using Manga.Infrastructure.Mappings;
     using Xunit;
 
     public class ConversionTests
     {
-        public IResponseConverter converter;
+        public IOutputConverter converter;
 
         public ConversionTests()
         {
-            converter = new ResponseConverter();
+            converter = new OutputConverter();
         }
 
         [Fact]
@@ -21,7 +21,7 @@ namespace Manga.MappingsTests
         {
             Debit debit = new Debit(new Amount(100));
 
-            var result = converter.Map<TransactionResponse>(debit);
+            var result = converter.Map<TransactionOutput>(debit);
             Assert.Equal(debit.Amount.Value, result.Amount);
             Assert.Equal(debit.TransactionDate, result.TransactionDate);
             Assert.Equal(debit.Description, result.Description);

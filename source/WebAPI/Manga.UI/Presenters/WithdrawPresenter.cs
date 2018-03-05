@@ -8,11 +8,11 @@
     {
         public IActionResult ViewModel { get; private set; }
 
-        public WithdrawOutput Response { get; private set; }
+        public WithdrawOutput Output { get; private set; }
 
         public void Populate(WithdrawOutput response)
         {
-            Response = response;
+            Output = response;
 
             if (response == null)
             {

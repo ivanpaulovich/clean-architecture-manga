@@ -9,11 +9,11 @@
     {
         public IActionResult ViewModel { get; private set; }
 
-        public DepositOutput Response { get; private set; }
+        public DepositOutput Output { get; private set; }
 
         public void Populate(DepositOutput response)
         {
-            Response = response;
+            Output = response;
 
             if (response == null)
             {

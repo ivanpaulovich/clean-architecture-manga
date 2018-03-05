@@ -8,11 +8,11 @@
     {
         public IActionResult ViewModel { get; private set; }
 
-        public CloseOutput Response { get; private set; }
+        public CloseOutput Output { get; private set; }
 
         public void Populate(CloseOutput response)
         {
-            Response = response;
+            Output = response;
 
             if (response == null)
             {

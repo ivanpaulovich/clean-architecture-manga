@@ -37,7 +37,7 @@
         public async Task<IActionResult> Post([FromBody]RegisterRequest message)
         {
             var request = new RegisterInput(message.PIN, message.Name, message.InitialAmount);
-            await registerInput.Handle(request);
+            await registerInput.Process(request);
             return registerPresenter.ViewModel;
         }
 
@@ -48,7 +48,7 @@
         public async Task<IActionResult> GetCustomer(Guid customerId)
         {
             var request = new GetCustomerDetaisInput(customerId);
-            await this.getCustomerInput.Handle(request);
+            await this.getCustomerInput.Process(request);
             return this.getCustomerDetailsPresenter.ViewModel;
         }
     }

@@ -1,7 +1,7 @@
-﻿namespace Manga.Application.Responses
+﻿namespace Manga.Application.Outputs
 {
     using System;
-    public class TransactionResponse
+    public class TransactionOutput
     {
         public string Description { get; set; }
         public double Amount { get; set; }

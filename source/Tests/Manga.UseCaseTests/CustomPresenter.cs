@@ -4,11 +4,11 @@
 
     public class CustomPresenter<T> : IOutputBoundary<T>
     {
-        public T Response { get; private set; }
+        public T Output { get; private set; }
 
         public void Populate(T response)
         {
-            Response = response;
+            Output = response;
         }
     }
 }

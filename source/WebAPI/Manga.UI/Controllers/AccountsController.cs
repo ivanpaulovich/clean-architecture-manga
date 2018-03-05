@@ -53,7 +53,7 @@
         {
             var request = new CloseInput(accountId);
 
-            await closeAccountInput.Handle(request);
+            await closeAccountInput.Process(request);
             return closePresenter.ViewModel;
         }
 
@@ -65,7 +65,7 @@
         {
             var request = new DepositInput(message.AccountId, message.Amount);
 
-            await depositInput.Handle(request);
+            await depositInput.Process(request);
             return depositPresenter.ViewModel;
         }
 
@@ -77,7 +77,7 @@
         {
             var request = new WithdrawInput(message.AccountId, message.Amount);
 
-            await withdrawInput.Handle(request);
+            await withdrawInput.Process(request);
             return withdrawPresenter.ViewModel;
         }
 
@@ -90,7 +90,7 @@
         {
             var request = new GetAccountDetailsInput(accountId);
 
-            await getAccountDetailsInput.Handle(request);
+            await getAccountDetailsInput.Process(request);
             return getAccountDetailsPresenter.ViewModel;
         }
     }

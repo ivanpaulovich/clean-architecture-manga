@@ -1,5 +1,6 @@
-﻿namespace Manga.Domain.Customers
+﻿namespace Manga.Application.Repositories
 {
+    using Manga.Domain.Customers;
     using System.Threading.Tasks;
 
     public interface ICustomerWriteOnlyRepository

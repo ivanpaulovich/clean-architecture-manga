@@ -1,17 +1,17 @@
 ﻿namespace Manga.Application.UseCases.Register
 {
-    using Manga.Application.Responses;
+    using Manga.Application.Outputs;
     public class RegisterOutput
     {
-        public CustomerResponse Customer { get; private set; }
-        public AccountResponse Account { get; private set; }
+        public CustomerOutput Customer { get; private set; }
+        public AccountOutput Account { get; private set; }
 
         public RegisterOutput()
         {
 
         }
 
-        public RegisterOutput(CustomerResponse customer, AccountResponse account)
+        public RegisterOutput(CustomerOutput customer, AccountOutput account)
         {
             Customer = customer;
             Account = account;
