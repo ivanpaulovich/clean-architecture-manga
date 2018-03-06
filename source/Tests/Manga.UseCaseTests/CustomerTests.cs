@@ -1,4 +1,4 @@
-namespace Manga.Domain.UnitTests
+namespace Manga.UseCaseTests
 {
     using Xunit;
     using NSubstitute;
