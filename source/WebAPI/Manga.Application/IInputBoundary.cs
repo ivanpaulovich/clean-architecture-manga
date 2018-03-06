@@ -4,6 +4,6 @@
 
     public interface IInputBoundary<T>
     {
-        Task Process(T request);
+        Task Process(T input);
     }
 }

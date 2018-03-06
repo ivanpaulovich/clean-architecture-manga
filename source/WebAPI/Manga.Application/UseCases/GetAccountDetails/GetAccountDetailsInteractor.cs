@@ -20,17 +20,17 @@
             this.outputConverter = outputConverter;
         }
 
-        public async Task Process(GetAccountDetailsInput message)
+        public async Task Process(GetAccountDetailsInput input)
         {
-            var account = await accountReadOnlyRepository.Get(message.AccountId);
+            var account = await accountReadOnlyRepository.Get(input.AccountId);
             if (account == null)
             {
                 outputBoundary.Populate(null);
                 return;
             }
 
-            AccountOutput response = outputConverter.Map<AccountOutput>(account);
-            outputBoundary.Populate(response);
+            AccountOutput output = outputConverter.Map<AccountOutput>(account);
+            outputBoundary.Populate(output);
         }
     }
 }

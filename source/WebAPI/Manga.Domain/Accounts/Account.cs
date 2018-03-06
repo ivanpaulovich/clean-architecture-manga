@@ -2,7 +2,7 @@
 {
     using Manga.Domain.ValueObjects;
 
-    public class Account : Entity, IAggregate
+    public class Account : Entity, IAggregateRoot
     {
         public TransactionCollection Transactions { get; private set; }
 

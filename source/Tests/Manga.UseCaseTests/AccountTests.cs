@@ -40,6 +40,7 @@ namespace Manga.UseCaseTests
 
             var registerUseCase = new Application.UseCases.Register.RegisterInteractor(
                 customerWriteOnlyRepository,
+                accountWriteOnlyRepository,
                 output,
                 converter
             );
@@ -87,11 +88,6 @@ namespace Manga.UseCaseTests
             await depositUseCase.Process(request);
 
             Assert.Equal(request.Amount, output.Output.Transaction.Amount);
-        }
-
-        private int IList<T>()
-        {
-            throw new NotImplementedException();
         }
 
         [Theory]

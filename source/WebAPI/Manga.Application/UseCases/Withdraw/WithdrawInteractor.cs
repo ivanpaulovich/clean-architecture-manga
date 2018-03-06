@@ -11,38 +11,38 @@
         private readonly IAccountReadOnlyRepository accountReadOnlyRepository;
         private readonly IAccountWriteOnlyRepository accountWriteOnlyRepository;
         private readonly IOutputBoundary<WithdrawOutput> outputBoundary;
-        private readonly IOutputConverter responseConverter;
+        private readonly IOutputConverter outputConverter;
         
         public WithdrawInteractor(
             IAccountReadOnlyRepository accountReadOnlyRepository,
             IAccountWriteOnlyRepository accountWriteOnlyRepository,
             IOutputBoundary<WithdrawOutput> outputBoundary,
-            IOutputConverter responseConverter)
+            IOutputConverter outputConverter)
         {
             this.accountReadOnlyRepository = accountReadOnlyRepository;
             this.accountWriteOnlyRepository = accountWriteOnlyRepository;
             this.outputBoundary = outputBoundary;
-            this.responseConverter = responseConverter;
+            this.outputConverter = outputConverter;
         }
 
-        public async Task Process(WithdrawInput request)
+        public async Task Process(WithdrawInput input)
         {
-            Account account = await accountReadOnlyRepository.Get(request.AccountId);
+            Account account = await accountReadOnlyRepository.Get(input.AccountId);
             if (account == null)
-                throw new AccountNotFoundException($"The account {request.AccountId} does not exists or is already closed.");
+                throw new AccountNotFoundException($"The account {input.AccountId} does not exists or is already closed.");
 
-            Debit debit = new Debit(new Amount(request.Amount));
+            Debit debit = new Debit(new Amount(input.Amount));
             account.Withdraw(debit);
 
             await accountWriteOnlyRepository.Update(account);
 
-            TransactionOutput transactionOutput = responseConverter.Map<TransactionOutput>(debit);
-            WithdrawOutput response = new WithdrawOutput(
+            TransactionOutput transactionOutput = outputConverter.Map<TransactionOutput>(debit);
+            WithdrawOutput output = new WithdrawOutput(
                 transactionOutput,
                 account.GetCurrentBalance().Value
             );
 
-            outputBoundary.Populate(response);
+            outputBoundary.Populate(output);
         }
     }
 }

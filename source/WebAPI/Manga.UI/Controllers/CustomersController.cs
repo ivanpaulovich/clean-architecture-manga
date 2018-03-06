@@ -13,14 +13,14 @@
     public class CustomersController : Controller
     {
         private readonly IInputBoundary<RegisterInput> registerInput;
-        private readonly IInputBoundary<GetCustomerDetaisInput> getCustomerInput;
+        private readonly IInputBoundary<GetCustomerDetailsInput> getCustomerInput;
 
         private readonly RegisterPresenter registerPresenter;
         private readonly CustomerDetailsPresenter getCustomerDetailsPresenter;
 
         public CustomersController(
             IInputBoundary<RegisterInput> registerInput,
-            IInputBoundary<GetCustomerDetaisInput> getCustomerInput,
+            IInputBoundary<GetCustomerDetailsInput> getCustomerInput,
             RegisterPresenter registerPresenter,
             CustomerDetailsPresenter getCustomerDetailsPresenter)
         {
@@ -47,7 +47,7 @@
         [HttpGet("{customerId}", Name = "GetCustomer")]
         public async Task<IActionResult> GetCustomer(Guid customerId)
         {
-            var request = new GetCustomerDetaisInput(customerId);
+            var request = new GetCustomerDetailsInput(customerId);
             await this.getCustomerInput.Process(request);
             return this.getCustomerDetailsPresenter.ViewModel;
         }

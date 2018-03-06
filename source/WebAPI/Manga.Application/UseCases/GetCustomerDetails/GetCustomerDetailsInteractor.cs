@@ -7,32 +7,32 @@
     using Manga.Application.Outputs;
     using Manga.Domain.Accounts;
 
-    public class GetCustomerDetailsInteractor : IInputBoundary<GetCustomerDetaisInput>
+    public class GetCustomerDetailsInteractor : IInputBoundary<GetCustomerDetailsInput>
     {
         private readonly ICustomerReadOnlyRepository customerReadOnlyRepository;
         private readonly IAccountReadOnlyRepository accountReadOnlyRepository;
         private readonly IOutputBoundary<CustomerOutput> outputBoundary;
-        private readonly IOutputConverter responseConverter;
+        private readonly IOutputConverter outputConverter;
 
         public GetCustomerDetailsInteractor(
             ICustomerReadOnlyRepository customerReadOnlyRepository,
             IAccountReadOnlyRepository accountReadOnlyRepository,
             IOutputBoundary<CustomerOutput> outputBoundary,
-            IOutputConverter responseConverter)
+            IOutputConverter outputConverter)
         {
             this.customerReadOnlyRepository = customerReadOnlyRepository;
             this.accountReadOnlyRepository = accountReadOnlyRepository;
             this.outputBoundary = outputBoundary;
-            this.responseConverter = responseConverter;
+            this.outputConverter = outputConverter;
         }
 
-        public async Task Process(GetCustomerDetaisInput message)
+        public async Task Process(GetCustomerDetailsInput input)
         {
             //
             // TODO: The following queries could be simplified
             //
 
-            Customer customer = await customerReadOnlyRepository.Get(message.CustomerId);
+            Customer customer = await customerReadOnlyRepository.Get(input.CustomerId);
 
             List<AccountOutput> accounts = new List<AccountOutput>();
 
@@ -46,20 +46,20 @@
 
                 if (account != null)
                 {
-                    AccountOutput accountOutput = responseConverter.Map<AccountOutput>(account);
+                    AccountOutput accountOutput = outputConverter.Map<AccountOutput>(account);
                     accounts.Add(accountOutput);
                 }
             }
 
-            CustomerOutput response = responseConverter.Map<CustomerOutput>(customer);
+            CustomerOutput output = outputConverter.Map<CustomerOutput>(customer);
 
-            response = new CustomerOutput(
+            output = new CustomerOutput(
                 customer.Id,
                 customer.PIN.Text,
                 customer.Name.Text,
                 accounts);
 
-            outputBoundary.Populate(response);
+            outputBoundary.Populate(output);
         }
     }
 }

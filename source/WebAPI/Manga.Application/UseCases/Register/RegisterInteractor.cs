@@ -12,28 +12,28 @@
         private readonly ICustomerWriteOnlyRepository customerWriteOnlyRepository;
         private readonly IAccountWriteOnlyRepository accountWriteOnlyRepository;
         private readonly IOutputBoundary<RegisterOutput> outputBoundary;
-        private readonly IOutputConverter responseConverter;
+        private readonly IOutputConverter outputConverter;
         
         public RegisterInteractor(
             ICustomerWriteOnlyRepository customerWriteOnlyRepository,
             IAccountWriteOnlyRepository accountWriteOnlyRepository,
             IOutputBoundary<RegisterOutput> outputBoundary,
-            IOutputConverter responseConverter)
+            IOutputConverter outputConverter)
         {
             this.customerWriteOnlyRepository = customerWriteOnlyRepository;
             this.accountWriteOnlyRepository = accountWriteOnlyRepository;
             this.outputBoundary = outputBoundary;
-            this.responseConverter = responseConverter;
+            this.outputConverter = outputConverter;
         }
 
-        public async Task Process(RegisterInput message)
+        public async Task Process(RegisterInput input)
         {
             Customer customer = new Customer(
-                new PIN(message.PIN),
-                new Name(message.Name));
+                new PIN(input.PIN),
+                new Name(input.Name));
 
             Account account = new Account();
-            Credit credit = new Credit(new Amount(message.InitialAmount));
+            Credit credit = new Credit(new Amount(input.InitialAmount));
             account.Deposit(credit);
 
             customer.Register(account.Id);
@@ -41,8 +41,8 @@
             await customerWriteOnlyRepository.Add(customer);
             await accountWriteOnlyRepository.Add(account);
 
-            CustomerOutput customerOutput = responseConverter.Map<CustomerOutput>(customer);
-            AccountOutput accountOutput = responseConverter.Map<AccountOutput>(account);
+            CustomerOutput customerOutput = outputConverter.Map<CustomerOutput>(customer);
+            AccountOutput accountOutput = outputConverter.Map<AccountOutput>(account);
             RegisterOutput output = new RegisterOutput(customerOutput, accountOutput);
 
             outputBoundary.Populate(output);

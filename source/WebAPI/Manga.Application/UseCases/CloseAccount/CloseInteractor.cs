@@ -9,29 +9,29 @@
         private readonly IAccountReadOnlyRepository accountReadOnlyRepository;
         private readonly IAccountWriteOnlyRepository accountWriteOnlyRepository;
         private readonly IOutputBoundary<CloseOutput> outputBoundary;
-        private readonly IOutputConverter responseConverter;
+        private readonly IOutputConverter outputConverter;
 
         public CloseInteractor(
             IAccountReadOnlyRepository accountReadOnlyRepository,
             IAccountWriteOnlyRepository accountWriteOnlyRepository,
             IOutputBoundary<CloseOutput> outputBoundary,
-            IOutputConverter responseConverter)
+            IOutputConverter outputConverter)
         {
             this.accountReadOnlyRepository = accountReadOnlyRepository;
             this.accountWriteOnlyRepository = accountWriteOnlyRepository;
             this.outputBoundary = outputBoundary;
-            this.responseConverter = responseConverter;
+            this.outputConverter = outputConverter;
         }
 
-        public async Task Process(CloseInput request)
+        public async Task Process(CloseInput input)
         {
-            Account account = await accountReadOnlyRepository.Get(request.AccountId);
+            Account account = await accountReadOnlyRepository.Get(input.AccountId);
             account.Close();
 
             await accountWriteOnlyRepository.Delete(account);
 
-            CloseOutput response = responseConverter.Map<CloseOutput>(account);
-            this.outputBoundary.Populate(response);
+            CloseOutput output = outputConverter.Map<CloseOutput>(account);
+            this.outputBoundary.Populate(output);
         }
     }
 }

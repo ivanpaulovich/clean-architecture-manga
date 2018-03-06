@@ -2,10 +2,10 @@
 {
     using System;
 
-    public class GetCustomerDetaisInput
+    public class GetCustomerDetailsInput
     {
         public Guid CustomerId { get; private set; }
-        public GetCustomerDetaisInput(Guid customerId)
+        public GetCustomerDetailsInput(Guid customerId)
         {
             this.CustomerId = customerId;
         }
