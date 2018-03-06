@@ -8,6 +8,7 @@
         public Name Name { get; private set; }
         public PIN PIN { get; private set; }
         public AccountCollection Accounts { get; private set; }
+        public int Version { get; private set; }
 
         public Customer()
         {

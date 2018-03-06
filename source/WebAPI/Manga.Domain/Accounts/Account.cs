@@ -5,6 +5,7 @@
     public class Account : Entity, IAggregateRoot
     {
         public TransactionCollection Transactions { get; private set; }
+        public int Version { get; private set; }
 
         public Account()
         {
