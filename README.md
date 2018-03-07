@@ -16,7 +16,7 @@ dotnet run
 
 ## The Clean Architecture
 
-The artifact result of an implementation of Clean Architecture is a software that encapsulate business rules in use cases and the enterprise rules in entities. Also the Use Cases are independent from every detail like User Interface, Data Access, Web Server or external agency. 
+The artifact result of an implementation of Clean Architecture is a software that encapsulate business rules in use cases and the enterprise rules in entities. Also the Use Cases are independents from every detail like User Interface, Data Access, Web Server or any external agency. 
 
 ![Clean Architecture by Uncle Bob](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/CleanArchitecture-Uncle-Bob.jpg)
 > The Clean Architecture Diagram by [Uncle Bob](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html).
@@ -33,7 +33,9 @@ The artifact result of an implementation of Clean Architecture is a software tha
 | MongoDB | MongoDB is a detail. At infrastructure layer we implemented the ICustomerWriteOnlyRepository to update the Mongo database. |
 | .NET Core 2.0 | .NET Core is a detail. Almost everything in this code base could be ported to older versions. |
 
-# Flow of Control: The Register Use Case 
+# Flow of Control: The Register Use Case
+
+The artifact result of an implementation of Clean Architecture is a software that encapsulate business rules in use cases and the enterprise rules in entities. Also the Use Cases are independents from every detail like User Interface, Data Access, Web Server or any external agency.
 
 ![Flow of Control: Customer Registration](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/Flow-Of-Control.png)
 
@@ -42,33 +44,9 @@ The artifact result of an implementation of Clean Architecture is a software tha
 * [.NET SDK 2.0](https://www.microsoft.com/net/download/core)
 * [Docker](https://docs.docker.com/docker-for-windows/install/)
 
-# Environment setup
+# Prerequisites Setup
 
-* Run the `./prerequisites.sh` script to download the MongoDB image and run as a Docker container. 
-Please wait until the ~400mb download to be complete.
-
-```
-$ ./prerequisites.sh
-Pulling mongodb (mongo:latest)...
-latest: Pulling from library/mongo
-Digest: sha256:2c55bcc870c269771aeade05fc3dd3657800540e0a48755876a1dc70db1e76d9
-Status: Downloaded newer image for mongo:latest
-Creating setup_mongodb_1 ...
-Creating setup_mongodb_1
-Creating setup_mongodb_1 ... done
-```
-* Check Mongo image with the the following commands:
-
-```
-$ docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-mongo               latest              d22888af0ce0        17 hours ago        361MB
-$ docker ps
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                            NAMES
-ba28cf144478        mongo               "docker-entrypoint..."   2 days ago          Up 2 days           0.0.0.0:27017->27017/tcp                         setup_mongodb_1
-```
-
-If everything goes well MongoDB will be running with the following connection string `mongodb://10.0.75.1:27017`.
+The only one prerequisite to run the Web API is a valid connection string to MongoDB. To help you run it with out hard work follow the steps on [prerequisites setup](https://github.com/ivanpaulovich/manga/wiki/Prerequisites-setup) page.
 
 # Running the latest Docker Build ![Authorization](https://dockerbuildbadges.quelltext.eu/status.svg?organization=ivanpaulovich&repository=manga)
 
