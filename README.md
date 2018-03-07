@@ -14,10 +14,23 @@ cd manga/source/WebAPI/Manga.UI
 dotnet run
 ```
 
-# Architectural Style
+# Architectural Styles
 In this project the usecases are first-class modules, when you open the source code you will see that the system looks like an Account Balance Application.  
 
 ![Flow of Control: Customer Registration](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/Flow-Of-Control.png)
+
+
+| Concept | Description |
+| --- | --- |
+| DDD | The use cases of this project is to manage an account balance with deposit and credits and its concepts is enforced by the Domain and Application. Also we use the Eric Evans terms like Entities, Value Object, Aggregates, Aggregate Root and etc. And everything is on a single Bounded Context. |
+| TDD | From the beginning of the project we developed Unit Tests and that helped us to enforce the business rules and to create an application that prevents bugs intead of finding them. We also have Use Case tests and Mapping Tests and a more sophistecated Integration Tests.  |
+| SOLID | The SOLID principles are all over the the solution. Knowledge of SOLID is not a prerequisite to understand and run the solution but it is highly recommended. |
+| Entity-Boundary-Interactor (EBI) | The goal of EBI architecture is to produce a software implementation agnostic to technology, framework and to have a focus on the use cases and input/output. |
+| Microservice | Even though the definition of microservice may be different for different professionals. We have tried to value some aspects like Continous Delivery, modelled around Business Domain and Independent Deployment. |
+| Logging | Loggin is a detail. We plugged Serilog and configured it to redirect every log message to files. |
+| Docker | Docker is a detail of this architecture. And it was implemented to help us make a faster and reliable deployment. You could pull the latest image |
+| MongoDB | MongoDB is a detail. At infrastructure layer we implemented the ICustomerWriteOnlyRepository to update the Mongo database. |
+| .NET Core 2.0 | .NET Core is a detail. Almost everything in this code base could be ported to older versions. |
 
 # Main Architectural Concepts
 On of the goals of the clean architecture is to encapsulate the business logic in an clean way, with no dependencies to details like (UI, Database version or Frameworks). And by building a software that looks like your Business Domain at the first look of the source code.
@@ -33,33 +46,6 @@ By following Uncle Bob material, we developed this project to have this Dimensio
 * Independent of any external agency.
 
 ![Clean Architecture by Uncle Bob](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/CleanArchitecture-Uncle-Bob.jpg)
-
-## DDD
-The use cases of this project is to manage an account balance with deposit and credits and its concepts is enforced by the Domain and Application. Also we use the Eric Evans terms like Entities, Value Object, Aggregates, Aggregate Root and etc. And everything is on a single Bounded Context.
-
-## TDD
-From the beginning of the project we developed Unit Tests and that helped us to enforce the business rules and to create an application that prevents bugs intead of finding them. We also have Use Case tests and Mapping Tests and a more sophistecated Integration Tests. 
-
-## SOLID
-The SOLID principles are all over the the solution. Knowledge of SOLID is not a prerequisite to understand and run the solution but it is highly recommended.
-
-## Entity-Boundary-Interactor (EBI)
-The goal of EBI architecture is to produce a software implementation agnostic to technology, framework and to have a focus on the use cases and input/output. 
-
-## Microservice
-Even though the definition of microservice may be different for different professionals. We have tried to value some aspects like Continous Delivery, modelled around Business Domain and Independent Deployment.
-
-## Logging
-Loggin is a detail. We plugged Serilog and configured it to redirect every log message to files.
-
-## Docker
-Docker is a detail of this architecture. And it was implemented to help us make a faster and reliable deployment. You could pull the 
-
-## Mongo DB
-Mongo DB is a detail. At infrastructure layer we implemented the ICustomerWriteOnlyRepository to update the Mongo database.
-
-## .NET Core 2.0
-.NET Core is a detail. Almost everything in this code base could be ported to older versions.
 
 # Requirements
 * [Visual Studio 2017 with Update 3](https://www.visualstudio.com/en-us/news/releasenotes/vs2017-relnotes)
