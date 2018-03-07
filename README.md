@@ -33,20 +33,20 @@ The implementation result of the Clean Architecture is a software that encapsula
 | MongoDB | MongoDB is a detail. At infrastructure layer we implemented the ICustomerWriteOnlyRepository to update the Mongo database. |
 | .NET Core 2.0 | .NET Core is a detail. Almost everything in this code base could be ported to older versions. |
 
-# Flow of Control: The Register Use Case
+## Flow of Control: The Register Use Case
 
 ![Flow of Control: Customer Registration](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/Flow-Of-Control.png)
 
-# Requirements
+## Requirements
 * [Visual Studio 2017 with Update 3](https://www.visualstudio.com/en-us/news/releasenotes/vs2017-relnotes)
 * [.NET SDK 2.0](https://www.microsoft.com/net/download/core)
 * [Docker](https://docs.docker.com/docker-for-windows/install/)
 
-# Prerequisites Setup
+## Prerequisites Setup
 
 The only one prerequisite to run the Web API is a valid connection string to MongoDB. To help you run it without hard work follow the steps on [prerequisites setup](https://github.com/ivanpaulovich/manga/wiki/Prerequisites-setup) page.
 
-# Running the latest Docker Build
+## Running the latest Docker Build
 
 You can run the Docker container of this project with the following command:
 
@@ -58,7 +58,7 @@ $ docker run -p 8000:80 -d \
 ```
 Then navigate to http://localhost:8000/swagger and play with de Swagger.
 
-# We are live on Azure
+## Live Demo on Azure
 
 ![Live on Azure](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/Swagger.png)
 
