@@ -14,8 +14,9 @@ cd manga/source/WebAPI/Manga.UI
 dotnet run
 ```
 
-# Architectural Styles
-In this project the usecases are first-class modules, when you open the source code you will see that the system looks like an Account Balance Application.
+## The Clean Architecture
+
+The artifact result of an implementation of Clean Architecture is a software that encapsulate business rules in use cases and the enterprise rules in entities. Also the Use Cases are independent from every detail like User Interface, Data Access, Web Server or external agency. 
 
 ![Clean Architecture by Uncle Bob](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/CleanArchitecture-Uncle-Bob.jpg)
 > The Clean Architecture Diagram by [Uncle Bob](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html).
@@ -32,18 +33,7 @@ In this project the usecases are first-class modules, when you open the source c
 | MongoDB | MongoDB is a detail. At infrastructure layer we implemented the ICustomerWriteOnlyRepository to update the Mongo database. |
 | .NET Core 2.0 | .NET Core is a detail. Almost everything in this code base could be ported to older versions. |
 
-# Main Architectural Concepts
-On of the goals of the clean architecture is to encapsulate the business logic in an clean way, with no dependencies to details like (UI, Database version or Frameworks). And by building a software that looks like your Business Domain at the first look of the source code.
-
-If you are interested check out [The Clean Architecture post by Uncle Bob](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html) or his latest book [Clean Architecture](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164/ref=sr_1_1?ie=UTF8&qid=1518796865&sr=8-1&keywords=clean+architecture).
-
-By following Uncle Bob material, we developed this project to have this Dimensions (Fitness Functions will came later):
-
-* Independent of Frameworks.
-* Testable. 
-* Independent of UI. 
-* Independent of Database. 
-* Independent of any external agency.
+# Flow of Control: The Register Use Case 
 
 ![Flow of Control: Customer Registration](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/Flow-Of-Control.png)
 
