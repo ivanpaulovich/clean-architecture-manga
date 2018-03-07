@@ -60,7 +60,7 @@ Then navigate to http://localhost:8000/swagger and play with de Swagger.
 
 ## Live Demo on Azure
 
-![Live on Azure](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/Swagger.png)
+[![Manga Live Demo on Azure](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/Swagger.png)](http://grape.westus2.cloudapp.azure.com:8800/swagger)
 
 You can play with the latest build of [Manga](http://grape.westus2.cloudapp.azure.com:8800/swagger "Manga").
 > This source code and website should be used only for learning purposes and **all data will be erased weekly**.
