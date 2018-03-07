@@ -16,7 +16,7 @@ dotnet run
 
 ## The Clean Architecture
 
-The artifact result of an implementation of Clean Architecture is a software that encapsulate business rules in use cases and the enterprise rules in entities. Also the Use Cases are independents from every detail like User Interface, Data Access, Web Server or any external agency. 
+The implementation result of the Clean Architecture is a software that encapsulate Business Rules in Use Cases and the Enterprise Rules in Entities. Also the Use Cases are independent from details like User Interface, Data Access, Web Server or any external agency. 
 
 ![Clean Architecture by Uncle Bob](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/CleanArchitecture-Uncle-Bob.jpg)
 > The Clean Architecture Diagram by [Uncle Bob](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html).
@@ -35,8 +35,6 @@ The artifact result of an implementation of Clean Architecture is a software tha
 
 # Flow of Control: The Register Use Case
 
-The artifact result of an implementation of Clean Architecture is a software that encapsulate business rules in use cases and the enterprise rules in entities. Also the Use Cases are independents from every detail like User Interface, Data Access, Web Server or any external agency.
-
 ![Flow of Control: Customer Registration](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/Flow-Of-Control.png)
 
 # Requirements
@@ -46,24 +44,23 @@ The artifact result of an implementation of Clean Architecture is a software tha
 
 # Prerequisites Setup
 
-The only one prerequisite to run the Web API is a valid connection string to MongoDB. To help you run it with out hard work follow the steps on [prerequisites setup](https://github.com/ivanpaulovich/manga/wiki/Prerequisites-setup) page.
+The only one prerequisite to run the Web API is a valid connection string to MongoDB. To help you run it without hard work follow the steps on [prerequisites setup](https://github.com/ivanpaulovich/manga/wiki/Prerequisites-setup) page.
 
-# Running the latest Docker Build ![Authorization](https://dockerbuildbadges.quelltext.eu/status.svg?organization=ivanpaulovich&repository=manga)
+# Running the latest Docker Build
 
-If you like to run a Docker container for this project use the latest image:
+You can run the Docker container of this project with the following command:
 
-```
+```sh
 $ docker run -p 8000:80 -d \
 	-e modules__2__properties__ConnectionString=mongodb://10.0.75.1:27017 \
-	--name manga-backend \
+	--name manga \
 	ivanpaulovich/manga:latest
 ```
-Then navigate to http://localhost:8000/swagger and play with de API.
+Then navigate to http://localhost:8000/swagger and play with de Swagger.
 
 # We are live on Azure
 
 ![Live on Azure](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/Swagger.png)
 
-You can play with the latest build by navigating to [the Swagger client](http://grape.westus2.cloudapp.azure.com:8800/swagger "Manga Swagger").
-
-This source code and website should be used only for learning purposes and **all data will be erased weekly**.
+You can play with the latest build of [Manga](http://grape.westus2.cloudapp.azure.com:8800/swagger "Manga").
+> This source code and website should be used only for learning purposes and **all data will be erased weekly**.
