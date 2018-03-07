@@ -15,10 +15,10 @@ dotnet run
 ```
 
 # Architectural Styles
-In this project the usecases are first-class modules, when you open the source code you will see that the system looks like an Account Balance Application.  
+In this project the usecases are first-class modules, when you open the source code you will see that the system looks like an Account Balance Application.
 
-![Flow of Control: Customer Registration](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/Flow-Of-Control.png)
-
+![Clean Architecture by Uncle Bob](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/CleanArchitecture-Uncle-Bob.jpg)
+> The Clean Architecture Diagram by [Uncle Bob](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html).
 
 | Concept | Description |
 | --- | --- |
@@ -45,7 +45,7 @@ By following Uncle Bob material, we developed this project to have this Dimensio
 * Independent of Database. 
 * Independent of any external agency.
 
-![Clean Architecture by Uncle Bob](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/CleanArchitecture-Uncle-Bob.jpg)
+![Flow of Control: Customer Registration](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/Flow-Of-Control.png)
 
 # Requirements
 * [Visual Studio 2017 with Update 3](https://www.visualstudio.com/en-us/news/releasenotes/vs2017-relnotes)
