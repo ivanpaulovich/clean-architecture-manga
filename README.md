@@ -1,4 +1,18 @@
-![Flow of Control: Customer Registration](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/logo.png)
+![Manga](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/manga-icon.png) Manga: Clean Architecture
+=========
+[![Manga latest Docker build](https://dockerbuildbadges.quelltext.eu/status.svg?organization=ivanpaulovich&repository=manga)](https://hub.docker.com/r/ivanpaulovich/manga/)
+
+Manga is a Service Template for helping you to build evolvable, adaptable and maintainable applications. It follows the principles from [Clean Architecture book](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164) and has a Domain built on Domain-Driven Design. It is easy for you to start your new microservice based on his guidelines and patterns.
+
+## Compiling from source
+
+To run Manga from source, clone this repository to your machine, compile and test it:
+
+```sh
+git clone https://github.com/ivanpaulovich/manga.git
+cd manga/source/WebAPI/Manga.UI
+dotnet run
+```
 
 # Architectural Style
 In this project the usecases are first-class modules, when you open the source code you will see that the system looks like an Account Balance Application.  
@@ -39,7 +53,7 @@ Even though the definition of microservice may be different for different profes
 Loggin is a detail. We plugged Serilog and configured it to redirect every log message to files.
 
 ## Docker
-Docker is a detail of this architecture. And it was implemented to help us make a faster and reliable deployment. You could pull the [Manga latest image any time.](https://hub.docker.com/r/ivanpaulovich/manga/)
+Docker is a detail of this architecture. And it was implemented to help us make a faster and reliable deployment. You could pull the 
 
 ## Mongo DB
 Mongo DB is a detail. At infrastructure layer we implemented the ICustomerWriteOnlyRepository to update the Mongo database.
