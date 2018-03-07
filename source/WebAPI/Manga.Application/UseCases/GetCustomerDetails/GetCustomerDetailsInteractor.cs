@@ -34,6 +34,9 @@
 
             Customer customer = await customerReadOnlyRepository.Get(input.CustomerId);
 
+            if (customer == null)
+                throw new CustomerNotFoundException($"The customer {input.CustomerId} does not exists or is not processed yet.");
+
             List<AccountOutput> accounts = new List<AccountOutput>();
 
             foreach (var accountId in customer.Accounts.Items)

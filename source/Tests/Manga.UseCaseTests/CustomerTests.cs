@@ -4,7 +4,6 @@ namespace Manga.UseCaseTests
     using NSubstitute;
     using Manga.Application;
     using Manga.Infrastructure.Mappings;
-    using Manga.UseCaseTests;
     using System;
     using Manga.Application.Repositories;
 
