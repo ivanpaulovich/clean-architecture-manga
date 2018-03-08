@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Ivan Paulovich",
+  "classifications": [ "Common", "Library" ], 
+  "name": "Manga Domain with DDD concepts",
+  "identity": "Paulovich.Manga.Domain",         
+  "groupIdentity":"Paulovich.Manga",
+  "shortName": "domain",
+  "tags": {
+    "language": "C#",
+    "type":"project"
+  },
+  "sourceName": "MyProject.Domain",
+  "preferNameDirectory": true,
+  "symbols":{
+    "ExcludeCustomers":{
+      "type": "parameter",
+      "dataType":"bool",
+      "defaultValue": "false"
+    },
+    "ExcludeAccounts":{
+      "type": "parameter",
+      "dataType":"bool",
+      "defaultValue": "false"
+    }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(ExcludeCustomers)",
+          "exclude": [
+            "Customers/**/*"
+          ]
+        },
+        {
+          "condition": "(ExcludeAccounts)",
+          "exclude": [
+            "Accounts/**/*"
+          ]
+        },
+        {
+          "condition": "(ExcludeCustomers && ExcludeAccounts)",
+          "exclude": [
+            "ValueObjects/**/*"
+          ]
+        }
+      ]
+    }
+  ]
+}
