@@ -2,6 +2,8 @@
 {
     using Autofac;
     using Manga.Infrastructure.DataAccess;
+    using Manga.Infrastructure.DataAccess.Mongo;
+    using Microsoft.EntityFrameworkCore;
 
     public class InfrastructureModule : Autofac.Module
     {
@@ -15,6 +17,16 @@
                 .WithParameter("connectionString", ConnectionString)
                 .WithParameter("databaseName", DatabaseName)
                 .SingleInstance();
+
+            //
+            // Entity Framework
+            //
+            //var optionsBuilder = new DbContextOptionsBuilder<AccountBalanceContext>();
+            //optionsBuilder.UseSqlServer(ConnectionString);
+
+            //builder.RegisterType<AccountBalanceContext>()
+            //  .WithParameter(new TypedParameter(typeof(DbContextOptions), optionsBuilder.Options))
+            //  .InstancePerLifetimeScope();
 
             //
             // Register all Types in Manga.Infrastructure
