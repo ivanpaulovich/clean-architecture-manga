@@ -1,4 +1,4 @@
-﻿namespace Manga.Infrastructure.DataAccess.Dapper
+﻿namespace Manga.Infrastructure.Dapper
 {
     using Manga.Application.Repositories;
     using Manga.Domain.Accounts;

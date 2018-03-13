@@ -1,4 +1,4 @@
-﻿namespace Manga.Infrastructure.DataAccess.EntityFramework
+﻿namespace Manga.Infrastructure.EntityFramework
 {
     using System;
     using System.Data;

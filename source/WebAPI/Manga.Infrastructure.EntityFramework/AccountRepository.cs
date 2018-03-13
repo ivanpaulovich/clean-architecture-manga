@@ -1,4 +1,4 @@
-﻿namespace Manga.Infrastructure.DataAccess.EntityFramework
+﻿namespace Manga.Infrastructure.EntityFramework
 {
     using Manga.Application.Repositories;
     using Manga.Domain.Customers;

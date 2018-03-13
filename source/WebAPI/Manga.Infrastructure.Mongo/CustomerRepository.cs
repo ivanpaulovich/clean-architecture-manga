@@ -1,4 +1,4 @@
-﻿namespace Manga.Infrastructure.DataAccess.Mongo
+﻿namespace Manga.Infrastructure.Mongo
 {
     using Manga.Application.Repositories;
     using Manga.Domain.Customers;

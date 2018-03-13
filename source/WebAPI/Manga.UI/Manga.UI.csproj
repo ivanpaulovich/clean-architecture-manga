@@ -1,6 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
+    <Infrastructure>Mongo</Infrastructure>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
@@ -8,6 +12,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <NoWarn>1701;1702;1705;NU1701;CS1591</NoWarn>
     <DocumentationFile>bin\Debug\netcoreapp2.0\Manga.UI.xml</DocumentationFile>
+    <DefineConstants>TRACE;DEBUG;NETCOREAPP2_0;MONGO</DefineConstants>
   </PropertyGroup>
   
   <ItemGroup>
@@ -15,7 +20,6 @@
     <PackageReference Include="Autofac" Version="4.6.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
-    <PackageReference Include="MediatR" Version="3.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Serilog" Version="2.6.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="2.1.0" />
@@ -31,7 +35,19 @@
     <ProjectReference Include="..\Manga.Domain\Manga.Domain.csproj" />
     <ProjectReference Include="..\Manga.Infrastructure\Manga.Infrastructure.csproj" />
   </ItemGroup>
+  
+  <ItemGroup Condition="'$(Infrastructure)'=='Dapper'">
+    <ProjectReference Include="..\Manga.Infrastructure.Dapper\Manga.Infrastructure.Dapper.csproj" />
+  </ItemGroup>
 
+  <ItemGroup Condition="'$(Infrastructure)'=='EntityFramework'">
+    <ProjectReference Include="..\Manga.Infrastructure.EntityFramework\Manga.Infrastructure.EntityFramework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Infrastructure)'=='Mongo'">
+    <ProjectReference Include="..\Manga.Infrastructure.Mongo\Manga.Infrastructure.Mongo.csproj" />
+  </ItemGroup>
+  
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>

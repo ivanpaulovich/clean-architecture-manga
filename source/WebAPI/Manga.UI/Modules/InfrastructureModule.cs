@@ -1,9 +1,8 @@
 ﻿namespace Manga.UI.Modules
 {
     using Autofac;
-    using Manga.Infrastructure.DataAccess;
-    using Manga.Infrastructure.DataAccess.Mongo;
-    using Microsoft.EntityFrameworkCore;
+    using Manga.Infrastructure.Mappings;
+    using Manga.Infrastructure.Mongo;
 
     public class InfrastructureModule : Autofac.Module
     {
@@ -17,6 +16,10 @@
                 .WithParameter("connectionString", ConnectionString)
                 .WithParameter("databaseName", DatabaseName)
                 .SingleInstance();
+
+            builder.RegisterAssemblyTypes(typeof(OutputConverter).Assembly)
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
 
             //
             // Entity Framework

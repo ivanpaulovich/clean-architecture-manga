@@ -1,5 +1,5 @@
 ﻿
-namespace Manga.Infrastructure.DataAccess.EntityFramework
+namespace Manga.Infrastructure.EntityFramework
 {
     using JetBrains.Annotations;
     using Manga.Domain.Accounts;
