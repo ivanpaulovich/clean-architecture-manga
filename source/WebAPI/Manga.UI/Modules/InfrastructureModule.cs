@@ -1,8 +1,10 @@
 ﻿namespace Manga.UI.Modules
 {
     using Autofac;
+#if Mongo
+    using Manga.Infrastructure.DataAccess.Mongo;
+#endif
     using Manga.Infrastructure.Mappings;
-    using Manga.Infrastructure.Mongo;
 
     public class InfrastructureModule : Autofac.Module
     {
@@ -11,11 +13,13 @@
 
         protected override void Load(ContainerBuilder builder)
         {
+#if Mongo
             builder.RegisterType<AccountBalanceContext>()
                 .As<AccountBalanceContext>()
                 .WithParameter("connectionString", ConnectionString)
                 .WithParameter("databaseName", DatabaseName)
                 .SingleInstance();
+#endif
 
             builder.RegisterAssemblyTypes(typeof(OutputConverter).Assembly)
                 .AsImplementedInterfaces()

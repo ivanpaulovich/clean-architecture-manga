@@ -1,32 +1,27 @@
 ﻿namespace Manga.Domain.Accounts
 {
     using Manga.Domain.ValueObjects;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
-    public class TransactionCollection : ICollection<Transaction>
+    public class TransactionCollection
     {
-        private List<Transaction> _items;
+        private List<Transaction> items;
         public IReadOnlyCollection<Transaction> Items
         {
             get
             {
-                return _items.AsReadOnly();
+                return items.AsReadOnly();
             }
             private set
             {
-                _items = value.ToList();
+                items = value.ToList();
             }
         }
 
-        public int Count => _items.Count;
-
-        public bool IsReadOnly => true;
-
         public TransactionCollection()
         {
-            _items = new List<Transaction>();
+            items = new List<Transaction>();
         }
 
         internal Amount GetCurrentBalance()
@@ -49,39 +44,9 @@
             return totalAmount;
         }
 
-        public void Add(Transaction item)
+        internal void Add(Transaction transaction)
         {
-            _items.Add(item);
-        }
-
-        public void Clear()
-        {
-            _items.Clear();
-        }
-
-        public bool Contains(Transaction item)
-        {
-            return _items.Contains(item);
-        }
-
-        public void CopyTo(Transaction[] array, int arrayIndex)
-        {
-            _items.CopyTo(array, arrayIndex);
-        }
-
-        public bool Remove(Transaction item)
-        {
-            return _items.Remove(item);
-        }
-
-        public IEnumerator<Transaction> GetEnumerator()
-        {
-            return _items.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return _items.GetEnumerator();
+            items.Add(transaction);
         }
     }
 }
