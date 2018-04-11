@@ -1,16 +1,17 @@
 ﻿namespace Manga.Domain.Accounts
 {
     using Manga.Domain.ValueObjects;
+    using System;
 
     public class Debit : Transaction
     {
-        public Debit()
+        protected Debit()
         {
 
         }
 
-        public Debit(Amount amount)
-            :base(amount)
+        public Debit(Guid accountId, Amount amount)
+            : base(accountId, amount)
         {
 
         }

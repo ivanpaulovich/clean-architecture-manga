@@ -1,9 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <DefineConstants>Mongo</DefineConstants>
-  </PropertyGroup>
-
+ 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
@@ -14,25 +10,11 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="Autofac" Version="4.6.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="DataAccess\**" />
-  </ItemGroup>
-  
-  <ItemGroup Condition="$(DefineConstants.Contains('Mongo'))">
     <PackageReference Include="MongoDB.Driver" Version="2.4.4" />
-    <Compile Include="DataAccess\Mongo\*.cs" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(DefineConstants.Contains('Dapper'))">
-    <PackageReference Include="Dapper" Version="1.50.4" />
-    <Compile Include="DataAccess\Dapper\*.cs" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(DefineConstants.Contains('EntityFramework'))">
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
-    <Compile Include="DataAccess\EntityFramework\*.cs" />
   </ItemGroup>
 
   <ItemGroup>

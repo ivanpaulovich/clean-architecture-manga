@@ -4,6 +4,7 @@ namespace Manga.UnitTests
     using Manga.Domain.ValueObjects;
     using NSubstitute;
     using Manga.Domain.Accounts;
+    using System;
 
     public class AccountTests
     {
@@ -12,8 +13,8 @@ namespace Manga.UnitTests
         {
             //
             // Arrange
-            Account sut = Substitute.For<Account>();
-            Credit credit = new Credit(new Amount(100.0));
+            Account sut = new Account(Guid.NewGuid());
+            Credit credit = new Credit(sut.Id, 100.0);
 
             //
             // Act
@@ -29,11 +30,11 @@ namespace Manga.UnitTests
         {
             //
             // Arrange
-            Account sut = Substitute.For<Account>();
-            Credit credit = new Credit(new Amount(1000.0));
+            Account sut = new Account(Guid.NewGuid());
+            Credit credit = new Credit(sut.Id, 1000.0);
             sut.Deposit(credit);
 
-            Debit transaction = new Debit(new Amount(100.0));
+            Debit transaction = new Debit(sut.Id, 100.0);
 
             //
             // Act
@@ -49,7 +50,7 @@ namespace Manga.UnitTests
         {
             //
             // Arrange
-            Account sut = Substitute.For<Account>();
+            Account sut = new Account(Guid.NewGuid());
 
             //
             // Act
@@ -65,8 +66,8 @@ namespace Manga.UnitTests
         {
             //
             // Arrange
-            Account sut = Substitute.For<Account>();
-            Credit credit = new Credit(new Amount(100));
+            Account sut = new Account(Guid.NewGuid());
+            Credit credit = new Credit(sut.Id, 100);
             sut.Deposit(credit);
 
             //
@@ -81,11 +82,11 @@ namespace Manga.UnitTests
         {
             //
             // Arrange
-            Account sut = Substitute.For<Account>();
-            Credit credit = new Credit(new Amount(200));
+            Account sut = new Account(Guid.Empty);
+            Credit credit = new Credit(sut.Id, 200);
             sut.Deposit(credit);
 
-            Debit debit = new Debit(new Amount(5000.0));
+            Debit debit = new Debit(sut.Id, 5000.0);
 
             //
             // Act and Assert

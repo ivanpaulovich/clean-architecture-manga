@@ -3,7 +3,7 @@ namespace Manga.IntegrationTests
     using Microsoft.AspNetCore.Hosting;
     using Autofac.Extensions.DependencyInjection;
     using Microsoft.Extensions.Configuration;
-    using Manga.UI;
+    using Manga.WebApi;
     using Microsoft.AspNetCore.TestHost;
     using Xunit;
     using System.Threading.Tasks;

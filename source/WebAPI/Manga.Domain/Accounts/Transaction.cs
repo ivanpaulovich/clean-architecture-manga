@@ -5,17 +5,19 @@
 
     public abstract class Transaction : Entity
     {
-        public Amount Amount { get; private set; }
+        public virtual Amount Amount { get; protected set; }
+        public virtual DateTime TransactionDate { get; protected set; }
         public abstract string Description { get; }
-        public DateTime TransactionDate { get; private set; }
+        public virtual Guid AccountId { get; set; }
 
-        public Transaction()
+        protected Transaction()
         {
 
         }
 
-        protected Transaction(Amount amount)
+        protected Transaction(Guid accountId, Amount amount)
         {
+            AccountId = accountId;
             Amount = amount;
             TransactionDate = DateTime.Now;
         }

@@ -4,11 +4,17 @@
 
     public class Entity : IEntity
     {
-        public Guid Id { get; protected set; }
-
-        protected Entity()
+        private Guid id = Guid.NewGuid();
+        public virtual Guid Id
         {
-            Id = Guid.NewGuid();
+            get
+            {
+                return id;
+            }
+            protected set
+            {
+                id = value;
+            }
         }
     }
 }

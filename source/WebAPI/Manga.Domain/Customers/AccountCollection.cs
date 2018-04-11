@@ -1,32 +1,22 @@
 ﻿namespace Manga.Domain.Customers
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System;
+    using System.Collections.ObjectModel;
 
-    public class AccountCollection
+    public class AccountCollection : Collection<Guid>
     {
-        private List<Guid> items;
-        public IReadOnlyCollection<Guid> Items
-        {
-            get
-            {
-                return items.AsReadOnly();
-            }
-            private set
-            {
-                items = value.ToList();
-            }
-        }
-
         public AccountCollection()
         {
-            items = new List<Guid>();
+
         }
 
-        internal void Add(Guid accountId)
+        public AccountCollection(IEnumerable<Guid> list)
         {
-            items.Add(accountId);
+            foreach (var item in list)
+            {
+                Items.Add(item);
+            }
         }
     }
 }

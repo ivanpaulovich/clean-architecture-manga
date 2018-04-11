@@ -1,15 +1,23 @@
 ﻿namespace Manga.Domain.Accounts
 {
     using Manga.Domain.ValueObjects;
+    using System;
 
     public class Account : Entity, IAggregateRoot
     {
-        public TransactionCollection Transactions { get; private set; }
-        public int Version { get; private set; }
+        public virtual Guid CustomerId { get; protected set; }
+        public virtual int Version { get; protected set; }
+        public virtual TransactionCollection Transactions { get; protected set; }
 
-        public Account()
+        protected Account()
         {
             Transactions = new TransactionCollection();
+        }
+
+        public Account(Guid customerId)
+            : this()
+        {
+            CustomerId = customerId;
         }
 
         public void Deposit(Credit credit)
@@ -27,7 +35,7 @@
 
         public void Close()
         {
-            if (Transactions.GetCurrentBalance() > new Amount(0))
+            if (Transactions.GetCurrentBalance() > 0)
                 throw new AccountCannotBeClosedException($"The account {Id} can not be closed because it has funds.");
         }
 
@@ -35,6 +43,5 @@
         {
             return Transactions.GetCurrentBalance();
         }
-
     }
 }

@@ -22,7 +22,7 @@ namespace Manga.UnitTests
 
             //
             // Assert
-            Assert.Equal(1, sut.Accounts.Items.Count);
+            Assert.Single(sut.Accounts);
         }
     }
 }

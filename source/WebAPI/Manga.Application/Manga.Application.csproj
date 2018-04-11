@@ -8,5 +8,4 @@
     <ProjectReference Include="..\Manga.Domain\Manga.Domain.csproj" />
   </ItemGroup>
 
-
 </Project>

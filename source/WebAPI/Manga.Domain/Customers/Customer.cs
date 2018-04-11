@@ -5,14 +5,14 @@
 
     public class Customer : Entity, IAggregateRoot
     {
-        public Name Name { get; private set; }
-        public PIN PIN { get; private set; }
-        public AccountCollection Accounts { get; private set; }
-        public int Version { get; private set; }
+        public virtual Name Name { get; protected set; }
+        public virtual PIN PIN { get; protected set; }
+        public virtual int Version { get; protected set; }
+        public virtual AccountCollection Accounts { get; protected set; }
 
-        public Customer()
+        protected Customer()
         {
-            
+            Accounts = new AccountCollection();
         }
 
         public Customer(PIN pin, Name name)

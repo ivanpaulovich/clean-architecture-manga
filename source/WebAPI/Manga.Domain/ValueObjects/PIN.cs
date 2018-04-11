@@ -16,5 +16,10 @@
         {
             return Text.ToString();
         }
+
+        public static implicit operator PIN(string text)
+        {
+            return new PIN(text);
+        }
     }
 }

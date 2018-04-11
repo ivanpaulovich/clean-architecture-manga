@@ -2,31 +2,26 @@
 {
     using Manga.Domain.ValueObjects;
     using System.Collections.Generic;
-    using System.Linq;
+    using System.Collections.ObjectModel;
 
-    public class TransactionCollection
+    public class TransactionCollection : Collection<Transaction>
     {
-        private List<Transaction> items;
-        public IReadOnlyCollection<Transaction> Items
-        {
-            get
-            {
-                return items.AsReadOnly();
-            }
-            private set
-            {
-                items = value.ToList();
-            }
-        }
-
         public TransactionCollection()
         {
-            items = new List<Transaction>();
+
         }
 
-        internal Amount GetCurrentBalance()
+        public TransactionCollection(IEnumerable<Transaction> list)
         {
-            Amount totalAmount = new Amount(0);
+            foreach (var item in list)
+            {
+                Items.Add(item);
+            }
+        }
+
+        public Amount GetCurrentBalance()
+        {
+            Amount totalAmount = 0;
 
             //
             // TODO: Think on a better Strategy
@@ -42,11 +37,6 @@
             }
 
             return totalAmount;
-        }
-
-        internal void Add(Transaction transaction)
-        {
-            items.Add(transaction);
         }
     }
 }

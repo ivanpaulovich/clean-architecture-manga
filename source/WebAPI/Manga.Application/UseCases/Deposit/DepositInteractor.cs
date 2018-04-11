@@ -1,7 +1,6 @@
 ﻿namespace Manga.Application.UseCases.Deposit
 {
     using System.Threading.Tasks;
-    using Manga.Domain.ValueObjects;
     using Manga.Application.Repositories;
     using Manga.Domain.Accounts;
     using Manga.Application.Outputs;
@@ -31,10 +30,10 @@
             if (account == null)
                 throw new AccountNotFoundException($"The account {input.AccountId} does not exists or is already closed.");
 
-            Credit credit = new Credit(new Amount(input.Amount));
+            Credit credit = new Credit(account.Id, input.Amount);
             account.Deposit(credit);
 
-            await accountWriteOnlyRepository.Update(account);
+            await accountWriteOnlyRepository.Update(account, credit);
 
             TransactionOutput transactionResponse = outputConverter.Map<TransactionOutput>(credit);
             DepositOutput output = new DepositOutput(transactionResponse, account.GetCurrentBalance().Value);

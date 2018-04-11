@@ -64,7 +64,7 @@ namespace Manga.UseCaseTests
         [InlineData("c725315a-1de6-4bf7-aecf-3af8f0083681", 100)]
         public async void Deposit_Valid_Amount(string accountId, double amount)
         {
-            var account = Substitute.For<Account>();
+            var account = new Account(Guid.NewGuid());
             var customer = Substitute.For<Customer>();
 
             accountReadOnlyRepository
@@ -94,8 +94,8 @@ namespace Manga.UseCaseTests
         [InlineData("c725315a-1de6-4bf7-aecf-3af8f0083681", 100)]
         public async void Withdraw_Valid_Amount(string accountId, double amount)
         {
-            Account account = Substitute.For<Account>();
-            account.Deposit(new Credit(new Amount(1000)));
+            Account account = new Account(Guid.NewGuid());
+            account.Deposit(new Credit(account.Id, 1000));
 
             accountReadOnlyRepository
                 .Get(Guid.Parse(accountId))
@@ -124,8 +124,8 @@ namespace Manga.UseCaseTests
         [InlineData(100)]
         public void Account_With_Credits_Should_Not_Allow_Close(double amount)
         {
-            var account = new Account();
-            account.Deposit(new Credit(new Amount(amount)));
+            var account = new Account(Guid.NewGuid());
+            account.Deposit(new Credit(account.Id, amount));
 
             Assert.Throws<AccountCannotBeClosedException>(
                 () => account.Close());

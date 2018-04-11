@@ -6,15 +6,17 @@
 
         public Amount(double value)
         {
-            if (value < 0)
-                throw new AmountShouldBePositiveException($"Amount should be greater than zero ({value}).");
-
-            this.Value = value;
+            Value = value;
         }
 
         public override string ToString()
         {
             return Value.ToString();
+        }
+
+        public static implicit operator Amount(double value)
+        {
+            return new Amount(value);
         }
 
         public static Amount operator +(Amount amount1, Amount amount2)

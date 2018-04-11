@@ -39,7 +39,7 @@
 
             List<AccountOutput> accounts = new List<AccountOutput>();
 
-            foreach (var accountId in customer.Accounts.Items)
+            foreach (var accountId in customer.Accounts)
             {
                 Account account = await accountReadOnlyRepository.Get(accountId);
 

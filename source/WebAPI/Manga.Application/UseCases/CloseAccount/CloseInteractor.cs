@@ -26,6 +26,9 @@
         public async Task Process(CloseInput input)
         {
             Account account = await accountReadOnlyRepository.Get(input.AccountId);
+			if (account == null)
+                throw new AccountNotFoundException($"The account {input.AccountId} does not exists or is already closed.");
+			
             account.Close();
 
             await accountWriteOnlyRepository.Delete(account);

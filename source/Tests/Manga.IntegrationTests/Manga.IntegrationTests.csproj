@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\WebAPI\Manga.UI\Manga.UI.csproj" />
+    <ProjectReference Include="..\..\WebAPI\Manga.WebApi\Manga.WebApi.csproj" />
   </ItemGroup>
 
 </Project>
