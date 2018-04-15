@@ -10,7 +10,7 @@ To run Manga from source, clone this repository to your machine, compile and tes
 
 ```sh
 git clone https://github.com/ivanpaulovich/manga.git
-cd manga/source/WebAPI/Manga.UI
+cd manga/source/WebAPI/Manga.WebApi
 dotnet run
 ```
 
