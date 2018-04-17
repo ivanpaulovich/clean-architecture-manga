@@ -1,0 +1,8 @@
+language: csharp
+install:
+  - curl -L -o nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+script:
+  - mono nuget.exe pack ./source/Paulovich.Manga.nuspec
+  - mono nuget.exe setApiKey $NUGET_API_KEY -Source $NUGET_SOURCE
+  - mono nuget.exe push Paulovich.Manga.*.nupkg -Source $NUGET_SOURCE
+  
