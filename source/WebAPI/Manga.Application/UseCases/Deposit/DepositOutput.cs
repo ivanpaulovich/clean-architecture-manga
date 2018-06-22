@@ -1,19 +1,22 @@
-﻿using Manga.Application.Outputs;
-
-namespace Manga.Application.UseCases.Deposit
+﻿namespace Manga.Application.UseCases.Deposit
 {
-    public class DepositOutput
+    using Manga.Domain.Accounts;
+    using Manga.Domain.ValueObjects;
+
+    public sealed class DepositOutput
     {
-        public TransactionOutput Transaction { get; private set; }
-        public double UpdatedBalance { get; private set; }
-        public DepositOutput()
-        {
+        public TransactionOutput Transaction { get; }
+        public double UpdatedBalance { get; }
 
-        }
-
-        public DepositOutput(TransactionOutput transaction, double updatedBalance)
+        public DepositOutput(
+            Credit credit,
+            Amount updatedBalance)
         {
-            Transaction = transaction;
+            Transaction = new TransactionOutput(
+                credit.Description,
+                credit.Amount,
+                credit.TransactionDate);
+
             UpdatedBalance = updatedBalance;
         }
     }

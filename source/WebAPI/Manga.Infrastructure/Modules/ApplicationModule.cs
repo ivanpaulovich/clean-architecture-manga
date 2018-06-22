@@ -10,7 +10,7 @@
             //
             // Register all Types in Manga.Application
             //
-            builder.RegisterAssemblyTypes(typeof(IOutputConverter).Assembly)
+            builder.RegisterAssemblyTypes(typeof(ApplicationException).Assembly)
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
         }

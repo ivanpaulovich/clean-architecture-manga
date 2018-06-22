@@ -1,20 +1,15 @@
 ﻿namespace Manga.WebApi.UseCases.Register
 {
-    using Manga.Application;
     using Manga.Application.UseCases.Register;
-    using Manga.WebApi.Model;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
 
-    public class Presenter : IOutputBoundary<RegisterOutput>
+    public class Presenter
     {
         public IActionResult ViewModel { get; private set; }
-        public RegisterOutput Output { get; private set; }
 
         public void Populate(RegisterOutput response)
         {
-            Output = response;
-
             if (response == null)
             {
                 ViewModel = new NoContentResult();
@@ -41,7 +36,7 @@
             List<AccountDetailsModel> accounts = new List<AccountDetailsModel>();
             accounts.Add(account);
 
-            Model model = new Model(
+            CustomerModel model = new CustomerModel(
                 response.Customer.CustomerId,
                 response.Customer.Personnummer,
                 response.Customer.Name,

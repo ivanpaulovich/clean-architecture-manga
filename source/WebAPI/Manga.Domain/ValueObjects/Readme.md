@@ -1,1 +1,0 @@
-﻿Here you should implement your Value Objects.

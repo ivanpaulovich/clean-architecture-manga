@@ -1,23 +1,23 @@
 ﻿namespace Manga.WebApi.UseCases.GetCustomerDetails
 {
-    using Manga.Application;
+    using Manga.Application.UseCases;
     using Manga.Application.UseCases.GetCustomerDetails;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Threading.Tasks;
 
     [Route("api/[controller]")]
-    public class CustomersController : Microsoft.AspNetCore.Mvc.Controller
+    public class CustomersController : Controller
     {
-        private readonly IInputBoundary<GetCustomerDetailsInput> getCustomerInput;
-        private readonly Presenter getCustomerDetailsPresenter;
+        private readonly IGetCustomerDetailsUseCase _getCustomerDetailsUseCase;
+        private readonly Presenter _presenter;
 
         public CustomersController(
-            IInputBoundary<GetCustomerDetailsInput> getCustomerInput,
-            Presenter getCustomerDetailsPresenter)
+            IGetCustomerDetailsUseCase getCustomerDetailsUseCase,
+            Presenter presenter)
         {
-            this.getCustomerInput = getCustomerInput;
-            this.getCustomerDetailsPresenter = getCustomerDetailsPresenter;
+            _getCustomerDetailsUseCase = getCustomerDetailsUseCase;
+            _presenter = presenter;
         }
 
         /// <summary>
@@ -26,9 +26,9 @@
         [HttpGet("{customerId}", Name = "GetCustomer")]
         public async Task<IActionResult> GetCustomer(Guid customerId)
         {
-            var request = new GetCustomerDetailsInput(customerId);
-            await this.getCustomerInput.Process(request);
-            return this.getCustomerDetailsPresenter.ViewModel;
+            CustomerOutput output = await _getCustomerDetailsUseCase.Execute(customerId);
+            _presenter.Populate(output);
+            return _presenter.ViewModel;
         }
     }
 }

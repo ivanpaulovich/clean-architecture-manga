@@ -1,8 +1,8 @@
 ﻿namespace Manga.Infrastructure.Modules
 {
     using Autofac;
-    using Manga.Application;
-	using System.Reflection;
+    using System;
+    using System.Reflection;
 
     public class WebApiModule : Autofac.Module
     {
@@ -11,8 +11,11 @@
             //
             // Register all Types in Manga.WebApi
             //
-            builder.RegisterAssemblyTypes(Assembly.GetEntryAssembly())
-                .AsClosedTypesOf(typeof(IOutputBoundary<>))
+
+            Type startup = Type.GetType("Manga.WebApi.Startup, Manga.WebApi");
+
+            builder.RegisterAssemblyTypes(startup.Assembly)
+                .AsSelf()
                 .InstancePerLifetimeScope();
         }
     }

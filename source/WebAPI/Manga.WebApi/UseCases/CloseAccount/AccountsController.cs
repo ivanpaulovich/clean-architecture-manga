@@ -1,22 +1,22 @@
 ﻿namespace Manga.WebApi.UseCases.CloseAccount
 {
-    using Manga.Application;
     using Manga.Application.UseCases.CloseAccount;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Threading.Tasks;
 
     [Route("api/[controller]")]
-    public class AccountsController : Microsoft.AspNetCore.Mvc.Controller
+    public class AccountsController : Controller
     {
-        private readonly IInputBoundary<CloseInput> closeAccountInput;
-        private readonly Presenter closePresenter;
+        private readonly ICloseAccountUseCase _closeAccountUseCase;
+        private readonly Presenter _presenter;
+
         public AccountsController(
-            IInputBoundary<CloseInput> closeAccountnput,
-            Presenter closePresenter)
+            ICloseAccountUseCase closeAccountUseCase,
+            Presenter presenter)
         {
-            this.closeAccountInput = closeAccountnput;
-            this.closePresenter = closePresenter;
+            _closeAccountUseCase = closeAccountUseCase;
+            _presenter = presenter;
         }
 
         /// <summary>
@@ -25,10 +25,9 @@
         [HttpDelete("{accountId}")]
         public async Task<IActionResult> Close(Guid accountId)
         {
-            var request = new CloseInput(accountId);
-
-            await closeAccountInput.Process(request);
-            return closePresenter.ViewModel;
+            Guid output = await _closeAccountUseCase.Execute(accountId);
+            _presenter.Populate(output);
+            return _presenter.ViewModel;
         }
     }
 }

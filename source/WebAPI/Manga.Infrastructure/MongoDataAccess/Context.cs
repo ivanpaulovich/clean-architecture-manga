@@ -1,8 +1,6 @@
 ﻿namespace Manga.Infrastructure.MongoDataAccess
 {
-    using Manga.Domain;
-    using Manga.Domain.Accounts;
-    using Manga.Domain.Customers;
+    using Manga.Infrastructure.MongoDataAccess.Entities;
     using MongoDB.Bson.Serialization;
     using MongoDB.Driver;
 
@@ -34,32 +32,35 @@
             }
         }
 
+        public IMongoCollection<Credit> Credits
+        {
+            get
+            {
+                return database.GetCollection<Credit>("Credits");
+            }
+        }
+
+        public IMongoCollection<Debit> Debits
+        {
+            get
+            {
+                return database.GetCollection<Debit>("Debits");
+            }
+        }
+
         private void Map()
         {
-            BsonClassMap.RegisterClassMap<Entity>(cm =>
-            {
-                cm.AutoMap();
-            });
-
             BsonClassMap.RegisterClassMap<Account>(cm =>
             {
                 cm.AutoMap();
             });
 
-            BsonClassMap.RegisterClassMap<AccountCollection>(cm =>
+            BsonClassMap.RegisterClassMap<Credit>(cm =>
             {
                 cm.AutoMap();
             });
 
-            BsonClassMap.RegisterClassMap<Transaction>(cm =>
-            {
-                cm.AutoMap();
-                cm.SetIsRootClass(true);
-                cm.AddKnownType(typeof(Debit));
-                cm.AddKnownType(typeof(Credit));
-            });
-
-            BsonClassMap.RegisterClassMap<TransactionCollection>(cm =>
+            BsonClassMap.RegisterClassMap<Debit>(cm =>
             {
                 cm.AutoMap();
             });

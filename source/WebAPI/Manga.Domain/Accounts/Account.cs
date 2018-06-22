@@ -2,46 +2,68 @@
 {
     using Manga.Domain.ValueObjects;
     using System;
+    using System.Collections.ObjectModel;
 
-    public class Account : Entity, IAggregateRoot
+    public sealed class Account : IEntity, IAggregateRoot
     {
-        public virtual Guid CustomerId { get; protected set; }
-        public virtual int Version { get; protected set; }
-        public virtual TransactionCollection Transactions { get; protected set; }
-
-        protected Account()
+        public Guid Id { get; }
+        public Guid CustomerId { get; }
+        public ReadOnlyCollection<ITransaction> Transactions
         {
-            Transactions = new TransactionCollection();
+            get
+            {
+                ReadOnlyCollection<ITransaction> readOnly = new ReadOnlyCollection<ITransaction>(_transactions);
+                return readOnly;
+            }
         }
 
-        public Account(Guid customerId)
-            : this()
+        private TransactionCollection _transactions;
+
+        public Account(Guid id, Guid customerId, TransactionCollection transactions)
         {
+            Id = id;
+            _transactions = transactions;
             CustomerId = customerId;
         }
 
-        public void Deposit(Credit credit)
+        public Account(Guid customerId)
         {
-            Transactions.Add(credit);
+            Id = Guid.NewGuid();
+            _transactions = new TransactionCollection();
+            CustomerId = customerId;
         }
 
-        public void Withdraw(Debit debit)
+        public void Deposit(Amount amount)
         {
-            if (Transactions.GetCurrentBalance() < debit.Amount)
-                throw new InsuficientFundsException($"The account {Id} does not have enough funds to withdraw {debit.Amount}.");
+            Credit credit = new Credit(Id, amount);
+            _transactions.Add(credit);
+        }
 
-            Transactions.Add(debit);
+        public void Withdraw(Amount amount)
+        {
+            if (_transactions.GetCurrentBalance() < amount)
+                throw new InsuficientFundsException($"The account {Id} does not have enough funds to withdraw {amount}.");
+
+            Debit debit = new Debit(Id, amount);
+            _transactions.Add(debit);
         }
 
         public void Close()
         {
-            if (Transactions.GetCurrentBalance() > 0)
+            if (_transactions.GetCurrentBalance() > 0)
                 throw new AccountCannotBeClosedException($"The account {Id} can not be closed because it has funds.");
         }
 
         public Amount GetCurrentBalance()
         {
-            return Transactions.GetCurrentBalance();
+            Amount totalAmount = _transactions.GetCurrentBalance();
+            return totalAmount;
+        }
+
+        public ITransaction GetLastTransaction()
+        {
+            ITransaction transaction = _transactions.GetLastTransaction();
+            return transaction;
         }
     }
 }

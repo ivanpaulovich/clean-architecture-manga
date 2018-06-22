@@ -1,20 +1,15 @@
 ﻿namespace Manga.WebApi.UseCases.Withdraw
 {
-    using Manga.Application;
     using Manga.Application.UseCases.Withdraw;
     using Microsoft.AspNetCore.Mvc;
 
-    public class Presenter : IOutputBoundary<WithdrawOutput>
+    public class Presenter
     {
         public IActionResult ViewModel { get; private set; }
 
-        public WithdrawOutput Output { get; private set; }
-
-        public void Populate(WithdrawOutput response)
+        public void Populate(WithdrawOutput output)
         {
-            Output = response;
-
-            if (response == null)
+            if (output == null)
             {
                 ViewModel = new NoContentResult();
                 return;
@@ -22,10 +17,10 @@
 
             ViewModel = new ObjectResult(new
             {
-                Amount = response.Transaction.Amount,
-                Description = response.Transaction.Description,
-                TransactionDate = response.Transaction.TransactionDate,
-                UpdateBalance = response.UpdatedBalance,
+                Amount = output.Transaction.Amount,
+                Description = output.Transaction.Description,
+                TransactionDate = output.Transaction.TransactionDate,
+                UpdatedBalance = output.UpdatedBalance,
             });
         }
     }

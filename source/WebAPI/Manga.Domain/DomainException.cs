@@ -1,12 +1,12 @@
 ﻿namespace Manga.Domain
 {
-    public class DomainException : MangaException
-    {
-        public string BusinessMessage { get; private set; }
+    using System;
 
-        public DomainException(string businessMessage)
+    public class DomainException : Exception
+    {
+        internal DomainException(string businessMessage)
+            : base(businessMessage)
         {
-            BusinessMessage = businessMessage;
         }
     }
 }

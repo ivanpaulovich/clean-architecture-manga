@@ -4,18 +4,19 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
-    public class TransactionCollection : Collection<Transaction>
+    public sealed class TransactionCollection : Collection<ITransaction>
     {
-        public TransactionCollection()
+        public ITransaction GetLastTransaction()
         {
-
+            ITransaction transaction = Items[Items.Count - 1];
+            return transaction;
         }
 
-        public TransactionCollection(IEnumerable<Transaction> list)
+        public void Add(IEnumerable<ITransaction> transactions)
         {
-            foreach (var item in list)
+            foreach (var transaction in transactions)
             {
-                Items.Add(item);
+                Items.Add(transaction);
             }
         }
 
@@ -23,17 +24,13 @@
         {
             Amount totalAmount = 0;
 
-            //
-            // TODO: Think on a better Strategy
-            //
-
             foreach (var item in Items)
             {
                 if (item is Debit)
-                    totalAmount -= item.Amount;
+                    totalAmount = totalAmount - item.Amount;
 
                 if (item is Credit)
-                    totalAmount += item.Amount;
+                    totalAmount = totalAmount + item.Amount;
             }
 
             return totalAmount;

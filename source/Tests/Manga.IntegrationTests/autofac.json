@@ -2,7 +2,7 @@
   "defaultAssembly": "Manga.Infrastructure",
   "modules": [
     {
-      "type": "Manga.Infrastructure.Modules.UIModule",
+      "type": "Manga.Infrastructure.Modules.WebApiModule",
       "properties": {
       }
     },

@@ -2,7 +2,7 @@
 {
     using System;
 
-    public interface IEntity
+    internal interface IEntity
     {
         Guid Id { get; }
     }

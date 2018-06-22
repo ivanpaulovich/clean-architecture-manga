@@ -1,33 +1,38 @@
 ﻿namespace Manga.WebApi.UseCases.Register
 {
-    using Manga.Application;
+    using Manga.Application.UseCases;
     using Manga.Application.UseCases.Register;
     using Microsoft.AspNetCore.Mvc;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     [Route("api/[controller]")]
-    public class CustomersController : Microsoft.AspNetCore.Mvc.Controller
+    public class CustomersController : Controller
     {
-        private readonly IInputBoundary<RegisterInput> registerInput;
-        private readonly Presenter registerPresenter;
+        private readonly IRegisterUseCase _registerUseCase;
+        private readonly Presenter _presenter;
 
         public CustomersController(
-            IInputBoundary<RegisterInput> registerInput,
-            Presenter registerPresenter)
+            IRegisterUseCase registerUseCase,
+            Presenter presenter)
         {
-            this.registerInput = registerInput;
-            this.registerPresenter = registerPresenter;
+            _registerUseCase = registerUseCase;
+            _presenter = presenter;
         }
 
         /// <summary>
         /// Register a new Customer
         /// </summary>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]RegisterRequest message)
+        public async Task<IActionResult> Post([FromBody]RegisterRequest request)
         {
-            var request = new RegisterInput(message.PIN, message.Name, message.InitialAmount);
-            await registerInput.Process(request);
-            return registerPresenter.ViewModel;
+            RegisterOutput output = await _registerUseCase.Execute(
+                request.PIN,
+                request.Name,
+                request.InitialAmount);
+
+            _presenter.Populate(output);
+            return _presenter.ViewModel;
         }
     }
 }

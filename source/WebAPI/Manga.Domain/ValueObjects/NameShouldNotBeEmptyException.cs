@@ -1,6 +1,6 @@
 ﻿namespace Manga.Domain.ValueObjects
 {
-    public class NameShouldNotBeEmptyException : DomainException
+    public sealed class NameShouldNotBeEmptyException : DomainException
     {
         internal NameShouldNotBeEmptyException(string message)
             : base(message)

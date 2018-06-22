@@ -1,20 +1,21 @@
 ﻿namespace Manga.Application.UseCases.Withdraw
 {
-    using Manga.Application.Outputs;
-    public class WithdrawOutput
+    using Manga.Domain.Accounts;
+    using Manga.Domain.ValueObjects;
+
+    public sealed class WithdrawOutput
     {
-        public TransactionOutput Transaction { get; private set; }
-        public double UpdatedBalance { get; private set; }
+        public TransactionOutput Transaction { get; }
+        public double UpdatedBalance { get; }
 
-        public WithdrawOutput()
+        public WithdrawOutput(Debit transaction, Amount updatedBalance)
         {
+            Transaction = new TransactionOutput(
+                transaction.Description,
+                transaction.Amount,
+                transaction.TransactionDate);
 
-        }
-
-        public WithdrawOutput(TransactionOutput transaction, double updatedBalance)
-        {
-            this.Transaction = transaction;
-            this.UpdatedBalance = updatedBalance;
+            UpdatedBalance = updatedBalance;
         }
     }
 }
