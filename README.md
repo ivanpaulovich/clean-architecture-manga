@@ -20,22 +20,25 @@ The Clean Architecture implementation is a software where the business rules are
 
 We followed the Dependency Rule that says the source code dependencies can only point inwards, nothing in an inner circle can know anything at all about something in an outer circle.
 
-To ilustrate this principle compare the diagram bellow with the source code.
+To ilustrate this principle compare the Clean Architecture Diagram by [Uncle Bob](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html) with the source code.
 
 ![Clean Architecture by Uncle Bob](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/CleanArchitecture-Uncle-Bob.jpg)
-> The Clean Architecture Diagram by [Uncle Bob](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html).
+
+## The Principles and Practices
+
+The code base is implemented around the Use Cases, and to design the solution we followed major principles described next: 
 
 | Concept | Description |
 | --- | --- |
-| DDD | The Use Cases of the Account Balance are the Ubiquitious Language designed in the Domain and Application layers, we use the Eric Evans terms like Entities, Value Object, Aggregates Root and Bounded Context. |
-| TDD | From the beginning of the project we developed Unit Tests that helped us to enforce the business rules and to create an application that prevents bugs intead of finding them. We also have more sophisticated tests like Use Case Tests, Mapping Tests and Integration Tests. |
-| SOLID | The SOLID principles are all over the the solution. The knowledge of SOLID is not a prerequisite but it is highly recommended. |
-| Entity-Boundary-Interactor (EBI) | The goal of EBI architecture is to produce a software implementation agnostic to technology, framework, or database. The result is focus on  use cases and input/output. |
-| Microservice | We designed the software around the Business Domain, having Continous Delivery and Independent Deployment. |
+| DDD | The Domain-Driven Design helped us on designing effective aggregates. The Customer and Account are aggregates and they keep the state consistent, we also have value-objects for Money and SSN. |
+| TDD | We design the software as tests are the first consumer of the application. They show us early how to use the API and what requirements we will implement first. |
+| SOLID | The SOLID principles are all over the solution. We had an special effort on Dependency Inversion and Single Responsibility Principle.  |
+| Hexagonal Architecture | The Clean Architecture is built on top of Hexagonal Architecture, we still have Ports for Use Cases and Adapters for every external detail. |
+| Microservice | This application has and independent business domain, built with continous delivery and independent deployment. |
 | Logging | Logging is a detail. We plugged Serilog and configured it to redirect every log message to the file system. |
-| Docker | Docker is a detail. It was implemented to help us make a faster and reliable deployment. |
-| MongoDB | MongoDB is a detail. You could create new Data Access implementation and setup it with Autofac. |
-| .NET Core 2.0 | .NET Core is a detail. Almost everything in this code base could be ported to other versions. |
+| Docker | Docker is a detail. The CD builds an image for every commit. |
+| MongoDB | MongoDB is a detail. We can change to any other database with few lines of code. |
+| .NET Core 2.0 | .NET Core is a detail. The main code is portable to other .NET frameworks. |
 
 ## Flow of Control: The Register Use Case
 
