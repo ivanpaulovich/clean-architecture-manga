@@ -1,22 +1,26 @@
-![Manga](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/manga-icon.png) Manga: Clean Architecture
+![Manga](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/manga-icon.png) Clean Architecture Service Template with TDD/DDD
 =========
 [![Manga latest Docker build](https://dockerbuildbadges.quelltext.eu/status.svg?organization=ivanpaulovich&repository=manga)](https://hub.docker.com/r/ivanpaulovich/manga/) [![Gitter](https://img.shields.io/badge/chat-on%20gitter-blue.svg)](https://gitter.im/ivanpaulovich/)
 
-Manga is a Service Template for helping you to build evolvable, adaptable and maintainable applications. It follows the principles from the [Clean Architecture book](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164) and has a Domain built on Domain-Driven Design. It is easy for you to start your new microservice based on its guidelines and patterns.
+Manga is a Service Template to help you to build evolvable, adaptable and maintainable applications. It follows the Clean Architecture Principles (Robert C. Martin, 2017) and Domain-Driven Design. Tests guided us on the implementation so all the components are testable in isolation.
 
 ## Compiling from source
 
 To run Manga from source, clone this repository to your machine, compile and test it:
 
 ```sh
-git clone https://github.com/ivanpaulovich/manga.git
-cd manga/source/WebAPI/Manga.WebApi
-dotnet run
+git clone https://github.com/ivanpaulovich/clean-architecture-manga.git
+cd clean-architecture-manga
+./build.sh
 ```
 
 ## The Clean Architecture
 
-The implementation result of the Clean Architecture is a software that encapsulate Business Rules in Use Cases and the Enterprise Rules in Entities. Also the Use Cases are independent from details like User Interface, Data Access, Web Server or any external agency. 
+The Clean Architecture implementation is a software where the business rules are encapsulated in the use cases and entities. The Application and Domain layers are independent from external details like frameworks, the UI, or data access libraries.
+
+We followed the Dependency Rule that says the source code dependencies can only point inwards, nothing in an inner circle can know anything at all about something in an outer circle.
+
+To ilustrate this principle compare the diagram bellow with the source code.
 
 ![Clean Architecture by Uncle Bob](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/CleanArchitecture-Uncle-Bob.jpg)
 > The Clean Architecture Diagram by [Uncle Bob](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html).
