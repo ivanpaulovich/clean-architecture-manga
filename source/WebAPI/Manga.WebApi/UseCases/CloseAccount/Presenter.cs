@@ -1,19 +1,15 @@
 ﻿namespace Manga.WebApi.UseCases.CloseAccount
 {
-    using Manga.Application;
-    using Manga.Application.UseCases.CloseAccount;
     using Microsoft.AspNetCore.Mvc;
+    using System;
 
-    public class Presenter : IOutputBoundary<CloseOutput>
+    public sealed class Presenter
     {
         public IActionResult ViewModel { get; private set; }
-        public CloseOutput Output { get; private set; }
 
-        public void Populate(CloseOutput response)
+        public void Populate(Guid output)
         {
-            Output = response;
-
-            if (response == null)
+            if (output == null)
             {
                 ViewModel = new NoContentResult();
                 return;

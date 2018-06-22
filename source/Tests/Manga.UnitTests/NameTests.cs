@@ -31,7 +31,7 @@ namespace Manga.UnitTests
 
             //
             // Assert
-            Assert.Equal(valid, name.Text);
+            Assert.Equal(new Name(valid), name);
         }
     }
 }

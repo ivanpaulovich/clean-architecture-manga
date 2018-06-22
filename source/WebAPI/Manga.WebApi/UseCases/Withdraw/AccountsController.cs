@@ -1,34 +1,32 @@
 ﻿namespace Manga.WebApi.UseCases.Withdraw
 {
-    using Manga.Application;
     using Manga.Application.UseCases.Withdraw;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
 
     [Route("api/[controller]")]
-    public class AccountsController : Microsoft.AspNetCore.Mvc.Controller
+    public class AccountsController : Controller
     {
-        private readonly IInputBoundary<WithdrawInput> withdrawInput;
-        private readonly Presenter withdrawPresenter;
-        
+        private readonly IWithdrawUseCase _withdrawUseCase;
+        private readonly Presenter _presenter;
+
         public AccountsController(
-            IInputBoundary<WithdrawInput> withdrawInput,
-            Presenter withdrawPresenter)
+            IWithdrawUseCase withdrawUseCase,
+            Presenter presenter)
         {
-            this.withdrawInput = withdrawInput;
-            this.withdrawPresenter = withdrawPresenter;
+            _withdrawUseCase = withdrawUseCase;
+            _presenter = presenter;
         }
 
         /// <summary>
         /// Withdraw from an account
         /// </summary>
         [HttpPatch("Withdraw")]
-        public async Task<IActionResult> Withdraw([FromBody]WithdrawRequest message)
+        public async Task<IActionResult> Withdraw([FromBody]WithdrawRequest request)
         {
-            var request = new WithdrawInput(message.AccountId, message.Amount);
-
-            await withdrawInput.Process(request);
-            return withdrawPresenter.ViewModel;
+            WithdrawOutput output = await _withdrawUseCase.Execute(request.AccountId, request.Amount);
+            _presenter.Populate(output);
+            return _presenter.ViewModel;
         }
     }
 }

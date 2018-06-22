@@ -1,23 +1,23 @@
 ﻿namespace Manga.WebApi.UseCases.GetAccountDetails
 {
-    using Manga.Application;
+    using Manga.Application.UseCases;
     using Manga.Application.UseCases.GetAccountDetails;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Threading.Tasks;
 
     [Route("api/[controller]")]
-    public class AccountsController : Microsoft.AspNetCore.Mvc.Controller
+    public class AccountsController : Controller
     {
-        private readonly IInputBoundary<GetAccountDetailsInput> getAccountDetailsInput;
-        private readonly Presenter getAccountDetailsPresenter;
+        private readonly IGetAccountDetailsUseCase _getAccountDetailsUseCase;
+        private readonly Presenter _presenter;
 
         public AccountsController(
-            IInputBoundary<GetAccountDetailsInput> getAccountDetailsInput,
-            Presenter getAccountDetailsPresenter)
+            IGetAccountDetailsUseCase getAccountDetailsUseCase,
+            Presenter presenter)
         {
-            this.getAccountDetailsInput = getAccountDetailsInput;
-            this.getAccountDetailsPresenter = getAccountDetailsPresenter;
+            _getAccountDetailsUseCase = getAccountDetailsUseCase;
+            _presenter = presenter;
         }
 
         /// <summary>
@@ -26,10 +26,9 @@
         [HttpGet("{accountId}", Name = "GetAccount")]
         public async Task<IActionResult> Get(Guid accountId)
         {
-            var request = new GetAccountDetailsInput(accountId);
-
-            await getAccountDetailsInput.Process(request);
-            return getAccountDetailsPresenter.ViewModel;
+            AccountOutput output = await _getAccountDetailsUseCase.Execute(accountId);
+            _presenter.Populate(output);
+            return _presenter.ViewModel;
         }
     }
 }

@@ -1,31 +1,45 @@
 ﻿namespace Manga.Domain.Customers
 {
     using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using Manga.Domain.ValueObjects;
 
-    public class Customer : Entity, IAggregateRoot
+    public sealed class Customer : IEntity, IAggregateRoot
     {
-        public virtual Name Name { get; protected set; }
-        public virtual PIN PIN { get; protected set; }
-        public virtual int Version { get; protected set; }
-        public virtual AccountCollection Accounts { get; protected set; }
-
-        protected Customer()
+        public Guid Id { get; }
+        public Name Name { get; }
+        public SSN SSN { get; }
+        public ReadOnlyCollection<Guid> Accounts
         {
-            Accounts = new AccountCollection();
+            get
+            {
+                ReadOnlyCollection<Guid> readOnly = new ReadOnlyCollection<Guid>(_accounts);
+                return readOnly;
+            }
         }
 
-        public Customer(PIN pin, Name name)
-            : this()
+        private AccountCollection _accounts;
+
+        public Customer(Guid id, Name name, SSN ssn, AccountCollection accounts)
         {
-            PIN = pin;
+            Id = id;
             Name = name;
+            SSN = ssn;
+            _accounts = accounts;
         }
 
-        public virtual void Register(Guid accountId)
+        public Customer(SSN ssn, Name name)
         {
-            Accounts = new AccountCollection();
-            Accounts.Add(accountId);
+            Id = Guid.NewGuid();
+            SSN = ssn;
+            Name = name;
+            _accounts = new AccountCollection();
+        }
+
+        public void Register(Guid accountId)
+        {
+            _accounts.Add(accountId);
         }
     }
 }

@@ -1,20 +1,15 @@
 ﻿namespace Manga.WebApi.UseCases.GetAccountDetails
 {
-    using Manga.Application;
-    using Manga.Application.Outputs;
-    using Manga.WebApi.Model;
+    using Manga.Application.UseCases;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
 
-    public class Presenter : IOutputBoundary<AccountOutput>
+    public sealed class Presenter
     {
         public IActionResult ViewModel { get; private set; }
-        public AccountOutput Output { get; private set; }
 
         public void Populate(AccountOutput output)
         {
-            Output = output;
-
             if (output == null)
             {
                 ViewModel = new NoContentResult();

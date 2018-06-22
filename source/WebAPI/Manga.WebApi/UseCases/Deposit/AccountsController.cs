@@ -1,22 +1,21 @@
 ﻿namespace Manga.WebApi.UseCases.Deposit
 {
-    using Manga.Application;
     using Manga.Application.UseCases.Deposit;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
 
     [Route("api/[controller]")]
-    public class AccountsController : Microsoft.AspNetCore.Mvc.Controller
+    public class AccountsController : Controller
     {
-        private readonly IInputBoundary<DepositInput> depositInput;
-        private readonly Presenter depositPresenter;
+        private readonly IDepositUseCase _depositUseCase;
+        private readonly Presenter _presenter;
 
         public AccountsController(
-            IInputBoundary<DepositInput> depositnput,
-            Presenter depositPresenter)
+            IDepositUseCase depositUseCase,
+            Presenter presenter)
         {
-            this.depositInput = depositnput;
-            this.depositPresenter = depositPresenter;
+            _depositUseCase = depositUseCase;
+            _presenter = presenter;
         }
 
         /// <summary>
@@ -25,10 +24,9 @@
         [HttpPatch("Deposit")]
         public async Task<IActionResult> Deposit([FromBody]DepositRequest message)
         {
-            var request = new DepositInput(message.AccountId, message.Amount);
-
-            await depositInput.Process(request);
-            return depositPresenter.ViewModel;
+            var output = await _depositUseCase.Execute(message.AccountId, message.Amount);
+            _presenter.Populate(output);
+            return _presenter.ViewModel;
         }
     }
 }

@@ -2,7 +2,6 @@
 {
     using Autofac;
     using Manga.Infrastructure.MongoDataAccess;
-    using Manga.Infrastructure.Mappings;
 
     public class InfrastructureModule : Autofac.Module
     {
@@ -20,7 +19,7 @@
             //
             // Register all Types in Manga.Infrastructure
             //
-            builder.RegisterAssemblyTypes(typeof(OutputConverter).Assembly)
+            builder.RegisterAssemblyTypes(typeof(InfrastructureException).Assembly)
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
         }

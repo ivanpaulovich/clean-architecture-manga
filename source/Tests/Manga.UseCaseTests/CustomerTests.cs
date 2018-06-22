@@ -1,59 +1,36 @@
 namespace Manga.UseCaseTests
 {
     using Xunit;
-    using NSubstitute;
-    using Manga.Application;
-    using Manga.Infrastructure.Mappings;
-    using System;
+    using Manga.Application.UseCases.Register;
     using Manga.Application.Repositories;
+    using Moq;
 
     public class CustomerTests
     {
-        public IAccountReadOnlyRepository accountReadOnlyRepository;
-        public IAccountWriteOnlyRepository accountWriteOnlyRepository;
-        public ICustomerReadOnlyRepository customerReadOnlyRepository;
-        public ICustomerWriteOnlyRepository customerWriteOnlyRepository;
-
-        public IOutputConverter converter;
-
-        public CustomerTests()
-        {
-            accountReadOnlyRepository = Substitute.For<IAccountReadOnlyRepository>();
-            accountWriteOnlyRepository = Substitute.For<IAccountWriteOnlyRepository>();
-            customerReadOnlyRepository = Substitute.For<ICustomerReadOnlyRepository>();
-            customerWriteOnlyRepository = Substitute.For<ICustomerWriteOnlyRepository>();
-
-            converter = new OutputConverter();
-        }
-
         [Theory]
-        [InlineData("08724050601", "Ivan Paulovich", 300)]
-        [InlineData("08724050601", "Ivan Paulovich Pinheiro Gomes", 100)]
-        [InlineData("444", "Ivan Paulovich", 500)]
-        [InlineData("08724050", "Ivan Paulovich", 300)]
-        public async void Register_Valid_User_Account(string personnummer, string name, double amount)
+        [InlineData(300)]
+        [InlineData(100)]
+        [InlineData(500)]
+        [InlineData(3300)]
+        public async void Register_Valid_User_Account(double amount)
         {
-            var output = Substitute.For<CustomPresenter<Application.UseCases.Register.RegisterOutput>>();
+            string personnummer = "8608178888";
+            string name = "Ivan Paulovich";
 
-            var registerUseCase = new Application.UseCases.Register.RegisterInteractor(
-                customerWriteOnlyRepository,
-                accountWriteOnlyRepository,
-                output,
-                converter
+            var mockCustomerWriteOnlyRepository = new Mock<ICustomerWriteOnlyRepository>();
+            var mockAccountWriteOnlyRepository = new Mock<IAccountWriteOnlyRepository>();
+
+            var sut = new RegisterUseCase(
+                mockCustomerWriteOnlyRepository.Object,
+                mockAccountWriteOnlyRepository.Object
             );
 
-            var request = new Application.UseCases.Register.RegisterInput(
+            var output = await sut.Execute(
                 personnummer,
                 name,
-                amount
-            );
+                amount);
 
-            await registerUseCase.Process(request);
-
-            Assert.Equal(request.PIN, output.Output.Customer.Personnummer);
-            Assert.Equal(request.Name, output.Output.Customer.Name);
-            Assert.True(output.Output.Customer.CustomerId != Guid.Empty);
-            Assert.True(output.Output.Account.AccountId != Guid.Empty);
+            Assert.Equal(amount, output.Account.CurrentBalance);
         }
     }
 }

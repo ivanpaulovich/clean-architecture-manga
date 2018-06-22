@@ -1,7 +1,6 @@
 ﻿namespace Manga.Domain
 {
-    public interface IAggregateRoot : IEntity
+    internal interface IAggregateRoot : IEntity
     {
-        int Version { get; }
     }
 }
