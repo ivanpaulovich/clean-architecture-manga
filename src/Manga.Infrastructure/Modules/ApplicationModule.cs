@@ -3,7 +3,7 @@
     using Autofac;
     using Manga.Application;
 
-    public class ApplicationModule : Autofac.Module
+    public class ApplicationModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
