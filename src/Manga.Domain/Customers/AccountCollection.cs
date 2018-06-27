@@ -4,14 +4,24 @@
     using System;
     using System.Collections.ObjectModel;
 
-    public sealed class AccountCollection : Collection<Guid>
+    public sealed class AccountCollection
     {
-        public void Add(IEnumerable<Guid> accounts)
+        private readonly IList<Guid> _accountIds;
+
+        public AccountCollection()
         {
-            foreach (var account in accounts)
-            {
-                Items.Add(account);
-            }
+            _accountIds = new List<Guid>();
+        }
+
+        public IReadOnlyCollection<Guid> GetAccountIds()
+        {
+            IReadOnlyCollection<Guid> accountIds = new ReadOnlyCollection<Guid>(_accountIds);
+            return accountIds;
+        }
+
+        public void Add(Guid accountId)
+        {
+            _accountIds.Add(accountId);
         }
     }
 }

@@ -9,12 +9,7 @@
             if (string.IsNullOrWhiteSpace(text))
                 throw new NameShouldNotBeEmptyException("The 'Name' field is required");
 
-            this._text = text;
-        }
-
-        public override string ToString()
-        {
-            return _text.ToString();
+            _text = text;
         }
 
         public static implicit operator Name(string text)
@@ -45,11 +40,6 @@
             }
 
             return ((Name)obj)._text == _text;
-        }
-
-        public override int GetHashCode()
-        {
-            return _text.GetHashCode();
         }
     }
 }

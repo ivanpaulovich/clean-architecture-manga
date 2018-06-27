@@ -45,7 +45,7 @@ namespace Manga.UseCaseTests
             var transactions = new TransactionCollection();
             transactions.Add(new Credit(Guid.Empty, 4000));
 
-            Account account = new Account(Guid.Parse(accountId), Guid.Empty, transactions);
+            Account account = Account.Load(Guid.Parse(accountId), Guid.Empty, transactions);
 
             mockAccountReadOnlyRepository.SetupSequence(e => e.Get(It.IsAny<Guid>()))
                 .ReturnsAsync(account);

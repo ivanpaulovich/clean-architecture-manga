@@ -13,7 +13,7 @@
         {
             List<TransactionOutput> transactionOutputs = new List<TransactionOutput>();
 
-            foreach (ITransaction transaction in account.Transactions)
+            foreach (ITransaction transaction in account.GetTransactions())
             {
                 transactionOutputs.Add(
                     new TransactionOutput(

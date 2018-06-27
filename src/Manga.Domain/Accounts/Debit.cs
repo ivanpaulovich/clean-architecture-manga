@@ -5,21 +5,25 @@
 
     public sealed class Debit : IEntity, ITransaction
     {
-        public Guid Id { get; }
-        public Guid AccountId { get; }
-        public Amount Amount { get; }
+        public Guid Id { get; private set; }
+        public Guid AccountId { get; private set; }
+        public Amount Amount { get; private set; }
         public string Description
         {
             get { return "Debit"; }
         }
-        public DateTime TransactionDate { get; }
+        public DateTime TransactionDate { get; private set; }
 
-        public Debit(Guid id, Guid accountId, Amount amount, DateTime transactionDate)
+        private Debit() { }
+
+        public static Debit Load(Guid id, Guid accountId, Amount amount, DateTime transactionDate)
         {
-            Id = id;
-            AccountId = accountId;
-            Amount = amount;
-            TransactionDate = transactionDate;
+            Debit debit = new Debit();
+            debit.Id = id;
+            debit.AccountId = accountId;
+            debit.Amount = amount;
+            debit.TransactionDate = transactionDate;
+            return debit;
         }
 
         public Debit(Guid accountId, Amount amount)
