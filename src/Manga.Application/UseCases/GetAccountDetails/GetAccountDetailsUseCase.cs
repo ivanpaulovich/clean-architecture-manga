@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
     using Manga.Application.Repositories;
     using System;
+    using Manga.Domain.Accounts;
 
     public sealed class GetAccountDetailsUseCase : IGetAccountDetailsUseCase
     {
@@ -15,7 +16,7 @@
 
         public async Task<AccountOutput> Execute(Guid accountId)
         {
-            Domain.Accounts.Account account = await _accountReadOnlyRepository.Get(accountId);
+            Account account = await _accountReadOnlyRepository.Get(accountId);
 
             if (account == null)
                 throw new AccountNotFoundException($"The account {accountId} does not exists or is not processed yet.");

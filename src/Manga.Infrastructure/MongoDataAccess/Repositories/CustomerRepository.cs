@@ -4,7 +4,7 @@
     using Manga.Domain.Customers;
     using MongoDB.Driver;
     using System;
-    using System.Linq;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public class CustomerRepository : ICustomerReadOnlyRepository, ICustomerWriteOnlyRepository
@@ -18,19 +18,20 @@
 
         public async Task<Customer> Get(Guid customerId)
         {
-            var customer = await _context.Customers
+            Entities.Customer customer = await _context.Customers
                 .Find(e => e.Id == customerId)
                 .SingleOrDefaultAsync();
 
-            var accounts = await _context.Accounts
+            List<Guid> accounts = await _context.Accounts
                 .Find(e => e.CustomerId == customerId)
                 .Project(p => p.Id)
                 .ToListAsync();
 
             AccountCollection accountCollection = new AccountCollection();
-            accountCollection.Add(accounts.AsEnumerable());
+            foreach (var accountId in accounts)
+                accountCollection.Add(accountId);
 
-            return new Customer(customer.Id, customer.Name, customer.SSN, accountCollection);
+            return Customer.Load(customer.Id, customer.Name, customer.SSN, accountCollection);
         }
 
         public async Task Add(Customer customer)

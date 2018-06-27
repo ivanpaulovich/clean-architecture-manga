@@ -1,4 +1,4 @@
-namespace Manga.UnitTests
+namespace Manga.Domain.Tests
 {
     using Manga.Domain.ValueObjects;
     using Xunit;

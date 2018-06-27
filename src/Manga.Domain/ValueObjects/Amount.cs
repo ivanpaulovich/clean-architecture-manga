@@ -21,11 +21,6 @@ namespace Manga.Domain.ValueObjects
             return value._value;
         }
 
-        public static Amount operator -(Amount value)
-        {
-            return new Amount(Math.Abs(value._value) * -1);
-        }
-
         public static implicit operator Amount(double value)
         {
             return new Amount(value);
@@ -79,11 +74,6 @@ namespace Manga.Domain.ValueObjects
             }
 
             return ((Amount)obj)._value == _value;
-        }
-
-        public override int GetHashCode()
-        {
-            return _value.GetHashCode();
         }
     }
 }

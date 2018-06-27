@@ -26,7 +26,7 @@
             CurrentBalance = account.GetCurrentBalance();
 
             List<TransactionOutput> transactionResults = new List<TransactionOutput>();
-            foreach (ITransaction transaction in account.Transactions)
+            foreach (ITransaction transaction in account.GetTransactions())
             {
                 TransactionOutput transactionOutput = new TransactionOutput(
                     transaction.Description, transaction.Amount, transaction.TransactionDate);

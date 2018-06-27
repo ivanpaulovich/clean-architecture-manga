@@ -1,4 +1,4 @@
-namespace Manga.UnitTests
+namespace Manga.DomainTests
 {
     using Xunit;
     using Manga.Domain.ValueObjects;
@@ -22,7 +22,7 @@ namespace Manga.UnitTests
 
             //
             // Assert
-            Credit credit = (Credit)sut.Transactions[0];
+            Credit credit = (Credit)sut.GetLastTransaction();
 
             Assert.Equal(customerId, sut.CustomerId);
             Assert.Equal(100, credit.Amount);
@@ -90,6 +90,46 @@ namespace Manga.UnitTests
             // Act and Assert
             Assert.Throws<InsuficientFundsException>(
                 () => sut.Withdraw(5000));
+        }
+
+        [Fact]
+        public void Account_With_Three_Transactions_Should_Be_Consistent()
+        {
+            //
+            // Arrange
+            Account sut = new Account(Guid.NewGuid());
+            sut.Deposit(200);
+            sut.Withdraw(100);
+            sut.Deposit(50);
+
+            //
+            // Act and Assert
+
+            var transactions = sut.GetTransactions();
+
+            Assert.Equal(3, transactions.Count); 
+        }
+
+        [Fact]
+        public void Account_Should_Be_Loaded()
+        {
+            //
+            // Arrange
+            TransactionCollection transactions = new TransactionCollection();
+            transactions.Add(new Debit(Guid.Empty, 100));
+
+            //
+            // Act
+            Account account = Account.Load(
+                Guid.Empty,
+                Guid.Empty,
+                transactions);
+
+            //
+            // Assert
+            Assert.Single(account.GetTransactions());
+            Assert.Equal(Guid.Empty, account.Id);
+            Assert.Equal(Guid.Empty, account.CustomerId);
         }
     }
 }

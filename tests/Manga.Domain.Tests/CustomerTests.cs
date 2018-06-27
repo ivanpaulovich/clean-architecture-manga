@@ -1,10 +1,8 @@
-namespace Manga.UnitTests
+namespace Manga.Domain.Tests
 {
     using Xunit;
     using Manga.Domain.Customers;
-    using NSubstitute;
     using Manga.Domain.Accounts;
-    using Manga.Domain.ValueObjects;
     using System;
 
     public class CustomerTests
@@ -39,7 +37,7 @@ namespace Manga.UnitTests
 
             Guid customerId = Guid.NewGuid();
 
-            Customer customer = new Customer(
+            Customer customer = Customer.Load(
                 customerId,
                 "Sammy Fredriksson",
                 "741214-3054",
@@ -48,7 +46,6 @@ namespace Manga.UnitTests
             Assert.Equal(customerId, customer.Id);
             Assert.Equal("Sammy Fredriksson", customer.Name);
             Assert.Equal("741214-3054", customer.SSN);
-            Assert.Equal(accounts, customer.Accounts);
         }
     }
 }

@@ -66,7 +66,7 @@
 
             foreach (Entities.Credit transactionData in credits)
             {
-                Credit transaction = new Credit(
+                Credit transaction = Credit.Load(
                     transactionData.Id,
                     transactionData.AccountId,
                     transactionData.Amount,
@@ -77,7 +77,7 @@
 
             foreach (Entities.Debit transactionData in debits)
             {
-                Debit transaction = new Debit(
+                Debit transaction = Debit.Load(
                     transactionData.Id,
                     transactionData.AccountId,
                     transactionData.Amount,
@@ -91,7 +91,7 @@
             TransactionCollection transactionCollection = new TransactionCollection();
             transactionCollection.Add(orderedTransactions);
 
-            Account result = new Account(
+            Account result = Account.Load(
                 account.Id,
                 account.CustomerId,
                 transactionCollection);

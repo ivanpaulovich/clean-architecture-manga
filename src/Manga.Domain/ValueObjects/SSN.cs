@@ -4,7 +4,7 @@
 
     public sealed class SSN
     {
-        public string _text { get; private set; }
+        private string _text;
         const string RegExForValidation = @"^\d{6,8}[-|(\s)]{0,1}\d{4}$";
 
         public SSN(string text)
@@ -18,12 +18,7 @@
             if (!match.Success)
                 throw new InvalidSSNException("Invalid SSN format. Use YYMMDDNNNN.");
 
-            this._text = text;
-        }
-
-        public override string ToString()
-        {
-            return _text.ToString();
+            _text = text;
         }
 
         public static implicit operator SSN(string text)
@@ -34,31 +29,6 @@
         public static implicit operator string(SSN ssn)
         {
             return ssn._text;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj is string)
-            {
-                return obj.ToString() == _text;
-            }
-
-            return ((SSN)obj)._text == _text;
-        }
-
-        public override int GetHashCode()
-        {
-            return _text.GetHashCode();
         }
     }
 }

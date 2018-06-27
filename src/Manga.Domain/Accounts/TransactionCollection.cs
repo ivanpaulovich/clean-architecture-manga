@@ -4,19 +4,37 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
-    public sealed class TransactionCollection : Collection<ITransaction>
+    public sealed class TransactionCollection
     {
+        private readonly IList<ITransaction> _transactions;
+
+        public TransactionCollection()
+        {
+            _transactions = new List<ITransaction>();
+        }
+
+        public IReadOnlyCollection<ITransaction> GetTransactions()
+        {
+            IReadOnlyCollection<ITransaction> transactions = new ReadOnlyCollection<ITransaction>(_transactions);
+            return transactions;
+        }
+
         public ITransaction GetLastTransaction()
         {
-            ITransaction transaction = Items[Items.Count - 1];
+            ITransaction transaction = _transactions[_transactions.Count - 1];
             return transaction;
+        }
+
+        public void Add(ITransaction transaction)
+        {
+            _transactions.Add(transaction);
         }
 
         public void Add(IEnumerable<ITransaction> transactions)
         {
             foreach (var transaction in transactions)
             {
-                Items.Add(transaction);
+                Add(transaction);
             }
         }
 
@@ -24,7 +42,7 @@
         {
             Amount totalAmount = 0;
 
-            foreach (var item in Items)
+            foreach (ITransaction item in _transactions)
             {
                 if (item is Debit)
                     totalAmount = totalAmount - item.Amount;
