@@ -6,45 +6,45 @@
 
     public class Context
     {
-        private readonly MongoClient mongoClient;
-        private readonly IMongoDatabase database;
+        private readonly MongoClient _mongoClient;
+        private readonly IMongoDatabase _database;
 
         public Context(string connectionString, string databaseName)
         {
-            this.mongoClient = new MongoClient(connectionString);
-            this.database = mongoClient.GetDatabase(databaseName);
+            _mongoClient = new MongoClient(connectionString);
+            _database = _mongoClient.GetDatabase(databaseName);
             Map();
         }
 
-        public IMongoCollection<Customer> Customers
+        internal IMongoCollection<Customer> Customers
         {
             get
             {
-                return database.GetCollection<Customer>("Customers");
+                return _database.GetCollection<Customer>("Customers");
             }
         }
 
-        public IMongoCollection<Account> Accounts
+        internal IMongoCollection<Account> Accounts
         {
             get
             {
-                return database.GetCollection<Account>("Accounts");
+                return _database.GetCollection<Account>("Accounts");
             }
         }
 
-        public IMongoCollection<Credit> Credits
+        internal IMongoCollection<Credit> Credits
         {
             get
             {
-                return database.GetCollection<Credit>("Credits");
+                return _database.GetCollection<Credit>("Credits");
             }
         }
 
-        public IMongoCollection<Debit> Debits
+        internal IMongoCollection<Debit> Debits
         {
             get
             {
-                return database.GetCollection<Debit>("Debits");
+                return _database.GetCollection<Debit>("Debits");
             }
         }
 

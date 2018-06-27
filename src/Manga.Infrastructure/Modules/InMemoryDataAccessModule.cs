@@ -1,25 +1,21 @@
 ﻿namespace Manga.Infrastructure.Modules
 {
     using Autofac;
-    using Manga.Infrastructure.MongoDataAccess;
+    using Manga.Infrastructure.InMemoryDataAccess;
 
-    public class InfrastructureModule : Autofac.Module
+    public class InMemoryDataAccessModule : Module
     {
-        public string ConnectionString { get; set; }
-        public string DatabaseName { get; set; }
-
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<Context>()
                 .As<Context>()
-                .WithParameter("connectionString", ConnectionString)
-                .WithParameter("databaseName", DatabaseName)
                 .SingleInstance();
 
             //
-            // Register all Types in Manga.Infrastructure
+            // Register all Types in InMemoryDataAccess namespace
             //
             builder.RegisterAssemblyTypes(typeof(InfrastructureException).Assembly)
+                .Where(type => type.Namespace.Contains("InMemoryDataAccess"))
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
         }

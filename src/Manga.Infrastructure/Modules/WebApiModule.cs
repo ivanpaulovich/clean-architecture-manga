@@ -3,7 +3,7 @@
     using Autofac;
     using System;
 
-    public class WebApiModule : Autofac.Module
+    public class WebApiModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
