@@ -9,7 +9,9 @@ before_build:
  
 build_script:
   - ps: .\build.ps1
-  - OpenCover.Console.exe -register:user -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test --logger:trx;LogFileName=results.trx /p:DebugType=full test\Manga.Domain.Tests\Manga.Domain.Tests.csproj" /p:DebugType=full test\Manga.UseCases.Tests\Manga.UseCases.Tests.csproj" /p:DebugType=full test\Manga.WebApi.Tests\Manga.WebApi.Tests.csproj" -filter:"+[Manga.*]* -[*.Tests*]*" -output:".\my_app_coverage.xml" -oldstyle
+  - OpenCover.Console.exe -register:user -target:"C:/Program Files/dotnet/dotnet.exe" -mergeoutput -targetargs:"test --logger:trx;LogFileName=results.trx /p:DebugType=full test\Manga.Domain.Tests\Manga.Domain.Tests.csproj" -filter:"+[Manga.*]* -[*.Tests*]*" -output:".\my_app_coverage.xml" -oldstyle
+  - OpenCover.Console.exe -register:user -target:"C:/Program Files/dotnet/dotnet.exe" -mergeoutput -targetargs:"test --logger:trx;LogFileName=results.trx /p:DebugType=full test\Manga.UseCases.Tests\Manga.UseCases.Tests.csproj" -filter:"+[Manga.*]* -[*.Tests*]*" -output:".\my_app_coverage.xml" -oldstyle
+  - OpenCover.Console.exe -register:user -target:"C:/Program Files/dotnet/dotnet.exe" -mergeoutput -targetargs:"test --logger:trx;LogFileName=results.trx /p:DebugType=full test\Manga.WebApi.Tests\Manga.WebApi.Tests.csproj" -filter:"+[Manga.*]* -[*.Tests*]*" -output:".\my_app_coverage.xml" -oldstyle
   - codecov -f .\my_app_coverage.xml -t $(codecov_token)
  
 test: off
