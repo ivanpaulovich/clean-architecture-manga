@@ -1,0 +1,29 @@
+init:
+  - git config --global core.autocrlf true
+ 
+image: Visual Studio 2017
+ 
+before_build:
+- choco install opencover.portable
+- choco install codecov
+ 
+build_script:
+  - ps: .\build.ps1
+  - OpenCover.Console.exe -register:user -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test --logger:trx;LogFileName=results.trx 
+    /p:DebugType=full test\Manga.Domain.Tests\Manga.Domain.Testscsproj" 
+    /p:DebugType=full test\Manga.UseCases.Tests\Manga.UseCases.Tests.csproj" 
+    /p:DebugType=full test\Manga.WebApi.Tests\Manga.WebApi.Tests.csproj" 
+    -filter:"+[Manga.*]* -[*.Tests*]*" 
+    -output:".\my_app_coverage.xml" -oldstyle
+  - codecov -f .\my_app_coverage.xml -t $(codecov_token)
+ 
+test: off
+ 
+branches:
+  only:
+    - dev
+    - master
+ 
+cache:
+- tools -> build.cake
+- packages -> build.cake

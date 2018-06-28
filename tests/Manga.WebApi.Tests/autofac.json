@@ -14,12 +14,5 @@
     {
       "type": "Manga.Infrastructure.Modules.InMemoryDataAccessModule"
     }
-    //{
-    //  "type": "Manga.Infrastructure.Modules.MongoDataAccessModule",
-    //  "properties": {
-    //    "ConnectionString": "mongodb://10.0.75.1:27017",
-    //    "DatabaseName": "Manga-Tests-V02"
-    //  }
-    //}
   ]
 }
