@@ -1,12 +1,12 @@
 pushd .\src\Manga.WebApi\
 dotnet build
 popd
-pushd .\tests\Manga.Domain.Tests\
+pushd .\test\Manga.Domain.Tests\
 dotnet test
 popd
-pushd .\tests\Manga.UseCases.Tests\
+pushd .\test\Manga.UseCases.Tests\
 dotnet test
 popd
-pushd .\tests\Manga.WebApi.Tests\
+pushd .\test\Manga.WebApi.Tests\
 dotnet test
 popd

@@ -12,11 +12,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manga.WebApi", "src\Manga.W
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2F0DE466-FC19-4764-9337-4890F21269BE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manga.Domain.Tests", "tests\Manga.Domain.Tests\Manga.Domain.Tests.csproj", "{0B8CF4EA-D250-488C-B8D5-1D678A881FF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manga.Domain.Tests", "test\Manga.Domain.Tests\Manga.Domain.Tests.csproj", "{0B8CF4EA-D250-488C-B8D5-1D678A881FF4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manga.UseCases.Tests", "tests\Manga.UseCases.Tests\Manga.UseCases.Tests.csproj", "{5DD83518-B0FC-4014-B2C0-D8A7EA132B8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manga.UseCases.Tests", "test\Manga.UseCases.Tests\Manga.UseCases.Tests.csproj", "{5DD83518-B0FC-4014-B2C0-D8A7EA132B8D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manga.WebApi.Tests", "tests\Manga.WebApi.Tests\Manga.WebApi.Tests.csproj", "{A98C96C8-EE41-43FD-933B-C86F75B639D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manga.WebApi.Tests", "test\Manga.WebApi.Tests\Manga.WebApi.Tests.csproj", "{A98C96C8-EE41-43FD-933B-C86F75B639D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
