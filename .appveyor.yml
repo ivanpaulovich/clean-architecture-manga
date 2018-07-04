@@ -1,11 +1,8 @@
 image: Visual Studio 2017
  
-test_script:
+build_script:
   - ps: cd build
   - ps: .\coverage.ps1
-  
-build:
-  project: Clean-Architecture-Manga.sln
  
 branches:
   only:
