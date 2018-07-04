@@ -1,0 +1,12 @@
+image: Visual Studio 2017
+ 
+test_script:
+  - ps: pushd build
+  - ps: nuget install packages.config
+  - ps: .\coverage.ps1
+  - ps: popd
+ 
+branches:
+  only:
+    - dev
+    - master
