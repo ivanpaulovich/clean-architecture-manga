@@ -1,3 +1,4 @@
+nuget install packages.config
 pushd '..\test\Manga.Domain.Tests\'
 ..\..\build\OpenCover.4.6.476-rc\tools\OpenCover.Console.exe -register:user -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test --logger:trx;LogFileName=results1.trx /p:DebugType=full Manga.Domain.Tests.csproj" -filter:"+[Manga.*]* -[*]Tests" -output:"..\..\build\my_app_coverage1.xml" -oldstyle
 popd
