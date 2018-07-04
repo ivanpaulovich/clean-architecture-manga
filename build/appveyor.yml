@@ -1,0 +1,12 @@
+image: Visual Studio 2017
+ 
+before_build:
+- cmd: nuget install packages.config
+
+test_script:
+  - ps: .\Scripts\coverage.ps1
+ 
+branches:
+  only:
+    - dev
+    - master
