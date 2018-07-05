@@ -3,7 +3,8 @@ image: Visual Studio 2017
 build_script:
   - ps: cd build
   - ps: .\coverage.ps1
- 
+  - ps: .\pack-push.ps1
+
 branches:
   only:
     - dev
