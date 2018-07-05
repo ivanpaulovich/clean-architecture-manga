@@ -9,4 +9,4 @@ pushd '..\test\Manga.WebApi.Tests\'
 ..\..\build\OpenCover.4.6.476-rc\tools\OpenCover.Console.exe -register:user -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test --logger:trx;LogFileName=results3.trx /p:DebugType=full Manga.WebApi.Tests.csproj" -filter:"+[Manga.*]* -[*]Tests" -output:"..\..\build\my_app_coverage3.xml" -oldstyle
 popd
 ReportGenerator.2.4.0.0\tools\ReportGenerator.exe "-reports:my_app_coverage*.xml;" -targetdir:coverage
-Codecov.1.0.5\tools\codecov.exe -f 'my_app_coverage1.xml' 'my_app_coverage2.xml' 'my_app_coverage3.xml' -t 450ca375-8b2d-46ab-b5e4-039b3f621521
+Codecov.1.0.5\tools\codecov.exe -f 'my_app_coverage1.xml' 'my_app_coverage2.xml' 'my_app_coverage3.xml' -t $codecov_token
