@@ -10,7 +10,7 @@ To run Manga from source, clone this repository to your machine, compile and tes
 
 ```sh
 git clone https://github.com/ivanpaulovich/clean-architecture-manga.git
-cd clean-architecture-manga
+cd clean-architecture-manga/build
 ./build.sh
 ```
 

@@ -1,9 +1,8 @@
-﻿namespace Manga.Infrastructure.Modules
+﻿namespace Manga.Infrastructure.MongoDataAccess
 {
     using Autofac;
-    using Manga.Infrastructure.MongoDataAccess;
 
-    public class MongoDataAccessModule : Module
+    public class Module : Autofac.Module
     {
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }

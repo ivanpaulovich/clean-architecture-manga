@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Manga.Domain.ValueObjects
+﻿namespace Manga.Domain.ValueObjects
 {
     public sealed class Amount
     {

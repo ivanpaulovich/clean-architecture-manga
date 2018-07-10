@@ -12,7 +12,10 @@
       }
     },
     {
-      "type": "Manga.Infrastructure.InMemoryDataAccess.Module"
+      "type": "Manga.Infrastructure.DapperDataAccess.Module",
+      "properties": {
+        "ConnectionString": "Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword;"
+      }
     }
   ]
 }

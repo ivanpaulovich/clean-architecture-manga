@@ -12,7 +12,10 @@
       }
     },
     {
-      "type": "Manga.Infrastructure.InMemoryDataAccess.Module"
+      "type": "Manga.Infrastructure.DapperDataAccess.Module",
+      "properties": {
+        "ConnectionString": "Server=(LocalDB)\\MSSQLLocalDB;Database=MangaDb;Integrated Security=true;"
+      }
     }
   ]
 }

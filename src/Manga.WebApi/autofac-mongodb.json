@@ -12,7 +12,11 @@
       }
     },
     {
-      "type": "Manga.Infrastructure.InMemoryDataAccess.Module"
+      "type": "Manga.Infrastructure.MongoDataAccess.Module",
+      "properties": {
+        "ConnectionString": "mongodb://10.0.75.1:27017",
+        "DatabaseName": "Manga-V01"
+      }
     }
   ]
 }
