@@ -82,7 +82,7 @@ namespace Manga.IntegrationTests
             JObject customer = JsonConvert.DeserializeObject<JObject>(responseString);
 
             string customerId = customer["customerId"].Value<string>();
-            string accountId = ((Newtonsoft.Json.Linq.JContainer)customer["accounts"]).First["accountId"].Value<string>();
+            string accountId = ((JContainer)customer["accounts"]).First["accountId"].Value<string>();
 
             return new Tuple<string, string>(customerId, accountId);
         }

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Paulovich.Manga</id>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <authors>Ivan Paulovich</authors>
     <owners>Ivan Paulovich</owners>
     <projectUrl>https://github.com/ivanpaulovich/manga-clean-architecture</projectUrl>

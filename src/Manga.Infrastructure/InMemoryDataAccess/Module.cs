@@ -1,9 +1,8 @@
-﻿namespace Manga.Infrastructure.Modules
+﻿namespace Manga.Infrastructure.InMemoryDataAccess
 {
     using Autofac;
-    using Manga.Infrastructure.InMemoryDataAccess;
 
-    public class InMemoryDataAccessModule : Module
+    public class Module : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
         {

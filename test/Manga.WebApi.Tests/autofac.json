@@ -9,10 +9,10 @@
     {
       "type": "Manga.Infrastructure.Modules.ApplicationModule",
       "properties": {
-      }
+      } //aa
     },
     {
-      "type": "Manga.Infrastructure.Modules.InMemoryDataAccessModule"
+      "type": "Manga.Infrastructure.InMemoryDataAccess.Module"
     }
   ]
 }
