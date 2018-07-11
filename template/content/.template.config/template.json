@@ -14,7 +14,7 @@
     "language": "C#",
     "type": "project"
   },
-  "sourceName": "MyProject",
+  "sourceName": "Manga",
   "preferNameDirectory": true,
   "symbols": {    
     "use-cases": {
@@ -70,8 +70,12 @@
     "data-access": {
       "type": "parameter",
       "datatype": "choice",
-      "defaultValue": "mongo",
+      "defaultValue": "inmemory",
       "choices": [
+		{
+          "choice": "inmemory",
+          "description": "InMemory"
+        },
         {
           "choice": "mongo",
           "description": "MongoDB"
@@ -156,6 +160,10 @@
       "type": "computed",
       "value": "(data-access == \"dapper\")"
     },
+    "InMemory": {
+      "type": "computed",
+      "value": "(data-access == \"inmemory\")"
+    },
     "CloseAccount": {
       "type": "computed",
       "value": "(Full)"
@@ -188,52 +196,53 @@
         {
           "condition": "(Empty)",
           "exclude": [
-            "MyProject.WebApi/UseCases/Register/**/*.cs",
-            "MyProject.WebApi/UseCases/Deposit/**/*.cs",
-            "MyProject.WebApi/UseCases/Withdraw/**/*.cs",
-            "MyProject.WebApi/UseCases/GetAccountDetails/**/*.cs",
-            "MyProject.WebApi/UseCases/GetCustomerDetails/**/*.cs",
-            "MyProject.WebApi/UseCases/CloseAccount/**/*.cs",
-            "MyProject.WebApi/Model/**/*.cs",
-            "MyProject.Application/UseCases/Register/**/*.cs",
-            "MyProject.Application/UseCases/Deposit/**/*.cs",
-            "MyProject.Application/UseCases/Withdraw/**/*.cs",
-            "MyProject.Application/UseCases/GetAccountDetails/**/*.cs",
-            "MyProject.Application/UseCases/GetCustomerDetails/**/*.cs",
-            "MyProject.Application/UseCases/CloseAccount/**/*.cs",
-            "MyProject.Application/Outputs/**/*.cs",
-            "MyProject.Application/DataAccess/**/*.cs",
-            "MyProject.Domain/Accounts/**/*.cs",
-            "MyProject.Domain/Customers/**/*.cs",
-            "MyProject.Domain/ValueObjects/**/*.cs",
-            "MyProject.Infrastructure/Mappings/**/*.cs",
-            "MyProject.Infrastructure/Modules/**/*.cs"
+            "Manga.WebApi/UseCases/Register/**/*.cs",
+            "Manga.WebApi/UseCases/Deposit/**/*.cs",
+            "Manga.WebApi/UseCases/Withdraw/**/*.cs",
+            "Manga.WebApi/UseCases/GetAccountDetails/**/*.cs",
+            "Manga.WebApi/UseCases/GetCustomerDetails/**/*.cs",
+            "Manga.WebApi/UseCases/CloseAccount/**/*.cs",
+            "Manga.Application/UseCases/Register/**/*.cs",
+            "Manga.Application/UseCases/Deposit/**/*.cs",
+            "Manga.Application/UseCases/Withdraw/**/*.cs",
+            "Manga.Application/UseCases/GetAccountDetails/**/*.cs",
+            "Manga.Application/UseCases/GetCustomerDetails/**/*.cs",
+            "Manga.Application/UseCases/CloseAccount/**/*.cs",
+            "Manga.Application/Repositories/**/*.cs",
+            "Manga.Domain/Accounts/**/*.cs",
+            "Manga.Domain/Customers/**/*.cs",
+            "Manga.Domain/ValueObjects/**/*.cs",
+            "Manga.Infrastructure/DapperDataAccess/**/*.cs",
+            "Manga.Infrastructure/EntityFrameworkDataAccess/**/*.cs",
+            "Manga.Infrastructure/InMemoryDataAccess/**/*.cs",
+            "Manga.Infrastructure/MongoDataAccess/**/*.cs",
+            "Manga.Infrastructure/Modules/**/*.cs"
 			]
         },
         {
           "condition": "(ReadOnly)",
           "exclude": [
-            "MyProject.WebApi/UseCases/Register/**/*.cs",
-            "MyProject.WebApi/UseCases/Deposit/**/*.cs",
-            "MyProject.WebApi/UseCases/Withdraw/**/*.cs",
-            "MyProject.WebApi/UseCases/CloseAccount/**/*.cs",
-            "MyProject.Application/UseCases/Register/**/*.cs",
-            "MyProject.Application/UseCases/Deposit/**/*.cs",
-            "MyProject.Application/UseCases/Withdraw/**/*.cs",
-            "MyProject.Application/UseCases/CloseAccount/**/*.cs"
+            "Manga.WebApi/UseCases/Register/**/*.cs",
+            "Manga.WebApi/UseCases/Deposit/**/*.cs",
+            "Manga.WebApi/UseCases/Withdraw/**/*.cs",
+            "Manga.WebApi/UseCases/CloseAccount/**/*.cs",
+            "Manga.Application/UseCases/Register/**/*.cs",
+            "Manga.Application/UseCases/Deposit/**/*.cs",
+            "Manga.Application/UseCases/Withdraw/**/*.cs",
+            "Manga.Application/UseCases/CloseAccount/**/*.cs"
           ]
         },
         {
           "condition": "(Basic)",
           "exclude": [
-            "MyProject.WebApi/UseCases/Deposit/**/*.cs",
-            "MyProject.WebApi/UseCases/Withdraw/**/*.cs",
-            "MyProject.WebApi/UseCases/GetAccountDetails/**/*.cs",
-            "MyProject.WebApi/UseCases/CloseAccount/**/*.cs",
-            "MyProject.Application/UseCases/Deposit/**/*.cs",
-            "MyProject.Application/UseCases/Withdraw/**/*.cs",
-            "MyProject.Application/UseCases/GetAccountDetails/**/*.cs",
-            "MyProject.Application/UseCases/CloseAccount/**/*.cs"
+            "Manga.WebApi/UseCases/Deposit/**/*.cs",
+            "Manga.WebApi/UseCases/Withdraw/**/*.cs",
+            "Manga.WebApi/UseCases/GetAccountDetails/**/*.cs",
+            "Manga.WebApi/UseCases/CloseAccount/**/*.cs",
+            "Manga.Application/UseCases/Deposit/**/*.cs",
+            "Manga.Application/UseCases/Withdraw/**/*.cs",
+            "Manga.Application/UseCases/GetAccountDetails/**/*.cs",
+            "Manga.Application/UseCases/CloseAccount/**/*.cs"
           ]
         },
         {
@@ -249,27 +258,39 @@
         {
           "condition": "(!Mongo)",
           "exclude": [
-            "MyProject.Infrastructure/MongoDataAccess/**/*.cs"
+            "Manga.Infrastructure/MongoDataAccess/**/*.cs",
+			"Manga.Infrastructure/MongoDataAccess/**/*.sh",
+			"Manga.WebApi/autofac.mongodb.json"
           ]
         },
         {
           "condition": "(!Dapper)",
           "exclude": [
-            "MyProject.Infrastructure/DapperDataAccess/**/*.cs",
-			"MyProject.Infrastructure/DapperDataAccess/**/*.sql"
+            "Manga.Infrastructure/DapperDataAccess/**/*.cs",
+			"Manga.Infrastructure/DapperDataAccess/**/*.sql",
+			"Manga.WebApi/autofac.dapper.json"
           ]
         },
         {
           "condition": "(!EntityFramework)",
           "exclude": [
-            "MyProject.Infrastructure/EntityFrameworkDataAccess/**/*.cs",
-			"MyProject.Infrastructure/EntityFrameworkDataAccess/**/*.sql"
+            "Manga.Infrastructure/EntityFrameworkDataAccess/**/*.cs",
+			"Manga.Infrastructure/EntityFrameworkDataAccess/**/*.sql",
+			"Manga.WebApi/autofac.entityframework.json"
+          ]
+        },
+        {
+          "condition": "(!InMemory)",
+          "exclude": [
+            "Manga.Infrastructure/InMemoryDataAccess/**/*.cs",
+			"Manga.Infrastructure/InMemoryDataAccess/**/*.sql",
+			"Manga.WebApi/autofac.json"
           ]
         },
         {
           "condition": "(UI-None)",
           "exclude": [
-            "MyProject.WebApi/**/*"
+            "Manga.WebApi/**/*"
           ]
         },
         {
@@ -283,16 +304,16 @@
   ],
   "primaryOutputs": [
     {
-      "path": "MyProject.Application/MyProject.Application.csproj"
+      "path": "Manga.Application/Manga.Application.csproj"
     },
     {
-      "path": "MyProject.Domain/MyProject.Domain.csproj"
+      "path": "Manga.Domain/Manga.Domain.csproj"
     },
     {
-      "path": "MyProject.Infrastructure/MyProject.Infrastructure.csproj"
+      "path": "Manga.Infrastructure/Manga.Infrastructure.csproj"
     },
     {
-      "path": "MyProject.WebApi/MyProject.WebApi.csproj",
+      "path": "Manga.WebApi/Manga.WebApi.csproj",
       "condition": "(user-interface == \"webapi\")"
     }
   ],

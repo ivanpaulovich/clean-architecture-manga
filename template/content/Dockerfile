@@ -6,9 +6,9 @@ EXPOSE 80
 FROM microsoft/aspnetcore-build:2.0-jessie AS builder
 WORKDIR /src
 COPY . .
-WORKDIR /src/MyProject.Infrastructure
+WORKDIR /src/Manga.Infrastructure
 RUN dotnet build -c Release
-WORKDIR /src/MyProject.WebApi
+WORKDIR /src/Manga.WebApi
 RUN dotnet build -c Release -o /app
 #
 #
@@ -19,4 +19,4 @@ RUN dotnet publish -c Release -o /app
 FROM base AS production
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "MyProject.WebApi.dll"]
+ENTRYPOINT ["dotnet", "Manga.WebApi.dll"]
