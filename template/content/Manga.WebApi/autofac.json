@@ -1,0 +1,18 @@
+﻿{
+  "defaultAssembly": "Manga.Infrastructure",
+  "modules": [
+    {
+      "type": "Manga.Infrastructure.Modules.WebApiModule",
+      "properties": {
+      }
+    },
+    {
+      "type": "Manga.Infrastructure.Modules.ApplicationModule",
+      "properties": {
+      }
+    },
+    {
+      "type": "Manga.Infrastructure.InMemoryDataAccess.Module"
+    }
+  ]
+}
