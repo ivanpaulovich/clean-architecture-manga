@@ -25,7 +25,7 @@ namespace Manga.IntegrationTests
                 .ConfigureAppConfiguration((builderContext, config) =>
                 {
                     IHostingEnvironment env = builderContext.HostingEnvironment;
-                    config.AddJsonFile("autofac.json")
+                    config.AddJsonFile("autofac.entityframework.json")
                     .AddEnvironmentVariables();
                 })
                 .ConfigureServices(services => services.AddAutofac());
