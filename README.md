@@ -4,7 +4,7 @@
 
 Manga is a Service Template to help you to build evolvable, adaptable and maintainable applications. It follows the Clean Architecture Principles (Robert C. Martin, 2017) and Domain-Driven Design. Tests guided us on the implementation so all the components are testable in isolation.
 
-## Compiling from source
+## :lemon: Compiling from source
 
 To run Manga from source, clone this repository to your machine, compile and test it:
 
@@ -14,7 +14,7 @@ cd clean-architecture-manga/build
 ./build.sh
 ```
 
-## The Clean Architecture
+## :clapper: The Clean Architecture
 
 Unfortunately remain very common that applications are built on top of frameworks and databases. I see that developers usually implement software that mimics the data tables instead of design software driven by the business domain. As time goes by, the software becomes highly coupled to these external details and what happens next is the application evolution been dictated by the vendors support.
 
@@ -28,7 +28,7 @@ I need to point out that **Business Rules and Use Cases** should be implemented 
 
 It is important to distinguish between the business and the details.
 
-## Business Rules and Use Cases
+## :scissors: Business Rules and Use Cases
 The business rules are the fine grained rules, they encapsulate entity fields and constraints. Also the business rules are the use cases that interacts with multiple entities and services. They together creates a process in the application, they should be sustained for a long time.
 
 If the difference remain not clear, this Uncle Bob quote will clarify:
@@ -37,7 +37,7 @@ If the difference remain not clear, this Uncle Bob quote will clarify:
 
 In the DDD age, we have patterns to describe the business rules with Entities, Value Objects, Aggregates, Domain Services and so on. They are a perfect match with Hexagonal Architecture.
 
-## External Details
+## :musical_keyboard: External Details
 In most scenarios we can defer the implementation of external details and still keep the development progress. If your answer is yes for any of the next questions, you are probably dealing with peripheral details:
 
 - Does the application needs an database to persist state?
@@ -60,7 +60,7 @@ What we should do?
 
 Moving on, there are design principles that you should understand before implementing the Hexagonal Architecture style.
 
-## Dependency Inversion Principle (DIP)
+## :lock: Dependency Inversion Principle (DIP)
 In the next example, the DIP was applied when decoupling our Use Cases from the Repositories. It is important to understand this priciple as it was applied to decouple other stuff in our source code. Let’s remember the DIP then navigate through one example:
 
 > High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details should depend on abstractions.
@@ -114,14 +114,14 @@ public sealed class DepositUseCase : IDepositUseCase
 
 That is the main idea behind Hexagonal Architecture, whenever our application requires an external service we use the Port (a simple interface) and we implement the Adapter behind the abstraction.
 
-## Separation of Concerns (SoC)
+## :bell: Separation of Concerns (SoC)
 Our application requires some external capabilities but the application is not concerned about their implementation details, only their abstractions are visible to the application layer. We apply SoC by creating boundaries around the Adapters and by allowing them to be developed and tested in isolation. It’s a good practice to have different packages for each Adapter implementation.
 
 We could have an specific Adapter for an SQL Database and an specific Adapter for Azure Storage both could be replaced with little effort. That is the idea behind the Hexagonal Architecture, keep the options open as long as possible and the ability to rollback if necessary.
 
 We can quote Uncle Bob’s Plugin Architecture, about the relationship between Visual Studio and Resharper. Not a single line of VS knows about Resharper, but Resharper is developed based on the Visual Studio abstractions. They are developed by different companies one in Seattle and another in Moscow and still running well together.
 
-## Hexagonal Architecture Style Characteristics
+## :key: Hexagonal Architecture Style Characteristics
 With this style we have:
 
 - An independent Business Domain to embody the fine grained business rules.
@@ -142,7 +142,7 @@ One way to explain the Hexagonal Architecture is by its shapes. Take a look at t
 
 The direction of the dependencies goes inwards the center, so the Domain Layer does not know the Application Layer but the Application Layer depends on the Domain, the same rule applies to the outer layers.
 
-## Layers
+## :fire: Layers
 Let’s describe the Dependency Diagram below:
 
 ![Layers](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/Untitled-Diagram-1.png)
@@ -157,7 +157,7 @@ We should pay attention that the Infrastructure Layer can have many concerns. I 
 
 It is important to highlight the dashed arrow from the UI Layer to the Infrastructure layer. That is the where **Dependency Injection** is implemented, the concretions are loaded closer to the Main function. And there is a single setting in a external file that decides all the dependencies to be loaded.
 
-## Application Layer
+## :star: Application Layer
 Let’s dig into the Application Business Rules implemented by the Use Cases in our Bounded Context. As said by Uncle Bob in his book Clean Architecture:
 
 > Just as the plans for a house or a library scream about the use cases of those buildings, so should the architecture of a software application scream about the use cases of the application.
@@ -172,7 +172,7 @@ At your first look of the solution folders, you can build an idea of the purpose
 
 The Application exposes an interface (Port) to the UI Layer and another interface (another Port) to the Infrastructure Layer. What have you seen until here is Enterprise + Application Business Rules enforced without frameworks dependencies or without database coupling. Every details has abstractions protecting the Business Rules to be coupled to tech stuff.
 
-## Adapters for the User Interface
+## :soccer: Adapters for the User Interface
 Now we advance to the next layer, at the User Interface Layer we translate the input in a way that the Use Cases can understand, it is good practice to do not reuse entities in this layer because it could create coupling, the front-end has specific frameworks, other ways of creating its data structures, different presentation for each field and validation rules.
 
 In our implementation we have the following feature folders for every use case:
@@ -239,12 +239,12 @@ public class Presenter
 }
 ```
 
-## Adapters for the Infrastructure
+## :tractor: Adapters for the Infrastructure
 Another external layer is the Infrastructure Layer that implements Data Access, Dependency Injection Framework (DI) and other frameworks specifics. In this example we have multiple data access implementations.
 
 ![Use Cases](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/Infrastructure.png)
 
-## How and When the DI is configured
+## :game_die: How and When the DI is configured
 We group the DI by Modules, so we have an module for the Entity Framework Data Access that requires a connection string like this:
 
 ```
@@ -298,10 +298,10 @@ There is others modules in the same code base and we can run using them by chang
 
 The autofac.json in set on the very beginning in the Program.cs. As it should be!
 
-## Conclusion
+## :orange_book: Conclusion
 With Hexagonal Architecture you design a decoupled software that allows major decisions to be deferred, all business rules will be isolated from peripheral concerns. And you have the option to try different adapters with less effort.
 
-## Running the latest Docker Build
+## :octopus: Running the latest Docker Build
 
 You can run the Docker container of this project with the following command:
 
@@ -313,7 +313,7 @@ $ docker run -p 8000:80 -d \
 ```
 Then navigate to http://localhost:8000/swagger and play with de Swagger.
 
-## Live Demo on Azure
+## :cloud: Live Demo on Azure
 
 [![Manga Live Demo on Azure](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/Swagger.png)](http://grape.westus2.cloudapp.azure.com:8800/swagger)
 
