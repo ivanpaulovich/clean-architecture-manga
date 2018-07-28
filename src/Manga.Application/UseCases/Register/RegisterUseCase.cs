@@ -4,6 +4,7 @@
     using Manga.Domain.Customers;
     using Manga.Application.Repositories;
     using Manga.Domain.Accounts;
+    using Manga.Domain.ValueObjects;
 
     public sealed class RegisterUseCase : IRegisterUseCase
     {
@@ -18,9 +19,9 @@
             _accountWriteOnlyRepository = accountWriteOnlyRepository;
         }
 
-        public async Task<RegisterOutput> Execute(string pin, string name, double initialAmount)
+        public async Task<RegisterOutput> Execute(SSN personnummer, Name name, Amount initialAmount)
         {
-            Customer customer = new Customer(pin, name);
+            Customer customer = new Customer(personnummer, name);
 
             Account account = new Account(customer.Id);
             account.Deposit(initialAmount);

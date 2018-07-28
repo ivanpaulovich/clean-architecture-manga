@@ -1,4 +1,4 @@
-﻿namespace Manga.Infrastructure.Modules
+﻿namespace Manga.Infrastructure
 {
     using Autofac;
     using Manga.Application;

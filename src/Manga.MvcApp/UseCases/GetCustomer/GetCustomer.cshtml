@@ -1,0 +1,39 @@
+﻿@model Manga.MvcApp.UseCases.GetCustomer.CustomerDetailsModel
+
+<form asp-controller="Customers" asp-action="Register">
+
+    <h2>Customer</h2>
+
+    <div class="form-group">
+
+        <dl class="dl-horizontal">
+            <dt>
+                <label asp-for="Personnummer" class="col-md-2 control-label"></label>
+            </dt>
+
+            <dd>
+                <label class="form-control">@Model.Personnummer</label>
+            </dd>
+
+            <dt>
+                <label asp-for="Name" class="col-md-2 control-label"></label>
+            </dt>
+
+            <dd>
+                <label class="form-control">@Model.Name</label>
+            </dd>
+
+        </dl>
+    </div>
+
+    @foreach (var account in Model.Accounts)
+    {
+        <h3>Account</h3>
+
+        <ul>
+            <li>
+                <a href="/Accounts/@account.AccountId">@account.CurrentBalance</a>
+            </li>
+        </ul>
+    }
+</form>
