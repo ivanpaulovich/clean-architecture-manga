@@ -1,19 +1,15 @@
-﻿namespace Manga.Infrastructure.Modules
+﻿namespace Manga.WebApi
 {
     using Autofac;
-    using System;
 
-    public class WebApiModule : Module
+    public class Module : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
         {
             //
             // Register all Types in Manga.WebApi
             //
-
-            Type startup = Type.GetType("Manga.WebApi.Startup, Manga.WebApi");
-
-            builder.RegisterAssemblyTypes(startup.Assembly)
+            builder.RegisterAssemblyTypes(typeof(Startup).Assembly)
                 .AsSelf()
                 .InstancePerLifetimeScope();
         }

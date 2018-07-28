@@ -2,14 +2,14 @@
   "defaultAssembly": "Manga.Infrastructure",
   "modules": [
     {
-      "type": "Manga.Infrastructure.Modules.WebApiModule",
+      "type": "Manga.WebApi.Module, Manga.WebApi",
       "properties": {
       }
     },
     {
-      "type": "Manga.Infrastructure.Modules.ApplicationModule",
+      "type": "Manga.Infrastructure.ApplicationModule",
       "properties": {
-      } //aa
+      }
     },
     {
       "type": "Manga.Infrastructure.InMemoryDataAccess.Module"
