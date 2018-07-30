@@ -77,7 +77,7 @@ On the left side we found in red an Layered Application where the DepositUseCase
 
 The following listing of DepositUseCase with DIP:
 
-```
+```csharp
 public sealed class DepositUseCase : IDepositUseCase
 {
     private readonly IAccountReadOnlyRepository _accountReadOnlyRepository;
@@ -186,7 +186,7 @@ In our implementation we have the following feature folders for every use case:
 
 We must highlight that the Controller knows the Deposit Use Case and it is not interested about the Output, instead the Controller delegates the responsibility of generating a Model to the Presenter instance.
 
-```
+```csharp
 [Route("api/[controller]")]
 public class AccountsController : Controller
 {
@@ -216,7 +216,7 @@ public class AccountsController : Controller
 
 An Presenter class is detailed bellow and it shows a conversion from the DepositOutput to two different ViewModels. One ViewModel for null Outputs and another ViewModel for successful deposits.
 
-```
+```csharp
 public class Presenter
 {
     public IActionResult ViewModel { get; private set; }
@@ -247,7 +247,7 @@ Another external layer is the Infrastructure Layer that implements Data Access, 
 ## :game_die: How and When the DI is configured
 We group the DI by Modules, so we have an module for the Entity Framework Data Access that requires a connection string like this:
 
-```
+```csharp
 public class Module : Autofac.Module
 {
     public string ConnectionString { get; set; }
@@ -275,7 +275,7 @@ public class Module : Autofac.Module
 
 There is others modules in the same code base and we can run using them by changing the autofac.entityframework.json, an convenient way to setup desired modules.
 
-```
+```javascript
 {
   "defaultAssembly": "Manga.Infrastructure",
   "modules": [
