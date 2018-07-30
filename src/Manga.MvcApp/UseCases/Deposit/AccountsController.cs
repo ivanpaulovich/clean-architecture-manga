@@ -2,8 +2,10 @@
 {
     using Manga.Application.UseCases.Deposit;
     using Microsoft.AspNetCore.Mvc;
+    using System;
     using System.Threading.Tasks;
 
+    [Route("[controller]")]
     public sealed class AccountsController : Controller
     {
         private readonly IDepositUseCase _depositUseCase;
@@ -17,16 +19,19 @@
             _presenter = presenter;
         }
 
-        public IActionResult Deposit()
+        [HttpGet("Deposit/{accountId}")]
+        public IActionResult Deposit(Guid accountId)
         {
+            ViewBag.AccountId = accountId;
+
             return View();
         }
 
         /// <summary>
-        /// Register a new Customer
+        /// Deposit to an Account
         /// </summary>
-        [HttpPost]
-        public async Task<IActionResult> Deposit(DepositRequest request)
+        [HttpPost("Deposit/{accountId}")]
+        public async Task<IActionResult> Deposit([FromRoute]Guid accountId, DepositRequest request)
         {
             if (!ModelState.IsValid)
                 return View();

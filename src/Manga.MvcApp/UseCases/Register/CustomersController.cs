@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
 
+    [Route("")]
     public sealed class AccountsController : Controller
     {
         private readonly IRegisterUseCase _registerUseCase;
@@ -17,7 +18,7 @@
             _presenter = presenter;
         }
 
-        [Route("")]
+        [HttpGet]
         public IActionResult Register()
         {
             return View();
@@ -27,7 +28,6 @@
         /// Register a new Customer
         /// </summary>
         [HttpPost]
-        [Route("")]
         public async Task<IActionResult> Register(RegisterRequest request)
         {
             if (!ModelState.IsValid)

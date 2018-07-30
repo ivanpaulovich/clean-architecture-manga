@@ -54,4 +54,13 @@
             </dd>
         </dl>
     }
+
+
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li><a asp-controller="Accounts" asp-action="Deposit" asp-route-accountId="@Model.AccountId">Deposit</a></li>
+            <li><a asp-controller="Accounts" asp-action="Withdraw" asp-route-accountId="@Model.AccountId">Withdraw</a></li>
+        </ul>
+    </div>
+
 </form>
