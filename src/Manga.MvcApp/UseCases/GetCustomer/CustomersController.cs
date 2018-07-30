@@ -19,7 +19,7 @@
             _presenter = presenter;
         }
 
-        [Route("{customerId}")]
+        [HttpGet("{customerId}")]
         public async Task<IActionResult> GetCustomer(Guid customerId)
         {
             CustomerOutput output = await _getCustomerDetailsUseCase.Execute(customerId);

@@ -20,7 +20,7 @@
             _presenter = presenter;
         }
 
-        [Route("{accountId}")]
+        [HttpGet("{accountId}")]
         public async Task<IActionResult> GetAccount(Guid accountId)
         {
             AccountOutput output = await _getAccountDetailsUseCase.Execute(accountId);

@@ -2,8 +2,10 @@
 {
     using Manga.Application.UseCases.Withdraw;
     using Microsoft.AspNetCore.Mvc;
+    using System;
     using System.Threading.Tasks;
 
+    [Route("[controller]")]
     public sealed class AccountsController : Controller
     {
         private readonly IWithdrawUseCase _withdrawUseCase;
@@ -17,16 +19,19 @@
             _presenter = presenter;
         }
 
-        public IActionResult Withdraw()
+        [HttpGet("Withdraw/{accountId}")]
+        public IActionResult Withdraw(Guid accountId)
         {
+            ViewBag.AccountId = accountId;
+
             return View();
         }
 
         /// <summary>
-        /// Register a new Customer
+        /// Withdraw from an Account
         /// </summary>
-        [HttpPost]
-        public async Task<IActionResult> Withdraw(WithdrawRequest request)
+        [HttpPost("Withdraw/{accountId}")]
+        public async Task<IActionResult> Withdraw([FromRoute]Guid accountId, WithdrawRequest request)
         {
             if (!ModelState.IsValid)
                 return View();
