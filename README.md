@@ -4,6 +4,15 @@
 
 Manga is a Service Template to help you to build evolvable, adaptable and maintainable applications. It follows the Clean Architecture Principles (Robert C. Martin, 2017) and Domain-Driven Design. Tests guided us on the implementation so all the components are testable in isolation.
 
+## :star: Generate your Microservice
+
+Simple run:
+
+```sh
+dotnet new -i Paulovich.Manga
+dotnet new manga
+```
+
 ## :lemon: Compiling from source
 
 To run Manga from source, clone this repository to your machine, compile and test it:
