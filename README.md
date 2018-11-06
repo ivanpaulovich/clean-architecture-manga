@@ -322,9 +322,6 @@ $ docker run -p 8000:80 -d \
 ```
 Then navigate to http://localhost:8000/swagger and play with de Swagger.
 
-## :cloud: Live Demo on Azure
+## :cloud: Questions and Issues
 
-[![Manga Live Demo on Azure](https://raw.githubusercontent.com/ivanpaulovich/manga/master/docs/Swagger.png)](http://grape.westus2.cloudapp.azure.com:8800/swagger)
-
-You can play with the latest build of [Manga](http://grape.westus2.cloudapp.azure.com:8800/swagger "Manga").
-> This source code and website should be used only for learning purposes and **all data will be erased weekly**.
+I am happy to clarify the decisions I made in this project through the [Issues tab](https://github.com/ivanpaulovich/clean-architecture-manga/issues) so everyone will take benefit of the discussion.
