@@ -1,7 +1,7 @@
 image: Visual Studio 2017
  
 build_script:
-  - ps: cd build
+  - ps: cd manga\build
   - ps: .\coverage.ps1
   - ps: .\pack-push.ps1
 
