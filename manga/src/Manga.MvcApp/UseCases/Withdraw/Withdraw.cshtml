@@ -1,0 +1,20 @@
+﻿@model Manga.MvcApp.UseCases.Deposit.DepositRequest
+
+<h2>Deposit</h2>
+
+<form asp-controller="Customers" asp-action="Deposit" method="POST">
+    <div class="form-group">
+        <label asp-for="Amount" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Amount" class="form-control" />
+            <span asp-validation-for="Amount" class="text-danger"></span>
+        </div>
+    </div>
+    <button type="submit">Withdraw</button>
+
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li><a asp-controller="Accounts" asp-action="GetAccount" asp-route-accountId="@ViewBag.AccountId">Account Details</a></li>
+        </ul>
+    </div>
+</form>

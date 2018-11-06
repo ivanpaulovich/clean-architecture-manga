@@ -1,0 +1,66 @@
+﻿@model Manga.MvcApp.UseCases.GetAccount.AccountDetailsModel
+
+<form asp-controller="Customers" asp-action="Register">
+
+    <h2>Account</h2>
+
+    <div class="form-group">
+        <dl class="dl-horizontal">
+            <dt>
+                <label asp-for="@Model.AccountId" class="col-md-2 control-label"></label>
+            </dt>
+
+            <dd>
+                <label class="form-control">@Model.AccountId</label>
+            </dd>
+
+            <dt>
+                <label asp-for="@Model.CurrentBalance" class="col-md-2 control-label"></label>
+            </dt>
+
+            <dd>
+                <label class="form-control">@Model.CurrentBalance</label>
+            </dd>
+        </dl>
+    </div>
+
+    @foreach (var transaction in Model.Transactions)
+    {
+        <h4>Transaction</h4>
+
+        <dl class="dl-horizontal">
+            <dt>
+                <label asp-for="@transaction.Amount" class="col-md-2 control-label"></label>
+            </dt>
+
+            <dd>
+                <label class="form-control">@transaction.Amount</label>
+            </dd>
+
+            <dt>
+                <label asp-for="@transaction.Description" class="col-md-2 control-label"></label>
+            </dt>
+
+            <dd>
+                <label class="form-control">@transaction.Description</label>
+            </dd>
+
+            <dt>
+                <label asp-for="@transaction.TransactionDate" class="col-md-2 control-label"></label>
+            </dt>
+
+            <dd>
+                <label class="form-control">@transaction.TransactionDate</label>
+            </dd>
+        </dl>
+    }
+
+
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li><a asp-controller="Accounts" asp-action="Deposit" asp-route-accountId="@Model.AccountId">Deposit</a></li>
+            <li><a asp-controller="Accounts" asp-action="Withdraw" asp-route-accountId="@Model.AccountId">Withdraw</a></li>
+        </ul>
+    </div>
+
+</form>

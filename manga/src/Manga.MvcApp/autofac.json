@@ -1,0 +1,18 @@
+﻿{
+  "defaultAssembly": "Manga.Infrastructure",
+  "modules": [
+    {
+      "type": "Manga.MvcApp.Module, Manga.MvcApp",
+      "properties": {
+      }
+    },
+    {
+      "type": "Manga.Infrastructure.ApplicationModule",
+      "properties": {
+      }
+    },
+    {
+      "type": "Manga.Infrastructure.InMemoryDataAccess.Module"
+    }
+  ]
+}
