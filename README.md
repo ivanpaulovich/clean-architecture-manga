@@ -89,27 +89,27 @@ The following listing of DepositUseCase with DIP:
 ```csharp
 public sealed class DepositUseCase : IDepositUseCase
 {
-    private readonly IAccountReadOnlyRepository _accountReadOnlyRepository;
-    private readonly IAccountWriteOnlyRepository _accountWriteOnlyRepository;
+    private readonly IAccountRepository _accountRepository;
+    private readonly IAccountRepository _accountRepository;
 
     public DepositUseCase(
-        IAccountReadOnlyRepository accountReadOnlyRepository,
-        IAccountWriteOnlyRepository accountWriteOnlyRepository)
+        IAccountRepository accountRepository,
+        IAccountRepository accountRepository)
     {
-        _accountReadOnlyRepository = accountReadOnlyRepository;
-        _accountWriteOnlyRepository = accountWriteOnlyRepository;
+        _accountRepository = accountRepository;
+        _accountRepository = accountRepository;
     }
 
     public async Task<DepositOutput> Execute(Guid accountId, Amount amount)
     {
-        Account account = await _accountReadOnlyRepository.Get(accountId);
+        Account account = await _accountRepository.Get(accountId);
         if (account == null)
             throw new AccountNotFoundException($"The account {accountId} does not exists or is already closed.");
 
         account.Deposit(amount);
         Credit credit = (Credit)account.GetLastTransaction();
 
-        await _accountWriteOnlyRepository.Update(
+        await _accountRepository.Update(
             account,
             credit);
 
@@ -325,3 +325,30 @@ Then navigate to http://localhost:8000/swagger and play with de Swagger.
 ## :cloud: Questions and Issues
 
 I am happy to clarify the decisions I made in this project through the [Issues tab](https://github.com/ivanpaulovich/clean-architecture-manga/issues) so everyone will take benefit of the discussion.
+
+
+## :floppy_disk: Setup SQL Server (Optional)
+
+### Setup SQL Server in Docker
+
+Run `scripts/sql-docker-up.sh` to setup a SQL Server in a Docker container with the following Connection String:
+
+```
+Server=localhost;User Id=sa;Password=<YourNewStrong!Passw0rd>;
+```
+
+#### Add Migration
+
+Run the EF Tool to add a migration to the `MrRobot.Infrastructure` project.
+
+```sh
+dotnet ef migrations add "InitialCreate" -o "EntityFrameworkDataAccess/Migrations" --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
+```
+
+#### Update the Database
+
+Generate tables and seed the database via Entity Framework Tool:
+
+```sh
+dotnet ef database update --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
+```
