@@ -24,16 +24,16 @@ namespace Manga.Domain.Accounts
             _credits.Add(credit);
         }
 
-        public Amount GetTotal()
+        public PositiveAmount GetTotal()
         {
-            Amount totalAmount = 0;
+            PositiveAmount total = new PositiveAmount(0);
 
             foreach (ICredit credit in _credits)
             {
-                totalAmount = credit.Add(totalAmount);
+                total = credit.Sum(total);
             }
 
-            return totalAmount;
+            return total;
         }
     }
 }

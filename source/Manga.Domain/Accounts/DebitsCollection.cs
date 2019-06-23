@@ -24,16 +24,16 @@ namespace Manga.Domain.Accounts
             _debits.Add(transaction);
         }
 
-        public Amount GetTotal()
+        public PositiveAmount GetTotal()
         {
-            Amount totalAmount = 0;
+            PositiveAmount total = new PositiveAmount(0);
 
             foreach (IDebit debit in _debits)
             {
-                totalAmount = debit.Add(totalAmount);
+                total = debit.Sum(total);
             }
 
-            return totalAmount;
+            return total;
         }
     }
 }

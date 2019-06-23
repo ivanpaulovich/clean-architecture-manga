@@ -2,27 +2,25 @@ namespace Manga.UnitTests.UseCasesTests
 {
     using Xunit;
     using Manga.Application.UseCases;
-    using Manga.Domain;
     using Manga.Infrastructure.InMemoryGateway;
     using Manga.Infrastructure.InMemoryDataAccess.Repositories;
     using Manga.Infrastructure.InMemoryDataAccess;
     using System.Linq;
-    using System;
-    using Manga.Domain.Accounts;
+    using Manga.Domain.ValueObjects;
+    using System.Threading.Tasks;
 
     public sealed class DepositTests
     {
         [Theory]
-        [InlineData("c725315a-1de6-4bf7-aecf-3af8f0083681", 100)]
-        public async void Deposit_Valid_Amount(string accountId, double amount)
+        [InlineData(100)]
+        [InlineData(200)]
+        [InlineData(0)]
+        [InlineData(-100)]
+        public async Task Deposit_ChangesBalance_WhenAccountExists(double amount)
         {
-            var entityFactory = new DefaultEntitiesFactory();
             var presenter = new Presenter();
             var context = new MangaContext();
-            var customerRepository = new CustomerRepository(context);
             var accountRepository = new AccountRepository(context);
-            
-            var account = new Account(Guid.Parse(accountId));
             
             var sut = new Deposit(
                 presenter,
@@ -30,11 +28,11 @@ namespace Manga.UnitTests.UseCasesTests
             );
 
             await sut.Execute(
-                Guid.Parse(accountId),
-                amount);
+                context.DefaultAccountId,
+                new PositiveAmount(amount));
 
             var output = presenter.Deposits.First();
-            Assert.Equal(100, output.UpdatedBalance);
+            Assert.Equal(amount, output.Transaction.Amount);
         }
     }
 }

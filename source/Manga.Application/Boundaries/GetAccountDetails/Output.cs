@@ -23,7 +23,7 @@ namespace Manga.Application.Boundaries.GetAccountDetails
         public Output(IAccount account)
         {
             AccountId = account.Id;
-            CurrentBalance = account.GetCurrentBalance();
+            CurrentBalance = account.GetCurrentBalance().ToDouble();
 
             List<Transaction> transactionResults = new List<Transaction>();
             foreach (ICredit credit in account.GetCredits())
@@ -32,7 +32,10 @@ namespace Manga.Application.Boundaries.GetAccountDetails
 
                 Transaction transactionOutput = new Transaction(
                     creditEntity.Description,
-                    creditEntity.Amount,
+                    creditEntity
+                        .Amount
+                        .ToAmount()
+                        .ToDouble(),
                     creditEntity.TransactionDate);
 
                 transactionResults.Add(transactionOutput);
@@ -44,7 +47,10 @@ namespace Manga.Application.Boundaries.GetAccountDetails
 
                 Transaction transactionOutput = new Transaction(
                     debitEntity.Description,
-                    debitEntity.Amount,
+                    debitEntity
+                        .Amount
+                        .ToAmount()
+                        .ToDouble(),
                     debitEntity.TransactionDate);
 
                 transactionResults.Add(transactionOutput);

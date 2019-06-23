@@ -1,4 +1,4 @@
-namespace Manga.DomainTests
+namespace Manga.UnitTests.EntitiesTests
 {
     using Xunit;
     using Manga.Domain.ValueObjects;
@@ -13,7 +13,7 @@ namespace Manga.DomainTests
             //
             // Arrange
             Guid customerId = Guid.NewGuid();
-            Amount amount = new Amount(100.0);
+            PositiveAmount amount = new PositiveAmount(100.0);
             Account sut = new Account(customerId);
 
             //
@@ -22,7 +22,7 @@ namespace Manga.DomainTests
 
             //
             // Assert
-            Assert.Equal(100, actual.Amount);
+            Assert.Equal(100, actual.Amount.ToAmount().ToDouble());
             Assert.Equal("Credit", actual.Description);
             Assert.True(actual.AccountId != Guid.Empty);
         }
@@ -33,15 +33,15 @@ namespace Manga.DomainTests
             //
             // Arrange
             Account sut = new Account(Guid.NewGuid());
-            sut.Deposit(1000.0);
+            sut.Deposit(new PositiveAmount(1000.0));
 
             //
             // Act
-            sut.Withdraw(100);
+            sut.Withdraw(new PositiveAmount(100));
 
             //
             // Assert
-            Assert.Equal(900, sut.GetCurrentBalance());
+            Assert.Equal(900, sut.GetCurrentBalance().ToDouble());
         }
 
         [Fact]
@@ -53,7 +53,7 @@ namespace Manga.DomainTests
 
             //
             // Act
-            bool actual = sut.CanBeClosed();
+            bool actual = sut.IsClosingAllowed();
 
             //
             // Assert
@@ -67,10 +67,10 @@ namespace Manga.DomainTests
             //
             // Arrange
             Account sut = new Account(Guid.NewGuid());
-            ICredit credit = sut.Deposit(200);
+            ICredit credit = sut.Deposit(new PositiveAmount(200));
 
             // Act
-            IDebit actual = sut.Withdraw(5000);
+            IDebit actual = sut.Withdraw(new PositiveAmount(5000));
 
             //
             // Act and Assert
@@ -83,9 +83,9 @@ namespace Manga.DomainTests
             //
             // Arrange
             Account sut = new Account(Guid.NewGuid());
-            sut.Deposit(200);
-            sut.Withdraw(100);
-            sut.Deposit(50);
+            sut.Deposit(new PositiveAmount(200));
+            sut.Withdraw(new PositiveAmount(100));
+            sut.Deposit(new PositiveAmount(50));
 
             Assert.Equal(2, sut.GetCredits().Count);
             Assert.Equal(1, sut.GetDebits().Count); 

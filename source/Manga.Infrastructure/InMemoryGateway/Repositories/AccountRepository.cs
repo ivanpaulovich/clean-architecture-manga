@@ -6,7 +6,7 @@
     using Manga.Application.Repositories;
     using Manga.Domain.Accounts;
 
-    public class AccountRepository : IAccountRepository
+    public sealed class AccountRepository : IAccountRepository
     {
         private readonly MangaContext _context;
 

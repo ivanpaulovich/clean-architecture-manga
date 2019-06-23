@@ -7,7 +7,7 @@ namespace Manga.Domain.Accounts
     {
         public Guid Id { get; protected set; }
         public Guid AccountId { get; protected set; }
-        public Amount Amount { get; protected set; }
+        public PositiveAmount Amount { get; protected set; }
         public string Description
         {
             get { return "Credit"; }
@@ -16,7 +16,7 @@ namespace Manga.Domain.Accounts
 
         private Credit() { }
 
-        public Credit(Guid accountId, Amount amount)
+        public Credit(Guid accountId, PositiveAmount amount)
         {
             Id = Guid.NewGuid();
             AccountId = accountId;
@@ -24,9 +24,9 @@ namespace Manga.Domain.Accounts
             TransactionDate = DateTime.UtcNow;
         }
 
-        public Amount Add(Amount addedAmount)
+        public PositiveAmount Sum(PositiveAmount amount)
         {
-            return Amount + addedAmount;
+            return Amount.Add(amount);
         }
     }
 }

@@ -1,4 +1,4 @@
-namespace Manga.Domain.Tests
+namespace Manga.UnitTests.EntitiesTests
 {
     using Xunit;
     using Manga.Domain.Customers;

@@ -2,6 +2,7 @@ namespace Manga.WebApi.UseCases.Withdraw
 {
     using System.Threading.Tasks;
     using Manga.Application.Boundaries.Withdraw;
+    using Manga.Domain.ValueObjects;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
@@ -24,7 +25,7 @@ namespace Manga.WebApi.UseCases.Withdraw
         [HttpPatch("Withdraw")]
         public async Task<IActionResult> Withdraw([FromBody] WithdrawRequest request)
         {
-            await _withdrawUseCase.Execute(request.AccountId, request.Amount);
+            await _withdrawUseCase.Execute(request.AccountId, new PositiveAmount(request.Amount));
             return _presenter.ViewModel;
         }
     }

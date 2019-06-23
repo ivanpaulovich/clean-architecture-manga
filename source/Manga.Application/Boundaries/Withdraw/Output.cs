@@ -14,10 +14,12 @@ namespace Manga.Application.Boundaries.Withdraw
 
             Transaction = new Transaction(
                 debitEntity.Description,
-                debitEntity.Amount,
+                debitEntity.Amount
+                    .ToAmount()
+                    .ToDouble(),
                 debitEntity.TransactionDate);
 
-            UpdatedBalance = updatedBalance;
+            UpdatedBalance = updatedBalance.ToDouble();
         }
     }
 }

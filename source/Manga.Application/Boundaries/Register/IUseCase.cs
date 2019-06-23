@@ -5,6 +5,6 @@ namespace Manga.Application.Boundaries.Register
 
     public interface IUseCase
     {
-        Task Execute(SSN personnummer, Name name, Amount initialAmount);
+        Task Execute(SSN personnummer, Name name, PositiveAmount initialAmount);
     }
 }

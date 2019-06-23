@@ -6,6 +6,6 @@ namespace Manga.Application.Boundaries.Withdraw
 
     public interface IUseCase
     {
-        Task Execute(Guid accountId, Amount amount);
+        Task Execute(Guid accountId, PositiveAmount amount);
     }
 }

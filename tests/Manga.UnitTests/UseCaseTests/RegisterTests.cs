@@ -7,6 +7,8 @@ namespace Manga.UnitTests.UseCasesTests
     using Manga.Infrastructure.InMemoryDataAccess.Repositories;
     using Manga.Infrastructure.InMemoryDataAccess;
     using System.Linq;
+    using Manga.Domain.ValueObjects;
+    using System.Threading.Tasks;
 
     public sealed class RegisterTests
     {
@@ -15,7 +17,7 @@ namespace Manga.UnitTests.UseCasesTests
         [InlineData(100)]
         [InlineData(500)]
         [InlineData(3300)]
-        public async void Register_WritesOutput_InputIsValid(double amount)
+        public async Task Register_WritesOutput_InputIsValid(double amount)
         {
             string ssn = "8608178888";
             string name = "Ivan Paulovich";
@@ -36,7 +38,7 @@ namespace Manga.UnitTests.UseCasesTests
             await sut.Execute(
                 ssn,
                 name,
-                amount);
+                new PositiveAmount(amount));
             
             var actual = presenter.Registers.First();
             Assert.NotNull(actual);

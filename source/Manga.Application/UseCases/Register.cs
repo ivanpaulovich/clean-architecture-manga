@@ -26,7 +26,7 @@ namespace Manga.Application.UseCases
             _accountRepository = accountRepository;
         }
 
-        public async Task Execute(SSN personnummer, Name name, Amount initialAmount)
+        public async Task Execute(SSN personnummer, Name name, PositiveAmount initialAmount)
         {
             var customer = _entityFactory.NewCustomer(personnummer, name);
             var account = _entityFactory.NewAccount(customer.Id);

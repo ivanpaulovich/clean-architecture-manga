@@ -1,9 +1,8 @@
 namespace Manga.WebApi.UseCases.Register
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Manga.Application.Boundaries.Register;
-    using Manga.Application.UseCases;
+    using Manga.Domain.ValueObjects;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
@@ -29,7 +28,7 @@ namespace Manga.WebApi.UseCases.Register
             await _registerUseCase.Execute(
                 request.PIN,
                 request.Name,
-                request.InitialAmount);
+                new PositiveAmount(request.InitialAmount));
 
             return _presenter.ViewModel;
         }

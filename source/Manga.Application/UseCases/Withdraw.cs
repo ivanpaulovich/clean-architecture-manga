@@ -20,7 +20,7 @@ namespace Manga.Application.UseCases
             _accountRepository = accountRepository;
         }
 
-        public async Task Execute(Guid accountId, Amount amount)
+        public async Task Execute(Guid accountId, PositiveAmount amount)
         {
             IAccount account = await _accountRepository.Get(accountId);
             if (account == null)

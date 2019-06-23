@@ -4,6 +4,6 @@ namespace Manga.Domain.Accounts
 
     public interface ICredit : IEntity
     {
-        Amount Add(Amount amount);
+        PositiveAmount Sum(PositiveAmount amount);
     }
 }

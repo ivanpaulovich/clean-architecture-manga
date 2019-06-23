@@ -16,10 +16,13 @@ namespace Manga.Application.Boundaries.Deposit
 
             Transaction = new Transaction(
                 creditEntity.Description,
-                creditEntity.Amount,
+                creditEntity
+                    .Amount
+                    .ToAmount()
+                    .ToDouble(),
                 creditEntity.TransactionDate);
 
-            UpdatedBalance = updatedBalance;
+            UpdatedBalance = updatedBalance.ToDouble();
         }
     }
 }

@@ -7,9 +7,9 @@ namespace Manga.Domain.Accounts
     {
         IReadOnlyCollection<ICredit> GetCredits();
         IReadOnlyCollection<IDebit> GetDebits();
-        ICredit Deposit(Amount amount);
-        IDebit Withdraw(Amount amount);
-        bool CanBeClosed();
+        ICredit Deposit(PositiveAmount amount);
+        IDebit Withdraw(PositiveAmount amount);
+        bool IsClosingAllowed();
         Amount GetCurrentBalance();
     }
 }

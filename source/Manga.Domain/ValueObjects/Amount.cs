@@ -13,39 +13,9 @@ namespace Manga.Domain.ValueObjects
             _value = value;
         }
 
-        public override string ToString()
+        public double ToDouble()
         {
-            return _value.ToString();
-        }
-
-        public static implicit operator double(Amount value)
-        {
-            return value._value;
-        }
-
-        public static implicit operator Amount(double value)
-        {
-            return new Amount(value);
-        }
-
-        public static Amount operator +(Amount amount1, Amount amount2)
-        {
-            return new Amount(amount1._value + amount2._value);
-        }
-
-        public static Amount operator -(Amount amount1, Amount amount2)
-        {
-            return new Amount(amount1._value - amount2._value);
-        }
-
-        public static bool operator <(Amount amount1, Amount amount2)
-        {
-            return amount1._value < amount2._value;
-        }
-
-        public static bool operator >(Amount amount1, Amount amount2)
-        {
-            return amount1._value > amount2._value;
+            return _value;
         }
 
         public override bool Equals(object obj)
@@ -62,10 +32,10 @@ namespace Manga.Domain.ValueObjects
 
             if (obj is double)
             {
-                return (double) obj == _value;
+                return (double)obj == _value;
             }
 
-            return ((Amount) obj)._value == _value;
+            return ((Amount)obj)._value == _value;
         }
 
         public override int GetHashCode()
@@ -78,9 +48,29 @@ namespace Manga.Domain.ValueObjects
             }
         }
 
+        internal bool LessThan(PositiveAmount amount)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal bool IsZero()
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Equals(Amount other)
         {
-            return this._value == other._value;
+            return _value == other._value;
+        }
+
+        internal PositiveAmount Add(Amount value)
+        {
+            return new PositiveAmount(_value + value.ToDouble());
+        }
+
+        internal Amount Subtract(Amount value)
+        {
+            return new Amount(_value + value.ToDouble());
         }
     }
 }

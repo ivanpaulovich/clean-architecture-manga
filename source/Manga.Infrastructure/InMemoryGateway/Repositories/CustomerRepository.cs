@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    public class CustomerRepository : ICustomerRepository
+    public sealed class CustomerRepository : ICustomerRepository
     {
         private readonly MangaContext _context;
 

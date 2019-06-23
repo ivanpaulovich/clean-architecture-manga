@@ -2,6 +2,7 @@ namespace Manga.WebApi.UseCases.Deposit
 {
     using System.Threading.Tasks;
     using Manga.Application.Boundaries.Deposit;
+    using Manga.Domain.ValueObjects;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
@@ -24,7 +25,7 @@ namespace Manga.WebApi.UseCases.Deposit
         [HttpPatch("Deposit")]
         public async Task<IActionResult> Deposit([FromBody] DepositRequest message)
         {
-            await _depositUseCase.Execute(message.AccountId, message.Amount);
+            await _depositUseCase.Execute(message.AccountId, new PositiveAmount(message.Amount));
             return _presenter.ViewModel;
         }
     }

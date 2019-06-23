@@ -28,7 +28,7 @@ namespace Manga.Application.UseCases
                 return;
             }
 
-            if (account.CanBeClosed())
+            if (account.IsClosingAllowed())
             {
                 await _accountRepository.Delete(account);
             }

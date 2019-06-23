@@ -19,43 +19,53 @@ namespace Manga.Domain.Accounts
             CustomerId = customerId;
         }
 
-        public ICredit Deposit(Amount amount)
+        public ICredit Deposit(PositiveAmount amount)
         {
-            Credit credit = new Credit(Id, amount);
+            var credit = new Credit(Id, amount);
             _credits.Add(credit);
             return credit;
         }
 
-        public IDebit Withdraw(Amount amount)
+        public IDebit Withdraw(PositiveAmount amount)
         {
-            if (GetCurrentBalance() < amount)
+            if (GetCurrentBalance().LessThan(amount))
                 return null;
 
-            Debit debit = new Debit(Id, amount);
+            var debit = new Debit(Id, amount);
             _debits.Add(debit);
             return debit;
         }
 
-        public bool CanBeClosed()
+        public bool IsClosingAllowed()
         {
-            return GetCurrentBalance() > 0;
+            return GetCurrentBalance().IsZero();
         }
 
         public Amount GetCurrentBalance()
         {
-            Amount totalAmount = _credits.GetTotal() - _debits.GetTotal();
+            var totalCredits = _credits
+                .GetTotal();
+
+            var totalDebits = _debits
+                .GetTotal();
+
+            var totalAmount = totalCredits
+                .Subtract(totalDebits);
+
             return totalAmount;
         }
 
         public IReadOnlyCollection<ICredit> GetCredits()
         {
-            var credits = _credits.GetTransactions();
+            var credits = _credits
+                .GetTransactions();
             return credits;
         }
 
         public IReadOnlyCollection<IDebit> GetDebits()
         {
-            var debits = _debits.GetTransactions();
+            var debits = _debits
+                .GetTransactions();
             return debits;
         }
     }
