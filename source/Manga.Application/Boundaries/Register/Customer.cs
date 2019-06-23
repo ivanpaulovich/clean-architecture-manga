@@ -17,8 +17,8 @@ namespace Manga.Application.Boundaries.Register
         {
             var customerEntity = (Domain.Customers.Customer) customer;
             CustomerId = customerEntity.Id;
-            SSN = customerEntity.SSN;
-            Name = customerEntity.Name;
+            SSN = customerEntity.SSN.ToString();
+            Name = customerEntity.Name.ToString();
             Accounts = accounts;
         }
     }

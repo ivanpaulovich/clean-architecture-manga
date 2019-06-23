@@ -10,17 +10,11 @@ namespace Manga.WebApi.UseCases.GetCustomerDetails
 
         public void Error(string message)
         {
-            throw new System.NotImplementedException();
+            ViewModel = new NoContentResult();
         }
 
         public void Handle(Output output)
         {
-            if (output == null)
-            {
-                ViewModel = new NoContentResult();
-                return;
-            }
-
             List<AccountDetailsModel> accounts = new List<AccountDetailsModel>();
 
             foreach (var account in output.Accounts)
@@ -45,7 +39,7 @@ namespace Manga.WebApi.UseCases.GetCustomerDetails
 
             CustomerDetailsModel model = new CustomerDetailsModel(
                 output.CustomerId,
-                output.Personnummer,
+                output.SSN,
                 output.Name,
                 accounts
             );

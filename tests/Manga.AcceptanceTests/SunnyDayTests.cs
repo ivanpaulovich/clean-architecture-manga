@@ -55,7 +55,7 @@ namespace Manga.AcceptanceTests
             var client = _factory.CreateClient();
             var register = new
             {
-                pin = "08724050601",
+                ssn = "8608179999",
                 name = "Ivan Paulovich",
                 initialAmount = initialAmount
             };

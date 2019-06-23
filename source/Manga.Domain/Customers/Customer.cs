@@ -33,5 +33,12 @@ namespace Manga.Domain.Customers
             SSN = ssn;
             Name = name;
         }
+
+        public void LoadAccounts(ICollection<Guid> accountIds)
+        {
+            _accounts = new AccountCollection();
+            foreach(var account in accountIds)
+                _accounts.Add(account);
+        }
     }
 }

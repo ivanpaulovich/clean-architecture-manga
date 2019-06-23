@@ -8,6 +8,7 @@ namespace Manga.IntegrationTests.EntityFrameworkTests
     using Manga.Infrastructure.EntityFrameworkDataAccess;
     using Microsoft.EntityFrameworkCore;
     using Xunit;
+    using Manga.Domain.ValueObjects;
 
     public sealed class CustomerRepositoryTests
     {
@@ -19,7 +20,7 @@ namespace Manga.IntegrationTests.EntityFrameworkTests
                 .Options;
 
             var factory = new DefaultEntitiesFactory();
-            var customer = factory.NewCustomer("19860817-7955", "Ivan Paulovich");
+            var customer = factory.NewCustomer(new SSN("198608177955"), new Name("Ivan Paulovich"));
 
             using(var context = new MangaContext(options))
             {

@@ -6,6 +6,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
     using Manga.Application.Repositories;
     using Manga.Domain.Accounts;
     using Microsoft.EntityFrameworkCore;
+    using System.Linq;
 
     public sealed class AccountRepository : IAccountRepository
     {
@@ -39,9 +40,20 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
 
         public async Task<IAccount> Get(Guid id)
         {
-            IAccount account = await _context
+            Account account = await _context
                 .Accounts
                 .FindAsync(id);
+
+            var credits = _context.Credits
+                .Where(e => e.AccountId == id)
+                .ToList();
+
+            var debits = _context.Debits
+                .Where(e => e.AccountId == id)
+                .ToList();
+
+            account.LoadCredits(credits);
+            account.LoadDebits(debits);
 
             return account;
         }

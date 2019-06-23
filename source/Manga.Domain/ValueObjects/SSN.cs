@@ -24,14 +24,9 @@ namespace Manga.Domain.ValueObjects
             _text = text;
         }
 
-        public static implicit operator SSN(string text)
+        public override string ToString()
         {
-            return new SSN(text);
-        }
-
-        public static implicit operator string(SSN ssn)
-        {
-            return ssn._text;
+            return _text;
         }
 
         public bool Equals(SSN other)

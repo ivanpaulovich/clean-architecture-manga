@@ -16,14 +16,9 @@ namespace Manga.Domain.ValueObjects
             _text = text;
         }
 
-        public static implicit operator Name(string text)
+        public override string ToString()
         {
-            return new Name(text);
-        }
-
-        public static implicit operator string(Name name)
-        {
-            return name._text;
+            return _text;
         }
 
         public override bool Equals(object obj)

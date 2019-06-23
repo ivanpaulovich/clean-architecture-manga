@@ -24,7 +24,7 @@
             Credits = new Collection<Credit>();
             Debits = new Collection<Debit>();
 
-            var customer = new Customer("8608179999", "Ivan Paulovich");
+            var customer = new Customer(new SSN("8608179999"), new Name("Ivan Paulovich"));
             var account = new Account(customer.Id);
             var credit = account.Deposit(new PositiveAmount(800));
             var debit = account.Withdraw(new PositiveAmount(100));

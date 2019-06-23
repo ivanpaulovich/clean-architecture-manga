@@ -10,17 +10,11 @@ namespace Manga.WebApi.UseCases.GetAccountDetails
 
         public void Error(string message)
         {
-            throw new System.NotImplementedException();
+            ViewModel = new NoContentResult();
         }
 
         public void Handle(Output output)
         {
-            if (output == null)
-            {
-                ViewModel = new NoContentResult();
-                return;
-            }
-
             List<TransactionModel> transactions = new List<TransactionModel>();
 
             foreach (var item in output.Transactions)

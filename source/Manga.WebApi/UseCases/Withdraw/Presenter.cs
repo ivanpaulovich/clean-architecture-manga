@@ -9,17 +9,11 @@ namespace Manga.WebApi.UseCases.Withdraw
 
         public void Error(string message)
         {
-            throw new System.NotImplementedException();
+            ViewModel = new NoContentResult();
         }
 
         public void Handle(Output output)
         {
-            if (output == null)
-            {
-                ViewModel = new NoContentResult();
-                return;
-            }
-
             ViewModel = new ObjectResult(new
             {
                 Amount = output.Transaction.Amount,

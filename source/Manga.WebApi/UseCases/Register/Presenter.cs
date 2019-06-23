@@ -10,17 +10,11 @@ namespace Manga.WebApi.UseCases.Register
 
         public void Error(string message)
         {
-            throw new System.NotImplementedException();
+            ViewModel = new NoContentResult();
         }
 
         public void Handle(Output output)
         {
-            if (output == null)
-            {
-                ViewModel = new NoContentResult();
-                return;
-            }
-
             List<TransactionModel> transactions = new List<TransactionModel>();
 
             foreach (var item in output.Account.Transactions)
@@ -48,7 +42,11 @@ namespace Manga.WebApi.UseCases.Register
                 accounts
             );
 
-            ViewModel = new CreatedAtRouteResult("GetCustomer", new { customerId = model.CustomerId }, model);
+            ViewModel = new CreatedAtRouteResult("GetCustomer",
+                new { 
+                    customerId = model.CustomerId 
+                },
+                model);
         }
     }
 }

@@ -6,14 +6,14 @@ namespace Manga.WebApi.UseCases
     public sealed class CustomerDetailsModel
     {
         public Guid CustomerId { get; }
-        public string Personnummer { get; }
+        public string SSN { get; }
         public string Name { get; }
         public List<AccountDetailsModel> Accounts { get; }
 
-        public CustomerDetailsModel(Guid customerId, string personnummer, string name, List<AccountDetailsModel> accounts)
+        public CustomerDetailsModel(Guid customerId, string ssn, string name, List<AccountDetailsModel> accounts)
         {
             CustomerId = customerId;
-            Personnummer = personnummer;
+            SSN = ssn;
             Name = name;
             Accounts = accounts;
         }

@@ -10,7 +10,7 @@ namespace Manga.WebApi.UseCases.CloseAccount
 
         public void Error(string message)
         {
-            throw new NotImplementedException();
+            ViewModel = new NoContentResult();
         }
 
         public void Handle(Guid output)

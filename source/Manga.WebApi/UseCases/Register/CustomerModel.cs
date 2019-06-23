@@ -6,18 +6,18 @@ namespace Manga.WebApi.UseCases.Register
     public class CustomerModel
     {
         public Guid CustomerId { get; }
-        public string Personnummer { get; }
+        public string SSN { get; }
         public string Name { get; }
         public List<AccountDetailsModel> Accounts { get; set; }
 
         public CustomerModel(
             Guid customerId,
-            string perssonnummer,
+            string ssn,
             string name,
             List<AccountDetailsModel> accounts)
         {
             CustomerId = customerId;
-            Personnummer = perssonnummer;
+            SSN = ssn;
             Name = name;
             Accounts = accounts;
         }

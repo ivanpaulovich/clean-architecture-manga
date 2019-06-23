@@ -50,12 +50,12 @@ namespace Manga.Domain.ValueObjects
 
         internal bool LessThan(PositiveAmount amount)
         {
-            throw new NotImplementedException();
+            return _value < amount.ToAmount()._value;
         }
 
         internal bool IsZero()
         {
-            throw new NotImplementedException();
+            return _value == 0;
         }
 
         public bool Equals(Amount other)

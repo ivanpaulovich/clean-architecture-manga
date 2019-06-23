@@ -26,8 +26,8 @@ namespace Manga.WebApi.UseCases.Register
         public async Task<IActionResult> Post([FromBody] RegisterRequest request)
         {
             await _registerUseCase.Execute(
-                request.PIN,
-                request.Name,
+                new SSN(request.SSN),
+                new Name(request.Name),
                 new PositiveAmount(request.InitialAmount));
 
             return _presenter.ViewModel;
