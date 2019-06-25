@@ -1,6 +1,5 @@
 namespace Manga.WebApi.UseCases.CloseAccount
 {
-    using System;
     using Manga.Application.Boundaries.CloseAccount;
     using Microsoft.AspNetCore.Mvc;
 
@@ -13,7 +12,7 @@ namespace Manga.WebApi.UseCases.CloseAccount
             ViewModel = new NoContentResult();
         }
 
-        public void Handle(Guid output)
+        public void Handle(Output output)
         {
             ViewModel = new OkResult();
         }

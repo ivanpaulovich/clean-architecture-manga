@@ -24,13 +24,13 @@ namespace Manga.Application.UseCases
             _accountRepository = accountRepository;
         }
 
-        public async Task Execute(Guid customerId)
+        public async Task Execute(Input input)
         {
-            ICustomer customer = await _customerRepository.Get(customerId);
+            ICustomer customer = await _customerRepository.Get(input.CustomerId);
 
             if (customer == null)
             {
-                _outputHandler.Error($"The customer {customerId} does not exists or is not processed yet.");
+                _outputHandler.Error($"The customer {input.CustomerId} does not exists or is not processed yet.");
                 return;
             }
 

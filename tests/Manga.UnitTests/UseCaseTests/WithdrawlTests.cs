@@ -9,6 +9,7 @@ namespace Manga.UnitTests.UseCasesTests
     using System;
     using System.Threading.Tasks;
     using Manga.Domain.ValueObjects;
+    using Manga.Application.Boundaries.Withdraw;
 
     public sealed class WithdrawlTests
     {
@@ -25,9 +26,9 @@ namespace Manga.UnitTests.UseCasesTests
                 accountRepository
             );
 
-            await sut.Execute(
+            await sut.Execute(new Input(
                 Guid.Parse(accountId),
-                new PositiveAmount(amount));
+                new PositiveAmount(amount)));
 
             var actual = presenter.Withdrawals.First();
             Assert.Equal(3900, actual.UpdatedBalance);

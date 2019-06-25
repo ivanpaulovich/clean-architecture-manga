@@ -9,6 +9,7 @@ namespace Manga.UnitTests.UseCasesTests
     using System.Linq;
     using Manga.Domain.ValueObjects;
     using System.Threading.Tasks;
+    using Application.Boundaries.Register;
 
     public sealed class RegisterTests
     {
@@ -35,10 +36,10 @@ namespace Manga.UnitTests.UseCasesTests
                 accountRepository
             );
 
-            await sut.Execute(
+            await sut.Execute(new Input(
                 ssn,
                 name,
-                new PositiveAmount(amount));
+                new PositiveAmount(amount)));
             
             var actual = presenter.Registers.First();
             Assert.NotNull(actual);

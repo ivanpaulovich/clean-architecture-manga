@@ -26,12 +26,12 @@ namespace Manga.Application.UseCases
             _accountRepository = accountRepository;
         }
 
-        public async Task Execute(SSN ssn, Name name, PositiveAmount initialAmount)
+        public async Task Execute(Input input)
         {
-            var customer = _entityFactory.NewCustomer(ssn, name);
+            var customer = _entityFactory.NewCustomer(input.SSN, input.Name);
             var account = _entityFactory.NewAccount(customer.Id);
 
-            ICredit credit = account.Deposit(initialAmount);
+            ICredit credit = account.Deposit(input.InitialAmount);
             if (credit == null)
             {
                 _outputHandler.Error("Error");

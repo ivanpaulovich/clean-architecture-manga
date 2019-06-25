@@ -1,11 +1,9 @@
 namespace Manga.Application.UseCases
 {
     using System.Threading.Tasks;
-    using System;
     using Manga.Application.Boundaries.Deposit;
     using Manga.Application.Repositories;
     using Manga.Domain.Accounts;
-    using Manga.Domain.ValueObjects;
 
     public sealed class Deposit : IUseCase
     {
@@ -20,16 +18,16 @@ namespace Manga.Application.UseCases
             _accountRepository = accountRepository;
         }
 
-        public async Task Execute(Guid accountId, PositiveAmount amount)
+        public async Task Execute(Input input)
         {
-            IAccount account = await _accountRepository.Get(accountId);
+            IAccount account = await _accountRepository.Get(input.AccountId);
             if (account == null)
             {
-                _outputHandler.Error($"The account {accountId} does not exists or is already closed.");
+                _outputHandler.Error($"The account {input.AccountId} does not exists or is already closed.");
                 return;
             }
 
-            ICredit credit = account.Deposit(amount);
+            ICredit credit = account.Deposit(input.Amount);
 
             await _accountRepository.Update(account, credit);
 

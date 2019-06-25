@@ -1,7 +1,6 @@
 namespace Manga.Application.UseCases
 {
     using System.Threading.Tasks;
-    using System;
     using Manga.Application.Boundaries.GetAccountDetails;
     using Manga.Application.Repositories;
     using Manga.Domain.Accounts;
@@ -19,13 +18,13 @@ namespace Manga.Application.UseCases
             _accountRepository = accountRepository;
         }
 
-        public async Task Execute(Guid accountId)
+        public async Task Execute(Input input)
         {
-            IAccount account = await _accountRepository.Get(accountId);
+            IAccount account = await _accountRepository.Get(input.AccountId);
 
             if (account == null)
             {
-                _outputHandler.Error($"The account {accountId} does not exists or is not processed yet.");
+                _outputHandler.Error($"The account {input.AccountId} does not exists or is not processed yet.");
                 return;
             }
 

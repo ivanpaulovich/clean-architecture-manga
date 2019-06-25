@@ -25,7 +25,7 @@ namespace Manga.WebApi.UseCases.CloseAccount
         [HttpDelete("{accountId}")]
         public async Task<IActionResult> Close(Guid accountId)
         {
-            await _closeAccountUseCase.Execute(accountId);
+            await _closeAccountUseCase.Execute(new Input(accountId));
             return _presenter.ViewModel;
         }
     }

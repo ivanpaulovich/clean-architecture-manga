@@ -1,6 +1,5 @@
 namespace Manga.Infrastructure.InMemoryGateway
 {
-    using System;
     using System.Collections.ObjectModel;
 
     public sealed class Presenter : 
@@ -15,7 +14,7 @@ namespace Manga.Infrastructure.InMemoryGateway
         public Collection<Application.Boundaries.Register.Output> Registers { get; }
         public Collection<Application.Boundaries.Deposit.Output> Deposits { get; }
         public Collection<Application.Boundaries.Withdraw.Output> Withdrawals { get; }
-        public Collection<Guid> ClosedAccounts { get; }
+        public Collection<Application.Boundaries.CloseAccount.Output> ClosedAccounts { get; }
         public Collection<Application.Boundaries.GetAccountDetails.Output> GetAccountDetails { get; }
         public Collection<Application.Boundaries.GetCustomerDetails.Output> GetCustomerDetails { get; }
 
@@ -26,7 +25,7 @@ namespace Manga.Infrastructure.InMemoryGateway
             Registers = new Collection<Application.Boundaries.Register.Output>();
             Deposits = new Collection<Application.Boundaries.Deposit.Output>();
             Withdrawals = new Collection<Application.Boundaries.Withdraw.Output>();
-            ClosedAccounts = new Collection<Guid>();
+            ClosedAccounts = new Collection<Application.Boundaries.CloseAccount.Output>();
             GetAccountDetails = new Collection<Application.Boundaries.GetAccountDetails.Output>();
             GetCustomerDetails = new Collection<Application.Boundaries.GetCustomerDetails.Output>();
         }
@@ -51,7 +50,7 @@ namespace Manga.Infrastructure.InMemoryGateway
             Withdrawals.Add(output);
         }
 
-        public void Handle(Guid output)
+        public void Handle(Application.Boundaries.CloseAccount.Output output)
         {
             ClosedAccounts.Add(output);
         }

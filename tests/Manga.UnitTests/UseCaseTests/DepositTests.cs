@@ -8,6 +8,7 @@ namespace Manga.UnitTests.UseCasesTests
     using System.Linq;
     using Manga.Domain.ValueObjects;
     using System.Threading.Tasks;
+    using Application.Boundaries.Deposit;
 
     public sealed class DepositTests
     {
@@ -28,8 +29,7 @@ namespace Manga.UnitTests.UseCasesTests
             );
 
             await sut.Execute(
-                context.DefaultAccountId,
-                new PositiveAmount(amount));
+                new Input(context.DefaultAccountId, new PositiveAmount(amount)));
 
             var output = presenter.Deposits.First();
             Assert.Equal(amount, output.Transaction.Amount);
