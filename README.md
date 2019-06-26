@@ -27,7 +27,7 @@ $ dotnet run --project "source/Manga.WebApi/Manga.WebApi.csproj"
 * Docker :whale:
 * SQL Server
 
-### Setup SQL Server in Docker
+### :floppy_disk: Setup SQL Server in Docker
 
 <details><summary>Install SQL Server</summary>
 <p>
