@@ -324,31 +324,45 @@ Then navigate to http://localhost:8000/swagger and play with de Swagger.
 
 ## :cloud: Questions and Issues
 
-I am happy to clarify the decisions I made in this project through the [Issues tab](https://github.com/ivanpaulovich/clean-architecture-manga/issues) so everyone will take benefit of the discussion.
+I am happy to clarify the decisions I made in this project through the [Issues tab](https://github.com/ivanpaulovich/clean-architecture-manga/issues) so everyone will take benefit from the discussions.
 
-
-## :floppy_disk: Setup SQL Server (Optional)
+## :floppy_disk: Setup Database
 
 ### Setup SQL Server in Docker
 
-Run `scripts/sql-docker-up.sh` to setup a SQL Server in a Docker container with the following Connection String:
+<details><summary>Install SQL Server</summary>
+<p>
 
-```
-Server=localhost;User Id=sa;Password=<YourNewStrong!Passw0rd>;
-```
-
-#### Add Migration
-
-Run the EF Tool to add a migration to the `MrRobot.Infrastructure` project.
+To spin up a SQL Server in a docker container using the connection string `Server=localhost;User Id=sa;Password=<YourNewStrong!Passw0rd>;` run the following command:
 
 ```sh
-dotnet ef migrations add "InitialCreate" -o "EntityFrameworkDataAccess/Migrations" --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
+$ ./source/scripts/sql-docker-up.sh
 ```
 
-#### Update the Database
+</p>
+</details>
+
+<details><summary>Add Migration</summary>
+<p>
+
+Run the EF Tool to add a migration to the `Manga.Infrastructure` project.
+
+```sh
+$ dotnet ef migrations add "InitialCreate" -o "EntityFrameworkDataAccess/Migrations" --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
+```
+
+</p>
+</details>
+
+<details><summary>Update the Database</summary>
+<p>
 
 Generate tables and seed the database via Entity Framework Tool:
 
 ```sh
 dotnet ef database update --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
 ```
+
+</p>
+</details>
+

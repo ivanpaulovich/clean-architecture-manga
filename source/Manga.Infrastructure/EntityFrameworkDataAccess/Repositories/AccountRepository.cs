@@ -52,8 +52,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
                 .Where(e => e.AccountId == id)
                 .ToList();
 
-            account.LoadCredits(credits);
-            account.LoadDebits(debits);
+            account.Load(credits, debits);
 
             return account;
         }

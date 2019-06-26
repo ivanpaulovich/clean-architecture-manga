@@ -1,9 +1,6 @@
 namespace Manga.AcceptanceTests
 {
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.Configuration;
     using Manga.WebApi;
-    using Microsoft.AspNetCore.TestHost;
     using Xunit;
     using System.Threading.Tasks;
     using System.Net.Http;

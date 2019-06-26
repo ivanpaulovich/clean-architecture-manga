@@ -3,7 +3,6 @@ namespace Manga.Domain.Accounts
     using System.Collections.Generic;
     using System;
     using Manga.Domain.ValueObjects;
-    using System.Linq;
 
     public class Account : IAccount
     {
@@ -70,18 +69,15 @@ namespace Manga.Domain.Accounts
             return debits;
         }
 
-        public void LoadDebits(IList<Debit> debits)
-        {
-            _debits = new DebitsCollection();
-            foreach(var debit in debits)
-                _debits.Add(debit);
-        }
-
-        public void LoadCredits(IList<Credit> credits)
+        public void Load(IList<Credit> credits, IList<Debit> debits)
         {
             _credits = new CreditsCollection();
             foreach(var credit in credits)
                 _credits.Add(credit);
+
+            _debits = new DebitsCollection();
+            foreach(var debit in debits)
+                _debits.Add(debit);
         }
     }
 }

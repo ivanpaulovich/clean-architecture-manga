@@ -10,9 +10,17 @@ namespace Manga.UnitTests.UseCasesTests
     using Manga.Domain.ValueObjects;
     using System.Threading.Tasks;
     using Application.Boundaries.Register;
+    using System;
 
     public sealed class RegisterTests
     {
+        [Fact]
+        public void GivenNullInput_ThrowsException()
+        {
+            var register = new Register(null, null, null, null);
+            Assert.ThrowsAsync<Exception>(async() => await register.Execute(null));
+        }
+
         [Theory]
         [InlineData(300)]
         [InlineData(100)]

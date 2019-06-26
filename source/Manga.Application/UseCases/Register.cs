@@ -4,7 +4,6 @@ namespace Manga.Application.UseCases
     using Manga.Application.Boundaries.Register;
     using Manga.Application.Repositories;
     using Manga.Domain.Accounts;
-    using Manga.Domain.ValueObjects;
     using Manga.Domain;
 
     public sealed class Register : IUseCase
@@ -28,13 +27,19 @@ namespace Manga.Application.UseCases
 
         public async Task Execute(Input input)
         {
+            if (input == null)
+            {
+                _outputHandler.Error("Input is null.");
+                return;
+            }
+
             var customer = _entityFactory.NewCustomer(input.SSN, input.Name);
             var account = _entityFactory.NewAccount(customer.Id);
 
             ICredit credit = account.Deposit(input.InitialAmount);
             if (credit == null)
             {
-                _outputHandler.Error("Error");
+                _outputHandler.Error("An error happened when depositing the amount.");
                 return;
             }
 
