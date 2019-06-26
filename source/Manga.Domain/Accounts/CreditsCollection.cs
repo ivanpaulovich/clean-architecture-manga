@@ -13,15 +13,21 @@ namespace Manga.Domain.Accounts
             _credits = new List<ICredit>();
         }
 
-        public IReadOnlyCollection<ICredit> GetTransactions()
+        public CreditsCollection(IList<Credit> credits) : this()
         {
-            var transactions = new ReadOnlyCollection<ICredit>(_credits);
-            return transactions;
+            foreach (var credit in credits)
+                Add(credit);
         }
 
         public void Add(ICredit credit)
         {
             _credits.Add(credit);
+        }
+
+        public IReadOnlyCollection<ICredit> GetTransactions()
+        {
+            var transactions = new ReadOnlyCollection<ICredit>(_credits);
+            return transactions;
         }
 
         public PositiveAmount GetTotal()

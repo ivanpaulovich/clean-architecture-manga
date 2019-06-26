@@ -1,4 +1,4 @@
-# :fire: Clean Architecture Implementation Template for .NET apps :white_check_mark:
+# :fire: Clean Architecture Implementation Template for .NET apps :cyclone:
 Pure and simple implementation following the Clean Architecture Principles, decoupled from frameworks and technology details. Use Cases as central organizing structure and smaller components developed and tested in isolation.
 
 ### :arrow_forward: Running from source

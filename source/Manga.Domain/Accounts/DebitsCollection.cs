@@ -13,15 +13,21 @@ namespace Manga.Domain.Accounts
             _debits = new List<IDebit>();
         }
 
+        public DebitsCollection(IList<Debit> debits) : this()
+        {
+            foreach (var debit in debits)
+                Add(debit);
+        }
+
+        public void Add(IDebit debit)
+        {
+            _debits.Add(debit);
+        }
+
         public IReadOnlyCollection<IDebit> GetTransactions()
         {
             IReadOnlyCollection<IDebit> transactions = new ReadOnlyCollection<IDebit>(_debits);
             return transactions;
-        }
-
-        public void Add(IDebit transaction)
-        {
-            _debits.Add(transaction);
         }
 
         public PositiveAmount GetTotal()

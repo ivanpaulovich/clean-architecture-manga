@@ -71,13 +71,8 @@ namespace Manga.Domain.Accounts
 
         public void Load(IList<Credit> credits, IList<Debit> debits)
         {
-            _credits = new CreditsCollection();
-            foreach(var credit in credits)
-                _credits.Add(credit);
-
-            _debits = new DebitsCollection();
-            foreach(var debit in debits)
-                _debits.Add(debit);
+            _credits = new CreditsCollection(credits);
+            _debits = new DebitsCollection(debits);
         }
     }
 }

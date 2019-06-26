@@ -70,7 +70,7 @@ namespace Manga.Domain.ValueObjects
 
         internal Amount Subtract(Amount value)
         {
-            return new Amount(_value + value.ToDouble());
+            return new Amount(_value - value.ToDouble());
         }
     }
 }
