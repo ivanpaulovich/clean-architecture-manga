@@ -4,19 +4,7 @@ Pure and simple implementation following the Clean Architecture Principles, deco
 ### :arrow_forward: Running from source
 
 ```
-<<<<<<< HEAD
-
-## :lemon: Compiling from source
-
-To run Manga from source, clone this repository to your machine, compile and test it:
-
-```sh
-git clone https://github.com/ivanpaulovich/clean-architecture-manga.git
-cd clean-architecture-manga/manga/build
-./build.sh
-=======
 $ dotnet run --project "source/Manga.WebApi/Manga.WebApi.csproj"
->>>>>>> 82c4eeb... Review
 ```
 
 ### :checkered_flag: Development Environment
