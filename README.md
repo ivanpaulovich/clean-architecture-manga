@@ -1,5 +1,5 @@
 # :fire: Clean Architecture Implementation Template for .NET apps :white_check_mark:
-Pure and simple implementation following the Clean Architecture Principles, decoupled from frameworks and technology details. Use Cases as central organizing component and smaller components developed and tested in isolation.
+Pure and simple implementation following the Clean Architecture Principles, decoupled from frameworks and technology details. Use Cases as central organizing structure and smaller components developed and tested in isolation.
 
 ### :arrow_forward: Running from source
 
@@ -26,8 +26,6 @@ $ dotnet run --project "source/Manga.WebApi/Manga.WebApi.csproj"
 * [.NET Core SDK 2.2](https://www.microsoft.com/net/download/dotnet-core/2.2)
 * Docker :whale:
 * SQL Server
-
-## :floppy_disk: Setup Database
 
 ### Setup SQL Server in Docker
 
@@ -67,6 +65,6 @@ dotnet ef database update --project source/Manga.Infrastructure --startup-projec
 </p>
 </details>
 
-## :telephone: Support and Issues
+### :telephone: Support and Issues
 
 I am happy to clarify the decisions I made in this project through the [Issues tab](https://github.com/ivanpaulovich/clean-architecture-manga/issues) so everyone will take benefit from the discussions.
