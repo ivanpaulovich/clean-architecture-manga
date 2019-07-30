@@ -16,7 +16,6 @@ namespace Manga.UnitTests.UseCasesTests
         [InlineData(100)]
         [InlineData(200)]
         [InlineData(0)]
-        [InlineData(-100)]
         public async Task Deposit_ChangesBalance_WhenAccountExists(double amount)
         {
             var presenter = new Presenter();
@@ -33,6 +32,23 @@ namespace Manga.UnitTests.UseCasesTests
 
             var output = presenter.Deposits.First();
             Assert.Equal(amount, output.Transaction.Amount);
+        }
+
+        [Theory]
+        [InlineData(-100)]
+        public async Task Cant_Perform_Deposit_With_Amount_Less_Than_Zero(double amount)
+        {
+            var presenter = new Presenter();
+            var context = new MangaContext();
+            var accountRepository = new AccountRepository(context);
+            
+            var sut = new Deposit(
+                presenter,
+                accountRepository
+            );
+
+            await Assert.ThrowsAsync<AmountShouldBePositiveException>(() =>
+              sut.Execute(new Input(context.DefaultAccountId, new PositiveAmount(amount))));
         }
     }
 }
