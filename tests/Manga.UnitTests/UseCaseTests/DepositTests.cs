@@ -36,7 +36,7 @@ namespace Manga.UnitTests.UseCasesTests
 
         [Theory]
         [InlineData(-100)]
-        public async Task Cant_Perform_Deposit_With_Amount_Less_Than_Zero(double amount)
+        public async Task Shuold_Not_Perform_Deposit_With_Amount_Less_Than_Zero(double amount)
         {
             var presenter = new Presenter();
             var context = new MangaContext();
