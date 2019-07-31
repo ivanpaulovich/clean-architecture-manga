@@ -1,4 +1,6 @@
 # :fire: Clean Architecture Implementation Template for .NET apps :cyclone:
+[![Build status](https://ci.appveyor.com/api/projects/status/0i6s33kw3y87tkb2?svg=true)](https://ci.appveyor.com/project/ivanpaulovich/clean-architecture-manga)
+
 Pure and simple implementation following the Clean Architecture Principles, decoupled from frameworks and technology details. Use Cases as central organizing structure and smaller components developed and tested in isolation.
 
 ### :arrow_forward: Running from source
