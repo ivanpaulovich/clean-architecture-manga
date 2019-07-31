@@ -1,8 +1,8 @@
-using System.Net.Http;
-using System.Threading.Tasks;
-
 namespace Manga.AcceptanceTests
 {
+    using System.Net.Http;
+    using System.Threading.Tasks;
+
     public static class HttpClientExtensions
     {
         public static async Task<HttpResponseMessage> PatchAsync(this HttpClient client, string requestUri, HttpContent content)
