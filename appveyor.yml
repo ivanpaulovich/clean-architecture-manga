@@ -1,0 +1,15 @@
+version: '1.0.{build}'
+image: 
+  - Ubuntu
+services:
+  - docker
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+build_script:
+  - dotnet build
+test_script:
+  - dotnet test tests/Manga.UnitTests/Manga.UnitTests.csproj
+  - dotnet test tests/Manga.IntegrationTests/Manga.IntegrationTests.csproj
+  - dotnet test tests/Manga.AcceptanceTests/Manga.AcceptanceTests.csproj
