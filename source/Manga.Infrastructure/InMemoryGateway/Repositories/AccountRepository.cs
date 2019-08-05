@@ -1,4 +1,4 @@
-﻿namespace Manga.Infrastructure.InMemoryDataAccess.Repositories
+﻿namespace Manga.Infrastructure.InMemoryGateway.Repositories
 {
     using System;
     using System.Linq;

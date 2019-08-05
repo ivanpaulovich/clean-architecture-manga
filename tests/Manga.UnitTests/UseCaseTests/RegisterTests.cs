@@ -4,8 +4,7 @@ namespace Manga.UnitTests.UseCasesTests
     using Manga.Application.UseCases;
     using Manga.Domain;
     using Manga.Infrastructure.InMemoryGateway;
-    using Manga.Infrastructure.InMemoryDataAccess.Repositories;
-    using Manga.Infrastructure.InMemoryDataAccess;
+    using Manga.Infrastructure.InMemoryGateway.Repositories;
     using System.Linq;
     using Manga.Domain.ValueObjects;
     using System.Threading.Tasks;

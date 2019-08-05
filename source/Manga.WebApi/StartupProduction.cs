@@ -6,8 +6,7 @@ using Manga.Application.Boundaries;
 using Manga.Application.Repositories;
 using Manga.Application.UseCases;
 using Manga.Domain;
-using Manga.Infrastructure.InMemoryGateway;
-using Manga.Infrastructure.InMemoryGateway.Repositories;
+using Manga.Infrastructure.EntityFrameworkDataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -22,9 +21,9 @@ using Swashbuckle.AspNetCore.Swagger;
 
 namespace Manga.WebApi
 {
-    public sealed class StartupDevelopment
+    public sealed class StartupProduction
     {
-        public StartupDevelopment(IConfiguration configuration)
+        public StartupProduction(IConfiguration configuration)
         {
             Configuration = configuration;
         }
@@ -38,14 +37,16 @@ namespace Manga.WebApi
 
             AddSwagger(services);
             AddMangaCore(services);
-            AddInMemoryPersistence(services);
+            AddSQLPersistence(services);
         }
 
-        private void AddInMemoryPersistence(IServiceCollection services)
+        private void AddSQLPersistence(IServiceCollection services)
         {
-            Console.WriteLine("In Memory");
+            Console.WriteLine("SQL");
 
-            services.AddSingleton<MangaContext, MangaContext>();
+
+            services.AddDbContext<MangaContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();

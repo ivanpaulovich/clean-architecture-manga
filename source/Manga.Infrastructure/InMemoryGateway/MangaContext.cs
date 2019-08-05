@@ -1,4 +1,4 @@
-﻿namespace Manga.Infrastructure.InMemoryDataAccess
+﻿namespace Manga.Infrastructure.InMemoryGateway
 {
     using Manga.Domain.Accounts;
     using Manga.Domain.Customers;

@@ -1,4 +1,4 @@
-﻿namespace Manga.Infrastructure.InMemoryDataAccess.Repositories
+﻿namespace Manga.Infrastructure.InMemoryGateway.Repositories
 {
     using Manga.Application.Repositories;
     using Manga.Domain.Customers;
