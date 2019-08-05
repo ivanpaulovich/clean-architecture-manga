@@ -5,6 +5,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
     using Manga.Application.Repositories;
     using Manga.Domain.Customers;
     using System.Linq;
+    using Microsoft.EntityFrameworkCore;
 
     public sealed class CustomerRepository : ICustomerRepository
     {
@@ -24,8 +25,12 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
 
         public async Task<ICustomer> Get(Guid id)
         {
-            Customer customer = await _context.Customers
-                .FindAsync(id);
+            Customer customer =  await _context.Customers
+                .Where(c => c.Id == id)
+                .SingleOrDefaultAsync();
+
+            if (customer == null)
+                return null;
 
             var accounts = _context.Accounts
                 .Where(e => e.CustomerId == id)

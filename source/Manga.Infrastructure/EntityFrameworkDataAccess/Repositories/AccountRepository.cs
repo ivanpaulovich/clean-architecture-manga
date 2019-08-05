@@ -42,7 +42,11 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
         {
             Account account = await _context
                 .Accounts
-                .FindAsync(id);
+                .Where(a => a.Id == id)
+                .SingleOrDefaultAsync();
+
+            if (account == null)
+                return null;
 
             var credits = _context.Credits
                 .Where(e => e.AccountId == id)

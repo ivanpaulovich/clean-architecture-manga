@@ -31,18 +31,6 @@ $ ./source/scripts/sql-docker-up.sh
 </p>
 </details>
 
-<details><summary>Add Migration</summary>
-<p>
-
-Run the EF Tool to add a migration to the `Manga.Infrastructure` project.
-
-```sh
-$ dotnet ef migrations add "InitialCreate" -o "EntityFrameworkDataAccess/Migrations" --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
-```
-
-</p>
-</details>
-
 <details><summary>Update the Database</summary>
 <p>
 
@@ -50,6 +38,18 @@ Generate tables and seed the database via Entity Framework Tool:
 
 ```sh
 dotnet ef database update --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
+```
+
+</p>
+</details>
+
+<details><summary>Add Migrations</summary>
+<p>
+
+Run the EF Tool to add a migration to the `Manga.Infrastructure` project.
+
+```sh
+$ dotnet ef migrations add "InitialCreate" -o "EntityFrameworkDataAccess/Migrations" --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
 ```
 
 </p>

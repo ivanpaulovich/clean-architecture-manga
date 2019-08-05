@@ -23,7 +23,7 @@ namespace Manga.Application.UseCases
             IAccount account = await _accountRepository.Get(input.AccountId);
             if (account == null)
             {
-                _outputHandler.Error($"The account {input.AccountId} does not exists or is already closed.");
+                _outputHandler.Error($"The account {input.AccountId} does not exist or is already closed.");
                 return;
             }
 

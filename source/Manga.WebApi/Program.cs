@@ -35,6 +35,14 @@ namespace Manga.WebApi
                         config.AddCommandLine(args);
                     }
                 })
+                .ConfigureLogging((hostingContext, logging) =>
+                {
+                    // Requires `using Microsoft.Extensions.Logging;`
+                    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                    logging.AddConsole();
+                    logging.AddDebug();
+                    logging.AddEventSourceLogger();
+                })
                 .UseStartup(typeof(Program).Assembly.FullName);
         }
     }
