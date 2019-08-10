@@ -1,19 +1,15 @@
-namespace Manga.WebApi.UseCases.Deposit
+namespace Manga.WebApi.UseCases.Transfer
 {
     using System;
 
-    public sealed class CurrentAccountBalanceModel
+    public sealed class CurrentBalanceModel
     {
         public double Amount { get; }
         public string Description { get; }
         public DateTime TransactionDate { get; }
         public double UpdateBalance { get; }
 
-        public CurrentAccountBalanceModel(
-            double amount,
-            string description,
-            DateTime transactionDate,
-            double updatedBalance)
+        public CurrentBalanceModel(double amount, string description, DateTime transactionDate, double updatedBalance)
         {
             Amount = amount;
             Description = description;

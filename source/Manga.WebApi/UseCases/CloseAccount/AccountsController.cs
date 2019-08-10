@@ -6,7 +6,7 @@ namespace Manga.WebApi.UseCases.CloseAccount
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
-    public class AccountsController : Controller
+    public sealed class AccountsController : Controller
     {
         private readonly IUseCase _closeAccountUseCase;
         private readonly Presenter _presenter;

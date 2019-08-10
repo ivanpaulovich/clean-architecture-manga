@@ -14,19 +14,25 @@ namespace Manga.UnitTests.UseCasesTests
     {
         [Theory]
         [ClassData(typeof(WithdrawDataSetup))]
-        public async Task Withdraw_Valid_Amount(MangaContext context, string accountId, double amount, double expectedBalance)
+        public async Task Withdraw_Valid_Amount(
+            MangaContext context,
+            Guid accountId,
+            double amount,
+            double expectedBalance)
         {
             var presenter = new Presenter();
             
             var accountRepository = new AccountRepository(context);
+            var unitOfWork = new UnitOfWork(context);
 
             var sut = new Withdraw(
                 presenter,
-                accountRepository
+                accountRepository,
+                unitOfWork
             );
 
             await sut.Execute(new Input(
-                Guid.Parse(accountId),
+                accountId,
                 new PositiveAmount(amount)));
 
             var actual = presenter.Withdrawals.First();
@@ -34,13 +40,13 @@ namespace Manga.UnitTests.UseCasesTests
         }
     }
 
-    internal class WithdrawDataSetup : TheoryData<MangaContext, string, double, double>
+    internal class WithdrawDataSetup : TheoryData<MangaContext, Guid, double, double>
     {
         public WithdrawDataSetup()
         {
             var context = new MangaContext();
-            var accountId = context.Accounts.FirstOrDefault().Id;
-            Add(context, accountId.ToString(), 100, 600);
+            var accountId = context.DefaultAccountId;
+            Add(context, accountId, 100, 600);
         }
     }
 }

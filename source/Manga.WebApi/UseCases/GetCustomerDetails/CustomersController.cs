@@ -6,7 +6,7 @@ namespace Manga.WebApi.UseCases.GetCustomerDetails
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
-    public class CustomersController : Controller
+    public sealed class CustomersController : Controller
     {
         private readonly IUseCase _getCustomerDetailsUseCase;
         private readonly Presenter _presenter;

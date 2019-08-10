@@ -3,7 +3,7 @@ namespace Manga.WebApi.UseCases.Register
     using System.Collections.Generic;
     using System;
 
-    public class CustomerModel
+    public sealed class CustomerModel
     {
         public Guid CustomerId { get; }
         public string SSN { get; }

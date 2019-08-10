@@ -6,7 +6,7 @@ namespace Manga.WebApi.UseCases.Deposit
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
-    public class AccountsController : Controller
+    public sealed class AccountsController : Controller
     {
         private readonly IUseCase _depositUseCase;
         private readonly Presenter _presenter;

@@ -1,4 +1,4 @@
-namespace Manga.Application.Boundaries.Withdraw
+namespace Manga.Application.Boundaries.Transfer
 {
     public interface IOutputHandler : IErrorHandler
     {

@@ -22,7 +22,6 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
         {
             await _context.Accounts.AddAsync((Account) account);
             await _context.Credits.AddAsync((Credit) credit);
-            await _context.SaveChangesAsync();
         }
 
         public async Task Delete(IAccount account)
@@ -64,13 +63,11 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
         public async Task Update(IAccount account, ICredit credit)
         {
             await _context.Credits.AddAsync((Credit) credit);
-            await _context.SaveChangesAsync();
         }
 
         public async Task Update(IAccount account, IDebit debit)
         {
             await _context.Debits.AddAsync((Debit) debit);
-            await _context.SaveChangesAsync();
         }
     }
 }

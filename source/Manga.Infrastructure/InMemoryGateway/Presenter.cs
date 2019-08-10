@@ -1,6 +1,7 @@
 namespace Manga.Infrastructure.InMemoryGateway
 {
     using System.Collections.ObjectModel;
+    using Manga.Application.Boundaries.Transfer;
 
     public sealed class Presenter : 
         Application.Boundaries.Register.IOutputHandler,
@@ -8,7 +9,8 @@ namespace Manga.Infrastructure.InMemoryGateway
         Application.Boundaries.Withdraw.IOutputHandler,
         Application.Boundaries.CloseAccount.IOutputHandler,
         Application.Boundaries.GetAccountDetails.IOutputHandler,
-        Application.Boundaries.GetCustomerDetails.IOutputHandler
+        Application.Boundaries.GetCustomerDetails.IOutputHandler,
+        Application.Boundaries.Transfer.IOutputHandler
     {
         public Collection<string> Errors { get; }
         public Collection<Application.Boundaries.Register.Output> Registers { get; }
@@ -17,7 +19,7 @@ namespace Manga.Infrastructure.InMemoryGateway
         public Collection<Application.Boundaries.CloseAccount.Output> ClosedAccounts { get; }
         public Collection<Application.Boundaries.GetAccountDetails.Output> GetAccountDetails { get; }
         public Collection<Application.Boundaries.GetCustomerDetails.Output> GetCustomerDetails { get; }
-
+        public Collection<Application.Boundaries.Transfer.Output> Transfers { get; }
 
         public Presenter()
         {
@@ -28,6 +30,7 @@ namespace Manga.Infrastructure.InMemoryGateway
             ClosedAccounts = new Collection<Application.Boundaries.CloseAccount.Output>();
             GetAccountDetails = new Collection<Application.Boundaries.GetAccountDetails.Output>();
             GetCustomerDetails = new Collection<Application.Boundaries.GetCustomerDetails.Output>();
+            Transfers = new Collection<Application.Boundaries.Transfer.Output>();
         }
 
         public void Error(string message)
@@ -63,6 +66,11 @@ namespace Manga.Infrastructure.InMemoryGateway
         public void Handle(Application.Boundaries.GetCustomerDetails.Output output)
         {
             GetCustomerDetails.Add(output);
+        }
+
+        public void Handle(Output output)
+        {
+            Transfers.Add(output);
         }
     }
 }
