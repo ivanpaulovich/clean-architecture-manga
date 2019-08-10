@@ -16,7 +16,7 @@ namespace Manga.UnitTests.UseCasesTests
         [Fact]
         public void GivenNullInput_ThrowsException()
         {
-            var register = new Register(null, null, null, null);
+            var register = new Register(null, null, null, null, null);
             Assert.ThrowsAsync<Exception>(async() => await register.Execute(null));
         }
 
@@ -35,12 +35,14 @@ namespace Manga.UnitTests.UseCasesTests
             var context = new MangaContext();
             var customerRepository = new CustomerRepository(context);
             var accountRepository = new AccountRepository(context);
+            var unitOfWork = new UnitOfWork(context);
 
             var sut = new Register(
                 entityFactory,
                 presenter,
                 customerRepository,
-                accountRepository
+                accountRepository,
+                unitOfWork
             );
 
             await sut.Execute(new Input(

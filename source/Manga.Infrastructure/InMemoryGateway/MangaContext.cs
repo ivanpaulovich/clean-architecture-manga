@@ -16,6 +16,8 @@
         public Guid DefaultCustomerId { get; }
         public Guid DefaultAccountId { get; }
 
+        public Guid SecondCustomerId { get; }
+        public Guid SecondAccountId { get; }
 
         public MangaContext()
         {
@@ -37,6 +39,15 @@
 
             DefaultCustomerId = customer.Id;
             DefaultAccountId = account.Id;
+
+            var secondCustomer = new Customer(new SSN("8408319999"), new Name("Andre Paulovich"));
+            var secondAccount = new Account(secondCustomer.Id);
+
+            Customers.Add(secondCustomer);
+            Accounts.Add(secondAccount);
+
+            SecondCustomerId = secondCustomer.Id;
+            SecondAccountId = secondAccount.Id;
         }
     }
 }

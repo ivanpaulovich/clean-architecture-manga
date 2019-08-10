@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Manga.Application.Boundaries;
 using Manga.Application.Repositories;
+using Manga.Application.Services;
 using Manga.Application.UseCases;
 using Manga.Domain;
 using Manga.Infrastructure.EntityFrameworkDataAccess;
@@ -44,9 +45,9 @@ namespace Manga.WebApi
         {
             Console.WriteLine("SQL");
 
-
             services.AddDbContext<MangaContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
@@ -71,6 +72,7 @@ namespace Manga.WebApi
             services.AddScoped<Manga.WebApi.UseCases.GetCustomerDetails.Presenter, Manga.WebApi.UseCases.GetCustomerDetails.Presenter>();
             services.AddScoped<Manga.WebApi.UseCases.Register.Presenter, Manga.WebApi.UseCases.Register.Presenter>();
             services.AddScoped<Manga.WebApi.UseCases.Withdraw.Presenter, Manga.WebApi.UseCases.Withdraw.Presenter>();
+            services.AddScoped<Manga.WebApi.UseCases.Transfer.Presenter, Manga.WebApi.UseCases.Transfer.Presenter>();
 
             services.AddScoped<Manga.Application.Boundaries.CloseAccount.IOutputHandler>(x => x.GetRequiredService<Manga.WebApi.UseCases.CloseAccount.Presenter>());
             services.AddScoped<Manga.Application.Boundaries.Deposit.IOutputHandler>(x => x.GetRequiredService<Manga.WebApi.UseCases.Deposit.Presenter>());
@@ -78,6 +80,7 @@ namespace Manga.WebApi
             services.AddScoped<Manga.Application.Boundaries.GetCustomerDetails.IOutputHandler>(x => x.GetRequiredService<Manga.WebApi.UseCases.GetCustomerDetails.Presenter>());
             services.AddScoped<Manga.Application.Boundaries.Register.IOutputHandler>(x => x.GetRequiredService<Manga.WebApi.UseCases.Register.Presenter>());
             services.AddScoped<Manga.Application.Boundaries.Withdraw.IOutputHandler>(x => x.GetRequiredService<Manga.WebApi.UseCases.Withdraw.Presenter>());
+            services.AddScoped<Manga.Application.Boundaries.Transfer.IOutputHandler>(x => x.GetRequiredService<Manga.WebApi.UseCases.Transfer.Presenter>());
 
             services.AddScoped<Manga.Application.Boundaries.CloseAccount.IUseCase, Manga.Application.UseCases.CloseAccount>();
             services.AddScoped<Manga.Application.Boundaries.Deposit.IUseCase, Manga.Application.UseCases.Deposit>();
@@ -85,6 +88,7 @@ namespace Manga.WebApi
             services.AddScoped<Manga.Application.Boundaries.GetCustomerDetails.IUseCase, Manga.Application.UseCases.GetCustomerDetails>();
             services.AddScoped<Manga.Application.Boundaries.Register.IUseCase, Manga.Application.UseCases.Register>();
             services.AddScoped<Manga.Application.Boundaries.Withdraw.IUseCase, Manga.Application.UseCases.Withdraw>();
+            services.AddScoped<Manga.Application.Boundaries.Transfer.IUseCase, Manga.Application.UseCases.Transfer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,19 +3,23 @@ namespace Manga.Application.UseCases
     using System.Threading.Tasks;
     using Manga.Application.Boundaries.Deposit;
     using Manga.Application.Repositories;
+    using Manga.Application.Services;
     using Manga.Domain.Accounts;
 
     public sealed class Deposit : IUseCase
     {
         private readonly IOutputHandler _outputHandler;
         private readonly IAccountRepository _accountRepository;
+        private readonly IUnitOfWork _unityOfWork;
 
         public Deposit(
             IOutputHandler outputHandler,
-            IAccountRepository accountRepository)
+            IAccountRepository accountRepository,
+            IUnitOfWork unityOfWork)
         {
             _outputHandler = outputHandler;
             _accountRepository = accountRepository;
+            _unityOfWork = unityOfWork;
         }
 
         public async Task Execute(Input input)
@@ -30,6 +34,7 @@ namespace Manga.Application.UseCases
             ICredit credit = account.Deposit(input.Amount);
 
             await _accountRepository.Update(account, credit);
+            await _unityOfWork.Save();
 
             Output output = new Output(
                 credit,

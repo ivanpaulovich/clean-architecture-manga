@@ -4,7 +4,6 @@ namespace Manga.UnitTests.UseCasesTests
     using Manga.Application.UseCases;
     using Manga.Infrastructure.InMemoryGateway;
     using Manga.Infrastructure.InMemoryGateway.Repositories;
-    using Manga.Infrastructure.InMemoryGateway;
     using System.Linq;
     using Manga.Domain.ValueObjects;
     using System.Threading.Tasks;
@@ -21,10 +20,12 @@ namespace Manga.UnitTests.UseCasesTests
             var presenter = new Presenter();
             var context = new MangaContext();
             var accountRepository = new AccountRepository(context);
+            var unitOfWork = new UnitOfWork(context);
             
             var sut = new Deposit(
                 presenter,
-                accountRepository
+                accountRepository,
+                unitOfWork
             );
 
             await sut.Execute(
@@ -41,10 +42,12 @@ namespace Manga.UnitTests.UseCasesTests
             var presenter = new Presenter();
             var context = new MangaContext();
             var accountRepository = new AccountRepository(context);
+            var unitOfWork = new UnitOfWork(context);
             
             var sut = new Deposit(
                 presenter,
-                accountRepository
+                accountRepository,
+                unitOfWork
             );
 
             await Assert.ThrowsAsync<AmountShouldBePositiveException>(() =>
