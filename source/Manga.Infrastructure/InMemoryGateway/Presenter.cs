@@ -20,6 +20,7 @@ namespace Manga.Infrastructure.InMemoryGateway
         public Collection<Application.Boundaries.GetAccountDetails.Output> GetAccountDetails { get; }
         public Collection<Application.Boundaries.GetCustomerDetails.Output> GetCustomerDetails { get; }
         public Collection<Application.Boundaries.Transfer.Output> Transfers { get; }
+         public Collection<string> NotFounds { get; }
 
         public Presenter()
         {
@@ -71,6 +72,11 @@ namespace Manga.Infrastructure.InMemoryGateway
         public void Handle(Output output)
         {
             Transfers.Add(output);
+        }
+
+        public void NotFound(string message)
+        {
+            NotFounds.Add(message);
         }
     }
 }
