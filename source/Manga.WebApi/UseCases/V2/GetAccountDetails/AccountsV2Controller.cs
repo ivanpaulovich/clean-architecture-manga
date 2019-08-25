@@ -6,7 +6,10 @@ namespace Manga.WebApi.UseCases.V2.GetAccountDetails
     using Microsoft.AspNetCore.Http;
     using Swashbuckle.AspNetCore.Examples;
     using System.ComponentModel.DataAnnotations;
+    using Manga.WebApi.Extensions.FeatureFlags;
+    using Microsoft.FeatureManagement.Mvc;
 
+    [FeatureGate(Features.GetAccountDetailsV2)]
     [ApiVersion("2.0")]
     [Route("api/v2/[controller]")]
     [ApiController]

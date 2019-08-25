@@ -7,7 +7,10 @@ namespace Manga.WebApi.UseCases.V1.Transfer
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Swashbuckle.AspNetCore.Examples;
+    using Manga.WebApi.Extensions.FeatureFlags;
+    using Microsoft.FeatureManagement.Mvc;
 
+    [FeatureGate(Features.Transfer)]
     [ApiVersion("1.0")]
     [Route("api/v1/[controller]")]
     [ApiController]
