@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Manga.WebApi.Extensions;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Manga.WebApi.Extensions.FeatureFlags;
 
 namespace Manga.WebApi
 {
@@ -24,6 +25,7 @@ namespace Manga.WebApi
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddControllersAsServices();
 
+            services.AddFeatureFlags(Configuration);
             services.AddVersionedSwagger();
 
             services.AddUseCases();
