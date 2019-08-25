@@ -3,12 +3,12 @@ namespace Manga.Application.Boundaries.Deposit
     using Manga.Domain.Accounts;
     using Manga.Domain.ValueObjects;
 
-    public sealed class Output
+    public sealed class DepositOutput
     {
         public Transaction Transaction { get; }
         public double UpdatedBalance { get; }
 
-        public Output(
+        public DepositOutput(
             ICredit credit,
             Amount updatedBalance)
         {
@@ -17,9 +17,9 @@ namespace Manga.Application.Boundaries.Deposit
             Transaction = new Transaction(
                 creditEntity.Description,
                 creditEntity
-                    .Amount
-                    .ToAmount()
-                    .ToDouble(),
+                .Amount
+                .ToAmount()
+                .ToDouble(),
                 creditEntity.TransactionDate);
 
             UpdatedBalance = updatedBalance.ToDouble();

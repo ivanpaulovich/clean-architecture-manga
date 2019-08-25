@@ -1,7 +1,7 @@
 namespace Manga.WebApi.UseCases.V1.Transfer
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
+    using System;
 
     /// <summary>
     /// Transfer Request
@@ -13,13 +13,13 @@ namespace Manga.WebApi.UseCases.V1.Transfer
         /// </summary>
         [Required]
         public Guid OriginAccountId { get; set; }
-        
+
         /// <summary>
         /// Destination Account ID
         /// </summary>
         [Required]
         public Guid DestinationAccountId { get; set; }
-        
+
         /// <summary>
         /// Amount Transferred
         /// </summary>

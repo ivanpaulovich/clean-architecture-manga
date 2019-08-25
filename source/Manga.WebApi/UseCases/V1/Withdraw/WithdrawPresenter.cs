@@ -18,7 +18,7 @@ namespace Manga.WebApi.UseCases.V1.Withdraw
             ViewModel = new BadRequestObjectResult(problemDetails);
         }
 
-        public void Handle(Output output)
+        public void Handle(WithdrawOutput output)
         {
             ViewModel = new ObjectResult(new WithdrawResponse(
                 output.Transaction.Amount,

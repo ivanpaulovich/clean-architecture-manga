@@ -1,7 +1,7 @@
 namespace Manga.WebApi.UseCases.V1.GetCustomerDetails
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
+    using System;
 
     /// <summary>
     /// The Get Customer Details Request

@@ -2,7 +2,7 @@ namespace Manga.Application.Boundaries.GetCustomerDetails
 {
     public interface IOutputHandler : IErrorHandler
     {
-        void Handle(Output output);
+        void Handle(GetCustomerDetailsOutput output);
         void NotFound(string message);
     }
 }

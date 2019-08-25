@@ -13,7 +13,7 @@ namespace Manga.WebApi.Extensions
             services.AddScoped<Manga.Application.Boundaries.Register.IUseCase, Manga.Application.UseCases.Register>();
             services.AddScoped<Manga.Application.Boundaries.Withdraw.IUseCase, Manga.Application.UseCases.Withdraw>();
             services.AddScoped<Manga.Application.Boundaries.Transfer.IUseCase, Manga.Application.UseCases.Transfer>();
-            
+
             return services;
         }
     }

@@ -1,7 +1,7 @@
 namespace Manga.WebApi.UseCases.V1.CloseAccount
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
+    using System;
     using Manga.Application.Boundaries.CloseAccount;
 
     /// <summary>
@@ -15,7 +15,7 @@ namespace Manga.WebApi.UseCases.V1.CloseAccount
         [Required]
         public Guid AccountId { get; }
 
-        public CloseAccountResponse(Output output)
+        public CloseAccountResponse(CreateAccountOutput output)
         {
             AccountId = output.AccountId;
         }

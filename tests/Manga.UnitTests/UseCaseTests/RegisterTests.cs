@@ -45,7 +45,7 @@ namespace Manga.UnitTests.UseCasesTests
                 unitOfWork
             );
 
-            await sut.Execute(new Input(
+            await sut.Execute(new RegisterInput(
                 ssn,
                 name,
                 new PositiveAmount(amount)));

@@ -1,25 +1,22 @@
-namespace Manga.Application.Boundaries.Transfer
+namespace Manga.Application.Boundaries.Withdraw
 {
-    using System;
     using Manga.Domain.Accounts;
     using Manga.Domain.ValueObjects;
 
-    public sealed class Output
+    public sealed class WithdrawOutput
     {
         public Transaction Transaction { get; }
         public double UpdatedBalance { get; }
 
-        public Output(IDebit debit, Amount updatedBalance, Guid originAccountId, Guid destinationAccountId)
+        public WithdrawOutput(IDebit debit, Amount updatedBalance)
         {
             Debit debitEntity = (Debit) debit;
 
             Transaction = new Transaction(
-                originAccountId,
-                destinationAccountId,
                 debitEntity.Description,
                 debitEntity.Amount
-                    .ToAmount()
-                    .ToDouble(),
+                .ToAmount()
+                .ToDouble(),
                 debitEntity.TransactionDate);
 
             UpdatedBalance = updatedBalance.ToDouble();

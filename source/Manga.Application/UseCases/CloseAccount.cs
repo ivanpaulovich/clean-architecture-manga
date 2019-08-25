@@ -18,7 +18,7 @@ namespace Manga.Application.UseCases
             _accountRepository = accountRepository;
         }
 
-        public async Task Execute(Input input)
+        public async Task Execute(CloseAccountInput input)
         {
             IAccount account = await _accountRepository.Get(input.AccountId);
             if (account == null)
@@ -32,7 +32,7 @@ namespace Manga.Application.UseCases
                 await _accountRepository.Delete(account);
             }
 
-            var output = new Output(account);
+            var output = new CreateAccountOutput(account);
             _outputHandler.Handle(output);
         }
     }

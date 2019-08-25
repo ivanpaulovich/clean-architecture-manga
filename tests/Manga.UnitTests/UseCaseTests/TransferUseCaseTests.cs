@@ -32,7 +32,7 @@ namespace Manga.UnitTests.UseCaseTests
             );
 
             await sut.Execute(
-                new Input(
+                new TransferInput(
                     originAccountId,
                     destinationAccountId,
                     new PositiveAmount(amount)));

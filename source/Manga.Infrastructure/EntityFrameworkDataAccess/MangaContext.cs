@@ -60,22 +60,24 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
             );
 
             modelBuilder.Entity<Credit>().HasData(
-                new { 
+                new
+                {
                     Id = new Guid("f5117315-e789-491a-b662-958c37237f9b"),
-                    AccountId = new Guid("4c510cfe-5d61-4a46-a3d9-c4313426655f"),
-                    Amount = new PositiveAmount(400),
-                    Description = "Credit",
-                    TransactionDate = DateTime.UtcNow
+                        AccountId = new Guid("4c510cfe-5d61-4a46-a3d9-c4313426655f"),
+                        Amount = new PositiveAmount(400),
+                        Description = "Credit",
+                        TransactionDate = DateTime.UtcNow
                 }
             );
 
             modelBuilder.Entity<Debit>().HasData(
-                new { 
+                new
+                {
                     Id = new Guid("3d6032df-7a3b-46e6-8706-be971e3d539f"),
-                    AccountId = new Guid("4c510cfe-5d61-4a46-a3d9-c4313426655f"),
-                    Amount = new PositiveAmount(400),
-                    Description = "Debit",
-                    TransactionDate = DateTime.UtcNow
+                        AccountId = new Guid("4c510cfe-5d61-4a46-a3d9-c4313426655f"),
+                        Amount = new PositiveAmount(400),
+                        Description = "Debit",
+                        TransactionDate = DateTime.UtcNow
                 }
             );
         }

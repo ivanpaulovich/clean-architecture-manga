@@ -1,5 +1,4 @@
 namespace Manga.Domain
 {
-    public interface IAggregateRoot : IEntity
-    { }
+    public interface IAggregateRoot : IEntity { }
 }

@@ -6,7 +6,7 @@ namespace Manga.Domain.Accounts
 
     public class Account : IAccount
     {
-        public Guid Id { get; protected set; } 
+        public Guid Id { get; protected set; }
         public Guid CustomerId { get; protected set; }
         private CreditsCollection _credits = new CreditsCollection();
         private DebitsCollection _debits = new DebitsCollection();

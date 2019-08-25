@@ -35,9 +35,9 @@ namespace Manga.Application.Boundaries.GetCustomerDetails
                 Transaction transactionOutput = new Transaction(
                     creditEntity.Description,
                     creditEntity
-                        .Amount
-                        .ToAmount()
-                        .ToDouble(),
+                    .Amount
+                    .ToAmount()
+                    .ToDouble(),
                     creditEntity.TransactionDate);
 
                 transactionResults.Add(transactionOutput);
@@ -50,9 +50,9 @@ namespace Manga.Application.Boundaries.GetCustomerDetails
                 Transaction transactionOutput = new Transaction(
                     debitEntity.Description,
                     debitEntity
-                        .Amount
-                        .ToAmount()
-                        .ToDouble(),
+                    .Amount
+                    .ToAmount()
+                    .ToDouble(),
                     debitEntity.TransactionDate);
 
                 transactionResults.Add(transactionOutput);

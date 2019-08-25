@@ -4,11 +4,11 @@ namespace Manga.WebApi.UseCases.V1.Transfer
     using System.Threading.Tasks;
     using Manga.Application.Boundaries.Transfer;
     using Manga.Domain.ValueObjects;
+    using Manga.WebApi.Extensions.FeatureFlags;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Swashbuckle.AspNetCore.Examples;
-    using Manga.WebApi.Extensions.FeatureFlags;
     using Microsoft.FeatureManagement.Mvc;
+    using Swashbuckle.AspNetCore.Examples;
 
     [FeatureGate(Features.Transfer)]
     [ApiVersion("1.0")]
@@ -43,7 +43,7 @@ namespace Manga.WebApi.UseCases.V1.Transfer
         public async Task<IActionResult> Transfer([FromBody][Required] TransferRequest request)
         {
             await _TransferUseCase.Execute(
-                new Input(
+                new TransferInput(
                     request.OriginAccountId,
                     request.DestinationAccountId,
                     new PositiveAmount(request.Amount)

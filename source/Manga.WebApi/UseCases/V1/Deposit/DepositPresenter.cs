@@ -18,7 +18,7 @@ namespace Manga.WebApi.UseCases.V1.Deposit
             ViewModel = new BadRequestObjectResult(problemDetails);
         }
 
-        public void Handle(Output output)
+        public void Handle(DepositOutput output)
         {
             ViewModel = new ObjectResult(new DepositResponse(
                 output.Transaction.Amount,

@@ -20,7 +20,7 @@ namespace Manga.WebApi.UseCases.V1.GetCustomerDetails
             ViewModel = new BadRequestObjectResult(problemDetails);
         }
 
-        public void Handle(Output output)
+        public void Handle(GetCustomerDetailsOutput output)
         {
             List<AccountDetailsModel> accounts = new List<AccountDetailsModel>();
 

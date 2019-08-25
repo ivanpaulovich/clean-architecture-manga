@@ -26,7 +26,7 @@ namespace Manga.WebApi.Extensions
 
             services.AddScoped<Manga.WebApi.UseCases.V1.Transfer.TransferPresenter, Manga.WebApi.UseCases.V1.Transfer.TransferPresenter>();
             services.AddScoped<Manga.Application.Boundaries.Transfer.IOutputHandler>(x => x.GetRequiredService<Manga.WebApi.UseCases.V1.Transfer.TransferPresenter>());
-            
+
             return services;
         }
     }

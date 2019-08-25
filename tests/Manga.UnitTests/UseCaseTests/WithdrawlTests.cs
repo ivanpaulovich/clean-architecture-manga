@@ -31,7 +31,7 @@ namespace Manga.UnitTests.UseCasesTests
                 unitOfWork
             );
 
-            await sut.Execute(new Input(
+            await sut.Execute(new WithdrawInput(
                 accountId,
                 new PositiveAmount(amount)));
 

@@ -1,11 +1,11 @@
 namespace Manga.WebApi.UseCases.V1.CloseAccount
 {
+    using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Manga.Application.Boundaries.CloseAccount;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
     using Swashbuckle.AspNetCore.Examples;
-    using System.ComponentModel.DataAnnotations;
 
     [ApiVersion("1.0")]
     [Route("api/v1/[controller]")]
@@ -38,7 +38,7 @@ namespace Manga.WebApi.UseCases.V1.CloseAccount
         [SwaggerRequestExample(typeof(CloseAccountRequest), typeof(CloseAccountRequestExample))]
         public async Task<IActionResult> Close([FromRoute][Required] CloseAccountRequest request)
         {
-            await _closeAccountUseCase.Execute(new Input(request.AccountId));
+            await _closeAccountUseCase.Execute(new CloseAccountInput(request.AccountId));
             return _presenter.ViewModel;
         }
     }

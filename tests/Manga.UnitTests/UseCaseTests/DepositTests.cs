@@ -29,7 +29,7 @@ namespace Manga.UnitTests.UseCasesTests
             );
 
             await sut.Execute(
-                new Input(context.DefaultAccountId, new PositiveAmount(amount)));
+                new DepositInput(context.DefaultAccountId, new PositiveAmount(amount)));
 
             var output = presenter.Deposits.First();
             Assert.Equal(amount, output.Transaction.Amount);
@@ -51,7 +51,7 @@ namespace Manga.UnitTests.UseCasesTests
             );
 
             await Assert.ThrowsAsync<AmountShouldBePositiveException>(() =>
-              sut.Execute(new Input(context.DefaultAccountId, new PositiveAmount(amount))));
+              sut.Execute(new DepositInput(context.DefaultAccountId, new PositiveAmount(amount))));
         }
     }
 }

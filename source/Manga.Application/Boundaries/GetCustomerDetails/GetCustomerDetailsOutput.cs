@@ -4,14 +4,14 @@ namespace Manga.Application.Boundaries.GetCustomerDetails
     using System;
     using Manga.Domain.Customers;
 
-    public sealed class Output
+    public sealed class GetCustomerDetailsOutput
     {
         public Guid CustomerId { get; }
         public string SSN { get; }
         public string Name { get; }
         public IReadOnlyList<Account> Accounts { get; }
 
-        public Output(
+        public GetCustomerDetailsOutput(
             ICustomer customer,
             List<Account> accounts)
         {

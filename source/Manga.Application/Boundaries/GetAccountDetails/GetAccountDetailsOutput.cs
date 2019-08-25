@@ -1,16 +1,30 @@
-namespace Manga.Application.Boundaries.Register
+namespace Manga.Application.Boundaries.GetAccountDetails
 {
     using System.Collections.Generic;
+    using System;
     using Manga.Domain.Accounts;
-    using Manga.Domain.Customers;
 
-    public sealed class Output
+    public sealed class GetAccountDetailsOutput
     {
-        public Customer Customer { get; }
-        public Account Account { get; }
+        public Guid AccountId { get; }
+        public double CurrentBalance { get; }
+        public List<Transaction> Transactions { get; }
 
-        public Output(ICustomer customer, IAccount account)
+        public GetAccountDetailsOutput(
+            Guid accountId,
+            double currentBalance,
+            List<Transaction> transactions)
         {
+            AccountId = accountId;
+            CurrentBalance = currentBalance;
+            Transactions = transactions;
+        }
+
+        public GetAccountDetailsOutput(IAccount account)
+        {
+            AccountId = account.Id;
+            CurrentBalance = account.GetCurrentBalance().ToDouble();
+
             List<Transaction> transactionResults = new List<Transaction>();
             foreach (ICredit credit in account.GetCredits())
             {
@@ -19,9 +33,9 @@ namespace Manga.Application.Boundaries.Register
                 Transaction transactionOutput = new Transaction(
                     creditEntity.Description,
                     creditEntity
-                        .Amount
-                        .ToAmount()
-                        .ToDouble(),
+                    .Amount
+                    .ToAmount()
+                    .ToDouble(),
                     creditEntity.TransactionDate);
 
                 transactionResults.Add(transactionOutput);
@@ -34,23 +48,15 @@ namespace Manga.Application.Boundaries.Register
                 Transaction transactionOutput = new Transaction(
                     debitEntity.Description,
                     debitEntity
-                        .Amount
-                        .ToAmount()
-                        .ToDouble(),
+                    .Amount
+                    .ToAmount()
+                    .ToDouble(),
                     debitEntity.TransactionDate);
 
                 transactionResults.Add(transactionOutput);
             }
 
-            Account = new Account(
-                account.Id,
-                account.GetCurrentBalance().ToDouble(),
-                transactionResults);
-
-            List<Account> accountOutputs = new List<Account>();
-            accountOutputs.Add(Account);
-
-            Customer = new Customer(customer, accountOutputs);
+            Transactions = transactionResults;
         }
     }
 }

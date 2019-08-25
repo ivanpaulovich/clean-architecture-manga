@@ -1,8 +1,8 @@
 namespace Manga.WebApi.UseCases.V1.GetCustomerDetails
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System;
     using Manga.WebApi.Models;
 
     /// <summary>
@@ -15,19 +15,19 @@ namespace Manga.WebApi.UseCases.V1.GetCustomerDetails
         /// </summary>
         [Required]
         public Guid CustomerId { get; }
-        
+
         /// <summary>
         /// SSN
         /// </summary>
         [Required]
         public string SSN { get; }
-        
+
         /// <summary>
         /// Name
         /// </summary>
         [Required]
         public string Name { get; }
-        
+
         /// <summary>
         /// Accounts
         /// </summary>

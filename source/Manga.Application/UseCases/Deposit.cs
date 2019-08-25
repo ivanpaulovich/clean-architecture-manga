@@ -22,7 +22,7 @@ namespace Manga.Application.UseCases
             _unitOfWork = unitOfWork;
         }
 
-        public async Task Execute(Input input)
+        public async Task Execute(DepositInput input)
         {
             IAccount account = await _accountRepository.Get(input.AccountId);
             if (account == null)
@@ -36,7 +36,7 @@ namespace Manga.Application.UseCases
             await _accountRepository.Update(account, credit);
             await _unitOfWork.Save();
 
-            Output output = new Output(
+            DepositOutput output = new DepositOutput(
                 credit,
                 account.GetCurrentBalance());
 
