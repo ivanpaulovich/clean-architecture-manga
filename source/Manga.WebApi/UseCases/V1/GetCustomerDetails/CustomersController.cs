@@ -26,7 +26,7 @@ namespace Manga.WebApi.UseCases.V1.GetCustomerDetails
         /// <summary>
         /// Get the Customer details 
         /// </summary>
-        [HttpGet("{customerId}", Name = "GetCustomer")]
+        [HttpGet("{CustomerId}", Name = "GetCustomer")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetCustomerDetailsResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

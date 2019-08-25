@@ -26,7 +26,7 @@ namespace Manga.WebApi.UseCases.V2.GetAccountDetails
         /// <summary>
         /// Get an account details
         /// </summary>
-        [HttpGet("{accountId}", Name = "GetAccountV2")]
+        [HttpGet("{AccountId}", Name = "GetAccountV2")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetAccountDetailsResponseV2))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

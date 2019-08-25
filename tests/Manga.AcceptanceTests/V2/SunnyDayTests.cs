@@ -1,4 +1,4 @@
-namespace Manga.AcceptanceTests
+namespace Manga.AcceptanceTests.V2
 {
     using Manga.WebApi;
     using Xunit;
@@ -44,7 +44,7 @@ namespace Manga.AcceptanceTests
         private async Task GetAccount(string accountId)
         {
             var client = _factory.CreateClient();
-            string result = await client.GetStringAsync("/api/v1/Accounts/" + accountId);
+            string result = await client.GetStringAsync("/api/v2/AccountsV2/" + accountId + "/?api-version=2");
         }
 
         private async Task<Tuple<string, string>> Register(double initialAmount)
