@@ -13,7 +13,7 @@ namespace Manga.Application.UseCases
         private readonly IOutputHandler _outputHandler;
         private readonly ICustomerRepository _customerRepository;
         private readonly IAccountRepository _accountRepository;
-        private readonly IUnitOfWork _unityOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         public Register(
             IEntitiesFactory entityFactory,
@@ -26,7 +26,7 @@ namespace Manga.Application.UseCases
             _outputHandler = outputHandler;
             _customerRepository = customerRepository;
             _accountRepository = accountRepository;
-            _unityOfWork = unityOfWork;
+            _unitOfWork = unityOfWork;
         }
 
         public async Task Execute(Input input)
@@ -51,7 +51,7 @@ namespace Manga.Application.UseCases
 
             await _customerRepository.Add(customer);
             await _accountRepository.Add(account, credit);
-            await _unityOfWork.Save();
+            await _unitOfWork.Save();
 
             Output output = new Output(customer, account);
             _outputHandler.Handle(output);

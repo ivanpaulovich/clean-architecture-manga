@@ -29,6 +29,7 @@ namespace Manga.WebApi
             services.AddUseCases();
             services.AddInMemoryPersistence();
             services.AddPresentersV1();
+            services.AddPresentersV2();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

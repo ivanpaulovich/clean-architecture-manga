@@ -10,16 +10,16 @@ namespace Manga.Application.UseCases
     {
         private readonly IOutputHandler _outputHandler;
         private readonly IAccountRepository _accountRepository;
-        private readonly IUnitOfWork _unityOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         public Withdraw(
             IOutputHandler outputHandler,
             IAccountRepository accountRepository,
-            IUnitOfWork unityOfWork)
+            IUnitOfWork unitOfWork)
         {
             _outputHandler = outputHandler;
             _accountRepository = accountRepository;
-            _unityOfWork = unityOfWork;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task Execute(Input input)
@@ -40,7 +40,7 @@ namespace Manga.Application.UseCases
             }
 
             await _accountRepository.Update(account, debit);
-            await _unityOfWork.Save();
+            await _unitOfWork.Save();
 
             Output output = new Output(
                 debit,
