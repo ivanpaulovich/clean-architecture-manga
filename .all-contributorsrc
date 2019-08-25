@@ -33,7 +33,7 @@
       "profile": "https://github.com/luizgustavogp",
       "contributions": [
         "design",
-        "test" 
+        "test"
       ]
     },
     {
@@ -83,6 +83,17 @@
       "profile": "https://github.com/NicoCG",
       "contributions": [
         "test"
+      ]
+    },
+    {
+      "login": "fals",
+      "name": "Filipe Augusto Lima de Souza",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/3750960?v=4",
+      "profile": "https://stackoverflow.com/users/2072198/fals",
+      "contributions": [
+        "design",
+        "test",
+        "code"
       ]
     }
   ],
