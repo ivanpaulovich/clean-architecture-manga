@@ -62,6 +62,17 @@
       "avatar_url": "https://avatars1.githubusercontent.com/u/13519594?v=4",
       "profile": "https://github.com/ostorc",
       "contributions": [
+        "design",
+        "test"
+      ]
+    },
+    {
+      "login": "MarlonMiranda",
+      "name": "Marlon Miranda da Silva",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/12774904?v=4",
+      "profile": "https://github.com/MarlonMiranda",
+      "contributions": [
+        "design",
         "test"
       ]
     }
