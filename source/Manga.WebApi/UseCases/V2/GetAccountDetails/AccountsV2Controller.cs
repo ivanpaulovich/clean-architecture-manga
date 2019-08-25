@@ -1,13 +1,13 @@
 namespace Manga.WebApi.UseCases.V2.GetAccountDetails
 {
+    using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Manga.Application.Boundaries.GetAccountDetails;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Http;
-    using Swashbuckle.AspNetCore.Examples;
-    using System.ComponentModel.DataAnnotations;
     using Manga.WebApi.Extensions.FeatureFlags;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;
+    using Swashbuckle.AspNetCore.Examples;
 
     [FeatureGate(Features.GetAccountDetailsV2)]
     [ApiVersion("2.0")]
@@ -37,7 +37,7 @@ namespace Manga.WebApi.UseCases.V2.GetAccountDetails
         [SwaggerRequestExample(typeof(GetAccountDetailsRequestV2), typeof(GetAccountDetailsRequestExampleV2))]
         public async Task<IActionResult> Get([FromRoute][Required] GetAccountDetailsRequestV2 request)
         {
-            await _getAccountDetailsUseCase.Execute(new Input(request.AccountId));
+            await _getAccountDetailsUseCase.Execute(new GetAccountDetailsInput(request.AccountId));
             return _presenter.ViewModel;
         }
     }

@@ -1,7 +1,7 @@
 namespace Manga.WebApi.UseCases.V2.GetAccountDetails
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
+    using System;
 
     /// <summary>
     /// The Get Account Details Request

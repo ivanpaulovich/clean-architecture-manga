@@ -12,13 +12,13 @@ namespace Manga.WebApi.Extensions.FeatureFlags
 
             var featureManager = services.BuildServiceProvider()
                 .GetRequiredService<IFeatureManager>();
-            
+
             services.AddMvc()
                 .ConfigureApplicationPartManager(apm =>
                     apm.FeatureProviders.Add(
                         new CustomControllerFeatureProvider(featureManager)
                     ));
-            
+
             return services;
         }
     }

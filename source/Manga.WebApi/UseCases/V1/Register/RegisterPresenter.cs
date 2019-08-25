@@ -20,7 +20,7 @@ namespace Manga.WebApi.UseCases.V1.Register
             ViewModel = new BadRequestObjectResult(problemDetails);
         }
 
-        public void Handle(Output output)
+        public void Handle(RegisterOutput output)
         {
             List<TransactionModel> transactions = new List<TransactionModel>();
 
@@ -50,8 +50,9 @@ namespace Manga.WebApi.UseCases.V1.Register
             );
 
             ViewModel = new CreatedAtRouteResult("GetCustomer",
-                new { 
-                    customerId = model.CustomerId 
+                new
+                {
+                    customerId = model.CustomerId
                 },
                 model);
         }

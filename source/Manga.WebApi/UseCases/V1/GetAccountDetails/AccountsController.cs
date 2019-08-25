@@ -1,11 +1,11 @@
 namespace Manga.WebApi.UseCases.V1.GetAccountDetails
 {
+    using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Manga.Application.Boundaries.GetAccountDetails;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
     using Swashbuckle.AspNetCore.Examples;
-    using System.ComponentModel.DataAnnotations;
 
     [ApiVersion("1.0")]
     [Route("api/v1/[controller]")]
@@ -34,7 +34,7 @@ namespace Manga.WebApi.UseCases.V1.GetAccountDetails
         [SwaggerRequestExample(typeof(GetAccountDetailsRequest), typeof(GetAccountDetailsRequestExample))]
         public async Task<IActionResult> Get([FromRoute][Required] GetAccountDetailsRequest request)
         {
-            await _getAccountDetailsUseCase.Execute(new Input(request.AccountId));
+            await _getAccountDetailsUseCase.Execute(new GetAccountDetailsInput(request.AccountId));
             return _presenter.ViewModel;
         }
     }

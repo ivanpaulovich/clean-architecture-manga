@@ -1,8 +1,8 @@
-﻿namespace Manga.Infrastructure.InMemoryGateway.Repositories
+namespace Manga.Infrastructure.InMemoryGateway.Repositories
 {
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using System;
     using Manga.Application.Repositories;
     using Manga.Domain.Accounts;
 
@@ -17,8 +17,8 @@
 
         public async Task Add(IAccount account, ICredit credit)
         {
-            _context.Accounts.Add((Account)account);
-            _context.Credits.Add((Credit)credit);
+            _context.Accounts.Add((Account) account);
+            _context.Credits.Add((Credit) credit);
             await Task.CompletedTask;
         }
 
@@ -48,7 +48,7 @@
                 .Where(e => e.Id == account.Id)
                 .SingleOrDefault();
 
-            accountOld = (Account)account;
+            accountOld = (Account) account;
             await Task.CompletedTask;
         }
 
@@ -58,7 +58,7 @@
                 .Where(e => e.Id == account.Id)
                 .SingleOrDefault();
 
-            accountOld = (Account)account;
+            accountOld = (Account) account;
             await Task.CompletedTask;
         }
     }

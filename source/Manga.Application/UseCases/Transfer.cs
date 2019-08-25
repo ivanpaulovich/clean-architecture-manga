@@ -22,7 +22,7 @@ namespace Manga.Application.UseCases
             _unitOfWork = unitOfWork;
         }
 
-        public async Task Execute(Input input)
+        public async Task Execute(TransferInput input)
         {
             IAccount originAccount = await _accountRepository.Get(input.OriginAccountId);
             if (originAccount == null)
@@ -45,8 +45,8 @@ namespace Manga.Application.UseCases
             await _accountRepository.Update(destinationAccount, credit);
             await _unitOfWork.Save();
 
-            Output output = new Output(
-                debit,                
+            TransferOutput output = new TransferOutput(
+                debit,
                 originAccount.GetCurrentBalance(),
                 input.OriginAccountId,
                 input.DestinationAccountId);

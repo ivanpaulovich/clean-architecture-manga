@@ -3,9 +3,9 @@ namespace Manga.Application.UseCases
     using System.Threading.Tasks;
     using Manga.Application.Boundaries.Register;
     using Manga.Application.Repositories;
+    using Manga.Application.Services;
     using Manga.Domain.Accounts;
     using Manga.Domain;
-    using Manga.Application.Services;
 
     public sealed class Register : IUseCase
     {
@@ -29,7 +29,7 @@ namespace Manga.Application.UseCases
             _unitOfWork = unityOfWork;
         }
 
-        public async Task Execute(Input input)
+        public async Task Execute(RegisterInput input)
         {
             if (input == null)
             {
@@ -53,7 +53,7 @@ namespace Manga.Application.UseCases
             await _accountRepository.Add(account, credit);
             await _unitOfWork.Save();
 
-            Output output = new Output(customer, account);
+            RegisterOutput output = new RegisterOutput(customer, account);
             _outputHandler.Handle(output);
         }
     }

@@ -32,10 +32,10 @@ namespace Manga.Domain.ValueObjects
 
             if (obj is double)
             {
-                return (double)obj == _value;
+                return (double) obj == _value;
             }
 
-            return ((Amount)obj)._value == _value;
+            return ((Amount) obj)._value == _value;
         }
 
         public override int GetHashCode()

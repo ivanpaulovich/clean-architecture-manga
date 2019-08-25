@@ -1,7 +1,7 @@
 namespace Manga.Infrastructure.EntityFrameworkDataAccess
 {
-    using System;
     using System.Threading.Tasks;
+    using System;
     using Manga.Application.Services;
 
     public sealed class UnitOfWork : IUnitOfWork, IDisposable

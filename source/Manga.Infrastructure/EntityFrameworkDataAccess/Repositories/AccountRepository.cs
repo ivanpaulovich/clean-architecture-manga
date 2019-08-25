@@ -1,12 +1,12 @@
 namespace Manga.Infrastructure.EntityFrameworkDataAccess
 {
     using System.Data.SqlClient;
+    using System.Linq;
     using System.Threading.Tasks;
     using System;
     using Manga.Application.Repositories;
     using Manga.Domain.Accounts;
     using Microsoft.EntityFrameworkCore;
-    using System.Linq;
 
     public sealed class AccountRepository : IAccountRepository
     {

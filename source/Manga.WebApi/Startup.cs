@@ -1,11 +1,11 @@
+using Manga.WebApi.Extensions;
+using Manga.WebApi.Extensions.FeatureFlags;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Manga.WebApi.Extensions;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Manga.WebApi.Extensions.FeatureFlags;
 
 namespace Manga.WebApi
 {

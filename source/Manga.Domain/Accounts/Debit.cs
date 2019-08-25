@@ -12,7 +12,7 @@ namespace Manga.Domain.Accounts
         {
             get { return "Debit"; }
         }
-        public DateTime TransactionDate { get; protected set; } 
+        public DateTime TransactionDate { get; protected set; }
 
         private Debit() { }
 

@@ -3,11 +3,11 @@ namespace Manga.Application.Boundaries.CloseAccount
     using System;
     using Manga.Domain.Accounts;
 
-    public sealed class Output
+    public sealed class CreateAccountOutput
     {
         public Guid AccountId { get; }
 
-        public Output(IAccount account)
+        public CreateAccountOutput(IAccount account)
         {
             AccountId = account.Id;
         }

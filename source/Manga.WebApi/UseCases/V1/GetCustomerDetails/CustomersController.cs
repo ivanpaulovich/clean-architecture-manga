@@ -1,11 +1,11 @@
 namespace Manga.WebApi.UseCases.V1.GetCustomerDetails
 {
+    using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Manga.Application.Boundaries.GetCustomerDetails;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
     using Swashbuckle.AspNetCore.Examples;
-    using System.ComponentModel.DataAnnotations;
 
     [ApiVersion("1.0")]
     [Route("api/v1/[controller]")]
@@ -34,7 +34,7 @@ namespace Manga.WebApi.UseCases.V1.GetCustomerDetails
         [SwaggerRequestExample(typeof(GetCustomerDetailsRequest), typeof(GetCustomerDetailsRequestExample))]
         public async Task<IActionResult> GetCustomer([FromRoute][Required] GetCustomerDetailsRequest request)
         {
-            await _getCustomerDetailsUseCase.Execute(new Input(request.CustomerId));
+            await _getCustomerDetailsUseCase.Execute(new GetCustomerDetailsInput(request.CustomerId));
             return _presenter.ViewModel;
         }
     }

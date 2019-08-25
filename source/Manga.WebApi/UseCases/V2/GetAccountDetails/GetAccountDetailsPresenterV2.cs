@@ -20,7 +20,7 @@ namespace Manga.WebApi.UseCases.V2.GetAccountDetails
             ViewModel = new BadRequestObjectResult(problemDetails);
         }
 
-        public void Handle(Output output)
+        public void Handle(GetAccountDetailsOutput output)
         {
             List<TransactionModel> transactions = new List<TransactionModel>();
 

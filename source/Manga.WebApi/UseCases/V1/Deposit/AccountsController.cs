@@ -39,7 +39,7 @@ namespace Manga.WebApi.UseCases.V1.Deposit
         [SwaggerRequestExample(typeof(DepositRequest), typeof(DepositRequestExample))]
         public async Task<IActionResult> Deposit([FromBody][Required] DepositRequest request)
         {
-            await _depositUseCase.Execute(new Input(request.AccountId, new PositiveAmount(request.Amount)));
+            await _depositUseCase.Execute(new DepositInput(request.AccountId, new PositiveAmount(request.Amount)));
             return _presenter.ViewModel;
         }
     }

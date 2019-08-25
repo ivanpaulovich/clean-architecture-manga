@@ -22,7 +22,7 @@ namespace Manga.Application.UseCases
             _unitOfWork = unitOfWork;
         }
 
-        public async Task Execute(Input input)
+        public async Task Execute(WithdrawInput input)
         {
             IAccount account = await _accountRepository.Get(input.AccountId);
             if (account == null)
@@ -42,7 +42,7 @@ namespace Manga.Application.UseCases
             await _accountRepository.Update(account, debit);
             await _unitOfWork.Save();
 
-            Output output = new Output(
+            WithdrawOutput output = new WithdrawOutput(
                 debit,
                 account.GetCurrentBalance()
             );

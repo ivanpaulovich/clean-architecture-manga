@@ -1,7 +1,7 @@
 namespace Manga.WebApi.UseCases.V1.Deposit
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
+    using System;
 
     /// <summary>
     /// The response for a successfull Deposit
@@ -13,7 +13,7 @@ namespace Manga.WebApi.UseCases.V1.Deposit
         /// </summary>
         [Required]
         public double Amount { get; }
-        
+
         /// <summary>
         /// Description
         /// </summary>

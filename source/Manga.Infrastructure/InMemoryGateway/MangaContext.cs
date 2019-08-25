@@ -1,10 +1,10 @@
-﻿namespace Manga.Infrastructure.InMemoryGateway
+namespace Manga.Infrastructure.InMemoryGateway
 {
+    using System.Collections.ObjectModel;
+    using System;
     using Manga.Domain.Accounts;
     using Manga.Domain.Customers;
     using Manga.Domain.ValueObjects;
-    using System;
-    using System.Collections.ObjectModel;
 
     public sealed class MangaContext
     {
@@ -34,8 +34,8 @@
 
             Customers.Add(customer);
             Accounts.Add(account);
-            Credits.Add((Credit)credit);
-            Debits.Add((Debit)debit);
+            Credits.Add((Credit) credit);
+            Debits.Add((Debit) debit);
 
             DefaultCustomerId = customer.Id;
             DefaultAccountId = account.Id;

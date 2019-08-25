@@ -4,6 +4,6 @@ namespace Manga.Application.Boundaries.Transfer
 
     public interface IUseCase
     {
-        Task Execute(Input input);
+        Task Execute(TransferInput input);
     }
 }

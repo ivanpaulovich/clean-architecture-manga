@@ -2,7 +2,7 @@ namespace Manga.WebApi.UseCases.V2.GetAccountDetails
 {
     using System;
     using Swashbuckle.AspNetCore.Examples;
-    
+
     public sealed class GetAccountDetailsRequestExampleV2 : IExamplesProvider
     {
         public object GetExamples()

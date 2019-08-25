@@ -1,8 +1,8 @@
 namespace Manga.WebApi.UseCases.V1.Register
 {
     using System.Collections.Generic;
-    using System;
     using System.ComponentModel.DataAnnotations;
+    using System;
     using Manga.WebApi.Models;
 
     /// <summary>
@@ -13,21 +13,21 @@ namespace Manga.WebApi.UseCases.V1.Register
         /// <summary>
         /// Customer ID
         /// </summary>
-        [Required]        
+        [Required]
         public Guid CustomerId { get; }
-        
+
         /// <summary>
         /// SSN
         /// </summary>
         [Required]
         public string SSN { get; }
-        
+
         /// <summary>
         /// Name
         /// </summary>
         [Required]
         public string Name { get; }
-        
+
         /// <summary>
         /// Accounts
         /// </summary>

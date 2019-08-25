@@ -2,6 +2,6 @@ namespace Manga.Application.Boundaries.Withdraw
 {
     public interface IOutputHandler : IErrorHandler
     {
-        void Handle(Output output);
+        void Handle(WithdrawOutput output);
     }
 }

@@ -1,10 +1,10 @@
-﻿namespace Manga.Infrastructure.InMemoryGateway.Repositories
+namespace Manga.Infrastructure.InMemoryGateway.Repositories
 {
-    using Manga.Application.Repositories;
-    using Manga.Domain.Customers;
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using System;
+    using Manga.Application.Repositories;
+    using Manga.Domain.Customers;
 
     public sealed class CustomerRepository : ICustomerRepository
     {
@@ -17,7 +17,7 @@
 
         public async Task Add(ICustomer customer)
         {
-            _context.Customers.Add((Customer)customer);
+            _context.Customers.Add((Customer) customer);
             await Task.CompletedTask;
         }
 
@@ -36,7 +36,7 @@
                 .Where(e => e.Id == customer.Id)
                 .SingleOrDefault();
 
-            customerOld = (Customer)customer;
+            customerOld = (Customer) customer;
             await Task.CompletedTask;
         }
     }

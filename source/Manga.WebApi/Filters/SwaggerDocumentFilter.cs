@@ -1,18 +1,19 @@
 namespace Manga.WebApi.Filters
 {
-    using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System;
     using Swashbuckle.AspNetCore.Swagger;
     using Swashbuckle.AspNetCore.SwaggerGen;
-    using System.Linq;
 
     public class SwaggerDocumentFilter : IDocumentFilter
     {
         private readonly List<Tag> _tags = new List<Tag>
         {
-            new Tag { 
-            	Name = "RoutingApi", 
-            	Description = "This is a description for the api routes" 
+            new Tag
+            {
+            Name = "RoutingApi",
+            Description = "This is a description for the api routes"
             }
         };
 
@@ -31,15 +32,15 @@ namespace Manga.WebApi.Filters
         {
             //Filtering ensures route for tag is present
             var currentGroupNames = context.ApiDescriptions
-            	.Select(description => description.GroupName);
+                .Select(description => description.GroupName);
             return _tags.Where(tag => currentGroupNames.Contains(tag.Name)).ToList();
         }
 
         private IDictionary<string, PathItem> GetSortedPaths(
-        	SwaggerDocument swaggerDoc)
+            SwaggerDocument swaggerDoc)
         {
             return swaggerDoc.Paths.OrderBy(pair => pair.Key)
-            	.ToDictionary(pair => pair.Key, pair => pair.Value);
+                .ToDictionary(pair => pair.Key, pair => pair.Value);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Manga.Application.UseCases
             _accountRepository = accountRepository;
         }
 
-        public async Task Execute(Input input)
+        public async Task Execute(GetAccountDetailsInput input)
         {
             IAccount account = await _accountRepository.Get(input.AccountId);
 
@@ -28,7 +28,7 @@ namespace Manga.Application.UseCases
                 return;
             }
 
-            Output output = new Output(account);
+            GetAccountDetailsOutput output = new GetAccountDetailsOutput(account);
             _outputHandler.Handle(output);
         }
     }

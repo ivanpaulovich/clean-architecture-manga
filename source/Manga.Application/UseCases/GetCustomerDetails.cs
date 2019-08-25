@@ -24,7 +24,7 @@ namespace Manga.Application.UseCases
             _accountRepository = accountRepository;
         }
 
-        public async Task Execute(Input input)
+        public async Task Execute(GetCustomerDetailsInput input)
         {
             ICustomer customer = await _customerRepository.Get(input.CustomerId);
 
@@ -47,7 +47,7 @@ namespace Manga.Application.UseCases
                 }
             }
 
-            Output output = new Output(customer, accounts);
+            GetCustomerDetailsOutput output = new GetCustomerDetailsOutput(customer, accounts);
             _outputHandler.Handle(output);
         }
     }

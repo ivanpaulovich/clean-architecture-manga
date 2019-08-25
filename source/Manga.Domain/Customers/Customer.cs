@@ -5,7 +5,7 @@ namespace Manga.Domain.Customers
     using Manga.Domain.ValueObjects;
 
     public class Customer : ICustomer
-    { 
+    {
         public Guid Id { get; protected set; }
         public Name Name { get; protected set; }
         public SSN SSN { get; protected set; }
@@ -37,7 +37,7 @@ namespace Manga.Domain.Customers
         public void LoadAccounts(ICollection<Guid> accountIds)
         {
             _accounts = new AccountCollection();
-            foreach(var account in accountIds)
+            foreach (var account in accountIds)
                 _accounts.Add(account);
         }
     }

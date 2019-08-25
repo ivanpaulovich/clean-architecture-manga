@@ -7,7 +7,7 @@ namespace Manga.WebApi.Extensions
         public static IServiceCollection AddPresentersV2(this IServiceCollection services)
         {
             services.AddScoped<Manga.WebApi.UseCases.V2.GetAccountDetails.GetAccountDetailsPresenterV2, Manga.WebApi.UseCases.V2.GetAccountDetails.GetAccountDetailsPresenterV2>();
-            
+
             services.AddTransient(ctx =>
                 new UseCases.V2.GetAccountDetails.AccountsV2Controller(
                     new Application.UseCases.GetAccountDetails(
@@ -17,7 +17,7 @@ namespace Manga.WebApi.Extensions
                     ctx.GetRequiredService<Manga.WebApi.UseCases.V2.GetAccountDetails.GetAccountDetailsPresenterV2>()
                 )
             );
-            
+
             return services;
         }
     }
