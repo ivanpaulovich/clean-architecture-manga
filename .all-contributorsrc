@@ -24,6 +24,7 @@
       "contributions": [
         "test",
         "code"
+      ]
     },
     {
       "login": "luizgustavogp",
@@ -32,6 +33,15 @@
       "profile": "https://github.com/luizgustavogp",
       "contributions": [
         "design",
+        "test" 
+      ]
+    },
+    {
+      "login": "arulconsultant",
+      "name": "arulconsultant",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/47856951?v=4",
+      "profile": "https://github.com/arulconsultant",
+      "contributions": [
         "test"
       ]
     }
