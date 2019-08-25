@@ -95,6 +95,16 @@
         "test",
         "code"
       ]
+    },
+    {
+      "login": "sshaw-sml",
+      "name": "sshaw-sml",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/33876744?v=4",
+      "profile": "https://github.com/sshaw-sml",
+      "contributions": [
+        "test",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
