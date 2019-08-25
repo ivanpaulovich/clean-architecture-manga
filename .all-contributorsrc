@@ -75,6 +75,15 @@
         "design",
         "test"
       ]
+    },
+    {
+      "login": "NicoCG",
+      "name": "NicoCG",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/33652180?v=4",
+      "profile": "https://github.com/NicoCG",
+      "contributions": [
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7,
