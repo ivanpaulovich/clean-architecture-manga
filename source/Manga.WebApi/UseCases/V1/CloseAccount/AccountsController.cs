@@ -31,7 +31,7 @@ namespace Manga.WebApi.UseCases.V1.CloseAccount
         /// <response code="500">Error.</response>
         /// <param name="request">The request to Close an Account.</param>
         /// <returns>The account id.</returns>
-        [HttpDelete("{accountId}")]
+        [HttpDelete("{AccountId}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CloseAccountResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
