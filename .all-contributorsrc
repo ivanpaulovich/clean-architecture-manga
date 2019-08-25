@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "ivanpaulovich",
+      "name": "Ivan Paulovich",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7133698?v=4",
+      "profile": "https://paulovich.net",
+      "contributions": [
+        "design",
+        "test",
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "clean-architecture-manga",
+  "projectOwner": "ivanpaulovich",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}
