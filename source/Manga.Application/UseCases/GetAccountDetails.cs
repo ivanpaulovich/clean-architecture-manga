@@ -24,7 +24,7 @@ namespace Manga.Application.UseCases
 
             if (account == null)
             {
-                _outputHandler.Error($"The account {input.AccountId} does not exist or is not processed yet.");
+                _outputHandler.NotFound($"The account {input.AccountId} does not exist or is not processed yet.");
                 return;
             }
 

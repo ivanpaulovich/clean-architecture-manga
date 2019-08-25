@@ -10,11 +10,11 @@ namespace Manga.AcceptanceTests
     using System;
     using Microsoft.AspNetCore.Mvc.Testing;
 
-    public sealed class SunnyDayTests : IClassFixture<WebApplicationFactory<StartupDevelopment>>
+    public sealed class SunnyDayTests : IClassFixture<WebApplicationFactory<Startup>>
     {
-        private readonly WebApplicationFactory<StartupDevelopment> _factory;
+        private readonly WebApplicationFactory<Startup> _factory;
 
-        public SunnyDayTests(WebApplicationFactory<StartupDevelopment> factory)
+        public SunnyDayTests(WebApplicationFactory<Startup> factory)
         {
             _factory = factory;
         }
@@ -38,13 +38,13 @@ namespace Manga.AcceptanceTests
         private async Task GetCustomer(string customerId)
         {
             var client = _factory.CreateClient();
-            string result = await client.GetStringAsync("/api/Customers/" + customerId);
+            string result = await client.GetStringAsync("/api/v1/Customers/" + customerId);
         }
 
         private async Task GetAccount(string accountId)
         {
             var client = _factory.CreateClient();
-            string result = await client.GetStringAsync("/api/Accounts/" + accountId);
+            string result = await client.GetStringAsync("/api/v1/Accounts/" + accountId);
         }
 
         private async Task<Tuple<string, string>> Register(double initialAmount)
@@ -60,7 +60,7 @@ namespace Manga.AcceptanceTests
             string registerData = JsonConvert.SerializeObject(register);
             StringContent content = new StringContent(registerData, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync("api/Customers", content);
+            var response = await client.PostAsync("api/v1/Customers", content);
 
             response.EnsureSuccessStatusCode();
 
@@ -87,7 +87,7 @@ namespace Manga.AcceptanceTests
             string data = JsonConvert.SerializeObject(json);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
-            var response = await client.PatchAsync("api/Accounts/Deposit", content);
+            var response = await client.PatchAsync("api/v1/Accounts/Deposit", content);
             string result = await response.Content.ReadAsStringAsync();
 
             response.EnsureSuccessStatusCode();
@@ -105,7 +105,7 @@ namespace Manga.AcceptanceTests
             string data = JsonConvert.SerializeObject(json);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
-            var response = await client.PatchAsync("api/Accounts/Withdraw", content);
+            var response = await client.PatchAsync("api/v1/Accounts/Withdraw", content);
             string result = await response.Content.ReadAsStringAsync();
 
             response.EnsureSuccessStatusCode();
@@ -114,7 +114,7 @@ namespace Manga.AcceptanceTests
         private async Task Close(string account)
         {
             var client = _factory.CreateClient();
-            var response = await client.DeleteAsync("api/Accounts/" + account);
+            var response = await client.DeleteAsync("api/v1/Accounts/" + account);
             response.EnsureSuccessStatusCode();
         }
     }

@@ -30,7 +30,7 @@ namespace Manga.Application.UseCases
 
             if (customer == null)
             {
-                _outputHandler.Error($"The customer {input.CustomerId} does not exist or is not processed yet.");
+                _outputHandler.NotFound($"The customer {input.CustomerId} does not exist or is not processed yet.");
                 return;
             }
 
