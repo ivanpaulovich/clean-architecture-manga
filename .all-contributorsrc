@@ -15,6 +15,16 @@
         "test",
         "code"
       ]
+    },
+    {
+      "login": "petrspelos",
+      "name": "Petr Sedláček",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/21304428?v=4",
+      "profile": "https://spelos.net/",
+      "contributions": [
+        "test",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
