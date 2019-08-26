@@ -3,7 +3,7 @@ namespace Manga.WebApi.UseCases.V1.Withdraw
     using Manga.Application.Boundaries.Withdraw;
     using Microsoft.AspNetCore.Mvc;
 
-    public sealed class WithdrawPresenter : IOutputHandler
+    public sealed class WithdrawPresenter : IOutputPort
     {
         public IActionResult ViewModel { get; private set; }
 
@@ -18,7 +18,7 @@ namespace Manga.WebApi.UseCases.V1.Withdraw
             ViewModel = new BadRequestObjectResult(problemDetails);
         }
 
-        public void Handle(WithdrawOutput output)
+        public void Default(WithdrawOutput output)
         {
             ViewModel = new ObjectResult(new WithdrawResponse(
                 output.Transaction.Amount,

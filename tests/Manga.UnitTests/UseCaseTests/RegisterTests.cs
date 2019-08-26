@@ -1,15 +1,15 @@
 namespace Manga.UnitTests.UseCasesTests
 {
-    using Xunit;
-    using Manga.Application.UseCases;
-    using Manga.Domain;
-    using Manga.Infrastructure.InMemoryGateway;
-    using Manga.Infrastructure.InMemoryGateway.Repositories;
     using System.Linq;
-    using Manga.Domain.ValueObjects;
     using System.Threading.Tasks;
-    using Application.Boundaries.Register;
     using System;
+    using Application.Boundaries.Register;
+    using Manga.Application.UseCases;
+    using Manga.Domain.ValueObjects;
+    using Manga.Domain;
+    using Manga.Infrastructure.InMemoryGateway.Repositories;
+    using Manga.Infrastructure.InMemoryGateway;
+    using Xunit;
 
     public sealed class RegisterTests
     {
@@ -49,7 +49,7 @@ namespace Manga.UnitTests.UseCasesTests
                 ssn,
                 name,
                 new PositiveAmount(amount)));
-            
+
             var actual = presenter.Registers.First();
             Assert.NotNull(actual);
             Assert.Equal(ssn.ToString(), actual.Customer.SSN);

@@ -1,13 +1,13 @@
 namespace Manga.UnitTests.UseCasesTests
 {
-    using Xunit;
-    using Manga.Application.UseCases;
-    using Manga.Infrastructure.InMemoryGateway;
-    using Manga.Infrastructure.InMemoryGateway.Repositories;
     using System.Linq;
-    using Manga.Domain.ValueObjects;
     using System.Threading.Tasks;
     using Application.Boundaries.Deposit;
+    using Manga.Application.UseCases;
+    using Manga.Domain.ValueObjects;
+    using Manga.Infrastructure.InMemoryGateway.Repositories;
+    using Manga.Infrastructure.InMemoryGateway;
+    using Xunit;
 
     public sealed class DepositTests
     {
@@ -21,7 +21,7 @@ namespace Manga.UnitTests.UseCasesTests
             var context = new MangaContext();
             var accountRepository = new AccountRepository(context);
             var unitOfWork = new UnitOfWork(context);
-            
+
             var sut = new Deposit(
                 presenter,
                 accountRepository,
@@ -43,7 +43,7 @@ namespace Manga.UnitTests.UseCasesTests
             var context = new MangaContext();
             var accountRepository = new AccountRepository(context);
             var unitOfWork = new UnitOfWork(context);
-            
+
             var sut = new Deposit(
                 presenter,
                 accountRepository,
@@ -51,7 +51,7 @@ namespace Manga.UnitTests.UseCasesTests
             );
 
             await Assert.ThrowsAsync<AmountShouldBePositiveException>(() =>
-              sut.Execute(new DepositInput(context.DefaultAccountId, new PositiveAmount(amount))));
+                sut.Execute(new DepositInput(context.DefaultAccountId, new PositiveAmount(amount))));
         }
     }
 }

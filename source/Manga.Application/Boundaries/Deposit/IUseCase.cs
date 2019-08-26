@@ -4,6 +4,6 @@ namespace Manga.Application.Boundaries.Deposit
 
     public interface IUseCase
     {
-        Task Execute(DepositInput input);
+        Task Execute(DepositInput depositInput);
     }
 }

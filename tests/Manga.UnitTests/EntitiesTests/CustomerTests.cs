@@ -1,9 +1,9 @@
 namespace Manga.UnitTests.EntitiesTests
 {
-    using Xunit;
-    using Manga.Domain.Customers;
     using Manga.Domain.Accounts;
+    using Manga.Domain.Customers;
     using Manga.Domain.ValueObjects;
+    using Xunit;
 
     public class CustomerTests
     {

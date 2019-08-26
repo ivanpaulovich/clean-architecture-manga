@@ -4,6 +4,6 @@ namespace Manga.Application.Boundaries.GetCustomerDetails
 
     public interface IUseCase
     {
-        Task Execute(GetCustomerDetailsInput input);
+        Task Execute(GetCustomerDetailsInput getCustomerDetailsInput);
     }
 }

@@ -14,15 +14,15 @@ namespace Manga.UnitTests.InputValidationTests
                 () => new GetCustomerDetailsInput(
                     Guid.Empty
                 ));
-            Assert.Contains("customerId", actualEx.Message);        
+            Assert.Contains("customerId", actualEx.Message);
         }
 
         [Fact]
         public void GivenValidData_InputCreated()
         {
             var actual = new GetCustomerDetailsInput(
-                    Guid.NewGuid()
-                );
+                Guid.NewGuid()
+            );
             Assert.NotNull(actual);
         }
     }

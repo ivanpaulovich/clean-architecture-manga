@@ -17,7 +17,7 @@ namespace Manga.UnitTests.InputValidationTests
                     Guid.NewGuid(),
                     new PositiveAmount(10)
                 ));
-            Assert.Contains("originAccountId", actualEx.Message);        
+            Assert.Contains("originAccountId", actualEx.Message);
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace Manga.UnitTests.InputValidationTests
                     Guid.Empty,
                     new PositiveAmount(10)
                 ));
-            Assert.Contains("destinationAccountId", actualEx.Message);        
+            Assert.Contains("destinationAccountId", actualEx.Message);
         }
 
         [Fact]
@@ -41,17 +41,17 @@ namespace Manga.UnitTests.InputValidationTests
                     Guid.NewGuid(),
                     null
                 ));
-            Assert.Contains("amount", actualEx.Message);        
+            Assert.Contains("amount", actualEx.Message);
         }
 
         [Fact]
         public void GivenValidData_InputCreated()
         {
             var actual = new TransferInput(
-                    Guid.NewGuid(),
-                    Guid.NewGuid(),
-                    new PositiveAmount(10)
-                );
+                Guid.NewGuid(),
+                Guid.NewGuid(),
+                new PositiveAmount(10)
+            );
             Assert.NotNull(actual);
         }
     }

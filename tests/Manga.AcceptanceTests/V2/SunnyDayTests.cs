@@ -1,14 +1,14 @@
 namespace Manga.AcceptanceTests.V2
 {
-    using Manga.WebApi;
-    using Xunit;
-    using System.Threading.Tasks;
     using System.Net.Http;
-    using Newtonsoft.Json;
     using System.Text;
-    using Newtonsoft.Json.Linq;
+    using System.Threading.Tasks;
     using System;
+    using Manga.WebApi;
     using Microsoft.AspNetCore.Mvc.Testing;
+    using Newtonsoft.Json.Linq;
+    using Newtonsoft.Json;
+    using Xunit;
 
     public sealed class SunnyDayTests : IClassFixture<WebApplicationFactory<Startup>>
     {
@@ -70,7 +70,7 @@ namespace Manga.AcceptanceTests.V2
             JObject customer = JsonConvert.DeserializeObject<JObject>(responseString);
 
             string customerId = customer["customerId"].Value<string>();
-            string accountId = ((JContainer)customer["accounts"]).First["accountId"].Value<string>();
+            string accountId = ((JContainer) customer["accounts"]).First["accountId"].Value<string>();
 
             return new Tuple<string, string>(customerId, accountId);
         }

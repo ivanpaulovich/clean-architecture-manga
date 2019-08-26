@@ -8,12 +8,12 @@ namespace Manga.Application.UseCases
 
     public sealed class Withdraw : IUseCase
     {
-        private readonly IOutputHandler _outputHandler;
+        private readonly IOutputPort _outputHandler;
         private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public Withdraw(
-            IOutputHandler outputHandler,
+            IOutputPort outputHandler,
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
@@ -47,7 +47,7 @@ namespace Manga.Application.UseCases
                 account.GetCurrentBalance()
             );
 
-            _outputHandler.Handle(output);
+            _outputHandler.Default(output);
         }
     }
 }

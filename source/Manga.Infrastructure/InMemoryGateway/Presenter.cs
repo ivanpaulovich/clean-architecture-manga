@@ -4,13 +4,13 @@ namespace Manga.Infrastructure.InMemoryGateway
     using Manga.Application.Boundaries.Transfer;
 
     public sealed class Presenter:
-        Application.Boundaries.Register.IOutputHandler,
+        Application.Boundaries.Register.IOutputPort,
         Application.Boundaries.Deposit.IOutputHandler,
-        Application.Boundaries.Withdraw.IOutputHandler,
-        Application.Boundaries.CloseAccount.IOutputHandler,
-        Application.Boundaries.GetAccountDetails.IOutputHandler,
-        Application.Boundaries.GetCustomerDetails.IOutputHandler,
-        Application.Boundaries.Transfer.IOutputHandler
+        Application.Boundaries.Withdraw.IOutputPort,
+        Application.Boundaries.CloseAccount.IOutputPort,
+        Application.Boundaries.GetAccountDetails.IOutputPort,
+        Application.Boundaries.GetCustomerDetails.IOutputPort,
+        Application.Boundaries.Transfer.IOutputPort
         {
             public Collection<string> Errors { get; }
             public Collection<Application.Boundaries.Register.RegisterOutput> Registers { get; }
@@ -39,37 +39,37 @@ namespace Manga.Infrastructure.InMemoryGateway
                 Errors.Add(message);
             }
 
-            public void Handle(Application.Boundaries.Register.RegisterOutput output)
+            public void Standard(Application.Boundaries.Register.RegisterOutput output)
             {
                 Registers.Add(output);
             }
 
-            public void Handle(Application.Boundaries.Deposit.DepositOutput output)
+            public void Default(Application.Boundaries.Deposit.DepositOutput output)
             {
                 Deposits.Add(output);
             }
 
-            public void Handle(Application.Boundaries.Withdraw.WithdrawOutput output)
+            public void Default(Application.Boundaries.Withdraw.WithdrawOutput output)
             {
                 Withdrawals.Add(output);
             }
 
-            public void Handle(Application.Boundaries.CloseAccount.CreateAccountOutput output)
+            public void Default(Application.Boundaries.CloseAccount.CreateAccountOutput output)
             {
                 ClosedAccounts.Add(output);
             }
 
-            public void Handle(Application.Boundaries.GetAccountDetails.GetAccountDetailsOutput output)
+            public void Default(Application.Boundaries.GetAccountDetails.GetAccountDetailsOutput output)
             {
                 GetAccountDetails.Add(output);
             }
 
-            public void Handle(Application.Boundaries.GetCustomerDetails.GetCustomerDetailsOutput output)
+            public void Default(Application.Boundaries.GetCustomerDetails.GetCustomerDetailsOutput output)
             {
                 GetCustomerDetails.Add(output);
             }
 
-            public void Handle(TransferOutput output)
+            public void Default(TransferOutput output)
             {
                 Transfers.Add(output);
             }

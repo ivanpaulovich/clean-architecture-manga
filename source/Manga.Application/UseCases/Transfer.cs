@@ -8,12 +8,12 @@ namespace Manga.Application.UseCases
 
     public sealed class Transfer : IUseCase
     {
-        private readonly IOutputHandler _outputHandler;
+        private readonly IOutputPort _outputHandler;
         private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public Transfer(
-            IOutputHandler outputHandler,
+            IOutputPort outputHandler,
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
@@ -51,7 +51,7 @@ namespace Manga.Application.UseCases
                 input.OriginAccountId,
                 input.DestinationAccountId);
 
-            _outputHandler.Handle(output);
+            _outputHandler.Default(output);
         }
     }
 }

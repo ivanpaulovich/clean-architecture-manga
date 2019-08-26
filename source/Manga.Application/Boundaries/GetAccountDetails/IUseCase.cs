@@ -4,6 +4,6 @@ namespace Manga.Application.Boundaries.GetAccountDetails
 
     public interface IUseCase
     {
-        Task Execute(GetAccountDetailsInput input);
+        Task Execute(GetAccountDetailsInput getAccountDetailsInput);
     }
 }

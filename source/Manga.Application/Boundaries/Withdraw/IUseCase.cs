@@ -4,6 +4,6 @@ namespace Manga.Application.Boundaries.Withdraw
 
     public interface IUseCase
     {
-        Task Execute(WithdrawInput input);
+        Task Execute(WithdrawInput withdrawInput);
     }
 }

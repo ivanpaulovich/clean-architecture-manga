@@ -1,7 +1,7 @@
 namespace Manga.UnitTests.PresenterTests
 {
-    using System;
     using System.Net;
+    using System;
     using Manga.Application.Boundaries.Register;
     using Manga.Domain.ValueObjects;
     using Manga.WebApi.UseCases.V1.Register;
@@ -28,12 +28,12 @@ namespace Manga.UnitTests.PresenterTests
             );
 
             var sut = new RegisterPresenter();
-            sut.Handle(registerOutput);
+            sut.Standard(registerOutput);
 
-            var actual = Assert.IsType<OkObjectResult>(sut.ViewModel);
-            Assert.Equal((int)HttpStatusCode.OK, actual.StatusCode);
+            var actual = Assert.IsType<CreatedAtRouteResult>(sut.ViewModel);
+            Assert.Equal((int) HttpStatusCode.Created, actual.StatusCode);
 
-            var actualValue = (RegisterResponse)actual.Value;
+            var actualValue = (RegisterResponse) actual.Value;
             Assert.Equal(customer.Id, actualValue.CustomerId);
         }
     }
