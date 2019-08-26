@@ -1,14 +1,14 @@
 namespace Manga.UnitTests.UseCasesTests
 {
-    using Xunit;
-    using Manga.Application.UseCases;
-    using Manga.Infrastructure.InMemoryGateway;
-    using Manga.Infrastructure.InMemoryGateway.Repositories;
     using System.Linq;
-    using System;
     using System.Threading.Tasks;
-    using Manga.Domain.ValueObjects;
+    using System;
     using Manga.Application.Boundaries.Withdraw;
+    using Manga.Application.UseCases;
+    using Manga.Domain.ValueObjects;
+    using Manga.Infrastructure.InMemoryGateway.Repositories;
+    using Manga.Infrastructure.InMemoryGateway;
+    using Xunit;
 
     public sealed class WithdrawlTests
     {
@@ -21,7 +21,7 @@ namespace Manga.UnitTests.UseCasesTests
             double expectedBalance)
         {
             var presenter = new Presenter();
-            
+
             var accountRepository = new AccountRepository(context);
             var unitOfWork = new UnitOfWork(context);
 

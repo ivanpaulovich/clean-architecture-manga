@@ -1,16 +1,140 @@
-# :fire: Clean Architecture Implementation Template for .NET apps :cyclone:
+# Manga: The Clean Architecture Sample Implementation with .NET Core :cyclone:
 [![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors)
 [![Build status](https://ci.appveyor.com/api/projects/status/0i6s33kw3y87tkb2?svg=true)](https://ci.appveyor.com/project/ivanpaulovich/clean-architecture-manga)
 
-Pure and simple implementation following the Clean Architecture Principles, decoupled from frameworks and technology details. Use Cases as central organizing structure and smaller components developed and tested in isolation.
+> TODO: Add High level architecture and use cases image
 
-### :arrow_forward: Running from source
+Sample implementation of the **Clean Architecture Principles with .NET Core**. Use cases as central organizing structure, decoupled from frameworks and technology details. Has small components that are developed and tested in isolation.
+
+## Motivation
+
+> Learn how to design modular applications.
+>
+> Explore the .NET Core tooling.
+
+### Learn how to design modular applications
+
+Learning how to design modular applications will help you become a better engineer. Designing modular applications is the holy grail of software architecture, in our industry it is hard to find engineers that know how to design applications which allows adding new features in a steady speed. 
+
+### Explore the .NET Core tooling
+
+.NET Core brings a sweet development environment, an extensible and cross-platform framework. We will explore the benefits of it in the infrastructure layer and we will reduce the importance of it in the domain. The same rule is applied for modern C# constructions.
+
+### Learn from the open source community
+
+This is continually updated, open source project.
+
+[Contributions](#contributors-) are welcome!
+
+## Contributing
+
+> Learn from the community.
+
+Feel free to submit pull requests to help:
+
+* Fix errors
+* Improve sections
+* Add new sections
+* Submit questions and bugs
+
+## Index of Clean Architecture Manga
+
+* [Use Cases Description](#use-cases-description)
+  * [Register](#register)
+  * [Deposit](#deposit)
+  * [Transfer](#transfer)
+  * [Withdraw](#withdraw)
+  * [Get Customer Details](#get-customer-details)
+  * [Get Account Details](#get-account-details)
+  * [Close Account](#close-account)
+* [Flow of Control](#register-flow-of-control)
+  * [Register Flow of Control](#register-flow-of-control)
+  * [Get Customer Details Flow of Control](#rget-customer-details-flow-of-control)
+* [Architecture Styles](#architecture-styles)
+  * [Ports and Adapters Architecture Style](#ports-and-adapters-architecture-style)
+  * [Onion Architecture Style](#onion-architecture-style)
+  * [Clean Architecture Style](#clean-architecture-style)
+* [Design Patterns](#design-patterns)
+* [SOLID](#solid)
+
+## Use Cases Description
+
+Application architecture is about usage, a good architecture screams the business use cases to the developer and framework concerns are implementation details. On **Manga** sample the user can `Register` an account then manage the balance with `Deposits` and `Withdrawals`.
+
+### Register
+
+An customer can register the account using his personal details.
+
+### Deposit
+
+The customer can deposit a positive amount.
+
+### Transfer
+
+The customer can transfer money from one account to another.
+
+### Withdraw
+
+A customer can withdraw money but not more that the current balance.
+
+### Get Customer Details
+
+Customer details with all accounts and transactions are returned.
+
+### Get Account Details
+
+Account details with transactions are returned.
+
+### Close Account
+
+Close an account, requires zero balance.
+
+## Flow of Control
+
+The flow of control begins in the controller, moves through the use case, and then winds up executing in the presenter.
+
+### Register Flow of Control
+
+1. An request in received by the `CustomersController` and an action `Post` is invoked.
+2. The action creates an `RegisterInput` message and the use case is executed.
+3. The `Register` use case creates a `Customer` and an `Account`. Repositories are called, the `RegisterOutput` message is created and sent to the `RegisterPresenter`.
+4. The `RegisterPresenter` builds the HTTP Response message.
+5. The `CustomersController` asks the presenter the current response.
+
+### Get Customer Details Flow of Control
+
+1. An request in received by the `CustomersController` and an action `GetCustomer` is invoked.
+2. The action creates an `GetCustomerDetailsInput` message and the use case is executed.
+3. The `GetCustomerDetails` use case asks the repositories about the `Customer` and the `Account`. It could call the `NotFound` or the `Default` port on the `GetCustomerDetailsPresenter`.
+4. The `GetCustomerDetailsPresenter` builds the HTTP Response message.
+5. The `CustomersController` asks the presenter the current response.
+
+## Architecture Styles
+
+Manga use ideas from popular architectural styles. They Ports and Adapters are the simplest one followed by the others, they complement each other and aim a software with use cases decoupled from implementation details.
+
+### Ports and Adapters Architecture Style
+
+The Ports and Adapters Architecture Style divides the application into **Application Core** and **Adapters** in which the adapters are interchangeable components developed and tested in isolation. The Application Core is loosely coupled to the Adapters and their implementation details.
+
+### Onion Architecture Style
+
+Very similar to Ports and Adapters, I would add that data objects cross boundaries as simple data structures. For instance, when the controller execute an use case it passes and immutable Input message. When the use cases calls an Presenter it gives a Output message (Data Transfer Objects if you like).
+
+### Clean Architecture Style
+
+An application architecture implementation guided by tests cases.
+
+## Design Patterns
+## SOLID
+
+## Running from source
 
 ```
 $ dotnet run --project "source/Manga.WebApi/Manga.WebApi.csproj"
 ```
 
-### :checkered_flag: Development Environment
+### Development Environment
 
 * MacOS Catalina :apple:
 * Visual Studio Code :heart:
@@ -18,7 +142,7 @@ $ dotnet run --project "source/Manga.WebApi/Manga.WebApi.csproj"
 * Docker :whale:
 * SQL Server
 
-### :floppy_disk: Setup SQL Server in Docker
+### Setup SQL Server in Docker
 
 <details><summary>Install SQL Server</summary>
 <p>
@@ -55,10 +179,6 @@ $ dotnet ef migrations add "InitialCreate" -o "EntityFrameworkDataAccess/Migrati
 
 </p>
 </details>
-
-### :telephone: Support and Issues
-
-I am happy to clarify the decisions I made in this project through the [Issues tab](https://github.com/ivanpaulovich/clean-architecture-manga/issues) so everyone will take benefit from the discussions.
 
 ## Contributors ✨
 

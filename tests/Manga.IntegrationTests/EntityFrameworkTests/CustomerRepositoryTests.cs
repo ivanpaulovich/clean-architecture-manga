@@ -4,11 +4,11 @@ namespace Manga.IntegrationTests.EntityFrameworkTests
     using System.Threading.Tasks;
     using System;
     using Manga.Domain.Customers;
+    using Manga.Domain.ValueObjects;
     using Manga.Domain;
     using Manga.Infrastructure.EntityFrameworkDataAccess;
     using Microsoft.EntityFrameworkCore;
     using Xunit;
-    using Manga.Domain.ValueObjects;
 
     public sealed class CustomerRepositoryTests
     {
@@ -31,7 +31,7 @@ namespace Manga.IntegrationTests.EntityFrameworkTests
 
                 var repository = new CustomerRepository(context);
                 await repository.Add(customer);
-            
+
                 Assert.Equal(2, context.Customers.Count());
             }
         }

@@ -3,7 +3,7 @@ namespace Manga.WebApi.UseCases.V1.Transfer
     using Manga.Application.Boundaries.Transfer;
     using Microsoft.AspNetCore.Mvc;
 
-    public sealed class TransferPresenter : IOutputHandler
+    public sealed class TransferPresenter : IOutputPort
     {
         public IActionResult ViewModel { get; private set; }
 
@@ -18,7 +18,7 @@ namespace Manga.WebApi.UseCases.V1.Transfer
             ViewModel = new BadRequestObjectResult(problemDetails);
         }
 
-        public void Handle(TransferOutput output)
+        public void Default(TransferOutput output)
         {
             ViewModel = new ObjectResult(new
             {

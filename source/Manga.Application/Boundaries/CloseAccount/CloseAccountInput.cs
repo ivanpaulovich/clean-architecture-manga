@@ -13,7 +13,7 @@ namespace Manga.Application.Boundaries.CloseAccount
             {
                 throw new InputValidationException($"{nameof(accountId)} cannot be empty.");
             }
-            
+
             AccountId = accountId;
         }
     }

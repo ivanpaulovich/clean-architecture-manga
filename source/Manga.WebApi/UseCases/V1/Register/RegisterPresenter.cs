@@ -5,7 +5,7 @@ namespace Manga.WebApi.UseCases.V1.Register
     using Manga.WebApi.Models;
     using Microsoft.AspNetCore.Mvc;
 
-    public sealed class RegisterPresenter : IOutputHandler
+    public sealed class RegisterPresenter : IOutputPort
     {
         public IActionResult ViewModel { get; private set; }
 
@@ -20,7 +20,7 @@ namespace Manga.WebApi.UseCases.V1.Register
             ViewModel = new BadRequestObjectResult(problemDetails);
         }
 
-        public void Handle(RegisterOutput output)
+        public void Standard(RegisterOutput output)
         {
             List<TransactionModel> transactions = new List<TransactionModel>();
 

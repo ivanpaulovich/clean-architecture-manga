@@ -4,6 +4,6 @@ namespace Manga.Application.Boundaries.Register
 
     public interface IUseCase
     {
-        Task Execute(RegisterInput input);
+        Task Execute(RegisterInput registerInput);
     }
 }

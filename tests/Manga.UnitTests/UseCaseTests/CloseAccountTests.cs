@@ -1,9 +1,9 @@
 namespace Manga.UnitTests.UseCasesTests
 {
-    using Xunit;
     using System;
     using Manga.Domain.Accounts;
     using Manga.Domain.ValueObjects;
+    using Xunit;
 
     public sealed class CloseAccountTests
     {

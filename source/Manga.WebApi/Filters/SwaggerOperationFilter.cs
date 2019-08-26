@@ -3,7 +3,6 @@ namespace Manga.WebApi.Filters
 {
     public class SwaggerOperationFilter
     {
-        public SwaggerOperationFilter()
-        { }
+        public SwaggerOperationFilter() { }
     }
 }

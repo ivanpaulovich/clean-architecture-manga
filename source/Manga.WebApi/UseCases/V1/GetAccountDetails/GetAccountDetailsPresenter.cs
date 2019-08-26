@@ -5,7 +5,7 @@ namespace Manga.WebApi.UseCases.V1.GetAccountDetails
     using Manga.WebApi.Models;
     using Microsoft.AspNetCore.Mvc;
 
-    public sealed class GetAccountDetailsPresenter : IOutputHandler
+    public sealed class GetAccountDetailsPresenter : IOutputPort
     {
         public IActionResult ViewModel { get; private set; }
 
@@ -20,7 +20,7 @@ namespace Manga.WebApi.UseCases.V1.GetAccountDetails
             ViewModel = new BadRequestObjectResult(problemDetails);
         }
 
-        public void Handle(GetAccountDetailsOutput output)
+        public void Default(GetAccountDetailsOutput output)
         {
             List<TransactionModel> transactions = new List<TransactionModel>();
 

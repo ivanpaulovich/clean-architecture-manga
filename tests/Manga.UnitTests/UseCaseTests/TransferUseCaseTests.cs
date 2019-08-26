@@ -1,13 +1,13 @@
 namespace Manga.UnitTests.UseCaseTests
 {
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using System;
     using Manga.Application.Boundaries.Transfer;
     using Manga.Application.UseCases;
     using Manga.Domain.ValueObjects;
-    using Manga.Infrastructure.InMemoryGateway;
     using Manga.Infrastructure.InMemoryGateway.Repositories;
+    using Manga.Infrastructure.InMemoryGateway;
     using Xunit;
 
     public sealed class TransferUseCaseTests
@@ -24,7 +24,7 @@ namespace Manga.UnitTests.UseCaseTests
             var presenter = new Presenter();
             var accountRepository = new AccountRepository(context);
             var unitOfWork = new UnitOfWork(context);
-            
+
             var sut = new Transfer(
                 presenter,
                 accountRepository,

@@ -1,9 +1,9 @@
 namespace Manga.UnitTests.EntitiesTests
 {
-    using Xunit;
-    using Manga.Domain.ValueObjects;
-    using Manga.Domain.Accounts;
     using System;
+    using Manga.Domain.Accounts;
+    using Manga.Domain.ValueObjects;
+    using Xunit;
 
     public class AccountTests
     {
@@ -18,7 +18,7 @@ namespace Manga.UnitTests.EntitiesTests
 
             //
             // Act
-            Credit actual = (Credit)sut.Deposit(amount);
+            Credit actual = (Credit) sut.Deposit(amount);
 
             //
             // Assert
@@ -60,7 +60,6 @@ namespace Manga.UnitTests.EntitiesTests
             Assert.True(actual);
         }
 
-
         [Fact]
         public void Account_With_200_Balance_Should_Not_Allow_50000_Withdraw()
         {
@@ -88,7 +87,7 @@ namespace Manga.UnitTests.EntitiesTests
             sut.Deposit(new PositiveAmount(50));
 
             Assert.Equal(2, sut.GetCredits().Count);
-            Assert.Equal(1, sut.GetDebits().Count); 
+            Assert.Equal(1, sut.GetDebits().Count);
         }
     }
 }

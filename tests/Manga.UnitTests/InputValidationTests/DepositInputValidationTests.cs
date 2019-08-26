@@ -16,7 +16,7 @@ namespace Manga.UnitTests.InputValidationTests
                     Guid.Empty,
                     new PositiveAmount(10)
                 ));
-            Assert.Contains("accountId", actualEx.Message);        
+            Assert.Contains("accountId", actualEx.Message);
         }
 
         [Fact]
@@ -27,16 +27,16 @@ namespace Manga.UnitTests.InputValidationTests
                     Guid.NewGuid(),
                     null
                 ));
-            Assert.Contains("amount", actualEx.Message);        
+            Assert.Contains("amount", actualEx.Message);
         }
 
         [Fact]
         public void GivenValidData_InputCreated()
         {
             var actual = new DepositInput(
-                    Guid.NewGuid(),
-                    new PositiveAmount(10)
-                );
+                Guid.NewGuid(),
+                new PositiveAmount(10)
+            );
             Assert.NotNull(actual);
         }
     }

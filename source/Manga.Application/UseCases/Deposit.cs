@@ -40,7 +40,7 @@ namespace Manga.Application.UseCases
                 credit,
                 account.GetCurrentBalance());
 
-            _outputHandler.Handle(output);
+            _outputHandler.Default(output);
         }
     }
 }

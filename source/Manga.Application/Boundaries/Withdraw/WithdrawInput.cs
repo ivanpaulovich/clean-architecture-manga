@@ -20,7 +20,7 @@ namespace Manga.Application.Boundaries.Withdraw
             {
                 throw new InputValidationException($"{nameof(amount)} cannot be null.");
             }
-            
+
             AccountId = accountId;
             Amount = amount;
         }

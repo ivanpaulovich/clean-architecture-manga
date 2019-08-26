@@ -3,7 +3,7 @@ namespace Manga.WebApi.UseCases.V1.CloseAccount
     using Manga.Application.Boundaries.CloseAccount;
     using Microsoft.AspNetCore.Mvc;
 
-    public sealed class CloseAccountPresenter : IOutputHandler
+    public sealed class CloseAccountPresenter : IOutputPort
     {
         public IActionResult ViewModel { get; private set; }
 
@@ -18,7 +18,7 @@ namespace Manga.WebApi.UseCases.V1.CloseAccount
             ViewModel = new BadRequestObjectResult(problemDetails);
         }
 
-        public void Handle(CreateAccountOutput output)
+        public void Default(CreateAccountOutput output)
         {
             ViewModel = new OkResult();
         }

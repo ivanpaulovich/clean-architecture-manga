@@ -7,11 +7,11 @@ namespace Manga.Application.UseCases
 
     public sealed class GetAccountDetails : IUseCase
     {
-        private readonly IOutputHandler _outputHandler;
+        private readonly IOutputPort _outputHandler;
         private readonly IAccountRepository _accountRepository;
 
         public GetAccountDetails(
-            IOutputHandler outputHandler,
+            IOutputPort outputHandler,
             IAccountRepository accountRepository)
         {
             _outputHandler = outputHandler;
@@ -29,7 +29,7 @@ namespace Manga.Application.UseCases
             }
 
             GetAccountDetailsOutput output = new GetAccountDetailsOutput(account);
-            _outputHandler.Handle(output);
+            _outputHandler.Default(output);
         }
     }
 }

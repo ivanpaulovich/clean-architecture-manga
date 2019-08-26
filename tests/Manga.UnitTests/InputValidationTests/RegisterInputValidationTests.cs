@@ -16,7 +16,7 @@ namespace Manga.UnitTests.InputValidationTests
                     new Name("Ivan"),
                     new PositiveAmount(10)
                 ));
-            Assert.Contains("ssn", actualEx.Message);        
+            Assert.Contains("ssn", actualEx.Message);
         }
 
         [Fact]
@@ -28,7 +28,7 @@ namespace Manga.UnitTests.InputValidationTests
                     null,
                     new PositiveAmount(10)
                 ));
-            Assert.Contains("name", actualEx.Message);        
+            Assert.Contains("name", actualEx.Message);
         }
 
         [Fact]
@@ -40,17 +40,17 @@ namespace Manga.UnitTests.InputValidationTests
                     new Name("Ivan"),
                     null
                 ));
-            Assert.Contains("initialAmount", actualEx.Message);        
+            Assert.Contains("initialAmount", actualEx.Message);
         }
 
         [Fact]
         public void GivenValidData_InputCreated()
         {
             var actual = new RegisterInput(
-                    new SSN("19860817999"),
-                    new Name("Ivan"),
-                    new PositiveAmount(10)
-                );
+                new SSN("19860817999"),
+                new Name("Ivan"),
+                new PositiveAmount(10)
+            );
             Assert.NotNull(actual);
         }
     }

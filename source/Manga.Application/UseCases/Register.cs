@@ -10,14 +10,14 @@ namespace Manga.Application.UseCases
     public sealed class Register : IUseCase
     {
         private readonly IEntitiesFactory _entityFactory;
-        private readonly IOutputHandler _outputHandler;
+        private readonly IOutputPort _outputHandler;
         private readonly ICustomerRepository _customerRepository;
         private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public Register(
             IEntitiesFactory entityFactory,
-            IOutputHandler outputHandler,
+            IOutputPort outputHandler,
             ICustomerRepository customerRepository,
             IAccountRepository accountRepository,
             IUnitOfWork unityOfWork)
@@ -54,7 +54,7 @@ namespace Manga.Application.UseCases
             await _unitOfWork.Save();
 
             RegisterOutput output = new RegisterOutput(customer, account);
-            _outputHandler.Handle(output);
+            _outputHandler.Standard(output);
         }
     }
 }
