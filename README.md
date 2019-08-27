@@ -65,6 +65,7 @@ Feel free to submit pull requests to help:
   * [Repository](#repository)
   * [Unit of Work](#unit-of-work)
   * [Use Case](#use-case)
+  * [First-Class Collections](#first-class-collections)
 * [Separation of Concerns](#separation-of-concerns)
 * [Test-Driven Development TDD](#test-driven-development-tdd)
   * [Outside-In Approach](#outside-in-approach)
