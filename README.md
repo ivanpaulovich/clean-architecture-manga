@@ -85,8 +85,12 @@ Feel free to submit pull requests to help:
     * [Microsoft Extensions](#microsoft-extensions)
     * [Feature Flags](#feature-flags)
     * [Logging](#logging)
+    * [Localizing](#Localizing)
+    * [Data Annotations](#data-annotations)
   * [Entity Framework Core](#entity-framework-core)
+  * [Environment Configurations](#environment-configurations)
 * [Docker](#docker)
+* [SQL Server](#sql-server)
   
 ## Use Cases Description
 
