@@ -2,7 +2,7 @@ namespace Manga.WebApi.UseCases.V2.GetAccountDetails
 {
     using System.Collections.Generic;
     using Manga.Application.Boundaries.GetAccountDetails;
-    using Manga.WebApi.Models;
+    using Manga.WebApi.ViewModels;
     using Microsoft.AspNetCore.Mvc;
 
     public sealed class GetAccountDetailsPresenterV2 : IOutputPort

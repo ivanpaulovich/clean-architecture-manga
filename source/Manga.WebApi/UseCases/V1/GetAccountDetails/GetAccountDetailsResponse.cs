@@ -3,7 +3,7 @@ namespace Manga.WebApi.UseCases.V1.GetAccountDetails
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System;
-    using Manga.WebApi.Models;
+    using Manga.WebApi.ViewModels;
 
     /// <summary>
     /// Get Account Details

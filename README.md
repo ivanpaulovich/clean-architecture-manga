@@ -55,7 +55,8 @@ Feel free to submit pull requests to help:
   * [Onion Architecture Style](#onion-architecture-style)
   * [Clean Architecture Style](#clean-architecture-style)
 * [Design Patterns](#design-patterns)
-  * [Model-View-Controller](#model-view-controller)
+  * [Controller](#controller)
+  * [ViewModel](#viewmodel)
   * [Presenter](#presenter)
     * [Standard Output](#standard-output)
     * [Error Output](#error-output)
@@ -67,6 +68,8 @@ Feel free to submit pull requests to help:
   * [Unit of Work](#unit-of-work)
   * [Use Case](#use-case)
   * [First-Class Collections](#first-class-collections)
+  * [Factory](#factory)
+  * [Component](#component)
 * [Separation of Concerns](#separation-of-concerns)
 * [Encapsulation](#encapsulation)
 * [Test-Driven Development TDD](#test-driven-development-tdd)
@@ -177,17 +180,190 @@ An application architecture implementation guided by tests cases.
 
 ## Design Patterns
 
-### Model-View-Controller
+The following Design Patterns will help you continue implementing use cases in a consistent way. 
+
+### Controller
+
+Controllers receive Requests, build an Input message then call an Use Case, you should notice that the controller do not build the ViewModel, instead this responsibility is delegated to the presenter object.
+
+```c#
+public sealed class CustomersController : Controller
+{
+    
+    // code omitted to simplify
+
+    public async Task<IActionResult> Post([FromBody][Required] RegisterRequest request)
+    {
+        await _registerUseCase.Execute(new RegisterInput(
+            new SSN(request.SSN),
+            new Name(request.Name),
+            new PositiveAmount(request.InitialAmount)));
+
+        return _presenter.ViewModel;
+    }
+}
+```
+
+### ViewModel
+
+ViewModels are data transfer objects, they will be rendered by the MVC framework so we need to follow the framework guidelines. I suggest that you add `[Required]` attributes so swagger generators could know the properties that are not nullable. My personal preference is to avoid getters here because you know how the response object will be created, so use the constructor.
+
+```c#
+/// <summary>
+/// The response for Registration
+/// </summary>
+public sealed class RegisterResponse
+{
+    /// <summary>
+    /// Customer ID
+    /// </summary>
+    [Required]
+    public Guid CustomerId { get; }
+
+    /// <summary>
+    /// SSN
+    /// </summary>
+    [Required]
+    public string SSN { get; }
+
+    /// <summary>
+    /// Name
+    /// </summary>
+    [Required]
+    public string Name { get; }
+
+    /// <summary>
+    /// Accounts
+    /// </summary>
+    [Required]
+    public List<AccountDetailsModel> Accounts { get; }
+
+    public RegisterResponse(
+        Guid customerId,
+        string ssn,
+        string name,
+        List<AccountDetailsModel> accounts)
+    {
+        CustomerId = customerId;
+        SSN = ssn;
+        Name = name;
+        Accounts = accounts;
+    }
+}
+```
 
 ### Presenter
 
+Presenters build the Response objects when called by the application.
+
+```c#
+public sealed class RegisterPresenter : IOutputPort
+{
+    public IActionResult ViewModel { get; private set; }
+
+    public void Error(string message)
+    {
+        var problemDetails = new ProblemDetails()
+        {
+            Title = "An error occurred",
+            Detail = message
+        };
+
+        ViewModel = new BadRequestObjectResult(problemDetails);
+    }
+
+    public void Standard(RegisterOutput output)
+    {
+        /// long object creation omitted
+
+        ViewModel = new CreatedAtRouteResult("GetCustomer",
+            new
+            {
+                customerId = model.CustomerId
+            },
+            model);
+    }
+}
+```
+
+It is important to understand that from the Application perspective the use cases see an OutputPort with custom methods to call dependent on the message, and from the Web Api perspective the Controller only see the ViewModel property.
+
 #### Standard Output
+
+The output port for the use case regular behavior.
 
 #### Error Output
 
+Called when an blocking errors happens.
+
+#### Alternative Output
+
+Called when an blocking errors happens.
+
 ### Value Object
 
+Describe the tiny domain business rules. Objects that are unique by the has of their properties. Are immutable.
+
+```c#
+public sealed class Name : IEquatable<Name>
+{
+    private string _text;
+
+    private Name() { }
+
+    public Name(string text)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+            throw new NameShouldNotBeEmptyException("The 'Name' field is required");
+
+        _text = text;
+    }
+
+    public override string ToString()
+    {
+        return _text;
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (ReferenceEquals(null, obj))
+        {
+            return false;
+        }
+
+        if (ReferenceEquals(this, obj))
+        {
+            return true;
+        }
+
+        if (obj is string)
+        {
+            return obj.ToString() == _text;
+        }
+
+        return ((Name) obj)._text == _text;
+    }
+
+    public override int GetHashCode()
+    {
+        unchecked
+        {
+            int hash = 17;
+            hash = hash * 23 + _text.GetHashCode();
+            return hash;
+        }
+    }
+
+    public bool Equals(Name other)
+    {
+        return this._text == other._text;
+    }
+}
+```
+
 ### Entity
+
+Objects that are unique by their IDs. Entities are mutable and instances of domain concepts.
 
 ### Aggregate Root
 

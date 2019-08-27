@@ -2,7 +2,7 @@ namespace Manga.WebApi.UseCases.V1.Register
 {
     using System.Collections.Generic;
     using Manga.Application.Boundaries.Register;
-    using Manga.WebApi.Models;
+    using Manga.WebApi.ViewModels;
     using Microsoft.AspNetCore.Mvc;
 
     public sealed class RegisterPresenter : IOutputPort
