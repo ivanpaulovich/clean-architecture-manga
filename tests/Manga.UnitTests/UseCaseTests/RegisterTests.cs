@@ -30,7 +30,7 @@ namespace Manga.UnitTests.UseCasesTests
             var ssn = new SSN("8608178888");
             var name = new Name("Ivan Paulovich");
 
-            var entityFactory = new DefaultEntitiesFactory();
+            var entityFactory = new EntityFactory();
             var presenter = new Presenter();
             var context = new MangaContext();
             var customerRepository = new CustomerRepository(context);

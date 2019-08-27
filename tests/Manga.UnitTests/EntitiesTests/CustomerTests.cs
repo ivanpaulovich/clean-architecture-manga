@@ -10,18 +10,21 @@ namespace Manga.UnitTests.EntitiesTests
         [Fact]
         public void Customer_Should_Be_Registered_With_1_Account()
         {
+            var entityFactory = new Manga.Infrastructure.InMemoryGateway.EntityFactory();
+            //
             // Arrange
-            var sut = new Customer(
-                new SSN("741214-3054"),
-                new Name("Sammy Fredriksson"));
-
-            var account = new Account(sut.Id);
+            ICustomer sut = entityFactory.NewCustomer(
+                new SSN("198608179922"),
+                new Name("Ivan Paulovich")
+            );
+            
+            var account = entityFactory.NewAccount(sut);
 
             // Act
-            sut.Register(account.Id);
+            sut.Register(account);
 
             // Assert
-            Assert.Single(sut.Accounts);
+            Assert.Single(sut.Accounts.GetAccountIds());
         }
     }
 }

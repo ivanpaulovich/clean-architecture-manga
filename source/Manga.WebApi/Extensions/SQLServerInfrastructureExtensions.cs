@@ -12,7 +12,7 @@ namespace Manga.WebApi.Extensions
     {
         public static IServiceCollection AddSQLServerPersistence(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IEntitiesFactory, DefaultEntitiesFactory>();
+            services.AddScoped<IEntityFactory, EntityFactory>();
 
             services.AddDbContext<MangaContext>(
                 options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));

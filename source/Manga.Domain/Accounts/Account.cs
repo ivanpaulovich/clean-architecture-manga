@@ -1,38 +1,34 @@
 namespace Manga.Domain.Accounts
 {
-    using System.Collections.Generic;
     using System;
     using Manga.Domain.ValueObjects;
 
     public class Account : IAccount
     {
         public Guid Id { get; protected set; }
-        public Guid CustomerId { get; protected set; }
-        private CreditsCollection _credits = new CreditsCollection();
-        private DebitsCollection _debits = new DebitsCollection();
+        public CreditsCollection Credits { get; protected set; }
+        public DebitsCollection Debits { get; protected set; }
 
-        private Account() { }
-
-        public Account(Guid customerId)
+        protected Account()
         {
-            Id = Guid.NewGuid();
-            CustomerId = customerId;
+            Credits = new CreditsCollection();
+            Debits = new DebitsCollection();
         }
 
-        public ICredit Deposit(PositiveAmount amount)
+        public ICredit Deposit(IEntityFactory entityFactory, PositiveAmount amountToDeposit)
         {
-            var credit = new Credit(Id, amount);
-            _credits.Add(credit);
+            var credit = entityFactory.NewCredit(this, amountToDeposit);
+            Credits.Add(credit);
             return credit;
         }
 
-        public IDebit Withdraw(PositiveAmount amount)
+        public IDebit Withdraw(IEntityFactory entityFactory, PositiveAmount amountToWithdraw)
         {
-            if (GetCurrentBalance().LessThan(amount))
+            if (GetCurrentBalance().LessThan(amountToWithdraw))
                 return null;
 
-            var debit = new Debit(Id, amount);
-            _debits.Add(debit);
+            var debit = entityFactory.NewDebit(this, amountToWithdraw);
+            Debits.Add(debit);
             return debit;
         }
 
@@ -43,36 +39,16 @@ namespace Manga.Domain.Accounts
 
         public Amount GetCurrentBalance()
         {
-            var totalCredits = _credits
+            var totalCredits = Credits
                 .GetTotal();
 
-            var totalDebits = _debits
+            var totalDebits = Debits
                 .GetTotal();
 
             var totalAmount = totalCredits
                 .Subtract(totalDebits);
 
             return totalAmount;
-        }
-
-        public IReadOnlyCollection<ICredit> GetCredits()
-        {
-            var credits = _credits
-                .GetTransactions();
-            return credits;
-        }
-
-        public IReadOnlyCollection<IDebit> GetDebits()
-        {
-            var debits = _debits
-                .GetTransactions();
-            return debits;
-        }
-
-        public void Load(IList<Credit> credits, IList<Debit> debits)
-        {
-            _credits = new CreditsCollection(credits);
-            _debits = new DebitsCollection(debits);
         }
     }
 }

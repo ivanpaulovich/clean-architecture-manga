@@ -2,8 +2,6 @@ namespace Manga.Infrastructure.InMemoryGateway
 {
     using System.Collections.ObjectModel;
     using System;
-    using Manga.Domain.Accounts;
-    using Manga.Domain.Customers;
     using Manga.Domain.ValueObjects;
 
     public sealed class MangaContext
@@ -21,16 +19,17 @@ namespace Manga.Infrastructure.InMemoryGateway
 
         public MangaContext()
         {
+            var entityFactory = new EntityFactory();
             Customers = new Collection<Customer>();
             Accounts = new Collection<Account>();
             Credits = new Collection<Credit>();
             Debits = new Collection<Debit>();
 
             var customer = new Customer(new SSN("8608179999"), new Name("Ivan Paulovich"));
-            var account = new Account(customer.Id);
-            var credit = account.Deposit(new PositiveAmount(800));
-            var debit = account.Withdraw(new PositiveAmount(100));
-            customer.Register(account.Id);
+            var account = new Account(customer);
+            var credit = account.Deposit(entityFactory, new PositiveAmount(800));
+            var debit = account.Withdraw(entityFactory, new PositiveAmount(100));
+            customer.Register(account);
 
             Customers.Add(customer);
             Accounts.Add(account);
@@ -41,7 +40,7 @@ namespace Manga.Infrastructure.InMemoryGateway
             DefaultAccountId = account.Id;
 
             var secondCustomer = new Customer(new SSN("8408319999"), new Name("Andre Paulovich"));
-            var secondAccount = new Account(secondCustomer.Id);
+            var secondAccount = new Account(secondCustomer);
 
             Customers.Add(secondCustomer);
             Accounts.Add(secondAccount);

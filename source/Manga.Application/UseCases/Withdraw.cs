@@ -4,19 +4,23 @@ namespace Manga.Application.UseCases
     using Manga.Application.Boundaries.Withdraw;
     using Manga.Application.Repositories;
     using Manga.Application.Services;
+    using Manga.Domain;
     using Manga.Domain.Accounts;
 
     public sealed class Withdraw : IUseCase
     {
+        private readonly IEntityFactory _entityFactory;
         private readonly IOutputPort _outputHandler;
         private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public Withdraw(
+            IEntityFactory entityFactory,
             IOutputPort outputHandler,
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
+            _entityFactory = entityFactory;
             _outputHandler = outputHandler;
             _accountRepository = accountRepository;
             _unitOfWork = unitOfWork;
@@ -31,7 +35,7 @@ namespace Manga.Application.UseCases
                 return;
             }
 
-            IDebit debit = account.Withdraw(input.Amount);
+            IDebit debit = account.Withdraw(_entityFactory, input.Amount);
 
             if (debit == null)
             {

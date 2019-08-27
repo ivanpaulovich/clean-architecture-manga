@@ -24,8 +24,10 @@ namespace Manga.UnitTests.UseCasesTests
 
             var accountRepository = new AccountRepository(context);
             var unitOfWork = new UnitOfWork(context);
+            var entityFactory = new EntityFactory();
 
             var sut = new Withdraw(
+                entityFactory,
                 presenter,
                 accountRepository,
                 unitOfWork

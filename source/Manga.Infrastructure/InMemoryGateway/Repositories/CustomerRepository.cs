@@ -17,7 +17,7 @@ namespace Manga.Infrastructure.InMemoryGateway.Repositories
 
         public async Task Add(ICustomer customer)
         {
-            _context.Customers.Add((Customer) customer);
+            _context.Customers.Add((InMemoryGateway.Customer) customer);
             await Task.CompletedTask;
         }
 

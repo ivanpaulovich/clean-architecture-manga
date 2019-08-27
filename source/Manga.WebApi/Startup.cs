@@ -25,6 +25,8 @@ namespace Manga.WebApi
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddControllersAsServices();
 
+            services.AddBusinessExceptionFilter();
+
             services.AddFeatureFlags(Configuration);
             services.AddVersionedSwagger();
 

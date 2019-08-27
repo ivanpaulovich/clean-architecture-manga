@@ -13,7 +13,8 @@ namespace Manga.Domain.Accounts
             _credits = new List<ICredit>();
         }
 
-        public CreditsCollection(IList<Credit> credits) : this()
+        public void Add<T>(IEnumerable<T> credits)
+            where T : ICredit
         {
             foreach (var credit in credits)
                 Add(credit);

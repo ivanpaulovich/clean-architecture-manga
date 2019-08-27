@@ -13,6 +13,12 @@ namespace Manga.Domain.Customers
             _accountIds = new List<Guid>();
         }
 
+        public void Add(IEnumerable<Guid> accounts)
+        {
+            foreach (var account in accounts)
+                Add(account);
+        }
+
         public IReadOnlyCollection<Guid> GetAccountIds()
         {
             IReadOnlyCollection<Guid> accountIds = new ReadOnlyCollection<Guid>(_accountIds);

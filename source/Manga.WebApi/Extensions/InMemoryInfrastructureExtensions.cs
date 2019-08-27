@@ -11,7 +11,7 @@ namespace Manga.WebApi.Extensions
     {
         public static IServiceCollection AddInMemoryPersistence(this IServiceCollection services)
         {
-            services.AddScoped<IEntitiesFactory, DefaultEntitiesFactory>();
+            services.AddScoped<IEntityFactory, EntityFactory>();
 
             services.AddSingleton<MangaContext, MangaContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
