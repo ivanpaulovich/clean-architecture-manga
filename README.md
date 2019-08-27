@@ -65,12 +65,27 @@ Feel free to submit pull requests to help:
   * [Repository](#repository)
   * [Unit of Work](#unit-of-work)
   * [Use Case](#use-case)
+* [Separation of Concerns](#separation-of-concerns)
 * [Test-Driven Development TDD](#test-driven-development-tdd)
   * [Outside-In Approach](#outside-in-approach)
   * [Fakes](#fakes)
   * [Clean Tests](#clean-tests)
+  * [xUnit](#xunit)
 * [SOLID](#solid)
-
+  * [Single Responsibilty Principle](#single-responsibility-principle)
+  * [Open-Closed Principle](#open-closed-principle)
+  * [Liskov Substituiton Principle](#liskov-substituition-principle)
+  * [Interface Segregation Principle](#interface-segregation-principle)
+  * [Dependency Inversion Principle](#dependency-inversion-principle)
+* [.NET Core](#.net-core)
+  * [.NET Core Web API](#.net-core-webapi)
+    * [Swagger](#swagger)
+    * [API Versioning](#api-versioning)
+    * [Microsoft Extensions](#microsoft-extensions)
+    * [Feature Flags](#feature-flags)
+  * [Entity Framework Core](#entity-framework-core)
+* [Docker](#docker)
+  
 ## Use Cases Description
 
 Application architecture is about usage, a good architecture screams the business use cases to the developer and framework concerns are implementation details. On **Manga** sample the user can `Register` an account then manage the balance with `Deposits` and `Withdrawals`.
