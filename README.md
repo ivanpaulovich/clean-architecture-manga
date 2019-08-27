@@ -96,16 +96,18 @@ The flow of control begins in the controller, moves through the use case, and th
 ### Register Flow of Control
 
 1. An request in received by the `CustomersController` and an action `Post` is invoked.
-2. The action creates an `RegisterInput` message and the use case is executed.
-3. The `Register` use case creates a `Customer` and an `Account`. Repositories are called, the `RegisterOutput` message is created and sent to the `RegisterPresenter`.
+2. The action creates an `RegisterInput` message and the `Register` use case is executed.
+3. The `Register` use case creates a `Customer` and an `Account`. Repositories are called, the `RegisterOutput` message is built and sent to the `RegisterPresenter`.
 4. The `RegisterPresenter` builds the HTTP Response message.
 5. The `CustomersController` asks the presenter the current response.
+
+![Register Flow of Control](https://github.com/ivanpaulovich/clean-architecture-manga/blob/master/register-flow-of-control.svg)
 
 ### Get Customer Details Flow of Control
 
 1. An request in received by the `CustomersController` and an action `GetCustomer` is invoked.
-2. The action creates an `GetCustomerDetailsInput` message and the use case is executed.
-3. The `GetCustomerDetails` use case asks the repositories about the `Customer` and the `Account`. It could call the `NotFound` or the `Default` port on the `GetCustomerDetailsPresenter`.
+2. The action creates an `GetCustomerDetailsInput` message and the `GetCustomerDetails` use case is executed.
+3. The `GetCustomerDetails` use case asks the repositories about the `Customer` and the `Account`. It could call the `NotFound` or the `Default` port of the `GetCustomerDetailsPresenter` depending if it exists or not.
 4. The `GetCustomerDetailsPresenter` builds the HTTP Response message.
 5. The `CustomersController` asks the presenter the current response.
 
