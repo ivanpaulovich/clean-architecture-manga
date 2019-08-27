@@ -88,9 +88,12 @@ Feel free to submit pull requests to help:
     * [Localizing](#Localizing)
     * [Data Annotations](#data-annotations)
   * [Entity Framework Core](#entity-framework-core)
+    * [Add Migration](#add-migration)
+    * [Update Database](#update-database)
   * [Environment Configurations](#environment-configurations)
 * [Docker](#docker)
 * [SQL Server](#sql-server)
+* [Related Content and Projects](#related-content-and-projects)
   
 ## Use Cases Description
 
