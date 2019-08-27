@@ -2,7 +2,7 @@ namespace Manga.WebApi.UseCases.V1.GetCustomerDetails
 {
     using System.Collections.Generic;
     using Manga.Application.Boundaries.GetCustomerDetails;
-    using Manga.WebApi.Models;
+    using Manga.WebApi.ViewModels;
     using Microsoft.AspNetCore.Mvc;
 
     public sealed class GetCustomerDetailsPresenter : IOutputPort
