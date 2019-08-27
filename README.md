@@ -84,6 +84,7 @@ Feel free to submit pull requests to help:
     * [API Versioning](#api-versioning)
     * [Microsoft Extensions](#microsoft-extensions)
     * [Feature Flags](#feature-flags)
+    * [Logging](#logging)
   * [Entity Framework Core](#entity-framework-core)
 * [Docker](#docker)
   
