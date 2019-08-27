@@ -49,12 +49,26 @@ Feel free to submit pull requests to help:
   * [Close Account](#close-account)
 * [Flow of Control](#register-flow-of-control)
   * [Register Flow of Control](#register-flow-of-control)
-  * [Get Customer Details Flow of Control](#rget-customer-details-flow-of-control)
+  * [Get Customer Details Flow of Control](#get-customer-details-flow-of-control)
 * [Architecture Styles](#architecture-styles)
   * [Ports and Adapters Architecture Style](#ports-and-adapters-architecture-style)
   * [Onion Architecture Style](#onion-architecture-style)
   * [Clean Architecture Style](#clean-architecture-style)
 * [Design Patterns](#design-patterns)
+  * [Model-View-Controller](#model-view-controller)
+  * [Presenter](#presenter)
+    * [Standard Output](#standard-output)
+    * [Error Output](#error-output)
+  * [Value Object](#value-object)
+  * [Entity](#entity)
+  * [Aggregate Root](#aggregate-root)
+  * [Repository](#repository)
+  * [Unit of Work](#unit-of-work)
+  * [Use Case](#use-case)
+* [Test-Driven Development TDD](#test-driven-development-tdd)
+  * [Outside-In Approach](#outside-in-approach)
+  * [Fakes](#fakes)
+  * [Clean Tests](#clean-tests)
 * [SOLID](#solid)
 
 ## Use Cases Description
@@ -128,6 +142,35 @@ Very similar to Ports and Adapters, I would add that data objects cross boundari
 An application architecture implementation guided by tests cases.
 
 ## Design Patterns
+
+### Model-View-Controller
+
+### Presenter
+
+#### Standard Output
+
+#### Error Output
+
+### Value Object
+
+### Entity
+
+### Aggregate Root
+
+### Repository
+
+### Unit of Work
+
+### Use Case
+
+## Test-Driven Development TDD
+
+### Outside-In Approach
+
+### Fakes
+
+### Clean Tests
+
 ## SOLID
 
 ## Running from source
