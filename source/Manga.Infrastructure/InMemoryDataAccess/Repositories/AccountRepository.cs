@@ -1,4 +1,4 @@
-namespace Manga.Infrastructure.InMemoryGateway.Repositories
+namespace Manga.Infrastructure.InMemoryDataAccess.Repositories
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -17,8 +17,8 @@ namespace Manga.Infrastructure.InMemoryGateway.Repositories
 
         public async Task Add(IAccount account, ICredit credit)
         {
-            _context.Accounts.Add((InMemoryGateway.Account) account);
-            _context.Credits.Add((InMemoryGateway.Credit) credit);
+            _context.Accounts.Add((InMemoryDataAccess.Account) account);
+            _context.Credits.Add((InMemoryDataAccess.Credit) credit);
             await Task.CompletedTask;
         }
 

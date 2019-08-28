@@ -6,8 +6,8 @@ namespace Manga.UnitTests.UseCaseTests
     using Manga.Application.Boundaries.Transfer;
     using Manga.Application.UseCases;
     using Manga.Domain.ValueObjects;
-    using Manga.Infrastructure.InMemoryGateway.Repositories;
-    using Manga.Infrastructure.InMemoryGateway;
+    using Manga.Infrastructure.InMemoryDataAccess.Repositories;
+    using Manga.Infrastructure.InMemoryDataAccess;
     using Xunit;
 
     public sealed class TransferUseCaseTests

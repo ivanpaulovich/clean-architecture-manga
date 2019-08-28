@@ -3,8 +3,8 @@ namespace Manga.WebApi.Extensions
     using Manga.Application.Repositories;
     using Manga.Application.Services;
     using Manga.Domain;
-    using Manga.Infrastructure.InMemoryGateway.Repositories;
-    using Manga.Infrastructure.InMemoryGateway;
+    using Manga.Infrastructure.InMemoryDataAccess.Repositories;
+    using Manga.Infrastructure.InMemoryDataAccess;
     using Microsoft.Extensions.DependencyInjection;
 
     public static class InMemoryInfrastructureExtensions

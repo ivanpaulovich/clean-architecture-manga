@@ -1,7 +1,7 @@
 namespace Manga.UnitTests.UseCasesTests
 {
     using Manga.Domain.ValueObjects;
-    using Manga.Infrastructure.InMemoryGateway;
+    using Manga.Infrastructure.InMemoryDataAccess;
     using Xunit;
 
     public sealed class CloseAccountTests

@@ -1,4 +1,4 @@
-namespace Manga.Infrastructure.InMemoryGateway.Repositories
+namespace Manga.Infrastructure.InMemoryDataAccess.Repositories
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -17,7 +17,7 @@ namespace Manga.Infrastructure.InMemoryGateway.Repositories
 
         public async Task Add(ICustomer customer)
         {
-            _context.Customers.Add((InMemoryGateway.Customer) customer);
+            _context.Customers.Add((InMemoryDataAccess.Customer) customer);
             await Task.CompletedTask;
         }
 

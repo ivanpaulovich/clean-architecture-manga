@@ -11,7 +11,7 @@ namespace Manga.UnitTests.EntitiesTests
         [Fact]
         public void New_Account_Should_Have_100_Credit_After_Deposit()
         {
-            var entityFactory = new Manga.Infrastructure.InMemoryGateway.EntityFactory();
+            var entityFactory = new Manga.Infrastructure.InMemoryDataAccess.EntityFactory();
             //
             // Arrange
             PositiveAmount amount = new PositiveAmount(100.0);
@@ -37,7 +37,7 @@ namespace Manga.UnitTests.EntitiesTests
         {
             //
             // Arrange
-            var entityFactory = new Manga.Infrastructure.InMemoryGateway.EntityFactory();
+            var entityFactory = new Manga.Infrastructure.InMemoryDataAccess.EntityFactory();
             //
             // Arrange
             ICustomer customer = entityFactory.NewCustomer(
@@ -61,7 +61,7 @@ namespace Manga.UnitTests.EntitiesTests
         [Fact]
         public void New_Account_Should_Allow_Closing()
         {
-            var entityFactory = new Manga.Infrastructure.InMemoryGateway.EntityFactory();
+            var entityFactory = new Manga.Infrastructure.InMemoryDataAccess.EntityFactory();
 
             //
             // Arrange
@@ -84,7 +84,7 @@ namespace Manga.UnitTests.EntitiesTests
         [Fact]
         public void Account_With_200_Balance_Should_Not_Allow_50000_Withdraw()
         {
-            var entityFactory = new Manga.Infrastructure.InMemoryGateway.EntityFactory();
+            var entityFactory = new Manga.Infrastructure.InMemoryDataAccess.EntityFactory();
 
             //
             // Arrange
@@ -108,7 +108,7 @@ namespace Manga.UnitTests.EntitiesTests
         [Fact]
         public void Account_With_Three_Transactions_Should_Be_Consistent()
         {
-            var entityFactory = new Manga.Infrastructure.InMemoryGateway.EntityFactory();
+            var entityFactory = new Manga.Infrastructure.InMemoryDataAccess.EntityFactory();
 
             //
             // Arrange

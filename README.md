@@ -61,7 +61,6 @@ Feel free to submit pull requests to help:
     * [Standard Output](#standard-output)
     * [Error Output](#error-output)
     * [Alternative Output](#alternative-output)
-  * [Use Case](#use-case)
   * [Unit of Work](#unit-of-work)
   * [First-Class Collections](#first-class-collections)
   * [Factory](#factory)
@@ -71,6 +70,7 @@ Feel free to submit pull requests to help:
   * [Entity](#entity)
   * [Aggregate Root](#aggregate-root)
   * [Repository](#repository)
+  * [Use Case](#use-case)
 * [Separation of Concerns](#separation-of-concerns)
 * [Encapsulation](#encapsulation)
 * [Test-Driven Development TDD](#test-driven-development-tdd)
@@ -153,7 +153,7 @@ The flow of control begins in the controller, moves through the use case, and th
 4. The `RegisterPresenter` builds the HTTP Response message.
 5. The `CustomersController` asks the presenter the current response.
 
-![Register Flow of Control](https://github.com/ivanpaulovich/clean-architecture-manga/blob/master/register-flow-of-control.svg)
+![Register Flow of Control](https://github.com/ivanpaulovich/clean-architecture-manga/blob/master/docs/register-flow-of-control.svg)
 
 ### Get Customer Details Flow of Control
 
@@ -185,7 +185,7 @@ The following Design Patterns will help you continue implementing use cases in a
 
 ### Controller
 
-Controllers receive Requests, build an Input message then call an Use Case, you should notice that the controller do not build the ViewModel, instead this responsibility is delegated to the presenter object.
+Controllers receive Requests, build an Input message then call an Use Case, you should notice that the controller do not build the Response, instead this responsibility is delegated to the presenter object.
 
 ```c#
 public sealed class CustomersController : Controller
@@ -207,7 +207,7 @@ public sealed class CustomersController : Controller
 
 ### ViewModel
 
-ViewModels are data transfer objects, they will be rendered by the MVC framework so we need to follow the framework guidelines. I suggest that you add `[Required]` attributes so swagger generators could know the properties that are not nullable. My personal preference is to avoid getters here because you know how the response object will be created, so use the constructor.
+ViewModels are data transfer objects, they will be rendered by the MVC framework so we need to follow the framework guidelines. I suggest that you add comments describing each property and the `[Required]` attribute so swagger generators could know the properties that are not nullable. My personal preference is to avoid getters here because you have total control of response object instantiation, so implement the constructor.
 
 ```c#
 /// <summary>
@@ -255,7 +255,7 @@ public sealed class RegisterResponse
 
 ### Presenter
 
-Presenters build the Response objects when called by the application.
+Presenters are called by te application Use Cases and build the Response objects.
 
 ```c#
 public sealed class RegisterPresenter : IOutputPort
@@ -300,6 +300,10 @@ Called when an blocking errors happens.
 #### Alternative Output
 
 Called when an blocking errors happens.
+
+## Domain-Driven Design Patterns
+
+The following patterns are known to describe business solutions.
 
 ### Value Object
 
@@ -364,15 +368,158 @@ public sealed class Name : IEquatable<Name>
 
 ### Entity
 
-Objects that are unique by their IDs. Entities are mutable and instances of domain concepts.
+Mutable objects unique identified by their IDs.
+
+```c#
+public class Credit : ICredit
+{
+    public Guid Id { get; protected set; }
+    public PositiveAmount Amount { get; protected set; }
+    public string Description
+    {
+        get { return "Credit"; }
+    }
+    public DateTime TransactionDate { get; protected set; }
+
+    public PositiveAmount Sum(PositiveAmount amount)
+    {
+        return Amount.Add(amount);
+    }
+}
+```
 
 ### Aggregate Root
 
+Similar to Entities with the addition that Aggregate Root are responsible to keep the tree of objects consistent.
+
+```c#
+public class Account : IAccount
+{
+    public Guid Id { get; protected set; }
+    public CreditsCollection Credits { get; protected set; }
+    public DebitsCollection Debits { get; protected set; }
+
+    protected Account()
+    {
+        Credits = new CreditsCollection();
+        Debits = new DebitsCollection();
+    }
+
+    public ICredit Deposit(IEntityFactory entityFactory, PositiveAmount amountToDeposit)
+    {
+        var credit = entityFactory.NewCredit(this, amountToDeposit);
+        Credits.Add(credit);
+        return credit;
+    }
+
+    public IDebit Withdraw(IEntityFactory entityFactory, PositiveAmount amountToWithdraw)
+    {
+        if (GetCurrentBalance().LessThan(amountToWithdraw))
+            return null;
+
+        var debit = entityFactory.NewDebit(this, amountToWithdraw);
+        Debits.Add(debit);
+        return debit;
+    }
+
+    public bool IsClosingAllowed()
+    {
+        return GetCurrentBalance().IsZero();
+    }
+
+    public Amount GetCurrentBalance()
+    {
+        var totalCredits = Credits
+            .GetTotal();
+
+        var totalDebits = Debits
+            .GetTotal();
+
+        var totalAmount = totalCredits
+            .Subtract(totalDebits);
+
+        return totalAmount;
+    }
+}
+```
+
 ### Repository
 
-### Unit of Work
+```c#
+public sealed class CustomerRepository : ICustomerRepository
+{
+    private readonly MangaContext _context;
+
+    public CustomerRepository(MangaContext context)
+    {
+        _context = context;
+    }
+
+    public async Task Add(ICustomer customer)
+    {
+        _context.Customers.Add((InMemoryDataAccess.Customer) customer);
+        await Task.CompletedTask;
+    }
+
+    public async Task<ICustomer> Get(Guid id)
+    {
+        Customer customer = _context.Customers
+            .Where(e => e.Id == id)
+            .SingleOrDefault();
+
+        return await Task.FromResult<Customer>(customer);
+    }
+
+    public async Task Update(ICustomer customer)
+    {
+        Customer customerOld = _context.Customers
+            .Where(e => e.Id == customer.Id)
+            .SingleOrDefault();
+
+        customerOld = (Customer) customer;
+        await Task.CompletedTask;
+    }
+}
+```
 
 ### Use Case
+
+```c#
+public sealed class Withdraw : IUseCase
+{
+    // properties and constructor omitted
+
+    public async Task Execute(WithdrawInput input)
+    {
+        IAccount account = await _accountRepository.Get(input.AccountId);
+        if (account == null)
+        {
+            _outputHandler.Error($"The account {input.AccountId} does not exist or is already closed.");
+            return;
+        }
+
+        IDebit debit = account.Withdraw(_entityFactory, input.Amount);
+
+        if (debit == null)
+        {
+            _outputHandler.Error($"The account {input.AccountId} does not have enough funds to withdraw {input.Amount}.");
+            return;
+        }
+
+        await _accountRepository.Update(account, debit);
+        await _unitOfWork.Save();
+
+        WithdrawOutput output = new WithdrawOutput(
+            debit,
+            account.GetCurrentBalance()
+        );
+
+        _outputHandler.Default(output);
+    }
+}
+```
+
+### Unit of Work
 
 ## Separation of Concerns
 
@@ -390,11 +537,11 @@ Objects that are unique by their IDs. Entities are mutable and instances of doma
 
 ## SOLID
 
-### Single Responsibilty Principle
+### Single Responsibility Principle
 
 ### Open-Closed Principle
 
-### Liskov Substituiton Principle
+### Liskov Substitution Principle
 
 ### Interface Segregation Principle
 
@@ -442,6 +589,22 @@ dotnet ef database update --project source/Manga.Infrastructure --startup-projec
 
 ### Environment Configurations
 
+To run in `Development` mode use:
+
+```bash
+dotnet run --project "source/Manga.WebApi/Manga.WebApi.csproj" --Environment="Development"
+```
+
+It starts the application and call `ConfigureDevelopmentServices` method which runs the application using in memory persistence.
+
+The second option is to run in `Production` mode:
+
+```bash
+dotnet run --project "source/Manga.WebApi/Manga.WebApi.csproj" --Environment="Production"
+```
+
+This command will call `ConfigureProductionServices` then use SQL Server repositories.
+
 ## DevOps
 
 ### Running the Application Locally
@@ -452,7 +615,7 @@ The single requirement is to install the latest .NET Code SDK.
 
 * [.NET Core SDK 2.2](https://www.microsoft.com/net/download/dotnet-core/2.2)
 
-We made avaiable scripts to create and seed the database quickly via Docker.
+We made available scripts to create and seed the database quickly via Docker.
 
 Finally to run it locally use:
 

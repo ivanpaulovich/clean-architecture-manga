@@ -1,4 +1,4 @@
-namespace Manga.Infrastructure.InMemoryGateway
+namespace Manga.Infrastructure.InMemoryDataAccess
 {
     using System.Collections.ObjectModel;
     using Manga.Application.Boundaries.Transfer;

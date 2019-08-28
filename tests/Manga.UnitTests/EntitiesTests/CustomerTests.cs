@@ -10,7 +10,7 @@ namespace Manga.UnitTests.EntitiesTests
         [Fact]
         public void Customer_Should_Be_Registered_With_1_Account()
         {
-            var entityFactory = new Manga.Infrastructure.InMemoryGateway.EntityFactory();
+            var entityFactory = new Manga.Infrastructure.InMemoryDataAccess.EntityFactory();
             //
             // Arrange
             ICustomer sut = entityFactory.NewCustomer(
