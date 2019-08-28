@@ -457,10 +457,16 @@ We made avaiable scripts to create and seed the database quickly via Docker.
 Finally to run it locally use:
 
 ```
-$ dotnet run --project "source/Manga.WebApi/Manga.WebApi.csproj"
+dotnet run --project "source/Manga.WebApi/Manga.WebApi.csproj"
 ```
 
 ### Running the Tests Locally
+
+Run the following command at the root folder:
+
+```
+dotnet test
+```
 
 ### Continuous Integration
 
