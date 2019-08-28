@@ -79,9 +79,9 @@ Feel free to submit pull requests to help:
   * [Clean Tests](#clean-tests)
   * [xUnit](#xunit)
 * [SOLID](#solid)
-  * [Single Responsibilty Principle](#single-responsibility-principle)
+  * [Single Responsibility Principle](#single-responsibility-principle)
   * [Open-Closed Principle](#open-closed-principle)
-  * [Liskov Substituiton Principle](#liskov-substituition-principle)
+  * [Liskov Substitution Principle](#liskov-substitution-principle)
   * [Interface Segregation Principle](#interface-segregation-principle)
   * [Dependency Inversion Principle](#dependency-inversion-principle)
 * [.NET Core](#.net-core)
@@ -301,6 +301,14 @@ Called when an blocking errors happens.
 
 Called when an blocking errors happens.
 
+### Unit of Work
+
+### First-Class Collections
+
+### Factory
+
+### Component
+
 ## Domain-Driven Design Patterns
 
 The following patterns are known to describe business solutions.
@@ -518,8 +526,6 @@ public sealed class Withdraw : IUseCase
     }
 }
 ```
-
-### Unit of Work
 
 ## Separation of Concerns
 
