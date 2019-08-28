@@ -2,6 +2,7 @@ namespace Manga.UnitTests.EntitiesTests
 {
     using System;
     using Manga.Domain.Accounts;
+    using Manga.Domain.Customers;
     using Manga.Domain.ValueObjects;
     using Xunit;
 
@@ -10,21 +11,25 @@ namespace Manga.UnitTests.EntitiesTests
         [Fact]
         public void New_Account_Should_Have_100_Credit_After_Deposit()
         {
+            var entityFactory = new Manga.Infrastructure.InMemoryGateway.EntityFactory();
             //
             // Arrange
-            Guid customerId = Guid.NewGuid();
             PositiveAmount amount = new PositiveAmount(100.0);
-            Account sut = new Account(customerId);
+            ICustomer customer = entityFactory.NewCustomer(
+                new SSN("198608179922"),
+                new Name("Ivan Paulovich")
+            );
+            
+            IAccount sut = entityFactory.NewAccount(customer);
 
             //
             // Act
-            Credit actual = (Credit) sut.Deposit(amount);
+            Credit actual = (Credit) sut.Deposit(entityFactory, amount);
 
             //
             // Assert
             Assert.Equal(100, actual.Amount.ToAmount().ToDouble());
             Assert.Equal("Credit", actual.Description);
-            Assert.True(actual.AccountId != Guid.Empty);
         }
 
         [Fact]
@@ -32,12 +37,21 @@ namespace Manga.UnitTests.EntitiesTests
         {
             //
             // Arrange
-            Account sut = new Account(Guid.NewGuid());
-            sut.Deposit(new PositiveAmount(1000.0));
+            var entityFactory = new Manga.Infrastructure.InMemoryGateway.EntityFactory();
+            //
+            // Arrange
+            ICustomer customer = entityFactory.NewCustomer(
+                new SSN("198608179922"),
+                new Name("Ivan Paulovich")
+            );
+            
+            IAccount sut = entityFactory.NewAccount(customer);
+
+            sut.Deposit(entityFactory, new PositiveAmount(1000.0));
 
             //
             // Act
-            sut.Withdraw(new PositiveAmount(100));
+            sut.Withdraw(entityFactory, new PositiveAmount(100));
 
             //
             // Assert
@@ -47,9 +61,16 @@ namespace Manga.UnitTests.EntitiesTests
         [Fact]
         public void New_Account_Should_Allow_Closing()
         {
+            var entityFactory = new Manga.Infrastructure.InMemoryGateway.EntityFactory();
+
             //
             // Arrange
-            Account sut = new Account(Guid.NewGuid());
+            ICustomer customer = entityFactory.NewCustomer(
+                new SSN("198608179922"),
+                new Name("Ivan Paulovich")
+            );
+            
+            IAccount sut = entityFactory.NewAccount(customer);
 
             //
             // Act
@@ -63,13 +84,21 @@ namespace Manga.UnitTests.EntitiesTests
         [Fact]
         public void Account_With_200_Balance_Should_Not_Allow_50000_Withdraw()
         {
+            var entityFactory = new Manga.Infrastructure.InMemoryGateway.EntityFactory();
+
             //
             // Arrange
-            Account sut = new Account(Guid.NewGuid());
-            ICredit credit = sut.Deposit(new PositiveAmount(200));
+            ICustomer customer = entityFactory.NewCustomer(
+                new SSN("198608179922"),
+                new Name("Ivan Paulovich")
+            );
+            
+            IAccount sut = entityFactory.NewAccount(customer);
+
+            ICredit credit = sut.Deposit(entityFactory, new PositiveAmount(200));
 
             // Act
-            IDebit actual = sut.Withdraw(new PositiveAmount(5000));
+            IDebit actual = sut.Withdraw(entityFactory, new PositiveAmount(5000));
 
             //
             // Act and Assert
@@ -79,15 +108,23 @@ namespace Manga.UnitTests.EntitiesTests
         [Fact]
         public void Account_With_Three_Transactions_Should_Be_Consistent()
         {
+            var entityFactory = new Manga.Infrastructure.InMemoryGateway.EntityFactory();
+
             //
             // Arrange
-            Account sut = new Account(Guid.NewGuid());
-            sut.Deposit(new PositiveAmount(200));
-            sut.Withdraw(new PositiveAmount(100));
-            sut.Deposit(new PositiveAmount(50));
+            ICustomer customer = entityFactory.NewCustomer(
+                new SSN("198608179922"),
+                new Name("Ivan Paulovich")
+            );
+            
+            IAccount sut = entityFactory.NewAccount(customer);
 
-            Assert.Equal(2, sut.GetCredits().Count);
-            Assert.Equal(1, sut.GetDebits().Count);
+            sut.Deposit(entityFactory, new PositiveAmount(200));
+            sut.Withdraw(entityFactory, new PositiveAmount(100));
+            sut.Deposit(entityFactory, new PositiveAmount(50));
+
+            Assert.Equal(2, ((Account)sut).Credits.GetTransactions().Count);
+            Assert.Equal(1, ((Account)sut).Debits.GetTransactions().Count);
         }
     }
 }

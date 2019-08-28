@@ -17,14 +17,14 @@ namespace Manga.Infrastructure.InMemoryGateway.Repositories
 
         public async Task Add(IAccount account, ICredit credit)
         {
-            _context.Accounts.Add((Account) account);
-            _context.Credits.Add((Credit) credit);
+            _context.Accounts.Add((InMemoryGateway.Account) account);
+            _context.Credits.Add((InMemoryGateway.Credit) credit);
             await Task.CompletedTask;
         }
 
         public async Task Delete(IAccount account)
         {
-            Account accountOld = _context.Accounts
+            var accountOld = _context.Accounts
                 .Where(e => e.Id == account.Id)
                 .SingleOrDefault();
 

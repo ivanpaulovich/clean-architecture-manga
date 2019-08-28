@@ -21,8 +21,10 @@ namespace Manga.UnitTests.UseCasesTests
             var context = new MangaContext();
             var accountRepository = new AccountRepository(context);
             var unitOfWork = new UnitOfWork(context);
+            var entityFactory = new EntityFactory();
 
             var sut = new Deposit(
+                entityFactory,
                 presenter,
                 accountRepository,
                 unitOfWork
@@ -43,8 +45,10 @@ namespace Manga.UnitTests.UseCasesTests
             var context = new MangaContext();
             var accountRepository = new AccountRepository(context);
             var unitOfWork = new UnitOfWork(context);
+            var entityFactory = new EntityFactory();
 
             var sut = new Deposit(
+                entityFactory,
                 presenter,
                 accountRepository,
                 unitOfWork

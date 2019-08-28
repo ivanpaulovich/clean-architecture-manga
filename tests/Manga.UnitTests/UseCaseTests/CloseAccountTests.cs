@@ -1,8 +1,7 @@
 namespace Manga.UnitTests.UseCasesTests
 {
-    using System;
-    using Manga.Domain.Accounts;
     using Manga.Domain.ValueObjects;
+    using Manga.Infrastructure.InMemoryGateway;
     using Xunit;
 
     public sealed class CloseAccountTests
@@ -11,8 +10,15 @@ namespace Manga.UnitTests.UseCasesTests
         [InlineData(100)]
         public void Account_With_Credits_Should_Not_Allow_Closing(double amount)
         {
-            var account = new Account(Guid.NewGuid());
-            account.Deposit(new PositiveAmount(amount));
+            var entityFactory = new EntityFactory();
+            var customer = entityFactory.NewCustomer(
+                new SSN("198608178899"),
+                new Name("Ivan Paulovich")
+            );
+
+            var account = entityFactory.NewAccount(customer);
+
+            account.Deposit(entityFactory, new PositiveAmount(amount));
             account.IsClosingAllowed();
         }
     }

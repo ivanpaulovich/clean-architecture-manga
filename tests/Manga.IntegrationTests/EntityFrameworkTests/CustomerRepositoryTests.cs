@@ -19,7 +19,7 @@ namespace Manga.IntegrationTests.EntityFrameworkTests
                 .UseInMemoryDatabase(databaseName: "test_database")
                 .Options;
 
-            var factory = new DefaultEntitiesFactory();
+            var factory = new EntityFactory();
 
             var customer = factory.NewCustomer(
                 new SSN("198608177955"),

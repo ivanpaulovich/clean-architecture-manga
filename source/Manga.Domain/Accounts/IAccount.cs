@@ -1,14 +1,11 @@
 namespace Manga.Domain.Accounts
 {
-    using System.Collections.Generic;
     using Manga.Domain.ValueObjects;
 
     public interface IAccount : IAggregateRoot
     {
-        IReadOnlyCollection<ICredit> GetCredits();
-        IReadOnlyCollection<IDebit> GetDebits();
-        ICredit Deposit(PositiveAmount amount);
-        IDebit Withdraw(PositiveAmount amount);
+        ICredit Deposit(IEntityFactory entityFactory, PositiveAmount amountToDeposit);
+        IDebit Withdraw(IEntityFactory entityFactory, PositiveAmount amountToWithdraw);
         bool IsClosingAllowed();
         Amount GetCurrentBalance();
     }

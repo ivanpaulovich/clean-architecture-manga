@@ -24,8 +24,10 @@ namespace Manga.UnitTests.UseCaseTests
             var presenter = new Presenter();
             var accountRepository = new AccountRepository(context);
             var unitOfWork = new UnitOfWork(context);
+            var entityFactory = new EntityFactory();
 
             var sut = new Transfer(
+                entityFactory,
                 presenter,
                 accountRepository,
                 unitOfWork

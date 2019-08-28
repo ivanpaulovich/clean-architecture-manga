@@ -1,11 +1,10 @@
 namespace Manga.Domain.Customers
 {
-    using System.Collections.Generic;
-    using System;
+    using Manga.Domain.Accounts;
 
     public interface ICustomer : IAggregateRoot
     {
-        IReadOnlyCollection<Guid> Accounts { get; }
-        void Register(Guid accountId);
+        AccountCollection Accounts { get; }
+        void Register(IAccount account);
     }
 }

@@ -13,13 +13,13 @@ namespace Manga.UnitTests.PresenterTests
         [Fact]
         public void GivenValidData_Handle_WritesOkObjectResult()
         {
-            var customer = new Domain.Customers.Customer(
-                new SSN("198608179999"),
-                new Name("Ivan")
+            var customer = new Infrastructure.InMemoryGateway.Customer(
+                new SSN("198608178888"),
+                new Name("Ivan Paulovich")
             );
 
-            var account = new Domain.Accounts.Account(
-                Guid.NewGuid()
+            var account = new Infrastructure.InMemoryGateway.Account(
+                customer
             );
 
             var registerOutput = new RegisterOutput(

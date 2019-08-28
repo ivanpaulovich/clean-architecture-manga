@@ -9,14 +9,14 @@ namespace Manga.Application.UseCases
 
     public sealed class Register : IUseCase
     {
-        private readonly IEntitiesFactory _entityFactory;
+        private readonly IEntityFactory _entityFactory;
         private readonly IOutputPort _outputHandler;
         private readonly ICustomerRepository _customerRepository;
         private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public Register(
-            IEntitiesFactory entityFactory,
+            IEntityFactory entityFactory,
             IOutputPort outputHandler,
             ICustomerRepository customerRepository,
             IAccountRepository accountRepository,
@@ -38,16 +38,16 @@ namespace Manga.Application.UseCases
             }
 
             var customer = _entityFactory.NewCustomer(input.SSN, input.Name);
-            var account = _entityFactory.NewAccount(customer.Id);
+            var account = _entityFactory.NewAccount(customer);
 
-            ICredit credit = account.Deposit(input.InitialAmount);
+            ICredit credit = account.Deposit(_entityFactory, input.InitialAmount);
             if (credit == null)
             {
                 _outputHandler.Error("An error happened when depositing the amount.");
                 return;
             }
 
-            customer.Register(account.Id);
+            customer.Register(account);
 
             await _customerRepository.Add(customer);
             await _accountRepository.Add(account, credit);

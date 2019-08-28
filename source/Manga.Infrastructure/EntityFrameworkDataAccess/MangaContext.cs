@@ -1,8 +1,6 @@
 namespace Manga.Infrastructure.EntityFrameworkDataAccess
 {
     using System;
-    using Manga.Domain.Accounts;
-    using Manga.Domain.Customers;
     using Manga.Domain.ValueObjects;
     using Microsoft.EntityFrameworkCore;
 
@@ -23,19 +21,26 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
             modelBuilder.Entity<Account>()
                 .ToTable("Account");
 
+            modelBuilder.Entity<Account>()
+                .Ignore(p => p.Credits)
+                .Ignore(p => p.Debits);
+
             modelBuilder.Entity<Customer>()
                 .ToTable("Customer")
                 .Property(b => b.SSN)
                 .HasConversion(
                     v => v.ToString(),
                     v => new SSN(v));
-
+                    
             modelBuilder.Entity<Customer>()
                 .ToTable("Customer")
                 .Property(b => b.Name)
                 .HasConversion(
                     v => v.ToString(),
                     v => new Name(v));
+
+            modelBuilder.Entity<Customer>()
+                .Ignore(p => p.Accounts);
 
             modelBuilder.Entity<Debit>()
                 .ToTable("Debit")

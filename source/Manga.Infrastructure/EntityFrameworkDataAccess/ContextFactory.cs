@@ -1,9 +1,7 @@
 namespace Manga.Infrastructure.EntityFrameworkDataAccess
 {
     using System.IO;
-    using System;
     using Microsoft.EntityFrameworkCore.Design;
-    using Microsoft.EntityFrameworkCore.Infrastructure;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
 

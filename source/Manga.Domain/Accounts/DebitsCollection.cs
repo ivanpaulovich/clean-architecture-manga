@@ -13,7 +13,8 @@ namespace Manga.Domain.Accounts
             _debits = new List<IDebit>();
         }
 
-        public DebitsCollection(IList<Debit> debits) : this()
+        public void Add<T>(IEnumerable<T> debits)
+            where T : IDebit
         {
             foreach (var debit in debits)
                 Add(debit);

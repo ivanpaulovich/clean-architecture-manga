@@ -36,7 +36,7 @@ namespace Manga.Application.UseCases
 
             List<Boundaries.GetCustomerDetails.Account> accounts = new List<Boundaries.GetCustomerDetails.Account>();
 
-            foreach (Guid accountId in customer.Accounts)
+            foreach (Guid accountId in customer.Accounts.GetAccountIds())
             {
                 IAccount account = await _accountRepository.Get(accountId);
 

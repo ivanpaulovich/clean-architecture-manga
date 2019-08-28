@@ -373,6 +373,10 @@ Objects that are unique by their IDs. Entities are mutable and instances of doma
 
 ### Use Case
 
+## Separation of Concerns
+
+## Encapsulation
+
 ## Test-Driven Development TDD
 
 ### Outside-In Approach
@@ -381,50 +385,45 @@ Objects that are unique by their IDs. Entities are mutable and instances of doma
 
 ### Clean Tests
 
+### xUnit
+
 ## SOLID
 
-## Running from source
+### Single Responsibilty Principle
 
-```
-$ dotnet run --project "source/Manga.WebApi/Manga.WebApi.csproj"
-```
+### Open-Closed Principle
 
-### Development Environment
+### Liskov Substituiton Principle
 
-* MacOS Catalina :apple:
-* Visual Studio Code :heart:
-* [.NET Core SDK 2.2](https://www.microsoft.com/net/download/dotnet-core/2.2)
-* Docker :whale:
-* SQL Server
+### Interface Segregation Principle
 
-### Setup SQL Server in Docker
+### Dependency Inversion Principle
 
-<details><summary>Install SQL Server</summary>
-<p>
+## .NET Core
 
-To spin up a SQL Server in a docker container using the connection string `Server=localhost;User Id=sa;Password=<YourNewStrong!Passw0rd>;` run the following command:
+### .NET Core Web API
 
-```sh
-$ ./source/scripts/sql-docker-up.sh
-```
+#### Swagger
 
-</p>
-</details>
+#### API Versioning
 
-<details><summary>Update the Database</summary>
-<p>
+#### Microsoft Extensions
 
-Generate tables and seed the database via Entity Framework Tool:
+#### Feature Flags
 
-```sh
-dotnet ef database update --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
-```
+#### Logging
 
-</p>
-</details>
+#### Localizing
 
-<details><summary>Add Migrations</summary>
-<p>
+#### Data Annotations
+
+#### Authentication
+
+#### Authorization
+
+### Entity Framework Core
+
+#### Add Migration
 
 Run the EF Tool to add a migration to the `Manga.Infrastructure` project.
 
@@ -432,8 +431,53 @@ Run the EF Tool to add a migration to the `Manga.Infrastructure` project.
 $ dotnet ef migrations add "InitialCreate" -o "EntityFrameworkDataAccess/Migrations" --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
 ```
 
-</p>
-</details>
+#### Update Database
+
+Generate tables and seed the database via Entity Framework Tool:
+
+```sh
+dotnet ef database update --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
+```
+
+### Environment Configurations
+
+## DevOps
+
+### Running the Application Locally
+
+Manga is a cross-platform application, you can run it from Mac, Windows or Unix. To develop new features, you may use Visual Studio or Visual Studio Code :heart:.
+
+The single requirement is to install the latest .NET Code SDK.
+
+* [.NET Core SDK 2.2](https://www.microsoft.com/net/download/dotnet-core/2.2)
+
+We made avaiable scripts to create and seed the database quickly via Docker.
+
+Finally to run it locally use:
+
+```
+$ dotnet run --project "source/Manga.WebApi/Manga.WebApi.csproj"
+```
+
+### Running the Tests Locally
+
+### Continuous Integration
+
+### Continuous Delivery
+
+### Continuous Deployment
+
+## Docker
+
+## SQL Server
+
+To spin up a SQL Server in a docker container using the connection string `Server=localhost;User Id=sa;Password=<YourNewStrong!Passw0rd>;` run the following command:
+
+```sh
+$ ./source/scripts/sql-docker-up.sh
+```
+
+## Related Content and Projects
 
 ## Contributors ✨
 

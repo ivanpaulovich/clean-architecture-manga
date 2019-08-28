@@ -4,19 +4,23 @@ namespace Manga.Application.UseCases
     using Manga.Application.Boundaries.Transfer;
     using Manga.Application.Repositories;
     using Manga.Application.Services;
+    using Manga.Domain;
     using Manga.Domain.Accounts;
 
     public sealed class Transfer : IUseCase
     {
+        private readonly IEntityFactory _entityFactory;
         private readonly IOutputPort _outputHandler;
         private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public Transfer(
+            IEntityFactory entityFactory,
             IOutputPort outputHandler,
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
+            _entityFactory = entityFactory;
             _outputHandler = outputHandler;
             _accountRepository = accountRepository;
             _unitOfWork = unitOfWork;
@@ -38,8 +42,8 @@ namespace Manga.Application.UseCases
                 return;
             }
 
-            IDebit debit = originAccount.Withdraw(input.Amount);
-            ICredit credit = destinationAccount.Deposit(input.Amount);
+            IDebit debit = originAccount.Withdraw(_entityFactory, input.Amount);
+            ICredit credit = destinationAccount.Deposit(_entityFactory, input.Amount);
 
             await _accountRepository.Update(originAccount, debit);
             await _accountRepository.Update(destinationAccount, credit);
