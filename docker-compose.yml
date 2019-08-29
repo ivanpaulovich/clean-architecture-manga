@@ -1,0 +1,8 @@
+version: '3'
+services:  
+  webapi:
+    image: ivanpaulovich/clean-architecture-manga
+    ports:
+        - 5500:80
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
