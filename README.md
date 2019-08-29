@@ -305,7 +305,88 @@ Called when an blocking errors happens.
 
 ### First-Class Collections
 
+```c#
+public sealed class CreditsCollection
+{
+    private readonly IList<ICredit> _credits;
+
+    public CreditsCollection()
+    {
+        _credits = new List<ICredit>();
+    }
+
+    public void Add<T>(IEnumerable<T> credits)
+        where T : ICredit
+    {
+        foreach (var credit in credits)
+            Add(credit);
+    }
+
+    public void Add(ICredit credit)
+    {
+        _credits.Add(credit);
+    }
+
+    public IReadOnlyCollection<ICredit> GetTransactions()
+    {
+        var transactions = new ReadOnlyCollection<ICredit>(_credits);
+        return transactions;
+    }
+
+    public PositiveAmount GetTotal()
+    {
+        PositiveAmount total = new PositiveAmount(0);
+
+        foreach (ICredit credit in _credits)
+        {
+            total = credit.Sum(total);
+        }
+
+        return total;
+    }
+}
+```
+
 ### Factory
+
+```c#
+public interface IEntityFactory
+{
+    ICustomer NewCustomer(SSN ssn, Name name);
+    IAccount NewAccount(ICustomer customer);
+    ICredit NewCredit(IAccount account, PositiveAmount amountToDeposit);
+    IDebit NewDebit(IAccount account, PositiveAmount amountToWithdraw);
+}
+```
+
+```c#
+public sealed class EntityFactory : IEntityFactory
+{
+    public IAccount NewAccount(ICustomer customer)
+    {
+        var account = new Account(customer);
+        return account;
+    }
+
+    public ICredit NewCredit(IAccount account, PositiveAmount amountToDeposit)
+    {
+        var credit = new Credit(account, amountToDeposit);
+        return credit;
+    }
+
+    public ICustomer NewCustomer(SSN ssn, Name name)
+    {
+        var customer = new Customer(ssn, name);
+        return customer;
+    }
+
+    public IDebit NewDebit(IAccount account, PositiveAmount amountToWithdraw)
+    {
+        var debit = new Debit(account, amountToWithdraw);
+        return debit;
+    }
+}
+```
 
 ### Component
 
@@ -576,6 +657,92 @@ public sealed class Withdraw : IUseCase
 #### Authorization
 
 ### Entity Framework Core
+
+```c#
+public sealed class MangaContext : DbContext
+{
+    public MangaContext(DbContextOptions options) : base(options)
+    {
+
+    }
+
+    public DbSet<Account> Accounts { get; set; }
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Credit> Credits { get; set; }
+    public DbSet<Debit> Debits { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Account>()
+            .ToTable("Account");
+
+        modelBuilder.Entity<Account>()
+            .Ignore(p => p.Credits)
+            .Ignore(p => p.Debits);
+
+        modelBuilder.Entity<Customer>()
+            .ToTable("Customer")
+            .Property(b => b.SSN)
+            .HasConversion(
+                v => v.ToString(),
+                v => new SSN(v));
+                
+        modelBuilder.Entity<Customer>()
+            .ToTable("Customer")
+            .Property(b => b.Name)
+            .HasConversion(
+                v => v.ToString(),
+                v => new Name(v));
+
+        modelBuilder.Entity<Customer>()
+            .Ignore(p => p.Accounts);
+
+        modelBuilder.Entity<Debit>()
+            .ToTable("Debit")
+            .Property(b => b.Amount)
+            .HasConversion(
+                v => v.ToAmount().ToDouble(),
+                v => new PositiveAmount(v));
+
+        modelBuilder.Entity<Credit>()
+            .ToTable("Credit")
+            .Property(b => b.Amount)
+            .HasConversion(
+                v => v.ToAmount().ToDouble(),
+                v => new PositiveAmount(v));
+
+        modelBuilder.Entity<Customer>().HasData(
+            new { Id = new Guid("197d0438-e04b-453d-b5de-eca05960c6ae"), Name = new Name("Test User"), SSN = new SSN("19860817-9999") }
+        );
+
+        modelBuilder.Entity<Account>().HasData(
+            new { Id = new Guid("4c510cfe-5d61-4a46-a3d9-c4313426655f"), CustomerId = new Guid("197d0438-e04b-453d-b5de-eca05960c6ae") }
+        );
+
+        modelBuilder.Entity<Credit>().HasData(
+            new
+            {
+                Id = new Guid("f5117315-e789-491a-b662-958c37237f9b"),
+                    AccountId = new Guid("4c510cfe-5d61-4a46-a3d9-c4313426655f"),
+                    Amount = new PositiveAmount(400),
+                    Description = "Credit",
+                    TransactionDate = DateTime.UtcNow
+            }
+        );
+
+        modelBuilder.Entity<Debit>().HasData(
+            new
+            {
+                Id = new Guid("3d6032df-7a3b-46e6-8706-be971e3d539f"),
+                    AccountId = new Guid("4c510cfe-5d61-4a46-a3d9-c4313426655f"),
+                    Amount = new PositiveAmount(400),
+                    Description = "Debit",
+                    TransactionDate = DateTime.UtcNow
+            }
+        );
+    }
+}
+```
 
 #### Add Migration
 
