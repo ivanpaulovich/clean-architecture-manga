@@ -5,35 +5,34 @@ namespace Manga.UnitTests.UseCasesTests
     using Application.Boundaries.Deposit;
     using Manga.Application.UseCases;
     using Manga.Domain.ValueObjects;
-    using Manga.Infrastructure.InMemoryDataAccess.Repositories;
-    using Manga.Infrastructure.InMemoryDataAccess;
     using Xunit;
+    using Manga.UnitTests.TestFixtures;
 
     public sealed class DepositTests
     {
+        private readonly Standard _fixture;
+        public DepositTests(Standard fixture)
+        {
+            _fixture = fixture;
+        }
+
         [Theory]
         [InlineData(100)]
         [InlineData(200)]
         [InlineData(0)]
         public async Task Deposit_ChangesBalance_WhenAccountExists(double amount)
         {
-            var presenter = new Presenter();
-            var context = new MangaContext();
-            var accountRepository = new AccountRepository(context);
-            var unitOfWork = new UnitOfWork(context);
-            var entityFactory = new EntityFactory();
-
             var sut = new Deposit(
-                entityFactory,
-                presenter,
-                accountRepository,
-                unitOfWork
+                _fixture.EntityFactory,
+                _fixture.Presenter,
+                _fixture.AccountRepository,
+                _fixture.UnitOfWork
             );
 
             await sut.Execute(
-                new DepositInput(context.DefaultAccountId, new PositiveAmount(amount)));
+                new DepositInput(_fixture.Context.DefaultAccountId, new PositiveAmount(amount)));
 
-            var output = presenter.Deposits.First();
+            var output = _fixture.Presenter.Deposits.First();
             Assert.Equal(amount, output.Transaction.Amount);
         }
 
@@ -41,21 +40,15 @@ namespace Manga.UnitTests.UseCasesTests
         [InlineData(-100)]
         public async Task Should_Not_Perform_Deposit_With_Amount_Less_Than_Zero(double amount)
         {
-            var presenter = new Presenter();
-            var context = new MangaContext();
-            var accountRepository = new AccountRepository(context);
-            var unitOfWork = new UnitOfWork(context);
-            var entityFactory = new EntityFactory();
-
             var sut = new Deposit(
-                entityFactory,
-                presenter,
-                accountRepository,
-                unitOfWork
+                _fixture.EntityFactory,
+                _fixture.Presenter,
+                _fixture.AccountRepository,
+                _fixture.UnitOfWork
             );
 
             await Assert.ThrowsAsync<AmountShouldBePositiveException>(() =>
-                sut.Execute(new DepositInput(context.DefaultAccountId, new PositiveAmount(amount))));
+                sut.Execute(new DepositInput(_fixture.Context.DefaultAccountId, new PositiveAmount(amount))));
         }
     }
 }

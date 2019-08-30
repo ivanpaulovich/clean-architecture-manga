@@ -6,12 +6,18 @@ namespace Manga.UnitTests.UseCasesTests
     using Manga.Application.Boundaries.Withdraw;
     using Manga.Application.UseCases;
     using Manga.Domain.ValueObjects;
-    using Manga.Infrastructure.InMemoryDataAccess.Repositories;
     using Manga.Infrastructure.InMemoryDataAccess;
     using Xunit;
+    using Manga.UnitTests.TestFixtures;
 
     public sealed class WithdrawlTests
     {
+        private readonly Standard _fixture;
+        public WithdrawlTests(Standard fixture)
+        {
+            _fixture = fixture;
+        }
+
         [Theory]
         [ClassData(typeof(WithdrawDataSetup))]
         public async Task Withdraw_Valid_Amount(
@@ -20,24 +26,18 @@ namespace Manga.UnitTests.UseCasesTests
             double amount,
             double expectedBalance)
         {
-            var presenter = new Presenter();
-
-            var accountRepository = new AccountRepository(context);
-            var unitOfWork = new UnitOfWork(context);
-            var entityFactory = new EntityFactory();
-
             var sut = new Withdraw(
-                entityFactory,
-                presenter,
-                accountRepository,
-                unitOfWork
+                _fixture.EntityFactory,
+                _fixture.Presenter,
+                _fixture.AccountRepository,
+                _fixture.UnitOfWork
             );
 
             await sut.Execute(new WithdrawInput(
                 accountId,
                 new PositiveAmount(amount)));
 
-            var actual = presenter.Withdrawals.First();
+            var actual = _fixture.Presenter.Withdrawals.First();
             Assert.Equal(expectedBalance, actual.UpdatedBalance);
         }
     }

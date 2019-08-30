@@ -1,7 +1,6 @@
 namespace Manga.UnitTests.PresenterTests
 {
     using System.Net;
-    using System;
     using Manga.Application.Boundaries.Register;
     using Manga.Domain.ValueObjects;
     using Manga.WebApi.UseCases.V1.Register;

@@ -6,12 +6,18 @@ namespace Manga.UnitTests.UseCaseTests
     using Manga.Application.Boundaries.Transfer;
     using Manga.Application.UseCases;
     using Manga.Domain.ValueObjects;
-    using Manga.Infrastructure.InMemoryDataAccess.Repositories;
     using Manga.Infrastructure.InMemoryDataAccess;
     using Xunit;
+    using Manga.UnitTests.TestFixtures;
 
     public sealed class TransferUseCaseTests
     {
+        private readonly Standard _fixture;
+        public TransferUseCaseTests(Standard fixture)
+        {
+            _fixture = fixture;
+        }
+
         [Theory]
         [ClassData(typeof(TransferDataSetup))]
         public async Task Transfer_ChangesBalance_WhenAccountExists(
@@ -21,16 +27,11 @@ namespace Manga.UnitTests.UseCaseTests
             double amount,
             double expectedOriginBalance)
         {
-            var presenter = new Presenter();
-            var accountRepository = new AccountRepository(context);
-            var unitOfWork = new UnitOfWork(context);
-            var entityFactory = new EntityFactory();
-
             var sut = new Transfer(
-                entityFactory,
-                presenter,
-                accountRepository,
-                unitOfWork
+                _fixture.EntityFactory,
+                _fixture.Presenter,
+                _fixture.AccountRepository,
+                _fixture.UnitOfWork
             );
 
             await sut.Execute(
@@ -39,7 +40,7 @@ namespace Manga.UnitTests.UseCaseTests
                     destinationAccountId,
                     new PositiveAmount(amount)));
 
-            var actual = presenter.Transfers.First();
+            var actual = _fixture.Presenter.Transfers.First();
             Assert.Equal(expectedOriginBalance, actual.UpdatedBalance);
         }
     }

@@ -6,13 +6,17 @@ namespace Manga.UnitTests.UseCasesTests
     using Application.Boundaries.Register;
     using Manga.Application.UseCases;
     using Manga.Domain.ValueObjects;
-    using Manga.Domain;
-    using Manga.Infrastructure.InMemoryDataAccess.Repositories;
-    using Manga.Infrastructure.InMemoryDataAccess;
     using Xunit;
+    using Manga.UnitTests.TestFixtures;
 
     public sealed class RegisterTests
     {
+        private readonly Standard _fixture;
+        public RegisterTests(Standard fixture)
+        {
+            _fixture = fixture;
+        }
+
         [Fact]
         public void GivenNullInput_ThrowsException()
         {
@@ -30,19 +34,12 @@ namespace Manga.UnitTests.UseCasesTests
             var ssn = new SSN("8608178888");
             var name = new Name("Ivan Paulovich");
 
-            var entityFactory = new EntityFactory();
-            var presenter = new Presenter();
-            var context = new MangaContext();
-            var customerRepository = new CustomerRepository(context);
-            var accountRepository = new AccountRepository(context);
-            var unitOfWork = new UnitOfWork(context);
-
             var sut = new Register(
-                entityFactory,
-                presenter,
-                customerRepository,
-                accountRepository,
-                unitOfWork
+                _fixture.EntityFactory,
+                _fixture.Presenter,
+                _fixture.CustomerRepository,
+                _fixture.AccountRepository,
+                _fixture.UnitOfWork
             );
 
             await sut.Execute(new RegisterInput(
@@ -50,7 +47,7 @@ namespace Manga.UnitTests.UseCasesTests
                 name,
                 new PositiveAmount(amount)));
 
-            var actual = presenter.Registers.First();
+            var actual = _fixture.Presenter.Registers.First();
             Assert.NotNull(actual);
             Assert.Equal(ssn.ToString(), actual.Customer.SSN);
             Assert.Equal(name.ToString(), actual.Customer.Name);

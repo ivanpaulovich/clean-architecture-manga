@@ -1,25 +1,33 @@
 namespace Manga.UnitTests.UseCasesTests
 {
     using Manga.Domain.ValueObjects;
-    using Manga.Infrastructure.InMemoryDataAccess;
+    using Manga.UnitTests.TestFixtures;
     using Xunit;
 
-    public sealed class CloseAccountTests
+    public sealed class CloseAccountTests : IClassFixture<Standard>
     {
+        private readonly Standard _fixture;
+        public CloseAccountTests(Standard fixture)
+        {
+            _fixture = fixture;
+        }
+
         [Theory]
         [InlineData(100)]
         public void Account_With_Credits_Should_Not_Allow_Closing(double amount)
         {
-            var entityFactory = new EntityFactory();
-            var customer = entityFactory.NewCustomer(
+            var customer = _fixture.EntityFactory.NewCustomer(
                 new SSN("198608178899"),
                 new Name("Ivan Paulovich")
             );
 
-            var account = entityFactory.NewAccount(customer);
+            var account = _fixture.EntityFactory.NewAccount(customer);
 
-            account.Deposit(entityFactory, new PositiveAmount(amount));
-            account.IsClosingAllowed();
+            account.Deposit(_fixture.EntityFactory, new PositiveAmount(amount));
+            
+            bool actual = account.IsClosingAllowed();
+            
+            Assert.False(actual);
         }
     }
 }
