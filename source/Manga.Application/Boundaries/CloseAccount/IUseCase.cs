@@ -4,6 +4,6 @@ namespace Manga.Application.Boundaries.CloseAccount
 
     public interface IUseCase
     {
-        Task Execute(CloseAccountInput createAccountInput);
+        Task Execute(CloseAccountInput closeAccountInput);
     }
 }

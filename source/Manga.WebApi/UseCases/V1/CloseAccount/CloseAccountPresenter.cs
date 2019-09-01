@@ -18,7 +18,7 @@ namespace Manga.WebApi.UseCases.V1.CloseAccount
             ViewModel = new BadRequestObjectResult(problemDetails);
         }
 
-        public void Default(CreateAccountOutput output)
+        public void Default(CloseAccountOutput output)
         {
             ViewModel = new OkResult();
         }

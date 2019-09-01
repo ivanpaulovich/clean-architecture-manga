@@ -16,7 +16,7 @@ namespace Manga.Infrastructure.InMemoryDataAccess
             public Collection<Application.Boundaries.Register.RegisterOutput> Registers { get; }
             public Collection<Application.Boundaries.Deposit.DepositOutput> Deposits { get; }
             public Collection<Application.Boundaries.Withdraw.WithdrawOutput> Withdrawals { get; }
-            public Collection<Application.Boundaries.CloseAccount.CreateAccountOutput> ClosedAccounts { get; }
+            public Collection<Application.Boundaries.CloseAccount.CloseAccountOutput> ClosedAccounts { get; }
             public Collection<Application.Boundaries.GetAccountDetails.GetAccountDetailsOutput> GetAccountDetails { get; }
             public Collection<Application.Boundaries.GetCustomerDetails.GetCustomerDetailsOutput> GetCustomerDetails { get; }
             public Collection<Application.Boundaries.Transfer.TransferOutput> Transfers { get; }
@@ -28,7 +28,7 @@ namespace Manga.Infrastructure.InMemoryDataAccess
                 Registers = new Collection<Application.Boundaries.Register.RegisterOutput>();
                 Deposits = new Collection<Application.Boundaries.Deposit.DepositOutput>();
                 Withdrawals = new Collection<Application.Boundaries.Withdraw.WithdrawOutput>();
-                ClosedAccounts = new Collection<Application.Boundaries.CloseAccount.CreateAccountOutput>();
+                ClosedAccounts = new Collection<Application.Boundaries.CloseAccount.CloseAccountOutput>();
                 GetAccountDetails = new Collection<Application.Boundaries.GetAccountDetails.GetAccountDetailsOutput>();
                 GetCustomerDetails = new Collection<Application.Boundaries.GetCustomerDetails.GetCustomerDetailsOutput>();
                 Transfers = new Collection<Application.Boundaries.Transfer.TransferOutput>();
@@ -54,7 +54,7 @@ namespace Manga.Infrastructure.InMemoryDataAccess
                 Withdrawals.Add(output);
             }
 
-            public void Default(Application.Boundaries.CloseAccount.CreateAccountOutput output)
+            public void Default(Application.Boundaries.CloseAccount.CloseAccountOutput output)
             {
                 ClosedAccounts.Add(output);
             }

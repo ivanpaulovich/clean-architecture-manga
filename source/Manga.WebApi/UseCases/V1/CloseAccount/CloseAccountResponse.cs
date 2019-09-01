@@ -15,7 +15,7 @@ namespace Manga.WebApi.UseCases.V1.CloseAccount
         [Required]
         public Guid AccountId { get; }
 
-        public CloseAccountResponse(CreateAccountOutput output)
+        public CloseAccountResponse(CloseAccountOutput output)
         {
             AccountId = output.AccountId;
         }

@@ -1,6 +1,11 @@
 version: '1.0.{build}'
 image: 
   - Ubuntu
+environment:
+  DOCKER_USER:
+    secure: YnlezJhfKFUWo+E5/WCikQ==
+  DOCKER_PASS:
+    secure: iwibHSi3B80XJ3KjT1sAS1c66AsaOP3UFyUKKWrL1jo=
 services:
   - docker
 dotnet_csproj:
@@ -20,3 +25,7 @@ test_script:
   - dotnet test tests/Manga.UnitTests/Manga.UnitTests.csproj
   - dotnet test tests/Manga.IntegrationTests/Manga.IntegrationTests.csproj
   - dotnet test tests/Manga.AcceptanceTests/Manga.AcceptanceTests.csproj
+deploy_script:
+  - docker build -t ivanpaulovich/clean-architecture-manga:github .
+  - docker login -u="$env:DOCKER_USER" -p="$env:DOCKER_PASS"
+  - docker push

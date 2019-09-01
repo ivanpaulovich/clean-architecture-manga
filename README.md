@@ -165,7 +165,7 @@ The flow of control begins in the controller, moves through the use case, and th
 
 ## Architecture Styles
 
-Manga use ideas from popular architectural styles. They Ports and Adapters are the simplest one followed by the others, they complement each other and aim a software with use cases decoupled from implementation details.
+Manga uses ideas from popular architectural styles. They Ports and Adapters are the simplest one followed by the others, they complement each other and aim a software with use cases decoupled from implementation details.
 
 ### Ports and Adapters Architecture Style
 
@@ -185,7 +185,7 @@ The following Design Patterns will help you continue implementing use cases in a
 
 ### Controller
 
-Controllers receive Requests, build an Input message then call an Use Case, you should notice that the controller do not build the Response, instead this responsibility is delegated to the presenter object.
+Controllers receive Requests, build the Input message then call the Use Case, you should notice that the controller do not build the Response, instead this responsibility is delegated to the presenter object.
 
 ```c#
 public sealed class CustomersController : Controller

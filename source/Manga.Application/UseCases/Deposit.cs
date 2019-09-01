@@ -42,7 +42,8 @@ namespace Manga.Application.UseCases
 
             DepositOutput output = new DepositOutput(
                 credit,
-                account.GetCurrentBalance());
+                account.GetCurrentBalance()
+            );
 
             _outputHandler.Default(output);
         }
