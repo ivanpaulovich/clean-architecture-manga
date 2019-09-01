@@ -1,9 +1,9 @@
 namespace Manga.UnitTests.TestFixtures
 {
-    using Manga.Infrastructure.InMemoryDataAccess;
     using Manga.Infrastructure.InMemoryDataAccess.Repositories;
+    using Manga.Infrastructure.InMemoryDataAccess;
 
-    public sealed class Standard
+    public sealed class StandardFixture
     {
         public EntityFactory EntityFactory { get; }
         public Presenter Presenter { get; }
@@ -12,7 +12,7 @@ namespace Manga.UnitTests.TestFixtures
         public CustomerRepository CustomerRepository { get; }
         public UnitOfWork UnitOfWork { get; }
 
-        public Standard()
+        public StandardFixture()
         {
             Presenter = new Presenter();
             Context = new MangaContext();

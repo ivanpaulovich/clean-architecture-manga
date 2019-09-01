@@ -17,7 +17,7 @@ namespace Manga.UnitTests.EntitiesTests
                 new SSN("198608179922"),
                 new Name("Ivan Paulovich")
             );
-            
+
             var account = entityFactory.NewAccount(sut);
 
             // Act

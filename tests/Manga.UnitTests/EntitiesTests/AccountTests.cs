@@ -19,7 +19,7 @@ namespace Manga.UnitTests.EntitiesTests
                 new SSN("198608179922"),
                 new Name("Ivan Paulovich")
             );
-            
+
             IAccount sut = entityFactory.NewAccount(customer);
 
             //
@@ -44,7 +44,7 @@ namespace Manga.UnitTests.EntitiesTests
                 new SSN("198608179922"),
                 new Name("Ivan Paulovich")
             );
-            
+
             IAccount sut = entityFactory.NewAccount(customer);
 
             sut.Deposit(entityFactory, new PositiveAmount(1000.0));
@@ -69,7 +69,7 @@ namespace Manga.UnitTests.EntitiesTests
                 new SSN("198608179922"),
                 new Name("Ivan Paulovich")
             );
-            
+
             IAccount sut = entityFactory.NewAccount(customer);
 
             //
@@ -92,7 +92,7 @@ namespace Manga.UnitTests.EntitiesTests
                 new SSN("198608179922"),
                 new Name("Ivan Paulovich")
             );
-            
+
             IAccount sut = entityFactory.NewAccount(customer);
 
             ICredit credit = sut.Deposit(entityFactory, new PositiveAmount(200));
@@ -116,15 +116,15 @@ namespace Manga.UnitTests.EntitiesTests
                 new SSN("198608179922"),
                 new Name("Ivan Paulovich")
             );
-            
+
             IAccount sut = entityFactory.NewAccount(customer);
 
             sut.Deposit(entityFactory, new PositiveAmount(200));
             sut.Withdraw(entityFactory, new PositiveAmount(100));
             sut.Deposit(entityFactory, new PositiveAmount(50));
 
-            Assert.Equal(2, ((Account)sut).Credits.GetTransactions().Count);
-            Assert.Equal(1, ((Account)sut).Debits.GetTransactions().Count);
+            Assert.Equal(2, ((Account) sut).Credits.GetTransactions().Count);
+            Assert.Equal(1, ((Account) sut).Debits.GetTransactions().Count);
         }
     }
 }

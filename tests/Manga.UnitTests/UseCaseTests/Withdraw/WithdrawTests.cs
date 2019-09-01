@@ -1,28 +1,24 @@
-namespace Manga.UnitTests.UseCasesTests
+namespace Manga.UnitTests.UseCasesTests.Withdraw
 {
     using System.Linq;
     using System.Threading.Tasks;
-    using System;
     using Manga.Application.Boundaries.Withdraw;
     using Manga.Application.UseCases;
     using Manga.Domain.ValueObjects;
-    using Manga.Infrastructure.InMemoryDataAccess;
-    using Xunit;
     using Manga.UnitTests.TestFixtures;
+    using Xunit;
 
-    public sealed class WithdrawlTests
+    public sealed class WithdrawlTests : IClassFixture<StandardFixture>
     {
-        private readonly Standard _fixture;
-        public WithdrawlTests(Standard fixture)
+        private readonly StandardFixture _fixture;
+        public WithdrawlTests(StandardFixture fixture)
         {
             _fixture = fixture;
         }
 
         [Theory]
-        [ClassData(typeof(WithdrawDataSetup))]
+        [ClassData(typeof(PositiveDataSetup))]
         public async Task Withdraw_Valid_Amount(
-            MangaContext context,
-            Guid accountId,
             double amount,
             double expectedBalance)
         {
@@ -34,21 +30,11 @@ namespace Manga.UnitTests.UseCasesTests
             );
 
             await sut.Execute(new WithdrawInput(
-                accountId,
+                _fixture.Context.DefaultAccountId,
                 new PositiveAmount(amount)));
 
-            var actual = _fixture.Presenter.Withdrawals.First();
+            var actual = _fixture.Presenter.Withdrawals.Last();
             Assert.Equal(expectedBalance, actual.UpdatedBalance);
-        }
-    }
-
-    internal class WithdrawDataSetup : TheoryData<MangaContext, Guid, double, double>
-    {
-        public WithdrawDataSetup()
-        {
-            var context = new MangaContext();
-            var accountId = context.DefaultAccountId;
-            Add(context, accountId, 100, 600);
         }
     }
 }

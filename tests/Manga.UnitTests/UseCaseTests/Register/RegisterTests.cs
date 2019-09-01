@@ -1,4 +1,4 @@
-namespace Manga.UnitTests.UseCasesTests
+namespace Manga.UnitTests.UseCasesTests.Register
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -6,13 +6,13 @@ namespace Manga.UnitTests.UseCasesTests
     using Application.Boundaries.Register;
     using Manga.Application.UseCases;
     using Manga.Domain.ValueObjects;
-    using Xunit;
     using Manga.UnitTests.TestFixtures;
+    using Xunit;
 
-    public sealed class RegisterTests
+    public sealed class RegisterTests : IClassFixture<StandardFixture>
     {
-        private readonly Standard _fixture;
-        public RegisterTests(Standard fixture)
+        private readonly StandardFixture _fixture;
+        public RegisterTests(StandardFixture fixture)
         {
             _fixture = fixture;
         }
@@ -25,10 +25,7 @@ namespace Manga.UnitTests.UseCasesTests
         }
 
         [Theory]
-        [InlineData(300)]
-        [InlineData(100)]
-        [InlineData(500)]
-        [InlineData(3300)]
+        [ClassData(typeof(PositiveDataSetup))]
         public async Task Register_WritesOutput_InputIsValid(double amount)
         {
             var ssn = new SSN("8608178888");
@@ -47,7 +44,7 @@ namespace Manga.UnitTests.UseCasesTests
                 name,
                 new PositiveAmount(amount)));
 
-            var actual = _fixture.Presenter.Registers.First();
+            var actual = _fixture.Presenter.Registers.Last();
             Assert.NotNull(actual);
             Assert.Equal(ssn.ToString(), actual.Customer.SSN);
             Assert.Equal(name.ToString(), actual.Customer.Name);

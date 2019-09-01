@@ -1,26 +1,24 @@
-namespace Manga.UnitTests.UseCasesTests
+namespace Manga.UnitTests.UseCasesTests.Deposit
 {
     using System.Linq;
     using System.Threading.Tasks;
     using Application.Boundaries.Deposit;
     using Manga.Application.UseCases;
     using Manga.Domain.ValueObjects;
-    using Xunit;
     using Manga.UnitTests.TestFixtures;
+    using Xunit;
 
-    public sealed class DepositTests
+    public sealed class DepositTests : IClassFixture<StandardFixture>
     {
-        private readonly Standard _fixture;
-        public DepositTests(Standard fixture)
+        private readonly StandardFixture _fixture;
+        public DepositTests(StandardFixture fixture)
         {
             _fixture = fixture;
         }
 
         [Theory]
-        [InlineData(100)]
-        [InlineData(200)]
-        [InlineData(0)]
-        public async Task Deposit_ChangesBalance_WhenAccountExists(double amount)
+        [ClassData(typeof(PositiveDataSetup))]
+        public async Task Deposit_ChangesBalance(double amount)
         {
             var sut = new Deposit(
                 _fixture.EntityFactory,
@@ -30,15 +28,17 @@ namespace Manga.UnitTests.UseCasesTests
             );
 
             await sut.Execute(
-                new DepositInput(_fixture.Context.DefaultAccountId, new PositiveAmount(amount)));
+                new DepositInput(
+                    _fixture.Context.DefaultAccountId,
+                    new PositiveAmount(amount)));
 
-            var output = _fixture.Presenter.Deposits.First();
+            var output = _fixture.Presenter.Deposits.Last();
             Assert.Equal(amount, output.Transaction.Amount);
         }
 
         [Theory]
-        [InlineData(-100)]
-        public async Task Should_Not_Perform_Deposit_With_Amount_Less_Than_Zero(double amount)
+        [ClassData(typeof(NegativeDataSetup))]
+        public async Task Deposit_ShouldNot_ChangesBalance_WhenNegative(double amount)
         {
             var sut = new Deposit(
                 _fixture.EntityFactory,
@@ -48,7 +48,11 @@ namespace Manga.UnitTests.UseCasesTests
             );
 
             await Assert.ThrowsAsync<AmountShouldBePositiveException>(() =>
-                sut.Execute(new DepositInput(_fixture.Context.DefaultAccountId, new PositiveAmount(amount))));
+                sut.Execute(
+                    new DepositInput(
+                        _fixture.Context.DefaultAccountId,
+                        new PositiveAmount(amount)
+                    )));
         }
     }
 }
