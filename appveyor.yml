@@ -3,7 +3,7 @@ image:
   - Ubuntu
 environment:
   DOCKER_USER:
-    secure: YnlezJhfKFUWo+E5/WCikQ==
+    secure: klx4/DDdDHCfjpsV3hx7CveuIJJCZsRIqcuRFr2Q6EA=
   DOCKER_PASS:
     secure: iwibHSi3B80XJ3KjT1sAS1c66AsaOP3UFyUKKWrL1jo=
 services:
