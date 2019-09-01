@@ -3,7 +3,7 @@ image:
   - Ubuntu
 environment:
   DOCKER_USER:
-    secure: klx4/DDdDHCfjpsV3hx7CveuIJJCZsRIqcuRFr2Q6EA=
+    secure: YnlezJhfKFUWo+E5/WCikQ==
   DOCKER_PASS:
     secure: iwibHSi3B80XJ3KjT1sAS1c66AsaOP3UFyUKKWrL1jo=
 services:
@@ -15,6 +15,7 @@ dotnet_csproj:
 build_script:
   - docker pull mcr.microsoft.com/mssql/server:2017-latest || true
   - docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=<YourStrong!Passw0rd>' -p 1433:1433 --name sql1 -d mcr.microsoft.com/mssql/server:2017-latest || true
+  - sleep 10
   - docker exec -i sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P '<YourStrong!Passw0rd>' -Q 'ALTER LOGIN SA WITH PASSWORD="<YourNewStrong!Passw0rd>"' || true
   - dotnet ef database update --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
   - dotnet build
