@@ -84,6 +84,10 @@ Feel free to submit pull requests to help:
   * [Repository](#repository)
   * [Use Case](#use-case)
 * [Separation of Concerns](#separation-of-concerns)
+  * [Domain](#domain)
+  * [Application](#application)
+  * [Infrastructure](#infrastructure)
+  * [Web](#web)
 * [Encapsulation](#encapsulation)
 * [Test-Driven Development TDD](#test-driven-development-tdd)
   * [Outside-In Approach](#outside-in-approach)
@@ -129,7 +133,9 @@ Feel free to submit pull requests to help:
 
 Application architecture is about usage, a good architecture screams the business use cases to the developer and framework concerns are implementation details. On **Manga** sample the user can `Register` an account then manage the balance by `Deposits`, `Withdrawals` and `Transfers`.
 
-![Clean Architecture Use Cases](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architectur-mangae-use-cases.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-manga-use-cases.png" alt=Clean Architecture Use Cases" style="max-width:100%;">
+</p>
 
 ### Register
 
@@ -189,7 +195,7 @@ Manga uses ideas from popular architectural styles. They Ports and Adapters are 
 
 The Ports and Adapters Architecture Style divides the application into **Application Core** and **Adapters** in which the adapters are interchangeable components developed and tested in isolation. The Application Core is loosely coupled to the Adapters and their implementation details.
 
-![Ports and Adapters](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-ports-and-adapters.png)
+![Ports and Adapters](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-manga-ports-and-adapters.png)
 
 ### Onion Architecture Style
 
@@ -630,7 +636,17 @@ public sealed class Withdraw : IUseCase
 
 ## Separation of Concerns
 
-![Layers](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-manga-layers.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-manga-layers.png" alt="Layers" style="max-width:100%;">
+</p>
+
+### Domain
+
+### Application
+
+### Infrastructure
+
+### Web
 
 ## Encapsulation
 
