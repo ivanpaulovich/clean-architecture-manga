@@ -2,7 +2,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors)
 [![Build status](https://ci.appveyor.com/api/projects/status/0i6s33kw3y87tkb2?svg=true)](https://ci.appveyor.com/project/ivanpaulovich/clean-architecture-manga)[![Try in PWD](https://raw.githubusercontent.com/play-with-docker/stacks/master/assets/images/button.png)](https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docker-compose.yml&stack_name=clean-architecture-manga) 
 
-> TODO: Add High level architecture and use cases image
+[![Swagger Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-manga-swagger.png)](https://clean-architecture-manga.herokuapp.com/swagger/index.html) 
 
 Sample implementation of the **Clean Architecture Principles with .NET Core**. Use cases as central organizing structure, decoupled from frameworks and technology details. Has small components that are developed and tested in isolation.
 
@@ -609,6 +609,8 @@ public sealed class Withdraw : IUseCase
 ```
 
 ## Separation of Concerns
+
+![Layers](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-manga-layers.png)
 
 ## Encapsulation
 
