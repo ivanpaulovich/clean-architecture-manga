@@ -129,7 +129,7 @@ Feel free to submit pull requests to help:
 
 Application architecture is about usage, a good architecture screams the business use cases to the developer and framework concerns are implementation details. On **Manga** sample the user can `Register` an account then manage the balance by `Deposits`, `Withdrawals` and `Transfers`.
 
-![Clean Architecture Use Cases](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-use-cases.png)
+![Clean Architecture Use Cases](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architectur-mangae-use-cases.png)
 
 ### Register
 
@@ -189,7 +189,7 @@ Manga uses ideas from popular architectural styles. They Ports and Adapters are 
 
 The Ports and Adapters Architecture Style divides the application into **Application Core** and **Adapters** in which the adapters are interchangeable components developed and tested in isolation. The Application Core is loosely coupled to the Adapters and their implementation details.
 
-![Ports and Adapters](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-ports-adapters.png)
+![Ports and Adapters](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-ports-and-adapters.png)
 
 ### Onion Architecture Style
 
