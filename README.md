@@ -329,6 +329,51 @@ Called when an blocking errors happens.
 
 ### Unit of Work
 
+```c#
+public interface IUnitOfWork
+{
+    Task<int> Save();
+}
+```
+
+```c#
+public sealed class UnitOfWork : IUnitOfWork, IDisposable
+{
+    private MangaContext context;
+
+    public UnitOfWork(MangaContext context)
+    {
+        this.context = context;
+    }
+
+    public async Task<int> Save()
+    {
+        int affectedRows = await context.SaveChangesAsync();
+        return affectedRows;
+    }
+
+    private bool disposed = false;
+
+    private void Dispose(bool disposing)
+    {
+        if (!this.disposed)
+        {
+            if (disposing)
+            {
+                context.Dispose();
+            }
+        }
+        this.disposed = true;
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+}
+```
+
 ### First-Class Collections
 
 ```c#
@@ -636,8 +681,6 @@ public sealed class Withdraw : IUseCase
 
 ## Separation of Concerns
 
-
-
 <p align="center">
   <img src="https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-manga-layers.png" alt="Layers" style="max-width:100%;">
 </p>
@@ -904,6 +947,82 @@ public enum Features
 #### Localizing
 
 #### Data Annotations
+
+Data Annotations are powerful tool from .NET, it can be interpreted by ASP.NET Core and other frameworks to generate Validation, User Interface and other things. On Manga project, Data Annotations are used to create a complete Swagger UI and HTTP Request validation. Of course following the Clean Architecture Principles we need to keep frameworks under control.
+
+I decided to use Data Annotations on the User Interface layer. Take a look on the `RegisterRequest` class:
+
+```c#
+/// <summary>
+/// Registration Request
+/// </summary>
+public sealed class RegisterRequest
+{
+    /// <summary>
+    /// SSN
+    /// </summary>
+    [Required]
+    public string SSN { get; set; }
+
+    /// <summary>
+    /// Name
+    /// </summary>
+    [Required]
+    public string Name { get; set; }
+
+    /// <summary>
+    /// Initial Amount
+    /// </summary>
+    [Required]
+    public double InitialAmount { get; set; }
+}
+```
+
+The `RegisterResponse` also needs `[Required]` annotation for Swagger Clients.
+
+```c#
+/// <summary>
+/// The response for Registration
+/// </summary>
+public sealed class RegisterResponse
+{
+    /// <summary>
+    /// Customer ID
+    /// </summary>
+    [Required]
+    public Guid CustomerId { get; }
+
+    /// <summary>
+    /// SSN
+    /// </summary>
+    [Required]
+    public string SSN { get; }
+
+    /// <summary>
+    /// Name
+    /// </summary>
+    [Required]
+    public string Name { get; }
+
+    /// <summary>
+    /// Accounts
+    /// </summary>
+    [Required]
+    public List<AccountDetailsModel> Accounts { get; }
+
+    public RegisterResponse(
+        Guid customerId,
+        string ssn,
+        string name,
+        List<AccountDetailsModel> accounts)
+    {
+        CustomerId = customerId;
+        SSN = ssn;
+        Name = name;
+        Accounts = accounts;
+    }
+}
+```
 
 #### Authentication
 
