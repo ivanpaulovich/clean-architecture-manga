@@ -4,7 +4,7 @@
 
 Sample implementation of the **Clean Architecture Principles with .NET Core**. Use cases as central organizing structure, decoupled from frameworks and technology details. Built with small components that are developed and tested in isolation. 
 
-**ProTip:** To get the Clean Architecture updates hit the `WATCH` button :eyes:.
+**ProTip #1:** To get the Clean Architecture updates hit the `WATCH` button :eyes:.
 
 The Manga's swagger client is running on `Heroku` servers at [https://clean-architecture-manga.herokuapp.com/swagger/](https://clean-architecture-manga.herokuapp.com/swagger/) and the `Swagger UI` is just beautiful!
 [![Swagger Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-manga-swagger.png)](https://clean-architecture-manga.herokuapp.com/swagger/index.html)
@@ -118,12 +118,12 @@ Feel free to submit pull requests to help:
 * [DevOps](#devops)
     * [Running the Application Locally](#running-the-application-locally)
     * [Running the Tests Locally](#running-the-tests-locally)
-    * [Continuous Integration](#continuous-integration)
-    * [Continuous Delivery](#continuous-delivery)
-    * [Continuous Deployment](#continuous-deployment)
+    * [Continuous Integration & Continuous Deployment](#continuous-integration-continuous-deployment)
 * [Docker](#docker)
 * [SQL Server](#sql-server)
 * [Related Content and Projects](#related-content-and-projects)
+
+**ProTip #2:** Really interested in designing modular applications? Support this project with a hit on the `STAR` button :star:.
   
 ## Use Cases Description
 
@@ -847,6 +847,76 @@ namespace Manga.WebApi.Extensions
 
 #### Microsoft Extensions
 
+```c#
+public sealed class Startup
+{
+    public Startup(IConfiguration configuration)
+    {
+        Configuration = configuration;
+    }
+
+    public IConfiguration Configuration { get; }
+
+    // This method gets called by the runtime. Use this method to add services to the container.
+    public void ConfigureDevelopmentServices(IServiceCollection services)
+    {
+        services.AddMvc()
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            .AddControllersAsServices();
+
+        services.AddBusinessExceptionFilter();
+
+        services.AddFeatureFlags(Configuration);
+        services.AddVersionedSwagger();
+
+        services.AddUseCases();
+        services.AddInMemoryPersistence();
+        services.AddPresentersV1();
+        services.AddPresentersV2();
+    }
+
+    public void ConfigureProductionServices(IServiceCollection services)
+    {
+        services.AddMvc()
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            .AddControllersAsServices();
+
+        services.AddBusinessExceptionFilter();
+
+        services.AddFeatureFlags(Configuration);
+        services.AddVersionedSwagger();
+
+        services.AddUseCases();
+        services.AddSQLServerPersistence(Configuration);
+        services.AddPresentersV1();
+        services.AddPresentersV2();
+    }
+
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(
+        IApplicationBuilder app,
+        IHostingEnvironment env,
+        IApiVersionDescriptionProvider provider)
+    {
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+        }
+        else
+        {
+            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            app.UseHsts();
+        }
+
+        app.UseVersionedSwagger(provider);
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+        app.UseCookiePolicy();
+        app.UseMvc();
+    }
+}
+```
+
 #### Feature Flags
 
 ```c#
@@ -1136,7 +1206,7 @@ dotnet ef database update --project source/Manga.Infrastructure --startup-projec
 
 To run in `Development` mode use:
 
-```bash
+```sh
 dotnet run --project "source/Manga.WebApi/Manga.WebApi.csproj" --Environment="Development"
 ```
 
@@ -1144,7 +1214,7 @@ It starts the application and call `ConfigureDevelopmentServices` method which r
 
 The second option is to run in `Production` mode:
 
-```bash
+```sh
 dotnet run --project "source/Manga.WebApi/Manga.WebApi.csproj" --Environment="Production"
 ```
 
@@ -1164,7 +1234,7 @@ We made available scripts to create and seed the database quickly via Docker.
 
 Finally to run it locally use:
 
-```
+```sh
 dotnet run --project "source/Manga.WebApi/Manga.WebApi.csproj"
 ```
 
@@ -1172,17 +1242,74 @@ dotnet run --project "source/Manga.WebApi/Manga.WebApi.csproj"
 
 Run the following command at the root folder:
 
-```
+```sh
 dotnet test
 ```
 
-### Continuous Integration
+### Continuous Integration & Continuous Deployment
 
-### Continuous Delivery
-
-### Continuous Deployment
+```yml
+version: '1.0.{build}'
+image: 
+  - Ubuntu
+environment:
+  DOCKER_USER:
+    secure: YnlezJhfKFUWo+E5/WCikQ==
+  DOCKER_PASS:
+    secure: iwibHSi3B80XJ3KjT1sAS1c66AsaOP3UFyUKKWrL1jo=
+  HEROKU_USERNAME:
+    secure: CUWu9AI7dgCvD7XMGYEDtb7XQlvkcOSuxpdaKdzOu/M=
+  HEROKU_API_KEY:
+    secure: XEo5yF9x7hReDhlb66Aj6xnk2HOFboVzNW6BLR1+shV7MP1DhRl8J+hHg8Do7OKl
+  HEROKU_APP_NAME:
+    secure: tKa7ydQJbbA+uovQNa5sBs9OcRWsCj71r4l9wvDG7/I=
+services:
+  - docker
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+build_script:
+  - docker pull mcr.microsoft.com/mssql/server:2017-latest || true
+  - docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=<YourStrong!Passw0rd>' -p 1433:1433 --name sql1 -d mcr.microsoft.com/mssql/server:2017-latest || true
+  - sleep 10
+  - docker exec -i sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P '<YourStrong!Passw0rd>' -Q 'ALTER LOGIN SA WITH PASSWORD="<YourNewStrong!Passw0rd>"' || true
+  - dotnet ef database update --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
+  - dotnet build
+  - pushd source/Manga.WebApi/
+  - dotnet pack --configuration Release
+  - popd
+test_script:
+  - dotnet test tests/Manga.UnitTests/Manga.UnitTests.csproj
+  - dotnet test tests/Manga.IntegrationTests/Manga.IntegrationTests.csproj
+  - dotnet test tests/Manga.AcceptanceTests/Manga.AcceptanceTests.csproj
+deploy_script:
+  - docker build -t ivanpaulovich/clean-architecture-manga:github .
+  - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
+  - docker push ivanpaulovich/clean-architecture-manga:github
+  - docker login --username=$HEROKU_USERNAME --password=$HEROKU_API_KEY registry.heroku.com
+  - docker tag ivanpaulovich/clean-architecture-manga:github registry.heroku.com/$HEROKU_APP_NAME/web
+  - docker push registry.heroku.com/$HEROKU_APP_NAME/web                
+  - curl https://cli-assets.heroku.com/install.sh | sh
+  - heroku container:release web -a $HEROKU_APP_NAME
+```
 
 ## Docker
+
+```sh
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build-env
+WORKDIR /app
+
+# Copy everything else and build
+COPY . ./
+RUN dotnet publish -c Release -o out
+
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
+WORKDIR /app
+COPY --from=build-env /app/source/Manga.WebApi/out .
+CMD export ASPNETCORE_URLS=http://*:$PORT && dotnet Manga.WebApi.dll
+```
 
 ## SQL Server
 
@@ -1220,3 +1347,5 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+**ProTip #3:** Would you like to show Clean Architecture on your GitHub profile? Hit the `FORK` button :hearts:.
