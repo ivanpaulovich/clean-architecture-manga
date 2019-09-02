@@ -87,7 +87,7 @@ Feel free to submit pull requests to help:
   * [Domain](#domain)
   * [Application](#application)
   * [Infrastructure](#infrastructure)
-  * [Web](#web)
+  * [User Interface](#user-interface)
 * [Encapsulation](#encapsulation)
 * [Test-Driven Development TDD](#test-driven-development-tdd)
   * [Outside-In Approach](#outside-in-approach)
@@ -636,17 +636,27 @@ public sealed class Withdraw : IUseCase
 
 ## Separation of Concerns
 
+
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-manga-layers.png" alt="Layers" style="max-width:100%;">
 </p>
 
 ### Domain
 
+The package that contains the `High Level Modules` which describe the Domain via Aggregate Roots, Entities and Value Objects. By design this project is `Highly Abstract` and `Stable`, in other terms this package contains a considerable amount of interfaces and should not depend on external libraries and frameworks. Ideally it should be loosely coupled even to the .NET Framework.
+
 ### Application
+
+A project that contains the Application Use Cases which orchestrate the high level business rules. By design the orchestration will depend on abstractions of external services (eg. Repositories). The package exposes Boundaries Interfaces (in other terms Contracts or `Ports`) which are used by the user interface.
 
 ### Infrastructure
 
-### Web
+The infrastructure layer is responsible to implement the `Adapters` to the `Secondary Actors`. For instance an SQL Server Database is a secondary actor which is affected by the application use cases, all the implementation and dependencies required to consume the SQL Server is created on infrastructure. By design the infrastructure depends on application layer.
+
+### User Interface
+
+The system entry point responsible to render an interface to interact with the User. Made with Controllers which receive HTTP Requests and Presenters which converts the application outputs into ViewModels that are rendered as HTTP Responses.
 
 ## Encapsulation
 
