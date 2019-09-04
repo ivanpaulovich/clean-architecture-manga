@@ -6,12 +6,14 @@ Sample implementation of the **Clean Architecture Principles with .NET Core**. U
 
 **ProTip #1:** To get the Clean Architecture updates hit the `WATCH` button :eyes:.
 
-The Manga's swagger client is running on `Heroku` servers at [https://clean-architecture-manga.herokuapp.com/swagger/](https://clean-architecture-manga.herokuapp.com/swagger/) and the `Swagger UI` is just beautiful!
+**Manga** is a virtual Wallet application in which a customer can register an account then manage the balance with `Deposits`, `Withdraws` and `Transfers`.
+
+The Manga's demo is hosted on `Heroku` servers and the `Swagger UI` client is available at [https://clean-architecture-manga.herokuapp.com/swagger/](https://clean-architecture-manga.herokuapp.com/swagger/). It is just beautiful!
 [![Swagger Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-manga-swagger.png)](https://clean-architecture-manga.herokuapp.com/swagger/index.html)
 
 
 <p align="center">
-  Also you can run the Docker container through:
+  Run the Docker container in less than 2 minutes using Play With Docker:
   <br>
   <br>
   <a href="https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docker-compose.yml&amp;stack_name=clean-architecture-manga" rel="nofollow"><img src="https://raw.githubusercontent.com/play-with-docker/stacks/master/assets/images/button.png" alt="Try in PWD" style="max-width:100%;"></a>
@@ -22,15 +24,15 @@ The Manga's swagger client is running on `Heroku` servers at [https://clean-arch
 
 > Learn how to design modular applications.
 >
-> Explore the .NET Core tooling.
+> Explore the .NET Core features.
 
 ### Learn how to design modular applications
 
-Learning how to design modular applications will help you become a better engineer. Designing modular applications is the holy grail of software architecture, in our industry it is hard to find engineers that know how to design applications which allows adding new features in a steady speed. 
+Learning how to design modular applications will help you become a better engineer. Designing modular applications is the holy grail of software architecture, it is hard to find engineers experienced in designing applications which allows adding new features in a steady speed. 
 
-### Explore the .NET Core tooling
+### Explore the .NET Core features
 
-.NET Core brings a sweet development environment, an extensible and cross-platform framework. We will explore the benefits of it in the infrastructure layer and we will reduce the importance of it in the domain. The same rule is applied for modern C# constructions.
+.NET Core brings a sweet development environment, an extensible and cross-platform framework. We will explore the benefits of it in the infrastructure layer and we will reduce its relevance in the application layer. The same rule is applied for modern C# language constructions.
 
 ### Learn from the open source community
 
@@ -63,7 +65,11 @@ Feel free to submit pull requests to help:
   * [Register Flow of Control](#register-flow-of-control)
   * [Get Customer Details Flow of Control](#get-customer-details-flow-of-control)
 * [Architecture Styles](#architecture-styles)
-  * [Ports and Adapters Architecture Style](#ports-and-adapters-architecture-style)
+  * [Hexagonal Architecture Style](#ports-and-adapters-architecture-style)
+    * [Ports](#ports)
+    * [Adapters](#adapters)
+    * [The Left Side](#the-left-side)
+    * [The Right Side](#the-right-side)
   * [Onion Architecture Style](#onion-architecture-style)
   * [Clean Architecture Style](#clean-architecture-style)
 * [Design Patterns](#design-patterns)
@@ -123,7 +129,7 @@ Feel free to submit pull requests to help:
 * [SQL Server](#sql-server)
 * [Related Content and Projects](#related-content-and-projects)
 
-**ProTip #2:** Really interested in designing modular applications? Support this project with a hit on the `STAR` button :star:.
+**ProTip #2:** Really interested in designing modular applications? Support this project with a hit on the `STAR` button :star:. Share with a friend!
   
 ## Use Cases Description
 
@@ -137,13 +143,15 @@ Application architecture is about usage, a good architecture screams the busines
   <img src="https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-manga-use-cases.png" alt=Clean Architecture Use Cases" style="max-width:100%;">
 </p>
 
+Following the list of Use Cases:
+
 ### Register
 
-An customer can register the account using his personal details.
+An customer can register an account using his personal details.
 
 ### Deposit
 
-The customer can deposit a positive amount.
+The customer can deposit an amount.
 
 ### Transfer
 
@@ -155,15 +163,15 @@ A customer can withdraw money but not more that the current balance.
 
 ### Get Customer Details
 
-Customer details with all accounts and transactions are returned.
+Get customer details including all related accounts and transactions.
 
 ### Get Account Details
 
-Account details with transactions are returned.
+Get account details including transactions.
 
 ### Close Account
 
-Close an account, requires zero balance.
+Closes an account, requires balance to be zero.
 
 ## Flow of Control
 
@@ -189,13 +197,31 @@ The flow of control begins in the controller, moves through the use case, and th
 
 ## Architecture Styles
 
-Manga uses ideas from popular architectural styles. They Ports and Adapters are the simplest one followed by the others, they complement each other and aim a software with use cases decoupled from implementation details.
+Manga uses ideas from popular architectural styles. They Ports and Adapters are the simplest one followed by the others, they complement each other and aim a software made by use cases decoupled from technology implementation details.
 
-### Ports and Adapters Architecture Style
+### Hexagonal Architecture Style
 
-The Ports and Adapters Architecture Style divides the application into **Application Core** and **Adapters** in which the adapters are interchangeable components developed and tested in isolation. The Application Core is loosely coupled to the Adapters and their implementation details.
+The general idea behind Hexagonal architecture style is that the dependencies (Adapters) required by the software to run are used behind an interface (Port).  
+
+The software is divided into **Application** and **Infrastructure** in which the adapters are interchangeable components developed and tested in isolation. The Application is loosely coupled to the Adapters and their implementation details.
+
+#### Ports
+
+Interfaces like `ICustomerRepository`, `IOutputPort` and `IUnitOfWork` are ports required by the application.
+
+#### Adapters
+
+The interface implementations, they are specific to a technology and bring external capabilities. For instance the `CustomerRepository` inside the `EntityFrameworkDataAccess` folder provides capabilities to consume an SQL Server database.
 
 ![Ports and Adapters](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-manga-ports-and-adapters.png)
+
+#### The Left Side
+
+Primary Actors are usually the user interface or the Test Suit.
+
+#### The Right Side
+
+The Secondary Actors are usually Databases, Cloud Services or other systems.
 
 ### Onion Architecture Style
 
@@ -703,11 +729,59 @@ The system entry point responsible to render an interface to interact with the U
 
 ## Encapsulation
 
-## Test-Driven Development TDD
+> Given a class, the sum of its members complexity should be less that the sum of its parts in isolation.
+
+Suppose there is a `Customer` entity like this:
+
+```c#
+public class Customer
+{
+    public Guid Id { get; set; }
+    public string Name { get; set; }
+    public string SSN { get; set; }
+    public bool Active { get; set; }
+    public string ActivatedBy { get; set; }
+}
+```
+
+The complexity of the previous class is the same if there were variables like the following:
+
+```c#
+    Guid Id;
+    string Name;
+    string SSN;
+    bool Active;
+    string ActivatedBy;
+```
+
+Classes that are similar to a bag of data leaks unnecessary complexity. Consider reducing the complexity with something like:
+
+```c#
+public class Customer
+{
+    public Guid Id { get; protected set; }
+    public string Name { get; protected set; }
+    public string SSN { get; protected set; }
+    public bool Active { get; protected set; }
+    public string ActivatedBy { get; protected set; }
+}
+```
+
+## Test-Driven Development (TDD)
+
+> You are not allowed to write any production code unless it is to make a failing unit test pass.
+>
+> You are not allowed to write any more of a unit test than is sufficient to fail; and compilation failures are failures.
+>
+> You are not allowed to write any more production code than is sufficient to pass the one failing unit test.
+
+http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd
 
 ### Outside-In Approach
 
 ### Fakes
+
+> Fake it till you make it
 
 ### Clean Tests
 
