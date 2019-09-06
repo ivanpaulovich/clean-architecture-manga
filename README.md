@@ -53,7 +53,7 @@ Feel free to submit pull requests to help:
 
 ## Index of Clean Architecture Manga
 
-* [Use Cases Description](#use-cases)
+* [Use Cases](#use-cases)
 * [Flow of Control](#register-flow-of-control)
   * [Register Flow of Control](#register-flow-of-control)
   * [Get Customer Details Flow of Control](#get-customer-details-flow-of-control)
