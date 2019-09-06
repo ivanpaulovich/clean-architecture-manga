@@ -82,7 +82,6 @@ Feel free to submit pull requests to help:
   * [Unit of Work](#unit-of-work)
   * [First-Class Collections](#first-class-collections)
   * [Factory](#factory)
-  * [Component](#component)
 * [Domain-Driven Design Patterns](#domain-driven-design-patterns)
   * [Value Object](#value-object)
   * [Entity](#entity)
@@ -96,35 +95,29 @@ Feel free to submit pull requests to help:
   * [User Interface](#user-interface)
 * [Encapsulation](#encapsulation)
 * [Test-Driven Development TDD](#test-driven-development-tdd)
-  * [Outside-In Approach](#outside-in-approach)
   * [Fakes](#fakes)
-  * [Clean Tests](#clean-tests)
-  * [xUnit](#xunit)
 * [SOLID](#solid)
   * [Single Responsibility Principle](#single-responsibility-principle)
   * [Open-Closed Principle](#open-closed-principle)
   * [Liskov Substitution Principle](#liskov-substitution-principle)
   * [Interface Segregation Principle](#interface-segregation-principle)
   * [Dependency Inversion Principle](#dependency-inversion-principle)
-* [.NET Core](#.net-core)
-  * [.NET Core Web API](#.net-core-webapi)
-    * [Swagger](#swagger)
-    * [API Versioning](#api-versioning)
-    * [Microsoft Extensions](#microsoft-extensions)
-    * [Feature Flags](#feature-flags)
-    * [Logging](#logging)
-    * [Localizing](#Localizing)
-    * [Data Annotations](#data-annotations)
-    * [Authentication](#authentication)
-    * [Authorization](#authorization)
-  * [Entity Framework Core](#entity-framework-core)
-    * [Add Migration](#add-migration)
-    * [Update Database](#update-database)
-  * [Environment Configurations](#environment-configurations)
+* [.NET Core Web API](#.net-core-webapi)
+  * [Swagger and API Versioning](#swagger-and-api-versioning)
+  * [Microsoft Extensions](#microsoft-extensions)
+  * [Feature Flags](#feature-flags)
+  * [Logging](#logging)
+  * [Data Annotations](#data-annotations)
+  * [Authentication](#authentication)
+  * [Authorization](#authorization)
+* [Entity Framework Core](#entity-framework-core)
+  * [Add Migration](#add-migration)
+  * [Update Database](#update-database)
+* [Environment Configurations](#environment-configurations)
 * [DevOps](#devops)
-    * [Running the Application Locally](#running-the-application-locally)
-    * [Running the Tests Locally](#running-the-tests-locally)
-    * [Continuous Integration & Continuous Deployment](#continuous-integration-continuous-deployment)
+  * [Running the Application Locally](#running-the-application-locally)
+  * [Running the Tests Locally](#running-the-tests-locally)
+  * [Continuous Integration & Continuous Deployment](#continuous-integration-continuous-deployment)
 * [Docker](#docker)
 * [SQL Server](#sql-server)
 * [Related Content and Projects](#related-content-and-projects)
@@ -233,7 +226,7 @@ An application architecture implementation guided by tests cases.
 
 ## Design Patterns
 
-The following Design Patterns will help you continue implementing use cases in a consistent way. 
+The following Design Patterns will help you continue implementing use cases in a consistent way.
 
 ### Controller
 
@@ -242,7 +235,6 @@ Controllers receive Requests, build the Input message then call the Use Case, yo
 ```c#
 public sealed class CustomersController : Controller
 {
-    
     // code omitted to simplify
 
     public async Task<IActionResult> Post([FromBody][Required] RegisterRequest request)
@@ -777,35 +769,35 @@ public class Customer
 
 http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd
 
-### Outside-In Approach
-
 ### Fakes
 
 > Fake it till you make it
-
-### Clean Tests
-
-### xUnit
 
 ## SOLID
 
 ### Single Responsibility Principle
 
+> A class should have one, and only one, reason to change.
+
 ### Open-Closed Principle
+
+> You should be able to extend a classes behavior, without modifying it.
 
 ### Liskov Substitution Principle
 
+> Derived classes must be substitutable for their base classes.
+
 ### Interface Segregation Principle
+
+> Make fine grained interfaces that are client specific.
 
 ### Dependency Inversion Principle
 
-## .NET Core
+> Depend on abstractions, not on concretions.
 
-### .NET Core Web API
+## .NET Core Web API
 
-#### Swagger
-
-#### API Versioning
+### Swagger and API Versioning
 
 ```c#
 namespace Manga.WebApi.Extensions
@@ -919,7 +911,7 @@ namespace Manga.WebApi.Extensions
 }
 ```
 
-#### Microsoft Extensions
+### Microsoft Extensions
 
 ```c#
 public sealed class Startup
@@ -991,7 +983,7 @@ public sealed class Startup
 }
 ```
 
-#### Feature Flags
+### Feature Flags
 
 ```c#
 public sealed class CustomControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
@@ -1027,7 +1019,7 @@ public sealed class CustomControllerFeatureProvider : IApplicationFeatureProvide
 }
 ```
 
-#### Logging
+### Logging
 
 ```c#
 public static IWebHostBuilder CreateWebHostBuilder(string[] args)
@@ -1088,9 +1080,7 @@ public enum Features
 }
 ```
 
-#### Localizing
-
-#### Data Annotations
+### Data Annotations
 
 Data Annotations are powerful tool from .NET, it can be interpreted by ASP.NET Core and other frameworks to generate Validation, User Interface and other things. On Manga project, Data Annotations are used to create a complete Swagger UI and HTTP Request validation. Of course following the Clean Architecture Principles we need to keep frameworks under control.
 
@@ -1168,11 +1158,7 @@ public sealed class RegisterResponse
 }
 ```
 
-#### Authentication
-
-#### Authorization
-
-### Entity Framework Core
+## Entity Framework Core
 
 ```c#
 public sealed class MangaContext : DbContext
@@ -1260,15 +1246,15 @@ public sealed class MangaContext : DbContext
 }
 ```
 
-#### Add Migration
+### Add Migration
 
 Run the EF Tool to add a migration to the `Manga.Infrastructure` project.
 
 ```sh
-$ dotnet ef migrations add "InitialCreate" -o "EntityFrameworkDataAccess/Migrations" --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
+dotnet ef migrations add "InitialCreate" -o "EntityFrameworkDataAccess/Migrations" --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
 ```
 
-#### Update Database
+### Update Database
 
 Generate tables and seed the database via Entity Framework Tool:
 
@@ -1276,7 +1262,7 @@ Generate tables and seed the database via Entity Framework Tool:
 dotnet ef database update --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
 ```
 
-### Environment Configurations
+## Environment Configurations
 
 To run in `Development` mode use:
 
@@ -1390,10 +1376,16 @@ CMD export ASPNETCORE_URLS=http://*:$PORT && dotnet Manga.WebApi.dll
 To spin up a SQL Server in a docker container using the connection string `Server=localhost;User Id=sa;Password=<YourNewStrong!Passw0rd>;` run the following command:
 
 ```sh
-$ ./source/scripts/sql-docker-up.sh
+./source/scripts/sql-docker-up.sh
 ```
 
 ## Related Content and Projects
+
+| Video                                 | Date         |
+|---------------------------------------|--------------|
+| [Clean Architecture Manga](https://www.youtube.com/watch?v=ivAkdJmSqLQ)              | Aug 6, 2019  |
+| [TDD and TDD with .NET Core and VSCode](https://www.youtube.com/watch?v=ORe0r4bpfac&t=360s) | Nov 3, 2018  |
+| [Introduction to Clean Architecture](https://www.youtube.com/watch?v=6SeoWIIK1NU&t=50s)    | Oct 31, 2018 |
 
 ## Contributors ✨
 
