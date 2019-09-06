@@ -105,6 +105,15 @@
         "test",
         "code"
       ]
+    },
+    {
+      "login": "matheusneder",
+      "name": "Matheus Neder",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/6011646?v=4",
+      "profile": "https://github.com/matheusneder",
+      "contributions": [
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 5,
