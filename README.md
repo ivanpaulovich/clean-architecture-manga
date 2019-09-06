@@ -53,14 +53,7 @@ Feel free to submit pull requests to help:
 
 ## Index of Clean Architecture Manga
 
-* [Use Cases Description](#use-cases-description)
-  * [Register](#register)
-  * [Deposit](#deposit)
-  * [Transfer](#transfer)
-  * [Withdraw](#withdraw)
-  * [Get Customer Details](#get-customer-details)
-  * [Get Account Details](#get-account-details)
-  * [Close Account](#close-account)
+* [Use Cases Description](#use-cases)
 * [Flow of Control](#register-flow-of-control)
   * [Register Flow of Control](#register-flow-of-control)
   * [Get Customer Details Flow of Control](#get-customer-details-flow-of-control)
@@ -124,7 +117,7 @@ Feel free to submit pull requests to help:
 
 **ProTip #2:** Really interested in designing modular applications? Support this project with a hit on the `STAR` button :star:. Share with a friend!
   
-## Use Cases Description
+## Use Cases
 
 > Use Cases are delivery independent, they show the intent of a system.
 > 
@@ -138,33 +131,15 @@ Application architecture is about usage, a good architecture screams the busines
 
 Following the list of Use Cases:
 
-### Register
-
-An customer can register an account using his personal details.
-
-### Deposit
-
-The customer can deposit an amount.
-
-### Transfer
-
-The customer can transfer money from one account to another.
-
-### Withdraw
-
-A customer can withdraw money but not more that the current balance.
-
-### Get Customer Details
-
-Get customer details including all related accounts and transactions.
-
-### Get Account Details
-
-Get account details including transactions.
-
-### Close Account
-
-Closes an account, requires balance to be zero.
+| Use Case             | Description                                                           |
+|----------------------|-----------------------------------------------------------------------|
+| Register             | An customer can register an account using his personal details.       |
+| Deposit              | The customer can deposit an amount.                                   |
+| Transfer             | The customer can transfer money from one account to another.          |
+| Withdraw             | A customer can withdraw money but not more that the current balance.  |
+| Get Customer Details | Get customer details including all related accounts and transactions. |
+| Get Account Details  | Get account details including transactions.                           |
+| Close Account        | Closes an account, requires balance to be zero.                       |
 
 ## Flow of Control
 
