@@ -96,10 +96,7 @@ Feel free to submit pull requests to help:
   * [User Interface](#user-interface)
 * [Encapsulation](#encapsulation)
 * [Test-Driven Development TDD](#test-driven-development-tdd)
-  * [Outside-In Approach](#outside-in-approach)
   * [Fakes](#fakes)
-  * [Clean Tests](#clean-tests)
-  * [xUnit](#xunit)
 * [SOLID](#solid)
   * [Single Responsibility Principle](#single-responsibility-principle)
   * [Open-Closed Principle](#open-closed-principle)
@@ -122,9 +119,9 @@ Feel free to submit pull requests to help:
     * [Update Database](#update-database)
   * [Environment Configurations](#environment-configurations)
 * [DevOps](#devops)
-    * [Running the Application Locally](#running-the-application-locally)
-    * [Running the Tests Locally](#running-the-tests-locally)
-    * [Continuous Integration & Continuous Deployment](#continuous-integration-continuous-deployment)
+  * [Running the Application Locally](#running-the-application-locally)
+  * [Running the Tests Locally](#running-the-tests-locally)
+  * [Continuous Integration & Continuous Deployment](#continuous-integration-continuous-deployment)
 * [Docker](#docker)
 * [SQL Server](#sql-server)
 * [Related Content and Projects](#related-content-and-projects)
@@ -233,7 +230,7 @@ An application architecture implementation guided by tests cases.
 
 ## Design Patterns
 
-The following Design Patterns will help you continue implementing use cases in a consistent way. 
+The following Design Patterns will help you continue implementing use cases in a consistent way.
 
 ### Controller
 
@@ -242,7 +239,6 @@ Controllers receive Requests, build the Input message then call the Use Case, yo
 ```c#
 public sealed class CustomersController : Controller
 {
-    
     // code omitted to simplify
 
     public async Task<IActionResult> Post([FromBody][Required] RegisterRequest request)
@@ -777,27 +773,31 @@ public class Customer
 
 http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd
 
-### Outside-In Approach
-
 ### Fakes
 
 > Fake it till you make it
-
-### Clean Tests
-
-### xUnit
 
 ## SOLID
 
 ### Single Responsibility Principle
 
+> A class should have one, and only one, reason to change.
+
 ### Open-Closed Principle
+
+> You should be able to extend a classes behavior, without modifying it.
 
 ### Liskov Substitution Principle
 
+> Derived classes must be substitutable for their base classes.
+
 ### Interface Segregation Principle
 
+> Make fine grained interfaces that are client specific.
+
 ### Dependency Inversion Principle
+
+> Depend on abstractions, not on concretions.
 
 ## .NET Core
 
@@ -1168,10 +1168,6 @@ public sealed class RegisterResponse
 }
 ```
 
-#### Authentication
-
-#### Authorization
-
 ### Entity Framework Core
 
 ```c#
@@ -1265,7 +1261,7 @@ public sealed class MangaContext : DbContext
 Run the EF Tool to add a migration to the `Manga.Infrastructure` project.
 
 ```sh
-$ dotnet ef migrations add "InitialCreate" -o "EntityFrameworkDataAccess/Migrations" --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
+dotnet ef migrations add "InitialCreate" -o "EntityFrameworkDataAccess/Migrations" --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
 ```
 
 #### Update Database
@@ -1390,10 +1386,16 @@ CMD export ASPNETCORE_URLS=http://*:$PORT && dotnet Manga.WebApi.dll
 To spin up a SQL Server in a docker container using the connection string `Server=localhost;User Id=sa;Password=<YourNewStrong!Passw0rd>;` run the following command:
 
 ```sh
-$ ./source/scripts/sql-docker-up.sh
+./source/scripts/sql-docker-up.sh
 ```
 
 ## Related Content and Projects
+
+| Video                                 | Date         |
+|---------------------------------------|--------------|
+| [Clean Architecture Manga](https://www.youtube.com/watch?v=ivAkdJmSqLQ)              | Aug 6, 2019  |
+| [TDD and TDD with .NET Core and VSCode](https://www.youtube.com/watch?v=ORe0r4bpfac&t=360s) | Nov 3, 2018  |
+| [Introduction to Clean Architecture](https://www.youtube.com/watch?v=6SeoWIIK1NU&t=50s)    | Oct 31, 2018 |
 
 ## Contributors ✨
 
