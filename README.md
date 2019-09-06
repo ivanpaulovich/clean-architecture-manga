@@ -82,7 +82,6 @@ Feel free to submit pull requests to help:
   * [Unit of Work](#unit-of-work)
   * [First-Class Collections](#first-class-collections)
   * [Factory](#factory)
-  * [Component](#component)
 * [Domain-Driven Design Patterns](#domain-driven-design-patterns)
   * [Value Object](#value-object)
   * [Entity](#entity)
@@ -103,21 +102,18 @@ Feel free to submit pull requests to help:
   * [Liskov Substitution Principle](#liskov-substitution-principle)
   * [Interface Segregation Principle](#interface-segregation-principle)
   * [Dependency Inversion Principle](#dependency-inversion-principle)
-* [.NET Core](#.net-core)
-  * [.NET Core Web API](#.net-core-webapi)
-    * [Swagger](#swagger)
-    * [API Versioning](#api-versioning)
-    * [Microsoft Extensions](#microsoft-extensions)
-    * [Feature Flags](#feature-flags)
-    * [Logging](#logging)
-    * [Localizing](#Localizing)
-    * [Data Annotations](#data-annotations)
-    * [Authentication](#authentication)
-    * [Authorization](#authorization)
-  * [Entity Framework Core](#entity-framework-core)
-    * [Add Migration](#add-migration)
-    * [Update Database](#update-database)
-  * [Environment Configurations](#environment-configurations)
+* [.NET Core Web API](#.net-core-webapi)
+  * [Swagger and API Versioning](#swagger-and-api-versioning)
+  * [Microsoft Extensions](#microsoft-extensions)
+  * [Feature Flags](#feature-flags)
+  * [Logging](#logging)
+  * [Data Annotations](#data-annotations)
+  * [Authentication](#authentication)
+  * [Authorization](#authorization)
+* [Entity Framework Core](#entity-framework-core)
+  * [Add Migration](#add-migration)
+  * [Update Database](#update-database)
+* [Environment Configurations](#environment-configurations)
 * [DevOps](#devops)
   * [Running the Application Locally](#running-the-application-locally)
   * [Running the Tests Locally](#running-the-tests-locally)
@@ -799,13 +795,9 @@ http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd
 
 > Depend on abstractions, not on concretions.
 
-## .NET Core
+## .NET Core Web API
 
-### .NET Core Web API
-
-#### Swagger
-
-#### API Versioning
+### Swagger and API Versioning
 
 ```c#
 namespace Manga.WebApi.Extensions
@@ -919,7 +911,7 @@ namespace Manga.WebApi.Extensions
 }
 ```
 
-#### Microsoft Extensions
+### Microsoft Extensions
 
 ```c#
 public sealed class Startup
@@ -991,7 +983,7 @@ public sealed class Startup
 }
 ```
 
-#### Feature Flags
+### Feature Flags
 
 ```c#
 public sealed class CustomControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
@@ -1027,7 +1019,7 @@ public sealed class CustomControllerFeatureProvider : IApplicationFeatureProvide
 }
 ```
 
-#### Logging
+### Logging
 
 ```c#
 public static IWebHostBuilder CreateWebHostBuilder(string[] args)
@@ -1088,9 +1080,7 @@ public enum Features
 }
 ```
 
-#### Localizing
-
-#### Data Annotations
+### Data Annotations
 
 Data Annotations are powerful tool from .NET, it can be interpreted by ASP.NET Core and other frameworks to generate Validation, User Interface and other things. On Manga project, Data Annotations are used to create a complete Swagger UI and HTTP Request validation. Of course following the Clean Architecture Principles we need to keep frameworks under control.
 
@@ -1168,7 +1158,7 @@ public sealed class RegisterResponse
 }
 ```
 
-### Entity Framework Core
+## Entity Framework Core
 
 ```c#
 public sealed class MangaContext : DbContext
@@ -1256,7 +1246,7 @@ public sealed class MangaContext : DbContext
 }
 ```
 
-#### Add Migration
+### Add Migration
 
 Run the EF Tool to add a migration to the `Manga.Infrastructure` project.
 
@@ -1264,7 +1254,7 @@ Run the EF Tool to add a migration to the `Manga.Infrastructure` project.
 dotnet ef migrations add "InitialCreate" -o "EntityFrameworkDataAccess/Migrations" --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
 ```
 
-#### Update Database
+### Update Database
 
 Generate tables and seed the database via Entity Framework Tool:
 
@@ -1272,7 +1262,7 @@ Generate tables and seed the database via Entity Framework Tool:
 dotnet ef database update --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
 ```
 
-### Environment Configurations
+## Environment Configurations
 
 To run in `Development` mode use:
 
