@@ -1133,6 +1133,8 @@ public sealed class RegisterResponse
 }
 ```
 
+References: [Designing and Testing Input Validation in .NET Core: The Clean Architecture way](https://paulovich.net/designing-testing-input-validation-in-dotnet-core-the-clean-architecture-way/)
+
 ## Entity Framework Core
 
 ```c#
