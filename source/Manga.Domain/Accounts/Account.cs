@@ -17,7 +17,7 @@ namespace Manga.Domain.Accounts
 
         public ICredit Deposit(IEntityFactory entityFactory, PositiveAmount amountToDeposit)
         {
-            var credit = entityFactory.NewCredit(this, amountToDeposit);
+            var credit = entityFactory.NewCredit(this, amountToDeposit, DateTime.UtcNow);
             Credits.Add(credit);
             return credit;
         }
@@ -27,7 +27,7 @@ namespace Manga.Domain.Accounts
             if (GetCurrentBalance().LessThan(amountToWithdraw))
                 return null;
 
-            var debit = entityFactory.NewDebit(this, amountToWithdraw);
+            var debit = entityFactory.NewDebit(this, amountToWithdraw, DateTime.UtcNow);
             Debits.Add(debit);
             return debit;
         }

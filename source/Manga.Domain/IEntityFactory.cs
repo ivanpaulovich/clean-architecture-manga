@@ -1,5 +1,6 @@
 namespace Manga.Domain
 {
+    using System;
     using Manga.Domain.Accounts;
     using Manga.Domain.Customers;
     using Manga.Domain.ValueObjects;
@@ -8,7 +9,7 @@ namespace Manga.Domain
     {
         ICustomer NewCustomer(SSN ssn, Name name);
         IAccount NewAccount(ICustomer customer);
-        ICredit NewCredit(IAccount account, PositiveAmount amountToDeposit);
-        IDebit NewDebit(IAccount account, PositiveAmount amountToWithdraw);
+        ICredit NewCredit(IAccount account, PositiveAmount amountToDeposit, DateTime transactionDate);
+        IDebit NewDebit(IAccount account, PositiveAmount amountToWithdraw, DateTime transactionDate);
     }
 }

@@ -1,9 +1,11 @@
 namespace Manga.WebApi.UseCases.V2.GetAccountDetails
 {
-    using System.Collections.Generic;
+    using System;
+    using System.Data;
     using Manga.Application.Boundaries.GetAccountDetails;
     using Manga.WebApi.ViewModels;
     using Microsoft.AspNetCore.Mvc;
+    using OfficeOpenXml;
 
     public sealed class GetAccountDetailsPresenterV2 : IOutputPort
     {
@@ -20,25 +22,35 @@ namespace Manga.WebApi.UseCases.V2.GetAccountDetails
             ViewModel = new BadRequestObjectResult(problemDetails);
         }
 
-        public void Default(GetAccountDetailsOutput output)
+        public void Default(GetAccountDetailsOutput getAccountDetailsOutput)
         {
-            List<TransactionModel> transactions = new List<TransactionModel>();
+            var dataTable = new DataTable();
+            dataTable.Columns.Add("Amount", typeof(double));
+            dataTable.Columns.Add("Description", typeof(string));
+            dataTable.Columns.Add("TransactionDate", typeof(DateTime));
 
-            foreach (var item in output.Transactions)
+            foreach (var item in getAccountDetailsOutput.Transactions)
             {
                 var transaction = new TransactionModel(
                     item.Amount,
                     item.Description,
                     item.TransactionDate);
 
-                transactions.Add(transaction);
+                dataTable.Rows.Add(new object[] { item.Amount, item.Description, item.TransactionDate });
             }
 
-            var getAccountDetailsResponse = new GetAccountDetailsResponseV2(
-                output.AccountId,
-                output.CurrentBalance,
-                transactions);
-            ViewModel = new OkObjectResult(getAccountDetailsResponse);
+            byte[] fileContents;
+
+            using (ExcelPackage pck = new ExcelPackage())
+            {
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add(getAccountDetailsOutput.AccountId.ToString());
+                ws.Cells["A1"].LoadFromDataTable(dataTable, true);
+                ws.Row(1).Style.Font.Bold = true;
+                ws.Column(3).Style.Numberformat.Format = "dd/MM/yyyy HH:mm";
+                fileContents = pck.GetAsByteArray();
+            }
+
+            ViewModel = new FileContentResult(fileContents, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
         public void NotFound(string message)
