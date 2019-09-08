@@ -18,15 +18,16 @@ namespace Manga.WebApi.UseCases.V1.Transfer
             ViewModel = new BadRequestObjectResult(problemDetails);
         }
 
-        public void Default(TransferOutput output)
+        public void Default(TransferOutput transferOutput)
         {
-            ViewModel = new ObjectResult(new
+            var transferResponse = new
             {
-                Amount = output.Transaction.Amount,
-                    Description = output.Transaction.Description,
-                    TransactionDate = output.Transaction.TransactionDate,
-                    UpdatedBalance = output.UpdatedBalance,
-            });
+                Amount = transferOutput.Transaction.Amount,
+                    Description = transferOutput.Transaction.Description,
+                    TransactionDate = transferOutput.Transaction.TransactionDate,
+                    UpdatedBalance = transferOutput.UpdatedBalance,
+            };
+            ViewModel = new ObjectResult(transferResponse);
         }
     }
 }

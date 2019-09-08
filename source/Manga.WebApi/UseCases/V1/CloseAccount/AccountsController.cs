@@ -38,7 +38,8 @@ namespace Manga.WebApi.UseCases.V1.CloseAccount
         [SwaggerRequestExample(typeof(CloseAccountRequest), typeof(CloseAccountRequestExample))]
         public async Task<IActionResult> Close([FromRoute][Required] CloseAccountRequest request)
         {
-            await _closeAccountUseCase.Execute(new CloseAccountInput(request.AccountId));
+            var closeAccountInput = new CloseAccountInput(request.AccountId);
+            await _closeAccountUseCase.Execute(closeAccountInput);
             return _presenter.ViewModel;
         }
     }

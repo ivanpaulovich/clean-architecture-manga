@@ -20,11 +20,11 @@ namespace Manga.WebApi.UseCases.V1.GetAccountDetails
             ViewModel = new BadRequestObjectResult(problemDetails);
         }
 
-        public void Default(GetAccountDetailsOutput output)
+        public void Default(GetAccountDetailsOutput getAccountDetailsOutput)
         {
             List<TransactionModel> transactions = new List<TransactionModel>();
 
-            foreach (var item in output.Transactions)
+            foreach (var item in getAccountDetailsOutput.Transactions)
             {
                 var transaction = new TransactionModel(
                     item.Amount,
@@ -34,10 +34,12 @@ namespace Manga.WebApi.UseCases.V1.GetAccountDetails
                 transactions.Add(transaction);
             }
 
-            ViewModel = new OkObjectResult(new GetAccountDetailsResponse(
-                output.AccountId,
-                output.CurrentBalance,
-                transactions));
+            var getAccountDetailsResponse = new GetAccountDetailsResponse(
+                getAccountDetailsOutput.AccountId,
+                getAccountDetailsOutput.CurrentBalance,
+                transactions);
+
+            ViewModel = new OkObjectResult(getAccountDetailsResponse);
         }
 
         public void NotFound(string message)

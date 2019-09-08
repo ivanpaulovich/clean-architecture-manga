@@ -42,12 +42,13 @@ namespace Manga.WebApi.UseCases.V1.Transfer
         [SwaggerRequestExample(typeof(TransferRequest), typeof(TransferRequestExample))]
         public async Task<IActionResult> Transfer([FromBody][Required] TransferRequest request)
         {
-            await _TransferUseCase.Execute(
-                new TransferInput(
+            var transferInput = new TransferInput(
                     request.OriginAccountId,
                     request.DestinationAccountId,
                     new PositiveAmount(request.Amount)
-                ));
+                );
+                
+            await _TransferUseCase.Execute(transferInput);
             return _presenter.ViewModel;
         }
     }

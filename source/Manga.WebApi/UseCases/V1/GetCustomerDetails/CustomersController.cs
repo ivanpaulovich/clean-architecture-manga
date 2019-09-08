@@ -34,7 +34,8 @@ namespace Manga.WebApi.UseCases.V1.GetCustomerDetails
         [SwaggerRequestExample(typeof(GetCustomerDetailsRequest), typeof(GetCustomerDetailsRequestExample))]
         public async Task<IActionResult> GetCustomer([FromRoute][Required] GetCustomerDetailsRequest request)
         {
-            await _getCustomerDetailsUseCase.Execute(new GetCustomerDetailsInput(request.CustomerId));
+            var getCustomerDetailsInput = new GetCustomerDetailsInput(request.CustomerId);
+            await _getCustomerDetailsUseCase.Execute(getCustomerDetailsInput);
             return _presenter.ViewModel;
         }
     }

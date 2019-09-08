@@ -18,14 +18,15 @@ namespace Manga.WebApi.UseCases.V1.Deposit
             ViewModel = new BadRequestObjectResult(problemDetails);
         }
 
-        public void Default(DepositOutput output)
+        public void Default(DepositOutput depositOutput)
         {
-            ViewModel = new ObjectResult(new DepositResponse(
-                output.Transaction.Amount,
-                output.Transaction.Description,
-                output.Transaction.TransactionDate,
-                output.UpdatedBalance
-            ));
+            var depositResponse = new DepositResponse(
+                depositOutput.Transaction.Amount,
+                depositOutput.Transaction.Description,
+                depositOutput.Transaction.TransactionDate,
+                depositOutput.UpdatedBalance
+            );
+            ViewModel = new ObjectResult(depositResponse);
         }
     }
 }

@@ -18,14 +18,15 @@ namespace Manga.WebApi.UseCases.V1.Withdraw
             ViewModel = new BadRequestObjectResult(problemDetails);
         }
 
-        public void Default(WithdrawOutput output)
+        public void Default(WithdrawOutput withdrawOutput)
         {
-            ViewModel = new ObjectResult(new WithdrawResponse(
-                output.Transaction.Amount,
-                output.Transaction.Description,
-                output.Transaction.TransactionDate,
-                output.UpdatedBalance
-            ));
+            var withdrawResponse = new WithdrawResponse(
+                withdrawOutput.Transaction.Amount,
+                withdrawOutput.Transaction.Description,
+                withdrawOutput.Transaction.TransactionDate,
+                withdrawOutput.UpdatedBalance
+            );
+            ViewModel = new ObjectResult(withdrawResponse);
         }
     }
 }

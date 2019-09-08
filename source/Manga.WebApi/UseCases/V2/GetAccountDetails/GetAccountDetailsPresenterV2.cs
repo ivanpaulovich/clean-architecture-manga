@@ -34,10 +34,11 @@ namespace Manga.WebApi.UseCases.V2.GetAccountDetails
                 transactions.Add(transaction);
             }
 
-            ViewModel = new OkObjectResult(new GetAccountDetailsResponseV2(
+            var getAccountDetailsResponse = new GetAccountDetailsResponseV2(
                 output.AccountId,
                 output.CurrentBalance,
-                transactions));
+                transactions);
+            ViewModel = new OkObjectResult(getAccountDetailsResponse);
         }
 
         public void NotFound(string message)

@@ -22,7 +22,7 @@ namespace Manga.WebApi.UseCases.V1.Register
 
         public void Standard(RegisterOutput output)
         {
-            List<TransactionModel> transactions = new List<TransactionModel>();
+            var transactions = new List<TransactionModel>();
 
             foreach (var item in output.Account.Transactions)
             {
@@ -34,15 +34,15 @@ namespace Manga.WebApi.UseCases.V1.Register
                 transactions.Add(transaction);
             }
 
-            AccountDetailsModel account = new AccountDetailsModel(
+            var account = new AccountDetailsModel(
                 output.Account.AccountId,
                 output.Account.CurrentBalance,
                 transactions);
 
-            List<AccountDetailsModel> accounts = new List<AccountDetailsModel>();
+            var accounts = new List<AccountDetailsModel>();
             accounts.Add(account);
 
-            RegisterResponse model = new RegisterResponse(
+            var registerResponse = new RegisterResponse(
                 output.Customer.CustomerId,
                 output.Customer.SSN,
                 output.Customer.Name,
@@ -52,9 +52,9 @@ namespace Manga.WebApi.UseCases.V1.Register
             ViewModel = new CreatedAtRouteResult("GetCustomer",
                 new
                 {
-                    customerId = model.CustomerId
+                    customerId = registerResponse.CustomerId
                 },
-                model);
+                registerResponse);
         }
     }
 }

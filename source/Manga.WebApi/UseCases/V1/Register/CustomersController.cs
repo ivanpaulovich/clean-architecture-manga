@@ -39,11 +39,12 @@ namespace Manga.WebApi.UseCases.V1.Register
         [SwaggerRequestExample(typeof(RegisterRequest), typeof(GetCustomerDetailsRequestExample))]
         public async Task<IActionResult> Post([FromBody][Required] RegisterRequest request)
         {
-            await _registerUseCase.Execute(new RegisterInput(
+            var registerInput = new RegisterInput(
                 new SSN(request.SSN),
                 new Name(request.Name),
-                new PositiveAmount(request.InitialAmount)));
-
+                new PositiveAmount(request.InitialAmount)
+            );
+            await _registerUseCase.Execute(registerInput);
             return _presenter.ViewModel;
         }
     }

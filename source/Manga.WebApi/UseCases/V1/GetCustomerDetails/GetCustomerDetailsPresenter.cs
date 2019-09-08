@@ -20,11 +20,11 @@ namespace Manga.WebApi.UseCases.V1.GetCustomerDetails
             ViewModel = new BadRequestObjectResult(problemDetails);
         }
 
-        public void Default(GetCustomerDetailsOutput output)
+        public void Default(GetCustomerDetailsOutput getCustomerDetailsOutput)
         {
             List<AccountDetailsModel> accounts = new List<AccountDetailsModel>();
 
-            foreach (var account in output.Accounts)
+            foreach (var account in getCustomerDetailsOutput.Accounts)
             {
                 List<TransactionModel> transactions = new List<TransactionModel>();
 
@@ -44,14 +44,14 @@ namespace Manga.WebApi.UseCases.V1.GetCustomerDetails
                     transactions));
             }
 
-            GetCustomerDetailsResponse model = new GetCustomerDetailsResponse(
-                output.CustomerId,
-                output.SSN,
-                output.Name,
+            var getCustomerDetailsResponse = new GetCustomerDetailsResponse(
+                getCustomerDetailsOutput.CustomerId,
+                getCustomerDetailsOutput.SSN,
+                getCustomerDetailsOutput.Name,
                 accounts
             );
 
-            ViewModel = new OkObjectResult(model);
+            ViewModel = new OkObjectResult(getCustomerDetailsResponse);
         }
 
         public void NotFound(string message)

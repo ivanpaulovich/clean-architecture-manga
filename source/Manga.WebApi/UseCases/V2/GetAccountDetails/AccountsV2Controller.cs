@@ -37,7 +37,8 @@ namespace Manga.WebApi.UseCases.V2.GetAccountDetails
         [SwaggerRequestExample(typeof(GetAccountDetailsRequestV2), typeof(GetAccountDetailsRequestExampleV2))]
         public async Task<IActionResult> Get([FromRoute][Required] GetAccountDetailsRequestV2 request)
         {
-            await _getAccountDetailsUseCase.Execute(new GetAccountDetailsInput(request.AccountId));
+            var getAccountDetailsInput = new GetAccountDetailsInput(request.AccountId);
+            await _getAccountDetailsUseCase.Execute(getAccountDetailsInput);
             return _presenter.ViewModel;
         }
     }

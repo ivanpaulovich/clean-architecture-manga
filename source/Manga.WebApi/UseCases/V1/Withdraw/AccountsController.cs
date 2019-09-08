@@ -39,7 +39,11 @@ namespace Manga.WebApi.UseCases.V1.Withdraw
         [SwaggerRequestExample(typeof(WithdrawRequest), typeof(WithdrawRequestExample))]
         public async Task<IActionResult> Withdraw([FromBody][Required] WithdrawRequest request)
         {
-            await _withdrawUseCase.Execute(new WithdrawInput(request.AccountId, new PositiveAmount(request.Amount)));
+            var withdrawInput = new WithdrawInput(
+                request.AccountId,
+                new PositiveAmount(request.Amount)
+            );
+            await _withdrawUseCase.Execute(withdrawInput);
             return _presenter.ViewModel;
         }
     }
