@@ -1360,7 +1360,7 @@ To spin up a SQL Server in a docker container using the connection string `Serve
 
 | Video                                 | Date         |
 |---------------------------------------|--------------|
-| [Clean Architecture: The User Interface is a detail](https://www.youtube.com/watch?v=lWH_ZDu2zKQ| Sep 11, 2019  |
+| [Clean Architecture: The User Interface is a detail](https://www.youtube.com/watch?v=lWH_ZDu2zKQ)| Sep 11, 2019  |
 | [TDD and Hexagonal Architecture: Clean Tests](https://www.youtube.com/watch?v=j6_XPsqjrhE)| Sep 10, 2019  |
 | [Designing and Testing Input Validation with .NET Core: The Clean Architecture way](https://www.youtube.com/watch?v=hyW4d5OcExw)| Sep 9, 2019  |
 | [Clean Architecture Manga](https://www.youtube.com/watch?v=ivAkdJmSqLQ)              | Aug 6, 2019  |
