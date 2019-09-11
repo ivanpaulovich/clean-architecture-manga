@@ -1,5 +1,5 @@
 # Manga: The Clean Architecture Sample Implementation with .NET Core :cyclone:
-[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors)
 [![Build status](https://ci.appveyor.com/api/projects/status/0i6s33kw3y87tkb2?svg=true)](https://ci.appveyor.com/project/ivanpaulovich/clean-architecture-manga)
 
 Sample implementation of the **Clean Architecture Principles with .NET Core**. Use cases as central organizing structure, decoupled from frameworks and technology details. Built with small components that are developed and tested in isolation. 
@@ -1389,6 +1389,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/matheusneder"><img src="https://avatars1.githubusercontent.com/u/6011646?v=4" width="100px;" alt="Matheus Neder"/><br /><sub><b>Matheus Neder</b></sub></a><br /><a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=matheusneder" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://github.com/matiienkodimitri"><img src="https://avatars2.githubusercontent.com/u/53822759?v=4" width="100px;" alt="димитрий матиенко"/><br /><sub><b>димитрий матиенко</b></sub></a><br /><a href="#design-matiienkodimitri" title="Design">🎨</a> <a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=matiienkodimitri" title="Tests">⚠️</a></td>
   </tr>
 </table>
 
