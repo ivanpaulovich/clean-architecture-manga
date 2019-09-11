@@ -42,7 +42,7 @@ namespace Manga.WebApi.UseCases.V1.Register
             var registerInput = new RegisterInput(
                 new SSN(request.SSN),
                 new Name(request.Name),
-                new PositiveAmount(request.InitialAmount)
+                new PositiveMoney(request.InitialAmount)
             );
             await _registerUseCase.Execute(registerInput);
             return _presenter.ViewModel;

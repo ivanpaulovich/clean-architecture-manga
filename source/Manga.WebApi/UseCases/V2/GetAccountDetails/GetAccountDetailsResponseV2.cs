@@ -20,7 +20,7 @@ namespace Manga.WebApi.UseCases.V2.GetAccountDetails
         /// Current Balance
         /// </summary>
         [Required]
-        public double CurrentBalance { get; }
+        public decimal CurrentBalance { get; }
 
         /// <summary>
         /// Transactions
@@ -28,7 +28,7 @@ namespace Manga.WebApi.UseCases.V2.GetAccountDetails
         [Required]
         public IList<TransactionModel> Transactions { get; }
 
-        public GetAccountDetailsResponseV2(Guid accountId, double currentBalance, List<TransactionModel> transactions)
+        public GetAccountDetailsResponseV2(Guid accountId, decimal currentBalance, List<TransactionModel> transactions)
         {
             AccountId = accountId;
             CurrentBalance = currentBalance;

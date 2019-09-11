@@ -23,8 +23,8 @@ namespace Manga.Application.Boundaries.Register
                     creditEntity.Description,
                     creditEntity
                     .Amount
-                    .ToAmount()
-                    .ToDouble(),
+                    .ToMoney()
+                    .ToDecimal(),
                     creditEntity.TransactionDate);
 
                 transactionResults.Add(transactionOutput);
@@ -39,8 +39,8 @@ namespace Manga.Application.Boundaries.Register
                     debitEntity.Description,
                     debitEntity
                     .Amount
-                    .ToAmount()
-                    .ToDouble(),
+                    .ToMoney()
+                    .ToDecimal(),
                     debitEntity.TransactionDate);
 
                 transactionResults.Add(transactionOutput);
@@ -48,7 +48,7 @@ namespace Manga.Application.Boundaries.Register
 
             Account = new Account(
                 account.Id,
-                account.GetCurrentBalance().ToDouble(),
+                account.GetCurrentBalance().ToDecimal(),
                 transactionResults);
 
             List<Account> accountOutputs = new List<Account>();

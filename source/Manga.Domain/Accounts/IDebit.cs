@@ -4,6 +4,6 @@ namespace Manga.Domain.Accounts
 
     public interface IDebit : IEntity
     {
-        PositiveAmount Sum(PositiveAmount amount);
+        PositiveMoney Sum(PositiveMoney amount);
     }
 }

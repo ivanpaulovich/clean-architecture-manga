@@ -14,7 +14,7 @@ namespace Manga.UnitTests.InputValidationTests
                 () => new RegisterInput(
                     null,
                     new Name("Ivan"),
-                    new PositiveAmount(10)
+                    new PositiveMoney(10)
                 ));
             Assert.Contains("ssn", actualEx.Message);
         }
@@ -26,7 +26,7 @@ namespace Manga.UnitTests.InputValidationTests
                 () => new RegisterInput(
                     new SSN("19860817999"),
                     null,
-                    new PositiveAmount(10)
+                    new PositiveMoney(10)
                 ));
             Assert.Contains("name", actualEx.Message);
         }
@@ -49,7 +49,7 @@ namespace Manga.UnitTests.InputValidationTests
             var actual = new RegisterInput(
                 new SSN("19860817999"),
                 new Name("Ivan"),
-                new PositiveAmount(10)
+                new PositiveMoney(10)
             );
             Assert.NotNull(actual);
         }

@@ -1083,7 +1083,7 @@ public sealed class RegisterRequest
     /// Initial Amount
     /// </summary>
     [Required]
-    public double InitialAmount { get; set; }
+    public decimal InitialAmount { get; set; }
 }
 ```
 
@@ -1180,14 +1180,14 @@ public sealed class MangaContext : DbContext
             .ToTable("Debit")
             .Property(b => b.Amount)
             .HasConversion(
-                v => v.ToAmount().ToDouble(),
+                v => v.ToAmount().ToDecimal(),
                 v => new PositiveAmount(v));
 
         modelBuilder.Entity<Credit>()
             .ToTable("Credit")
             .Property(b => b.Amount)
             .HasConversion(
-                v => v.ToAmount().ToDouble(),
+                v => v.ToAmount().ToDecimal(),
                 v => new PositiveAmount(v));
 
         modelBuilder.Entity<Customer>().HasData(

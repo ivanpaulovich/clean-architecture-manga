@@ -15,14 +15,14 @@ namespace Manga.Domain.Accounts
             Debits = new DebitsCollection();
         }
 
-        public ICredit Deposit(IEntityFactory entityFactory, PositiveAmount amountToDeposit)
+        public ICredit Deposit(IEntityFactory entityFactory, PositiveMoney amountToDeposit)
         {
             var credit = entityFactory.NewCredit(this, amountToDeposit, DateTime.UtcNow);
             Credits.Add(credit);
             return credit;
         }
 
-        public IDebit Withdraw(IEntityFactory entityFactory, PositiveAmount amountToWithdraw)
+        public IDebit Withdraw(IEntityFactory entityFactory, PositiveMoney amountToWithdraw)
         {
             if (GetCurrentBalance().LessThan(amountToWithdraw))
                 return null;
@@ -37,7 +37,7 @@ namespace Manga.Domain.Accounts
             return GetCurrentBalance().IsZero();
         }
 
-        public Amount GetCurrentBalance()
+        public Money GetCurrentBalance()
         {
             var totalCredits = Credits
                 .GetTotal();

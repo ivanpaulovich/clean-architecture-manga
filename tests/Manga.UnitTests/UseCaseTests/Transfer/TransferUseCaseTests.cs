@@ -19,8 +19,8 @@ namespace Manga.UnitTests.UseCaseTests.Transfer
         [Theory]
         [ClassData(typeof(PositiveDataSetup))]
         public async Task Transfer_ChangesBalance_WhenAccountExists(
-            double amount,
-            double expectedOriginBalance)
+            decimal amount,
+            decimal expectedOriginBalance)
         {
             var sut = new Transfer(
                 _fixture.EntityFactory,
@@ -33,7 +33,7 @@ namespace Manga.UnitTests.UseCaseTests.Transfer
                 new TransferInput(
                     _fixture.Context.DefaultAccountId,
                     _fixture.Context.SecondAccountId,
-                    new PositiveAmount(amount)));
+                    new PositiveMoney(amount)));
 
             var actual = _fixture.Presenter.Transfers.Last();
             Assert.Equal(expectedOriginBalance, actual.UpdatedBalance);

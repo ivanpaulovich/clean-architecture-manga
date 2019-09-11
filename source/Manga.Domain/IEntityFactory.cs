@@ -9,7 +9,7 @@ namespace Manga.Domain
     {
         ICustomer NewCustomer(SSN ssn, Name name);
         IAccount NewAccount(ICustomer customer);
-        ICredit NewCredit(IAccount account, PositiveAmount amountToDeposit, DateTime transactionDate);
-        IDebit NewDebit(IAccount account, PositiveAmount amountToWithdraw, DateTime transactionDate);
+        ICredit NewCredit(IAccount account, PositiveMoney amountToDeposit, DateTime transactionDate);
+        IDebit NewDebit(IAccount account, PositiveMoney amountToWithdraw, DateTime transactionDate);
     }
 }

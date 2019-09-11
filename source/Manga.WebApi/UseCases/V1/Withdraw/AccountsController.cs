@@ -41,7 +41,7 @@ namespace Manga.WebApi.UseCases.V1.Withdraw
         {
             var withdrawInput = new WithdrawInput(
                 request.AccountId,
-                new PositiveAmount(request.Amount)
+                new PositiveMoney(request.Amount)
             );
             await _withdrawUseCase.Execute(withdrawInput);
             return _presenter.ViewModel;

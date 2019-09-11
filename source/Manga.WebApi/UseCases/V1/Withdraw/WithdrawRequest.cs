@@ -19,6 +19,6 @@ namespace Manga.WebApi.UseCases.V1.Withdraw
         /// The amount to withdraw
         /// </summary>
         [Required]
-        public Double Amount { get; set; }
+        public decimal Amount { get; set; }
     }
 }

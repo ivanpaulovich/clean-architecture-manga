@@ -6,14 +6,14 @@ namespace Manga.Domain.Accounts
     public class Debit : IDebit
     {
         public Guid Id { get; protected set; }
-        public PositiveAmount Amount { get; protected set; }
+        public PositiveMoney Amount { get; protected set; }
         public string Description
         {
             get { return "Debit"; }
         }
         public DateTime TransactionDate { get; protected set; }
 
-        public PositiveAmount Sum(PositiveAmount amount)
+        public PositiveMoney Sum(PositiveMoney amount)
         {
             return Amount.Add(amount);
         }

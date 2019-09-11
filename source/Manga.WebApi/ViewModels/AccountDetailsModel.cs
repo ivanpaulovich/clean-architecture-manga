@@ -19,7 +19,7 @@ namespace Manga.WebApi.ViewModels
         /// Current Balance
         /// </summary>
         [Required]
-        public double CurrentBalance { get; }
+        public decimal CurrentBalance { get; }
 
         /// <summary>
         /// Transactions
@@ -27,7 +27,7 @@ namespace Manga.WebApi.ViewModels
         [Required]
         public List<TransactionModel> Transactions { get; }
 
-        public AccountDetailsModel(Guid accountId, double currentBalance, List<TransactionModel> transactions)
+        public AccountDetailsModel(Guid accountId, decimal currentBalance, List<TransactionModel> transactions)
         {
             AccountId = accountId;
             CurrentBalance = currentBalance;

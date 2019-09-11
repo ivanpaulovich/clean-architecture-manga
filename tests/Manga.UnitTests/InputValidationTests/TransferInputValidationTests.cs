@@ -15,7 +15,7 @@ namespace Manga.UnitTests.InputValidationTests
                 () => new TransferInput(
                     Guid.Empty,
                     Guid.NewGuid(),
-                    new PositiveAmount(10)
+                    new PositiveMoney(10)
                 ));
             Assert.Contains("originAccountId", actualEx.Message);
         }
@@ -27,7 +27,7 @@ namespace Manga.UnitTests.InputValidationTests
                 () => new TransferInput(
                     Guid.NewGuid(),
                     Guid.Empty,
-                    new PositiveAmount(10)
+                    new PositiveMoney(10)
                 ));
             Assert.Contains("destinationAccountId", actualEx.Message);
         }
@@ -50,7 +50,7 @@ namespace Manga.UnitTests.InputValidationTests
             var actual = new TransferInput(
                 Guid.NewGuid(),
                 Guid.NewGuid(),
-                new PositiveAmount(10)
+                new PositiveMoney(10)
             );
             Assert.NotNull(actual);
         }

@@ -23,6 +23,6 @@ namespace Manga.WebApi.UseCases.V1.Register
         /// Initial Amount
         /// </summary>
         [Required]
-        public double InitialAmount { get; set; }
+        public decimal InitialAmount { get; set; }
     }
 }

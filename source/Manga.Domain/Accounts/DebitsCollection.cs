@@ -31,9 +31,9 @@ namespace Manga.Domain.Accounts
             return transactions;
         }
 
-        public PositiveAmount GetTotal()
+        public PositiveMoney GetTotal()
         {
-            PositiveAmount total = new PositiveAmount(0);
+            PositiveMoney total = new PositiveMoney(0);
 
             foreach (IDebit debit in _debits)
             {

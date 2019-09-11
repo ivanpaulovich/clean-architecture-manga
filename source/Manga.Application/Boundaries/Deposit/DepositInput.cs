@@ -7,9 +7,9 @@ namespace Manga.Application.Boundaries.Deposit
     public sealed class DepositInput
     {
         public Guid AccountId { get; }
-        public PositiveAmount Amount { get; }
+        public PositiveMoney Amount { get; }
 
-        public DepositInput(Guid accountId, PositiveAmount amount)
+        public DepositInput(Guid accountId, PositiveMoney amount)
         {
             if (accountId == Guid.Empty)
             {

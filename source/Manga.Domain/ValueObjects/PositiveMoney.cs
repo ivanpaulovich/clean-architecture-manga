@@ -2,18 +2,18 @@ namespace Manga.Domain.ValueObjects
 {
     using System;
 
-    public sealed class PositiveAmount : IEquatable<PositiveAmount>
+    public sealed class PositiveMoney : IEquatable<PositiveMoney>
     {
-        private readonly Amount _value;
+        private readonly Money _value;
 
-        private PositiveAmount() { }
+        private PositiveMoney() { }
 
-        public PositiveAmount(double value)
+        public PositiveMoney(decimal value)
         {
             if (value < 0)
-                throw new AmountShouldBePositiveException("The 'Amount' should be positive.");
+                throw new MoneyShouldBePositiveException("The 'Amount' should be positive.");
 
-            _value = new Amount(value);
+            _value = new Money(value);
         }
 
         public override bool Equals(object obj)
@@ -28,20 +28,20 @@ namespace Manga.Domain.ValueObjects
                 return true;
             }
 
-            if (obj is double)
+            if (obj is decimal)
             {
-                return (double) obj == _value.ToDouble();
+                return (decimal) obj == _value.ToDecimal();
             }
 
-            return ((PositiveAmount) obj)._value == _value;
+            return ((PositiveMoney) obj)._value == _value;
         }
 
-        public Amount ToAmount()
+        public Money ToMoney()
         {
             return _value;
         }
 
-        internal PositiveAmount Add(PositiveAmount positiveAmount)
+        internal PositiveMoney Add(PositiveMoney positiveAmount)
         {
             return _value.Add(positiveAmount._value);
         }
@@ -56,12 +56,12 @@ namespace Manga.Domain.ValueObjects
             }
         }
 
-        internal Amount Subtract(PositiveAmount positiveAmount)
+        internal Money Subtract(PositiveMoney positiveAmount)
         {
             return _value.Subtract(positiveAmount._value);
         }
 
-        public bool Equals(PositiveAmount other)
+        public bool Equals(PositiveMoney other)
         {
             return this._value == other._value;
         }
