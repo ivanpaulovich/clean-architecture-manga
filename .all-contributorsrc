@@ -114,6 +114,16 @@
       "contributions": [
         "test"
       ]
+    },
+    {
+      "login": "matiienkodimitri",
+      "name": "димитрий матиенко",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/53822759?v=4",
+      "profile": "https://github.com/matiienkodimitri",
+      "contributions": [
+        "design",
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 5,
