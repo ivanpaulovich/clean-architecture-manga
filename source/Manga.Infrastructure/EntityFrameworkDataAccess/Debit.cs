@@ -10,7 +10,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
 
         protected Debit() { }
 
-        public Debit(IAccount account, PositiveAmount amountToWithdraw, DateTime transactionDate)
+        public Debit(IAccount account, PositiveMoney amountToWithdraw, DateTime transactionDate)
         {
             this.AccountId = account.Id;
             this.Amount = amountToWithdraw;

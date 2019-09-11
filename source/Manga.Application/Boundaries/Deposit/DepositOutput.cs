@@ -6,11 +6,11 @@ namespace Manga.Application.Boundaries.Deposit
     public sealed class DepositOutput
     {
         public Transaction Transaction { get; }
-        public double UpdatedBalance { get; }
+        public decimal UpdatedBalance { get; }
 
         public DepositOutput(
             ICredit credit,
-            Amount updatedBalance)
+            Money updatedBalance)
         {
             Credit creditEntity = (Credit) credit;
 
@@ -18,11 +18,11 @@ namespace Manga.Application.Boundaries.Deposit
                 creditEntity.Description,
                 creditEntity
                 .Amount
-                .ToAmount()
-                .ToDouble(),
+                .ToMoney()
+                .ToDecimal(),
                 creditEntity.TransactionDate);
 
-            UpdatedBalance = updatedBalance.ToDouble();
+            UpdatedBalance = updatedBalance.ToDecimal();
         }
     }
 }

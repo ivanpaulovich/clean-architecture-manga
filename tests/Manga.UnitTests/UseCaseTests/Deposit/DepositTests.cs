@@ -18,7 +18,7 @@ namespace Manga.UnitTests.UseCasesTests.Deposit
 
         [Theory]
         [ClassData(typeof(PositiveDataSetup))]
-        public async Task Deposit_ChangesBalance(double amount)
+        public async Task Deposit_ChangesBalance(decimal amount)
         {
             var sut = new Deposit(
                 _fixture.EntityFactory,
@@ -30,7 +30,7 @@ namespace Manga.UnitTests.UseCasesTests.Deposit
             await sut.Execute(
                 new DepositInput(
                     _fixture.Context.DefaultAccountId,
-                    new PositiveAmount(amount)));
+                    new PositiveMoney(amount)));
 
             var output = _fixture.Presenter.Deposits.Last();
             Assert.Equal(amount, output.Transaction.Amount);
@@ -38,7 +38,7 @@ namespace Manga.UnitTests.UseCasesTests.Deposit
 
         [Theory]
         [ClassData(typeof(NegativeDataSetup))]
-        public async Task Deposit_ShouldNot_ChangesBalance_WhenNegative(double amount)
+        public async Task Deposit_ShouldNot_ChangesBalance_WhenNegative(decimal amount)
         {
             var sut = new Deposit(
                 _fixture.EntityFactory,
@@ -47,11 +47,11 @@ namespace Manga.UnitTests.UseCasesTests.Deposit
                 _fixture.UnitOfWork
             );
 
-            await Assert.ThrowsAsync<AmountShouldBePositiveException>(() =>
+            await Assert.ThrowsAsync<MoneyShouldBePositiveException>(() =>
                 sut.Execute(
                     new DepositInput(
                         _fixture.Context.DefaultAccountId,
-                        new PositiveAmount(amount)
+                        new PositiveMoney(amount)
                     )));
         }
     }

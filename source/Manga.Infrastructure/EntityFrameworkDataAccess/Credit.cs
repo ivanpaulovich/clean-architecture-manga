@@ -10,7 +10,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
 
         protected Credit() { }
 
-        public Credit(IAccount account, PositiveAmount amountToDeposit, DateTime transactionDate)
+        public Credit(IAccount account, PositiveMoney amountToDeposit, DateTime transactionDate)
         {
             this.AccountId = account.Id;
             this.Amount = amountToDeposit;

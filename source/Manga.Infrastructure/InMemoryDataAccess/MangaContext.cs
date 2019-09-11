@@ -27,8 +27,8 @@ namespace Manga.Infrastructure.InMemoryDataAccess
 
             var customer = new Customer(new SSN("8608179999"), new Name("Ivan Paulovich"));
             var account = new Account(customer);
-            var credit = account.Deposit(entityFactory, new PositiveAmount(800));
-            var debit = account.Withdraw(entityFactory, new PositiveAmount(100));
+            var credit = account.Deposit(entityFactory, new PositiveMoney(800));
+            var debit = account.Withdraw(entityFactory, new PositiveMoney(100));
             customer.Register(account);
 
             Customers.Add(customer);

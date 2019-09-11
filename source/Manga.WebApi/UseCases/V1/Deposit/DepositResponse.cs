@@ -12,7 +12,7 @@ namespace Manga.WebApi.UseCases.V1.Deposit
         /// Amount Deposited
         /// </summary>
         [Required]
-        public double Amount { get; }
+        public decimal Amount { get; }
 
         /// <summary>
         /// Description
@@ -30,13 +30,13 @@ namespace Manga.WebApi.UseCases.V1.Deposit
         /// Updated Balance
         /// </summary>
         [Required]
-        public double UpdateBalance { get; }
+        public decimal UpdateBalance { get; }
 
         public DepositResponse(
-            double amount,
+            decimal amount,
             string description,
             DateTime transactionDate,
-            double updatedBalance)
+            decimal updatedBalance)
         {
             Amount = amount;
             Description = description;

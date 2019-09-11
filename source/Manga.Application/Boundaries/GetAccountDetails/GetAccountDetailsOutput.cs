@@ -7,12 +7,12 @@ namespace Manga.Application.Boundaries.GetAccountDetails
     public sealed class GetAccountDetailsOutput
     {
         public Guid AccountId { get; }
-        public double CurrentBalance { get; }
+        public decimal CurrentBalance { get; }
         public List<Transaction> Transactions { get; }
 
         public GetAccountDetailsOutput(
             Guid accountId,
-            double currentBalance,
+            decimal currentBalance,
             List<Transaction> transactions)
         {
             AccountId = accountId;
@@ -27,7 +27,7 @@ namespace Manga.Application.Boundaries.GetAccountDetails
             AccountId = accountEntity.Id;
             CurrentBalance = accountEntity
                 .GetCurrentBalance()
-                .ToDouble();
+                .ToDecimal();
 
             List<Transaction> transactionResults = new List<Transaction>();
             foreach (var credit in accountEntity.Credits
@@ -39,8 +39,8 @@ namespace Manga.Application.Boundaries.GetAccountDetails
                     creditEntity.Description,
                     creditEntity
                     .Amount
-                    .ToAmount()
-                    .ToDouble(),
+                    .ToMoney()
+                    .ToDecimal(),
                     creditEntity.TransactionDate);
 
                 transactionResults.Add(transactionOutput);
@@ -55,8 +55,8 @@ namespace Manga.Application.Boundaries.GetAccountDetails
                     debitEntity.Description,
                     debitEntity
                     .Amount
-                    .ToAmount()
-                    .ToDouble(),
+                    .ToMoney()
+                    .ToDecimal(),
                     debitEntity.TransactionDate);
 
                 transactionResults.Add(transactionOutput);

@@ -12,7 +12,7 @@ namespace Manga.WebApi.ViewModels
         /// Amount
         /// </summary>
         [Required]
-        public double Amount { get; }
+        public decimal Amount { get; }
 
         /// <summary>
         /// Description
@@ -26,7 +26,7 @@ namespace Manga.WebApi.ViewModels
         [Required]
         public DateTime TransactionDate { get; }
 
-        public TransactionModel(double amount, string description, DateTime transactionDate)
+        public TransactionModel(decimal amount, string description, DateTime transactionDate)
         {
             Amount = amount;
             Description = description;

@@ -45,7 +45,7 @@ namespace Manga.WebApi.UseCases.V1.Transfer
             var transferInput = new TransferInput(
                     request.OriginAccountId,
                     request.DestinationAccountId,
-                    new PositiveAmount(request.Amount)
+                    new PositiveMoney(request.Amount)
                 );
                 
             await _TransferUseCase.Execute(transferInput);

@@ -6,14 +6,14 @@ namespace Manga.Application.Boundaries.Transfer
         public Guid OriginAccountId { get; }
         public Guid DestinationAccountId { get; }
         public string Description { get; }
-        public double Amount { get; }
+        public decimal Amount { get; }
         public DateTime TransactionDate { get; }
 
         public Transaction(
             Guid originAccountId,
             Guid destinationAccountId,
             string description,
-            double amount,
+            decimal amount,
             DateTime transactionDate)
         {
             OriginAccountId = originAccountId;

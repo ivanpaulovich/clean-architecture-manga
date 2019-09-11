@@ -24,6 +24,6 @@ namespace Manga.WebApi.UseCases.V1.Transfer
         /// Amount Transferred
         /// </summary>
         [Required]
-        public Double Amount { get; set; }
+        public decimal Amount { get; set; }
     }
 }

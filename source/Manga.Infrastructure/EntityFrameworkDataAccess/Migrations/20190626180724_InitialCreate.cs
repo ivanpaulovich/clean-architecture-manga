@@ -25,7 +25,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                         AccountId = table.Column<Guid>(nullable: false),
-                        Amount = table.Column<double>(nullable: true),
+                        Amount = table.Column<decimal>(nullable: true),
                         TransactionDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints : table =>
@@ -52,7 +52,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                         AccountId = table.Column<Guid>(nullable: false),
-                        Amount = table.Column<double>(nullable: true),
+                        Amount = table.Column<decimal>(nullable: true),
                         TransactionDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints : table =>

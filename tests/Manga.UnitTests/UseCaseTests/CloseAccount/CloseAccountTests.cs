@@ -14,7 +14,7 @@ namespace Manga.UnitTests.UseCasesTests.CloseAccount
 
         [Theory]
         [ClassData(typeof(PositiveDataSetup))]
-        public void PositiveBalance_Should_Not_Allow_Closing(double amount)
+        public void PositiveBalance_Should_Not_Allow_Closing(decimal amount)
         {
             var customer = _fixture.EntityFactory.NewCustomer(
                 new SSN("198608178899"),
@@ -23,7 +23,7 @@ namespace Manga.UnitTests.UseCasesTests.CloseAccount
 
             var account = _fixture.EntityFactory.NewAccount(customer);
 
-            account.Deposit(_fixture.EntityFactory, new PositiveAmount(amount));
+            account.Deposit(_fixture.EntityFactory, new PositiveMoney(amount));
 
             bool actual = account.IsClosingAllowed();
 

@@ -47,7 +47,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess.Migrations
 
                 b.Property<Guid>("AccountId");
 
-                b.Property<double?>("Amount");
+                b.Property<decimal?>("Amount");
 
                 b.Property<DateTime>("TransactionDate");
 
@@ -72,7 +72,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess.Migrations
 
                 b.Property<Guid>("AccountId");
 
-                b.Property<double?>("Amount");
+                b.Property<decimal?>("Amount");
 
                 b.Property<DateTime>("TransactionDate");
 

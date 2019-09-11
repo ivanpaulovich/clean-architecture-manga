@@ -6,20 +6,20 @@ namespace Manga.Application.Boundaries.Withdraw
     public sealed class WithdrawOutput
     {
         public Transaction Transaction { get; }
-        public double UpdatedBalance { get; }
+        public decimal UpdatedBalance { get; }
 
-        public WithdrawOutput(IDebit debit, Amount updatedBalance)
+        public WithdrawOutput(IDebit debit, Money updatedBalance)
         {
             Debit debitEntity = (Debit) debit;
 
             Transaction = new Transaction(
                 debitEntity.Description,
                 debitEntity.Amount
-                .ToAmount()
-                .ToDouble(),
+                .ToMoney()
+                .ToDecimal(),
                 debitEntity.TransactionDate);
 
-            UpdatedBalance = updatedBalance.ToDouble();
+            UpdatedBalance = updatedBalance.ToDecimal();
         }
     }
 }

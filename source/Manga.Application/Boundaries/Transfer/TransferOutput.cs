@@ -7,9 +7,9 @@ namespace Manga.Application.Boundaries.Transfer
     public sealed class TransferOutput
     {
         public Transaction Transaction { get; }
-        public double UpdatedBalance { get; }
+        public decimal UpdatedBalance { get; }
 
-        public TransferOutput(IDebit debit, Amount updatedBalance, Guid originAccountId, Guid destinationAccountId)
+        public TransferOutput(IDebit debit, Money updatedBalance, Guid originAccountId, Guid destinationAccountId)
         {
             Debit debitEntity = (Debit) debit;
 
@@ -18,11 +18,11 @@ namespace Manga.Application.Boundaries.Transfer
                 destinationAccountId,
                 debitEntity.Description,
                 debitEntity.Amount
-                .ToAmount()
-                .ToDouble(),
+                .ToMoney()
+                .ToDecimal(),
                 debitEntity.TransactionDate);
 
-            UpdatedBalance = updatedBalance.ToDouble();
+            UpdatedBalance = updatedBalance.ToDecimal();
         }
     }
 }

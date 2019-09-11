@@ -7,9 +7,9 @@ namespace Manga.Application.Boundaries.Withdraw
     public sealed class WithdrawInput
     {
         public Guid AccountId { get; }
-        public PositiveAmount Amount { get; }
+        public PositiveMoney Amount { get; }
 
-        public WithdrawInput(Guid accountId, PositiveAmount amount)
+        public WithdrawInput(Guid accountId, PositiveMoney amount)
         {
             if (accountId == Guid.Empty)
             {

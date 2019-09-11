@@ -41,7 +41,7 @@ namespace Manga.WebApi.UseCases.V1.Deposit
         {
             var depositInput = new DepositInput(
                 request.AccountId,
-                new PositiveAmount(request.Amount)
+                new PositiveMoney(request.Amount)
             );
             
             await _depositUseCase.Execute(depositInput);

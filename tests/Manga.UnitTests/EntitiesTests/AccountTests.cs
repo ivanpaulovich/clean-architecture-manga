@@ -14,7 +14,7 @@ namespace Manga.UnitTests.EntitiesTests
             var entityFactory = new Manga.Infrastructure.InMemoryDataAccess.EntityFactory();
             //
             // Arrange
-            PositiveAmount amount = new PositiveAmount(100.0);
+            PositiveMoney amount = new PositiveMoney(100.0M);
             ICustomer customer = entityFactory.NewCustomer(
                 new SSN("198608179922"),
                 new Name("Ivan Paulovich")
@@ -28,7 +28,7 @@ namespace Manga.UnitTests.EntitiesTests
 
             //
             // Assert
-            Assert.Equal(100, actual.Amount.ToAmount().ToDouble());
+            Assert.Equal(100, actual.Amount.ToMoney().ToDecimal());
             Assert.Equal("Credit", actual.Description);
         }
 
@@ -47,15 +47,15 @@ namespace Manga.UnitTests.EntitiesTests
 
             IAccount sut = entityFactory.NewAccount(customer);
 
-            sut.Deposit(entityFactory, new PositiveAmount(1000.0));
+            sut.Deposit(entityFactory, new PositiveMoney(1000.0M));
 
             //
             // Act
-            sut.Withdraw(entityFactory, new PositiveAmount(100));
+            sut.Withdraw(entityFactory, new PositiveMoney(100));
 
             //
             // Assert
-            Assert.Equal(900, sut.GetCurrentBalance().ToDouble());
+            Assert.Equal(900, sut.GetCurrentBalance().ToDecimal());
         }
 
         [Fact]
@@ -95,10 +95,10 @@ namespace Manga.UnitTests.EntitiesTests
 
             IAccount sut = entityFactory.NewAccount(customer);
 
-            ICredit credit = sut.Deposit(entityFactory, new PositiveAmount(200));
+            ICredit credit = sut.Deposit(entityFactory, new PositiveMoney(200));
 
             // Act
-            IDebit actual = sut.Withdraw(entityFactory, new PositiveAmount(5000));
+            IDebit actual = sut.Withdraw(entityFactory, new PositiveMoney(5000));
 
             //
             // Act and Assert
@@ -119,9 +119,9 @@ namespace Manga.UnitTests.EntitiesTests
 
             IAccount sut = entityFactory.NewAccount(customer);
 
-            sut.Deposit(entityFactory, new PositiveAmount(200));
-            sut.Withdraw(entityFactory, new PositiveAmount(100));
-            sut.Deposit(entityFactory, new PositiveAmount(50));
+            sut.Deposit(entityFactory, new PositiveMoney(200));
+            sut.Withdraw(entityFactory, new PositiveMoney(100));
+            sut.Deposit(entityFactory, new PositiveMoney(50));
 
             Assert.Equal(2, ((Account) sut).Credits.GetTransactions().Count);
             Assert.Equal(1, ((Account) sut).Debits.GetTransactions().Count);

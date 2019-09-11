@@ -14,7 +14,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
             return account;
         }
 
-        public ICredit NewCredit(IAccount account, PositiveAmount amountToDeposit, DateTime transactionDate)
+        public ICredit NewCredit(IAccount account, PositiveMoney amountToDeposit, DateTime transactionDate)
         {
             var credit = new Credit(account, amountToDeposit, transactionDate);
             return credit;
@@ -26,7 +26,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
             return customer;
         }
 
-        public IDebit NewDebit(IAccount account, PositiveAmount amountToWithdraw, DateTime transactionDate)
+        public IDebit NewDebit(IAccount account, PositiveMoney amountToWithdraw, DateTime transactionDate)
         {
             var debit = new Debit(account, amountToWithdraw, transactionDate);
             return debit;

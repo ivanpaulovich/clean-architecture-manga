@@ -7,9 +7,9 @@ namespace Manga.Application.Boundaries.Register
     {
         public SSN SSN { get; }
         public Name Name { get; }
-        public PositiveAmount InitialAmount { get; }
+        public PositiveMoney InitialAmount { get; }
 
-        public RegisterInput(SSN ssn, Name name, PositiveAmount initialAmount)
+        public RegisterInput(SSN ssn, Name name, PositiveMoney initialAmount)
         {
             if (ssn == null)
             {

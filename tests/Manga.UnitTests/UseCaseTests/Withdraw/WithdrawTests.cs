@@ -19,8 +19,8 @@ namespace Manga.UnitTests.UseCasesTests.Withdraw
         [Theory]
         [ClassData(typeof(PositiveDataSetup))]
         public async Task Withdraw_Valid_Amount(
-            double amount,
-            double expectedBalance)
+            decimal amount,
+            decimal expectedBalance)
         {
             var sut = new Withdraw(
                 _fixture.EntityFactory,
@@ -31,7 +31,7 @@ namespace Manga.UnitTests.UseCasesTests.Withdraw
 
             await sut.Execute(new WithdrawInput(
                 _fixture.Context.DefaultAccountId,
-                new PositiveAmount(amount)));
+                new PositiveMoney(amount)));
 
             var actual = _fixture.Presenter.Withdrawals.Last();
             Assert.Equal(expectedBalance, actual.UpdatedBalance);

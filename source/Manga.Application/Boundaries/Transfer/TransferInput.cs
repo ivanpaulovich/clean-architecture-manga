@@ -8,9 +8,9 @@ namespace Manga.Application.Boundaries.Transfer
     {
         public Guid OriginAccountId { get; }
         public Guid DestinationAccountId { get; }
-        public PositiveAmount Amount { get; }
+        public PositiveMoney Amount { get; }
 
-        public TransferInput(Guid originAccountId, Guid destinationAccountId, PositiveAmount amount)
+        public TransferInput(Guid originAccountId, Guid destinationAccountId, PositiveMoney amount)
         {
             if (originAccountId == Guid.Empty)
             {

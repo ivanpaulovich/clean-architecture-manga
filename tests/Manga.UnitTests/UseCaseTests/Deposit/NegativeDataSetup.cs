@@ -2,7 +2,7 @@ namespace Manga.UnitTests.UseCasesTests.Deposit
 {
     using Xunit;
 
-    internal sealed class NegativeDataSetup : TheoryData<double>
+    internal sealed class NegativeDataSetup : TheoryData<decimal>
     {
         public NegativeDataSetup()
         {

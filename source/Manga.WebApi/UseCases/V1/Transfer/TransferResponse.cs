@@ -6,7 +6,7 @@ namespace Manga.WebApi.UseCases.V1.Transfer
     public sealed class TransferResponse
     {
         [Required]
-        public double Amount { get; }
+        public decimal Amount { get; }
 
         [Required]
         public string Description { get; }
@@ -15,9 +15,9 @@ namespace Manga.WebApi.UseCases.V1.Transfer
         public DateTime TransactionDate { get; }
 
         [Required]
-        public double UpdateBalance { get; }
+        public decimal UpdateBalance { get; }
 
-        public TransferResponse(double amount, string description, DateTime transactionDate, double updatedBalance)
+        public TransferResponse(decimal amount, string description, DateTime transactionDate, decimal updatedBalance)
         {
             Amount = amount;
             Description = description;

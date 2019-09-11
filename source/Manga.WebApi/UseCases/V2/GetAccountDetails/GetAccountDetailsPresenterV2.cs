@@ -25,7 +25,7 @@ namespace Manga.WebApi.UseCases.V2.GetAccountDetails
         public void Default(GetAccountDetailsOutput getAccountDetailsOutput)
         {
             var dataTable = new DataTable();
-            dataTable.Columns.Add("Amount", typeof(double));
+            dataTable.Columns.Add("Amount", typeof(decimal));
             dataTable.Columns.Add("Description", typeof(string));
             dataTable.Columns.Add("TransactionDate", typeof(DateTime));
 

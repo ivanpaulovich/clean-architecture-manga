@@ -26,7 +26,7 @@ namespace Manga.UnitTests.UseCasesTests.Register
 
         [Theory]
         [ClassData(typeof(PositiveDataSetup))]
-        public async Task Register_WritesOutput_InputIsValid(double amount)
+        public async Task Register_WritesOutput_InputIsValid(decimal amount)
         {
             var ssn = new SSN("8608178888");
             var name = new Name("Ivan Paulovich");
@@ -42,7 +42,7 @@ namespace Manga.UnitTests.UseCasesTests.Register
             await sut.Execute(new RegisterInput(
                 ssn,
                 name,
-                new PositiveAmount(amount)));
+                new PositiveMoney(amount)));
 
             var actual = _fixture.Presenter.Registers.Last();
             Assert.NotNull(actual);

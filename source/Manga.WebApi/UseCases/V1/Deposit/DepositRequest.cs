@@ -18,6 +18,6 @@ namespace Manga.WebApi.UseCases.V1.Deposit
         /// The amount to Deposit
         /// </summary>
         [Required]
-        public Double Amount { get; set; }
+        public decimal Amount { get; set; }
     }
 }

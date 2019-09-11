@@ -47,7 +47,7 @@ namespace Manga.AcceptanceTests.V2
             string result = await client.GetStringAsync("/api/v2/AccountsV2/" + accountId + "/?api-version=2");
         }
 
-        private async Task<Tuple<string, string>> Register(double initialAmount)
+        private async Task<Tuple<string, string>> Register(decimal initialAmount)
         {
             var client = _factory.CreateClient();
             var register = new
@@ -75,7 +75,7 @@ namespace Manga.AcceptanceTests.V2
             return new Tuple<string, string>(customerId, accountId);
         }
 
-        private async Task Deposit(string account, double amount)
+        private async Task Deposit(string account, decimal amount)
         {
             var client = _factory.CreateClient();
             var json = new
@@ -93,7 +93,7 @@ namespace Manga.AcceptanceTests.V2
             response.EnsureSuccessStatusCode();
         }
 
-        private async Task Withdraw(string account, double amount)
+        private async Task Withdraw(string account, decimal amount)
         {
             var client = _factory.CreateClient();
             var json = new

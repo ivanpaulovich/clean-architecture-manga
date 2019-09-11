@@ -14,7 +14,7 @@ namespace Manga.UnitTests.InputValidationTests
             var actualEx = Assert.Throws<InputValidationException>(
                 () => new WithdrawInput(
                     Guid.Empty,
-                    new PositiveAmount(10)
+                    new PositiveMoney(10)
                 ));
             Assert.Contains("accountId", actualEx.Message);
         }
@@ -35,7 +35,7 @@ namespace Manga.UnitTests.InputValidationTests
         {
             var actual = new WithdrawInput(
                 Guid.NewGuid(),
-                new PositiveAmount(10)
+                new PositiveMoney(10)
             );
             Assert.NotNull(actual);
         }

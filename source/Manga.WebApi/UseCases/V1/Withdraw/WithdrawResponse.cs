@@ -6,7 +6,7 @@ namespace Manga.WebApi.UseCases.V1.Withdraw
     public sealed class WithdrawResponse
     {
         [Required]
-        public double Amount { get; }
+        public decimal Amount { get; }
 
         [Required]
         public string Description { get; }
@@ -15,9 +15,13 @@ namespace Manga.WebApi.UseCases.V1.Withdraw
         public DateTime TransactionDate { get; }
 
         [Required]
-        public double UpdateBalance { get; }
+        public decimal UpdateBalance { get; }
 
-        public WithdrawResponse(double amount, string description, DateTime transactionDate, double updatedBalance)
+        public WithdrawResponse(
+            decimal amount,
+            string description, 
+            DateTime transactionDate, 
+            decimal updatedBalance)
         {
             Amount = amount;
             Description = description;

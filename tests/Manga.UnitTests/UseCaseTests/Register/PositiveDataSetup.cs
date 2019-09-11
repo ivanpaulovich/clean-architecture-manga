@@ -2,7 +2,7 @@ namespace Manga.UnitTests.UseCasesTests.Register
 {
     using Xunit;
 
-    internal sealed class PositiveDataSetup : TheoryData<double>
+    internal sealed class PositiveDataSetup : TheoryData<decimal>
     {
         public PositiveDataSetup()
         {
