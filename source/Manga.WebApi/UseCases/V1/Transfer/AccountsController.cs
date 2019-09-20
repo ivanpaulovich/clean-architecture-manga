@@ -8,7 +8,6 @@ namespace Manga.WebApi.UseCases.V1.Transfer
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;
-    using Swashbuckle.AspNetCore.Examples;
 
     [FeatureGate(Features.Transfer)]
     [ApiVersion("1.0")]
@@ -39,7 +38,6 @@ namespace Manga.WebApi.UseCases.V1.Transfer
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransferResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [SwaggerRequestExample(typeof(TransferRequest), typeof(TransferRequestExample))]
         public async Task<IActionResult> Transfer([FromBody][Required] TransferRequest request)
         {
             var transferInput = new TransferInput(

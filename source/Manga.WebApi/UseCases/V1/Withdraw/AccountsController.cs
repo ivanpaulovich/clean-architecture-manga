@@ -6,7 +6,6 @@ namespace Manga.WebApi.UseCases.V1.Withdraw
     using Manga.Domain.ValueObjects;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Swashbuckle.AspNetCore.Examples;
 
     [ApiVersion("1.0")]
     [Route("api/v1/[controller]")]
@@ -36,7 +35,6 @@ namespace Manga.WebApi.UseCases.V1.Withdraw
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WithdrawResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [SwaggerRequestExample(typeof(WithdrawRequest), typeof(WithdrawRequestExample))]
         public async Task<IActionResult> Withdraw([FromBody][Required] WithdrawRequest request)
         {
             var withdrawInput = new WithdrawInput(

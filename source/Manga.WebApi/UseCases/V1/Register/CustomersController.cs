@@ -6,7 +6,6 @@ namespace Manga.WebApi.UseCases.V1.Register
     using Manga.Domain.ValueObjects;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Swashbuckle.AspNetCore.Examples;
 
     [ApiVersion("1.0")]
     [Route("api/v1/[controller]")]
@@ -36,7 +35,6 @@ namespace Manga.WebApi.UseCases.V1.Register
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RegisterResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [SwaggerRequestExample(typeof(RegisterRequest), typeof(GetCustomerDetailsRequestExample))]
         public async Task<IActionResult> Post([FromBody][Required] RegisterRequest request)
         {
             var registerInput = new RegisterInput(

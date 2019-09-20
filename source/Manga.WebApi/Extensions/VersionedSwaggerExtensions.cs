@@ -8,9 +8,9 @@ namespace Manga.WebApi.Extensions
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;
-    using Swashbuckle.AspNetCore.Examples;
-    using Swashbuckle.AspNetCore.Swagger;
     using Swashbuckle.AspNetCore.SwaggerGen;
+    using Microsoft.OpenApi.Models;
+    using System;
 
     public static class VersionedSwaggerExtensions
     {
@@ -38,7 +38,6 @@ namespace Manga.WebApi.Extensions
                     .Location.Replace("dll", "xml");
                 options.IncludeXmlComments(xmlCommentsPath);
 
-                options.OperationFilter<ExamplesOperationFilter>();
                 options.DocumentFilter<SwaggerDocumentFilter>();
             });
 
@@ -56,16 +55,16 @@ namespace Manga.WebApi.Extensions
 
             var apiVersionName = apiVersion.ApiVersion.ToString();
             options.SwaggerDoc(apiVersion.GroupName,
-                new Info()
+                new OpenApiInfo()
                 {
                     Title = "Clean Architecture Manga",
-                        Contact = new Contact()
+                        Contact = new OpenApiContact()
                         {
                             Name = "@ivanpaulovich",
                                 Email = "ivan@paulovich.net",
-                                Url = "https://github.com/ivanpaulovich"
+                                Url = new Uri("https://github.com/ivanpaulovich")
                         },
-                        License = new License()
+                        License = new OpenApiLicense()
                         {
                             Name = "Apache License"
                         },
@@ -84,12 +83,24 @@ namespace Manga.WebApi.Extensions
                 {
                     if (httpRequest.Path.Value.Contains("/swagger"))
                     {
-                        swaggerDoc.BasePath = httpRequest.Path.Value.Split("/").FirstOrDefault() ?? "";
+                        swaggerDoc.Servers = new List<OpenApiServer>()
+                        {
+                            new OpenApiServer
+                            {
+                                Url = httpRequest.Path.Value.Split("/").FirstOrDefault() ?? ""
+                            }
+                        };
                     }
 
                     if (httpRequest.Headers.TryGetValue("X-Forwarded-Prefix", out var xForwardedPrefix))
                     {
-                        swaggerDoc.BasePath = xForwardedPrefix[0];
+                        swaggerDoc.Servers = new List<OpenApiServer>()
+                        {
+                            new OpenApiServer
+                            {
+                                Url = xForwardedPrefix[0]
+                            }
+                        };
                     }
                 });
             });

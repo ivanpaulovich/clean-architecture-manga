@@ -5,7 +5,6 @@ namespace Manga.WebApi.UseCases.V1.CloseAccount
     using Manga.Application.Boundaries.CloseAccount;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Swashbuckle.AspNetCore.Examples;
 
     [ApiVersion("1.0")]
     [Route("api/v1/[controller]")]
@@ -35,7 +34,6 @@ namespace Manga.WebApi.UseCases.V1.CloseAccount
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CloseAccountResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [SwaggerRequestExample(typeof(CloseAccountRequest), typeof(CloseAccountRequestExample))]
         public async Task<IActionResult> Close([FromRoute][Required] CloseAccountRequest request)
         {
             var closeAccountInput = new CloseAccountInput(request.AccountId);
