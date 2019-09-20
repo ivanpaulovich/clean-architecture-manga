@@ -59,6 +59,7 @@ namespace Manga.WebApi
             app.UseRouting();
             app.UseVersionedSwagger(provider);
             app.UseHttpsRedirection();
+            app.UseRouting();
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseEndpoints(endpoints =>

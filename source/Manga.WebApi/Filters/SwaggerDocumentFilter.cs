@@ -25,7 +25,6 @@ namespace Manga.WebApi.Filters
             }
 
             swaggerDoc.Tags = GetFilteredTagDefinitions(context);
-            swaggerDoc.Paths = GetSortedPaths(swaggerDoc);
         }
 
         private List<OpenApiTag> GetFilteredTagDefinitions(DocumentFilterContext context)
@@ -35,16 +34,6 @@ namespace Manga.WebApi.Filters
                 .Select(description => description.GroupName);
             return _tags.Where(tag => currentGroupNames.Contains(tag.Name))
                 .ToList();
-        }
-
-        private OpenApiPaths GetSortedPaths(		
-            OpenApiDocument swaggerDoc)		
-        {		
-            IDictionary<string, OpenApiPathItem> dic = swaggerDoc.Paths.OrderBy(pair => pair.Key)		
-                .ToDictionary(pair => pair.Key, pair => pair.Value);
-
-            
-            return null;
         }
     }
 }
