@@ -9,7 +9,7 @@ namespace Manga.WebApi.UseCases.V1.GetCustomerDetails
     [ApiVersion("1.0")]
     [Route("api/v1/[controller]")]
     [ApiController]
-    public sealed class CustomersController : Controller
+    public sealed class CustomersController : ControllerBase
     {
         private readonly IUseCase _getCustomerDetailsUseCase;
         private readonly GetCustomerDetailsPresenter _presenter;

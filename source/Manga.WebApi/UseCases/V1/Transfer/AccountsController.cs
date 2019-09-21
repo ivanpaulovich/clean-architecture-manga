@@ -13,7 +13,7 @@ namespace Manga.WebApi.UseCases.V1.Transfer
     [ApiVersion("1.0")]
     [Route("api/v1/[controller]")]
     [ApiController]
-    public sealed class AccountsController : Controller
+    public sealed class AccountsController : ControllerBase
     {
         private readonly IUseCase _TransferUseCase;
         private readonly TransferPresenter _presenter;

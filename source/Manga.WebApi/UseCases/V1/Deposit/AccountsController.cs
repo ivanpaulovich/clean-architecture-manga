@@ -10,7 +10,7 @@ namespace Manga.WebApi.UseCases.V1.Deposit
     [ApiVersion("1.0")]
     [Route("api/v1/[controller]")]
     [ApiController]
-    public sealed class AccountsController : Controller
+    public sealed class AccountsController : ControllerBase
     {
         private readonly IUseCase _depositUseCase;
         private readonly DepositPresenter _presenter;

@@ -9,7 +9,7 @@ namespace Manga.WebApi.UseCases.V1.CloseAccount
     [ApiVersion("1.0")]
     [Route("api/v1/[controller]")]
     [ApiController]
-    public sealed class AccountsController : Controller
+    public sealed class AccountsController : ControllerBase
     {
         private readonly IUseCase _closeAccountUseCase;
         private readonly CloseAccountPresenter _presenter;

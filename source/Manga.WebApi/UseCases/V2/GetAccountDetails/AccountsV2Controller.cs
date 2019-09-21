@@ -12,7 +12,7 @@ namespace Manga.WebApi.UseCases.V2.GetAccountDetails
     [ApiVersion("2.0")]
     [Route("api/v2/[controller]")]
     [ApiController]
-    public sealed class AccountsV2Controller : Controller
+    public sealed class AccountsV2Controller : ControllerBase
     {
         private readonly IUseCase _getAccountDetailsUseCase;
         private readonly GetAccountDetailsPresenterV2 _presenter;

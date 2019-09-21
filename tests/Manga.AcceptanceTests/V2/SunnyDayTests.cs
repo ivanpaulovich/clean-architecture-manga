@@ -38,13 +38,13 @@ namespace Manga.AcceptanceTests.V2
         private async Task GetCustomer(string customerId)
         {
             var client = _factory.CreateClient();
-            string result = await client.GetStringAsync("/api/v1/Customers/" + customerId);
+            string result = await client.GetStringAsync($"/api/v1/Customers/{customerId}/?api-version=1");
         }
 
         private async Task GetAccount(string accountId)
         {
             var client = _factory.CreateClient();
-            string result = await client.GetStringAsync("/api/v2/AccountsV2/" + accountId + "/?api-version=2");
+            string result = await client.GetStringAsync($"/api/v2/AccountsV2/{accountId}/?api-version=2");
         }
 
         private async Task<Tuple<string, string>> Register(decimal initialAmount)
@@ -60,7 +60,7 @@ namespace Manga.AcceptanceTests.V2
             string registerData = JsonConvert.SerializeObject(register);
             StringContent content = new StringContent(registerData, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync("api/v1/Customers", content);
+            var response = await client.PostAsync("api/v1/Customers?api-version=1", content);
 
             response.EnsureSuccessStatusCode();
 
@@ -87,7 +87,7 @@ namespace Manga.AcceptanceTests.V2
             string data = JsonConvert.SerializeObject(json);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
-            var response = await client.PatchAsync("api/v1/Accounts/Deposit", content);
+            var response = await client.PatchAsync("api/v1/Accounts/Deposit?api-version=1", content);
             string result = await response.Content.ReadAsStringAsync();
 
             response.EnsureSuccessStatusCode();
@@ -105,7 +105,7 @@ namespace Manga.AcceptanceTests.V2
             string data = JsonConvert.SerializeObject(json);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
-            var response = await client.PatchAsync("api/v1/Accounts/Withdraw", content);
+            var response = await client.PatchAsync("api/v1/Accounts/Withdraw?api-version=1", content);
             string result = await response.Content.ReadAsStringAsync();
 
             response.EnsureSuccessStatusCode();
@@ -114,7 +114,7 @@ namespace Manga.AcceptanceTests.V2
         private async Task Close(string account)
         {
             var client = _factory.CreateClient();
-            var response = await client.DeleteAsync("api/v1/Accounts/" + account);
+            var response = await client.DeleteAsync($"api/v1/Accounts/{account}?api-version=1");
             response.EnsureSuccessStatusCode();
         }
     }

@@ -21,10 +21,11 @@ namespace Manga.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddControllersAsServices();
             services.AddBusinessExceptionFilter();
             services.AddFeatureFlags(Configuration);
-            services.AddVersionedSwagger();
+            services.AddVersioning();
+            services.AddSwagger();
             services.AddUseCases();
             services.AddInMemoryPersistence();
             services.AddPresentersV1();
@@ -33,10 +34,11 @@ namespace Manga.WebApi
 
         public void ConfigureProductionServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddControllersAsServices();
             services.AddBusinessExceptionFilter();
             services.AddFeatureFlags(Configuration);
-            services.AddVersionedSwagger();
+            services.AddVersioning();
+            services.AddSwagger();
             services.AddUseCases();
             services.AddSQLServerPersistence(Configuration);
             services.AddPresentersV1();
@@ -54,9 +56,9 @@ namespace Manga.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseRouting();
             app.UseVersionedSwagger(provider);
             app.UseHttpsRedirection();
-            app.UseRouting();
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseEndpoints(endpoints =>

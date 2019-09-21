@@ -10,7 +10,7 @@ namespace Manga.WebApi.UseCases.V1.Register
     [ApiVersion("1.0")]
     [Route("api/v1/[controller]")]
     [ApiController]
-    public sealed class CustomersController : Controller
+    public sealed class CustomersController : ControllerBase
     {
         private readonly IUseCase _registerUseCase;
         private readonly RegisterPresenter _presenter;
