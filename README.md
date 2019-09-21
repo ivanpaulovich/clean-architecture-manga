@@ -902,7 +902,7 @@ public sealed class Startup
     public void ConfigureDevelopmentServices(IServiceCollection services)
     {
         services.AddMvc()
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
             .AddControllersAsServices();
 
         services.AddBusinessExceptionFilter();
@@ -936,7 +936,7 @@ public sealed class Startup
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(
         IApplicationBuilder app,
-        IHostingEnvironment env,
+        IWebHostEnvironment env,
         IApiVersionDescriptionProvider provider)
     {
         if (env.IsDevelopment())

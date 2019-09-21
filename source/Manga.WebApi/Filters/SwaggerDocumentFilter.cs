@@ -3,21 +3,21 @@ namespace Manga.WebApi.Filters
     using System.Collections.Generic;
     using System.Linq;
     using System;
-    using Swashbuckle.AspNetCore.Swagger;
     using Swashbuckle.AspNetCore.SwaggerGen;
+    using Microsoft.OpenApi.Models;
 
     public class SwaggerDocumentFilter : IDocumentFilter
     {
-        private readonly List<Tag> _tags = new List<Tag>
+        private readonly List<OpenApiTag> _tags = new List<OpenApiTag>
         {
-            new Tag
+            new OpenApiTag
             {
-            Name = "RoutingApi",
-            Description = "This is a description for the api routes"
+                Name = "RoutingApi",
+                Description = "This is a description for the api routes"
             }
         };
 
-        public void Apply(SwaggerDocument swaggerDoc, DocumentFilterContext context)
+        public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
         {
             if (swaggerDoc == null)
             {
@@ -28,19 +28,23 @@ namespace Manga.WebApi.Filters
             swaggerDoc.Paths = GetSortedPaths(swaggerDoc);
         }
 
-        private List<Tag> GetFilteredTagDefinitions(DocumentFilterContext context)
+        private List<OpenApiTag> GetFilteredTagDefinitions(DocumentFilterContext context)
         {
             //Filtering ensures route for tag is present
             var currentGroupNames = context.ApiDescriptions
                 .Select(description => description.GroupName);
-            return _tags.Where(tag => currentGroupNames.Contains(tag.Name)).ToList();
+            return _tags.Where(tag => currentGroupNames.Contains(tag.Name))
+                .ToList();
         }
 
-        private IDictionary<string, PathItem> GetSortedPaths(
-            SwaggerDocument swaggerDoc)
-        {
-            return swaggerDoc.Paths.OrderBy(pair => pair.Key)
+        private OpenApiPaths GetSortedPaths(		
+            OpenApiDocument swaggerDoc)		
+        {		
+            IDictionary<string, OpenApiPathItem> dic = swaggerDoc.Paths.OrderBy(pair => pair.Key)		
                 .ToDictionary(pair => pair.Key, pair => pair.Value);
+
+            
+            return null;
         }
     }
 }

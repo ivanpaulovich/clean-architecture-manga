@@ -5,12 +5,11 @@ namespace Manga.WebApi.UseCases.V1.GetCustomerDetails
     using Manga.Application.Boundaries.GetCustomerDetails;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Swashbuckle.AspNetCore.Examples;
 
     [ApiVersion("1.0")]
     [Route("api/v1/[controller]")]
     [ApiController]
-    public sealed class CustomersController : Controller
+    public sealed class CustomersController : ControllerBase
     {
         private readonly IUseCase _getCustomerDetailsUseCase;
         private readonly GetCustomerDetailsPresenter _presenter;
@@ -31,7 +30,6 @@ namespace Manga.WebApi.UseCases.V1.GetCustomerDetails
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [SwaggerRequestExample(typeof(GetCustomerDetailsRequest), typeof(GetCustomerDetailsRequestExample))]
         public async Task<IActionResult> GetCustomer([FromRoute][Required] GetCustomerDetailsRequest request)
         {
             var getCustomerDetailsInput = new GetCustomerDetailsInput(request.CustomerId);

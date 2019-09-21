@@ -5,12 +5,11 @@ namespace Manga.WebApi.UseCases.V1.GetAccountDetails
     using Manga.Application.Boundaries.GetAccountDetails;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Swashbuckle.AspNetCore.Examples;
 
     [ApiVersion("1.0")]
     [Route("api/v1/[controller]")]
     [ApiController]
-    public sealed class AccountsController : Controller
+    public sealed class AccountsController : ControllerBase
     {
         private readonly IUseCase _getAccountDetailsUseCase;
         private readonly GetAccountDetailsPresenter _presenter;
@@ -31,7 +30,6 @@ namespace Manga.WebApi.UseCases.V1.GetAccountDetails
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [SwaggerRequestExample(typeof(GetAccountDetailsRequest), typeof(GetAccountDetailsRequestExample))]
         public async Task<IActionResult> Get([FromRoute][Required] GetAccountDetailsRequest request)
         {
             var getAccountDetailsInput = new GetAccountDetailsInput(request.AccountId);
