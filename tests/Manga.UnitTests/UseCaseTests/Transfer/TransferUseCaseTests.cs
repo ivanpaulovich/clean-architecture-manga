@@ -5,6 +5,7 @@ namespace Manga.UnitTests.UseCaseTests.Transfer
     using Manga.Application.Boundaries.Transfer;
     using Manga.Application.UseCases;
     using Manga.Domain.ValueObjects;
+    using Manga.Infrastructure.InMemoryDataAccess;
     using Manga.UnitTests.TestFixtures;
     using Xunit;
 
@@ -22,9 +23,10 @@ namespace Manga.UnitTests.UseCaseTests.Transfer
             decimal amount,
             decimal expectedOriginBalance)
         {
+            var presenter = new TransferPresenter();
             var sut = new Transfer(
                 _fixture.EntityFactory,
-                _fixture.Presenter,
+                presenter,
                 _fixture.AccountRepository,
                 _fixture.UnitOfWork
             );
@@ -35,7 +37,7 @@ namespace Manga.UnitTests.UseCaseTests.Transfer
                     _fixture.Context.SecondAccountId,
                     new PositiveMoney(amount)));
 
-            var actual = _fixture.Presenter.Transfers.Last();
+            var actual = presenter.Transfers.Last();
             Assert.Equal(expectedOriginBalance, actual.UpdatedBalance);
         }
     }
