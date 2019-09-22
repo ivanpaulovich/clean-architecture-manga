@@ -7,7 +7,7 @@ Sample implementation of the **Clean Architecture Principles with .NET Core**. U
 # Usage
 
 ```sh
-dotnet new -i Paulovich.Caju::0.7.2
+dotnet new -i Paulovich.Caju::0.7.3
 dotnet new manga -n "MyGreatApi"
 ```
 
