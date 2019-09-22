@@ -5,6 +5,7 @@ namespace Manga.UnitTests.UseCasesTests.Deposit
     using Application.Boundaries.Deposit;
     using Manga.Application.UseCases;
     using Manga.Domain.ValueObjects;
+    using Manga.Infrastructure.InMemoryDataAccess;
     using Manga.UnitTests.TestFixtures;
     using Xunit;
 
@@ -20,9 +21,10 @@ namespace Manga.UnitTests.UseCasesTests.Deposit
         [ClassData(typeof(PositiveDataSetup))]
         public async Task Deposit_ChangesBalance(decimal amount)
         {
+            var presenter = new DepositPresenter();
             var sut = new Deposit(
                 _fixture.EntityFactory,
-                _fixture.Presenter,
+                presenter,
                 _fixture.AccountRepository,
                 _fixture.UnitOfWork
             );
@@ -32,7 +34,7 @@ namespace Manga.UnitTests.UseCasesTests.Deposit
                     _fixture.Context.DefaultAccountId,
                     new PositiveMoney(amount)));
 
-            var output = _fixture.Presenter.Deposits.Last();
+            var output = presenter.Deposits.Last();
             Assert.Equal(amount, output.Transaction.Amount);
         }
 
@@ -40,9 +42,10 @@ namespace Manga.UnitTests.UseCasesTests.Deposit
         [ClassData(typeof(NegativeDataSetup))]
         public async Task Deposit_ShouldNot_ChangesBalance_WhenNegative(decimal amount)
         {
+            var presenter = new DepositPresenter();
             var sut = new Deposit(
                 _fixture.EntityFactory,
-                _fixture.Presenter,
+                presenter,
                 _fixture.AccountRepository,
                 _fixture.UnitOfWork
             );

@@ -5,6 +5,7 @@ namespace Manga.UnitTests.UseCasesTests.Withdraw
     using Manga.Application.Boundaries.Withdraw;
     using Manga.Application.UseCases;
     using Manga.Domain.ValueObjects;
+    using Manga.Infrastructure.InMemoryDataAccess;
     using Manga.UnitTests.TestFixtures;
     using Xunit;
 
@@ -22,9 +23,10 @@ namespace Manga.UnitTests.UseCasesTests.Withdraw
             decimal amount,
             decimal expectedBalance)
         {
+            var presenter = new WithdrawPresenter();
             var sut = new Withdraw(
                 _fixture.EntityFactory,
-                _fixture.Presenter,
+                presenter,
                 _fixture.AccountRepository,
                 _fixture.UnitOfWork
             );
@@ -33,7 +35,7 @@ namespace Manga.UnitTests.UseCasesTests.Withdraw
                 _fixture.Context.DefaultAccountId,
                 new PositiveMoney(amount)));
 
-            var actual = _fixture.Presenter.Withdrawals.Last();
+            var actual = presenter.Withdrawals.Last();
             Assert.Equal(expectedBalance, actual.UpdatedBalance);
         }
     }

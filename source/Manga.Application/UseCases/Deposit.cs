@@ -10,13 +10,13 @@ namespace Manga.Application.UseCases
     public sealed class Deposit : IUseCase
     {
         private readonly IEntityFactory _entityFactory;
-        private readonly IOutputHandler _outputHandler;
+        private readonly IOutputPort _outputHandler;
         private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public Deposit(
             IEntityFactory entityFactory,
-            IOutputHandler outputHandler,
+            IOutputPort outputHandler,
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {

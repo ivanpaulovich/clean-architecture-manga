@@ -10,7 +10,7 @@ namespace Manga.WebApi.Extensions
             services.AddScoped<Manga.Application.Boundaries.CloseAccount.IOutputPort>(x => x.GetRequiredService<Manga.WebApi.UseCases.V1.CloseAccount.CloseAccountPresenter>());
 
             services.AddScoped<Manga.WebApi.UseCases.V1.Deposit.DepositPresenter, Manga.WebApi.UseCases.V1.Deposit.DepositPresenter>();
-            services.AddScoped<Manga.Application.Boundaries.Deposit.IOutputHandler>(x => x.GetRequiredService<Manga.WebApi.UseCases.V1.Deposit.DepositPresenter>());
+            services.AddScoped<Manga.Application.Boundaries.Deposit.IOutputPort>(x => x.GetRequiredService<Manga.WebApi.UseCases.V1.Deposit.DepositPresenter>());
 
             services.AddScoped<Manga.WebApi.UseCases.V1.GetAccountDetails.GetAccountDetailsPresenter, Manga.WebApi.UseCases.V1.GetAccountDetails.GetAccountDetailsPresenter>();
             services.AddScoped<Manga.Application.Boundaries.GetAccountDetails.IOutputPort>(x => x.GetRequiredService<Manga.WebApi.UseCases.V1.GetAccountDetails.GetAccountDetailsPresenter>());
