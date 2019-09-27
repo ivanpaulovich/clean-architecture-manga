@@ -124,6 +124,16 @@
         "design",
         "test"
       ]
+    },
+    {
+      "login": "morphlogic",
+      "name": "morphlogic",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/29184473?v=4",
+      "profile": "https://github.com/morphlogic",
+      "contributions": [
+        "test",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5,
