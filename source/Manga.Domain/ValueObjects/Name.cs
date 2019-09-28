@@ -2,11 +2,9 @@ namespace Manga.Domain.ValueObjects
 {
     using System;
 
-    public sealed class Name : IEquatable<Name>
+    public struct Name : IEquatable<Name>
     {
-        private string _text;
-
-        private Name() { }
+        private readonly string _text;
 
         public Name(string text)
         {

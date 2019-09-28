@@ -28,13 +28,7 @@ namespace Manga.Application.UseCases
 
         public async Task Execute(DepositInput input)
         {
-            IAccount account = await _accountRepository.Get(input.AccountId);
-            if (account == null)
-            {
-                _outputHandler.Error($"The account {input.AccountId} does not exist or is already closed.");
-                return;
-            }
-
+            IAccount account = await _accountRepository.TryGet(input.AccountId);
             ICredit credit = account.Deposit(_entityFactory, input.Amount);
 
             await _accountRepository.Update(account, credit);

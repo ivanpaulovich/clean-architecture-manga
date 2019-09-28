@@ -3,12 +3,10 @@ namespace Manga.Domain.ValueObjects
     using System.Text.RegularExpressions;
     using System;
 
-    public sealed class SSN : IEquatable<SSN>
+    public struct SSN : IEquatable<SSN>
     {
         private string _text;
         const string RegExForValidation = @"^\d{6,8}[-|(\s)]{0,1}\d{4}$";
-
-        private SSN() { }
 
         public SSN(string text)
         {

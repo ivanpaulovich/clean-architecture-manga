@@ -5,8 +5,8 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
     using System;
     using Manga.Application.Repositories;
     using Manga.Domain.Accounts;
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.Data.SqlClient;
+    using Microsoft.EntityFrameworkCore;
 
     public sealed class AccountRepository : IAccountRepository
     {
@@ -37,7 +37,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
                 deleteSQL, id);
         }
 
-        public async Task<IAccount> Get(Guid id)
+        public async Task<IAccount> TryGet(Guid id)
         {
             Account account = await _context
                 .Accounts
@@ -45,7 +45,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
                 .SingleOrDefaultAsync();
 
             if (account == null)
-                return null;
+                throw new AccountNotFoundException($"Account {id} not found.");
 
             var credits = _context.Credits
                 .Where(e => e.AccountId == id)

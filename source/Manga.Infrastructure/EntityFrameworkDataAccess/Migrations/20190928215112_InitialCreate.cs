@@ -24,9 +24,9 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess.Migrations
                 columns : table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                        AccountId = table.Column<Guid>(nullable: false),
-                        Amount = table.Column<decimal>(nullable: true),
-                        TransactionDate = table.Column<DateTime>(nullable: false)
+                        Amount = table.Column<decimal>(nullable: false),
+                        TransactionDate = table.Column<DateTime>(nullable: false),
+                        AccountId = table.Column<Guid>(nullable: false)
                 },
                 constraints : table =>
                 {
@@ -38,8 +38,8 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess.Migrations
                 columns : table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                        Name = table.Column<string>(nullable: true),
-                        SSN = table.Column<string>(nullable: true)
+                        Name = table.Column<string>(nullable: false),
+                        SSN = table.Column<string>(nullable: false)
                 },
                 constraints : table =>
                 {
@@ -51,9 +51,9 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess.Migrations
                 columns : table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                        AccountId = table.Column<Guid>(nullable: false),
-                        Amount = table.Column<decimal>(nullable: true),
-                        TransactionDate = table.Column<DateTime>(nullable: false)
+                        Amount = table.Column<decimal>(nullable: false),
+                        TransactionDate = table.Column<DateTime>(nullable: false),
+                        AccountId = table.Column<Guid>(nullable: false)
                 },
                 constraints : table =>
                 {
@@ -68,7 +68,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "Credit",
                 columns : new [] { "Id", "AccountId", "Amount", "TransactionDate" },
-                values : new object[] { new Guid("f5117315-e789-491a-b662-958c37237f9b"), new Guid("4c510cfe-5d61-4a46-a3d9-c4313426655f"), 400.0, new DateTime(2019, 6, 26, 18, 7, 24, 681, DateTimeKind.Utc).AddTicks(3880) });
+                values : new object[] { new Guid("f5117315-e789-491a-b662-958c37237f9b"), new Guid("4c510cfe-5d61-4a46-a3d9-c4313426655f"), 400m, new DateTime(2019, 9, 28, 21, 51, 12, 605, DateTimeKind.Utc).AddTicks(4990) });
 
             migrationBuilder.InsertData(
                 table: "Customer",
@@ -78,7 +78,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "Debit",
                 columns : new [] { "Id", "AccountId", "Amount", "TransactionDate" },
-                values : new object[] { new Guid("3d6032df-7a3b-46e6-8706-be971e3d539f"), new Guid("4c510cfe-5d61-4a46-a3d9-c4313426655f"), 400.0, new DateTime(2019, 6, 26, 18, 7, 24, 681, DateTimeKind.Utc).AddTicks(4900) });
+                values : new object[] { new Guid("3d6032df-7a3b-46e6-8706-be971e3d539f"), new Guid("4c510cfe-5d61-4a46-a3d9-c4313426655f"), 400m, new DateTime(2019, 9, 28, 21, 51, 12, 605, DateTimeKind.Utc).AddTicks(5890) });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

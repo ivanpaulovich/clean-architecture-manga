@@ -2,11 +2,9 @@ namespace Manga.Domain.ValueObjects
 {
     using System;
 
-    public sealed class Money : IEquatable<Money>
+    public struct Money : IEquatable<Money>
     {
         private decimal _money;
-
-        private Money() { }
 
         public Money(decimal value)
         {

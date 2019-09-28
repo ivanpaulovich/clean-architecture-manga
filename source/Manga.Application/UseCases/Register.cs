@@ -40,20 +40,14 @@ namespace Manga.Application.UseCases
             var customer = _entityFactory.NewCustomer(input.SSN, input.Name);
             var account = _entityFactory.NewAccount(customer);
 
-            ICredit credit = account.Deposit(_entityFactory, input.InitialAmount);
-            if (credit == null)
-            {
-                _outputHandler.Error("An error happened when depositing the amount.");
-                return;
-            }
-
+            var credit = account.Deposit(_entityFactory, input.InitialAmount);
             customer.Register(account);
 
             await _customerRepository.Add(customer);
             await _accountRepository.Add(account, credit);
             await _unitOfWork.Save();
 
-            RegisterOutput output = new RegisterOutput(customer, account);
+            var output = new RegisterOutput(customer, account);
             _outputHandler.Standard(output);
         }
     }

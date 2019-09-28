@@ -16,11 +16,6 @@ namespace Manga.Application.Boundaries.Withdraw
                 throw new InputValidationException($"{nameof(accountId)} cannot be empty.");
             }
 
-            if (amount == null)
-            {
-                throw new InputValidationException($"{nameof(amount)} cannot be null.");
-            }
-
             AccountId = accountId;
             Amount = amount;
         }

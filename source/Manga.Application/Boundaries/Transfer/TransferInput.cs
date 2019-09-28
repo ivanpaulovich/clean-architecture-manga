@@ -22,11 +22,6 @@ namespace Manga.Application.Boundaries.Transfer
                 throw new InputValidationException($"{nameof(destinationAccountId)} cannot be empty.");
             }
 
-            if (amount == null)
-            {
-                throw new InputValidationException($"{nameof(amount)} cannot be null.");
-            }
-
             OriginAccountId = originAccountId;
             DestinationAccountId = destinationAccountId;
             Amount = amount;

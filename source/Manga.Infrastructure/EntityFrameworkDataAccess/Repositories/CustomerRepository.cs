@@ -23,14 +23,14 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
             await _context.SaveChangesAsync();
         }
 
-        public async Task<ICustomer> Get(Guid id)
+        public async Task<ICustomer> TryGet(Guid id)
         {
             Customer customer = await _context.Customers
                 .Where(c => c.Id == id)
                 .SingleOrDefaultAsync();
 
             if (customer == null)
-                return null;
+                throw new CustomerNotFoundException($"Customer {id} not found.");
 
             var accounts = _context.Accounts
                 .Where(e => e.CustomerId == id)

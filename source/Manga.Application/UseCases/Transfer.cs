@@ -28,21 +28,10 @@ namespace Manga.Application.UseCases
 
         public async Task Execute(TransferInput input)
         {
-            IAccount originAccount = await _accountRepository.Get(input.OriginAccountId);
-            if (originAccount == null)
-            {
-                _outputHandler.Error($"The account {input.OriginAccountId} does not exist or is already closed.");
-                return;
-            }
-
-            IAccount destinationAccount = await _accountRepository.Get(input.DestinationAccountId);
-            if (destinationAccount == null)
-            {
-                _outputHandler.Error($"The account {input.DestinationAccountId} does not exist or is already closed.");
-                return;
-            }
-
-            IDebit debit = originAccount.Withdraw(_entityFactory, input.Amount);
+            IAccount originAccount = await _accountRepository.TryGet(input.OriginAccountId);
+            IAccount destinationAccount = await _accountRepository.TryGet(input.DestinationAccountId);
+            
+            IDebit debit = originAccount.TryWithdraw(_entityFactory, input.Amount);
             ICredit credit = destinationAccount.Deposit(_entityFactory, input.Amount);
 
             await _accountRepository.Update(originAccount, debit);
