@@ -1,7 +1,7 @@
 namespace Manga.Infrastructure.EntityFrameworkDataAccess
 {
-    using System;
     using System.Collections.Generic;
+    using System;
     using Manga.Domain.Customers;
     using Manga.Domain.ValueObjects;
 

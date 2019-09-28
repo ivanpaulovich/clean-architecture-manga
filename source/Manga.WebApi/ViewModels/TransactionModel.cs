@@ -1,7 +1,7 @@
 namespace Manga.WebApi.ViewModels
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
+    using System;
 
     /// <summary>
     /// Transaction

@@ -1,8 +1,8 @@
-namespace Manga.WebApi.Extensions
+namespace Manga.WebApi.DependencyInjection
 {
-    using System;
     using System.IO;
     using System.Reflection;
+    using System;
     using Manga.WebApi.Filters;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -24,8 +24,8 @@ namespace Manga.WebApi.Extensions
                     options.OperationFilter<SwaggerDefaultValues>();
 
                     // integrate xml comments
-                    options.IncludeXmlComments( XmlCommentsFilePath );
-                } );
+                    options.IncludeXmlComments(XmlCommentsFilePath);
+                });
 
             return services;
         }
@@ -35,8 +35,8 @@ namespace Manga.WebApi.Extensions
             get
             {
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                var fileName = typeof( Startup ).GetTypeInfo().Assembly.GetName().Name + ".xml";
-                return Path.Combine( basePath, fileName );
+                var fileName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name + ".xml";
+                return Path.Combine(basePath, fileName);
             }
         }
 
@@ -47,11 +47,11 @@ namespace Manga.WebApi.Extensions
                 options =>
                 {
                     // build a swagger endpoint for each discovered API version
-                    foreach ( var description in provider.ApiVersionDescriptions )
+                    foreach (var description in provider.ApiVersionDescriptions)
                     {
-                        options.SwaggerEndpoint( $"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant() );
+                        options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
                     }
-                } );
+                });
 
             return app;
         }

@@ -1,10 +1,10 @@
 namespace Manga.Infrastructure.EntityFrameworkDataAccess
 {
     using System;
-    using Manga.Domain;
     using Manga.Domain.Accounts;
     using Manga.Domain.Customers;
     using Manga.Domain.ValueObjects;
+    using Manga.Domain;
 
     public sealed class EntityFactory : IEntityFactory
     {

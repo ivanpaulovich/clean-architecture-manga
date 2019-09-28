@@ -1,7 +1,7 @@
 namespace Manga.WebApi.UseCases.V2.GetAccountDetails
 {
-    using System;
     using System.Data;
+    using System;
     using Manga.Application.Boundaries.GetAccountDetails;
     using Manga.WebApi.ViewModels;
     using Microsoft.AspNetCore.Mvc;
@@ -41,7 +41,7 @@ namespace Manga.WebApi.UseCases.V2.GetAccountDetails
 
             byte[] fileContents;
 
-            using (ExcelPackage pck = new ExcelPackage())
+            using(ExcelPackage pck = new ExcelPackage())
             {
                 ExcelWorksheet ws = pck.Workbook.Worksheets.Add(getAccountDetailsOutput.AccountId.ToString());
                 ws.Cells["A1"].LoadFromDataTable(dataTable, true);

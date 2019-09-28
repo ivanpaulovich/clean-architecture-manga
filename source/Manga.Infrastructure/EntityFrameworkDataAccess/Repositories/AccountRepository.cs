@@ -1,12 +1,12 @@
 namespace Manga.Infrastructure.EntityFrameworkDataAccess
 {
-    using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
     using System;
     using Manga.Application.Repositories;
     using Manga.Domain.Accounts;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Data.SqlClient;
 
     public sealed class AccountRepository : IAccountRepository
     {
@@ -33,7 +33,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
 
             var id = new SqlParameter("@Id", account.Id);
 
-            int affectedRows = await _context.Database.ExecuteSqlCommandAsync(
+            int affectedRows = await _context.Database.ExecuteSqlRawAsync(
                 deleteSQL, id);
         }
 

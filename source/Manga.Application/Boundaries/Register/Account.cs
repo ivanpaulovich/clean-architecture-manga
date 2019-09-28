@@ -22,7 +22,7 @@ namespace Manga.Application.Boundaries.Register
 
         public Account(IAccount account)
         {
-            var accountEntity = (Domain.Accounts.Account)account;
+            var accountEntity = (Domain.Accounts.Account) account;
 
             AccountId = account.Id;
             CurrentBalance = account
@@ -31,7 +31,7 @@ namespace Manga.Application.Boundaries.Register
 
             List<Transaction> transactionResults = new List<Transaction>();
             foreach (ICredit credit in accountEntity.Credits
-                    .GetTransactions())
+                .GetTransactions())
             {
                 Credit creditEntity = (Credit) credit;
 
@@ -47,7 +47,7 @@ namespace Manga.Application.Boundaries.Register
             }
 
             foreach (IDebit debit in accountEntity.Debits
-                    .GetTransactions())
+                .GetTransactions())
             {
                 Debit debitEntity = (Debit) debit;
 

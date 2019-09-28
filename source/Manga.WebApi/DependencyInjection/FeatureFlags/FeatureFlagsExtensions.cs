@@ -1,4 +1,4 @@
-namespace Manga.WebApi.Extensions.FeatureFlags
+namespace Manga.WebApi.DependencyInjection.FeatureFlags
 {
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;

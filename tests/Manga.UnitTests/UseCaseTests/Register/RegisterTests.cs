@@ -6,9 +6,9 @@ namespace Manga.UnitTests.UseCasesTests.Register
     using Application.Boundaries.Register;
     using Manga.Application.UseCases;
     using Manga.Domain.ValueObjects;
+    using Manga.Infrastructure.InMemoryDataAccess;
     using Manga.UnitTests.TestFixtures;
     using Xunit;
-    using Manga.Infrastructure.InMemoryDataAccess;
 
     public sealed class RegisterTests : IClassFixture<StandardFixture>
     {

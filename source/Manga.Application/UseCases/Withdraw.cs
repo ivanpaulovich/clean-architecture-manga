@@ -4,8 +4,8 @@ namespace Manga.Application.UseCases
     using Manga.Application.Boundaries.Withdraw;
     using Manga.Application.Repositories;
     using Manga.Application.Services;
-    using Manga.Domain;
     using Manga.Domain.Accounts;
+    using Manga.Domain;
 
     public sealed class Withdraw : IUseCase
     {

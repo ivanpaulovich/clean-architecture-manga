@@ -9,7 +9,7 @@ namespace Manga.Infrastructure.InMemoryDataAccess
         public Guid AccountId { get; protected set; }
 
         protected Credit() { }
-        
+
         public Credit(IAccount account, PositiveMoney amountToDeposit, DateTime transactionDate)
         {
             this.AccountId = account.Id;

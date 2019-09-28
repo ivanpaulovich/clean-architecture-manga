@@ -31,7 +31,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
                 .HasConversion(
                     v => v.ToString(),
                     v => new SSN(v));
-                    
+
             modelBuilder.Entity<Customer>()
                 .ToTable("Customer")
                 .Property(b => b.Name)

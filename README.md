@@ -782,7 +782,7 @@ http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd
 ### Swagger and API Versioning
 
 ```c#
-namespace Manga.WebApi.Extensions
+namespace Manga.WebApi.DependencyInjection
 {
     using System.Collections.Generic;
     using System.Linq;

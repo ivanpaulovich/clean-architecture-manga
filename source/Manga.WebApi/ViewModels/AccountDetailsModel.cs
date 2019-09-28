@@ -1,8 +1,8 @@
 namespace Manga.WebApi.ViewModels
 {
     using System.Collections.Generic;
-    using System;
     using System.ComponentModel.DataAnnotations;
+    using System;
 
     /// <summary>
     /// Account Details
@@ -14,7 +14,7 @@ namespace Manga.WebApi.ViewModels
         /// </summary>
         [Required]
         public Guid AccountId { get; }
-        
+
         /// <summary>
         /// Current Balance
         /// </summary>

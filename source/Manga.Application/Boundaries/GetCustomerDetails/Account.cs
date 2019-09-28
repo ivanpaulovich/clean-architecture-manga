@@ -22,7 +22,7 @@ namespace Manga.Application.Boundaries.GetCustomerDetails
 
         public Account(IAccount account)
         {
-            var accountEntity = (Domain.Accounts.Account)account;
+            var accountEntity = (Domain.Accounts.Account) account;
 
             AccountId = account.Id;
             CurrentBalance = account
