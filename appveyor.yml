@@ -19,9 +19,11 @@ dotnet_csproj:
   file: '**\*.csproj'
   version: '{version}'
 install:
-  - cmd: choco install dotnetcore-sdk --pre
+  - sudo apt-get update
+  - sudo apt-get install apt-transport-https
+  - sudo apt-get install dotnet-sdk-3.0
 before_build:
-  - cmd: dotnet --version
+  - dotnet --version
 build_script:
   - docker pull mcr.microsoft.com/mssql/server:2017-latest || true
   - docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=<YourStrong!Passw0rd>' -p 1433:1433 --name sql1 -d mcr.microsoft.com/mssql/server:2017-latest || true
