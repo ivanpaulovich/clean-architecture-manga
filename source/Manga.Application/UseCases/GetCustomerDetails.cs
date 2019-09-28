@@ -26,25 +26,15 @@ namespace Manga.Application.UseCases
 
         public async Task Execute(GetCustomerDetailsInput input)
         {
-            ICustomer customer = await _customerRepository.Get(input.CustomerId);
-
-            if (customer == null)
-            {
-                _outputHandler.NotFound($"The customer {input.CustomerId} does not exist or is not processed yet.");
-                return;
-            }
+            ICustomer customer = await _customerRepository.TryGet(input.CustomerId);
 
             List<Boundaries.GetCustomerDetails.Account> accounts = new List<Boundaries.GetCustomerDetails.Account>();
 
             foreach (Guid accountId in customer.Accounts.GetAccountIds())
             {
-                IAccount account = await _accountRepository.Get(accountId);
-
-                if (account != null)
-                {
-                    Boundaries.GetCustomerDetails.Account accountOutput = new Boundaries.GetCustomerDetails.Account(account);
-                    accounts.Add(accountOutput);
-                }
+                IAccount account = await _accountRepository.TryGet(accountId);
+                Boundaries.GetCustomerDetails.Account accountOutput = new Boundaries.GetCustomerDetails.Account(account);
+                accounts.Add(accountOutput);
             }
 
             GetCustomerDetailsOutput output = new GetCustomerDetailsOutput(customer, accounts);

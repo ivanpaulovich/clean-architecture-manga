@@ -2,11 +2,9 @@ namespace Manga.Domain.ValueObjects
 {
     using System;
 
-    public sealed class PositiveMoney : IEquatable<PositiveMoney>
+    public struct PositiveMoney : IEquatable<PositiveMoney>
     {
         private readonly Money _value;
-
-        private PositiveMoney() { }
 
         public PositiveMoney(decimal value)
         {
@@ -33,7 +31,7 @@ namespace Manga.Domain.ValueObjects
                 return (decimal) obj == _value.ToDecimal();
             }
 
-            return ((PositiveMoney) obj)._value == _value;
+            return ((PositiveMoney) obj)._value.ToDecimal() == _value.ToDecimal();
         }
 
         public Money ToMoney()
@@ -63,7 +61,7 @@ namespace Manga.Domain.ValueObjects
 
         public bool Equals(PositiveMoney other)
         {
-            return this._value == other._value;
+            return this._value.ToDecimal() == other._value.ToDecimal();
         }
     }
 }

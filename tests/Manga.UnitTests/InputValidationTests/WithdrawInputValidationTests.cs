@@ -20,17 +20,6 @@ namespace Manga.UnitTests.InputValidationTests
         }
 
         [Fact]
-        public void GivenNullAmount_InputNotCreated_ThrowsInputValidationException()
-        {
-            var actualEx = Assert.Throws<InputValidationException>(
-                () => new WithdrawInput(
-                    Guid.NewGuid(),
-                    null
-                ));
-            Assert.Contains("amount", actualEx.Message);
-        }
-
-        [Fact]
         public void GivenValidData_InputCreated()
         {
             var actual = new WithdrawInput(

@@ -20,12 +20,7 @@ namespace Manga.Application.UseCases
 
         public async Task Execute(CloseAccountInput closeAccountInput)
         {
-            IAccount account = await _accountRepository.Get(closeAccountInput.AccountId);
-            if (account == null)
-            {
-                _outputHandler.Error($"The account {closeAccountInput.AccountId} does not exist or is already closed.");
-                return;
-            }
+            IAccount account = await _accountRepository.TryGet(closeAccountInput.AccountId);
 
             if (account.IsClosingAllowed())
             {

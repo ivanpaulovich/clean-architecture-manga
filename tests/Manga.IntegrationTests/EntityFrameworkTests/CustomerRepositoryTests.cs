@@ -50,7 +50,7 @@ namespace Manga.IntegrationTests.EntityFrameworkTests
                 context.Database.EnsureCreated();
 
                 var repository = new CustomerRepository(context);
-                customer = await repository.Get(new Guid("197d0438-e04b-453d-b5de-eca05960c6ae"));
+                customer = await repository.TryGet(new Guid("197d0438-e04b-453d-b5de-eca05960c6ae"));
 
                 Assert.NotNull(customer);
             }

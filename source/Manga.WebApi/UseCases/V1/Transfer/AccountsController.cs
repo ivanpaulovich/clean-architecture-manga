@@ -4,7 +4,7 @@ namespace Manga.WebApi.UseCases.V1.Transfer
     using System.Threading.Tasks;
     using Manga.Application.Boundaries.Transfer;
     using Manga.Domain.ValueObjects;
-    using Manga.WebApi.Extensions.FeatureFlags;
+    using Manga.WebApi.DependencyInjection.FeatureFlags;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;
@@ -41,11 +41,11 @@ namespace Manga.WebApi.UseCases.V1.Transfer
         public async Task<IActionResult> Transfer([FromBody][Required] TransferRequest request)
         {
             var transferInput = new TransferInput(
-                    request.OriginAccountId,
-                    request.DestinationAccountId,
-                    new PositiveMoney(request.Amount)
-                );
-                
+                request.OriginAccountId,
+                request.DestinationAccountId,
+                new PositiveMoney(request.Amount)
+            );
+
             await _TransferUseCase.Execute(transferInput);
             return _presenter.ViewModel;
         }

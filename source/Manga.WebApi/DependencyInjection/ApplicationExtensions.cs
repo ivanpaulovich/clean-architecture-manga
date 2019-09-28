@@ -1,4 +1,4 @@
-namespace Manga.WebApi.Extensions
+namespace Manga.WebApi.DependencyInjection
 {
     using Microsoft.Extensions.DependencyInjection;
 

@@ -1,5 +1,5 @@
-using Manga.WebApi.Extensions;
-using Manga.WebApi.Extensions.FeatureFlags;
+using Manga.WebApi.DependencyInjection;
+using Manga.WebApi.DependencyInjection.FeatureFlags;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;

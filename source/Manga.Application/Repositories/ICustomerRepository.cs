@@ -6,7 +6,7 @@ namespace Manga.Application.Repositories
 
     public interface ICustomerRepository
     {
-        Task<ICustomer> Get(Guid id);
+        Task<ICustomer> TryGet(Guid id);
         Task Add(ICustomer customer);
         Task Update(ICustomer customer);
     }

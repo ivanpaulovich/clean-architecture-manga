@@ -1,7 +1,7 @@
 namespace Manga.Infrastructure.InMemoryDataAccess
 {
-    using System;
     using System.Collections.Generic;
+    using System;
     using Manga.Domain.Accounts;
     using Manga.Domain.Customers;
 

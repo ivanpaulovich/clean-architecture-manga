@@ -16,13 +16,13 @@ namespace Manga.WebApi.Filters
         /// </summary>
         /// <param name="operation">The operation to apply the filter to.</param>
         /// <param name="context">The current operation filter context.</param>
-        public void Apply( OpenApiOperation operation, OperationFilterContext context )
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             var apiDescription = context.ApiDescription;
 
             operation.Deprecated |= apiDescription.IsDeprecated();
 
-            if ( operation.Parameters == null )
+            if (operation.Parameters == null)
             {
                 return;
             }

@@ -51,7 +51,7 @@ namespace Manga.UnitTests.EntitiesTests
 
             //
             // Act
-            sut.Withdraw(entityFactory, new PositiveMoney(100));
+            sut.TryWithdraw(entityFactory, new PositiveMoney(100));
 
             //
             // Assert
@@ -98,11 +98,12 @@ namespace Manga.UnitTests.EntitiesTests
             ICredit credit = sut.Deposit(entityFactory, new PositiveMoney(200));
 
             // Act
-            IDebit actual = sut.Withdraw(entityFactory, new PositiveMoney(5000));
+            var ex = Record.Exception(() => sut.TryWithdraw(entityFactory, new PositiveMoney(5000)));
 
             //
             // Act and Assert
-            Assert.Null(actual);
+            Assert.NotNull(ex);
+            Assert.IsType<MoneyShouldBePositiveException>(ex);
         }
 
         [Fact]
@@ -120,7 +121,7 @@ namespace Manga.UnitTests.EntitiesTests
             IAccount sut = entityFactory.NewAccount(customer);
 
             sut.Deposit(entityFactory, new PositiveMoney(200));
-            sut.Withdraw(entityFactory, new PositiveMoney(100));
+            sut.TryWithdraw(entityFactory, new PositiveMoney(100));
             sut.Deposit(entityFactory, new PositiveMoney(50));
 
             Assert.Equal(2, ((Account) sut).Credits.GetTransactions().Count);

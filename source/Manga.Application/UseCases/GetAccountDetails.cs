@@ -20,14 +20,7 @@ namespace Manga.Application.UseCases
 
         public async Task Execute(GetAccountDetailsInput input)
         {
-            IAccount account = await _accountRepository.Get(input.AccountId);
-
-            if (account == null)
-            {
-                _outputHandler.NotFound($"The account {input.AccountId} does not exist or is not processed yet.");
-                return;
-            }
-
+            IAccount account = await _accountRepository.TryGet(input.AccountId);
             GetAccountDetailsOutput output = new GetAccountDetailsOutput(account);
             _outputHandler.Default(output);
         }

@@ -3,7 +3,7 @@ namespace Manga.WebApi.UseCases.V2.GetAccountDetails
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Manga.Application.Boundaries.GetAccountDetails;
-    using Manga.WebApi.Extensions.FeatureFlags;
+    using Manga.WebApi.DependencyInjection.FeatureFlags;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;

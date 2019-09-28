@@ -21,11 +21,14 @@ namespace Manga.Infrastructure.InMemoryDataAccess.Repositories
             await Task.CompletedTask;
         }
 
-        public async Task<ICustomer> Get(Guid id)
+        public async Task<ICustomer> TryGet(Guid id)
         {
             Customer customer = _context.Customers
                 .Where(e => e.Id == id)
                 .SingleOrDefault();
+
+            if (customer == null)
+                throw new CustomerNotFoundException($"Customer {id} not found.");
 
             return await Task.FromResult<Customer>(customer);
         }

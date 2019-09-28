@@ -1,8 +1,8 @@
 namespace Manga.WebApi.Filters
 {
     using Manga.Domain;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Filters;
+    using Microsoft.AspNetCore.Mvc;
 
     public sealed class BusinessExceptionFilter : IExceptionFilter
     {

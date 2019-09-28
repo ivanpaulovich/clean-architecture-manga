@@ -19,8 +19,8 @@ namespace Manga.WebApi.UseCases.V1.Withdraw
 
         public WithdrawResponse(
             decimal amount,
-            string description, 
-            DateTime transactionDate, 
+            string description,
+            DateTime transactionDate,
             decimal updatedBalance)
         {
             Amount = amount;

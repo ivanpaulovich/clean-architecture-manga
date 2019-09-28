@@ -4,8 +4,8 @@ namespace Manga.Application.UseCases
     using Manga.Application.Boundaries.Withdraw;
     using Manga.Application.Repositories;
     using Manga.Application.Services;
-    using Manga.Domain;
     using Manga.Domain.Accounts;
+    using Manga.Domain;
 
     public sealed class Withdraw : IUseCase
     {
@@ -28,21 +28,8 @@ namespace Manga.Application.UseCases
 
         public async Task Execute(WithdrawInput input)
         {
-            IAccount account = await _accountRepository.Get(input.AccountId);
-            if (account == null)
-            {
-                _outputHandler.Error($"The account {input.AccountId} does not exist or is already closed.");
-                return;
-            }
-
-            IDebit debit = account.Withdraw(_entityFactory, input.Amount);
-
-            if (debit == null)
-            {
-                _outputHandler.Error($"The account {input.AccountId} does not have enough funds to withdraw {input.Amount}.");
-                return;
-            }
-
+            var account = await _accountRepository.TryGet(input.AccountId);
+            var debit = account.TryWithdraw(_entityFactory, input.Amount);
             await _accountRepository.Update(account, debit);
             await _unitOfWork.Save();
 

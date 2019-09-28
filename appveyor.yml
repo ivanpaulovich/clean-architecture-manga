@@ -18,6 +18,10 @@ dotnet_csproj:
   patch: true
   file: '**\*.csproj'
   version: '{version}'
+install:
+  - cmd: choco install dotnetcore-sdk --pre
+before_build:
+  - cmd: dotnet --version
 build_script:
   - docker pull mcr.microsoft.com/mssql/server:2017-latest || true
   - docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=<YourStrong!Passw0rd>' -p 1433:1433 --name sql1 -d mcr.microsoft.com/mssql/server:2017-latest || true
