@@ -124,6 +124,26 @@
         "design",
         "test"
       ]
+    },
+    {
+      "login": "morphlogic",
+      "name": "morphlogic",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/29184473?v=4",
+      "profile": "https://github.com/morphlogic",
+      "contributions": [
+        "test",
+        "code"
+      ]
+    },
+    {
+      "login": "felpasl",
+      "name": "Felipe Lambert",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/5658895?v=4",
+      "profile": "https://github.com/felpasl",
+      "contributions": [
+        "test",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5,
