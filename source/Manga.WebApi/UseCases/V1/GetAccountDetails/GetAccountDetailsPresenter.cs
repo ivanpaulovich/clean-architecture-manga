@@ -9,18 +9,7 @@ namespace Manga.WebApi.UseCases.V1.GetAccountDetails
     {
         public IActionResult ViewModel { get; private set; }
 
-        public void Error(string message)
-        {
-            var problemDetails = new ProblemDetails()
-            {
-                Title = "An error occurred",
-                Detail = message
-            };
-
-            ViewModel = new BadRequestObjectResult(problemDetails);
-        }
-
-        public void Default(GetAccountDetailsOutput getAccountDetailsOutput)
+        public void Standard(GetAccountDetailsOutput getAccountDetailsOutput)
         {
             List<TransactionModel> transactions = new List<TransactionModel>();
 

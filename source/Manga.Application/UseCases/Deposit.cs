@@ -28,18 +28,23 @@ namespace Manga.Application.UseCases
 
         public async Task Execute(DepositInput input)
         {
-            IAccount account = await _accountRepository.TryGet(input.AccountId);
-            ICredit credit = account.Deposit(_entityFactory, input.Amount);
+            var account = await _accountRepository.Get(input.AccountId);
+            var credit = account.Deposit(_entityFactory, input.Amount);
 
             await _accountRepository.Update(account, credit);
             await _unitOfWork.Save();
 
-            DepositOutput output = new DepositOutput(
+            BuildOutput(credit, account);
+        }
+
+        private void BuildOutput(ICredit credit, IAccount account)
+        {
+            var output = new DepositOutput(
                 credit,
                 account.GetCurrentBalance()
             );
 
-            _outputHandler.Default(output);
+            _outputHandler.Standard(output);
         }
     }
 }

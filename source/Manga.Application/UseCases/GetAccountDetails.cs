@@ -20,9 +20,14 @@ namespace Manga.Application.UseCases
 
         public async Task Execute(GetAccountDetailsInput input)
         {
-            IAccount account = await _accountRepository.TryGet(input.AccountId);
-            GetAccountDetailsOutput output = new GetAccountDetailsOutput(account);
-            _outputHandler.Default(output);
+            var account = await _accountRepository.Get(input.AccountId);
+            BuildOutput(account);
+        }
+
+        private void BuildOutput(IAccount account)
+        {
+            var output = new GetAccountDetailsOutput(account);
+            _outputHandler.Standard(output);
         }
     }
 }

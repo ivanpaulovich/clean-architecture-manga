@@ -674,7 +674,7 @@ public sealed class Withdraw : IUseCase
             account.GetCurrentBalance()
         );
 
-        _outputHandler.Default(output);
+        _outputHandler.Standard(output);
     }
 }
 ```

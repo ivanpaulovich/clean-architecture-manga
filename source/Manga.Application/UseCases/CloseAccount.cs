@@ -20,15 +20,20 @@ namespace Manga.Application.UseCases
 
         public async Task Execute(CloseAccountInput closeAccountInput)
         {
-            IAccount account = await _accountRepository.TryGet(closeAccountInput.AccountId);
+            var account = await _accountRepository.Get(closeAccountInput.AccountId);
 
             if (account.IsClosingAllowed())
             {
                 await _accountRepository.Delete(account);
             }
 
+            BuildOutput(account);
+        }
+
+        private void BuildOutput(IAccount account)
+        {
             var closeAccountOutput = new CloseAccountOutput(account);
-            _outputHandler.Default(closeAccountOutput);
+            _outputHandler.Standard(closeAccountOutput);
         }
     }
 }

@@ -7,18 +7,7 @@ namespace Manga.WebApi.UseCases.V1.Transfer
     {
         public IActionResult ViewModel { get; private set; }
 
-        public void Error(string message)
-        {
-            var problemDetails = new ProblemDetails()
-            {
-                Title = "An error occurred",
-                Detail = message
-            };
-
-            ViewModel = new BadRequestObjectResult(problemDetails);
-        }
-
-        public void Default(TransferOutput transferOutput)
+        public void Standard(TransferOutput transferOutput)
         {
             var transferResponse = new
             {

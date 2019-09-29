@@ -37,7 +37,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
                 deleteSQL, id);
         }
 
-        public async Task<IAccount> TryGet(Guid id)
+        public async Task<IAccount> Get(Guid id)
         {
             Account account = await _context
                 .Accounts
@@ -45,7 +45,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
                 .SingleOrDefaultAsync();
 
             if (account == null)
-                throw new AccountNotFoundException($"Account {id} not found.");
+                throw new AccountNotFoundException($"The account {id} does not exist or is not processed yet.");
 
             var credits = _context.Credits
                 .Where(e => e.AccountId == id)

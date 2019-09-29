@@ -1,6 +1,6 @@
 namespace Manga.Application.Boundaries.Register
 {
-    public interface IOutputPort : IErrorHandler
+    public interface IOutputPort
     {
         void Standard(RegisterOutput registerOutput);
     }

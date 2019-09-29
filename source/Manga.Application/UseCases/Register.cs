@@ -5,6 +5,7 @@ namespace Manga.Application.UseCases
     using Manga.Application.Repositories;
     using Manga.Application.Services;
     using Manga.Domain.Accounts;
+    using Manga.Domain.Customers;
     using Manga.Domain;
 
     public sealed class Register : IUseCase
@@ -31,12 +32,6 @@ namespace Manga.Application.UseCases
 
         public async Task Execute(RegisterInput input)
         {
-            if (input == null)
-            {
-                _outputHandler.Error("Input is null.");
-                return;
-            }
-
             var customer = _entityFactory.NewCustomer(input.SSN, input.Name);
             var account = _entityFactory.NewAccount(customer);
 
@@ -47,6 +42,12 @@ namespace Manga.Application.UseCases
             await _accountRepository.Add(account, credit);
             await _unitOfWork.Save();
 
+            var output = new RegisterOutput(customer, account);
+            _outputHandler.Standard(output);
+        }
+
+        public void BuildOutput(ICustomer customer, IAccount account)
+        {
             var output = new RegisterOutput(customer, account);
             _outputHandler.Standard(output);
         }

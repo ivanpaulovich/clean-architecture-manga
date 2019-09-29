@@ -9,17 +9,6 @@ namespace Manga.WebApi.UseCases.V1.Register
     {
         public IActionResult ViewModel { get; private set; }
 
-        public void Error(string message)
-        {
-            var problemDetails = new ProblemDetails()
-            {
-                Title = "An error occurred",
-                Detail = message
-            };
-
-            ViewModel = new BadRequestObjectResult(problemDetails);
-        }
-
         public void Standard(RegisterOutput output)
         {
             var transactions = new List<TransactionModel>();

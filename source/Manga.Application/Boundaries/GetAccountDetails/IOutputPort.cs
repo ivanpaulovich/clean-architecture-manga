@@ -1,8 +1,8 @@
 namespace Manga.Application.Boundaries.GetAccountDetails
 {
-    public interface IOutputPort : IErrorHandler
+    public interface IOutputPort
     {
-        void Default(GetAccountDetailsOutput getAccountDetailsOutput);
+        void Standard(GetAccountDetailsOutput getAccountDetailsOutput);
         void NotFound(string message);
     }
 }

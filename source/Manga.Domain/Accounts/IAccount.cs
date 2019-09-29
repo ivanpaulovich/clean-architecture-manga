@@ -5,7 +5,7 @@ namespace Manga.Domain.Accounts
     public interface IAccount : IAggregateRoot
     {
         ICredit Deposit(IEntityFactory entityFactory, PositiveMoney amountToDeposit);
-        IDebit TryWithdraw(IEntityFactory entityFactory, PositiveMoney amountToWithdraw);
+        IDebit Withdraw(IEntityFactory entityFactory, PositiveMoney amountToWithdraw);
         bool IsClosingAllowed();
         Money GetCurrentBalance();
     }

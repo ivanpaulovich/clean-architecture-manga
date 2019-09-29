@@ -1,7 +1,7 @@
 namespace Manga.Application.Boundaries.Deposit
 {
-    public interface IOutputPort : IErrorHandler
+    public interface IOutputPort
     {
-        void Default(DepositOutput depositOutput);
+        void Standard(DepositOutput depositOutput);
     }
 }
