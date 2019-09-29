@@ -1,8 +1,8 @@
 namespace Manga.Application.Boundaries.GetCustomerDetails
 {
-    public interface IOutputPort : IErrorHandler
+    public interface IOutputPort
     {
-        void Default(GetCustomerDetailsOutput getCustomerDetailsOutput);
+        void Standard(GetCustomerDetailsOutput getCustomerDetailsOutput);
         void NotFound(string message);
     }
 }

@@ -1,7 +1,7 @@
 namespace Manga.Application.Boundaries.Withdraw
 {
-    public interface IOutputPort : IErrorHandler
+    public interface IOutputPort
     {
-        void Default(WithdrawOutput withdrawOutput);
+        void Standard(WithdrawOutput withdrawOutput);
     }
 }

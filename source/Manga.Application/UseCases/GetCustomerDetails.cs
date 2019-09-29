@@ -5,7 +5,6 @@ namespace Manga.Application.UseCases
     using System;
     using Manga.Application.Boundaries.GetCustomerDetails;
     using Manga.Application.Repositories;
-    using Manga.Domain.Accounts;
     using Manga.Domain.Customers;
 
     public sealed class GetCustomerDetails : IUseCase
@@ -26,19 +25,24 @@ namespace Manga.Application.UseCases
 
         public async Task Execute(GetCustomerDetailsInput input)
         {
-            ICustomer customer = await _customerRepository.TryGet(input.CustomerId);
+            var customer = await _customerRepository.Get(input.CustomerId);
 
-            List<Boundaries.GetCustomerDetails.Account> accounts = new List<Boundaries.GetCustomerDetails.Account>();
+            var accounts = new List<Boundaries.GetCustomerDetails.Account>();
 
             foreach (Guid accountId in customer.Accounts.GetAccountIds())
             {
-                IAccount account = await _accountRepository.TryGet(accountId);
-                Boundaries.GetCustomerDetails.Account accountOutput = new Boundaries.GetCustomerDetails.Account(account);
-                accounts.Add(accountOutput);
+                var account = await _accountRepository.Get(accountId);
+                var outputAccount = new Boundaries.GetCustomerDetails.Account(account);
+                accounts.Add(outputAccount);
             }
 
-            GetCustomerDetailsOutput output = new GetCustomerDetailsOutput(customer, accounts);
-            _outputHandler.Default(output);
+            BuildOutput(customer, accounts);
+        }
+
+        private void BuildOutput(ICustomer customer, List<Boundaries.GetCustomerDetails.Account> accounts)
+        {
+            var output = new GetCustomerDetailsOutput(customer, accounts);
+            _outputHandler.Standard(output);
         }
     }
 }

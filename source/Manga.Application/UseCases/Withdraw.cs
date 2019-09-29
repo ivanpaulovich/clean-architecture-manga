@@ -28,17 +28,22 @@ namespace Manga.Application.UseCases
 
         public async Task Execute(WithdrawInput input)
         {
-            var account = await _accountRepository.TryGet(input.AccountId);
-            var debit = account.TryWithdraw(_entityFactory, input.Amount);
+            var account = await _accountRepository.Get(input.AccountId);
+            var debit = account.Withdraw(_entityFactory, input.Amount);
             await _accountRepository.Update(account, debit);
             await _unitOfWork.Save();
 
-            WithdrawOutput output = new WithdrawOutput(
+            BuildOutput(debit, account);
+        }
+
+        private void BuildOutput(IDebit debit, IAccount account)
+        {
+            var output = new WithdrawOutput(
                 debit,
                 account.GetCurrentBalance()
             );
 
-            _outputHandler.Default(output);
+            _outputHandler.Standard(output);
         }
     }
 }

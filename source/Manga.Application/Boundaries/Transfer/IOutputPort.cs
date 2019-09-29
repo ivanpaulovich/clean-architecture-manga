@@ -1,7 +1,7 @@
 namespace Manga.Application.Boundaries.Transfer
 {
-    public interface IOutputPort : IErrorHandler
+    public interface IOutputPort
     {
-        void Default(TransferOutput transferOutput);
+        void Standard(TransferOutput transferOutput);
     }
 }
