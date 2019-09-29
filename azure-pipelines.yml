@@ -10,6 +10,14 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: DotNetCoreInstaller@0
+  displayName: Install .NET Core SDK
+  name: install_dotnetcore_sdk
+  enabled: true
+  inputs:
+    packageType: 'sdk'
+    version: '3.0.100'
+    
 - script: dotnet restore
   displayName: 'dotnet restore'
 
