@@ -19,7 +19,7 @@ namespace Manga.Infrastructure.InMemoryDataAccess
             Errors.Add(message);
         }
 
-        public void Default(TransferOutput output)
+        public void Standard(TransferOutput output)
         {
             Transfers.Add(output);
         }

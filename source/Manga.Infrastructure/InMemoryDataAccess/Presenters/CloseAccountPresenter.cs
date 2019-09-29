@@ -19,7 +19,7 @@ namespace Manga.Infrastructure.InMemoryDataAccess
             Errors.Add(message);
         }
 
-        public void Default(CloseAccountOutput output)
+        public void Standard(CloseAccountOutput output)
         {
             ClosedAccounts.Add(output);
         }

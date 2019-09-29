@@ -28,23 +28,28 @@ namespace Manga.Application.UseCases
 
         public async Task Execute(TransferInput input)
         {
-            IAccount originAccount = await _accountRepository.TryGet(input.OriginAccountId);
-            IAccount destinationAccount = await _accountRepository.TryGet(input.DestinationAccountId);
-            
-            IDebit debit = originAccount.TryWithdraw(_entityFactory, input.Amount);
-            ICredit credit = destinationAccount.Deposit(_entityFactory, input.Amount);
+            var originAccount = await _accountRepository.Get(input.OriginAccountId);
+            var destinationAccount = await _accountRepository.Get(input.DestinationAccountId);
+
+            var debit = originAccount.Withdraw(_entityFactory, input.Amount);
+            var credit = destinationAccount.Deposit(_entityFactory, input.Amount);
 
             await _accountRepository.Update(originAccount, debit);
             await _accountRepository.Update(destinationAccount, credit);
             await _unitOfWork.Save();
 
-            TransferOutput output = new TransferOutput(
+            BuildOutput(debit, originAccount, destinationAccount);
+        }
+
+        public void BuildOutput(IDebit debit, IAccount originAccount, IAccount destinationAccount)
+        {
+            var output = new TransferOutput(
                 debit,
                 originAccount.GetCurrentBalance(),
-                input.OriginAccountId,
-                input.DestinationAccountId);
+                originAccount.Id,
+                destinationAccount.Id);
 
-            _outputHandler.Default(output);
+            _outputHandler.Standard(output);
         }
     }
 }

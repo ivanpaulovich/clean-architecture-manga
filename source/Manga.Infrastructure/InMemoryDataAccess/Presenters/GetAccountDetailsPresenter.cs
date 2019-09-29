@@ -21,7 +21,7 @@ namespace Manga.Infrastructure.InMemoryDataAccess
             Errors.Add(message);
         }
 
-        public void Default(Application.Boundaries.GetAccountDetails.GetAccountDetailsOutput output)
+        public void Standard(Application.Boundaries.GetAccountDetails.GetAccountDetailsOutput output)
         {
             GetAccountDetails.Add(output);
         }

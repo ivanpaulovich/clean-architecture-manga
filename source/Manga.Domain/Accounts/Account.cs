@@ -22,7 +22,7 @@ namespace Manga.Domain.Accounts
             return credit;
         }
 
-        public IDebit TryWithdraw(IEntityFactory entityFactory, PositiveMoney amountToWithdraw)
+        public IDebit Withdraw(IEntityFactory entityFactory, PositiveMoney amountToWithdraw)
         {
             if (GetCurrentBalance().LessThan(amountToWithdraw))
                 throw new MoneyShouldBePositiveException("Account has not enough funds.");

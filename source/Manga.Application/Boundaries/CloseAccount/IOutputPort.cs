@@ -1,7 +1,7 @@
 namespace Manga.Application.Boundaries.CloseAccount
 {
-    public interface IOutputPort : IErrorHandler
+    public interface IOutputPort
     {
-        void Default(CloseAccountOutput closeAccountOutput);
+        void Standard(CloseAccountOutput closeAccountOutput);
     }
 }

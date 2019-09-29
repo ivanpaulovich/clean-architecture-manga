@@ -33,14 +33,14 @@ namespace Manga.Infrastructure.InMemoryDataAccess.Repositories
             await Task.CompletedTask;
         }
 
-        public async Task<IAccount> TryGet(Guid id)
+        public async Task<IAccount> Get(Guid id)
         {
             Account account = _context.Accounts
                 .Where(e => e.Id == id)
                 .SingleOrDefault();
 
             if (account == null)
-                throw new AccountNotFoundException($"Account {id} not found.");
+                throw new AccountNotFoundException($"The account {id} does not exist or is not processed yet.");
 
             return await Task.FromResult<Account>(account);
         }

@@ -22,7 +22,7 @@ namespace Manga.WebApi.UseCases.V2.GetAccountDetails
             ViewModel = new BadRequestObjectResult(problemDetails);
         }
 
-        public void Default(GetAccountDetailsOutput getAccountDetailsOutput)
+        public void Standard(GetAccountDetailsOutput getAccountDetailsOutput)
         {
             var dataTable = new DataTable();
             dataTable.Columns.Add("Amount", typeof(decimal));

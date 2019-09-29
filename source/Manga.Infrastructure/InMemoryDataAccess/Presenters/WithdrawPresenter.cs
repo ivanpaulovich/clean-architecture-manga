@@ -19,7 +19,7 @@ namespace Manga.Infrastructure.InMemoryDataAccess
             Errors.Add(message);
         }
 
-        public void Default(WithdrawOutput output)
+        public void Standard(WithdrawOutput output)
         {
             Withdrawals.Add(output);
         }
