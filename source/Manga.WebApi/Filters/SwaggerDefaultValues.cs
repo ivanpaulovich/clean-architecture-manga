@@ -22,7 +22,7 @@ namespace Manga.WebApi.Filters
 
             operation.Deprecated |= apiDescription.IsDeprecated();
 
-            if (operation.Parameters == null)
+            if (operation.Parameters is null)
             {
                 return;
             }

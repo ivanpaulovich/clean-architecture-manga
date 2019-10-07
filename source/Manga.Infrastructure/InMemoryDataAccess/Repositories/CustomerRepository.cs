@@ -27,7 +27,7 @@ namespace Manga.Infrastructure.InMemoryDataAccess.Repositories
                 .Where(e => e.Id == id)
                 .SingleOrDefault();
 
-            if (customer == null)
+            if (customer is null)
                 throw new CustomerNotFoundException($"The customer {id} does not exist or is not processed yet.");
 
             return await Task.FromResult<Customer>(customer);
