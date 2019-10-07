@@ -1,6 +1,7 @@
 namespace Manga.Application.Boundaries.Register
 {
     using System;
+
     public sealed class Transaction
     {
         public string Description { get; }

@@ -1,6 +1,7 @@
 namespace Manga.Application.Boundaries.GetAccountDetails
 {
     using System;
+
     public sealed class Transaction
     {
         public string Description { get; }
