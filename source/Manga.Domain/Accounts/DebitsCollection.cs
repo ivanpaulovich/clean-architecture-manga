@@ -17,13 +17,13 @@ namespace Manga.Domain.Accounts
         where T : IDebit
         {
             foreach (var debit in debits)
+            {
                 Add(debit);
+            }
         }
 
         public void Add(IDebit debit)
-        {
-            _debits.Add(debit);
-        }
+            => _debits.Add(debit);
 
         public IReadOnlyCollection<IDebit> GetTransactions()
         {
