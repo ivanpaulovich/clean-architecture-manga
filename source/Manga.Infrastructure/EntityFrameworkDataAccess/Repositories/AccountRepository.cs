@@ -44,7 +44,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
                 .Where(a => a.Id == id)
                 .SingleOrDefaultAsync();
 
-            if (account == null)
+            if (account is null)
                 throw new AccountNotFoundException($"The account {id} does not exist or is not processed yet.");
 
             var credits = _context.Credits

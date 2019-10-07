@@ -652,7 +652,7 @@ public sealed class Withdraw : IUseCase
     public async Task Execute(WithdrawInput input)
     {
         IAccount account = await _accountRepository.Get(input.AccountId);
-        if (account == null)
+        if (account is null)
         {
             _outputHandler.Error($"The account {input.AccountId} does not exist or is already closed.");
             return;
@@ -660,7 +660,7 @@ public sealed class Withdraw : IUseCase
 
         IDebit debit = account.Withdraw(_entityFactory, input.Amount);
 
-        if (debit == null)
+        if (debit is null)
         {
             _outputHandler.Error($"The account {input.AccountId} does not have enough funds to withdraw {input.Amount}.");
             return;

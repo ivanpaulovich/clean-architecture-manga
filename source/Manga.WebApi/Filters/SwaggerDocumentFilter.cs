@@ -19,7 +19,7 @@ namespace Manga.WebApi.Filters
 
         public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
         {
-            if (swaggerDoc == null)
+            if (swaggerDoc is null)
             {
                 throw new ArgumentNullException(nameof(swaggerDoc));
             }

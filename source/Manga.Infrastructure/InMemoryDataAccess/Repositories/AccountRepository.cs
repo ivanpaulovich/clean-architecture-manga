@@ -39,7 +39,7 @@ namespace Manga.Infrastructure.InMemoryDataAccess.Repositories
                 .Where(e => e.Id == id)
                 .SingleOrDefault();
 
-            if (account == null)
+            if (account is null)
                 throw new AccountNotFoundException($"The account {id} does not exist or is not processed yet.");
 
             return await Task.FromResult<Account>(account);

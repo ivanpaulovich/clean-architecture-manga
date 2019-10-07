@@ -29,7 +29,7 @@ namespace Manga.Infrastructure.EntityFrameworkDataAccess
                 .Where(c => c.Id == id)
                 .SingleOrDefaultAsync();
 
-            if (customer == null)
+            if (customer is null)
                 throw new CustomerNotFoundException($"The customer {id} does not exist or is not processed yet.");
 
             var accounts = _context.Accounts
