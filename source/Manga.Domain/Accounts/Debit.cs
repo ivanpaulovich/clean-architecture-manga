@@ -7,15 +7,10 @@ namespace Manga.Domain.Accounts
     {
         public Guid Id { get; protected set; }
         public PositiveMoney Amount { get; protected set; }
-        public string Description
-        {
-            get { return "Debit"; }
-        }
+        public string Description { get => "Debit"; }
         public DateTime TransactionDate { get; protected set; }
 
         public PositiveMoney Sum(PositiveMoney amount)
-        {
-            return Amount.Add(amount);
-        }
+            => Amount.Add(amount);
     }
 }
