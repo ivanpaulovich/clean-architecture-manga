@@ -1,6 +1,7 @@
 namespace Manga.Application.Boundaries.Transfer
 {
     using System;
+
     public sealed class Transaction
     {
         public Guid OriginAccountId { get; }
