@@ -18,8 +18,7 @@ namespace Manga.Domain.Customers
 
         public void Register(IAccount account)
         {
-            if (Accounts == null)
-                Accounts = new AccountCollection();
+            Accounts ??= new AccountCollection();
 
             Accounts.Add(account.Id);
         }
