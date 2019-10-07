@@ -17,13 +17,13 @@ namespace Manga.Domain.Accounts
         where T : ICredit
         {
             foreach (var credit in credits)
+            {
                 Add(credit);
+            }
         }
 
         public void Add(ICredit credit)
-        {
-            _credits.Add(credit);
-        }
+            => _credits.Add(credit);
 
         public IReadOnlyCollection<ICredit> GetTransactions()
         {
