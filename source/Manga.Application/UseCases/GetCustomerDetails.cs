@@ -9,16 +9,16 @@ namespace Manga.Application.UseCases
 
     public sealed class GetCustomerDetails : IUseCase
     {
-        private readonly IOutputPort _outputHandler;
+        private readonly IOutputPort _outputPort;
         private readonly ICustomerRepository _customerRepository;
         private readonly IAccountRepository _accountRepository;
 
         public GetCustomerDetails(
-            IOutputPort outputHandler,
+            IOutputPort outputPort,
             ICustomerRepository customerRepository,
             IAccountRepository accountRepository)
         {
-            _outputHandler = outputHandler;
+            _outputPort = outputPort;
             _customerRepository = customerRepository;
             _accountRepository = accountRepository;
         }
@@ -42,7 +42,7 @@ namespace Manga.Application.UseCases
         private void BuildOutput(ICustomer customer, List<Boundaries.GetCustomerDetails.Account> accounts)
         {
             var output = new GetCustomerDetailsOutput(customer, accounts);
-            _outputHandler.Standard(output);
+            _outputPort.Standard(output);
         }
     }
 }

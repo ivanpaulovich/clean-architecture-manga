@@ -30,10 +30,5 @@ namespace Manga.WebApi.UseCases.V1.GetAccountDetails
 
             ViewModel = new OkObjectResult(getAccountDetailsResponse);
         }
-
-        public void NotFound(string message)
-        {
-            ViewModel = new NotFoundObjectResult(message);
-        }
     }
 }

@@ -10,18 +10,18 @@ namespace Manga.Application.UseCases
     public sealed class Withdraw : IUseCase
     {
         private readonly IEntityFactory _entityFactory;
-        private readonly IOutputPort _outputHandler;
+        private readonly IOutputPort _outputPort;
         private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public Withdraw(
             IEntityFactory entityFactory,
-            IOutputPort outputHandler,
+            IOutputPort outputPort,
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
             _entityFactory = entityFactory;
-            _outputHandler = outputHandler;
+            _outputPort = outputPort;
             _accountRepository = accountRepository;
             _unitOfWork = unitOfWork;
         }
@@ -43,7 +43,7 @@ namespace Manga.Application.UseCases
                 account.GetCurrentBalance()
             );
 
-            _outputHandler.Standard(output);
+            _outputPort.Standard(output);
         }
     }
 }

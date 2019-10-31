@@ -11,20 +11,20 @@ namespace Manga.Application.UseCases
     public sealed class Register : IUseCase
     {
         private readonly IEntityFactory _entityFactory;
-        private readonly IOutputPort _outputHandler;
+        private readonly IOutputPort _outputPort;
         private readonly ICustomerRepository _customerRepository;
         private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public Register(
             IEntityFactory entityFactory,
-            IOutputPort outputHandler,
+            IOutputPort outputPort,
             ICustomerRepository customerRepository,
             IAccountRepository accountRepository,
             IUnitOfWork unityOfWork)
         {
             _entityFactory = entityFactory;
-            _outputHandler = outputHandler;
+            _outputPort = outputPort;
             _customerRepository = customerRepository;
             _accountRepository = accountRepository;
             _unitOfWork = unityOfWork;
@@ -42,14 +42,13 @@ namespace Manga.Application.UseCases
             await _accountRepository.Add(account, credit);
             await _unitOfWork.Save();
 
-            var output = new RegisterOutput(customer, account);
-            _outputHandler.Standard(output);
+            BuildOutput(customer, account);
         }
 
         public void BuildOutput(ICustomer customer, IAccount account)
         {
             var output = new RegisterOutput(customer, account);
-            _outputHandler.Standard(output);
+            _outputPort.Standard(output);
         }
     }
 }

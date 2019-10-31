@@ -11,17 +11,6 @@ namespace Manga.WebApi.UseCases.V2.GetAccountDetails
     {
         public IActionResult ViewModel { get; private set; }
 
-        public void Error(string message)
-        {
-            var problemDetails = new ProblemDetails()
-            {
-                Title = "An error occurred",
-                Detail = message
-            };
-
-            ViewModel = new BadRequestObjectResult(problemDetails);
-        }
-
         public void Standard(GetAccountDetailsOutput getAccountDetailsOutput)
         {
             var dataTable = new DataTable();
@@ -51,11 +40,6 @@ namespace Manga.WebApi.UseCases.V2.GetAccountDetails
             }
 
             ViewModel = new FileContentResult(fileContents, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        }
-
-        public void NotFound(string message)
-        {
-            ViewModel = new NotFoundObjectResult(message);
         }
     }
 }
