@@ -42,10 +42,5 @@ namespace Manga.WebApi.UseCases.V1.GetCustomerDetails
 
             ViewModel = new OkObjectResult(getCustomerDetailsResponse);
         }
-
-        public void NotFound(string message)
-        {
-            ViewModel = new NotFoundObjectResult(message);
-        }
     }
 }

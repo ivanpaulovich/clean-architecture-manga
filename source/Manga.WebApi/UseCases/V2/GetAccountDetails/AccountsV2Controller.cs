@@ -14,11 +14,11 @@ namespace Manga.WebApi.UseCases.V2.GetAccountDetails
     [ApiController]
     public sealed class AccountsV2Controller : ControllerBase
     {
-        private readonly IUseCase _getAccountDetailsUseCase;
+        private readonly IUseCaseV2 _getAccountDetailsUseCase;
         private readonly GetAccountDetailsPresenterV2 _presenter;
 
         public AccountsV2Controller(
-            IUseCase getAccountDetailsUseCase,
+            IUseCaseV2 getAccountDetailsUseCase,
             GetAccountDetailsPresenterV2 presenter)
         {
             _getAccountDetailsUseCase = getAccountDetailsUseCase;

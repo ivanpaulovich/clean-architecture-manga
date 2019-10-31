@@ -34,7 +34,11 @@ namespace Manga.WebApi.UseCases.V1.GetCustomerDetails
         [Required]
         public IList<AccountDetailsModel> Accounts { get; }
 
-        public GetCustomerDetailsResponse(Guid customerId, string ssn, string name, List<AccountDetailsModel> accounts)
+        public GetCustomerDetailsResponse(
+            Guid customerId,
+            string ssn,
+            string name,
+            List<AccountDetailsModel> accounts)
         {
             CustomerId = customerId;
             SSN = ssn;

@@ -5,16 +5,16 @@ namespace Manga.Application.UseCases
     using Manga.Application.Repositories;
     using Manga.Domain.Accounts;
 
-    public sealed class GetAccountDetails : IUseCase
+    public sealed class GetAccountDetails : IUseCase, IUseCaseV2
     {
-        private readonly IOutputPort _outputHandler;
+        private readonly IOutputPort _outputPort;
         private readonly IAccountRepository _accountRepository;
 
         public GetAccountDetails(
-            IOutputPort outputHandler,
+            IOutputPort outputPort,
             IAccountRepository accountRepository)
         {
-            _outputHandler = outputHandler;
+            _outputPort = outputPort;
             _accountRepository = accountRepository;
         }
 
@@ -27,7 +27,7 @@ namespace Manga.Application.UseCases
         private void BuildOutput(IAccount account)
         {
             var output = new GetAccountDetailsOutput(account);
-            _outputHandler.Standard(output);
+            _outputPort.Standard(output);
         }
     }
 }

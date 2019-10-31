@@ -7,14 +7,14 @@ namespace Manga.Application.UseCases
 
     public sealed class CloseAccount : IUseCase
     {
-        private readonly IOutputPort _outputHandler;
+        private readonly IOutputPort _outputPort;
         private readonly IAccountRepository _accountRepository;
 
         public CloseAccount(
-            IOutputPort outputHandler,
+            IOutputPort outputPort,
             IAccountRepository accountRepository)
         {
-            _outputHandler = outputHandler;
+            _outputPort = outputPort;
             _accountRepository = accountRepository;
         }
 
@@ -33,7 +33,7 @@ namespace Manga.Application.UseCases
         private void BuildOutput(IAccount account)
         {
             var closeAccountOutput = new CloseAccountOutput(account);
-            _outputHandler.Standard(closeAccountOutput);
+            _outputPort.Standard(closeAccountOutput);
         }
     }
 }
