@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/source/Manga.WebApi/Manga.WebApi.csproj"
+                "${workspaceFolder}/src/WebApi/WebApi.csproj"
             ],
             "problemMatcher": "$tsc"
         },
@@ -17,7 +17,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/source/Manga.WebApi/Manga.WebApi.csproj"
+                "${workspaceFolder}/src/WebApi/WebApi.csproj"
             ],
             "problemMatcher": "$tsc"
         },
@@ -28,7 +28,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/source/Manga.WebApi/Manga.WebApi.csproj"
+                "${workspaceFolder}/src/WebApi/WebApi.csproj"
             ],
             "problemMatcher": "$tsc"
         }

@@ -15,8 +15,8 @@ dotnet new manga -n "MyGreatApi"
 
 **Manga** is a virtual Wallet application in which a customer can register an account then manage the balance with `Deposits`, `Withdraws` and `Transfers`.
 
-The Manga's demo is hosted on `Heroku` servers and the `Swagger UI` client is available at [https://clean-architecture-manga.herokuapp.com/swagger/](https://clean-architecture-manga.herokuapp.com/swagger/). It is just beautiful!
-[![Swagger Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-manga-swagger.png)](https://clean-architecture-manga.herokuapp.com/swagger/index.html)
+The Manga's demo is hosted on `Heroku` servers and the `Swagger UI` client is available at [https://clean-architecture-herokuapp.com/swagger/](https://clean-architecture-herokuapp.com/swagger/). It is just beautiful!
+[![Swagger Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-manga-swagger.png)](https://clean-architecture-herokuapp.com/swagger/index.html)
 
 
 <p align="center">
@@ -782,12 +782,12 @@ http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd
 ### Swagger and API Versioning
 
 ```c#
-namespace Manga.WebApi.DependencyInjection
+namespace WebApi.DependencyInjection
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using Manga.WebApi.Filters;
+    using WebApi.Filters;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.AspNetCore.Mvc;
@@ -1232,10 +1232,10 @@ public sealed class MangaContext : DbContext
 
 ### Add Migration
 
-Run the EF Tool to add a migration to the `Manga.Infrastructure` project.
+Run the EF Tool to add a migration to the `Infrastructure` project.
 
 ```sh
-dotnet ef migrations add "InitialCreate" -o "EntityFrameworkDataAccess/Migrations" --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
+dotnet ef migrations add "InitialCreate" -o "EntityFrameworkDataAccess/Migrations" --project src/Infrastructure --startup-project src/WebApi
 ```
 
 ### Update Database
@@ -1243,7 +1243,7 @@ dotnet ef migrations add "InitialCreate" -o "EntityFrameworkDataAccess/Migration
 Generate tables and seed the database via Entity Framework Tool:
 
 ```sh
-dotnet ef database update --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
+dotnet ef database update --project src/Infrastructure --startup-project src/WebApi
 ```
 
 ## Environment Configurations
@@ -1251,7 +1251,7 @@ dotnet ef database update --project source/Manga.Infrastructure --startup-projec
 To run in `Development` mode use:
 
 ```sh
-dotnet run --project "source/Manga.WebApi/Manga.WebApi.csproj" --Environment="Development"
+dotnet run --project "src/WebApi/WebApi.csproj" --Environment="Development"
 ```
 
 It starts the application and call `ConfigureDevelopmentServices` method which runs the application using in memory persistence.
@@ -1259,7 +1259,7 @@ It starts the application and call `ConfigureDevelopmentServices` method which r
 The second option is to run in `Production` mode:
 
 ```sh
-dotnet run --project "source/Manga.WebApi/Manga.WebApi.csproj" --Environment="Production"
+dotnet run --project "src/WebApi/WebApi.csproj" --Environment="Production"
 ```
 
 This command will call `ConfigureProductionServices` then use SQL Server repositories.
@@ -1279,7 +1279,7 @@ We made available scripts to create and seed the database quickly via Docker.
 Finally to run it locally use:
 
 ```sh
-dotnet run --project "source/Manga.WebApi/Manga.WebApi.csproj"
+dotnet run --project "src/WebApi/WebApi.csproj"
 ```
 
 ### Running the Tests Locally
@@ -1318,15 +1318,15 @@ build_script:
   - docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=<YourStrong!Passw0rd>' -p 1433:1433 --name sql1 -d mcr.microsoft.com/mssql/server:2017-latest || true
   - sleep 10
   - docker exec -i sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P '<YourStrong!Passw0rd>' -Q 'ALTER LOGIN SA WITH PASSWORD="<YourNewStrong!Passw0rd>"' || true
-  - dotnet ef database update --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
+  - dotnet ef database update --project src/Infrastructure --startup-project src/WebApi
   - dotnet build
-  - pushd source/Manga.WebApi/
+  - pushd src/WebApi/
   - dotnet pack --configuration Release
   - popd
 test_script:
-  - dotnet test tests/Manga.UnitTests/Manga.UnitTests.csproj
-  - dotnet test tests/Manga.IntegrationTests/Manga.IntegrationTests.csproj
-  - dotnet test tests/Manga.AcceptanceTests/Manga.AcceptanceTests.csproj
+  - dotnet test test/UnitTests/UnitTests.csproj
+  - dotnet test test/IntegrationTests/IntegrationTests.csproj
+  - dotnet test test/AcceptanceTests/AcceptanceTests.csproj
 deploy_script:
   - docker build -t ivanpaulovich/clean-architecture-manga:github .
   - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
@@ -1351,8 +1351,8 @@ RUN dotnet publish -c Release -o out
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
 WORKDIR /app
-COPY --from=build-env /app/source/Manga.WebApi/out .
-CMD export ASPNETCORE_URLS=http://*:$PORT && dotnet Manga.WebApi.dll
+COPY --from=build-env /app/src/WebApi/out .
+CMD export ASPNETCORE_URLS=http://*:$PORT && dotnet WebApi.dll
 ```
 
 ## SQL Server
@@ -1360,7 +1360,7 @@ CMD export ASPNETCORE_URLS=http://*:$PORT && dotnet Manga.WebApi.dll
 To spin up a SQL Server in a docker container using the connection string `Server=localhost;User Id=sa;Password=<YourNewStrong!Passw0rd>;` run the following command:
 
 ```sh
-./source/scripts/sql-docker-up.sh
+./src/scripts/sql-docker-up.sh
 ```
 
 ## Related Content and Projects
