@@ -30,15 +30,15 @@ build_script:
   - docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=<YourStrong!Passw0rd>' -p 1433:1433 --name sql1 -d mcr.microsoft.com/mssql/server:2017-latest || true
   - sleep 10
   - docker exec -i sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P '<YourStrong!Passw0rd>' -Q 'ALTER LOGIN SA WITH PASSWORD="<YourNewStrong!Passw0rd>"' || true
-  - dotnet ef database update --project source/Manga.Infrastructure --startup-project source/Manga.WebApi
+  - dotnet ef database update --project src/Infrastructure --startup-project src/WebApi
   - dotnet build
-  - pushd source/Manga.WebApi/
+  - pushd src/WebApi/
   - dotnet pack --configuration Release
   - popd
 test_script:
-  - dotnet test tests/Manga.UnitTests/Manga.UnitTests.csproj
-  - dotnet test tests/Manga.IntegrationTests/Manga.IntegrationTests.csproj
-  - dotnet test tests/Manga.AcceptanceTests/Manga.AcceptanceTests.csproj
+  - dotnet test test/UnitTests/UnitTests.csproj
+  - dotnet test test/IntegrationTests/IntegrationTests.csproj
+  - dotnet test test/AcceptanceTests/AcceptanceTests.csproj
 deploy_script:
   - docker build -t ivanpaulovich/clean-architecture-manga:github .
   - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
