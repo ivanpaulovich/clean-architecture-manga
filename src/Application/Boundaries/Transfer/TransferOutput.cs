@@ -17,9 +17,7 @@ namespace Application.Boundaries.Transfer
                 originAccountId,
                 destinationAccountId,
                 debitEntity.Description,
-                debitEntity.Amount
-                .ToMoney()
-                .ToDecimal(),
+                debitEntity.Amount,
                 debitEntity.TransactionDate);
 
             UpdatedBalance = updatedBalance;

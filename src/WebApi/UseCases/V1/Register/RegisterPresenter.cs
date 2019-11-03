@@ -16,7 +16,7 @@ namespace WebApi.UseCases.V1.Register
             foreach (var item in output.Account.Transactions)
             {
                 var transaction = new TransactionModel(
-                    item.Amount,
+                    item.Amount.ToMoney().ToDecimal(),
                     item.Description,
                     item.TransactionDate);
 
@@ -25,7 +25,7 @@ namespace WebApi.UseCases.V1.Register
 
             var account = new AccountDetailsModel(
                 output.Account.AccountId,
-                output.Account.CurrentBalance,
+                output.Account.CurrentBalance.ToDecimal(),
                 transactions);
 
             var accounts = new List<AccountDetailsModel>();
@@ -33,8 +33,8 @@ namespace WebApi.UseCases.V1.Register
 
             var registerResponse = new RegisterResponse(
                 output.Customer.CustomerId,
-                output.Customer.SSN,
-                output.Customer.Name,
+                output.Customer.SSN.ToString(),
+                output.Customer.Name.ToString(),
                 accounts
             );
 

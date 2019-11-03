@@ -26,11 +26,16 @@ namespace WebApi.UseCases.V2.GetAccountDetails
             foreach (var item in getAccountDetailsOutput.Transactions)
             {
                 var transaction = new TransactionModel(
-                    item.Amount.ToDecimal(),
+                    item.Amount.ToMoney().ToDecimal(),
                     item.Description,
                     item.TransactionDate);
 
-                dataTable.Rows.Add(new object[] { item.Amount.ToDecimal(), item.Description, item.TransactionDate });
+                dataTable.Rows.Add(new object[]
+                {
+                    item.Amount.ToMoney().ToDecimal(),
+                    item.Description,
+                    item.TransactionDate
+                });
             }
 
             byte[] fileContents;

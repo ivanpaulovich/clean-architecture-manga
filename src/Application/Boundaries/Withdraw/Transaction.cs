@@ -6,12 +6,12 @@ namespace Application.Boundaries.Withdraw
     public sealed class Transaction
     {
         public string Description { get; }
-        public Money Amount { get; }
+        public PositiveMoney Amount { get; }
         public DateTime TransactionDate { get; }
 
         public Transaction(
             string description,
-            Money amount,
+            PositiveMoney amount,
             DateTime transactionDate)
         {
             Description = description;

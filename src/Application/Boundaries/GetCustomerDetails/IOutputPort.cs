@@ -1,5 +1,3 @@
-using Domain;
-
 namespace Application.Boundaries.GetCustomerDetails
 {
     public interface IOutputPort

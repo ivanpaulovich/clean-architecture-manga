@@ -17,8 +17,7 @@ namespace Application.Boundaries.Deposit
             Transaction = new Transaction(
                 creditEntity.Description,
                 creditEntity
-                .Amount
-                .ToMoney(),
+                .Amount,
                 creditEntity.TransactionDate);
 
             UpdatedBalance = updatedBalance;

@@ -15,7 +15,7 @@ namespace WebApi.UseCases.V1.Deposit
         public void Standard(DepositOutput depositOutput)
         {
             var depositResponse = new DepositResponse(
-                depositOutput.Transaction.Amount.ToDecimal(),
+                depositOutput.Transaction.Amount.ToMoney().ToDecimal(),
                 depositOutput.Transaction.Description,
                 depositOutput.Transaction.TransactionDate,
                 depositOutput.UpdatedBalance.ToDecimal()

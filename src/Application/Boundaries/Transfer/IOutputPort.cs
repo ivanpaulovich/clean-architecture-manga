@@ -1,5 +1,3 @@
-using Domain;
-
 namespace Application.Boundaries.Transfer
 {
     public interface IOutputPort

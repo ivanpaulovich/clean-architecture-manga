@@ -1,20 +1,21 @@
 namespace Application.Boundaries.Transfer
 {
     using System;
+    using Domain.ValueObjects;
 
     public sealed class Transaction
     {
         public Guid OriginAccountId { get; }
         public Guid DestinationAccountId { get; }
         public string Description { get; }
-        public decimal Amount { get; }
+        public PositiveMoney Amount { get; }
         public DateTime TransactionDate { get; }
 
         public Transaction(
             Guid originAccountId,
             Guid destinationAccountId,
             string description,
-            decimal amount,
+            PositiveMoney amount,
             DateTime transactionDate)
         {
             OriginAccountId = originAccountId;

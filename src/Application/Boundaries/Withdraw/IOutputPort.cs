@@ -1,5 +1,3 @@
-using Domain;
-
 namespace Application.Boundaries.Withdraw
 {
     public interface IOutputPort
