@@ -20,7 +20,7 @@ namespace WebApi.UseCases.V1.Withdraw
         public void Standard(WithdrawOutput withdrawOutput)
         {
             var withdrawResponse = new WithdrawResponse(
-                withdrawOutput.Transaction.Amount.ToDecimal(),
+                withdrawOutput.Transaction.Amount.ToMoney().ToDecimal(),
                 withdrawOutput.Transaction.Description,
                 withdrawOutput.Transaction.TransactionDate,
                 withdrawOutput.UpdatedBalance.ToDecimal()

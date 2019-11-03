@@ -14,8 +14,7 @@ namespace Application.Boundaries.Withdraw
 
             Transaction = new Transaction(
                 debitEntity.Description,
-                debitEntity.Amount
-                .ToMoney(),
+                debitEntity.Amount,
                 debitEntity.TransactionDate);
 
             UpdatedBalance = updatedBalance;

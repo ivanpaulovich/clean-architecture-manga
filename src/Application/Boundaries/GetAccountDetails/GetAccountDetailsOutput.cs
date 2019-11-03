@@ -38,8 +38,7 @@ namespace Application.Boundaries.GetAccountDetails
                 Transaction transactionOutput = new Transaction(
                     creditEntity.Description,
                     creditEntity
-                    .Amount
-                    .ToMoney(),
+                    .Amount,
                     creditEntity.TransactionDate);
 
                 transactionResults.Add(transactionOutput);
@@ -53,8 +52,7 @@ namespace Application.Boundaries.GetAccountDetails
                 Transaction transactionOutput = new Transaction(
                     debitEntity.Description,
                     debitEntity
-                    .Amount
-                    .ToMoney(),
+                    .Amount,
                     debitEntity.TransactionDate);
 
                 transactionResults.Add(transactionOutput);

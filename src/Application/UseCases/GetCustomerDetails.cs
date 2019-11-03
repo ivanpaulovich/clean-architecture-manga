@@ -6,7 +6,6 @@ namespace Application.UseCases
     using Application.Boundaries.GetCustomerDetails;
     using Application.Repositories;
     using Domain.Customers;
-    using Domain;
     using Domain.Accounts;
 
     public sealed class GetCustomerDetails : IUseCase

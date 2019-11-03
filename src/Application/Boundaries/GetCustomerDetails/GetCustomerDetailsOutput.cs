@@ -18,8 +18,8 @@ namespace Application.Boundaries.GetCustomerDetails
         {
             Customer customerEntity = (Customer) customer;
             CustomerId = customerEntity.Id;
-            SSN = customerEntity.SSN!.Value;
-            Name = customerEntity.Name!.Value;
+            SSN = customerEntity.SSN;
+            Name = customerEntity.Name;
             Accounts = accounts;
         }
     }

@@ -4,7 +4,6 @@ namespace Application.UseCases
     using Application.Boundaries.CloseAccount;
     using Application.Repositories;
     using Domain.Accounts;
-    using Domain;
 
     public sealed class CloseAccount : IUseCase
     {

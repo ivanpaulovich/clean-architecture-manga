@@ -21,7 +21,7 @@ namespace WebApi.UseCases.V1.GetAccountDetails
             foreach (var item in getAccountDetailsOutput.Transactions)
             {
                 var transaction = new TransactionModel(
-                    item.Amount.ToDecimal(),
+                    item.Amount.ToMoney().ToDecimal(),
                     item.Description,
                     item.TransactionDate);
 

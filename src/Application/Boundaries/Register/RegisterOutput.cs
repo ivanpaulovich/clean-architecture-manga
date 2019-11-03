@@ -22,9 +22,7 @@ namespace Application.Boundaries.Register
                 Transaction transactionOutput = new Transaction(
                     creditEntity.Description,
                     creditEntity
-                    .Amount
-                    .ToMoney()
-                    .ToDecimal(),
+                    .Amount,
                     creditEntity.TransactionDate);
 
                 transactionResults.Add(transactionOutput);
@@ -38,9 +36,7 @@ namespace Application.Boundaries.Register
                 Transaction transactionOutput = new Transaction(
                     debitEntity.Description,
                     debitEntity
-                    .Amount
-                    .ToMoney()
-                    .ToDecimal(),
+                    .Amount,
                     debitEntity.TransactionDate);
 
                 transactionResults.Add(transactionOutput);
@@ -48,7 +44,7 @@ namespace Application.Boundaries.Register
 
             Account = new Account(
                 account.Id,
-                account.GetCurrentBalance().ToDecimal(),
+                account.GetCurrentBalance(),
                 transactionResults);
 
             List<Account> accountOutputs = new List<Account>();

@@ -36,7 +36,7 @@ namespace UnitTests.UseCasesTests.Deposit
                     new PositiveMoney(amount)));
 
             var output = presenter.Deposits.Last();
-            Assert.Equal(amount, output.Transaction.Amount.ToDecimal());
+            Assert.Equal(amount, output.Transaction.Amount.ToMoney().ToDecimal());
         }
 
         [Theory]

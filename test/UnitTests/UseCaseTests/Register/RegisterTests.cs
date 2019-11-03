@@ -6,7 +6,6 @@ namespace UnitTests.UseCasesTests.Register
     using Application.Boundaries.Register;
     using Application.UseCases;
     using Domain.ValueObjects;
-    using Infrastructure.InMemoryDataAccess;
     using UnitTests.TestFixtures;
     using Xunit;
     using Infrastructure.InMemoryDataAccess.Presenters;
@@ -49,9 +48,9 @@ namespace UnitTests.UseCasesTests.Register
 
             var actual = presenter.Registers.Last();
             Assert.NotNull(actual);
-            Assert.Equal(ssn.ToString(), actual.Customer.SSN);
-            Assert.Equal(name.ToString(), actual.Customer.Name);
-            Assert.Equal(amount, actual.Account.CurrentBalance);
+            Assert.Equal(ssn, actual.Customer.SSN);
+            Assert.Equal(name, actual.Customer.Name);
+            Assert.Equal(amount, actual.Account.CurrentBalance.ToDecimal());
         }
     }
 }

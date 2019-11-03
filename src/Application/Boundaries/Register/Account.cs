@@ -3,16 +3,17 @@ namespace Application.Boundaries.Register
     using System.Collections.Generic;
     using System;
     using Domain.Accounts;
+    using Domain.ValueObjects;
 
     public sealed class Account
     {
         public Guid AccountId { get; }
-        public decimal CurrentBalance { get; }
+        public Money CurrentBalance { get; }
         public List<Transaction> Transactions { get; }
 
         public Account(
             Guid accountId,
-            decimal currentBalance,
+            Money currentBalance,
             List<Transaction> transactions)
         {
             AccountId = accountId;
@@ -26,8 +27,7 @@ namespace Application.Boundaries.Register
 
             AccountId = account.Id;
             CurrentBalance = account
-                .GetCurrentBalance()
-                .ToDecimal();
+                .GetCurrentBalance();
 
             List<Transaction> transactionResults = new List<Transaction>();
             foreach (ICredit credit in accountEntity.Credits
@@ -38,9 +38,7 @@ namespace Application.Boundaries.Register
                 Transaction transactionOutput = new Transaction(
                     creditEntity.Description,
                     creditEntity
-                    .Amount
-                    .ToMoney()
-                    .ToDecimal(),
+                    .Amount,
                     creditEntity.TransactionDate);
 
                 transactionResults.Add(transactionOutput);
@@ -54,9 +52,7 @@ namespace Application.Boundaries.Register
                 Transaction transactionOutput = new Transaction(
                     debitEntity.Description,
                     debitEntity
-                    .Amount
-                    .ToMoney()
-                    .ToDecimal(),
+                    .Amount,
                     debitEntity.TransactionDate);
 
                 transactionResults.Add(transactionOutput);

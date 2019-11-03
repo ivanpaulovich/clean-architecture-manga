@@ -3,12 +3,13 @@ namespace Application.Boundaries.Register
     using System.Collections.Generic;
     using System;
     using Domain.Customers;
+    using Domain.ValueObjects;
 
     public sealed class Customer
     {
         public Guid CustomerId { get; }
-        public string SSN { get; }
-        public string Name { get; }
+        public SSN SSN { get; }
+        public Name Name { get; }
         public IReadOnlyList<Account> Accounts { get; }
 
         public Customer(
@@ -17,8 +18,8 @@ namespace Application.Boundaries.Register
         {
             var customerEntity = (Domain.Customers.Customer) customer;
             CustomerId = customerEntity.Id;
-            SSN = customerEntity.SSN.ToString();
-            Name = customerEntity.Name.ToString();
+            SSN = customerEntity.SSN;
+            Name = customerEntity.Name;
             Accounts = accounts;
         }
     }
