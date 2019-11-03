@@ -1,8 +1,8 @@
 namespace WebApi.UseCases.V1.Register
 {
     using System.Collections.Generic;
-    using Microsoft.AspNetCore.Mvc;
     using Application.Boundaries.Register;
+    using Microsoft.AspNetCore.Mvc;
     using WebApi.ViewModels;
 
     public sealed class RegisterPresenter : IOutputPort

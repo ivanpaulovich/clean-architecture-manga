@@ -3,8 +3,8 @@ namespace UnitTests.PresenterTests
     using System.Net;
     using Application.Boundaries.Register;
     using Domain.ValueObjects;
-    using WebApi.UseCases.V1.Register;
     using Microsoft.AspNetCore.Mvc;
+    using WebApi.UseCases.V1.Register;
     using Xunit;
 
     public sealed class RegisterPresenterTests

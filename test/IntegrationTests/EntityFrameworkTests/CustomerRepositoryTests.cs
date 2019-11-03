@@ -5,10 +5,10 @@ namespace IntegrationTests.EntityFrameworkTests
     using System;
     using Domain.Customers;
     using Domain.ValueObjects;
+    using Infrastructure.EntityFrameworkDataAccess.Repositories;
     using Infrastructure.EntityFrameworkDataAccess;
     using Microsoft.EntityFrameworkCore;
     using Xunit;
-    using Infrastructure.EntityFrameworkDataAccess.Repositories;
 
     public sealed class CustomerRepositoryTests
     {

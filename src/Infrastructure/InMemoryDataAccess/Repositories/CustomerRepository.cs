@@ -3,8 +3,8 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
     using System.Linq;
     using System.Threading.Tasks;
     using System;
-    using Domain.Customers;
     using Application.Repositories;
+    using Domain.Customers;
 
     public sealed class CustomerRepository : ICustomerRepository
     {

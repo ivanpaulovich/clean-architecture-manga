@@ -9,7 +9,6 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
         public Collection<string> NotFounds { get; }
         public Collection<string> OutOfBalances { get; }
 
-
         public WithdrawPresenter()
         {
             Withdrawals = new Collection<WithdrawOutput>();

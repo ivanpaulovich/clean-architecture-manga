@@ -33,8 +33,8 @@ namespace WebApi.UseCases.V2.GetAccountDetails
                 dataTable.Rows.Add(new object[]
                 {
                     item.Amount.ToMoney().ToDecimal(),
-                    item.Description,
-                    item.TransactionDate
+                        item.Description,
+                        item.TransactionDate
                 });
             }
 

@@ -5,8 +5,8 @@ namespace Application.UseCases
     using System;
     using Application.Boundaries.GetCustomerDetails;
     using Application.Repositories;
-    using Domain.Customers;
     using Domain.Accounts;
+    using Domain.Customers;
 
     public sealed class GetCustomerDetails : IUseCase
     {

@@ -5,8 +5,8 @@ namespace UnitTests.UseCasesTests.Deposit
     using Application.Boundaries.Deposit;
     using Application.UseCases;
     using Domain.ValueObjects;
-    using Infrastructure.InMemoryDataAccess;
     using Infrastructure.InMemoryDataAccess.Presenters;
+    using Infrastructure.InMemoryDataAccess;
     using UnitTests.TestFixtures;
     using Xunit;
 
