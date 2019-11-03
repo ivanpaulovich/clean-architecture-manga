@@ -3,10 +3,10 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
     using System.Linq;
     using System.Threading.Tasks;
     using System;
-    using Microsoft.Data.SqlClient;
-    using Microsoft.EntityFrameworkCore;
     using Application.Repositories;
     using Domain.Accounts;
+    using Microsoft.Data.SqlClient;
+    using Microsoft.EntityFrameworkCore;
 
     public sealed class AccountRepository : IAccountRepository
     {

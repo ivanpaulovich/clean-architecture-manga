@@ -57,25 +57,25 @@ namespace UnitTests.UseCasesTests.CloseAccount
             var withdrawPresenter = new WithdrawPresenter();
 
             var getAccountUseCase = new Application.UseCases.GetAccountDetails(
-                getAccountPresenter, 
+                getAccountPresenter,
                 _fixture.AccountRepository
             );
 
             var withdrawUseCase = new Application.UseCases.Withdraw(
                 _fixture.EntityFactory,
-                withdrawPresenter, 
+                withdrawPresenter,
                 _fixture.AccountRepository,
                 _fixture.UnitOfWork
             );
 
             var sut = new Application.UseCases.CloseAccount(
-                closeAccountPresenter, 
+                closeAccountPresenter,
                 _fixture.AccountRepository
             );
 
             await getAccountUseCase.Execute(new GetAccountDetailsInput(_fixture.Context.DefaultAccountId));
             var getAccountDetailtOutput = getAccountPresenter.GetAccountDetails.First();
-            
+
             await withdrawUseCase.Execute(new Application.Boundaries.Withdraw.WithdrawInput(
                 _fixture.Context.DefaultAccountId,
                 new PositiveMoney(getAccountDetailtOutput.CurrentBalance.ToDecimal())

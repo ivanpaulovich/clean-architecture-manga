@@ -2,10 +2,10 @@ namespace WebApi.DependencyInjection
 {
     using Application.Repositories;
     using Application.Services;
+    using Domain;
     using Infrastructure.InMemoryDataAccess.Repositories;
     using Infrastructure.InMemoryDataAccess;
     using Microsoft.Extensions.DependencyInjection;
-    using Domain;
 
     public static class InMemoryInfrastructureExtensions
     {

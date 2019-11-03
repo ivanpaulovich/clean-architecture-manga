@@ -6,9 +6,9 @@ namespace UnitTests.UseCasesTests.Register
     using Application.Boundaries.Register;
     using Application.UseCases;
     using Domain.ValueObjects;
+    using Infrastructure.InMemoryDataAccess.Presenters;
     using UnitTests.TestFixtures;
     using Xunit;
-    using Infrastructure.InMemoryDataAccess.Presenters;
 
     public sealed class RegisterTests : IClassFixture<StandardFixture>
     {

@@ -4,10 +4,10 @@ namespace AcceptanceTests.V2
     using System.Text;
     using System.Threading.Tasks;
     using System;
-    using WebApi;
     using Microsoft.AspNetCore.Mvc.Testing;
     using Newtonsoft.Json.Linq;
     using Newtonsoft.Json;
+    using WebApi;
     using Xunit;
 
     public sealed class SunnyDayTests : IClassFixture<WebApplicationFactory<Startup>>

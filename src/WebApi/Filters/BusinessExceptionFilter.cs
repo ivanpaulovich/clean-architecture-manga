@@ -1,8 +1,8 @@
 namespace WebApi.Filters
 {
+    using Domain;
     using Microsoft.AspNetCore.Mvc.Filters;
     using Microsoft.AspNetCore.Mvc;
-    using Domain;
 
     public sealed class BusinessExceptionFilter : IExceptionFilter
     {

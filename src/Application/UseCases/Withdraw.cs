@@ -5,8 +5,8 @@ namespace Application.UseCases
     using Application.Repositories;
     using Application.Services;
     using Domain.Accounts;
-    using Domain;
     using Domain.ValueObjects;
+    using Domain;
 
     public sealed class Withdraw : IUseCase
     {
