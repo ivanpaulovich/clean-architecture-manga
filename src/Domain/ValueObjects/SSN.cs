@@ -3,9 +3,9 @@ namespace Domain.ValueObjects
     using System.Text.RegularExpressions;
     using System;
 
-    public struct SSN : IEquatable<SSN>
+    public readonly struct SSN : IEquatable<SSN>
     {
-        private string _text;
+        private readonly string _text;
         const string RegExForValidation = @"^\d{6,8}[-|(\s)]{0,1}\d{4}$";
 
         public SSN(string text)
@@ -23,33 +23,15 @@ namespace Domain.ValueObjects
         }
 
         public override string ToString()
-        {
-            return _text;
-        }
+            => _text;
 
         public bool Equals(SSN other)
-        {
-            return _text == other._text;
-        }
+            => _text == other._text;
 
         public override bool Equals(object obj)
-        {
-            if (obj is string)
-            {
-                return obj.ToString() == _text;
-            }
-
-            return ((SSN) obj)._text == _text;
-        }
+            => obj is SSN other && Equals(other);
 
         public override int GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 17;
-                hash = hash * 23 + _text.GetHashCode();
-                return hash;
-            }
-        }
+            => _text != null ? _text.GetHashCode() : 0;
     }
 }
