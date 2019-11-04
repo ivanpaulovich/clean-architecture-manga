@@ -1,7 +1,7 @@
 namespace WebApi.DependencyInjection
 {
     using Microsoft.Extensions.DependencyInjection;
-    using WebApi.Filters;
+    using Filters;
 
     public static class BusinessExceptionExtensions
     {

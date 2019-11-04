@@ -39,7 +39,7 @@ namespace WebApi.DependencyInjection
                         .Call<Application.Boundaries.Withdraw.IUseCase>((handler, request) => handler.Execute(request));
 
                     builder.On<GetAccountDetailsInput>().PipelineAsync("GetAccountDetailsV2")
-                        .Call<Application.Boundaries.GetAccountDetails.IUseCaseV2>((handler, request) => handler.Execute(request));
+                        .Call<IUseCaseV2>((handler, request) => handler.Execute(request));
                 });
 
             return services;

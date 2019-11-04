@@ -1,6 +1,6 @@
 namespace Domain.Customers
 {
-    using Domain.Accounts;
+    using Accounts;
 
     public interface ICustomer : IAggregateRoot
     {

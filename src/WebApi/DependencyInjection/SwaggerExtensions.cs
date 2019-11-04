@@ -8,7 +8,7 @@ namespace WebApi.DependencyInjection
     using Microsoft.Extensions.Options;
     using Microsoft.Extensions.PlatformAbstractions;
     using Swashbuckle.AspNetCore.SwaggerGen;
-    using WebApi.Filters;
+    using Filters;
 
     public static class SwaggerExtensions
     {

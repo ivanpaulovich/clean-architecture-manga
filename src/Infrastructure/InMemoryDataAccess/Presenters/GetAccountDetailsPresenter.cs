@@ -14,7 +14,7 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
             NotFounds = new Collection<string>();
         }
 
-        public void Standard(Application.Boundaries.GetAccountDetails.GetAccountDetailsOutput output)
+        public void Standard(GetAccountDetailsOutput output)
         {
             GetAccountDetails.Add(output);
         }

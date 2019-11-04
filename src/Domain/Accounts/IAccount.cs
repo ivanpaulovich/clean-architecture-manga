@@ -1,6 +1,6 @@
 namespace Domain.Accounts
 {
-    using Domain.ValueObjects;
+    using ValueObjects;
 
     public interface IAccount : IAggregateRoot
     {

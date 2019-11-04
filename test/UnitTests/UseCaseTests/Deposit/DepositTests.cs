@@ -7,7 +7,7 @@ namespace UnitTests.UseCasesTests.Deposit
     using Domain.ValueObjects;
     using Infrastructure.InMemoryDataAccess.Presenters;
     using Infrastructure.InMemoryDataAccess;
-    using UnitTests.TestFixtures;
+    using TestFixtures;
     using Xunit;
 
     public sealed class DepositTests : IClassFixture<StandardFixture>

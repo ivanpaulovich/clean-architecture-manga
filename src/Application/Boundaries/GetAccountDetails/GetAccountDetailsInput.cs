@@ -1,7 +1,7 @@
 namespace Application.Boundaries.GetAccountDetails
 {
     using System;
-    using Application.Exceptions;
+    using Exceptions;
 
     public sealed class GetAccountDetailsInput
     {

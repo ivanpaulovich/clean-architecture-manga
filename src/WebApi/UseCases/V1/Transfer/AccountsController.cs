@@ -8,7 +8,7 @@ namespace WebApi.UseCases.V1.Transfer
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;
-    using WebApi.DependencyInjection.FeatureFlags;
+    using DependencyInjection.FeatureFlags;
 
     [FeatureGate(Features.Transfer)]
     [ApiVersion("1.0")]

@@ -3,7 +3,7 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System;
-    using WebApi.ViewModels;
+    using ViewModels;
 
     /// <summary>
     /// The Customer Details
