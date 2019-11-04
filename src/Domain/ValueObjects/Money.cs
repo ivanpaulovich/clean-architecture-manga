@@ -2,9 +2,9 @@ namespace Domain.ValueObjects
 {
     using System;
 
-    public struct Money : IEquatable<Money>
+    public readonly struct Money : IEquatable<Money>
     {
-        private decimal _money;
+        private readonly decimal _money;
 
         public Money(decimal value)
         {
@@ -12,29 +12,16 @@ namespace Domain.ValueObjects
         }
 
         public decimal ToDecimal()
-        {
-            return _money;
-        }
+            => _money;
+
+        public bool Equals(Money other)
+            => _money == other._money;
 
         public override bool Equals(object obj)
-        {
-            if (obj is decimal)
-            {
-                return (decimal) obj == _money;
-            }
-
-            return ((Money) obj)._money == _money;
-        }
+            => obj is Money other && Equals(other);
 
         public override int GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 17;
-                hash = hash * 23 + _money.GetHashCode();
-                return hash;
-            }
-        }
+            => _money.GetHashCode();
 
         internal bool LessThan(PositiveMoney amount)
         {
@@ -44,11 +31,6 @@ namespace Domain.ValueObjects
         internal bool IsZero()
         {
             return _money == 0;
-        }
-
-        public bool Equals(Money other)
-        {
-            return _money == other._money;
         }
 
         internal PositiveMoney Add(Money value)
