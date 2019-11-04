@@ -3,7 +3,7 @@ namespace Application.Boundaries.Withdraw
     using Domain.Accounts;
     using Domain.ValueObjects;
 
-    public sealed class WithdrawOutput
+    public sealed class WithdrawOutput : IUseCaseOutput
     {
         public Transaction Transaction { get; }
         public Money UpdatedBalance { get; }

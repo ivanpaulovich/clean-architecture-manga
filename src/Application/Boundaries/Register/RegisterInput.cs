@@ -2,7 +2,7 @@ namespace Application.Boundaries.Register
 {
     using Domain.ValueObjects;
 
-    public sealed class RegisterInput
+    public sealed class RegisterInput : IUseCaseInput
     {
         public SSN SSN { get; }
         public Name Name { get; }

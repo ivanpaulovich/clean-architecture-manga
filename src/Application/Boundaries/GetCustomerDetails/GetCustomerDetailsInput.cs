@@ -3,7 +3,7 @@ namespace Application.Boundaries.GetCustomerDetails
     using System;
     using Exceptions;
 
-    public sealed class GetCustomerDetailsInput
+    public sealed class GetCustomerDetailsInput : IUseCaseInput
     {
         public Guid CustomerId { get; }
 

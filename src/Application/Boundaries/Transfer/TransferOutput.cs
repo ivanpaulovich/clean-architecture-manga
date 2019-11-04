@@ -4,7 +4,7 @@ namespace Application.Boundaries.Transfer
     using Domain.Accounts;
     using Domain.ValueObjects;
 
-    public sealed class TransferOutput
+    public sealed class TransferOutput : IUseCaseOutput
     {
         public Transaction Transaction { get; }
         public Money UpdatedBalance { get; }

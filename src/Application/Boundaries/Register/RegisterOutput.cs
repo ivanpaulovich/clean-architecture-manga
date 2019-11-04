@@ -4,7 +4,7 @@ namespace Application.Boundaries.Register
     using Domain.Accounts;
     using Domain.Customers;
 
-    public sealed class RegisterOutput
+    public sealed class RegisterOutput : IUseCaseOutput
     {
         public Customer Customer { get; }
         public Account Account { get; }

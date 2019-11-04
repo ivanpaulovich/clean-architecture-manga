@@ -4,7 +4,7 @@ namespace Application.Boundaries.Withdraw
     using Exceptions;
     using Domain.ValueObjects;
 
-    public sealed class WithdrawInput
+    public sealed class WithdrawInput : IUseCaseInput
     {
         public Guid AccountId { get; }
         public PositiveMoney Amount { get; }

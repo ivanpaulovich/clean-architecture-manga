@@ -5,7 +5,7 @@ namespace Application.Boundaries.GetAccountDetails
     using Domain.Accounts;
     using Domain.ValueObjects;
 
-    public sealed class GetAccountDetailsOutput
+    public sealed class GetAccountDetailsOutput : IUseCaseOutput
     {
         public Guid AccountId { get; }
         public Money CurrentBalance { get; }

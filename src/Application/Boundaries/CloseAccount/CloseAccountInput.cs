@@ -3,7 +3,7 @@ namespace Application.Boundaries.CloseAccount
     using System;
     using Exceptions;
 
-    public sealed class CloseAccountInput
+    public sealed class CloseAccountInput : IUseCaseInput
     {
         public Guid AccountId { get; }
 

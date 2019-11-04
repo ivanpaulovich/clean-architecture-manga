@@ -1,9 +1,8 @@
 namespace Application.Boundaries.Withdraw
 {
     public interface IOutputPort
+        : IOutputPortStandard<WithdrawOutput>, IOutputPortNotFound
     {
-        void Standard(WithdrawOutput withdrawOutput);
-        void NotFound(string message);
         void OutOfBalance(string message);
     }
 }
