@@ -5,7 +5,7 @@ namespace Domain.ValueObjects
 
     public struct SSN : IEquatable<SSN>
     {
-        private string _text;
+        private readonly string _text;
         const string RegExForValidation = @"^\d{6,8}[-|(\s)]{0,1}\d{4}$";
 
         public SSN(string text)

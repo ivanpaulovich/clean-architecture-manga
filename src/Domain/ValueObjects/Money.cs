@@ -4,7 +4,7 @@ namespace Domain.ValueObjects
 
     public struct Money : IEquatable<Money>
     {
-        private decimal _money;
+        private readonly decimal _money;
 
         public Money(decimal value)
         {
