@@ -15,33 +15,15 @@ namespace Domain.ValueObjects
         }
 
         public override string ToString()
-        {
-            return _text;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj is string)
-            {
-                return obj.ToString() == _text;
-            }
-
-            return ((Name) obj)._text == _text;
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 17;
-                hash = hash * 23 + _text.GetHashCode();
-                return hash;
-            }
-        }
+            => _text;
 
         public bool Equals(Name other)
-        {
-            return this._text == other._text;
-        }
+            => _text == other._text;
+
+        public override bool Equals(object obj)
+            => obj is Name other && Equals(other);
+
+        public override int GetHashCode()
+            => _text != null ? _text.GetHashCode() : 0;
     }
 }
