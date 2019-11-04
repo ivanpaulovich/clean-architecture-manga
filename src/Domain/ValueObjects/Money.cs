@@ -46,7 +46,7 @@ namespace Domain.ValueObjects
             return _money == 0;
         }
 
-        public bool Equals(Money other)
+        internal readonly PositiveMoney Add(Money value)
         {
             return _money == other._money;
         }
@@ -56,7 +56,7 @@ namespace Domain.ValueObjects
             return new PositiveMoney(_money + value.ToDecimal());
         }
 
-        internal Money Subtract(Money value)
+        internal readonly Money Subtract(Money value)
         {
             return new Money(_money - value.ToDecimal());
         }
