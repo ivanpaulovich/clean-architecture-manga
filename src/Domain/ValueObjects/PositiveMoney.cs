@@ -2,7 +2,7 @@ namespace Domain.ValueObjects
 {
     using System;
 
-    public struct PositiveMoney : IEquatable<PositiveMoney>
+    public readonly struct PositiveMoney : IEquatable<PositiveMoney>
     {
         private readonly Money _value;
 

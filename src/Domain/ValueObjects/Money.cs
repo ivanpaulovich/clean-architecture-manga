@@ -2,7 +2,7 @@ namespace Domain.ValueObjects
 {
     using System;
 
-    public struct Money : IEquatable<Money>
+    public readonly struct Money : IEquatable<Money>
     {
         private readonly decimal _money;
 
@@ -33,12 +33,12 @@ namespace Domain.ValueObjects
             return _money == 0;
         }
 
-        internal readonly PositiveMoney Add(Money value)
+        internal PositiveMoney Add(Money value)
         {
             return new PositiveMoney(_money + value.ToDecimal());
         }
 
-        internal readonly Money Subtract(Money value)
+        internal Money Subtract(Money value)
         {
             return new Money(_money - value.ToDecimal());
         }

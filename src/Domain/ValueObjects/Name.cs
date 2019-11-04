@@ -2,7 +2,7 @@ namespace Domain.ValueObjects
 {
     using System;
 
-    public struct Name : IEquatable<Name>
+    public readonly struct Name : IEquatable<Name>
     {
         private readonly string _text;
 

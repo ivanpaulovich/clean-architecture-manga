@@ -3,7 +3,7 @@ namespace Domain.ValueObjects
     using System.Text.RegularExpressions;
     using System;
 
-    public struct SSN : IEquatable<SSN>
+    public readonly struct SSN : IEquatable<SSN>
     {
         private readonly string _text;
         const string RegExForValidation = @"^\d{6,8}[-|(\s)]{0,1}\d{4}$";
