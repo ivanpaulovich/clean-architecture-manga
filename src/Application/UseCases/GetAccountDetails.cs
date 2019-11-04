@@ -2,7 +2,7 @@ namespace Application.UseCases
 {
     using System.Threading.Tasks;
     using Application.Boundaries.GetAccountDetails;
-    using Application.Repositories;
+    using Repositories;
     using Domain.Accounts;
 
     public sealed class GetAccountDetails : IUseCase, IUseCaseV2

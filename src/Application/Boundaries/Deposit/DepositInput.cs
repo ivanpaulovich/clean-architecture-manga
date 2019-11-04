@@ -1,7 +1,7 @@
 namespace Application.Boundaries.Deposit
 {
     using System;
-    using Application.Exceptions;
+    using Exceptions;
     using Domain.ValueObjects;
 
     public sealed class DepositInput
@@ -16,8 +16,8 @@ namespace Application.Boundaries.Deposit
                 throw new InputValidationException($"{nameof(accountId)} cannot be empty.");
             }
 
-            this.AccountId = accountId;
-            this.Amount = amount;
+            AccountId = accountId;
+            Amount = amount;
         }
     }
 }

@@ -2,7 +2,7 @@ namespace WebApi.DependencyInjection
 {
     using Application.Repositories;
     using Microsoft.Extensions.DependencyInjection;
-    using WebApi.UseCases.V2.GetAccountDetails;
+    using UseCases.V2.GetAccountDetails;
 
     public static class UserInterfaceV2Extensions
     {

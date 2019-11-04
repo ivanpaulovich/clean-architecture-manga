@@ -2,8 +2,8 @@ namespace Application.UseCases
 {
     using System.Threading.Tasks;
     using Application.Boundaries.Register;
-    using Application.Repositories;
-    using Application.Services;
+    using Repositories;
+    using Services;
     using Domain.Accounts;
     using Domain.Customers;
     using Domain;

@@ -1,9 +1,9 @@
 namespace Domain
 {
     using System;
-    using Domain.Accounts;
-    using Domain.Customers;
-    using Domain.ValueObjects;
+    using Accounts;
+    using Customers;
+    using ValueObjects;
 
     public interface IEntityFactory
     {

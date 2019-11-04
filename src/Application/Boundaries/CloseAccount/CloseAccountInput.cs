@@ -1,7 +1,7 @@
 namespace Application.Boundaries.CloseAccount
 {
     using System;
-    using Application.Exceptions;
+    using Exceptions;
 
     public sealed class CloseAccountInput
     {

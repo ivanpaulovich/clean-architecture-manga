@@ -3,7 +3,7 @@ namespace WebApi.UseCases.V1.Register
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System;
-    using WebApi.ViewModels;
+    using ViewModels;
 
     /// <summary>
     /// The response for Registration

@@ -2,7 +2,7 @@ namespace Application.UseCases
 {
     using System.Threading.Tasks;
     using Application.Boundaries.CloseAccount;
-    using Application.Repositories;
+    using Repositories;
     using Domain.Accounts;
 
     public sealed class CloseAccount : IUseCase

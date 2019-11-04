@@ -23,7 +23,7 @@ namespace Application.Boundaries.GetAccountDetails
 
         public GetAccountDetailsOutput(IAccount account)
         {
-            var accountEntity = (Domain.Accounts.Account) account;
+            var accountEntity = (Account) account;
 
             AccountId = accountEntity.Id;
             CurrentBalance = accountEntity

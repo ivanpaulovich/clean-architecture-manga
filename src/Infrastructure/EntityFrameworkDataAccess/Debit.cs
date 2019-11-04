@@ -12,9 +12,9 @@ namespace Infrastructure.EntityFrameworkDataAccess
 
         public Debit(IAccount account, PositiveMoney amountToWithdraw, DateTime transactionDate)
         {
-            this.AccountId = account.Id;
-            this.Amount = amountToWithdraw;
-            this.TransactionDate = transactionDate;
+            AccountId = account.Id;
+            Amount = amountToWithdraw;
+            TransactionDate = transactionDate;
         }
     }
 }

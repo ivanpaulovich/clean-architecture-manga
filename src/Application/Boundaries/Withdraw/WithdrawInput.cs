@@ -1,7 +1,7 @@
 namespace Application.Boundaries.Withdraw
 {
     using System;
-    using Application.Exceptions;
+    using Exceptions;
     using Domain.ValueObjects;
 
     public sealed class WithdrawInput

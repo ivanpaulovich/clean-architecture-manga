@@ -10,7 +10,7 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
 
         public TransferPresenter()
         {
-            Transfers = new Collection<Application.Boundaries.Transfer.TransferOutput>();
+            Transfers = new Collection<TransferOutput>();
             NotFounds = new Collection<string>();
         }
 

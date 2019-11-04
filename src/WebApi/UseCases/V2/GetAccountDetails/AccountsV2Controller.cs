@@ -7,7 +7,7 @@ namespace WebApi.UseCases.V2.GetAccountDetails
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;
-    using WebApi.DependencyInjection.FeatureFlags;
+    using DependencyInjection.FeatureFlags;
 
     [FeatureGate(Features.GetAccountDetailsV2)]
     [ApiVersion("2.0")]

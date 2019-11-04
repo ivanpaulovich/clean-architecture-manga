@@ -4,7 +4,7 @@ namespace Application.UseCases
     using System.Threading.Tasks;
     using System;
     using Application.Boundaries.GetCustomerDetails;
-    using Application.Repositories;
+    using Repositories;
     using Domain.Accounts;
     using Domain.Customers;
 
