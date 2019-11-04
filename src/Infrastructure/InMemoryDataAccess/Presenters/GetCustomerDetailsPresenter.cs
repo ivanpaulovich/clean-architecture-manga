@@ -10,11 +10,11 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
 
         public GetCustomerDetailsPresenter()
         {
-            GetCustomerDetails = new Collection<Application.Boundaries.GetCustomerDetails.GetCustomerDetailsOutput>();
+            GetCustomerDetails = new Collection<GetCustomerDetailsOutput>();
             NotFounds = new Collection<string>();
         }
 
-        public void Standard(Application.Boundaries.GetCustomerDetails.GetCustomerDetailsOutput output)
+        public void Standard(GetCustomerDetailsOutput output)
         {
             GetCustomerDetails.Add(output);
         }

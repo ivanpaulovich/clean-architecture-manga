@@ -2,7 +2,7 @@ namespace Domain.Accounts
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using Domain.ValueObjects;
+    using ValueObjects;
 
     public sealed class DebitsCollection
     {

@@ -51,7 +51,7 @@ namespace Domain.ValueObjects
 
         public bool Equals(PositiveMoney other)
         {
-            return this._value.ToDecimal() == other._value.ToDecimal();
+            return _value.ToDecimal() == other._value.ToDecimal();
         }
     }
 }

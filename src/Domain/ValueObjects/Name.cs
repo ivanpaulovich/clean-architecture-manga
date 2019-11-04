@@ -41,7 +41,7 @@ namespace Domain.ValueObjects
 
         public bool Equals(Name other)
         {
-            return this._text == other._text;
+            return _text == other._text;
         }
     }
 }

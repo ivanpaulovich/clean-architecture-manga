@@ -6,7 +6,7 @@ namespace UnitTests.UseCasesTests.CloseAccount
     using Application.Boundaries.GetAccountDetails;
     using Domain.ValueObjects;
     using Infrastructure.InMemoryDataAccess.Presenters;
-    using UnitTests.TestFixtures;
+    using TestFixtures;
     using Xunit;
 
     public sealed class CloseAccountTests : IClassFixture<StandardFixture>

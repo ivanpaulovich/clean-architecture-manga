@@ -6,7 +6,7 @@ namespace UnitTests.UseCaseTests.Transfer
     using Application.UseCases;
     using Domain.ValueObjects;
     using Infrastructure.InMemoryDataAccess.Presenters;
-    using UnitTests.TestFixtures;
+    using TestFixtures;
     using Xunit;
 
     public sealed class TransferUseCaseTests : IClassFixture<StandardFixture>

@@ -29,7 +29,7 @@ namespace Domain.ValueObjects
 
         public bool Equals(SSN other)
         {
-            return this._text == other._text;
+            return _text == other._text;
         }
 
         public override bool Equals(object obj)

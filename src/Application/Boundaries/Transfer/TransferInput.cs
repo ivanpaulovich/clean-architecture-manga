@@ -1,7 +1,7 @@
 namespace Application.Boundaries.Transfer
 {
     using System;
-    using Application.Exceptions;
+    using Exceptions;
     using Domain.ValueObjects;
 
     public sealed class TransferInput

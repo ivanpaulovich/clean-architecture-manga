@@ -5,7 +5,7 @@ namespace WebApi.UseCases.V2.GetAccountDetails
     using Application.Boundaries.GetAccountDetails;
     using Microsoft.AspNetCore.Mvc;
     using OfficeOpenXml;
-    using WebApi.ViewModels;
+    using ViewModels;
 
     public sealed class GetAccountDetailsPresenterV2 : IOutputPort
     {
