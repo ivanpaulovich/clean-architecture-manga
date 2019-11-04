@@ -4,7 +4,7 @@ namespace Application.Boundaries.Deposit
     using Exceptions;
     using Domain.ValueObjects;
 
-    public sealed class DepositInput
+    public sealed class DepositInput : IUseCaseInput
     {
         public Guid AccountId { get; }
         public PositiveMoney Amount { get; }

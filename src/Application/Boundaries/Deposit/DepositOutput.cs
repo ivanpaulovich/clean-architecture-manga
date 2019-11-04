@@ -3,7 +3,7 @@ namespace Application.Boundaries.Deposit
     using Domain.Accounts;
     using Domain.ValueObjects;
 
-    public sealed class DepositOutput
+    public sealed class DepositOutput : IUseCaseOutput
     {
         public Transaction Transaction { get; }
         public Money UpdatedBalance { get; }

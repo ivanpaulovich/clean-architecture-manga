@@ -4,7 +4,7 @@ namespace Application.Boundaries.Transfer
     using Exceptions;
     using Domain.ValueObjects;
 
-    public sealed class TransferInput
+    public sealed class TransferInput : IUseCaseInput
     {
         public Guid OriginAccountId { get; }
         public Guid DestinationAccountId { get; }

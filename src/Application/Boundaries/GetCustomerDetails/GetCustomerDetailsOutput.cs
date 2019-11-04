@@ -5,7 +5,7 @@ namespace Application.Boundaries.GetCustomerDetails
     using Domain.Customers;
     using Domain.ValueObjects;
 
-    public sealed class GetCustomerDetailsOutput
+    public sealed class GetCustomerDetailsOutput : IUseCaseOutput
     {
         public Guid CustomerId { get; }
         public SSN SSN { get; }
