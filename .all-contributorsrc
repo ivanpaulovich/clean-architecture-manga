@@ -144,6 +144,16 @@
         "test",
         "code"
       ]
+    },
+    {
+      "login": "phmatray",
+      "name": "Philippe Matray",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/9035444?v=4",
+      "profile": "https://matray.website",
+      "contributions": [
+        "design",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5,
