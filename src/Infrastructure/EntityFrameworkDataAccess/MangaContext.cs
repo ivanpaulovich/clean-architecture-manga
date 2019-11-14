@@ -42,6 +42,22 @@ namespace Infrastructure.EntityFrameworkDataAccess
                 .IsRequired();
 
             modelBuilder.Entity<Customer>()
+                .ToTable("Customer")
+                .Property(b => b.Username)
+                .HasConversion(
+                    v => v.ToString(),
+                    v => new Username(v))
+                .IsRequired();
+
+            modelBuilder.Entity<Customer>()
+                .ToTable("Customer")
+                .Property(b => b.Password)
+                .HasConversion(
+                    v => v.ToString(),
+                    v => new Password(v))
+                .IsRequired();
+
+            modelBuilder.Entity<Customer>()
                 .Ignore(p => p.Accounts);
 
             modelBuilder.Entity<Debit>()
