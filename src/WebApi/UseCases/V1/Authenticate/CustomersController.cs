@@ -38,7 +38,7 @@ namespace WebApi.UseCases.V1.Authenticate
         /// <response code="400">Bad request.</response>
         /// <response code="500">Error.</response>
         [AllowAnonymous]
-        [HttpPost("authenticate")]
+        [HttpPost("Authenticate")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AuthenticateResponse))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
