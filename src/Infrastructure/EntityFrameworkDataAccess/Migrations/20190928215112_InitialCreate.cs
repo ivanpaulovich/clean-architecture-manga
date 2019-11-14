@@ -12,7 +12,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Migrations
                 columns : table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                        CustomerId = table.Column<Guid>(nullable: false)
+                    CustomerId = table.Column<Guid>(nullable: false)
                 },
                 constraints : table =>
                 {
@@ -24,9 +24,9 @@ namespace Infrastructure.EntityFrameworkDataAccess.Migrations
                 columns : table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                        Amount = table.Column<decimal>(nullable: false),
-                        TransactionDate = table.Column<DateTime>(nullable: false),
-                        AccountId = table.Column<Guid>(nullable: false)
+                    Amount = table.Column<decimal>(nullable: false),
+                    TransactionDate = table.Column<DateTime>(nullable: false),
+                    AccountId = table.Column<Guid>(nullable: false)
                 },
                 constraints : table =>
                 {
@@ -38,8 +38,10 @@ namespace Infrastructure.EntityFrameworkDataAccess.Migrations
                 columns : table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                        Name = table.Column<string>(nullable: false),
-                        SSN = table.Column<string>(nullable: false)
+                    Name = table.Column<string>(nullable: false),
+                    SSN = table.Column<string>(nullable: false),
+                    Username = table.Column<string>(nullable: false),
+                    Password = table.Column<string>(nullable: false)
                 },
                 constraints : table =>
                 {
@@ -51,9 +53,9 @@ namespace Infrastructure.EntityFrameworkDataAccess.Migrations
                 columns : table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                        Amount = table.Column<decimal>(nullable: false),
-                        TransactionDate = table.Column<DateTime>(nullable: false),
-                        AccountId = table.Column<Guid>(nullable: false)
+                    Amount = table.Column<decimal>(nullable: false),
+                    TransactionDate = table.Column<DateTime>(nullable: false),
+                    AccountId = table.Column<Guid>(nullable: false)
                 },
                 constraints : table =>
                 {
@@ -72,8 +74,8 @@ namespace Infrastructure.EntityFrameworkDataAccess.Migrations
 
             migrationBuilder.InsertData(
                 table: "Customer",
-                columns : new [] { "Id", "Name", "SSN" },
-                values : new object[] { new Guid("197d0438-e04b-453d-b5de-eca05960c6ae"), "Test User", "19860817-9999" });
+                columns : new [] { "Id", "Name", "SSN", "Username", "Password" },
+                values : new object[] { new Guid("197d0438-e04b-453d-b5de-eca05960c6ae"), "Test User", "19860817-9999", "test", "password" });
 
             migrationBuilder.InsertData(
                 table: "Debit",
