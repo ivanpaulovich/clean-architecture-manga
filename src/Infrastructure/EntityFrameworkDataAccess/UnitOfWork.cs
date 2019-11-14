@@ -6,37 +6,20 @@ namespace Infrastructure.EntityFrameworkDataAccess
 
     public sealed class UnitOfWork : IUnitOfWork, IDisposable
     {
-        private MangaContext context;
+        private readonly MangaContext _context;
 
         public UnitOfWork(MangaContext context)
         {
-            this.context = context;
+            _context = context;
         }
 
         public async Task<int> Save()
         {
-            int affectedRows = await context.SaveChangesAsync();
+            int affectedRows = await _context.SaveChangesAsync();
             return affectedRows;
         }
 
-        private bool disposed = false;
-
-        private void Dispose(bool disposing)
-        {
-            if (!disposed)
-            {
-                if (disposing)
-                {
-                    context.Dispose();
-                }
-            }
-            disposed = true;
-        }
-
         public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+            => _context?.Dispose();
     }
 }
