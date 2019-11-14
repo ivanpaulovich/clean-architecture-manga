@@ -1367,6 +1367,7 @@ To spin up a SQL Server in a docker container using the connection string `Serve
 
 | Video                                 | Date         |
 |---------------------------------------|--------------|
+| [Clean Architecture Essentials - Stockholm Software Crafstmanship Meetup](https://dev.to/ivanpaulovich/clean-architecture-essentials-5a0m)| November 11, 2019  |
 | [Hexagonal and Clean Architecture styles. Same or Different?](https://www.youtube.com/watch?v=FNQbyZu-NAo)| Sep 16, 2019  |
 | [Clean Architecture Essentials](https://www.youtube.com/watch?v=NjPjCxTIf4M)| Sep 13, 2019  |
 | [Shinning Frameworks and DDD?!](https://www.youtube.com/watch?v=OmxBqmmhoHg)| Sep 12, 2019  |
