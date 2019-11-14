@@ -2,7 +2,6 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using Domain.ValueObjects;
 
     /// <summary>
     /// The response for Authenticate

@@ -33,8 +33,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
 
             var id = new SqlParameter("@Id", account.Id);
 
-            int affectedRows = await _context.Database.ExecuteSqlRawAsync(
-                deleteSQL, id);
+            int affectedRows = await _context.Database.ExecuteSqlRawAsync(deleteSQL, id);
         }
 
         public async Task<IAccount> Get(Guid id)

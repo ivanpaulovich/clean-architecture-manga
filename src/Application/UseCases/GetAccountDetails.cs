@@ -5,7 +5,7 @@ namespace Application.UseCases
     using Repositories;
     using Domain.Accounts;
 
-    public sealed class GetAccountDetails : IUseCase, IUseCaseV2
+    public sealed class GetAccountDetails : IUseCaseV2
     {
         private readonly IOutputPort _outputPort;
         private readonly IAccountRepository _accountRepository;

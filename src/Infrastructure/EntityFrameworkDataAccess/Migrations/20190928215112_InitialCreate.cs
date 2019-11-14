@@ -11,8 +11,8 @@ namespace Infrastructure.EntityFrameworkDataAccess.Migrations
                 name: "Account",
                 columns : table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    CustomerId = table.Column<Guid>(nullable: false)
+                    Id = table.Column<Guid>(),
+                    CustomerId = table.Column<Guid>()
                 },
                 constraints : table =>
                 {
@@ -23,10 +23,10 @@ namespace Infrastructure.EntityFrameworkDataAccess.Migrations
                 name: "Credit",
                 columns : table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    Amount = table.Column<decimal>(nullable: false),
-                    TransactionDate = table.Column<DateTime>(nullable: false),
-                    AccountId = table.Column<Guid>(nullable: false)
+                    Id = table.Column<Guid>(),
+                    Amount = table.Column<decimal>(),
+                    TransactionDate = table.Column<DateTime>(),
+                    AccountId = table.Column<Guid>()
                 },
                 constraints : table =>
                 {
@@ -37,11 +37,11 @@ namespace Infrastructure.EntityFrameworkDataAccess.Migrations
                 name: "Customer",
                 columns : table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    SSN = table.Column<string>(nullable: false),
-                    Username = table.Column<string>(nullable: false),
-                    Password = table.Column<string>(nullable: false)
+                    Id = table.Column<Guid>(),
+                    Name = table.Column<string>(),
+                    SSN = table.Column<string>(),
+                    Username = table.Column<string>(),
+                    Password = table.Column<string>()
                 },
                 constraints : table =>
                 {
@@ -52,10 +52,10 @@ namespace Infrastructure.EntityFrameworkDataAccess.Migrations
                 name: "Debit",
                 columns : table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    Amount = table.Column<decimal>(nullable: false),
-                    TransactionDate = table.Column<DateTime>(nullable: false),
-                    AccountId = table.Column<Guid>(nullable: false)
+                    Id = table.Column<Guid>(),
+                    Amount = table.Column<decimal>(),
+                    TransactionDate = table.Column<DateTime>(),
+                    AccountId = table.Column<Guid>()
                 },
                 constraints : table =>
                 {

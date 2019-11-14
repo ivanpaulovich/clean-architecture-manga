@@ -1,9 +1,7 @@
 namespace WebApi.UseCases.V1.RegisterCustomer
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using ViewModels;
 
     /// <summary>
     /// The response for Registration

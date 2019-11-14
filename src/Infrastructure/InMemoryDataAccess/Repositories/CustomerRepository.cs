@@ -30,7 +30,7 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
             if (customer is null)
                 throw new CustomerNotFoundException($"The customer {id} does not exist or is not processed yet.");
 
-            return await Task.FromResult<Customer>(customer);
+            return await Task.FromResult(customer);
         }
 
         public async Task<ICustomer> Get(SSN ssn)
@@ -41,7 +41,7 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
             if (customer is null)
                 throw new CustomerNotFoundException($"The customer {ssn} does not exist or is not processed yet.");
 
-            return await Task.FromResult<Customer>(customer);
+            return await Task.FromResult(customer);
         }
 
         public async Task<ICustomer> Get(Username username, Password password)
@@ -52,7 +52,7 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
             if (customer is null)
                 throw new CustomerNotFoundException($"The customer {username} does not exist or is not processed yet.");
 
-            return await Task.FromResult<Customer>(customer);
+            return await Task.FromResult(customer);
         }
 
         public async Task Update(ICustomer customer)

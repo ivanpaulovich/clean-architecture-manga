@@ -1,9 +1,7 @@
 namespace WebApi.UseCases.V1.RegisterCustomer
 {
-    using System.Collections.Generic;
     using Application.Boundaries.RegisterCustomer;
     using Microsoft.AspNetCore.Mvc;
-    using ViewModels;
 
     public sealed class RegisterCustomerPresenter : IOutputPort
     {

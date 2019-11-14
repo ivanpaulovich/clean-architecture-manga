@@ -4,7 +4,6 @@ namespace Application.UseCases
     using Boundaries.RegisterCustomer;
     using Repositories;
     using Services;
-    using Domain.Accounts;
     using Domain.Customers;
     using Domain;
 
@@ -13,20 +12,17 @@ namespace Application.UseCases
         private readonly IEntityFactory _entityFactory;
         private readonly IOutputPort _outputPort;
         private readonly ICustomerRepository _customerRepository;
-        private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public RegisterCustomer(
             IEntityFactory entityFactory,
             IOutputPort outputPort,
             ICustomerRepository customerRepository,
-            IAccountRepository accountRepository,
             IUnitOfWork unityOfWork)
         {
             _entityFactory = entityFactory;
             _outputPort = outputPort;
             _customerRepository = customerRepository;
-            _accountRepository = accountRepository;
             _unitOfWork = unityOfWork;
         }
 

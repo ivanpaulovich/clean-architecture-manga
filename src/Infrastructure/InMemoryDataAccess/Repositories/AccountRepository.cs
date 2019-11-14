@@ -25,8 +25,7 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
         public async Task Delete(IAccount account)
         {
             var accountOld = _context.Accounts
-                .Where(e => e.Id == account.Id)
-                .SingleOrDefault();
+                .SingleOrDefault(e => e.Id == account.Id);
 
             _context.Accounts.Remove(accountOld);
 
@@ -36,20 +35,18 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
         public async Task<IAccount> Get(Guid id)
         {
             Account account = _context.Accounts
-                .Where(e => e.Id == id)
-                .SingleOrDefault();
+                .SingleOrDefault(e => e.Id == id);
 
             if (account is null)
                 throw new AccountNotFoundException($"The account {id} does not exist or is not processed yet.");
 
-            return await Task.FromResult<Account>(account);
+            return await Task.FromResult(account);
         }
 
         public async Task Update(IAccount account, ICredit credit)
         {
             Account accountOld = _context.Accounts
-                .Where(e => e.Id == account.Id)
-                .SingleOrDefault();
+                .SingleOrDefault(e => e.Id == account.Id);
 
             accountOld = (Account) account;
             await Task.CompletedTask;
@@ -58,8 +55,7 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
         public async Task Update(IAccount account, IDebit debit)
         {
             Account accountOld = _context.Accounts
-                .Where(e => e.Id == account.Id)
-                .SingleOrDefault();
+                .SingleOrDefault(e => e.Id == account.Id);
 
             accountOld = (Account) account;
             await Task.CompletedTask;
