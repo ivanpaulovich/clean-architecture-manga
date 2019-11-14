@@ -42,6 +42,7 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
                 getCustomerDetailsOutput.CustomerId,
                 getCustomerDetailsOutput.SSN.ToString(),
                 getCustomerDetailsOutput.Name.ToString(),
+                getCustomerDetailsOutput.Username.ToString(),
                 accounts
             );
 

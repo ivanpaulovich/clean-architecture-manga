@@ -22,6 +22,7 @@ namespace WebApi
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
             services.AddControllers().AddControllersAsServices();
+            services.AddJWTAuthentication(Configuration);
             services.AddBusinessExceptionFilter();
             services.AddFeatureFlags(Configuration);
             services.AddVersioning();
@@ -36,6 +37,7 @@ namespace WebApi
         public void ConfigureProductionServices(IServiceCollection services)
         {
             services.AddControllers().AddControllersAsServices();
+            services.AddJWTAuthentication(Configuration);
             services.AddBusinessExceptionFilter();
             services.AddFeatureFlags(Configuration);
             services.AddVersioning();
@@ -63,6 +65,8 @@ namespace WebApi
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

@@ -23,7 +23,9 @@ namespace IntegrationTests.EntityFrameworkTests
 
             var customer = factory.NewCustomer(
                 new SSN("198608177955"),
-                new Name("Ivan Paulovich"));
+                new Name("Ivan Paulovich"),
+                new Username("ivanpaulovich"),
+                new Password("password"));
 
             using(var context = new MangaContext(options))
             {

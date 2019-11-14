@@ -17,7 +17,9 @@ namespace UnitTests.EntitiesTests
             PositiveMoney amount = new PositiveMoney(100.0M);
             ICustomer customer = entityFactory.NewCustomer(
                 new SSN("198608179922"),
-                new Name("Ivan Paulovich")
+                new Name("Ivan Paulovich"),
+                new Username("ivanpaulovich"),
+                new Password("password")
             );
 
             IAccount sut = entityFactory.NewAccount(customer);
@@ -42,7 +44,9 @@ namespace UnitTests.EntitiesTests
             // Arrange
             ICustomer customer = entityFactory.NewCustomer(
                 new SSN("198608179922"),
-                new Name("Ivan Paulovich")
+                new Name("Ivan Paulovich"),
+                new Username("ivanpaulovich"),
+                new Password("password")
             );
 
             IAccount sut = entityFactory.NewAccount(customer);
@@ -67,7 +71,9 @@ namespace UnitTests.EntitiesTests
             // Arrange
             ICustomer customer = entityFactory.NewCustomer(
                 new SSN("198608179922"),
-                new Name("Ivan Paulovich")
+                new Name("Ivan Paulovich"),
+                new Username("ivanpaulovich"),
+                new Password("password")
             );
 
             IAccount sut = entityFactory.NewAccount(customer);
@@ -90,7 +96,9 @@ namespace UnitTests.EntitiesTests
             // Arrange
             ICustomer customer = entityFactory.NewCustomer(
                 new SSN("198608179922"),
-                new Name("Ivan Paulovich")
+                new Name("Ivan Paulovich"),
+                new Username("ivanpaulovich"),
+                new Password("password")
             );
 
             IAccount sut = entityFactory.NewAccount(customer);
@@ -115,7 +123,9 @@ namespace UnitTests.EntitiesTests
             // Arrange
             ICustomer customer = entityFactory.NewCustomer(
                 new SSN("198608179922"),
-                new Name("Ivan Paulovich")
+                new Name("Ivan Paulovich"),
+                new Username("ivanpaulovich"),
+                new Password("password")
             );
 
             IAccount sut = entityFactory.NewAccount(customer);

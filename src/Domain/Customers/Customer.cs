@@ -9,6 +9,8 @@ namespace Domain.Customers
         public Guid Id { get; protected set; }
         public Name Name { get; protected set; }
         public SSN SSN { get; protected set; }
+        public Username Username { get; protected set; }
+        public Password Password { get; protected set; }
         public AccountCollection Accounts { get; protected set; }
 
         public Customer()

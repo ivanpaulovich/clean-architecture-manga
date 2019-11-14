@@ -1,11 +1,13 @@
 namespace WebApi.DependencyInjection
 {
     using Microsoft.Extensions.DependencyInjection;
+    using UseCases.V1.Authenticate;
     using UseCases.V1.CloseAccount;
     using UseCases.V1.Deposit;
     using UseCases.V1.GetAccountDetails;
     using UseCases.V1.GetCustomerDetails;
-    using UseCases.V1.Register;
+    using UseCases.V1.RegisterAccount;
+    using UseCases.V1.RegisterCustomer;
     using UseCases.V1.Transfer;
     using UseCases.V1.Withdraw;
 
@@ -13,6 +15,9 @@ namespace WebApi.DependencyInjection
     {
         public static IServiceCollection AddPresentersV1(this IServiceCollection services)
         {
+            services.AddScoped<AuthenticatePresenter, AuthenticatePresenter>();
+            services.AddScoped<Application.Boundaries.Authenticate.IOutputPort>(x => x.GetRequiredService<AuthenticatePresenter>());
+
             services.AddScoped<CloseAccountPresenter, CloseAccountPresenter>();
             services.AddScoped<Application.Boundaries.CloseAccount.IOutputPort>(x => x.GetRequiredService<CloseAccountPresenter>());
 
@@ -25,8 +30,11 @@ namespace WebApi.DependencyInjection
             services.AddScoped<GetCustomerDetailsPresenter, GetCustomerDetailsPresenter>();
             services.AddScoped<Application.Boundaries.GetCustomerDetails.IOutputPort>(x => x.GetRequiredService<GetCustomerDetailsPresenter>());
 
-            services.AddScoped<RegisterPresenter, RegisterPresenter>();
-            services.AddScoped<Application.Boundaries.Register.IOutputPort>(x => x.GetRequiredService<RegisterPresenter>());
+            services.AddScoped<RegisterAccountPresenter, RegisterAccountPresenter>();
+            services.AddScoped<Application.Boundaries.RegisterAccount.IOutputPort>(x => x.GetRequiredService<RegisterAccountPresenter>());
+
+            services.AddScoped<RegisterCustomerPresenter, RegisterCustomerPresenter>();
+            services.AddScoped<Application.Boundaries.RegisterCustomer.IOutputPort>(x => x.GetRequiredService<RegisterCustomerPresenter>());
 
             services.AddScoped<WithdrawPresenter, WithdrawPresenter>();
             services.AddScoped<Application.Boundaries.Withdraw.IOutputPort>(x => x.GetRequiredService<WithdrawPresenter>());

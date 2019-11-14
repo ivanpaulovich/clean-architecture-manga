@@ -5,6 +5,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
     using System;
     using Application.Repositories;
     using Domain.Customers;
+    using Domain.ValueObjects;
     using Microsoft.EntityFrameworkCore;
 
     public sealed class CustomerRepository : ICustomerRepository
@@ -33,7 +34,45 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
                 throw new CustomerNotFoundException($"The customer {id} does not exist or is not processed yet.");
 
             var accounts = _context.Accounts
-                .Where(e => e.CustomerId == id)
+                .Where(e => e.CustomerId == customer.Id)
+                .Select(e => e.Id)
+                .ToList();
+
+            customer.LoadAccounts(accounts);
+
+            return customer;
+        }
+
+        public async Task<ICustomer> Get(SSN ssn)
+        {
+            EntityFrameworkDataAccess.Customer customer = await _context.Customers
+                .Where(c => c.SSN.Equals(ssn))
+                .SingleOrDefaultAsync();
+
+            if (customer is null)
+                throw new CustomerNotFoundException($"The customer {ssn} does not exist or is not processed yet.");
+
+            var accounts = _context.Accounts
+                .Where(e => e.CustomerId == customer.Id)
+                .Select(e => e.Id)
+                .ToList();
+
+            customer.LoadAccounts(accounts);
+
+            return customer;
+        }
+
+        public async Task<ICustomer> Get(Username username, Password password)
+        {
+            EntityFrameworkDataAccess.Customer customer = await _context.Customers
+                .Where(c => c.Username.Equals(username) && c.Password.Equals(password))
+                .SingleOrDefaultAsync();
+
+            if (customer is null)
+                throw new CustomerNotFoundException($"The customer {username} does not exist or is not processed yet.");
+
+            var accounts = _context.Accounts
+                .Where(e => e.CustomerId == customer.Id)
                 .Select(e => e.Id)
                 .ToList();
 

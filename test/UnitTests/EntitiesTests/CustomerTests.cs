@@ -15,7 +15,9 @@ namespace UnitTests.EntitiesTests
             // Arrange
             ICustomer sut = entityFactory.NewCustomer(
                 new SSN("198608179922"),
-                new Name("Ivan Paulovich")
+                new Name("Ivan Paulovich"),
+                new Username("ivanpaulovich"),
+                new Password("password")
             );
 
             var account = entityFactory.NewAccount(sut);

@@ -25,7 +25,11 @@ namespace Infrastructure.InMemoryDataAccess
             Credits = new Collection<Credit>();
             Debits = new Collection<Debit>();
 
-            var customer = new Customer(new SSN("8608179999"), new Name("Ivan Paulovich"));
+            var customer = new Customer(
+                new SSN("8608179999"),
+                new Name("Ivan Paulovich"),
+                new Username("ivanpaulovich"),
+                new Password("password"));
             var account = new Account(customer);
             var credit = account.Deposit(entityFactory, new PositiveMoney(800));
             var debit = account.Withdraw(entityFactory, new PositiveMoney(100));
@@ -39,7 +43,11 @@ namespace Infrastructure.InMemoryDataAccess
             DefaultCustomerId = customer.Id;
             DefaultAccountId = account.Id;
 
-            var secondCustomer = new Customer(new SSN("8408319999"), new Name("Andre Paulovich"));
+            var secondCustomer = new Customer(
+                new SSN("8408319999"),
+                new Name("Andre Paulovich"),
+                new Username("andrepaulovich"),
+                new Password("password"));
             var secondAccount = new Account(secondCustomer);
 
             Customers.Add(secondCustomer);

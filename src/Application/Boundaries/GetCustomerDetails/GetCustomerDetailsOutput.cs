@@ -10,6 +10,7 @@ namespace Application.Boundaries.GetCustomerDetails
         public Guid CustomerId { get; }
         public SSN SSN { get; }
         public Name Name { get; }
+        public Username Username { get; }
         public IReadOnlyList<Account> Accounts { get; }
 
         public GetCustomerDetailsOutput(
@@ -20,6 +21,7 @@ namespace Application.Boundaries.GetCustomerDetails
             CustomerId = customerEntity.Id;
             SSN = customerEntity.SSN;
             Name = customerEntity.Name;
+            Username = customerEntity.Username;
             Accounts = accounts;
         }
     }

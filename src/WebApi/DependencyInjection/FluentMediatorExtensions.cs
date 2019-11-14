@@ -1,10 +1,12 @@
 namespace WebApi.DependencyInjection
 {
+    using Application.Boundaries.Authenticate;
     using Application.Boundaries.CloseAccount;
     using Application.Boundaries.Deposit;
     using Application.Boundaries.GetAccountDetails;
     using Application.Boundaries.GetCustomerDetails;
-    using Application.Boundaries.Register;
+    using Application.Boundaries.RegisterAccount;
+    using Application.Boundaries.RegisterCustomer;
     using Application.Boundaries.Transfer;
     using Application.Boundaries.Withdraw;
     using FluentMediator;
@@ -17,6 +19,9 @@ namespace WebApi.DependencyInjection
             services.AddFluentMediator(
                 builder =>
                 {
+                    builder.On<AuthenticateInput>().PipelineAsync()
+                        .Call<Application.Boundaries.Authenticate.IUseCase>((handler, request) => handler.Execute(request));
+
                     builder.On<CloseAccountInput>().PipelineAsync()
                         .Call<Application.Boundaries.CloseAccount.IUseCase>((handler, request) => handler.Execute(request));
 
@@ -29,8 +34,11 @@ namespace WebApi.DependencyInjection
                     builder.On<GetCustomerDetailsInput>().PipelineAsync()
                         .Call<Application.Boundaries.GetCustomerDetails.IUseCase>((handler, request) => handler.Execute(request));
 
-                    builder.On<RegisterInput>().PipelineAsync()
-                        .Call<Application.Boundaries.Register.IUseCase>((handler, request) => handler.Execute(request));
+                    builder.On<RegisterAccountInput>().PipelineAsync()
+                        .Call<Application.Boundaries.RegisterAccount.IUseCase>((handler, request) => handler.Execute(request));
+
+                    builder.On<RegisterCustomerInput>().PipelineAsync()
+                        .Call<Application.Boundaries.RegisterCustomer.IUseCase>((handler, request) => handler.Execute(request));
 
                     builder.On<TransferInput>().PipelineAsync()
                         .Call<Application.Boundaries.Transfer.IUseCase>((handler, request) => handler.Execute(request));

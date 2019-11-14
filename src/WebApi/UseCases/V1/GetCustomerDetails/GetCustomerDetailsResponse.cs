@@ -29,6 +29,12 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
         public string Name { get; }
 
         /// <summary>
+        /// Username
+        /// </summary>
+        [Required]
+        public string Username { get; }
+
+        /// <summary>
         /// Accounts
         /// </summary>
         [Required]
@@ -38,11 +44,13 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
             Guid customerId,
             string ssn,
             string name,
+            string username,
             List<AccountDetailsModel> accounts)
         {
             CustomerId = customerId;
             SSN = ssn;
             Name = name;
+            Username = username;
             Accounts = accounts;
         }
     }

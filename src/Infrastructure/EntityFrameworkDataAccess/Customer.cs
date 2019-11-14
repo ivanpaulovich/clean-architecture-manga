@@ -9,11 +9,13 @@ namespace Infrastructure.EntityFrameworkDataAccess
     {
         protected Customer() { }
 
-        public Customer(SSN ssn, Name name)
+        public Customer(SSN ssn, Name name, Username username, Password password)
         {
             Id = Guid.NewGuid();
             SSN = ssn;
             Name = name;
+            Username = username;
+            Password = password;
         }
 
         public void LoadAccounts(IEnumerable<Guid> accounts)
