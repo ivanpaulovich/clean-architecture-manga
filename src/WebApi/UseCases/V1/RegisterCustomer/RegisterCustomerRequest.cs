@@ -30,5 +30,11 @@ namespace WebApi.UseCases.V1.RegisterCustomer
         /// </summary>
         [Required]
         public string Password { get; set; }
+
+        /// <summary>
+        /// Initial Amount
+        /// </summary>
+        [Required]
+        public decimal InitialAmount { get; set; }
     }
 }

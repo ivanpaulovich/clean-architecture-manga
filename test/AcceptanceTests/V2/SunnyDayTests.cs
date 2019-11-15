@@ -54,6 +54,8 @@ namespace AcceptanceTests.V2
             {
                 ssn = "8608179999",
                 name = "Ivan Paulovich",
+                username = "ivanpaulovich",
+                password = "password",
                 initialAmount = initialAmount
             };
 

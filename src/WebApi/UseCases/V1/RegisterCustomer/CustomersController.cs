@@ -42,7 +42,8 @@ namespace WebApi.UseCases.V1.RegisterCustomer
                 new SSN(request.SSN),
                 new Name(request.Name),
                 new Username(request.Username),
-                new Password(request.Password)
+                new Password(request.Password),
+                new PositiveMoney(request.InitialAmount)
             );
             await _mediator.PublishAsync(input);
             return _presenter.ViewModel;

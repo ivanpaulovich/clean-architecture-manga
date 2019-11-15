@@ -1,4 +1,4 @@
-namespace UnitTests.UseCasesTests.RegisterAccount
+namespace UnitTests.UseCasesTests.RegisterCustomer
 {
     using Xunit;
 

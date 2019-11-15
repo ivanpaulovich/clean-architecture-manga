@@ -8,13 +8,15 @@ namespace Application.Boundaries.RegisterCustomer
         public Name Name { get; }
         public Username Username { get; }
         public Password Password { get; }
+        public PositiveMoney InitialAmount { get; }
 
-        public RegisterCustomerInput(SSN ssn, Name name, Username username, Password password)
+        public RegisterCustomerInput(SSN ssn, Name name, Username username, Password password, PositiveMoney initialAmount)
         {
             SSN = ssn;
             Name = name;
             Username = username;
             Password = password;
+            InitialAmount = initialAmount;
         }
     }
 }

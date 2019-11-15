@@ -1,7 +1,9 @@
 namespace WebApi.UseCases.V1.RegisterCustomer
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using ViewModels;
 
     /// <summary>
     /// The response for Registration
@@ -32,16 +34,24 @@ namespace WebApi.UseCases.V1.RegisterCustomer
         [Required]
         public string Username { get; }
 
+        /// <summary>
+        /// Accounts
+        /// </summary>
+        [Required]
+        public List<AccountDetailsModel> Accounts { get; }
+
         public RegisterCustomerResponse(
             Guid customerId,
             string ssn,
             string name,
-            string username)
+            string username,
+            List<AccountDetailsModel> accounts)
         {
             CustomerId = customerId;
             SSN = ssn;
             Name = name;
             Username = username;
+            Accounts = accounts;
         }
     }
 }

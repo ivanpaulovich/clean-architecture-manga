@@ -54,7 +54,9 @@ namespace AcceptanceTests.V1
             {
                 ssn = "8608179999",
                 name = "Ivan Paulovich",
-                initialAmount = initialAmount
+                username = "ivanpaulovich",
+                password = "password",
+                initialAmount
             };
 
             string registerData = JsonConvert.SerializeObject(register);

@@ -1,28 +1,44 @@
 namespace Application.Boundaries.RegisterCustomer
 {
+    using System;
     using System.Collections.Generic;
     using Domain.Accounts;
-    using Domain.Customers;
+    using Domain.ValueObjects;
 
-    public sealed class RegisterCustomerOutput : IUseCaseOutput
+    public sealed class Account
     {
-        public Customer Customer { get; }
-        public Account Account { get; }
+        public Guid AccountId { get; }
+        public Money CurrentBalance { get; }
+        public List<Transaction> Transactions { get; }
 
-        public RegisterCustomerOutput(ICustomer customer, IAccount account)
+        public Account(
+            Guid accountId,
+            Money currentBalance,
+            List<Transaction> transactions)
         {
-            var accountEntity = (Domain.Accounts.Account)account;
+            AccountId = accountId;
+            CurrentBalance = currentBalance;
+            Transactions = transactions;
+        }
+
+        public Account(IAccount account)
+        {
+            var accountEntity = (Domain.Accounts.Account) account;
+
+            AccountId = account.Id;
+            CurrentBalance = account
+                .GetCurrentBalance();
 
             List<Transaction> transactionResults = new List<Transaction>();
             foreach (ICredit credit in accountEntity.Credits
                 .GetTransactions())
             {
-                Credit creditEntity = (Credit)credit;
+                Credit creditEntity = (Credit) credit;
 
                 Transaction transactionOutput = new Transaction(
                     creditEntity.Description,
                     creditEntity
-                        .Amount,
+                    .Amount,
                     creditEntity.TransactionDate);
 
                 transactionResults.Add(transactionOutput);
@@ -31,26 +47,18 @@ namespace Application.Boundaries.RegisterCustomer
             foreach (IDebit debit in accountEntity.Debits
                 .GetTransactions())
             {
-                Debit debitEntity = (Debit)debit;
+                Debit debitEntity = (Debit) debit;
 
                 Transaction transactionOutput = new Transaction(
                     debitEntity.Description,
                     debitEntity
-                        .Amount,
+                    .Amount,
                     debitEntity.TransactionDate);
 
                 transactionResults.Add(transactionOutput);
             }
 
-            Account = new Account(
-                account.Id,
-                account.GetCurrentBalance(),
-                transactionResults);
-
-            List<Account> accountOutputs = new List<Account>();
-            accountOutputs.Add(Account);
-
-            Customer = new Customer(customer, accountOutputs);
+            Transactions = transactionResults;
         }
     }
 }
