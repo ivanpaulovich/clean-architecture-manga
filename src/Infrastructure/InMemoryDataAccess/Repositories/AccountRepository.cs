@@ -5,6 +5,8 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
     using System;
     using Application.Repositories;
     using Domain.Accounts;
+    using Domain.ValueObjects;
+    using Domain.Customers;
 
     public sealed class AccountRepository : IAccountRepository
     {
@@ -35,8 +37,27 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
 
         public async Task<IAccount> Get(Guid id)
         {
-            Account account = _context.Accounts
+            var account = _context.Accounts
                 .Where(e => e.Id == id)
+                .SingleOrDefault();
+
+            if (account is null)
+                throw new AccountNotFoundException($"The account {id} does not exist or is not processed yet.");
+
+            return await Task.FromResult<Account>(account);
+        }
+
+        public async Task<IAccount> Get(ExternalUserId externalUserId, Guid id)
+        {
+            var customer = _context.Customers
+                .Where(e => e.ExternalUserId.Equals(externalUserId))
+                .SingleOrDefault();
+
+            if (customer is null)
+                throw new CustomerNotFoundException($"The customer {externalUserId} does not exist or is not processed yet.");
+
+            var account = _context.Accounts
+                .Where(e => e.Id == id && e.CustomerId == customer.Id)
                 .SingleOrDefault();
 
             if (account is null)

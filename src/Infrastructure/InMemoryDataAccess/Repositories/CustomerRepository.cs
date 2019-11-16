@@ -2,9 +2,9 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
 {
     using System.Linq;
     using System.Threading.Tasks;
-    using System;
     using Application.Repositories;
     using Domain.Customers;
+    using Domain.ValueObjects;
 
     public sealed class CustomerRepository : ICustomerRepository
     {
@@ -21,14 +21,14 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
             await Task.CompletedTask;
         }
 
-        public async Task<ICustomer> Get(Guid id)
+        public async Task<ICustomer> GetBy(ExternalUserId externalUserId)
         {
             Customer customer = _context.Customers
-                .Where(e => e.Id == id)
+                .Where(e => e.ExternalUserId.Equals(externalUserId))
                 .SingleOrDefault();
 
             if (customer is null)
-                throw new CustomerNotFoundException($"The customer {id} does not exist or is not processed yet.");
+                throw new CustomerNotFoundException($"The customer {externalUserId} does not exist or is not processed yet.");
 
             return await Task.FromResult<Customer>(customer);
         }

@@ -2,13 +2,13 @@ namespace WebApi.DependencyInjection
 {
     using System.IO;
     using System.Reflection;
+    using Filters;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
     using Microsoft.Extensions.PlatformAbstractions;
     using Swashbuckle.AspNetCore.SwaggerGen;
-    using Filters;
 
     public static class SwaggerExtensions
     {

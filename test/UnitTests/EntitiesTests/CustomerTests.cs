@@ -1,6 +1,5 @@
 namespace UnitTests.EntitiesTests
 {
-    using Domain.Accounts;
     using Domain.Customers;
     using Domain.ValueObjects;
     using Xunit;
@@ -14,6 +13,7 @@ namespace UnitTests.EntitiesTests
             //
             // Arrange
             ICustomer sut = entityFactory.NewCustomer(
+                new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608179922"),
                 new Name("Ivan Paulovich")
             );

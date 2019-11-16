@@ -2,29 +2,35 @@ namespace Application.UseCases
 {
     using System.Threading.Tasks;
     using Application.Boundaries.CloseAccount;
-    using Repositories;
+    using Application.Services;
     using Domain.Accounts;
+    using Repositories;
 
     public sealed class CloseAccount : IUseCase
     {
+        private readonly IUserService _userService;
         private readonly IOutputPort _outputPort;
         private readonly IAccountRepository _accountRepository;
 
         public CloseAccount(
+            IUserService userService,
             IOutputPort outputPort,
             IAccountRepository accountRepository)
         {
+            _userService = userService;
             _outputPort = outputPort;
             _accountRepository = accountRepository;
         }
 
-        public async Task Execute(CloseAccountInput closeAccountInput)
+        public async Task Execute(CloseAccountInput input)
         {
             IAccount account;
 
             try
             {
-                account = await _accountRepository.Get(closeAccountInput.AccountId);
+                account = await _accountRepository.Get(
+                    _userService.GetExternalUserId(),
+                    input.AccountId);
             }
             catch (AccountNotFoundException ex)
             {

@@ -1,14 +1,14 @@
 namespace AcceptanceTests.V1
 {
     using System.Net.Http;
-    using System.Text;
     using System.Threading.Tasks;
     using System;
-    using Microsoft.AspNetCore.Mvc.Testing;
     using Newtonsoft.Json.Linq;
     using Newtonsoft.Json;
     using WebApi;
     using Xunit;
+    using System.Collections.Generic;
+    using Microsoft.AspNetCore.Mvc.Testing;
 
     public sealed class SunnyDayTests : IClassFixture<WebApplicationFactory<Startup>>
     {
@@ -23,44 +23,41 @@ namespace AcceptanceTests.V1
         public async Task Register_Deposit_Withdraw_Close()
         {
             Tuple<string, string> customerId_accountId = await Register(100);
-            await GetCustomer(customerId_accountId.Item1);
+            await GetCustomer();
             await GetAccount(customerId_accountId.Item2);
             await Withdraw(customerId_accountId.Item2, 100);
-            await GetCustomer(customerId_accountId.Item1);
+            await GetCustomer();
             await Deposit(customerId_accountId.Item2, 500);
             await Deposit(customerId_accountId.Item2, 400);
-            await GetCustomer(customerId_accountId.Item1);
+            await GetCustomer();
             await Withdraw(customerId_accountId.Item2, 400);
             await Withdraw(customerId_accountId.Item2, 500);
             await Close(customerId_accountId.Item2);
         }
 
-        private async Task GetCustomer(string customerId)
+        private async Task GetCustomer()
         {
             var client = _factory.CreateClient();
-            string result = await client.GetStringAsync($"/api/v1/Customers/{customerId}?api-version=1");
+            string result = await client.GetStringAsync($"/api/v1/Customers/");
         }
 
         private async Task GetAccount(string accountId)
         {
             var client = _factory.CreateClient();
-            string result = await client.GetStringAsync($"/api/v1/Accounts/{accountId}?api-version=1");
+            string result = await client.GetStringAsync($"/api/v1/Accounts/{accountId}");
         }
 
         private async Task<Tuple<string, string>> Register(decimal initialAmount)
         {
             var client = _factory.CreateClient();
-            var register = new
+
+            var content = new FormUrlEncodedContent(new[]
             {
-                ssn = "8608179999",
-                name = "Ivan Paulovich",
-                initialAmount = initialAmount
-            };
+                new KeyValuePair<string, string>("ssn", "8608179999"), 
+                new KeyValuePair<string, string>("initialAmount", initialAmount.ToString()) 
+            });
 
-            string registerData = JsonConvert.SerializeObject(register);
-            StringContent content = new StringContent(registerData, Encoding.UTF8, "application/json");
-
-            var response = await client.PostAsync("api/v1/Customers?api-version=1", content);
+            var response = await client.PostAsync("api/v1/Customers", content);
 
             response.EnsureSuccessStatusCode();
 
@@ -78,16 +75,13 @@ namespace AcceptanceTests.V1
         private async Task Deposit(string account, decimal amount)
         {
             var client = _factory.CreateClient();
-            var json = new
+            var content = new FormUrlEncodedContent(new[]
             {
-                accountId = account,
-                amount = amount,
-            };
+                new KeyValuePair<string, string>("accountId", account),
+                new KeyValuePair<string, string>("amount", amount.ToString())
+            });
 
-            string data = JsonConvert.SerializeObject(json);
-            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-
-            var response = await client.PatchAsync("api/v1/Accounts/Deposit?api-version=1", content);
+            var response = await client.PatchAsync("api/v1/Accounts/Deposit", content);
             string result = await response.Content.ReadAsStringAsync();
 
             response.EnsureSuccessStatusCode();
@@ -96,16 +90,14 @@ namespace AcceptanceTests.V1
         private async Task Withdraw(string account, decimal amount)
         {
             var client = _factory.CreateClient();
-            var json = new
+
+            var content = new FormUrlEncodedContent(new[]
             {
-                accountId = account,
-                amount = amount,
-            };
+                new KeyValuePair<string, string>("accountId", account),
+                new KeyValuePair<string, string>("amount", amount.ToString())
+            });
 
-            string data = JsonConvert.SerializeObject(json);
-            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-
-            var response = await client.PatchAsync("api/v1/Accounts/Withdraw?api-version=1", content);
+            var response = await client.PatchAsync("api/v1/Accounts/Withdraw", content);
             string result = await response.Content.ReadAsStringAsync();
 
             response.EnsureSuccessStatusCode();
@@ -114,7 +106,7 @@ namespace AcceptanceTests.V1
         private async Task Close(string account)
         {
             var client = _factory.CreateClient();
-            var response = await client.DeleteAsync($"api/v1/Accounts/{account}?api-version=1");
+            var response = await client.DeleteAsync($"api/v1/Accounts/{account}");
             response.EnsureSuccessStatusCode();
         }
     }

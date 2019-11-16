@@ -19,7 +19,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("re.EntityFrameworkDataAccess.Account", b =>
+            modelBuilder.Entity("Infrastructure.EntityFrameworkDataAccess.Account", b =>
             {
                 b.Property<Guid>("Id")
                     .ValueGeneratedOnAdd()
@@ -40,7 +40,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Migrations
                     });
             });
 
-            modelBuilder.Entity("re.EntityFrameworkDataAccess.Credit", b =>
+            modelBuilder.Entity("Infrastructure.EntityFrameworkDataAccess.Credit", b =>
             {
                 b.Property<Guid>("Id")
                     .ValueGeneratedOnAdd()
@@ -65,15 +65,19 @@ namespace Infrastructure.EntityFrameworkDataAccess.Migrations
                         Id = new Guid("f5117315-e789-491a-b662-958c37237f9b"),
                             AccountId = new Guid("4c510cfe-5d61-4a46-a3d9-c4313426655f"),
                             Amount = 400m,
-                            TransactionDate = new DateTime(2019, 9, 28, 21, 51, 12, 605, DateTimeKind.Utc).AddTicks(4990)
+                            TransactionDate = new DateTime(2019, 11, 16, 22, 15, 10, 176, DateTimeKind.Utc).AddTicks(4260)
                     });
             });
 
-            modelBuilder.Entity("re.EntityFrameworkDataAccess.Customer", b =>
+            modelBuilder.Entity("Infrastructure.EntityFrameworkDataAccess.Customer", b =>
             {
                 b.Property<Guid>("Id")
                     .ValueGeneratedOnAdd()
                     .HasColumnType("uniqueidentifier");
+
+                b.Property<string>("ExternalUserId")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
                 b.Property<string>("Name")
                     .IsRequired()
@@ -91,12 +95,13 @@ namespace Infrastructure.EntityFrameworkDataAccess.Migrations
                     new
                     {
                         Id = new Guid("197d0438-e04b-453d-b5de-eca05960c6ae"),
+                            ExternalUserId = "42",
                             Name = "Test User",
                             SSN = "19860817-9999"
                     });
             });
 
-            modelBuilder.Entity("re.EntityFrameworkDataAccess.Debit", b =>
+            modelBuilder.Entity("Infrastructure.EntityFrameworkDataAccess.Debit", b =>
             {
                 b.Property<Guid>("Id")
                     .ValueGeneratedOnAdd()
@@ -121,7 +126,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Migrations
                         Id = new Guid("3d6032df-7a3b-46e6-8706-be971e3d539f"),
                             AccountId = new Guid("4c510cfe-5d61-4a46-a3d9-c4313426655f"),
                             Amount = 400m,
-                            TransactionDate = new DateTime(2019, 9, 28, 21, 51, 12, 605, DateTimeKind.Utc).AddTicks(5890)
+                            TransactionDate = new DateTime(2019, 11, 16, 22, 15, 10, 176, DateTimeKind.Utc).AddTicks(5200)
                     });
             });
 #pragma warning restore 612, 618

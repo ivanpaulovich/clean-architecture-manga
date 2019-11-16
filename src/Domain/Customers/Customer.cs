@@ -6,6 +6,7 @@ namespace Domain.Customers
 
     public class Customer : ICustomer
     {
+        public ExternalUserId ExternalUserId { get; protected set; }
         public Guid Id { get; protected set; }
         public Name Name { get; protected set; }
         public SSN SSN { get; protected set; }

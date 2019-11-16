@@ -41,7 +41,8 @@ namespace WebApi.UseCases.V1.Register
             ViewModel = new CreatedAtRouteResult("GetCustomer",
                 new
                 {
-                    customerId = registerResponse.CustomerId
+                    customerId = registerResponse.CustomerId,
+                    version = "1.0"
                 },
                 registerResponse);
         }

@@ -11,17 +11,13 @@ namespace Domain.ValueObjects
             _money = value;
         }
 
-        public decimal ToDecimal()
-            => _money;
+        public decimal ToDecimal() => _money;
 
-        public bool Equals(Money other)
-            => _money == other._money;
+        public bool Equals(Money other) => _money == other._money;
 
-        public override bool Equals(object obj)
-            => obj is Money other && Equals(other);
+        public override bool Equals(object obj) => obj is Money other && Equals(other);
 
-        public override int GetHashCode()
-            => _money.GetHashCode();
+        public override int GetHashCode() => _money.GetHashCode();
 
         internal bool LessThan(PositiveMoney amount)
         {

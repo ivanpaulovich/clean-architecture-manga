@@ -9,7 +9,7 @@ namespace WebApi.UseCases.V1.Deposit
     using Microsoft.AspNetCore.Mvc;
 
     [ApiVersion("1.0")]
-    [Route("api/v1/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public sealed class AccountsController : ControllerBase
     {
@@ -36,7 +36,7 @@ namespace WebApi.UseCases.V1.Deposit
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DepositResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Deposit([FromBody][Required] DepositRequest request)
+        public async Task<IActionResult> Deposit([FromForm][Required] DepositRequest request)
         {
             var input = new DepositInput(
                 request.AccountId,

@@ -3,22 +3,22 @@ namespace WebApi.UseCases.V2.GetAccountDetails
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Application.Boundaries.GetAccountDetails;
+    using DependencyInjection.FeatureFlags;
     using FluentMediator;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;
-    using DependencyInjection.FeatureFlags;
 
     [FeatureGate(Features.GetAccountDetailsV2)]
     [ApiVersion("2.0")]
-    [Route("api/v2/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    public sealed class AccountsV2Controller : ControllerBase
+    public sealed class AccountsController : ControllerBase
     {
         private readonly IMediator _mediator;
         private readonly GetAccountDetailsPresenterV2 _presenter;
 
-        public AccountsV2Controller(
+        public AccountsController(
             IMediator mediator,
             GetAccountDetailsPresenterV2 presenter)
         {

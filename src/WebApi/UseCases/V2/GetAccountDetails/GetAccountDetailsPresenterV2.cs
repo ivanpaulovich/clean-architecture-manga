@@ -5,7 +5,6 @@ namespace WebApi.UseCases.V2.GetAccountDetails
     using Application.Boundaries.GetAccountDetails;
     using Microsoft.AspNetCore.Mvc;
     using OfficeOpenXml;
-    using ViewModels;
 
     public sealed class GetAccountDetailsPresenterV2 : IOutputPort
     {
@@ -25,16 +24,11 @@ namespace WebApi.UseCases.V2.GetAccountDetails
 
             foreach (var item in getAccountDetailsOutput.Transactions)
             {
-                var transaction = new TransactionModel(
-                    item.Amount.ToMoney().ToDecimal(),
-                    item.Description,
-                    item.TransactionDate);
-
                 dataTable.Rows.Add(new object[]
                 {
                     item.Amount.ToMoney().ToDecimal(),
-                        item.Description,
-                        item.TransactionDate
+                    item.Description,
+                    item.TransactionDate
                 });
             }
 

@@ -42,6 +42,14 @@ namespace Infrastructure.EntityFrameworkDataAccess
                 .IsRequired();
 
             modelBuilder.Entity<Customer>()
+                .ToTable("Customer")
+                .Property(b => b.ExternalUserId)
+                .HasConversion(
+                    v => v.ToString(),
+                    v => new ExternalUserId(v))
+                .IsRequired();
+
+            modelBuilder.Entity<Customer>()
                 .Ignore(p => p.Accounts);
 
             modelBuilder.Entity<Debit>()
@@ -61,11 +69,21 @@ namespace Infrastructure.EntityFrameworkDataAccess
                 .IsRequired();
 
             modelBuilder.Entity<Customer>().HasData(
-                new { Id = new Guid("197d0438-e04b-453d-b5de-eca05960c6ae"), Name = new Name("Test User"), SSN = new SSN("19860817-9999") }
+                new
+                {
+                    Id = new Guid("197d0438-e04b-453d-b5de-eca05960c6ae"),
+                        ExternalUserId = new ExternalUserId("github/ivanpaulovich"),
+                        Name = new Name("Test User"),
+                        SSN = new SSN("19860817-9999")
+                }
             );
 
             modelBuilder.Entity<Account>().HasData(
-                new { Id = new Guid("4c510cfe-5d61-4a46-a3d9-c4313426655f"), CustomerId = new Guid("197d0438-e04b-453d-b5de-eca05960c6ae") }
+                new
+                {
+                    Id = new Guid("4c510cfe-5d61-4a46-a3d9-c4313426655f"),
+                        CustomerId = new Guid("197d0438-e04b-453d-b5de-eca05960c6ae")
+                }
             );
 
             modelBuilder.Entity<Credit>().HasData(

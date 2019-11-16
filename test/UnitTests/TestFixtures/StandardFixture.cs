@@ -2,6 +2,7 @@ namespace UnitTests.TestFixtures
 {
     using Infrastructure.InMemoryDataAccess.Repositories;
     using Infrastructure.InMemoryDataAccess;
+    using Infrastructure.InMemoryDataAccess.Services;
 
     public sealed class StandardFixture
     {
@@ -10,6 +11,7 @@ namespace UnitTests.TestFixtures
         public AccountRepository AccountRepository { get; }
         public CustomerRepository CustomerRepository { get; }
         public UnitOfWork UnitOfWork { get; }
+        public UserService UserService { get; }
 
         public StandardFixture()
         {
@@ -18,6 +20,7 @@ namespace UnitTests.TestFixtures
             CustomerRepository = new CustomerRepository(Context);
             UnitOfWork = new UnitOfWork(Context);
             EntityFactory = new EntityFactory();
+            UserService = new UserService();
         }
     }
 }

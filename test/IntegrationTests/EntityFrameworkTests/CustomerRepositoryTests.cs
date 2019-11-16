@@ -2,7 +2,6 @@ namespace IntegrationTests.EntityFrameworkTests
 {
     using System.Linq;
     using System.Threading.Tasks;
-    using System;
     using Domain.Customers;
     using Domain.ValueObjects;
     using Infrastructure.EntityFrameworkDataAccess.Repositories;
@@ -22,6 +21,7 @@ namespace IntegrationTests.EntityFrameworkTests
             var factory = new EntityFactory();
 
             var customer = factory.NewCustomer(
+                new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608177955"),
                 new Name("Ivan Paulovich"));
 
@@ -50,7 +50,7 @@ namespace IntegrationTests.EntityFrameworkTests
                 context.Database.EnsureCreated();
 
                 var repository = new CustomerRepository(context);
-                customer = await repository.Get(new Guid("197d0438-e04b-453d-b5de-eca05960c6ae"));
+                customer = await repository.GetBy(new ExternalUserId("github/ivanpaulovich"));
 
                 Assert.NotNull(customer);
             }

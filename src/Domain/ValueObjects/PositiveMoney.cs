@@ -14,17 +14,13 @@ namespace Domain.ValueObjects
             _value = new Money(value);
         }
 
-        public Money ToMoney()
-            => _value;
+        public Money ToMoney() => _value;
 
-        public bool Equals(PositiveMoney other)
-            => _value.Equals(other._value);
+        public bool Equals(PositiveMoney other) => _value.Equals(other._value);
 
-        public override bool Equals(object obj)
-            => obj is PositiveMoney other && Equals(other);
+        public override bool Equals(object obj) => obj is PositiveMoney other && Equals(other);
 
-        public override int GetHashCode()
-            => _value.GetHashCode();
+        public override int GetHashCode() => _value.GetHashCode();
 
         internal PositiveMoney Add(PositiveMoney positiveAmount)
         {

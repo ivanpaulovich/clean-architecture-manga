@@ -6,7 +6,6 @@ namespace UnitTests.UseCasesTests.Deposit
     using Application.UseCases;
     using Domain.ValueObjects;
     using Infrastructure.InMemoryDataAccess.Presenters;
-    using Infrastructure.InMemoryDataAccess;
     using TestFixtures;
     using Xunit;
 
@@ -24,6 +23,7 @@ namespace UnitTests.UseCasesTests.Deposit
         {
             var presenter = new DepositPresenter();
             var sut = new Deposit(
+                _fixture.UserService,
                 _fixture.EntityFactory,
                 presenter,
                 _fixture.AccountRepository,
@@ -45,6 +45,7 @@ namespace UnitTests.UseCasesTests.Deposit
         {
             var presenter = new DepositPresenter();
             var sut = new Deposit(
+                _fixture.UserService,
                 _fixture.EntityFactory,
                 presenter,
                 _fixture.AccountRepository,

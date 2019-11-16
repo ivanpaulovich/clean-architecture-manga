@@ -4,21 +4,26 @@ namespace Application.UseCases
     using System.Threading.Tasks;
     using System;
     using Application.Boundaries.GetCustomerDetails;
-    using Repositories;
     using Domain.Accounts;
     using Domain.Customers;
+    using Domain.ValueObjects;
+    using Repositories;
+    using Application.Services;
 
     public sealed class GetCustomerDetails : IUseCase
     {
+        private readonly IUserService _userService;
         private readonly IOutputPort _outputPort;
         private readonly ICustomerRepository _customerRepository;
         private readonly IAccountRepository _accountRepository;
 
         public GetCustomerDetails(
+            IUserService userService,
             IOutputPort outputPort,
             ICustomerRepository customerRepository,
             IAccountRepository accountRepository)
         {
+            _userService = userService;
             _outputPort = outputPort;
             _customerRepository = customerRepository;
             _accountRepository = accountRepository;
@@ -30,7 +35,8 @@ namespace Application.UseCases
 
             try
             {
-                customer = await _customerRepository.Get(input.CustomerId);
+                customer = await _customerRepository.GetBy(
+                    _userService.GetExternalUserId());
             }
             catch (CustomerNotFoundException ex)
             {
@@ -46,7 +52,9 @@ namespace Application.UseCases
 
                 try
                 {
-                    account = await _accountRepository.Get(accountId);
+                    account = await _accountRepository.Get(
+                        _userService.GetExternalUserId(),
+                        accountId);
                 }
                 catch (AccountNotFoundException ex)
                 {
@@ -58,12 +66,21 @@ namespace Application.UseCases
                 accounts.Add(outputAccount);
             }
 
-            BuildOutput(customer, accounts);
+            BuildOutput(
+                _userService.GetExternalUserId(),
+                customer,
+                accounts);
         }
 
-        private void BuildOutput(ICustomer customer, List<Boundaries.GetCustomerDetails.Account> accounts)
+        private void BuildOutput(
+            ExternalUserId externalUserId,
+            ICustomer customer,
+            List<Boundaries.GetCustomerDetails.Account> accounts)
         {
-            var output = new GetCustomerDetailsOutput(customer, accounts);
+            var output = new GetCustomerDetailsOutput(
+                externalUserId,
+                customer,
+                accounts);
             _outputPort.Standard(output);
         }
     }

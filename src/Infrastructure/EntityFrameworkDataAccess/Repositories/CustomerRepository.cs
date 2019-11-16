@@ -5,6 +5,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
     using System;
     using Application.Repositories;
     using Domain.Customers;
+    using Domain.ValueObjects;
     using Microsoft.EntityFrameworkCore;
 
     public sealed class CustomerRepository : ICustomerRepository
@@ -23,17 +24,17 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<ICustomer> Get(Guid id)
+        public async Task<ICustomer> GetBy(ExternalUserId externalUserId)
         {
             EntityFrameworkDataAccess.Customer customer = await _context.Customers
-                .Where(c => c.Id == id)
+                .Where(c => c.ExternalUserId.Equals(externalUserId))
                 .SingleOrDefaultAsync();
 
             if (customer is null)
-                throw new CustomerNotFoundException($"The customer {id} does not exist or is not processed yet.");
+                throw new CustomerNotFoundException($"The customer {externalUserId} does not exist or is not processed yet.");
 
             var accounts = _context.Accounts
-                .Where(e => e.CustomerId == id)
+                .Where(e => e.CustomerId == customer.Id)
                 .Select(e => e.Id)
                 .ToList();
 

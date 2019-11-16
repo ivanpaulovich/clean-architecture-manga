@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/src/WebApi/bin/Debug/netcoreapp2.2/WebApi.dll",
+            "program": "${workspaceFolder}/src/WebApi/bin/Debug/netcoreapp3.0/WebApi.dll",
             "args": [],
             "cwd": "${workspaceFolder}/src/WebApi",
             "stopAtEntry": false,
@@ -20,7 +20,7 @@
                 "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"                
             },
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Production"
+                "ASPNETCORE_ENVIRONMENT": "Development"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"

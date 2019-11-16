@@ -3,13 +3,14 @@ namespace Application.Boundaries.Register
     using System.Collections.Generic;
     using Domain.Accounts;
     using Domain.Customers;
+    using Domain.ValueObjects;
 
     public sealed class RegisterOutput : IUseCaseOutput
     {
         public Customer Customer { get; }
         public Account Account { get; }
 
-        public RegisterOutput(ICustomer customer, IAccount account)
+        public RegisterOutput(ExternalUserId externalUserId, ICustomer customer, IAccount account)
         {
             var accountEntity = (Domain.Accounts.Account) account;
 
@@ -50,7 +51,7 @@ namespace Application.Boundaries.Register
             List<Account> accountOutputs = new List<Account>();
             accountOutputs.Add(Account);
 
-            Customer = new Customer(customer, accountOutputs);
+            Customer = new Customer(externalUserId, customer, accountOutputs);
         }
     }
 }

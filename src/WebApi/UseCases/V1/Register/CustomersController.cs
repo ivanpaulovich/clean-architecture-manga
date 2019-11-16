@@ -9,7 +9,7 @@ namespace WebApi.UseCases.V1.Register
     using Microsoft.AspNetCore.Mvc;
 
     [ApiVersion("1.0")]
-    [Route("api/v1/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public sealed class CustomersController : ControllerBase
     {
@@ -36,11 +36,10 @@ namespace WebApi.UseCases.V1.Register
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RegisterResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Post([FromBody][Required] RegisterRequest request)
+        public async Task<IActionResult> Post([FromForm][Required] RegisterRequest request)
         {
             var input = new RegisterInput(
                 new SSN(request.SSN),
-                new Name(request.Name),
                 new PositiveMoney(request.InitialAmount)
             );
             await _mediator.PublishAsync(input);

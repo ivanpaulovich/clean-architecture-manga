@@ -11,7 +11,9 @@ namespace WebApi.DependencyInjection
 
     public static class SQLServerInfrastructureExtensions
     {
-        public static IServiceCollection AddSQLServerPersistence(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddSQLServerPersistence(
+            this IServiceCollection services,
+            IConfiguration configuration)
         {
             services.AddScoped<IEntityFactory, EntityFactory>();
 

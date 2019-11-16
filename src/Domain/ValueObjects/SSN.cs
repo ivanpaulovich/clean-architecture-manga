@@ -22,16 +22,12 @@ namespace Domain.ValueObjects
             _text = text;
         }
 
-        public override string ToString()
-            => _text;
+        public override string ToString() => _text;
 
-        public bool Equals(SSN other)
-            => _text == other._text;
+        public bool Equals(SSN other) => _text == other._text;
 
-        public override bool Equals(object obj)
-            => obj is SSN other && Equals(other);
+        public override bool Equals(object obj) => obj is SSN other && Equals(other);
 
-        public override int GetHashCode()
-            => _text != null ? _text.GetHashCode() : 0;
+        public override int GetHashCode() => _text != null ? _text.GetHashCode() : 0;
     }
 }

@@ -1,8 +1,8 @@
 namespace Application.Boundaries.Transfer
 {
     using System;
-    using Exceptions;
     using Domain.ValueObjects;
+    using Exceptions;
 
     public sealed class TransferInput : IUseCaseInput
     {
@@ -10,7 +10,10 @@ namespace Application.Boundaries.Transfer
         public Guid DestinationAccountId { get; }
         public PositiveMoney Amount { get; }
 
-        public TransferInput(Guid originAccountId, Guid destinationAccountId, PositiveMoney amount)
+        public TransferInput(
+            Guid originAccountId,
+            Guid destinationAccountId,
+            PositiveMoney amount)
         {
             if (originAccountId == Guid.Empty)
             {
