@@ -1,9 +1,10 @@
+using Application.Services;
+using Infrastructure.InMemoryDataAccess.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using WebApi.DependencyInjection;
 using WebApi.DependencyInjection.FeatureFlags;
 
@@ -18,7 +19,8 @@ namespace WebApi
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+#region Called for ASPNETCORE_ENVIRONMENT=Development
+
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
             services.AddControllers().AddControllersAsServices();
@@ -31,7 +33,29 @@ namespace WebApi
             services.AddPresentersV1();
             services.AddPresentersV2();
             services.AddMediator();
+            services.AddSingleton<IUserService, TestUserService>();
         }
+
+        public void ConfigureDevelopment(
+            IApplicationBuilder app,
+            IWebHostEnvironment env,
+            IApiVersionDescriptionProvider provider)
+        {
+            app.UseDeveloperExceptionPage();
+            app.UseRouting();
+            app.UseVersionedSwagger(provider);
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints
+                    .MapControllers();
+            });
+        }
+
+#endregion
+
+#region Called for ASPNETCORE_ENVIRONMENT=Production
 
         public void ConfigureProductionServices(IServiceCollection services)
         {
@@ -45,28 +69,31 @@ namespace WebApi
             services.AddPresentersV1();
             services.AddPresentersV2();
             services.AddMediator();
+            services.AddHttpContextAccessor();
+            services.AddGitHubAuthentication(Configuration);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(
+        public void ConfigureProduction(
             IApplicationBuilder app,
             IWebHostEnvironment env,
             IApiVersionDescriptionProvider provider)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
             app.UseRouting();
             app.UseVersionedSwagger(provider);
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseCookiePolicy();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints
+                    .MapControllers()
+                    .RequireAuthorization();
             });
         }
+
+#endregion
+
     }
 }

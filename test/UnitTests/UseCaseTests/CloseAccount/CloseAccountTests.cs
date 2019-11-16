@@ -22,6 +22,7 @@ namespace UnitTests.UseCasesTests.CloseAccount
         public void PositiveBalance_Should_Not_Allow_Closing(decimal amount)
         {
             var customer = _fixture.EntityFactory.NewCustomer(
+                new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608178899"),
                 new Name("Ivan Paulovich")
             );
@@ -39,6 +40,7 @@ namespace UnitTests.UseCasesTests.CloseAccount
         public void ZeroBalance_Should_Allow_Closing()
         {
             var customer = _fixture.EntityFactory.NewCustomer(
+                new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608178899"),
                 new Name("Ivan Paulovich")
             );
@@ -57,11 +59,13 @@ namespace UnitTests.UseCasesTests.CloseAccount
             var withdrawPresenter = new WithdrawPresenter();
 
             var getAccountUseCase = new Application.UseCases.GetAccountDetails(
+                _fixture.UserService,
                 getAccountPresenter,
                 _fixture.AccountRepository
             );
 
             var withdrawUseCase = new Application.UseCases.Withdraw(
+                _fixture.UserService,
                 _fixture.EntityFactory,
                 withdrawPresenter,
                 _fixture.AccountRepository,
@@ -69,11 +73,13 @@ namespace UnitTests.UseCasesTests.CloseAccount
             );
 
             var sut = new Application.UseCases.CloseAccount(
+                _fixture.UserService,
                 closeAccountPresenter,
                 _fixture.AccountRepository
             );
 
-            await getAccountUseCase.Execute(new GetAccountDetailsInput(_fixture.Context.DefaultAccountId));
+            await getAccountUseCase.Execute(new GetAccountDetailsInput(
+                _fixture.Context.DefaultAccountId));
             var getAccountDetailtOutput = getAccountPresenter.GetAccountDetails.First();
 
             await withdrawUseCase.Execute(new Application.Boundaries.Withdraw.WithdrawInput(
@@ -81,7 +87,8 @@ namespace UnitTests.UseCasesTests.CloseAccount
                 new PositiveMoney(getAccountDetailtOutput.CurrentBalance.ToDecimal())
             ));
 
-            var input = new CloseAccountInput(_fixture.Context.DefaultAccountId);
+            var input = new CloseAccountInput(
+                _fixture.Context.DefaultAccountId);
             await sut.Execute(input);
 
             Assert.Equal(input.AccountId, closeAccountPresenter.ClosedAccounts.First().AccountId);

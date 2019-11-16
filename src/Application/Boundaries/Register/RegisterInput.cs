@@ -5,13 +5,13 @@ namespace Application.Boundaries.Register
     public sealed class RegisterInput : IUseCaseInput
     {
         public SSN SSN { get; }
-        public Name Name { get; }
         public PositiveMoney InitialAmount { get; }
 
-        public RegisterInput(SSN ssn, Name name, PositiveMoney initialAmount)
+        public RegisterInput(
+            SSN ssn,
+            PositiveMoney initialAmount)
         {
             SSN = ssn;
-            Name = name;
             InitialAmount = initialAmount;
         }
     }

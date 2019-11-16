@@ -9,7 +9,7 @@ namespace WebApi.UseCases.V1.Withdraw
     using Microsoft.AspNetCore.Mvc;
 
     [ApiVersion("1.0")]
-    [Route("api/v1/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public sealed class AccountsController : ControllerBase
     {
@@ -36,7 +36,7 @@ namespace WebApi.UseCases.V1.Withdraw
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WithdrawResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Withdraw([FromBody][Required] WithdrawRequest request)
+        public async Task<IActionResult> Withdraw([FromForm][Required] WithdrawRequest request)
         {
             var input = new WithdrawInput(
                 request.AccountId,

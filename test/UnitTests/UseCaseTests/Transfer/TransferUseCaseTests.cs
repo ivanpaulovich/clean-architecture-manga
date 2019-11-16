@@ -25,6 +25,7 @@ namespace UnitTests.UseCaseTests.Transfer
         {
             var presenter = new TransferPresenter();
             var sut = new Transfer(
+                _fixture.UserService,
                 _fixture.EntityFactory,
                 presenter,
                 _fixture.AccountRepository,

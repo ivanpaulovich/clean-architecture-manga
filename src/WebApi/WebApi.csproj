@@ -17,8 +17,9 @@
     <PackageReference Include="EPPlus.Core" Version="1.5.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
     <PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="1.0.0-preview-009000001-1251" />
-    <PackageReference Include="FluentMediator" Version="0.4.5" />
-    <PackageReference Include="FluentMediator.Microsoft.Extensions.DependencyInjection" Version="0.4.5" />
+    <PackageReference Include="FluentMediator" Version="0.4.6" />
+    <PackageReference Include="FluentMediator.Microsoft.Extensions.DependencyInjection" Version="0.4.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OAuth" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -25,6 +25,7 @@ namespace UnitTests.UseCasesTests.Withdraw
         {
             var presenter = new WithdrawPresenter();
             var sut = new Withdraw(
+                _fixture.UserService,
                 _fixture.EntityFactory,
                 presenter,
                 _fixture.AccountRepository,

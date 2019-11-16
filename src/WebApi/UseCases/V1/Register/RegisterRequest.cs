@@ -14,12 +14,6 @@ namespace WebApi.UseCases.V1.Register
         public string SSN { get; set; }
 
         /// <summary>
-        /// Name
-        /// </summary>
-        [Required]
-        public string Name { get; set; }
-
-        /// <summary>
         /// Initial Amount
         /// </summary>
         [Required]

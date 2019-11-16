@@ -13,6 +13,7 @@ namespace UnitTests.PresenterTests
         public void GivenValidData_Handle_WritesOkObjectResult()
         {
             var customer = new Infrastructure.InMemoryDataAccess.Customer(
+                new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608178888"),
                 new Name("Ivan Paulovich")
             );
@@ -22,6 +23,7 @@ namespace UnitTests.PresenterTests
             );
 
             var registerOutput = new RegisterOutput(
+                customer.ExternalUserId,
                 customer,
                 account
             );

@@ -2,25 +2,28 @@ namespace Application.UseCases
 {
     using System.Threading.Tasks;
     using Application.Boundaries.Withdraw;
-    using Repositories;
-    using Services;
     using Domain.Accounts;
     using Domain.ValueObjects;
     using Domain;
+    using Repositories;
+    using Services;
 
     public sealed class Withdraw : IUseCase
     {
+        private readonly IUserService _userService;
         private readonly IEntityFactory _entityFactory;
         private readonly IOutputPort _outputPort;
         private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public Withdraw(
+            IUserService userService,
             IEntityFactory entityFactory,
             IOutputPort outputPort,
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
+            _userService = userService;
             _entityFactory = entityFactory;
             _outputPort = outputPort;
             _accountRepository = accountRepository;
@@ -34,7 +37,10 @@ namespace Application.UseCases
 
             try
             {
-                account = await _accountRepository.Get(input.AccountId);
+                account = await _accountRepository.Get(
+                    _userService.GetExternalUserId(),
+                    input.AccountId);
+                    
                 debit = account.Withdraw(_entityFactory, input.Amount);
             }
             catch (AccountNotFoundException notFoundEx)

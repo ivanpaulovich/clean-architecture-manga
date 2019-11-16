@@ -3,6 +3,7 @@ namespace UnitTests.InputValidationTests
     using System;
     using Application.Boundaries.CloseAccount;
     using Application.Exceptions;
+    using Domain.ValueObjects;
     using Xunit;
 
     public sealed class CloseAccountInputValidationTests

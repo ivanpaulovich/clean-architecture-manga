@@ -1,14 +1,14 @@
 namespace WebApi.UseCases.V1.GetCustomerDetails
 {
-    using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Application.Boundaries.GetCustomerDetails;
+    using Domain.ValueObjects;
     using FluentMediator;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     [ApiVersion("1.0")]
-    [Route("api/v1/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public sealed class CustomersController : ControllerBase
     {
@@ -26,14 +26,14 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
         /// <summary>
         /// Get the Customer details 
         /// </summary>
-        [HttpGet("{CustomerId}", Name = "GetCustomer")]
+        [HttpGet(Name = "GetCustomer")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetCustomerDetailsResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetCustomer([FromRoute][Required] GetCustomerDetailsRequest request)
+        public async Task<IActionResult> GetCustomer()
         {
-            var input = new GetCustomerDetailsInput(request.CustomerId);
+            var input = new GetCustomerDetailsInput();
             await _mediator.PublishAsync(input);
             return _presenter.ViewModel;
         }

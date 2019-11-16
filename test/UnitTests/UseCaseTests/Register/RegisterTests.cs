@@ -21,7 +21,7 @@ namespace UnitTests.UseCasesTests.Register
         [Fact]
         public void GivenNullInput_ThrowsException()
         {
-            var register = new Register(null, null, null, null, null);
+            var register = new Register(null, null, null, null, null, null);
             Assert.ThrowsAsync<Exception>(async() => await register.Execute(null));
         }
 
@@ -30,10 +30,12 @@ namespace UnitTests.UseCasesTests.Register
         public async Task Register_WritesOutput_InputIsValid(decimal amount)
         {
             var presenter = new RegisterPresenter();
+            var externalUserId = new ExternalUserId("github/ivanpaulovich");
             var ssn = new SSN("8608178888");
             var name = new Name("Ivan Paulovich");
 
             var sut = new Register(
+                _fixture.UserService,
                 _fixture.EntityFactory,
                 presenter,
                 _fixture.CustomerRepository,
@@ -43,7 +45,6 @@ namespace UnitTests.UseCasesTests.Register
 
             await sut.Execute(new RegisterInput(
                 ssn,
-                name,
                 new PositiveMoney(amount)));
 
             var actual = presenter.Registers.Last();

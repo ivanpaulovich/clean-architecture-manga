@@ -3,16 +3,16 @@ namespace WebApi.UseCases.V1.Transfer
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Application.Boundaries.Transfer;
+    using DependencyInjection.FeatureFlags;
     using Domain.ValueObjects;
     using FluentMediator;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;
-    using DependencyInjection.FeatureFlags;
 
     [FeatureGate(Features.Transfer)]
     [ApiVersion("1.0")]
-    [Route("api/v1/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public sealed class AccountsController : ControllerBase
     {
@@ -39,7 +39,7 @@ namespace WebApi.UseCases.V1.Transfer
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransferResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Transfer([FromBody][Required] TransferRequest request)
+        public async Task<IActionResult> Transfer([FromForm][Required] TransferRequest request)
         {
             var input = new TransferInput(
                 request.OriginAccountId,

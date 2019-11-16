@@ -16,6 +16,7 @@ namespace UnitTests.EntitiesTests
             // Arrange
             PositiveMoney amount = new PositiveMoney(100.0M);
             ICustomer customer = entityFactory.NewCustomer(
+                new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608179922"),
                 new Name("Ivan Paulovich")
             );
@@ -41,6 +42,7 @@ namespace UnitTests.EntitiesTests
             //
             // Arrange
             ICustomer customer = entityFactory.NewCustomer(
+                new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608179922"),
                 new Name("Ivan Paulovich")
             );
@@ -66,6 +68,7 @@ namespace UnitTests.EntitiesTests
             //
             // Arrange
             ICustomer customer = entityFactory.NewCustomer(
+                new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608179922"),
                 new Name("Ivan Paulovich")
             );
@@ -89,6 +92,7 @@ namespace UnitTests.EntitiesTests
             //
             // Arrange
             ICustomer customer = entityFactory.NewCustomer(
+                new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608179922"),
                 new Name("Ivan Paulovich")
             );
@@ -114,6 +118,7 @@ namespace UnitTests.EntitiesTests
             //
             // Arrange
             ICustomer customer = entityFactory.NewCustomer(
+                new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608179922"),
                 new Name("Ivan Paulovich")
             );

@@ -1,7 +1,6 @@
 namespace UnitTests.InputValidationTests
 {
     using Application.Boundaries.Register;
-    using Application.Exceptions;
     using Domain.ValueObjects;
     using Xunit;
 
@@ -12,7 +11,6 @@ namespace UnitTests.InputValidationTests
         {
             var actual = new RegisterInput(
                 new SSN("19860817999"),
-                new Name("Ivan"),
                 new PositiveMoney(10)
             );
             Assert.NotNull(actual);

@@ -9,9 +9,13 @@ namespace Infrastructure.EntityFrameworkDataAccess
     {
         protected Customer() { }
 
-        public Customer(SSN ssn, Name name)
+        public Customer(
+            ExternalUserId externalUserId,
+            SSN ssn,
+            Name name)
         {
             Id = Guid.NewGuid();
+            ExternalUserId = externalUserId;
             SSN = ssn;
             Name = name;
         }
