@@ -4,6 +4,7 @@ namespace WebApi.DependencyInjection
     using System.Net.Http;
     using System.Security.Claims;
     using System.Text.Json;
+    using Application.Services;
     using Microsoft.AspNetCore.Authentication.Cookies;
     using Microsoft.AspNetCore.Authentication.OAuth;
     using Microsoft.AspNetCore.Authentication;
@@ -12,7 +13,6 @@ namespace WebApi.DependencyInjection
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using WebApi.DependencyInjection.Authentication;
-    using Application.Services;
 
     // https://www.jerriepelser.com/blog/authenticate-oauth-aspnet-core-2/
 

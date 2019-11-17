@@ -9,6 +9,11 @@ namespace WebApi.UseCases.V1.Register
     {
         public IActionResult ViewModel { get; private set; }
 
+        public void CustomerAlreadyRegistered(string message)
+        {
+            ViewModel = new BadRequestObjectResult(message);
+        }
+
         public void Standard(RegisterOutput output)
         {
             var transactions = new List<TransactionModel>();
@@ -42,7 +47,7 @@ namespace WebApi.UseCases.V1.Register
                 new
                 {
                     customerId = registerResponse.CustomerId,
-                    version = "1.0"
+                        version = "1.0"
                 },
                 registerResponse);
         }

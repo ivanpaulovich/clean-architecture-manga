@@ -1,5 +1,8 @@
 namespace Application.Boundaries.Register
 {
     public interface IOutputPort
-        : IOutputPortStandard<RegisterOutput> { }
+        : IOutputPortStandard<RegisterOutput>
+    { 
+        void CustomerAlreadyRegistered(string message);
+    }
 }
