@@ -36,7 +36,22 @@ namespace Application.UseCases
 
         public async Task Execute(RegisterInput input)
         {
-            var customer = _entityFactory.NewCustomer(
+            ICustomer customer;
+
+            try
+            {
+                customer = await _customerRepository.GetBy(
+                    _userService.GetExternalUserId());
+                
+                _outputPort.CustomerAlreadyRegistered($"Customer already exists.");
+
+                return;
+            }
+            catch (CustomerNotFoundException)
+            {
+            }
+
+            customer = _entityFactory.NewCustomer(
                 _userService.GetExternalUserId(),
                 input.SSN,
                 _userService.GetUserName());

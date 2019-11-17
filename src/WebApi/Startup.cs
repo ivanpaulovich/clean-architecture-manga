@@ -19,7 +19,7 @@ namespace WebApi
 
         public IConfiguration Configuration { get; }
 
-#region Called for ASPNETCORE_ENVIRONMENT=Development
+        #region Called for ASPNETCORE_ENVIRONMENT=Development
 
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
@@ -41,10 +41,10 @@ namespace WebApi
             IWebHostEnvironment env,
             IApiVersionDescriptionProvider provider)
         {
+            app.UseHttpsRedirection();
             app.UseDeveloperExceptionPage();
             app.UseRouting();
             app.UseVersionedSwagger(provider);
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseEndpoints(endpoints =>
             {
@@ -53,9 +53,9 @@ namespace WebApi
             });
         }
 
-#endregion
+        #endregion
 
-#region Called for ASPNETCORE_ENVIRONMENT=Production
+        #region Called for ASPNETCORE_ENVIRONMENT=Production
 
         public void ConfigureProductionServices(IServiceCollection services)
         {
@@ -65,6 +65,7 @@ namespace WebApi
             services.AddVersioning();
             services.AddSwagger();
             services.AddUseCases();
+            //services.AddInMemoryPersistence();
             services.AddSQLServerPersistence(Configuration);
             services.AddPresentersV1();
             services.AddPresentersV2();
@@ -78,9 +79,9 @@ namespace WebApi
             IWebHostEnvironment env,
             IApiVersionDescriptionProvider provider)
         {
+            app.UseHttpsRedirection();
             app.UseRouting();
             app.UseVersionedSwagger(provider);
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -93,7 +94,7 @@ namespace WebApi
             });
         }
 
-#endregion
+        #endregion
 
     }
 }
