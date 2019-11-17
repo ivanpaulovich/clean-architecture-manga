@@ -9,6 +9,7 @@ namespace UnitTests.UseCasesTests.Register
     using Infrastructure.InMemoryDataAccess.Presenters;
     using TestFixtures;
     using Xunit;
+    using Infrastructure.InMemoryDataAccess.Services;
 
     public sealed class RegisterTests : IClassFixture<StandardFixture>
     {
@@ -32,10 +33,9 @@ namespace UnitTests.UseCasesTests.Register
             var presenter = new RegisterPresenter();
             var externalUserId = new ExternalUserId("github/ivanpaulovich");
             var ssn = new SSN("8608178888");
-            var name = new Name("Ivan Paulovich");
 
             var sut = new Register(
-                _fixture.UserService,
+                new TestUserService(),
                 _fixture.EntityFactory,
                 presenter,
                 _fixture.CustomerRepository,
@@ -50,7 +50,7 @@ namespace UnitTests.UseCasesTests.Register
             var actual = presenter.Registers.Last();
             Assert.NotNull(actual);
             Assert.Equal(ssn, actual.Customer.SSN);
-            Assert.Equal(name, actual.Customer.Name);
+            Assert.NotEmpty(actual.Customer.Name.ToString());
             Assert.Equal(amount, actual.Account.CurrentBalance.ToDecimal());
         }
     }
