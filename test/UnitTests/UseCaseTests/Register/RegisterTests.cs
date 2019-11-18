@@ -1,19 +1,20 @@
 namespace UnitTests.UseCasesTests.Register
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using System;
     using Application.Boundaries.Register;
     using Application.UseCases;
     using Domain.ValueObjects;
     using Infrastructure.InMemoryDataAccess.Presenters;
-    using TestFixtures;
-    using Xunit;
     using Infrastructure.InMemoryDataAccess.Services;
+    using UnitTests.TestFixtures;
+    using Xunit;
 
     public sealed class RegisterTests : IClassFixture<StandardFixture>
     {
         private readonly StandardFixture _fixture;
+
         public RegisterTests(StandardFixture fixture)
         {
             _fixture = fixture;
@@ -23,7 +24,7 @@ namespace UnitTests.UseCasesTests.Register
         public void GivenNullInput_ThrowsException()
         {
             var register = new Register(null, null, null, null, null, null);
-            Assert.ThrowsAsync<Exception>(async() => await register.Execute(null));
+            Assert.ThrowsAsync<Exception>(async () => await register.Execute(null));
         }
 
         [Theory]
@@ -40,8 +41,7 @@ namespace UnitTests.UseCasesTests.Register
                 presenter,
                 _fixture.CustomerRepository,
                 _fixture.AccountRepository,
-                _fixture.UnitOfWork
-            );
+                _fixture.UnitOfWork);
 
             await sut.Execute(new RegisterInput(
                 ssn,

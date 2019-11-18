@@ -4,8 +4,8 @@ namespace IntegrationTests.EntityFrameworkTests
     using System.Threading.Tasks;
     using Domain.Customers;
     using Domain.ValueObjects;
-    using Infrastructure.EntityFrameworkDataAccess.Repositories;
     using Infrastructure.EntityFrameworkDataAccess;
+    using Infrastructure.EntityFrameworkDataAccess.Repositories;
     using Microsoft.EntityFrameworkCore;
     using Xunit;
 
@@ -25,7 +25,7 @@ namespace IntegrationTests.EntityFrameworkTests
                 new SSN("198608177955"),
                 new Name("Ivan Paulovich"));
 
-            using(var context = new MangaContext(options))
+            using (var context = new MangaContext(options))
             {
                 context.Database.EnsureCreated();
 
@@ -45,7 +45,7 @@ namespace IntegrationTests.EntityFrameworkTests
 
             ICustomer customer = null;
 
-            using(var context = new MangaContext(options))
+            using (var context = new MangaContext(options))
             {
                 context.Database.EnsureCreated();
 
@@ -54,7 +54,6 @@ namespace IntegrationTests.EntityFrameworkTests
 
                 Assert.NotNull(customer);
             }
-
         }
     }
 }

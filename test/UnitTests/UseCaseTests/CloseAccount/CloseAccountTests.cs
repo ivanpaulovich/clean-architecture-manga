@@ -6,12 +6,13 @@ namespace UnitTests.UseCasesTests.CloseAccount
     using Application.Boundaries.GetAccountDetails;
     using Domain.ValueObjects;
     using Infrastructure.InMemoryDataAccess.Presenters;
-    using TestFixtures;
+    using UnitTests.TestFixtures;
     using Xunit;
 
     public sealed class CloseAccountTests : IClassFixture<StandardFixture>
     {
         private readonly StandardFixture _fixture;
+
         public CloseAccountTests(StandardFixture fixture)
         {
             _fixture = fixture;
@@ -24,8 +25,7 @@ namespace UnitTests.UseCasesTests.CloseAccount
             var customer = _fixture.EntityFactory.NewCustomer(
                 new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608178899"),
-                new Name("Ivan Paulovich")
-            );
+                new Name("Ivan Paulovich"));
 
             var account = _fixture.EntityFactory.NewAccount(customer);
 
@@ -42,8 +42,7 @@ namespace UnitTests.UseCasesTests.CloseAccount
             var customer = _fixture.EntityFactory.NewCustomer(
                 new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608178899"),
-                new Name("Ivan Paulovich")
-            );
+                new Name("Ivan Paulovich"));
 
             var account = _fixture.EntityFactory.NewAccount(customer);
             bool actual = account.IsClosingAllowed();
@@ -61,22 +60,19 @@ namespace UnitTests.UseCasesTests.CloseAccount
             var getAccountUseCase = new Application.UseCases.GetAccountDetails(
                 _fixture.UserService,
                 getAccountPresenter,
-                _fixture.AccountRepository
-            );
+                _fixture.AccountRepository);
 
             var withdrawUseCase = new Application.UseCases.Withdraw(
                 _fixture.UserService,
                 _fixture.EntityFactory,
                 withdrawPresenter,
                 _fixture.AccountRepository,
-                _fixture.UnitOfWork
-            );
+                _fixture.UnitOfWork);
 
             var sut = new Application.UseCases.CloseAccount(
                 _fixture.UserService,
                 closeAccountPresenter,
-                _fixture.AccountRepository
-            );
+                _fixture.AccountRepository);
 
             await getAccountUseCase.Execute(new GetAccountDetailsInput(
                 _fixture.Context.DefaultAccountId));
@@ -84,8 +80,7 @@ namespace UnitTests.UseCasesTests.CloseAccount
 
             await withdrawUseCase.Execute(new Application.Boundaries.Withdraw.WithdrawInput(
                 _fixture.Context.DefaultAccountId,
-                new PositiveMoney(getAccountDetailtOutput.CurrentBalance.ToDecimal())
-            ));
+                new PositiveMoney(getAccountDetailtOutput.CurrentBalance.ToDecimal())));
 
             var input = new CloseAccountInput(
                 _fixture.Context.DefaultAccountId);

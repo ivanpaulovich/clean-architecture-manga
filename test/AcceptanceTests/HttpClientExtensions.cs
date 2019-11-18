@@ -10,7 +10,7 @@ namespace AcceptanceTests
             var method = new HttpMethod("PATCH");
             var request = new HttpRequestMessage(method, requestUri)
             {
-                Content = content
+                Content = content,
             };
 
             var response = await client.SendAsync(request);
