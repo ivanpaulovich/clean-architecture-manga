@@ -1,8 +1,6 @@
 namespace Domain.ValueObjects
 {
-    using System;
-
-    public readonly struct PositiveMoney : IEquatable<PositiveMoney>
+    public readonly struct PositiveMoney
     {
         private readonly Money _value;
 
@@ -15,12 +13,6 @@ namespace Domain.ValueObjects
         }
 
         public Money ToMoney() => _value;
-
-        public bool Equals(PositiveMoney other) => _value.Equals(other._value);
-
-        public override bool Equals(object obj) => obj is PositiveMoney other && Equals(other);
-
-        public override int GetHashCode() => _value.GetHashCode();
 
         internal PositiveMoney Add(PositiveMoney positiveAmount)
         {
