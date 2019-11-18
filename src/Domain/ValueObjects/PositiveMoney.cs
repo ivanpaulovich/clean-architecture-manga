@@ -7,7 +7,9 @@ namespace Domain.ValueObjects
         public PositiveMoney(decimal value)
         {
             if (value < 0)
+            {
                 throw new MoneyShouldBePositiveException("The 'Amount' should be positive.");
+            }
 
             _value = new Money(value);
         }

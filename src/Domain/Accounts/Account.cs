@@ -1,19 +1,21 @@
 namespace Domain.Accounts
 {
     using System;
-    using ValueObjects;
+    using Domain.ValueObjects;
 
     public class Account : IAccount
     {
-        public Guid Id { get; protected set; }
-        public CreditsCollection Credits { get; protected set; }
-        public DebitsCollection Debits { get; protected set; }
-
         protected Account()
         {
             Credits = new CreditsCollection();
             Debits = new DebitsCollection();
         }
+
+        public Guid Id { get; protected set; }
+
+        public CreditsCollection Credits { get; protected set; }
+
+        public DebitsCollection Debits { get; protected set; }
 
         public ICredit Deposit(IEntityFactory entityFactory, PositiveMoney amountToDeposit)
         {
@@ -25,7 +27,9 @@ namespace Domain.Accounts
         public IDebit Withdraw(IEntityFactory entityFactory, PositiveMoney amountToWithdraw)
         {
             if (GetCurrentBalance().LessThan(amountToWithdraw))
+            {
                 throw new MoneyShouldBePositiveException("Account has not enough funds.");
+            }
 
             var debit = entityFactory.NewDebit(this, amountToWithdraw, DateTime.UtcNow);
             Debits.Add(debit);

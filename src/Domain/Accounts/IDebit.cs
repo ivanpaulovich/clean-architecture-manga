@@ -1,6 +1,6 @@
 namespace Domain.Accounts
 {
-    using ValueObjects;
+    using Domain.ValueObjects;
 
     public interface IDebit : IEntity
     {

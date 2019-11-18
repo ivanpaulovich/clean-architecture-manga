@@ -2,7 +2,7 @@ namespace Domain.Accounts
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using ValueObjects;
+    using Domain.ValueObjects;
 
     public sealed class CreditsCollection
     {
@@ -13,7 +13,8 @@ namespace Domain.Accounts
             _credits = new List<ICredit>();
         }
 
-        public void Add<T>(IEnumerable<T> credits) where T : ICredit
+        public void Add<T>(IEnumerable<T> credits)
+            where T : ICredit
         {
             foreach (var credit in credits)
             {

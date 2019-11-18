@@ -1,10 +1,11 @@
 namespace Domain.Customers
 {
-    using Accounts;
+    using Domain.Accounts;
 
     public interface ICustomer : IAggregateRoot
     {
         AccountCollection Accounts { get; }
+
         void Register(IAccount account);
     }
 }

@@ -1,8 +1,8 @@
 namespace Domain.Customers
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System;
 
     public sealed class AccountCollection
     {
