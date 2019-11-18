@@ -1,14 +1,11 @@
 namespace Application.Boundaries.Withdraw
 {
     using System;
+    using Application.Exceptions;
     using Domain.ValueObjects;
-    using Exceptions;
 
     public sealed class WithdrawInput : IUseCaseInput
     {
-        public Guid AccountId { get; }
-        public PositiveMoney Amount { get; }
-
         public WithdrawInput(
             Guid accountId,
             PositiveMoney amount)
@@ -21,5 +18,9 @@ namespace Application.Boundaries.Withdraw
             AccountId = accountId;
             Amount = amount;
         }
+
+        public Guid AccountId { get; }
+
+        public PositiveMoney Amount { get; }
     }
 }

@@ -1,4 +1,6 @@
 namespace Application.Boundaries
 {
-    public interface IUseCaseOutput { }
+    public interface IUseCaseOutput
+    {
+    }
 }

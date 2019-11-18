@@ -5,12 +5,9 @@ namespace Application.Boundaries.Withdraw
 
     public sealed class WithdrawOutput : IUseCaseOutput
     {
-        public Transaction Transaction { get; }
-        public Money UpdatedBalance { get; }
-
         public WithdrawOutput(IDebit debit, Money updatedBalance)
         {
-            Debit debitEntity = (Debit) debit;
+            Debit debitEntity = (Debit)debit;
 
             Transaction = new Transaction(
                 debitEntity.Description,
@@ -19,5 +16,9 @@ namespace Application.Boundaries.Withdraw
 
             UpdatedBalance = updatedBalance;
         }
+
+        public Transaction Transaction { get; }
+
+        public Money UpdatedBalance { get; }
     }
 }

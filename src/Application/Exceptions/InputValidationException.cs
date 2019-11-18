@@ -4,6 +4,9 @@ namespace Application.Exceptions
 
     public sealed class InputValidationException : DomainException
     {
-        public InputValidationException(string message) : base(message) { }
+        public InputValidationException(string message)
+            : base(message)
+        {
+        }
     }
 }

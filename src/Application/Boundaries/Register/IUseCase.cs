@@ -1,4 +1,6 @@
 namespace Application.Boundaries.Register
 {
-    public interface IUseCase : IUseCase<RegisterInput> { }
+    public interface IUseCase : IUseCase<RegisterInput>
+    {
+    }
 }

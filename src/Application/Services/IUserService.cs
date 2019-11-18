@@ -5,6 +5,7 @@ namespace Application.Services
     public interface IUserService
     {
          ExternalUserId GetExternalUserId();
+
          Name GetUserName();
     }
 }
