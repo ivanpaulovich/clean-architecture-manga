@@ -1,15 +1,15 @@
-using Application.Services;
-using Infrastructure.InMemoryDataAccess.Services;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using WebApi.DependencyInjection;
-using WebApi.DependencyInjection.FeatureFlags;
-
 namespace WebApi
 {
+    using Application.Services;
+    using Infrastructure.InMemoryDataAccess.Services;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc.ApiExplorer;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using WebApi.DependencyInjection;
+    using WebApi.DependencyInjection.FeatureFlags;
+
     public sealed class Startup
     {
         public Startup(IConfiguration configuration)
@@ -65,7 +65,6 @@ namespace WebApi
             services.AddVersioning();
             services.AddSwagger();
             services.AddUseCases();
-            //services.AddInMemoryPersistence();
             services.AddSQLServerPersistence(Configuration);
             services.AddPresentersV1();
             services.AddPresentersV2();

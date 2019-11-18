@@ -1,8 +1,8 @@
 namespace WebApi.Filters
 {
     using Domain;
-    using Microsoft.AspNetCore.Mvc.Filters;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Filters;
 
     public sealed class BusinessExceptionFilter : IExceptionFilter
     {
@@ -14,7 +14,7 @@ namespace WebApi.Filters
                 {
                     Status = 400,
                     Title = "Bad Request",
-                    Detail = context.Exception.Message
+                    Detail = context.Exception.Message,
                 };
 
                 context.Result = new BadRequestObjectResult(problemDetails);

@@ -23,8 +23,7 @@ namespace WebApi.UseCases.V1.Withdraw
                 withdrawOutput.Transaction.Amount.ToMoney().ToDecimal(),
                 withdrawOutput.Transaction.Description,
                 withdrawOutput.Transaction.TransactionDate,
-                withdrawOutput.UpdatedBalance.ToDecimal()
-            );
+                withdrawOutput.UpdatedBalance.ToDecimal());
             ViewModel = new ObjectResult(withdrawResponse);
         }
     }

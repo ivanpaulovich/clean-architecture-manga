@@ -1,13 +1,13 @@
 namespace WebApi.DependencyInjection.FeatureFlags
 {
-    using System.Collections.Generic;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using Microsoft.AspNetCore.Mvc.ApplicationParts;
     using Microsoft.AspNetCore.Mvc.Controllers;
-    using Microsoft.FeatureManagement.Mvc;
     using Microsoft.FeatureManagement;
+    using Microsoft.FeatureManagement.Mvc;
 
     public sealed class CustomControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
     {
@@ -30,10 +30,12 @@ namespace WebApi.DependencyInjection.FeatureFlags
                         var constructorArgument = customAttribute.ConstructorArguments.First();
                         foreach (var argumentValue in constructorArgument.Value as IEnumerable)
                         {
-                            var typedArgument = (CustomAttributeTypedArgument) argumentValue;
-                            var typedArgumentValue = (Features) (int) typedArgument.Value;
+                            var typedArgument = (CustomAttributeTypedArgument)argumentValue;
+                            var typedArgumentValue = (Features)(int)typedArgument.Value;
                             if (!_featureManager.IsEnabled(typedArgumentValue.ToString()))
+                            {
                                 feature.Controllers.RemoveAt(i);
+                            }
                         }
                     }
                 }

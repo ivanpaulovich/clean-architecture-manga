@@ -3,7 +3,7 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
     using System.Collections.Generic;
     using Application.Boundaries.GetCustomerDetails;
     using Microsoft.AspNetCore.Mvc;
-    using ViewModels;
+    using WebApi.ViewModels;
 
     public sealed class GetCustomerDetailsPresenter : IOutputPort
     {
@@ -42,8 +42,7 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
                 getCustomerDetailsOutput.CustomerId,
                 getCustomerDetailsOutput.SSN.ToString(),
                 getCustomerDetailsOutput.Name.ToString(),
-                accounts
-            );
+                accounts);
 
             ViewModel = new OkObjectResult(getCustomerDetailsResponse);
         }

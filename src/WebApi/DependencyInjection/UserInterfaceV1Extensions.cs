@@ -1,13 +1,13 @@
 namespace WebApi.DependencyInjection
 {
     using Microsoft.Extensions.DependencyInjection;
-    using UseCases.V1.CloseAccount;
-    using UseCases.V1.Deposit;
-    using UseCases.V1.GetAccountDetails;
-    using UseCases.V1.GetCustomerDetails;
-    using UseCases.V1.Register;
-    using UseCases.V1.Transfer;
-    using UseCases.V1.Withdraw;
+    using WebApi.UseCases.V1.CloseAccount;
+    using WebApi.UseCases.V1.Deposit;
+    using WebApi.UseCases.V1.GetAccountDetails;
+    using WebApi.UseCases.V1.GetCustomerDetails;
+    using WebApi.UseCases.V1.Register;
+    using WebApi.UseCases.V1.Transfer;
+    using WebApi.UseCases.V1.Withdraw;
 
     public static class UserInterfaceV1Extensions
     {

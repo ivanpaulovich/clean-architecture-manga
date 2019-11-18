@@ -2,16 +2,26 @@ namespace WebApi.DependencyInjection
 {
     using System.IO;
     using System.Reflection;
-    using Filters;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
     using Microsoft.Extensions.PlatformAbstractions;
     using Swashbuckle.AspNetCore.SwaggerGen;
+    using WebApi.Filters;
 
     public static class SwaggerExtensions
     {
+        private static string XmlCommentsFilePath
+        {
+            get
+            {
+                string basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                string fileName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name + ".xml";
+                return Path.Combine(basePath, fileName);
+            }
+        }
+
         public static IServiceCollection AddSwagger(this IServiceCollection services)
         {
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
@@ -26,16 +36,6 @@ namespace WebApi.DependencyInjection
                 });
 
             return services;
-        }
-
-        static string XmlCommentsFilePath
-        {
-            get
-            {
-                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                var fileName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name + ".xml";
-                return Path.Combine(basePath, fileName);
-            }
         }
 
         public static IApplicationBuilder UseVersionedSwagger(this IApplicationBuilder app, IApiVersionDescriptionProvider provider)

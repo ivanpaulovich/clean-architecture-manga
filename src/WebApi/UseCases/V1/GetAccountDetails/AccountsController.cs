@@ -24,8 +24,10 @@ namespace WebApi.UseCases.V1.GetAccountDetails
         }
 
         /// <summary>
-        /// Get an account details
+        /// Get an account details.
         /// </summary>
+        /// <param name="request">A <see cref="GetAccountDetailsRequest"></see>.</param>
+        /// <returns>An asynchronous <see cref="IActionResult"/>.</returns>
         [HttpGet("{AccountId}", Name = "GetAccount")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetAccountDetailsResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

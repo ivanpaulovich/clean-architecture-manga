@@ -3,8 +3,8 @@ namespace WebApi.DependencyInjection
     using Application.Repositories;
     using Application.Services;
     using Domain;
-    using Infrastructure.InMemoryDataAccess.Repositories;
     using Infrastructure.InMemoryDataAccess;
+    using Infrastructure.InMemoryDataAccess.Repositories;
     using Microsoft.Extensions.DependencyInjection;
 
     public static class InMemoryInfrastructureExtensions

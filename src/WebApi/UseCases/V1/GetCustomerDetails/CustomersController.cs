@@ -24,8 +24,9 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
         }
 
         /// <summary>
-        /// Get the Customer details 
+        /// Get the Customer details.
         /// </summary>
+        /// <returns>An asynchronous <see cref="IActionResult"/>.</returns>
         [HttpGet(Name = "GetCustomer")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetCustomerDetailsResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

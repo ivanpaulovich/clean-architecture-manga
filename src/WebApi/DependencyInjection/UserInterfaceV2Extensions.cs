@@ -3,7 +3,7 @@ namespace WebApi.DependencyInjection
     using Application.Repositories;
     using Application.Services;
     using Microsoft.Extensions.DependencyInjection;
-    using UseCases.V2.GetAccountDetails;
+    using WebApi.UseCases.V2.GetAccountDetails;
 
     public static class UserInterfaceV2Extensions
     {
@@ -14,8 +14,7 @@ namespace WebApi.DependencyInjection
                 ctx => new Application.UseCases.GetAccountDetails(
                     ctx.GetRequiredService<IUserService>(),
                     ctx.GetRequiredService<GetAccountDetailsPresenterV2>(),
-                    ctx.GetRequiredService<IAccountRepository>()
-                ));
+                    ctx.GetRequiredService<IAccountRepository>()));
 
             return services;
         }

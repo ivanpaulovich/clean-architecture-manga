@@ -1,39 +1,15 @@
 namespace WebApi.UseCases.V1.GetCustomerDetails
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System;
-    using ViewModels;
+    using WebApi.ViewModels;
 
     /// <summary>
-    /// The Customer Details
+    /// The Customer Details.
     /// </summary>
     public sealed class GetCustomerDetailsResponse
     {
-        /// <summary>
-        /// Customer ID
-        /// </summary>
-        [Required]
-        public Guid CustomerId { get; }
-
-        /// <summary>
-        /// SSN
-        /// </summary>
-        [Required]
-        public string SSN { get; }
-
-        /// <summary>
-        /// Name
-        /// </summary>
-        [Required]
-        public string Name { get; }
-
-        /// <summary>
-        /// Accounts
-        /// </summary>
-        [Required]
-        public IList<AccountDetailsModel> Accounts { get; }
-
         public GetCustomerDetailsResponse(
             Guid customerId,
             string ssn,
@@ -45,5 +21,29 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
             Name = name;
             Accounts = accounts;
         }
+
+        /// <summary>
+        /// Gets customer ID.
+        /// </summary>
+        [Required]
+        public Guid CustomerId { get; }
+
+        /// <summary>
+        /// Gets SSN.
+        /// </summary>
+        [Required]
+        public string SSN { get; }
+
+        /// <summary>
+        /// Gets name.
+        /// </summary>
+        [Required]
+        public string Name { get; }
+
+        /// <summary>
+        /// Gets accounts.
+        /// </summary>
+        [Required]
+        public IList<AccountDetailsModel> Accounts { get; }
     }
 }

@@ -16,8 +16,7 @@ namespace WebApi.DependencyInjection.FeatureFlags
             services.AddMvc()
                 .ConfigureApplicationPartManager(apm =>
                     apm.FeatureProviders.Add(
-                        new CustomControllerFeatureProvider(featureManager)
-                    ));
+                        new CustomControllerFeatureProvider(featureManager)));
 
             return services;
         }

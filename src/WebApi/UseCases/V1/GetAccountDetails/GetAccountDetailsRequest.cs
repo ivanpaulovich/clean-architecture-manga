@@ -1,15 +1,15 @@
 namespace WebApi.UseCases.V1.GetAccountDetails
 {
-    using System.ComponentModel.DataAnnotations;
     using System;
+    using System.ComponentModel.DataAnnotations;
 
     /// <summary>
-    /// The Get Account Details Request
+    /// The Get Account Details Request.
     /// </summary>
     public sealed class GetAccountDetailsRequest
     {
         /// <summary>
-        /// Account ID
+        /// Gets or sets account ID.
         /// </summary>
         [Required]
         public Guid AccountId { get; set; }
