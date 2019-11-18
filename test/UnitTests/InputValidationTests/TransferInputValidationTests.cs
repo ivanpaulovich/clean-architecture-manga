@@ -15,8 +15,7 @@ namespace UnitTests.InputValidationTests
                 () => new TransferInput(
                     Guid.Empty,
                     Guid.NewGuid(),
-                    new PositiveMoney(10)
-                ));
+                    new PositiveMoney(10)));
             Assert.Contains("originAccountId", actualEx.Message);
         }
 
@@ -27,8 +26,7 @@ namespace UnitTests.InputValidationTests
                 () => new TransferInput(
                     Guid.NewGuid(),
                     Guid.Empty,
-                    new PositiveMoney(10)
-                ));
+                    new PositiveMoney(10)));
             Assert.Contains("destinationAccountId", actualEx.Message);
         }
 
@@ -38,8 +36,7 @@ namespace UnitTests.InputValidationTests
             var actual = new TransferInput(
                 Guid.NewGuid(),
                 Guid.NewGuid(),
-                new PositiveMoney(10)
-            );
+                new PositiveMoney(10));
             Assert.NotNull(actual);
         }
     }

@@ -6,12 +6,13 @@ namespace UnitTests.UseCasesTests.Deposit
     using Application.UseCases;
     using Domain.ValueObjects;
     using Infrastructure.InMemoryDataAccess.Presenters;
-    using TestFixtures;
+    using UnitTests.TestFixtures;
     using Xunit;
 
     public sealed class DepositTests : IClassFixture<StandardFixture>
     {
         private readonly StandardFixture _fixture;
+
         public DepositTests(StandardFixture fixture)
         {
             _fixture = fixture;
@@ -27,8 +28,7 @@ namespace UnitTests.UseCasesTests.Deposit
                 _fixture.EntityFactory,
                 presenter,
                 _fixture.AccountRepository,
-                _fixture.UnitOfWork
-            );
+                _fixture.UnitOfWork);
 
             await sut.Execute(
                 new DepositInput(
@@ -49,15 +49,13 @@ namespace UnitTests.UseCasesTests.Deposit
                 _fixture.EntityFactory,
                 presenter,
                 _fixture.AccountRepository,
-                _fixture.UnitOfWork
-            );
+                _fixture.UnitOfWork);
 
             await Assert.ThrowsAsync<MoneyShouldBePositiveException>(() =>
                 sut.Execute(
                     new DepositInput(
                         _fixture.Context.DefaultAccountId,
-                        new PositiveMoney(amount)
-                    )));
+                        new PositiveMoney(amount))));
         }
     }
 }

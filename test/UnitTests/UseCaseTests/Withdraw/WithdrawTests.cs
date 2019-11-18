@@ -6,13 +6,14 @@ namespace UnitTests.UseCasesTests.Withdraw
     using Application.UseCases;
     using Domain.ValueObjects;
     using Infrastructure.InMemoryDataAccess.Presenters;
-    using TestFixtures;
+    using UnitTests.TestFixtures;
     using Xunit;
 
-    public sealed class WithdrawlTests : IClassFixture<StandardFixture>
+    public sealed class WithdrawTests : IClassFixture<StandardFixture>
     {
         private readonly StandardFixture _fixture;
-        public WithdrawlTests(StandardFixture fixture)
+
+        public WithdrawTests(StandardFixture fixture)
         {
             _fixture = fixture;
         }
@@ -29,8 +30,7 @@ namespace UnitTests.UseCasesTests.Withdraw
                 _fixture.EntityFactory,
                 presenter,
                 _fixture.AccountRepository,
-                _fixture.UnitOfWork
-            );
+                _fixture.UnitOfWork);
 
             await sut.Execute(new WithdrawInput(
                 _fixture.Context.DefaultAccountId,

@@ -11,8 +11,7 @@ namespace UnitTests.InputValidationTests
         {
             var actual = new RegisterInput(
                 new SSN("19860817999"),
-                new PositiveMoney(10)
-            );
+                new PositiveMoney(10));
             Assert.NotNull(actual);
         }
     }
