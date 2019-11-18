@@ -1,8 +1,6 @@
 namespace Domain.ValueObjects
 {
-    using System;
-
-    public readonly struct Name : IEquatable<Name>
+    public readonly struct Name
     {
         private readonly string _text;
 
@@ -18,11 +16,5 @@ namespace Domain.ValueObjects
         {
             return _text;
         }
-
-        public bool Equals(Name other) => _text == other._text;
-
-        public override bool Equals(object obj) => obj is Name other && Equals(other);
-
-        public override int GetHashCode() => _text != null ? _text.GetHashCode() : 0;
     }
 }

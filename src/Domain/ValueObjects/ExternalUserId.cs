@@ -1,8 +1,6 @@
 namespace Domain.ValueObjects
 {
-    using System;
-
-    public readonly struct ExternalUserId : IEquatable<ExternalUserId>
+    public readonly struct ExternalUserId
     {
         private readonly string _text;
 
@@ -18,11 +16,5 @@ namespace Domain.ValueObjects
         {
             return _text;
         }
-
-        public bool Equals(ExternalUserId other) => _text == other._text;
-
-        public override bool Equals(object obj) => obj is ExternalUserId other && Equals(other);
-
-        public override int GetHashCode() => _text != null ? _text.GetHashCode() : 0;
     }
 }

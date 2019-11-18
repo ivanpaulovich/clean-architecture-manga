@@ -1,8 +1,6 @@
 namespace Domain.ValueObjects
 {
-    using System;
-
-    public readonly struct Money : IEquatable<Money>
+    public readonly struct Money
     {
         private readonly decimal _money;
 
@@ -12,12 +10,6 @@ namespace Domain.ValueObjects
         }
 
         public decimal ToDecimal() => _money;
-
-        public bool Equals(Money other) => _money == other._money;
-
-        public override bool Equals(object obj) => obj is Money other && Equals(other);
-
-        public override int GetHashCode() => _money.GetHashCode();
 
         internal bool LessThan(PositiveMoney amount)
         {
