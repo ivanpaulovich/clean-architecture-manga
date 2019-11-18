@@ -4,7 +4,7 @@ services:
     image: ivanpaulovich/clean-architecture-manga
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: src/WebApi/Dockerfile
     ports:
         - 5500:80
     environment:
