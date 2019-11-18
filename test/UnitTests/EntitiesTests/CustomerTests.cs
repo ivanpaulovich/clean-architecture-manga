@@ -10,13 +10,12 @@ namespace UnitTests.EntitiesTests
         public void Customer_Should_Be_Registered_With_1_Account()
         {
             var entityFactory = new Infrastructure.InMemoryDataAccess.EntityFactory();
-            //
+
             // Arrange
             ICustomer sut = entityFactory.NewCustomer(
                 new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608179922"),
-                new Name("Ivan Paulovich")
-            );
+                new Name("Ivan Paulovich"));
 
             var account = entityFactory.NewAccount(sut);
 
