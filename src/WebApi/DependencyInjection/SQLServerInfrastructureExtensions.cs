@@ -3,8 +3,8 @@ namespace WebApi.DependencyInjection
     using Application.Repositories;
     using Application.Services;
     using Domain;
-    using Infrastructure.EntityFrameworkDataAccess.Repositories;
     using Infrastructure.EntityFrameworkDataAccess;
+    using Infrastructure.EntityFrameworkDataAccess.Repositories;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;

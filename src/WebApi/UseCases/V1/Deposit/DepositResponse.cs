@@ -1,37 +1,13 @@
 namespace WebApi.UseCases.V1.Deposit
 {
-    using System.ComponentModel.DataAnnotations;
     using System;
+    using System.ComponentModel.DataAnnotations;
 
     /// <summary>
-    /// The response for a successfull Deposit
+    /// The response for a successfull Deposit.
     /// </summary>
     public sealed class DepositResponse
     {
-        /// <summary>
-        /// Amount Deposited
-        /// </summary>
-        [Required]
-        public decimal Amount { get; }
-
-        /// <summary>
-        /// Description
-        /// </summary>
-        [Required]
-        public string Description { get; }
-
-        /// <summary>
-        /// Transaction Date
-        /// </summary>
-        [Required]
-        public DateTime TransactionDate { get; }
-
-        /// <summary>
-        /// Updated Balance
-        /// </summary>
-        [Required]
-        public decimal UpdateBalance { get; }
-
         public DepositResponse(
             decimal amount,
             string description,
@@ -43,5 +19,29 @@ namespace WebApi.UseCases.V1.Deposit
             TransactionDate = transactionDate;
             UpdateBalance = updatedBalance;
         }
+
+        /// <summary>
+        /// Gets amount Deposited.
+        /// </summary>
+        [Required]
+        public decimal Amount { get; }
+
+        /// <summary>
+        /// Gets description.
+        /// </summary>
+        [Required]
+        public string Description { get; }
+
+        /// <summary>
+        /// Gets transaction Date.
+        /// </summary>
+        [Required]
+        public DateTime TransactionDate { get; }
+
+        /// <summary>
+        /// Gets updated Balance.
+        /// </summary>
+        [Required]
+        public decimal UpdateBalance { get; }
     }
 }

@@ -25,7 +25,7 @@ namespace WebApi.UseCases.V1.CloseAccount
         }
 
         /// <summary>
-        /// Close an Account
+        /// Close an Account.
         /// </summary>
         /// <response code="200">The closed account id.</response>
         /// <response code="400">Bad request.</response>

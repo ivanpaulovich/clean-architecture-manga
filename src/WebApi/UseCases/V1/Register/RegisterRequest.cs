@@ -3,18 +3,18 @@ namespace WebApi.UseCases.V1.Register
     using System.ComponentModel.DataAnnotations;
 
     /// <summary>
-    /// Registration Request
+    /// Registration Request.
     /// </summary>
     public sealed class RegisterRequest
     {
         /// <summary>
-        /// SSN
+        /// Gets or sets sSN.
         /// </summary>
         [Required]
         public string SSN { get; set; }
 
         /// <summary>
-        /// Initial Amount
+        /// Gets or sets initial Amount.
         /// </summary>
         [Required]
         public decimal InitialAmount { get; set; }

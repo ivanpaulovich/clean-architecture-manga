@@ -18,8 +18,7 @@ namespace WebApi.UseCases.V1.Deposit
                 depositOutput.Transaction.Amount.ToMoney().ToDecimal(),
                 depositOutput.Transaction.Description,
                 depositOutput.Transaction.TransactionDate,
-                depositOutput.UpdatedBalance.ToDecimal()
-            );
+                depositOutput.UpdatedBalance.ToDecimal());
             ViewModel = new ObjectResult(depositResponse);
         }
     }

@@ -3,12 +3,12 @@ namespace WebApi.UseCases.V1.Transfer
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Application.Boundaries.Transfer;
-    using DependencyInjection.FeatureFlags;
     using Domain.ValueObjects;
     using FluentMediator;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;
+    using WebApi.DependencyInjection.FeatureFlags;
 
     [FeatureGate(Features.Transfer)]
     [ApiVersion("1.0")]
@@ -28,7 +28,7 @@ namespace WebApi.UseCases.V1.Transfer
         }
 
         /// <summary>
-        /// Transfer to an account
+        /// Transfer to an account.
         /// </summary>
         /// <response code="200">The updated balance.</response>
         /// <response code="400">Bad request.</response>
@@ -44,8 +44,7 @@ namespace WebApi.UseCases.V1.Transfer
             var input = new TransferInput(
                 request.OriginAccountId,
                 request.DestinationAccountId,
-                new PositiveMoney(request.Amount)
-            );
+                new PositiveMoney(request.Amount));
 
             await _mediator.PublishAsync(input);
             return _presenter.ViewModel;

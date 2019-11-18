@@ -1,22 +1,10 @@
 namespace WebApi.UseCases.V1.Withdraw
 {
-    using System.ComponentModel.DataAnnotations;
     using System;
+    using System.ComponentModel.DataAnnotations;
 
     public sealed class WithdrawResponse
     {
-        [Required]
-        public decimal Amount { get; }
-
-        [Required]
-        public string Description { get; }
-
-        [Required]
-        public DateTime TransactionDate { get; }
-
-        [Required]
-        public decimal UpdateBalance { get; }
-
         public WithdrawResponse(
             decimal amount,
             string description,
@@ -28,5 +16,17 @@ namespace WebApi.UseCases.V1.Withdraw
             TransactionDate = transactionDate;
             UpdateBalance = updatedBalance;
         }
+
+        [Required]
+        public decimal Amount { get; }
+
+        [Required]
+        public string Description { get; }
+
+        [Required]
+        public DateTime TransactionDate { get; }
+
+        [Required]
+        public decimal UpdateBalance { get; }
     }
 }

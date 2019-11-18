@@ -1,13 +1,13 @@
 namespace WebApi.DependencyInjection
 {
-    using System.Net.Http.Headers;
     using System.Net.Http;
+    using System.Net.Http.Headers;
     using System.Security.Claims;
     using System.Text.Json;
     using Application.Services;
+    using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authentication.Cookies;
     using Microsoft.AspNetCore.Authentication.OAuth;
-    using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.Configuration;
@@ -15,7 +15,6 @@ namespace WebApi.DependencyInjection
     using WebApi.DependencyInjection.Authentication;
 
     // https://www.jerriepelser.com/blog/authenticate-oauth-aspnet-core-2/
-
     public static class GitHubAuthenticationExtensions
     {
         public static IServiceCollection AddGitHubAuthentication(
@@ -68,7 +67,7 @@ namespace WebApi.DependencyInjection
                             var user = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
 
                             context.RunClaimActions(user.RootElement);
-                        }
+                        },
                     };
                 });
 

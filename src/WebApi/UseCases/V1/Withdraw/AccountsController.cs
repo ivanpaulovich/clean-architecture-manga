@@ -25,7 +25,7 @@ namespace WebApi.UseCases.V1.Withdraw
         }
 
         /// <summary>
-        /// Withdraw on an account
+        /// Withdraw on an account.
         /// </summary>
         /// <response code="200">The updated balance.</response>
         /// <response code="400">Bad request.</response>
@@ -40,8 +40,7 @@ namespace WebApi.UseCases.V1.Withdraw
         {
             var input = new WithdrawInput(
                 request.AccountId,
-                new PositiveMoney(request.Amount)
-            );
+                new PositiveMoney(request.Amount));
             await _mediator.PublishAsync(input);
             return _presenter.ViewModel;
         }

@@ -3,7 +3,7 @@ namespace WebApi.UseCases.V1.GetAccountDetails
     using System.Collections.Generic;
     using Application.Boundaries.GetAccountDetails;
     using Microsoft.AspNetCore.Mvc;
-    using ViewModels;
+    using WebApi.ViewModels;
 
     public sealed class GetAccountDetailsPresenter : IOutputPort
     {
