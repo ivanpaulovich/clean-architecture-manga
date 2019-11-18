@@ -5,14 +5,15 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
 
     public sealed class GetAccountDetailsPresenter : IOutputPort
     {
-        public Collection<GetAccountDetailsOutput> GetAccountDetails { get; }
-        public Collection<string> NotFounds { get; }
-
         public GetAccountDetailsPresenter()
         {
             GetAccountDetails = new Collection<GetAccountDetailsOutput>();
             NotFounds = new Collection<string>();
         }
+
+        public Collection<GetAccountDetailsOutput> GetAccountDetails { get; }
+
+        public Collection<string> NotFounds { get; }
 
         public void Standard(GetAccountDetailsOutput output)
         {

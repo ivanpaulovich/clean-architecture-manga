@@ -5,14 +5,15 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
 
     public sealed class CloseAccountPresenter : IOutputPort
     {
-        public Collection<CloseAccountOutput> ClosedAccounts { get; }
-        public Collection<string> NotFounds { get; }
-
         public CloseAccountPresenter()
         {
             ClosedAccounts = new Collection<CloseAccountOutput>();
             NotFounds = new Collection<string>();
         }
+
+        public Collection<CloseAccountOutput> ClosedAccounts { get; }
+
+        public Collection<string> NotFounds { get; }
 
         public void Standard(CloseAccountOutput output)
         {

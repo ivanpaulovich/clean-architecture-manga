@@ -1,8 +1,8 @@
 namespace Infrastructure.EntityFrameworkDataAccess.Repositories
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using System;
     using Application.Repositories;
     using Domain.Customers;
     using Domain.ValueObjects;
@@ -20,7 +20,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
 
         public async Task Add(ICustomer customer)
         {
-            await _context.Customers.AddAsync((EntityFrameworkDataAccess.Customer) customer);
+            await _context.Customers.AddAsync((EntityFrameworkDataAccess.Customer)customer);
             await _context.SaveChangesAsync();
         }
 
@@ -31,7 +31,9 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
                 .SingleOrDefaultAsync();
 
             if (customer is null)
+            {
                 throw new CustomerNotFoundException($"The customer {externalUserId} does not exist or is not processed yet.");
+            }
 
             var accounts = _context.Accounts
                 .Where(e => e.CustomerId == customer.Id)
@@ -45,7 +47,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
 
         public async Task Update(ICustomer customer)
         {
-            _context.Customers.Update((EntityFrameworkDataAccess.Customer) customer);
+            _context.Customers.Update((EntityFrameworkDataAccess.Customer)customer);
             await _context.SaveChangesAsync();
         }
     }

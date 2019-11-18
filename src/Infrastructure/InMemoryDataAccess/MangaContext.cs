@@ -1,22 +1,11 @@
 namespace Infrastructure.InMemoryDataAccess
 {
-    using System.Collections.ObjectModel;
     using System;
+    using System.Collections.ObjectModel;
     using Domain.ValueObjects;
 
     public sealed class MangaContext
     {
-        public Collection<Customer> Customers { get; set; }
-        public Collection<Account> Accounts { get; set; }
-        public Collection<Credit> Credits { get; set; }
-        public Collection<Debit> Debits { get; set; }
-
-        public Guid DefaultCustomerId { get; }
-        public Guid DefaultAccountId { get; }
-
-        public Guid SecondCustomerId { get; }
-        public Guid SecondAccountId { get; }
-
         public MangaContext()
         {
             var entityFactory = new EntityFactory();
@@ -40,8 +29,8 @@ namespace Infrastructure.InMemoryDataAccess
 
             Customers.Add(customer);
             Accounts.Add(account);
-            Credits.Add((Credit) credit);
-            Debits.Add((Debit) debit);
+            Credits.Add((Credit)credit);
+            Debits.Add((Debit)debit);
 
             DefaultCustomerId = customer.Id;
             DefaultAccountId = account.Id;
@@ -58,5 +47,21 @@ namespace Infrastructure.InMemoryDataAccess
             SecondCustomerId = secondCustomer.Id;
             SecondAccountId = secondAccount.Id;
         }
+
+        public Collection<Customer> Customers { get; set; }
+
+        public Collection<Account> Accounts { get; set; }
+
+        public Collection<Credit> Credits { get; set; }
+
+        public Collection<Debit> Debits { get; set; }
+
+        public Guid DefaultCustomerId { get; }
+
+        public Guid DefaultAccountId { get; }
+
+        public Guid SecondCustomerId { get; }
+
+        public Guid SecondAccountId { get; }
     }
 }

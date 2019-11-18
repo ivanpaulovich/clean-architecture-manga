@@ -5,14 +5,15 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
 
     public sealed class TransferPresenter : IOutputPort
     {
-        public Collection<TransferOutput> Transfers { get; }
-        public Collection<string> NotFounds { get; }
-
         public TransferPresenter()
         {
             Transfers = new Collection<TransferOutput>();
             NotFounds = new Collection<string>();
         }
+
+        public Collection<TransferOutput> Transfers { get; }
+
+        public Collection<string> NotFounds { get; }
 
         public void Standard(TransferOutput output)
         {

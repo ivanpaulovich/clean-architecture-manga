@@ -6,10 +6,6 @@ namespace Infrastructure.InMemoryDataAccess
 
     public class Credit : Domain.Accounts.Credit
     {
-        public Guid AccountId { get; protected set; }
-
-        protected Credit() { }
-
         public Credit(
             IAccount account,
             PositiveMoney amountToDeposit,
@@ -19,5 +15,11 @@ namespace Infrastructure.InMemoryDataAccess
             Amount = amountToDeposit;
             TransactionDate = transactionDate;
         }
+
+        protected Credit()
+        {
+        }
+
+        public Guid AccountId { get; protected set; }
     }
 }
