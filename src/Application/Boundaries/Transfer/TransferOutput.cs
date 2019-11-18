@@ -6,12 +6,13 @@ namespace Application.Boundaries.Transfer
 
     public sealed class TransferOutput : IUseCaseOutput
     {
-        public Transaction Transaction { get; }
-        public Money UpdatedBalance { get; }
-
-        public TransferOutput(IDebit debit, Money updatedBalance, Guid originAccountId, Guid destinationAccountId)
+        public TransferOutput(
+            IDebit debit,
+            Money updatedBalance,
+            Guid originAccountId,
+            Guid destinationAccountId)
         {
-            Debit debitEntity = (Debit) debit;
+            Debit debitEntity = (Debit)debit;
 
             Transaction = new Transaction(
                 originAccountId,
@@ -22,5 +23,9 @@ namespace Application.Boundaries.Transfer
 
             UpdatedBalance = updatedBalance;
         }
+
+        public Transaction Transaction { get; }
+
+        public Money UpdatedBalance { get; }
     }
 }

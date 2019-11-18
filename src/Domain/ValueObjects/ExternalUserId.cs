@@ -7,7 +7,9 @@ namespace Domain.ValueObjects
         public ExternalUserId(string text)
         {
             if (string.IsNullOrWhiteSpace(text))
+            {
                 throw new ExternalUserIdShouldNotBeEmptyException($"The '{nameof(text)}' field is required");
+            }
 
             _text = text;
         }

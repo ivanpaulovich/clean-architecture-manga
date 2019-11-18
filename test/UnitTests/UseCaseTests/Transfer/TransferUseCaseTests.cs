@@ -6,12 +6,13 @@ namespace UnitTests.UseCaseTests.Transfer
     using Application.UseCases;
     using Domain.ValueObjects;
     using Infrastructure.InMemoryDataAccess.Presenters;
-    using TestFixtures;
+    using UnitTests.TestFixtures;
     using Xunit;
 
     public sealed class TransferUseCaseTests : IClassFixture<StandardFixture>
     {
         private readonly StandardFixture _fixture;
+
         public TransferUseCaseTests(StandardFixture fixture)
         {
             _fixture = fixture;
@@ -29,8 +30,7 @@ namespace UnitTests.UseCaseTests.Transfer
                 _fixture.EntityFactory,
                 presenter,
                 _fixture.AccountRepository,
-                _fixture.UnitOfWork
-            );
+                _fixture.UnitOfWork);
 
             await sut.Execute(
                 new TransferInput(

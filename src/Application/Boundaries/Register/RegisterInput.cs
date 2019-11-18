@@ -4,9 +4,6 @@ namespace Application.Boundaries.Register
 
     public sealed class RegisterInput : IUseCaseInput
     {
-        public SSN SSN { get; }
-        public PositiveMoney InitialAmount { get; }
-
         public RegisterInput(
             SSN ssn,
             PositiveMoney initialAmount)
@@ -14,5 +11,9 @@ namespace Application.Boundaries.Register
             SSN = ssn;
             InitialAmount = initialAmount;
         }
+
+        public SSN SSN { get; }
+
+        public PositiveMoney InitialAmount { get; }
     }
 }

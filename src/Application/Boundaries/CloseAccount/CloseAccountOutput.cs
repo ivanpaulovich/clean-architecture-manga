@@ -5,11 +5,11 @@ namespace Application.Boundaries.CloseAccount
 
     public sealed class CloseAccountOutput : IUseCaseOutput
     {
-        public Guid AccountId { get; }
-
         public CloseAccountOutput(IAccount account)
         {
             AccountId = account.Id;
         }
+
+        public Guid AccountId { get; }
     }
 }

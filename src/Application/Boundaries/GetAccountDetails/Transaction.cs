@@ -5,10 +5,6 @@ namespace Application.Boundaries.GetAccountDetails
 
     public sealed class Transaction
     {
-        public string Description { get; }
-        public PositiveMoney Amount { get; }
-        public DateTime TransactionDate { get; }
-
         public Transaction(
             string description,
             PositiveMoney amount,
@@ -18,5 +14,11 @@ namespace Application.Boundaries.GetAccountDetails
             Amount = amount;
             TransactionDate = transactionDate;
         }
+
+        public string Description { get; }
+
+        public PositiveMoney Amount { get; }
+
+        public DateTime TransactionDate { get; }
     }
 }

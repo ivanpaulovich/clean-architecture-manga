@@ -1,14 +1,11 @@
 namespace Application.Boundaries.Deposit
 {
     using System;
+    using Application.Exceptions;
     using Domain.ValueObjects;
-    using Exceptions;
 
     public sealed class DepositInput : IUseCaseInput
     {
-        public Guid AccountId { get; }
-        public PositiveMoney Amount { get; }
-
         public DepositInput(
             Guid accountId,
             PositiveMoney amount)
@@ -21,5 +18,9 @@ namespace Application.Boundaries.Deposit
             AccountId = accountId;
             Amount = amount;
         }
+
+        public Guid AccountId { get; }
+
+        public PositiveMoney Amount { get; }
     }
 }

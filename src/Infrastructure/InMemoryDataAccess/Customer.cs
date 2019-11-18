@@ -1,13 +1,15 @@
 namespace Infrastructure.InMemoryDataAccess
 {
-    using System.Collections.Generic;
     using System;
+    using System.Collections.Generic;
     using Domain.Customers;
     using Domain.ValueObjects;
 
     public class Customer : Domain.Customers.Customer
     {
-        public Customer() { }
+        public Customer()
+        {
+        }
 
         public Customer(ExternalUserId externalUserId, SSN ssn, Name name)
         {

@@ -12,8 +12,7 @@ namespace UnitTests.InputValidationTests
         {
             var actualEx = Assert.Throws<InputValidationException>(
                 () => new GetAccountDetailsInput(
-                    Guid.Empty
-                ));
+                    Guid.Empty));
             Assert.Contains("accountId", actualEx.Message);
         }
 
@@ -21,8 +20,7 @@ namespace UnitTests.InputValidationTests
         public void GivenValidData_InputCreated()
         {
             var actual = new GetAccountDetailsInput(
-                Guid.NewGuid()
-            );
+                Guid.NewGuid());
             Assert.NotNull(actual);
         }
     }

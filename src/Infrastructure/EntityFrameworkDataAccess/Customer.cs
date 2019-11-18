@@ -1,14 +1,12 @@
 namespace Infrastructure.EntityFrameworkDataAccess
 {
-    using System.Collections.Generic;
     using System;
+    using System.Collections.Generic;
     using Domain.Customers;
     using Domain.ValueObjects;
 
     public class Customer : Domain.Customers.Customer
     {
-        protected Customer() { }
-
         public Customer(
             ExternalUserId externalUserId,
             SSN ssn,
@@ -18,6 +16,10 @@ namespace Infrastructure.EntityFrameworkDataAccess
             ExternalUserId = externalUserId;
             SSN = ssn;
             Name = name;
+        }
+
+        protected Customer()
+        {
         }
 
         public void LoadAccounts(IEnumerable<Guid> accounts)

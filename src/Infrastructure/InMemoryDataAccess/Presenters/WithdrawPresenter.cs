@@ -5,16 +5,18 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
 
     public sealed class WithdrawPresenter : IOutputPort
     {
-        public Collection<WithdrawOutput> Withdrawals { get; }
-        public Collection<string> NotFounds { get; }
-        public Collection<string> OutOfBalances { get; }
-
         public WithdrawPresenter()
         {
             Withdrawals = new Collection<WithdrawOutput>();
             NotFounds = new Collection<string>();
             OutOfBalances = new Collection<string>();
         }
+
+        public Collection<WithdrawOutput> Withdrawals { get; }
+
+        public Collection<string> NotFounds { get; }
+
+        public Collection<string> OutOfBalances { get; }
 
         public void Standard(WithdrawOutput output)
         {

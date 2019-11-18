@@ -1,5 +1,7 @@
 namespace Application.Boundaries.Deposit
 {
     public interface IOutputPort
-        : IOutputPortStandard<DepositOutput>, IOutputPortNotFound { }
+        : IOutputPortStandard<DepositOutput>, IOutputPortNotFound
+    {
+    }
 }

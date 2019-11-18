@@ -12,22 +12,19 @@ namespace UnitTests.EntitiesTests
         public void New_Account_Should_Have_100_Credit_After_Deposit()
         {
             var entityFactory = new Infrastructure.InMemoryDataAccess.EntityFactory();
-            //
+
             // Arrange
             PositiveMoney amount = new PositiveMoney(100.0M);
             ICustomer customer = entityFactory.NewCustomer(
                 new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608179922"),
-                new Name("Ivan Paulovich")
-            );
+                new Name("Ivan Paulovich"));
 
             IAccount sut = entityFactory.NewAccount(customer);
 
-            //
             // Act
-            Credit actual = (Credit) sut.Deposit(entityFactory, amount);
+            Credit actual = (Credit)sut.Deposit(entityFactory, amount);
 
-            //
             // Assert
             Assert.Equal(100, actual.Amount.ToMoney().ToDecimal());
             Assert.Equal("Credit", actual.Description);
@@ -36,26 +33,21 @@ namespace UnitTests.EntitiesTests
         [Fact]
         public void New_Account_With_1000_Balance_Should_Have_900_Credit_After_Withdraw()
         {
-            //
             // Arrange
             var entityFactory = new Infrastructure.InMemoryDataAccess.EntityFactory();
-            //
-            // Arrange
+
             ICustomer customer = entityFactory.NewCustomer(
                 new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608179922"),
-                new Name("Ivan Paulovich")
-            );
+                new Name("Ivan Paulovich"));
 
             IAccount sut = entityFactory.NewAccount(customer);
 
             sut.Deposit(entityFactory, new PositiveMoney(1000.0M));
 
-            //
             // Act
             sut.Withdraw(entityFactory, new PositiveMoney(100));
 
-            //
             // Assert
             Assert.Equal(900, sut.GetCurrentBalance().ToDecimal());
         }
@@ -65,21 +57,17 @@ namespace UnitTests.EntitiesTests
         {
             var entityFactory = new Infrastructure.InMemoryDataAccess.EntityFactory();
 
-            //
             // Arrange
             ICustomer customer = entityFactory.NewCustomer(
                 new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608179922"),
-                new Name("Ivan Paulovich")
-            );
+                new Name("Ivan Paulovich"));
 
             IAccount sut = entityFactory.NewAccount(customer);
 
-            //
             // Act
             bool actual = sut.IsClosingAllowed();
 
-            //
             // Assert
             Assert.True(actual);
         }
@@ -89,13 +77,11 @@ namespace UnitTests.EntitiesTests
         {
             var entityFactory = new Infrastructure.InMemoryDataAccess.EntityFactory();
 
-            //
             // Arrange
             ICustomer customer = entityFactory.NewCustomer(
                 new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608179922"),
-                new Name("Ivan Paulovich")
-            );
+                new Name("Ivan Paulovich"));
 
             IAccount sut = entityFactory.NewAccount(customer);
 
@@ -104,7 +90,6 @@ namespace UnitTests.EntitiesTests
             // Act
             var ex = Record.Exception(() => sut.Withdraw(entityFactory, new PositiveMoney(5000)));
 
-            //
             // Act and Assert
             Assert.NotNull(ex);
             Assert.IsType<MoneyShouldBePositiveException>(ex);
@@ -115,13 +100,11 @@ namespace UnitTests.EntitiesTests
         {
             var entityFactory = new Infrastructure.InMemoryDataAccess.EntityFactory();
 
-            //
             // Arrange
             ICustomer customer = entityFactory.NewCustomer(
                 new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608179922"),
-                new Name("Ivan Paulovich")
-            );
+                new Name("Ivan Paulovich"));
 
             IAccount sut = entityFactory.NewAccount(customer);
 
@@ -129,8 +112,8 @@ namespace UnitTests.EntitiesTests
             sut.Withdraw(entityFactory, new PositiveMoney(100));
             sut.Deposit(entityFactory, new PositiveMoney(50));
 
-            Assert.Equal(2, ((Account) sut).Credits.GetTransactions().Count);
-            Assert.Equal(1, ((Account) sut).Debits.GetTransactions().Count);
+            Assert.Equal(2, ((Account)sut).Credits.GetTransactions().Count);
+            Assert.Equal(1, ((Account)sut).Debits.GetTransactions().Count);
         }
     }
 }

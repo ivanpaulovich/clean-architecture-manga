@@ -1,22 +1,21 @@
 namespace Application.Boundaries.GetAccountDetails
 {
     using System;
+    using Application.Exceptions;
     using Domain.ValueObjects;
-    using Exceptions;
 
     public sealed class GetAccountDetailsInput : IUseCaseInput
     {
-        public Guid AccountId { get; }
-
-        public GetAccountDetailsInput(
-            Guid accountId)
+        public GetAccountDetailsInput(Guid accountId)
         {
             if (accountId == Guid.Empty)
             {
                 throw new InputValidationException($"{nameof(accountId)} cannot be empty.");
             }
-            
+
             AccountId = accountId;
         }
+
+        public Guid AccountId { get; }
     }
 }

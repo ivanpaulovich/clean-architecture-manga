@@ -1,8 +1,8 @@
 namespace WebApi.Filters
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System;
     using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -12,9 +12,9 @@ namespace WebApi.Filters
         {
             new OpenApiTag
             {
-            Name = "RoutingApi",
-            Description = "This is a description for the api routes"
-            }
+                Name = "RoutingApi",
+                Description = "This is a description for the api routes",
+            },
         };
 
         public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
@@ -30,17 +30,20 @@ namespace WebApi.Filters
 
         private List<OpenApiTag> GetFilteredTagDefinitions(DocumentFilterContext context)
         {
-            //Filtering ensures route for tag is present
+            // Filtering ensures route for tag is present
             var currentGroupNames = context.ApiDescriptions
                 .Select(description => description.GroupName);
-            return _tags.Where(tag => currentGroupNames.Contains(tag.Name))
+
+            return _tags
+                .Where(tag => currentGroupNames.Contains(tag.Name))
                 .ToList();
         }
 
         private OpenApiPaths GetSortedPaths(
             OpenApiDocument swaggerDoc)
         {
-            IDictionary<string, OpenApiPathItem> dic = swaggerDoc.Paths.OrderBy(pair => pair.Key)
+            IDictionary<string, OpenApiPathItem> dic = swaggerDoc.Paths
+                .OrderBy(pair => pair.Key)
                 .ToDictionary(pair => pair.Key, pair => pair.Value);
 
             return null;

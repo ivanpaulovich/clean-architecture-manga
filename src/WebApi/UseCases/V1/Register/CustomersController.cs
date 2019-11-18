@@ -25,13 +25,13 @@ namespace WebApi.UseCases.V1.Register
         }
 
         /// <summary>
-        /// Register a customer
+        /// Register a customer.
         /// </summary>
         /// <response code="200">The registered customer was create successfully.</response>
         /// <response code="400">Bad request.</response>
         /// <response code="500">Error.</response>
-        /// <param name="request">The request to register a customer</param>
-        /// <returns>The newly registered customer</returns>
+        /// <param name="request">The request to register a customer.</param>
+        /// <returns>The newly registered customer.</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RegisterResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -40,8 +40,7 @@ namespace WebApi.UseCases.V1.Register
         {
             var input = new RegisterInput(
                 new SSN(request.SSN),
-                new PositiveMoney(request.InitialAmount)
-            );
+                new PositiveMoney(request.InitialAmount));
             await _mediator.PublishAsync(input);
             return _presenter.ViewModel;
         }

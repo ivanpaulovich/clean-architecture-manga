@@ -1,16 +1,12 @@
 namespace Application.Boundaries.GetAccountDetails
 {
-    using System.Collections.Generic;
     using System;
+    using System.Collections.Generic;
     using Domain.Accounts;
     using Domain.ValueObjects;
 
     public sealed class GetAccountDetailsOutput : IUseCaseOutput
     {
-        public Guid AccountId { get; }
-        public Money CurrentBalance { get; }
-        public List<Transaction> Transactions { get; }
-
         public GetAccountDetailsOutput(
             Guid accountId,
             Money currentBalance,
@@ -23,7 +19,7 @@ namespace Application.Boundaries.GetAccountDetails
 
         public GetAccountDetailsOutput(IAccount account)
         {
-            var accountEntity = (Account) account;
+            var accountEntity = (Account)account;
 
             AccountId = accountEntity.Id;
             CurrentBalance = accountEntity
@@ -33,12 +29,11 @@ namespace Application.Boundaries.GetAccountDetails
             foreach (var credit in accountEntity.Credits
                     .GetTransactions())
             {
-                Credit creditEntity = (Credit) credit;
+                Credit creditEntity = (Credit)credit;
 
                 Transaction transactionOutput = new Transaction(
                     creditEntity.Description,
-                    creditEntity
-                    .Amount,
+                    creditEntity.Amount,
                     creditEntity.TransactionDate);
 
                 transactionResults.Add(transactionOutput);
@@ -47,12 +42,11 @@ namespace Application.Boundaries.GetAccountDetails
             foreach (var debit in accountEntity.Debits
                     .GetTransactions())
             {
-                Debit debitEntity = (Debit) debit;
+                Debit debitEntity = (Debit)debit;
 
                 Transaction transactionOutput = new Transaction(
                     debitEntity.Description,
-                    debitEntity
-                    .Amount,
+                    debitEntity.Amount,
                     debitEntity.TransactionDate);
 
                 transactionResults.Add(transactionOutput);
@@ -60,5 +54,11 @@ namespace Application.Boundaries.GetAccountDetails
 
             Transactions = transactionResults;
         }
+
+        public Guid AccountId { get; }
+
+        public Money CurrentBalance { get; }
+
+        public List<Transaction> Transactions { get; }
     }
 }
