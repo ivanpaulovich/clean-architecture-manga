@@ -467,14 +467,15 @@ The following patterns are known to describe business solutions.
 
 ### Value Object
 
-Describe the tiny domain business rules. Objects that are unique by the has of their properties. Are immutable.
+Describe the tiny domain business rules. Structures that are unique by the has of their properties. Are immutable.
+
+Tips: The IEquatable interface is not necessary to perform an equality check
+> The IEquatable interface is used by generic collection objects such as Dictionary<TKey,TValue>, List, and LinkedList when testing for equality in such methods as Contains, IndexOf, LastIndexOf, and Remove. It should be implemented for any object that might be stored in a generic collection.
 
 ```c#
-public sealed class Name : IEquatable<Name>
+public readonly struct Name
 {
-    private string _text;
-
-    private Name() { }
+    private readonly string _text;
 
     public Name(string text)
     {
@@ -487,41 +488,6 @@ public sealed class Name : IEquatable<Name>
     public override string ToString()
     {
         return _text;
-    }
-
-    public override bool Equals(object obj)
-    {
-        if (ReferenceEquals(null, obj))
-        {
-            return false;
-        }
-
-        if (ReferenceEquals(this, obj))
-        {
-            return true;
-        }
-
-        if (obj is string)
-        {
-            return obj.ToString() == _text;
-        }
-
-        return ((Name) obj)._text == _text;
-    }
-
-    public override int GetHashCode()
-    {
-        unchecked
-        {
-            int hash = 17;
-            hash = hash * 23 + _text.GetHashCode();
-            return hash;
-        }
-    }
-
-    public bool Equals(Name other)
-    {
-        return this._text == other._text;
     }
 }
 ```
