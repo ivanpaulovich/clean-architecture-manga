@@ -2,7 +2,7 @@ namespace Domain.Accounts
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using ValueObjects;
+    using Domain.ValueObjects;
 
     public sealed class DebitsCollection
     {
@@ -13,7 +13,8 @@ namespace Domain.Accounts
             _debits = new List<IDebit>();
         }
 
-        public void Add<T>(IEnumerable<T> debits) where T : IDebit
+        public void Add<T>(IEnumerable<T> debits)
+            where T : IDebit
         {
             foreach (var debit in debits)
             {
