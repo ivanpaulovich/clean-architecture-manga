@@ -5,14 +5,15 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
 
     public sealed class DepositPresenter : IOutputPort
     {
-        public Collection<DepositOutput> Deposits { get; }
-        public Collection<string> NotFounds { get; }
-
         public DepositPresenter()
         {
             Deposits = new Collection<DepositOutput>();
             NotFounds = new Collection<string>();
         }
+
+        public Collection<DepositOutput> Deposits { get; }
+
+        public Collection<string> NotFounds { get; }
 
         public void Standard(DepositOutput output)
         {

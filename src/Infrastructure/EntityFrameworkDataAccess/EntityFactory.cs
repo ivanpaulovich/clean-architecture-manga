@@ -1,10 +1,10 @@
 namespace Infrastructure.EntityFrameworkDataAccess
 {
     using System;
+    using Domain;
     using Domain.Accounts;
     using Domain.Customers;
     using Domain.ValueObjects;
-    using Domain;
 
     public sealed class EntityFactory : IEntityFactory
     {

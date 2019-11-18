@@ -1,14 +1,14 @@
 namespace Infrastructure.EntityFrameworkDataAccess.Repositories
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using System;
     using Application.Repositories;
     using Domain.Accounts;
+    using Domain.Customers;
+    using Domain.ValueObjects;
     using Microsoft.Data.SqlClient;
     using Microsoft.EntityFrameworkCore;
-    using Domain.ValueObjects;
-    using Domain.Customers;
 
     public sealed class AccountRepository : IAccountRepository
     {
@@ -22,8 +22,8 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
 
         public async Task Add(IAccount account, ICredit credit)
         {
-            await _context.Accounts.AddAsync((EntityFrameworkDataAccess.Account) account);
-            await _context.Credits.AddAsync((EntityFrameworkDataAccess.Credit) credit);
+            await _context.Accounts.AddAsync((EntityFrameworkDataAccess.Account)account);
+            await _context.Credits.AddAsync((EntityFrameworkDataAccess.Credit)credit);
         }
 
         public async Task Delete(IAccount account)
@@ -47,7 +47,9 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
                 .SingleOrDefaultAsync();
 
             if (account is null)
+            {
                 throw new AccountNotFoundException($"The account {id} does not exist or is not processed yet.");
+            }
 
             var credits = _context.Credits
                 .Where(e => e.AccountId == id)
@@ -69,7 +71,9 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
                 .SingleOrDefaultAsync();
 
             if (customer is null)
+            {
                 throw new CustomerNotFoundException($"The customer {externalUserId} does not exist or is not processed yet.");
+            }
 
             Infrastructure.EntityFrameworkDataAccess.Account account = await _context
                 .Accounts
@@ -77,7 +81,9 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
                 .SingleOrDefaultAsync();
 
             if (account is null)
+            {
                 throw new AccountNotFoundException($"The account {id} does not exist or is not processed yet.");
+            }
 
             var credits = _context.Credits
                 .Where(e => e.AccountId == id)
@@ -94,12 +100,12 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
 
         public async Task Update(IAccount account, ICredit credit)
         {
-            await _context.Credits.AddAsync((EntityFrameworkDataAccess.Credit) credit);
+            await _context.Credits.AddAsync((EntityFrameworkDataAccess.Credit)credit);
         }
 
         public async Task Update(IAccount account, IDebit debit)
         {
-            await _context.Debits.AddAsync((EntityFrameworkDataAccess.Debit) debit);
+            await _context.Debits.AddAsync((EntityFrameworkDataAccess.Debit)debit);
         }
     }
 }

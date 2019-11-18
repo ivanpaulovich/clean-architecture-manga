@@ -1,12 +1,12 @@
 namespace Infrastructure.InMemoryDataAccess.Repositories
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using System;
     using Application.Repositories;
     using Domain.Accounts;
-    using Domain.ValueObjects;
     using Domain.Customers;
+    using Domain.ValueObjects;
 
     public sealed class AccountRepository : IAccountRepository
     {
@@ -19,8 +19,8 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
 
         public async Task Add(IAccount account, ICredit credit)
         {
-            _context.Accounts.Add((InMemoryDataAccess.Account) account);
-            _context.Credits.Add((InMemoryDataAccess.Credit) credit);
+            _context.Accounts.Add((InMemoryDataAccess.Account)account);
+            _context.Credits.Add((InMemoryDataAccess.Credit)credit);
             await Task.CompletedTask;
         }
 
@@ -42,7 +42,9 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
                 .SingleOrDefault();
 
             if (account is null)
+            {
                 throw new AccountNotFoundException($"The account {id} does not exist or is not processed yet.");
+            }
 
             return await Task.FromResult<Account>(account);
         }
@@ -54,14 +56,18 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
                 .SingleOrDefault();
 
             if (customer is null)
+            {
                 throw new CustomerNotFoundException($"The customer {externalUserId} does not exist or is not processed yet.");
+            }
 
             var account = _context.Accounts
                 .Where(e => e.Id == id && e.CustomerId == customer.Id)
                 .SingleOrDefault();
 
             if (account is null)
+            {
                 throw new AccountNotFoundException($"The account {id} does not exist or is not processed yet.");
+            }
 
             return await Task.FromResult<Account>(account);
         }
@@ -72,7 +78,7 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
                 .Where(e => e.Id == account.Id)
                 .SingleOrDefault();
 
-            accountOld = (Account) account;
+            accountOld = (Account)account;
             await Task.CompletedTask;
         }
 
@@ -82,7 +88,7 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
                 .Where(e => e.Id == account.Id)
                 .SingleOrDefault();
 
-            accountOld = (Account) account;
+            accountOld = (Account)account;
             await Task.CompletedTask;
         }
     }

@@ -17,7 +17,7 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
 
         public async Task Add(ICustomer customer)
         {
-            _context.Customers.Add((InMemoryDataAccess.Customer) customer);
+            _context.Customers.Add((InMemoryDataAccess.Customer)customer);
             await Task.CompletedTask;
         }
 
@@ -28,7 +28,9 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
                 .SingleOrDefault();
 
             if (customer is null)
+            {
                 throw new CustomerNotFoundException($"The customer {externalUserId} does not exist or is not processed yet.");
+            }
 
             return await Task.FromResult<Customer>(customer);
         }
@@ -39,7 +41,7 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
                 .Where(e => e.Id == customer.Id)
                 .SingleOrDefault();
 
-            customerOld = (Customer) customer;
+            customerOld = (Customer)customer;
             await Task.CompletedTask;
         }
     }

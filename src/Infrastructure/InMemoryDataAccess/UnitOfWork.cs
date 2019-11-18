@@ -5,11 +5,11 @@ namespace Infrastructure.InMemoryDataAccess
 
     public sealed class UnitOfWork : IUnitOfWork
     {
-        private MangaContext context;
+        private readonly MangaContext _context;
 
         public UnitOfWork(MangaContext context)
         {
-            this.context = context;
+            _context = context;
         }
 
         public async Task<int> Save()
