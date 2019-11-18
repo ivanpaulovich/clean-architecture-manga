@@ -2,12 +2,12 @@ namespace Application.UseCases
 {
     using System.Threading.Tasks;
     using Application.Boundaries.Register;
+    using Application.Repositories;
+    using Application.Services;
+    using Domain;
     using Domain.Accounts;
     using Domain.Customers;
     using Domain.ValueObjects;
-    using Domain;
-    using Repositories;
-    using Services;
 
     public sealed class Register : IUseCase
     {
@@ -42,7 +42,7 @@ namespace Application.UseCases
             {
                 customer = await _customerRepository.GetBy(
                     _userService.GetExternalUserId());
-                
+
                 _outputPort.CustomerAlreadyRegistered($"Customer already exists.");
 
                 return;

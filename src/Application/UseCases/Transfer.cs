@@ -2,10 +2,10 @@ namespace Application.UseCases
 {
     using System.Threading.Tasks;
     using Application.Boundaries.Transfer;
-    using Domain.Accounts;
+    using Application.Repositories;
+    using Application.Services;
     using Domain;
-    using Repositories;
-    using Services;
+    using Domain.Accounts;
 
     public sealed class Transfer : IUseCase
     {

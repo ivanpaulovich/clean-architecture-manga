@@ -1,4 +1,6 @@
 namespace Application.Boundaries.Deposit
 {
-    public interface IUseCase : IUseCase<DepositInput> { }
+    public interface IUseCase : IUseCase<DepositInput>
+    {
+    }
 }

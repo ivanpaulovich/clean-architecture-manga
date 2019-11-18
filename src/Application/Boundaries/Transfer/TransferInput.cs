@@ -1,15 +1,11 @@
 namespace Application.Boundaries.Transfer
 {
     using System;
+    using Application.Exceptions;
     using Domain.ValueObjects;
-    using Exceptions;
 
     public sealed class TransferInput : IUseCaseInput
     {
-        public Guid OriginAccountId { get; }
-        public Guid DestinationAccountId { get; }
-        public PositiveMoney Amount { get; }
-
         public TransferInput(
             Guid originAccountId,
             Guid destinationAccountId,
@@ -29,5 +25,11 @@ namespace Application.Boundaries.Transfer
             DestinationAccountId = destinationAccountId;
             Amount = amount;
         }
+
+        public Guid OriginAccountId { get; }
+
+        public Guid DestinationAccountId { get; }
+
+        public PositiveMoney Amount { get; }
     }
 }

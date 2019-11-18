@@ -1,14 +1,14 @@
 namespace Application.UseCases
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using System;
     using Application.Boundaries.GetCustomerDetails;
+    using Application.Repositories;
+    using Application.Services;
     using Domain.Accounts;
     using Domain.Customers;
     using Domain.ValueObjects;
-    using Repositories;
-    using Application.Services;
 
     public sealed class GetCustomerDetails : IUseCase
     {

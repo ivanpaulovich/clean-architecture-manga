@@ -1,13 +1,11 @@
 namespace Application.Boundaries.CloseAccount
 {
     using System;
+    using Application.Exceptions;
     using Domain.ValueObjects;
-    using Exceptions;
 
     public sealed class CloseAccountInput : IUseCaseInput
     {
-        public Guid AccountId { get; }
-
         public CloseAccountInput(
             Guid accountId)
         {
@@ -18,5 +16,7 @@ namespace Application.Boundaries.CloseAccount
 
             AccountId = accountId;
         }
+
+        public Guid AccountId { get; }
     }
 }
