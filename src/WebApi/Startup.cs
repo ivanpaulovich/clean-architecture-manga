@@ -34,6 +34,7 @@ namespace WebApi
             services.AddPresentersV2();
             services.AddMediator();
             services.AddSingleton<IUserService, TestUserService>();
+            services.AddSingleton<IHashingService, HashingService>();
         }
 
         public void ConfigureDevelopment(
@@ -71,6 +72,7 @@ namespace WebApi
             services.AddMediator();
             services.AddHttpContextAccessor();
             services.AddGitHubAuthentication(Configuration);
+            services.AddSingleton<IHashingService, HashingService>();
         }
 
         public void ConfigureProduction(
