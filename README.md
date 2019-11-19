@@ -1,15 +1,7 @@
 # Manga: The Clean Architecture Sample Implementation with .NET Core :cyclone:
-[![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors)
-[![Build status](https://ci.appveyor.com/api/projects/status/0i6s33kw3y87tkb2?svg=true)](https://ci.appveyor.com/project/ivanpaulovich/clean-architecture-manga)<a href="https://www.nuget.org/packages/Paulovich.Caju/" rel="Paulovich.Caju"> ![NuGet](https://buildstats.info/nuget/paulovich.caju)</a> [![Build Status](https://travis-ci.org/ivanpaulovich/dotnet-new-caju.svg?branch=master)](https://travis-ci.org/ivanpaulovich/dotnet-new-caju) [![Build Status](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_apis/build/status/ivanpaulovich.clean-architecture-manga?branchName=master)](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_build/latest?definitionId=20&branchName=master)
+[![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors) [![Build Status](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_apis/build/status/ivanpaulovich.clean-architecture-manga?branchName=master)](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_build/latest?definitionId=20&branchName=master)
 
 Sample implementation of the **Clean Architecture Principles with .NET Core**. Use cases as central organizing structure, decoupled from frameworks and technology details. Built with small components that are developed and tested in isolation.
-
-# Usage
-
-```sh
-dotnet new -i Paulovich.Caju::0.7.3
-dotnet new manga -n "MyGreatApi"
-```
 
 **ProTip #1:** To get the Clean Architecture updates hit the `WATCH` button :eyes:.
 
