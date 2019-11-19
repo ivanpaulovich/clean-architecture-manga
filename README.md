@@ -1318,7 +1318,7 @@ CMD export ASPNETCORE_URLS=http://*:$PORT && dotnet WebApi.dll
 To spin up a SQL Server in a docker container using the connection string `Server=localhost;User Id=sa;Password=<YourNewStrong!Passw0rd>;` run the following command:
 
 ```sh
-./src/scripts/sql-docker-up.sh
+./sql-docker-up.sh
 ```
 
 ## Related Content and Projects
