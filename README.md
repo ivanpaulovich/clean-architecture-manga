@@ -1,22 +1,14 @@
 # Manga: The Clean Architecture Sample Implementation with .NET Core :cyclone:
-[![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors)
-[![Build status](https://ci.appveyor.com/api/projects/status/0i6s33kw3y87tkb2?svg=true)](https://ci.appveyor.com/project/ivanpaulovich/clean-architecture-manga)<a href="https://www.nuget.org/packages/Paulovich.Caju/" rel="Paulovich.Caju"> ![NuGet](https://buildstats.info/nuget/paulovich.caju)</a> [![Build Status](https://travis-ci.org/ivanpaulovich/dotnet-new-caju.svg?branch=master)](https://travis-ci.org/ivanpaulovich/dotnet-new-caju) [![Build Status](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_apis/build/status/ivanpaulovich.clean-architecture-manga?branchName=master)](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_build/latest?definitionId=20&branchName=master)
+[![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors) [![Build Status](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_apis/build/status/ivanpaulovich.clean-architecture-manga?branchName=master)](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_build/latest?definitionId=20&branchName=master)
 
 Sample implementation of the **Clean Architecture Principles with .NET Core**. Use cases as central organizing structure, decoupled from frameworks and technology details. Built with small components that are developed and tested in isolation.
-
-# Usage
-
-```sh
-dotnet new -i Paulovich.Caju::0.7.3
-dotnet new manga -n "MyGreatApi"
-```
 
 **ProTip #1:** To get the Clean Architecture updates hit the `WATCH` button :eyes:.
 
 **Manga** is a virtual Wallet application in which a customer can register an account then manage the balance with `Deposits`, `Withdraws` and `Transfers`.
 
-The Manga's demo is hosted on `Heroku` servers and the `Swagger UI` client is available at [https://clean-architecture-herokuapp.com/swagger/](https://clean-architecture-herokuapp.com/swagger/). It is just beautiful!
-[![Swagger Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-manga-swagger.png)](https://clean-architecture-herokuapp.com/swagger/index.html)
+The Manga's demo is hosted on `Azure` servers and the `Swagger UI` client is available at [https://clean-architecture-manga.azurewebsites.net/swagger/index.html](https://clean-architecture-manga.azurewebsites.net/swagger/). It is just beautiful!
+[![Swagger Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-manga-swagger.png)](https://clean-architecture-manga.azurewebsites.net/swagger/index.html)
 
 
 <p align="center">
@@ -1326,7 +1318,7 @@ CMD export ASPNETCORE_URLS=http://*:$PORT && dotnet WebApi.dll
 To spin up a SQL Server in a docker container using the connection string `Server=localhost;User Id=sa;Password=<YourNewStrong!Passw0rd>;` run the following command:
 
 ```sh
-./src/scripts/sql-docker-up.sh
+./sql-docker-up.sh
 ```
 
 ## Related Content and Projects
