@@ -6,7 +6,12 @@ namespace Infrastructure.EntityFrameworkDataAccess
     public class User : Domain.Users.User
     {
         public User(ICustomer customer, ExternalUserId externalUserId)
-            : base(customer, externalUserId)
+        {
+            CustomerId = customer.Id;
+            ExternalUserId = externalUserId;
+        }
+
+        protected User()
         {
         }
     }

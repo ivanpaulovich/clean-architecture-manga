@@ -39,6 +39,13 @@ namespace Infrastructure.EntityFrameworkDataAccess
                 .IsRequired();
 
             modelBuilder.Entity<Account>()
+                .Property(b => b.CustomerId)
+                .HasConversion(
+                    v => v.ToGuid(),
+                    v => new CustomerId(v))
+                .IsRequired();
+
+            modelBuilder.Entity<Account>()
                 .Ignore(p => p.Credits)
                 .Ignore(p => p.Debits);
 
@@ -75,12 +82,26 @@ namespace Infrastructure.EntityFrameworkDataAccess
                     v => new PositiveMoney(v))
                 .IsRequired();
 
+            modelBuilder.Entity<Debit>()
+                .Property(b => b.AccountId)
+                .HasConversion(
+                    v => v.ToGuid(),
+                    v => new AccountId(v))
+                .IsRequired();
+
             modelBuilder.Entity<Credit>()
                 .ToTable("Credit")
                 .Property(b => b.Amount)
                 .HasConversion(
                     v => v.ToMoney().ToDecimal(),
                     v => new PositiveMoney(v))
+                .IsRequired();
+
+            modelBuilder.Entity<Credit>()
+                .Property(b => b.AccountId)
+                .HasConversion(
+                    v => v.ToGuid(),
+                    v => new AccountId(v))
                 .IsRequired();
 
             modelBuilder.Entity<User>()
@@ -99,6 +120,15 @@ namespace Infrastructure.EntityFrameworkDataAccess
                     v => v.ToGuid(),
                     v => new CustomerId(v))
                 .IsRequired();
+
+            modelBuilder.Entity<User>()
+                .HasKey(
+                    c => new
+                    {
+                        c.ExternalUserId,
+                        c.CustomerId
+                    }
+                );
 
             modelBuilder.Entity<Customer>().HasData(
                 new
@@ -138,7 +168,7 @@ namespace Infrastructure.EntityFrameworkDataAccess
             modelBuilder.Entity<User>().HasData(
                 new
                 {
-                    Id = DefaultCustomerId,
+                    CustomerId = DefaultCustomerId,
                     ExternalUserId = new ExternalUserId("github/ivanpaulovich")
                 });
         }

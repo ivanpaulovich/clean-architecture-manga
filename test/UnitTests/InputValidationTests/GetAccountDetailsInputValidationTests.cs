@@ -2,7 +2,6 @@ namespace UnitTests.InputValidationTests
 {
     using System;
     using Application.Boundaries.GetAccountDetails;
-    using Application.Exceptions;
     using Domain.ValueObjects;
     using Xunit;
 
@@ -11,7 +10,7 @@ namespace UnitTests.InputValidationTests
         [Fact]
         public void GivenEmptyAccountId_InputNotCreated_ThrowsInputValidationException()
         {
-            var actualEx = Assert.Throws<InputValidationException>(
+            var actualEx = Assert.Throws<EmptyAccountIdException>(
                 () => new GetAccountDetailsInput(
                     new AccountId(Guid.Empty)));
             Assert.Contains("accountId", actualEx.Message);

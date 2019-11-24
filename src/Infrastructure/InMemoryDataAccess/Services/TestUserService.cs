@@ -27,10 +27,5 @@ namespace Infrastructure.InMemoryDataAccess.Services
         {
             return new Name($"Temporary User {_userId}");
         }
-
-        ExternalUserId IUserService.GetExternalUserId()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
