@@ -36,9 +36,8 @@ namespace Application.UseCases
 
             try
             {
-                originAccount = await _accountRepository.Get(
-                    _userService.GetExternalUserId(),
-                    input.OriginAccountId);
+                originAccount = await _accountRepository.Get(input.OriginAccountId);
+
                 destinationAccount = await _accountRepository.Get(
                     input.DestinationAccountId);
             }

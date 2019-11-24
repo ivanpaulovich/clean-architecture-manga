@@ -1,12 +1,12 @@
 namespace AcceptanceTests.V1
 {
-    using System;
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using System;
     using Microsoft.AspNetCore.Mvc.Testing;
-    using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
+    using Newtonsoft.Json;
     using WebApi;
     using Xunit;
 
@@ -51,10 +51,10 @@ namespace AcceptanceTests.V1
         {
             var client = _factory.CreateClient();
 
-            var content = new FormUrlEncodedContent(new[]
+            var content = new FormUrlEncodedContent(new []
             {
                 new KeyValuePair<string, string>("ssn", "8608179999"),
-                new KeyValuePair<string, string>("initialAmount", initialAmount.ToString()),
+                    new KeyValuePair<string, string>("initialAmount", initialAmount.ToString()),
             });
 
             var response = await client.PostAsync("api/v1/Customers", content);
@@ -67,7 +67,7 @@ namespace AcceptanceTests.V1
             JObject customer = JsonConvert.DeserializeObject<JObject>(responseString);
 
             string customerId = customer["customerId"].Value<string>();
-            string accountId = ((JContainer)customer["accounts"]).First["accountId"].Value<string>();
+            string accountId = ((JContainer) customer["accounts"]).First["accountId"].Value<string>();
 
             return new Tuple<string, string>(customerId, accountId);
         }
@@ -75,10 +75,10 @@ namespace AcceptanceTests.V1
         private async Task Deposit(string account, decimal amount)
         {
             var client = _factory.CreateClient();
-            var content = new FormUrlEncodedContent(new[]
+            var content = new FormUrlEncodedContent(new []
             {
                 new KeyValuePair<string, string>("accountId", account),
-                new KeyValuePair<string, string>("amount", amount.ToString()),
+                    new KeyValuePair<string, string>("amount", amount.ToString()),
             });
 
             var response = await client.PatchAsync("api/v1/Accounts/Deposit", content);
@@ -91,10 +91,10 @@ namespace AcceptanceTests.V1
         {
             var client = _factory.CreateClient();
 
-            var content = new FormUrlEncodedContent(new[]
+            var content = new FormUrlEncodedContent(new []
             {
                 new KeyValuePair<string, string>("accountId", account),
-                new KeyValuePair<string, string>("amount", amount.ToString()),
+                    new KeyValuePair<string, string>("amount", amount.ToString()),
             });
 
             var response = await client.PatchAsync("api/v1/Accounts/Withdraw", content);

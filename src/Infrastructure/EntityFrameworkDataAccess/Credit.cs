@@ -17,6 +17,6 @@ namespace Infrastructure.EntityFrameworkDataAccess
         {
         }
 
-        public Guid AccountId { get; protected set; }
+        public AccountId AccountId { get; protected set; }
     }
 }

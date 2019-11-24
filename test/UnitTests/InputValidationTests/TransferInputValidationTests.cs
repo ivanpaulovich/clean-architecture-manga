@@ -13,8 +13,8 @@ namespace UnitTests.InputValidationTests
         {
             var actualEx = Assert.Throws<InputValidationException>(
                 () => new TransferInput(
-                    Guid.Empty,
-                    Guid.NewGuid(),
+                    new AccountId(Guid.Empty),
+                    new AccountId(Guid.NewGuid()),
                     new PositiveMoney(10)));
             Assert.Contains("originAccountId", actualEx.Message);
         }
@@ -24,8 +24,8 @@ namespace UnitTests.InputValidationTests
         {
             var actualEx = Assert.Throws<InputValidationException>(
                 () => new TransferInput(
-                    Guid.NewGuid(),
-                    Guid.Empty,
+                    new AccountId(Guid.NewGuid()),
+                    new AccountId(Guid.Empty),
                     new PositiveMoney(10)));
             Assert.Contains("destinationAccountId", actualEx.Message);
         }
@@ -34,8 +34,8 @@ namespace UnitTests.InputValidationTests
         public void GivenValidData_InputCreated()
         {
             var actual = new TransferInput(
-                Guid.NewGuid(),
-                Guid.NewGuid(),
+                new AccountId(Guid.NewGuid()),
+                new AccountId(Guid.NewGuid()),
                 new PositiveMoney(10));
             Assert.NotNull(actual);
         }

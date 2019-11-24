@@ -13,7 +13,7 @@ namespace UnitTests.InputValidationTests
         {
             var actualEx = Assert.Throws<InputValidationException>(
                 () => new DepositInput(
-                    Guid.Empty,
+                    new AccountId(Guid.Empty),
                     new PositiveMoney(10)));
             Assert.Contains("accountId", actualEx.Message);
         }
@@ -22,7 +22,7 @@ namespace UnitTests.InputValidationTests
         public void GivenValidData_InputCreated()
         {
             var actual = new DepositInput(
-                Guid.NewGuid(),
+                new AccountId(Guid.NewGuid()),
                 new PositiveMoney(10));
             Assert.NotNull(actual);
         }

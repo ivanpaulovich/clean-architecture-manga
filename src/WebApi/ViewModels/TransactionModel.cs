@@ -2,15 +2,16 @@ namespace WebApi.ViewModels
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using Domain.ValueObjects;
 
     /// <summary>
     /// Transaction.
     /// </summary>
     public sealed class TransactionModel
     {
-        public TransactionModel(decimal amount, string description, DateTime transactionDate)
+        public TransactionModel(PositiveMoney amount, string description, DateTime transactionDate)
         {
-            Amount = amount;
+            Amount = amount.ToMoney().ToDecimal();
             Description = description;
             TransactionDate = transactionDate;
         }

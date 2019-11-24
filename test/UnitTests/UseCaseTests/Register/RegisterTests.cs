@@ -1,8 +1,8 @@
 namespace UnitTests.UseCasesTests.Register
 {
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using System;
     using Application.Boundaries.Register;
     using Application.UseCases;
     using Domain.ValueObjects;
@@ -24,7 +24,7 @@ namespace UnitTests.UseCasesTests.Register
         public void GivenNullInput_ThrowsException()
         {
             var register = new Register(null, null, null, null, null, null);
-            Assert.ThrowsAsync<Exception>(async () => await register.Execute(null));
+            Assert.ThrowsAsync<Exception>(async() => await register.Execute(null));
         }
 
         [Theory]

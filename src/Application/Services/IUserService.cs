@@ -4,8 +4,10 @@ namespace Application.Services
 
     public interface IUserService
     {
-         ExternalUserId GetExternalUserId();
+        CustomerId GetCustomerId();
 
-         Name GetUserName();
+        ExternalUserId GetExternalUserId();
+
+        Name GetUserName();
     }
 }

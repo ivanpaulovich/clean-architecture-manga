@@ -8,12 +8,10 @@ namespace Infrastructure.EntityFrameworkDataAccess
     public class Customer : Domain.Customers.Customer
     {
         public Customer(
-            ExternalUserId externalUserId,
             SSN ssn,
             Name name)
         {
-            Id = Guid.NewGuid();
-            ExternalUserId = externalUserId;
+            Id = new CustomerId(Guid.NewGuid());
             SSN = ssn;
             Name = name;
         }
@@ -22,7 +20,7 @@ namespace Infrastructure.EntityFrameworkDataAccess
         {
         }
 
-        public void LoadAccounts(IEnumerable<Guid> accounts)
+        public void LoadAccounts(IEnumerable<AccountId> accounts)
         {
             Accounts = new AccountCollection();
             Accounts.Add(accounts);

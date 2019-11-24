@@ -40,8 +40,7 @@ namespace Application.UseCases
 
             try
             {
-                customer = await _customerRepository.GetBy(
-                    _userService.GetExternalUserId());
+                customer = await _customerRepository.GetBy(_userService.GetCustomerId());
 
                 _outputPort.CustomerAlreadyRegistered($"Customer already exists.");
 
@@ -51,10 +50,7 @@ namespace Application.UseCases
             {
             }
 
-            customer = _entityFactory.NewCustomer(
-                _userService.GetExternalUserId(),
-                input.SSN,
-                _userService.GetUserName());
+            customer = _entityFactory.NewCustomer(input.SSN, _userService.GetUserName());
 
             var account = _entityFactory.NewAccount(customer);
 

@@ -13,6 +13,11 @@ namespace Infrastructure.InMemoryDataAccess.Services
             _userId = Guid.NewGuid();
         }
 
+        public CustomerId GetCustomerId()
+        {
+            return new CustomerId(Guid.NewGuid());
+        }
+
         public ExternalUserId GetExternalUserId()
         {
             return new ExternalUserId($"github/tempuser{_userId}");
@@ -21,6 +26,11 @@ namespace Infrastructure.InMemoryDataAccess.Services
         public Name GetUserName()
         {
             return new Name($"Temporary User {_userId}");
+        }
+
+        ExternalUserId IUserService.GetExternalUserId()
+        {
+            throw new NotImplementedException();
         }
     }
 }

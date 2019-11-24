@@ -5,7 +5,6 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
     using System.Threading.Tasks;
     using Application.Repositories;
     using Domain.Accounts;
-    using Domain.Customers;
     using Domain.ValueObjects;
     using Microsoft.Data.SqlClient;
     using Microsoft.EntityFrameworkCore;
@@ -39,11 +38,11 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
                 deleteSQL, id);
         }
 
-        public async Task<IAccount> Get(Guid id)
+        public async Task<IAccount> Get(AccountId id)
         {
             Infrastructure.EntityFrameworkDataAccess.Account account = await _context
                 .Accounts
-                .Where(a => a.Id == id)
+                .Where(a => a.Id.Equals(id))
                 .SingleOrDefaultAsync();
 
             if (account is null)
@@ -52,45 +51,11 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
             }
 
             var credits = _context.Credits
-                .Where(e => e.AccountId == id)
+                .Where(e => e.AccountId.Equals(id))
                 .ToList();
 
             var debits = _context.Debits
-                .Where(e => e.AccountId == id)
-                .ToList();
-
-            account.Load(credits, debits);
-
-            return account;
-        }
-
-        public async Task<IAccount> Get(ExternalUserId externalUserId, Guid id)
-        {
-            EntityFrameworkDataAccess.Customer customer = await _context.Customers
-                .Where(c => c.ExternalUserId.Equals(externalUserId))
-                .SingleOrDefaultAsync();
-
-            if (customer is null)
-            {
-                throw new CustomerNotFoundException($"The customer {externalUserId} does not exist or is not processed yet.");
-            }
-
-            Infrastructure.EntityFrameworkDataAccess.Account account = await _context
-                .Accounts
-                .Where(a => a.Id == id && a.CustomerId == customer.Id)
-                .SingleOrDefaultAsync();
-
-            if (account is null)
-            {
-                throw new AccountNotFoundException($"The account {id} does not exist or is not processed yet.");
-            }
-
-            var credits = _context.Credits
-                .Where(e => e.AccountId == id)
-                .ToList();
-
-            var debits = _context.Debits
-                .Where(e => e.AccountId == id)
+                .Where(e => e.AccountId.Equals(id))
                 .ToList();
 
             account.Load(credits, debits);

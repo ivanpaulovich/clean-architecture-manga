@@ -39,7 +39,7 @@ namespace WebApi.UseCases.V1.Deposit
         public async Task<IActionResult> Deposit([FromForm][Required] DepositRequest request)
         {
             var input = new DepositInput(
-                request.AccountId,
+                new AccountId(request.AccountId),
                 new PositiveMoney(request.Amount));
 
             await _mediator.PublishAsync(input);

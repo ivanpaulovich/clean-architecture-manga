@@ -1,8 +1,9 @@
 namespace WebApi.UseCases.V1.GetAccountDetails
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System;
+    using Domain.ValueObjects;
     using WebApi.ViewModels;
 
     /// <summary>
@@ -10,10 +11,13 @@ namespace WebApi.UseCases.V1.GetAccountDetails
     /// </summary>
     public sealed class GetAccountDetailsResponse
     {
-        public GetAccountDetailsResponse(Guid accountId, decimal currentBalance, List<TransactionModel> transactions)
+        public GetAccountDetailsResponse(
+            AccountId accountId,
+            Money currentBalance,
+            List<TransactionModel> transactions)
         {
-            AccountId = accountId;
-            CurrentBalance = currentBalance;
+            AccountId = accountId.ToGuid();
+            CurrentBalance = currentBalance.ToDecimal();
             Transactions = transactions;
         }
 

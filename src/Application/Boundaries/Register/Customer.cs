@@ -1,6 +1,5 @@
 namespace Application.Boundaries.Register
 {
-    using System;
     using System.Collections.Generic;
     using Domain.Customers;
     using Domain.ValueObjects;
@@ -22,7 +21,7 @@ namespace Application.Boundaries.Register
 
         public ExternalUserId ExternalUserId { get; }
 
-        public Guid CustomerId { get; }
+        public CustomerId CustomerId { get; }
 
         public SSN SSN { get; }
 

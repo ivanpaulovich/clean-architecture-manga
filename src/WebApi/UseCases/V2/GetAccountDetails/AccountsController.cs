@@ -1,8 +1,9 @@
-﻿namespace WebApi.UseCases.V2.GetAccountDetails
+namespace WebApi.UseCases.V2.GetAccountDetails
 {
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Application.Boundaries.GetAccountDetails;
+    using Domain.ValueObjects;
     using FluentMediator;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -38,7 +39,7 @@
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get([FromRoute][Required] GetAccountDetailsRequestV2 request)
         {
-            var input = new GetAccountDetailsInput(request.AccountId);
+            var input = new GetAccountDetailsInput(new AccountId(request.AccountId));
             await _mediator.PublishAsync(input, "GetAccountDetailsV2");
             return _presenter.ViewModel;
         }
