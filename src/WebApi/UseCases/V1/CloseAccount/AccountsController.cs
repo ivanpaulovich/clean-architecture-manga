@@ -38,7 +38,7 @@ namespace WebApi.UseCases.V1.CloseAccount
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Close([FromRoute][Required] CloseAccountRequest request)
         {
-            var input = new CloseAccountInput(request.AccountId);
+            var input = new CloseAccountInput(new AccountId(request.AccountId));
             await _mediator.PublishAsync(input);
             return _presenter.ViewModel;
         }

@@ -1,7 +1,7 @@
 namespace Application.Boundaries.CloseAccount
 {
-    using System;
     using Domain.Accounts;
+    using Domain.ValueObjects;
 
     public sealed class CloseAccountOutput : IUseCaseOutput
     {
@@ -10,6 +10,6 @@ namespace Application.Boundaries.CloseAccount
             AccountId = account.Id;
         }
 
-        public Guid AccountId { get; }
+        public AccountId AccountId { get; }
     }
 }

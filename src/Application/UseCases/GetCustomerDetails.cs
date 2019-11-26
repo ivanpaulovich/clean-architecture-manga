@@ -1,6 +1,5 @@
 namespace Application.UseCases
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Application.Boundaries.GetCustomerDetails;
@@ -33,28 +32,33 @@ namespace Application.UseCases
         {
             ICustomer customer;
 
-            try
+            if (_userService.GetCustomerId() is CustomerId customerId)
             {
-                customer = await _customerRepository.GetBy(
-                    _userService.GetExternalUserId());
+                try
+                {
+                    customer = await _customerRepository.GetBy(customerId);
+                }
+                catch (CustomerNotFoundException ex)
+                {
+                    _outputPort.NotFound(ex.Message);
+                    return;
+                }
             }
-            catch (CustomerNotFoundException ex)
+            else
             {
-                _outputPort.NotFound(ex.Message);
+                _outputPort.NotFound("Customer does not exist.");
                 return;
             }
 
             var accounts = new List<Boundaries.GetCustomerDetails.Account>();
 
-            foreach (Guid accountId in customer.Accounts.GetAccountIds())
+            foreach (AccountId accountId in customer.Accounts.GetAccountIds())
             {
                 IAccount account;
 
                 try
                 {
-                    account = await _accountRepository.Get(
-                        _userService.GetExternalUserId(),
-                        accountId);
+                    account = await _accountRepository.Get(accountId);
                 }
                 catch (AccountNotFoundException ex)
                 {

@@ -1,6 +1,5 @@
 namespace Application.Boundaries.Register
 {
-    using System;
     using System.Collections.Generic;
     using Domain.Accounts;
     using Domain.ValueObjects;
@@ -8,7 +7,7 @@ namespace Application.Boundaries.Register
     public sealed class Account
     {
         public Account(
-            Guid accountId,
+            AccountId accountId,
             Money currentBalance,
             List<Transaction> transactions)
         {
@@ -55,7 +54,7 @@ namespace Application.Boundaries.Register
             Transactions = transactionResults;
         }
 
-        public Guid AccountId { get; }
+        public AccountId AccountId { get; }
 
         public Money CurrentBalance { get; }
 

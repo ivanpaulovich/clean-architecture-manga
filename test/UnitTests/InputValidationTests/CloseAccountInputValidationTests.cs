@@ -2,7 +2,6 @@ namespace UnitTests.InputValidationTests
 {
     using System;
     using Application.Boundaries.CloseAccount;
-    using Application.Exceptions;
     using Domain.ValueObjects;
     using Xunit;
 
@@ -11,9 +10,8 @@ namespace UnitTests.InputValidationTests
         [Fact]
         public void GivenEmptyAccountId_InputNotCreated_ThrowsInputValidationException()
         {
-            var actualEx = Assert.Throws<InputValidationException>(
-                () => new CloseAccountInput(
-                    Guid.Empty));
+            var actualEx = Assert.Throws<EmptyAccountIdException>(
+                () => new AccountId(Guid.Empty));
             Assert.Contains("accountId", actualEx.Message);
         }
 
@@ -21,7 +19,7 @@ namespace UnitTests.InputValidationTests
         public void GivenValidData_InputCreated()
         {
             var actual = new CloseAccountInput(
-                Guid.NewGuid());
+                new AccountId(Guid.NewGuid()));
             Assert.NotNull(actual);
         }
     }

@@ -42,8 +42,8 @@ namespace WebApi.UseCases.V1.Transfer
         public async Task<IActionResult> Transfer([FromForm][Required] TransferRequest request)
         {
             var input = new TransferInput(
-                request.OriginAccountId,
-                request.DestinationAccountId,
+                new AccountId(request.OriginAccountId),
+                new AccountId(request.DestinationAccountId),
                 new PositiveMoney(request.Amount));
 
             await _mediator.PublishAsync(input);

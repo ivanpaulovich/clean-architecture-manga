@@ -1,6 +1,5 @@
 namespace Application.Boundaries.Transfer
 {
-    using System;
     using Domain.Accounts;
     using Domain.ValueObjects;
 
@@ -9,8 +8,8 @@ namespace Application.Boundaries.Transfer
         public TransferOutput(
             IDebit debit,
             Money updatedBalance,
-            Guid originAccountId,
-            Guid destinationAccountId)
+            AccountId originAccountId,
+            AccountId destinationAccountId)
         {
             Debit debitEntity = (Debit)debit;
 

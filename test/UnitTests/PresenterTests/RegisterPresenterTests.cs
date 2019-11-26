@@ -13,7 +13,6 @@ namespace UnitTests.PresenterTests
         public void GivenValidData_Handle_WritesOkObjectResult()
         {
             var customer = new Infrastructure.InMemoryDataAccess.Customer(
-                new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608178888"),
                 new Name("Ivan Paulovich"));
 
@@ -21,7 +20,7 @@ namespace UnitTests.PresenterTests
                 customer);
 
             var registerOutput = new RegisterOutput(
-                customer.ExternalUserId,
+                new ExternalUserId("github/ivanpaulovich"),
                 customer,
                 account);
 
@@ -29,10 +28,10 @@ namespace UnitTests.PresenterTests
             sut.Standard(registerOutput);
 
             var actual = Assert.IsType<CreatedAtRouteResult>(sut.ViewModel);
-            Assert.Equal((int)HttpStatusCode.Created, actual.StatusCode);
+            Assert.Equal((int) HttpStatusCode.Created, actual.StatusCode);
 
-            var actualValue = (RegisterResponse)actual.Value;
-            Assert.Equal(customer.Id, actualValue.CustomerId);
+            var actualValue = (RegisterResponse) actual.Value;
+            Assert.Equal(customer.Id.ToGuid(), actualValue.CustomerId);
         }
     }
 }

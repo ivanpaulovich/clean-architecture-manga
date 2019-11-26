@@ -1,6 +1,5 @@
 namespace Domain.Customers
 {
-    using System;
     using Domain.Accounts;
     using Domain.ValueObjects;
 
@@ -11,9 +10,7 @@ namespace Domain.Customers
             Accounts = new AccountCollection();
         }
 
-        public ExternalUserId ExternalUserId { get; protected set; }
-
-        public Guid Id { get; protected set; }
+        public CustomerId Id { get; protected set; }
 
         public Name Name { get; protected set; }
 

@@ -14,7 +14,7 @@ namespace Domain.Accounts
         }
 
         public void Add<T>(IEnumerable<T> debits)
-            where T : IDebit
+        where T : IDebit
         {
             foreach (var debit in debits)
             {

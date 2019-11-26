@@ -1,6 +1,5 @@
 namespace Infrastructure.InMemoryDataAccess
 {
-    using System;
     using System.Collections.ObjectModel;
     using Domain.ValueObjects;
 
@@ -13,11 +12,14 @@ namespace Infrastructure.InMemoryDataAccess
             Accounts = new Collection<Account>();
             Credits = new Collection<Credit>();
             Debits = new Collection<Debit>();
+            Users = new Collection<User>();
 
             var customer = new Customer(
-                new ExternalUserId("github/ivanpaulovich"),
                 new SSN("8608179999"),
                 new Name("Ivan Paulovich"));
+            var user1 = new User(
+                customer,
+                new ExternalUserId("github/ivanpaulovich"));
             var account = new Account(customer);
             var credit = account.Deposit(
                 entityFactory,
@@ -31,22 +33,28 @@ namespace Infrastructure.InMemoryDataAccess
             Accounts.Add(account);
             Credits.Add((Credit)credit);
             Debits.Add((Debit)debit);
+            Users.Add(user1);
 
             DefaultCustomerId = customer.Id;
             DefaultAccountId = account.Id;
 
             var secondCustomer = new Customer(
-                new ExternalUserId("github/andrepaulovich"),
                 new SSN("8408319999"),
                 new Name("Andre Paulovich"));
+            var secondUser = new User(
+                secondCustomer,
+                new ExternalUserId("github/andrepaulovich"));
             var secondAccount = new Account(secondCustomer);
 
             Customers.Add(secondCustomer);
             Accounts.Add(secondAccount);
+            Users.Add(secondUser);
 
             SecondCustomerId = secondCustomer.Id;
             SecondAccountId = secondAccount.Id;
         }
+
+        public Collection<User> Users { get; set; }
 
         public Collection<Customer> Customers { get; set; }
 
@@ -56,12 +64,12 @@ namespace Infrastructure.InMemoryDataAccess
 
         public Collection<Debit> Debits { get; set; }
 
-        public Guid DefaultCustomerId { get; }
+        public CustomerId DefaultCustomerId { get; }
 
-        public Guid DefaultAccountId { get; }
+        public AccountId DefaultAccountId { get; }
 
-        public Guid SecondCustomerId { get; }
+        public CustomerId SecondCustomerId { get; }
 
-        public Guid SecondAccountId { get; }
+        public AccountId SecondAccountId { get; }
     }
 }

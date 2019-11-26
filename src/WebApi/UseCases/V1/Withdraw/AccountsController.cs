@@ -39,7 +39,7 @@ namespace WebApi.UseCases.V1.Withdraw
         public async Task<IActionResult> Withdraw([FromForm][Required] WithdrawRequest request)
         {
             var input = new WithdrawInput(
-                request.AccountId,
+                new AccountId(request.AccountId),
                 new PositiveMoney(request.Amount));
             await _mediator.PublishAsync(input);
             return _presenter.ViewModel;

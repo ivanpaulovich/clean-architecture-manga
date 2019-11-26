@@ -4,8 +4,8 @@ namespace IntegrationTests.EntityFrameworkTests
     using System.Threading.Tasks;
     using Domain.Customers;
     using Domain.ValueObjects;
-    using Infrastructure.EntityFrameworkDataAccess;
     using Infrastructure.EntityFrameworkDataAccess.Repositories;
+    using Infrastructure.EntityFrameworkDataAccess;
     using Microsoft.EntityFrameworkCore;
     using Xunit;
 
@@ -21,16 +21,22 @@ namespace IntegrationTests.EntityFrameworkTests
             var factory = new EntityFactory();
 
             var customer = factory.NewCustomer(
-                new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608177955"),
                 new Name("Ivan Paulovich"));
 
-            using (var context = new MangaContext(options))
+            var user = factory.NewUser(
+                customer,
+                new ExternalUserId("github/ivanpaulovich"));
+
+            using(var context = new MangaContext(options))
             {
                 context.Database.EnsureCreated();
 
-                var repository = new CustomerRepository(context);
-                await repository.Add(customer);
+                var userRepository = new UserRepository(context);
+                await userRepository.Add(user);
+
+                var customerRepository = new CustomerRepository(context);
+                await customerRepository.Add(customer);
 
                 Assert.Equal(2, context.Customers.Count());
             }
@@ -45,12 +51,12 @@ namespace IntegrationTests.EntityFrameworkTests
 
             ICustomer customer = null;
 
-            using (var context = new MangaContext(options))
+            using(var context = new MangaContext(options))
             {
                 context.Database.EnsureCreated();
 
                 var repository = new CustomerRepository(context);
-                customer = await repository.GetBy(new ExternalUserId("github/ivanpaulovich"));
+                customer = await repository.GetBy(context.DefaultCustomerId);
 
                 Assert.NotNull(customer);
             }

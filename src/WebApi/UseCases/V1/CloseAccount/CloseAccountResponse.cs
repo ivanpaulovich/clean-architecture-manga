@@ -11,7 +11,7 @@ namespace WebApi.UseCases.V1.CloseAccount
     {
         public CloseAccountResponse(CloseAccountOutput output)
         {
-            AccountId = output.AccountId;
+            AccountId = output.AccountId.ToGuid();
         }
 
         /// <summary>

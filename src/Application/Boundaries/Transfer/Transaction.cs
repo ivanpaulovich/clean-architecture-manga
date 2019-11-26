@@ -6,8 +6,8 @@ namespace Application.Boundaries.Transfer
     public sealed class Transaction
     {
         public Transaction(
-            Guid originAccountId,
-            Guid destinationAccountId,
+            AccountId originAccountId,
+            AccountId destinationAccountId,
             string description,
             PositiveMoney amount,
             DateTime transactionDate)
@@ -19,9 +19,9 @@ namespace Application.Boundaries.Transfer
             TransactionDate = transactionDate;
         }
 
-        public Guid OriginAccountId { get; }
+        public AccountId OriginAccountId { get; }
 
-        public Guid DestinationAccountId { get; }
+        public AccountId DestinationAccountId { get; }
 
         public string Description { get; }
 

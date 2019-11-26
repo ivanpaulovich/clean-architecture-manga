@@ -2,7 +2,6 @@ namespace UnitTests.InputValidationTests
 {
     using System;
     using Application.Boundaries.Withdraw;
-    using Application.Exceptions;
     using Domain.ValueObjects;
     using Xunit;
 
@@ -11,9 +10,9 @@ namespace UnitTests.InputValidationTests
         [Fact]
         public void GivenEmptyAccountId_InputNotCreated_ThrowsInputValidationException()
         {
-            var actualEx = Assert.Throws<InputValidationException>(
+            var actualEx = Assert.Throws<EmptyAccountIdException>(
                 () => new WithdrawInput(
-                    Guid.Empty,
+                    new AccountId(Guid.Empty),
                     new PositiveMoney(10)));
             Assert.Contains("accountId", actualEx.Message);
         }
@@ -22,7 +21,7 @@ namespace UnitTests.InputValidationTests
         public void GivenValidData_InputCreated()
         {
             var actual = new WithdrawInput(
-                Guid.NewGuid(),
+                new AccountId(Guid.NewGuid()),
                 new PositiveMoney(10));
             Assert.NotNull(actual);
         }
