@@ -3,8 +3,8 @@ namespace WebApi.DependencyInjection
     using Application.Repositories;
     using Application.Services;
     using Domain;
-    using Infrastructure.InMemoryDataAccess;
     using Infrastructure.InMemoryDataAccess.Repositories;
+    using Infrastructure.InMemoryDataAccess;
     using Microsoft.Extensions.DependencyInjection;
 
     public static class InMemoryInfrastructureExtensions
@@ -18,6 +18,7 @@ namespace WebApi.DependencyInjection
 
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }

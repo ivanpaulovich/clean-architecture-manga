@@ -21,7 +21,7 @@ namespace WebApi.UseCases.V1.GetAccountDetails
             foreach (var item in getAccountDetailsOutput.Transactions)
             {
                 var transaction = new TransactionModel(
-                    item.Amount.ToMoney().ToDecimal(),
+                    item.Amount,
                     item.Description,
                     item.TransactionDate);
 
@@ -30,7 +30,7 @@ namespace WebApi.UseCases.V1.GetAccountDetails
 
             var getAccountDetailsResponse = new GetAccountDetailsResponse(
                 getAccountDetailsOutput.AccountId,
-                getAccountDetailsOutput.CurrentBalance.ToDecimal(),
+                getAccountDetailsOutput.CurrentBalance,
                 transactions);
 
             ViewModel = new OkObjectResult(getAccountDetailsResponse);

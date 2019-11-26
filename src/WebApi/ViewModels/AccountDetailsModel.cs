@@ -3,16 +3,20 @@ namespace WebApi.ViewModels
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Domain.ValueObjects;
 
     /// <summary>
     /// Account Details.
     /// </summary>
     public sealed class AccountDetailsModel
     {
-        public AccountDetailsModel(Guid accountId, decimal currentBalance, List<TransactionModel> transactions)
+        public AccountDetailsModel(
+            AccountId accountId,
+            Money currentBalance,
+            List<TransactionModel> transactions)
         {
-            AccountId = accountId;
-            CurrentBalance = currentBalance;
+            AccountId = accountId.ToGuid();
+            CurrentBalance = currentBalance.ToDecimal();
             Transactions = transactions;
         }
 

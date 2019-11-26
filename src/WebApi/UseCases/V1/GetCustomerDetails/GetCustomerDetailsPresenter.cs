@@ -25,7 +25,7 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
                 foreach (var item in account.Transactions)
                 {
                     var transaction = new TransactionModel(
-                        item.Amount.ToMoney().ToDecimal(),
+                        item.Amount,
                         item.Description,
                         item.TransactionDate);
 
@@ -34,14 +34,14 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
 
                 accounts.Add(new AccountDetailsModel(
                     account.AccountId,
-                    account.CurrentBalance.ToDecimal(),
+                    account.CurrentBalance,
                     transactions));
             }
 
             var getCustomerDetailsResponse = new GetCustomerDetailsResponse(
                 getCustomerDetailsOutput.CustomerId,
-                getCustomerDetailsOutput.SSN.ToString(),
-                getCustomerDetailsOutput.Name.ToString(),
+                getCustomerDetailsOutput.SSN,
+                getCustomerDetailsOutput.Name,
                 accounts);
 
             ViewModel = new OkObjectResult(getCustomerDetailsResponse);

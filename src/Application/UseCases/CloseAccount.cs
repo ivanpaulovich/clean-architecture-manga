@@ -28,9 +28,7 @@ namespace Application.UseCases
 
             try
             {
-                account = await _accountRepository.Get(
-                    _userService.GetExternalUserId(),
-                    input.AccountId);
+                account = await _accountRepository.Get(input.AccountId);
             }
             catch (AccountNotFoundException ex)
             {

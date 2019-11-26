@@ -24,19 +24,19 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<ICustomer> GetBy(ExternalUserId externalUserId)
+        public async Task<ICustomer> GetBy(CustomerId customerId)
         {
             EntityFrameworkDataAccess.Customer customer = await _context.Customers
-                .Where(c => c.ExternalUserId.Equals(externalUserId))
+                .Where(c => c.Id.Equals(customerId))
                 .SingleOrDefaultAsync();
 
             if (customer is null)
             {
-                throw new CustomerNotFoundException($"The customer {externalUserId} does not exist or is not processed yet.");
+                throw new CustomerNotFoundException($"The customer {customerId} does not exist or is not processed yet.");
             }
 
             var accounts = _context.Accounts
-                .Where(e => e.CustomerId == customer.Id)
+                .Where(e => e.CustomerId.Equals(customer.Id))
                 .Select(e => e.Id)
                 .ToList();
 

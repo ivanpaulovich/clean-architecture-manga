@@ -11,6 +11,7 @@ namespace UnitTests.TestFixtures
             Context = new MangaContext();
             AccountRepository = new AccountRepository(Context);
             CustomerRepository = new CustomerRepository(Context);
+            UserRepository = new UserRepository(Context);
             UnitOfWork = new UnitOfWork(Context);
             EntityFactory = new EntityFactory();
             UserService = new UserService();
@@ -23,6 +24,8 @@ namespace UnitTests.TestFixtures
         public AccountRepository AccountRepository { get; }
 
         public CustomerRepository CustomerRepository { get; }
+
+        public UserRepository UserRepository { get; }
 
         public UnitOfWork UnitOfWork { get; }
 

@@ -1,19 +1,19 @@
 namespace Domain.Customers
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using Domain.ValueObjects;
 
     public sealed class AccountCollection
     {
-        private readonly IList<Guid> _accountIds;
+        private readonly IList<AccountId> _accountIds;
 
         public AccountCollection()
         {
-            _accountIds = new List<Guid>();
+            _accountIds = new List<AccountId>();
         }
 
-        public void Add(IEnumerable<Guid> accounts)
+        public void Add(IEnumerable<AccountId> accounts)
         {
             foreach (var account in accounts)
             {
@@ -21,11 +21,11 @@ namespace Domain.Customers
             }
         }
 
-        public void Add(Guid accountId) => _accountIds.Add(accountId);
+        public void Add(AccountId accountId) => _accountIds.Add(accountId);
 
-        public IReadOnlyCollection<Guid> GetAccountIds()
+        public IReadOnlyCollection<AccountId> GetAccountIds()
         {
-            IReadOnlyCollection<Guid> accountIds = new ReadOnlyCollection<Guid>(_accountIds);
+            IReadOnlyCollection<AccountId> accountIds = new ReadOnlyCollection<AccountId>(_accountIds);
             return accountIds;
         }
     }

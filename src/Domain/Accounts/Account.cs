@@ -11,7 +11,7 @@ namespace Domain.Accounts
             Debits = new DebitsCollection();
         }
 
-        public Guid Id { get; protected set; }
+        public AccountId Id { get; protected set; }
 
         public CreditsCollection Credits { get; protected set; }
 

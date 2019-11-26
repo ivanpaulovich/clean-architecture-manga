@@ -11,15 +11,14 @@ namespace Infrastructure.InMemoryDataAccess
         {
         }
 
-        public Customer(ExternalUserId externalUserId, SSN ssn, Name name)
+        public Customer(SSN ssn, Name name)
         {
-            Id = Guid.NewGuid();
-            ExternalUserId = externalUserId;
+            Id = new CustomerId(Guid.NewGuid());
             SSN = ssn;
             Name = name;
         }
 
-        public void LoadAccounts(IEnumerable<Guid> accounts)
+        public void LoadAccounts(IEnumerable<AccountId> accounts)
         {
             Accounts = new AccountCollection();
             Accounts.Add(accounts);

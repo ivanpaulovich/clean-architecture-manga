@@ -4,12 +4,13 @@ namespace Infrastructure.EntityFrameworkDataAccess
     using System.Collections.Generic;
     using Domain.Accounts;
     using Domain.Customers;
+    using Domain.ValueObjects;
 
     public class Account : Domain.Accounts.Account
     {
         public Account(ICustomer customer)
         {
-            Id = Guid.NewGuid();
+            Id = new AccountId(Guid.NewGuid());
             CustomerId = customer.Id;
         }
 
@@ -17,7 +18,7 @@ namespace Infrastructure.EntityFrameworkDataAccess
         {
         }
 
-        public Guid CustomerId { get; protected set; }
+        public CustomerId CustomerId { get; protected set; }
 
         public void Load(IList<Credit> credits, IList<Debit> debits)
         {

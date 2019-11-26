@@ -3,11 +3,14 @@ namespace Domain
     using System;
     using Domain.Accounts;
     using Domain.Customers;
+    using Domain.Users;
     using Domain.ValueObjects;
 
     public interface IEntityFactory
     {
-        ICustomer NewCustomer(ExternalUserId externalUserId, SSN ssn, Name name);
+        IUser NewUser(ICustomer customer, ExternalUserId externalUserId);
+
+        ICustomer NewCustomer(SSN ssn, Name name);
 
         IAccount NewAccount(ICustomer customer);
 

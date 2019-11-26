@@ -1,8 +1,8 @@
 namespace UnitTests.UseCasesTests.Register
 {
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using System;
     using Application.Boundaries.Register;
     using Application.UseCases;
     using Domain.ValueObjects;
@@ -23,8 +23,8 @@ namespace UnitTests.UseCasesTests.Register
         [Fact]
         public void GivenNullInput_ThrowsException()
         {
-            var register = new Register(null, null, null, null, null, null);
-            Assert.ThrowsAsync<Exception>(async () => await register.Execute(null));
+            var register = new Register(null, null, null, null, null, null, null);
+            Assert.ThrowsAsync<Exception>(async() => await register.Execute(null));
         }
 
         [Theory]
@@ -36,11 +36,12 @@ namespace UnitTests.UseCasesTests.Register
             var ssn = new SSN("8608178888");
 
             var sut = new Register(
-                new TestUserService(),
+                new TestUserService(_fixture.Context),
                 _fixture.EntityFactory,
                 presenter,
                 _fixture.CustomerRepository,
                 _fixture.AccountRepository,
+                _fixture.UserRepository,
                 _fixture.UnitOfWork);
 
             await sut.Execute(new RegisterInput(

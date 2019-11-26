@@ -12,8 +12,8 @@ namespace WebApi.Filters
         {
             new OpenApiTag
             {
-                Name = "RoutingApi",
-                Description = "This is a description for the api routes",
+            Name = "RoutingApi",
+            Description = "This is a description for the api routes",
             },
         };
 

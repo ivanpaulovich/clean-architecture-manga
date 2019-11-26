@@ -1,8 +1,9 @@
 namespace WebApi.UseCases.V1.GetCustomerDetails
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System;
+    using Domain.ValueObjects;
     using WebApi.ViewModels;
 
     /// <summary>
@@ -11,14 +12,14 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
     public sealed class GetCustomerDetailsResponse
     {
         public GetCustomerDetailsResponse(
-            Guid customerId,
-            string ssn,
-            string name,
+            CustomerId customerId,
+            SSN ssn,
+            Name name,
             List<AccountDetailsModel> accounts)
         {
-            CustomerId = customerId;
-            SSN = ssn;
-            Name = name;
+            CustomerId = customerId.ToGuid();
+            SSN = ssn.ToString();
+            Name = name.ToString();
             Accounts = accounts;
         }
 

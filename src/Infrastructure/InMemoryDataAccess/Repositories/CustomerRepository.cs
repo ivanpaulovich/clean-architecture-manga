@@ -21,15 +21,15 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
             await Task.CompletedTask;
         }
 
-        public async Task<ICustomer> GetBy(ExternalUserId externalUserId)
+        public async Task<ICustomer> GetBy(CustomerId customerId)
         {
-            Customer customer = _context.Customers
-                .Where(e => e.ExternalUserId.Equals(externalUserId))
+            var customer = _context.Customers
+                .Where(e => e.Id.Equals(customerId))
                 .SingleOrDefault();
 
             if (customer is null)
             {
-                throw new CustomerNotFoundException($"The customer {externalUserId} does not exist or is not processed yet.");
+                throw new CustomerNotFoundException($"The customer {customerId} does not exist or is not processed yet.");
             }
 
             return await Task.FromResult<Customer>(customer);
@@ -38,7 +38,7 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
         public async Task Update(ICustomer customer)
         {
             Customer customerOld = _context.Customers
-                .Where(e => e.Id == customer.Id)
+                .Where(e => e.Id.Equals(customer.Id))
                 .SingleOrDefault();
 
             customerOld = (Customer)customer;

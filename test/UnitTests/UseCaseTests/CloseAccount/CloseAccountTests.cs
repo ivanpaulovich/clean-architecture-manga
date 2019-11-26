@@ -23,7 +23,6 @@ namespace UnitTests.UseCasesTests.CloseAccount
         public void PositiveBalance_Should_Not_Allow_Closing(decimal amount)
         {
             var customer = _fixture.EntityFactory.NewCustomer(
-                new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608178899"),
                 new Name("Ivan Paulovich"));
 
@@ -40,7 +39,6 @@ namespace UnitTests.UseCasesTests.CloseAccount
         public void ZeroBalance_Should_Allow_Closing()
         {
             var customer = _fixture.EntityFactory.NewCustomer(
-                new ExternalUserId("github/ivanpaulovich"),
                 new SSN("198608178899"),
                 new Name("Ivan Paulovich"));
 

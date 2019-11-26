@@ -1,13 +1,13 @@
 namespace WebApi.DependencyInjection.FeatureFlags
 {
-    using System.Collections;
     using System.Collections.Generic;
+    using System.Collections;
     using System.Linq;
     using System.Reflection;
     using Microsoft.AspNetCore.Mvc.ApplicationParts;
     using Microsoft.AspNetCore.Mvc.Controllers;
-    using Microsoft.FeatureManagement;
     using Microsoft.FeatureManagement.Mvc;
+    using Microsoft.FeatureManagement;
 
     public sealed class CustomControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
     {

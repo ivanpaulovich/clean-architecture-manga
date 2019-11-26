@@ -1,5 +1,6 @@
 namespace WebApi.DependencyInjection.Authentication
 {
+    using System;
     using Application.Services;
     using Domain.ValueObjects;
     using Microsoft.AspNetCore.Http;
@@ -11,6 +12,11 @@ namespace WebApi.DependencyInjection.Authentication
         public UserService(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
+        }
+
+        public CustomerId? GetCustomerId()
+        {
+            return new CustomerId(Guid.NewGuid());
         }
 
         public ExternalUserId GetExternalUserId()

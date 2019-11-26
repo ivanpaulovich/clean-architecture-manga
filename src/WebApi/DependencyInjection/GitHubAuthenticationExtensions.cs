@@ -1,13 +1,13 @@
 namespace WebApi.DependencyInjection
 {
-    using System.Net.Http;
     using System.Net.Http.Headers;
+    using System.Net.Http;
     using System.Security.Claims;
     using System.Text.Json;
     using Application.Services;
-    using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authentication.Cookies;
     using Microsoft.AspNetCore.Authentication.OAuth;
+    using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.Configuration;
