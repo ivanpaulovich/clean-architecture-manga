@@ -32,13 +32,21 @@ namespace Application.UseCases
         {
             ICustomer customer;
 
-            try
+            if (_userService.GetCustomerId() is CustomerId customerId)
             {
-                customer = await _customerRepository.GetBy(_userService.GetCustomerId());
+                try
+                {
+                    customer = await _customerRepository.GetBy(customerId);
+                }
+                catch (CustomerNotFoundException ex)
+                {
+                    _outputPort.NotFound(ex.Message);
+                    return;
+                }
             }
-            catch (CustomerNotFoundException ex)
+            else
             {
-                _outputPort.NotFound(ex.Message);
+                _outputPort.NotFound("Customer does not exist.");
                 return;
             }
 

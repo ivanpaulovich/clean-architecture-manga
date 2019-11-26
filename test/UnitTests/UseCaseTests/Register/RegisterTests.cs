@@ -36,7 +36,7 @@ namespace UnitTests.UseCasesTests.Register
             var ssn = new SSN("8608178888");
 
             var sut = new Register(
-                new TestUserService(),
+                new TestUserService(_fixture.Context),
                 _fixture.EntityFactory,
                 presenter,
                 _fixture.CustomerRepository,

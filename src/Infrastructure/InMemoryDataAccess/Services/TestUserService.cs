@@ -1,31 +1,52 @@
 namespace Infrastructure.InMemoryDataAccess.Services
 {
     using System;
+    using System.Linq;
     using Application.Services;
     using Domain.ValueObjects;
 
     public sealed class TestUserService : IUserService
     {
-        private readonly Guid _userId;
+        private readonly MangaContext _mangaContext;
+        private readonly Guid _sessionId;
 
-        public TestUserService()
+        public TestUserService(MangaContext mangaContext)
         {
-            _userId = Guid.NewGuid();
+            _sessionId = Guid.NewGuid();
+            _mangaContext = mangaContext;
         }
 
-        public CustomerId GetCustomerId()
+        public CustomerId? GetCustomerId()
         {
-            return new CustomerId(Guid.NewGuid());
+            var user = _mangaContext.Users
+                .Where(e => e.ExternalUserId.Equals(GetExternalUserId()))
+                .SingleOrDefault();
+
+            if (user is null)
+            {
+                return null;
+            }
+
+            var customer = _mangaContext.Customers
+                .Where(e => e.Id.Equals(user.CustomerId))
+                .SingleOrDefault();
+
+            if (customer is null)
+            {
+                return null;
+            }
+
+            return customer.Id;
         }
 
         public ExternalUserId GetExternalUserId()
         {
-            return new ExternalUserId($"github/tempuser{_userId}");
+            return new ExternalUserId($"github/tempuser{_sessionId}");
         }
 
         public Name GetUserName()
         {
-            return new Name($"Temporary User {_userId}");
+            return new Name($"Temporary User {_sessionId}");
         }
     }
 }

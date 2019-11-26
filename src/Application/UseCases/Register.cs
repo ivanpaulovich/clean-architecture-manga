@@ -41,16 +41,17 @@ namespace Application.UseCases
         {
             ICustomer customer;
 
-            try
+            if (_userService.GetCustomerId() is CustomerId customerId)
             {
-                customer = await _customerRepository.GetBy(_userService.GetCustomerId());
-
-                _outputPort.CustomerAlreadyRegistered($"Customer already exists.");
-
-                return;
-            }
-            catch (CustomerNotFoundException)
-            {
+                try
+                {
+                    customer = await _customerRepository.GetBy(customerId);
+                    _outputPort.CustomerAlreadyRegistered($"Customer already exists.");
+                    return;
+                }
+                catch (CustomerNotFoundException)
+                {
+                }
             }
 
             customer = _entityFactory.NewCustomer(input.SSN, _userService.GetUserName());

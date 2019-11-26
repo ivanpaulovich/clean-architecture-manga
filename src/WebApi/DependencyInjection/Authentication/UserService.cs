@@ -14,7 +14,7 @@ namespace WebApi.DependencyInjection.Authentication
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public CustomerId GetCustomerId()
+        public CustomerId? GetCustomerId()
         {
             return new CustomerId(Guid.NewGuid());
         }

@@ -6,7 +6,7 @@ namespace Infrastructure.InMemoryDataAccess.Services
 
     public sealed class UserService : IUserService
     {
-        public CustomerId GetCustomerId()
+        public CustomerId? GetCustomerId()
         {
             return new CustomerId(Guid.NewGuid());
         }
@@ -19,11 +19,6 @@ namespace Infrastructure.InMemoryDataAccess.Services
         public Name GetUserName()
         {
             return new Name("Ivan Paulovich");
-        }
-
-        ExternalUserId IUserService.GetExternalUserId()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
