@@ -5,7 +5,7 @@ namespace Domain.Accounts
 
     public class Credit : ICredit
     {
-        public Guid Id { get; protected set; }
+        public CreditId Id { get; protected set; }
 
         public PositiveMoney Amount { get; protected set; }
 

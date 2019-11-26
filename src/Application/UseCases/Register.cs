@@ -16,6 +16,7 @@ namespace Application.UseCases
         private readonly IOutputPort _outputPort;
         private readonly ICustomerRepository _customerRepository;
         private readonly IAccountRepository _accountRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public Register(
@@ -24,6 +25,7 @@ namespace Application.UseCases
             IOutputPort outputPort,
             ICustomerRepository customerRepository,
             IAccountRepository accountRepository,
+            IUserRepository userRepository,
             IUnitOfWork unityOfWork)
         {
             _userService = userService;
@@ -31,6 +33,7 @@ namespace Application.UseCases
             _outputPort = outputPort;
             _customerRepository = customerRepository;
             _accountRepository = accountRepository;
+            _userRepository = userRepository;
             _unitOfWork = unityOfWork;
         }
 
@@ -60,8 +63,13 @@ namespace Application.UseCases
 
             customer.Register(account);
 
+            var user = _entityFactory.NewUser(
+                customer,
+                _userService.GetExternalUserId());
+
             await _customerRepository.Add(customer);
             await _accountRepository.Add(account, credit);
+            await _userRepository.Add(user);
             await _unitOfWork.Save();
 
             BuildOutput(_userService.GetExternalUserId(), customer, account);

@@ -14,7 +14,7 @@ namespace Domain.Accounts
         }
 
         public void Add<T>(IEnumerable<T> credits)
-        where T : ICredit
+            where T : ICredit
         {
             foreach (var credit in credits)
             {

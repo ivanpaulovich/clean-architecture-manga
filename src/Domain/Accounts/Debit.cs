@@ -5,7 +5,7 @@ namespace Domain.Accounts
 
     public class Debit : IDebit
     {
-        public Guid Id { get; protected set; }
+        public DebitId Id { get; protected set; }
 
         public PositiveMoney Amount { get; protected set; }
 

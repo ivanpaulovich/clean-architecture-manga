@@ -54,7 +54,7 @@ namespace AcceptanceTests.V1
             var content = new FormUrlEncodedContent(new []
             {
                 new KeyValuePair<string, string>("ssn", "8608179999"),
-                    new KeyValuePair<string, string>("initialAmount", initialAmount.ToString()),
+                new KeyValuePair<string, string>("initialAmount", initialAmount.ToString()),
             });
 
             var response = await client.PostAsync("api/v1/Customers", content);

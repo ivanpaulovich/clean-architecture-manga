@@ -4,14 +4,16 @@ using Infrastructure.EntityFrameworkDataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.EntityFrameworkDataAccess.Migrations
 {
     [DbContext(typeof(MangaContext))]
-    partial class MangaContextModelSnapshot : ModelSnapshot
+    [Migration("20191126172117_ValueObjects")]
+    partial class ValueObjects
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

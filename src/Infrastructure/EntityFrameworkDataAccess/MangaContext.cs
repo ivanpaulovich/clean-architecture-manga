@@ -83,6 +83,13 @@ namespace Infrastructure.EntityFrameworkDataAccess
                 .IsRequired();
 
             modelBuilder.Entity<Debit>()
+                .Property(b => b.Id)
+                .HasConversion(
+                    v => v.ToGuid(),
+                    v => new DebitId(v))
+                .IsRequired();
+
+            modelBuilder.Entity<Debit>()
                 .Property(b => b.AccountId)
                 .HasConversion(
                     v => v.ToGuid(),
@@ -95,6 +102,13 @@ namespace Infrastructure.EntityFrameworkDataAccess
                 .HasConversion(
                     v => v.ToMoney().ToDecimal(),
                     v => new PositiveMoney(v))
+                .IsRequired();
+
+            modelBuilder.Entity<Credit>()
+                .Property(b => b.Id)
+                .HasConversion(
+                    v => v.ToGuid(),
+                    v => new CreditId(v))
                 .IsRequired();
 
             modelBuilder.Entity<Credit>()
@@ -148,7 +162,7 @@ namespace Infrastructure.EntityFrameworkDataAccess
             modelBuilder.Entity<Credit>().HasData(
                 new
                 {
-                    Id = new Guid("f5117315-e789-491a-b662-958c37237f9b"),
+                    Id = new CreditId(new Guid("f5117315-e789-491a-b662-958c37237f9b")),
                     AccountId = DefaultAccountId,
                     Amount = new PositiveMoney(400),
                     Description = "Credit",
@@ -158,7 +172,7 @@ namespace Infrastructure.EntityFrameworkDataAccess
             modelBuilder.Entity<Debit>().HasData(
                 new
                 {
-                    Id = new Guid("3d6032df-7a3b-46e6-8706-be971e3d539f"),
+                    Id = new DebitId(new Guid("3d6032df-7a3b-46e6-8706-be971e3d539f")),
                     AccountId = DefaultAccountId,
                     Amount = new PositiveMoney(400),
                     Description = "Debit",
