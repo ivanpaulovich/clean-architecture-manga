@@ -18,6 +18,7 @@ namespace WebApi.DependencyInjection
 
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }

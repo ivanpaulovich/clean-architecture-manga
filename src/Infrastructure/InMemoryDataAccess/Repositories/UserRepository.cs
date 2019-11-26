@@ -1,4 +1,4 @@
-namespace Infrastructure.InMemoryDataAccess.Services
+namespace Infrastructure.InMemoryDataAccess.Repositories
 {
     using System.Linq;
     using System.Threading.Tasks;
