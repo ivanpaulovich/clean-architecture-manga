@@ -1,4 +1,4 @@
-namespace AcceptanceTests
+namespace ComponentTests
 {
     using System.Net.Http;
     using System.Threading.Tasks;

@@ -1,4 +1,4 @@
-namespace AcceptanceTests.V2
+namespace ComponentTests.V2
 {
     using System.Collections.Generic;
     using System.Net.Http;
