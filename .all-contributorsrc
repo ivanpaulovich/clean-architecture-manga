@@ -154,6 +154,15 @@
         "design",
         "code"
       ]
+    },
+    {
+      "login": "leandrofagundes",
+      "name": "Leandro Fagundes",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/10363927?v=4",
+      "profile": "https://github.com/leandrofagundes",
+      "contributions": [
+        "question"
+      ]
     }
   ],
   "contributorsPerLine": 5,
