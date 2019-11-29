@@ -1,5 +1,5 @@
 # Manga: The Clean Architecture Sample Implementation with .NET Core :cyclone:
-[![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors) [![Build Status](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_apis/build/status/ivanpaulovich.clean-architecture-manga?branchName=master)](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_build/latest?definitionId=20&branchName=master)
+[![All Contributors](https://img.shields.io/badge/all_contributors-16-orange.svg?style=flat-square)](#contributors) [![Build Status](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_apis/build/status/ivanpaulovich.clean-architecture-manga?branchName=master)](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_build/latest?definitionId=20&branchName=master)
 
 Sample implementation of the **Clean Architecture Principles with .NET Core**. Use cases as central organizing structure, decoupled from frameworks and technology details. Built with small components that are developed and tested in isolation.
 
@@ -1363,6 +1363,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/morphlogic"><img src="https://avatars1.githubusercontent.com/u/29184473?v=4" width="100px;" alt="morphlogic"/><br /><sub><b>morphlogic</b></sub></a><br /><a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=morphlogic" title="Tests">⚠️</a> <a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=morphlogic" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/felpasl"><img src="https://avatars3.githubusercontent.com/u/5658895?v=4" width="100px;" alt="Felipe Lambert"/><br /><sub><b>Felipe Lambert</b></sub></a><br /><a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=felpasl" title="Tests">⚠️</a> <a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=felpasl" title="Code">💻</a></td>
     <td align="center"><a href="https://matray.website"><img src="https://avatars2.githubusercontent.com/u/9035444?v=4" width="100px;" alt="Philippe Matray"/><br /><sub><b>Philippe Matray</b></sub></a><br /><a href="#design-phmatray" title="Design">🎨</a> <a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=phmatray" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/leandrofagundes"><img src="https://avatars1.githubusercontent.com/u/10363927?v=4" width="100px;" alt="Leandro Fagundes"/><br /><sub><b>Leandro Fagundes</b></sub></a><br /><a href="#question-leandrofagundes" title="Answering Questions">💬</a></td>
   </tr>
 </table>
 
