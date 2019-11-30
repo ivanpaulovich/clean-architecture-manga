@@ -2,9 +2,8 @@ namespace Infrastructure.InMemoryDataAccess
 {
     using System;
     using Domain.Accounts;
-    using Domain.ValueObjects;
 
-    public class Credit : Domain.Accounts.Credit
+    public class Credit : Domain.Accounts.Credits.Credit
     {
         public Credit(
             IAccount account,

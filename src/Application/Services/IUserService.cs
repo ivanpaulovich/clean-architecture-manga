@@ -1,6 +1,7 @@
 namespace Application.Services
 {
-    using Domain.ValueObjects;
+    using Domain.Customers;
+    using Domain.Users;
 
     public interface IUserService
     {

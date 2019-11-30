@@ -1,6 +1,6 @@
 namespace Domain.Users
 {
-    using Domain.ValueObjects;
+    using Domain.Customers;
 
     public class User : IUser
     {

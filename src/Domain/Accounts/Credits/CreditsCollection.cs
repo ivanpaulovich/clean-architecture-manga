@@ -1,8 +1,7 @@
-namespace Domain.Accounts
+namespace Domain.Accounts.Credits
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using Domain.ValueObjects;
 
     public sealed class CreditsCollection
     {

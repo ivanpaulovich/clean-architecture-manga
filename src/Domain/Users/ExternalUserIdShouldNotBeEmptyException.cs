@@ -1,4 +1,4 @@
-namespace Domain.ValueObjects
+namespace Domain.Users
 {
     public sealed class ExternalUserIdShouldNotBeEmptyException : DomainException
     {

@@ -1,7 +1,5 @@
-namespace Domain.Accounts
+namespace Domain.Accounts.Debits
 {
-    using Domain.ValueObjects;
-
     public interface IDebit
     {
         PositiveMoney Sum(PositiveMoney amount);

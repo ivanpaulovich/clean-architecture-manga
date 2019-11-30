@@ -1,4 +1,4 @@
-namespace Domain.ValueObjects
+namespace Domain.Accounts.Debits
 {
     using System;
 
@@ -10,7 +10,7 @@ namespace Domain.ValueObjects
         {
             if (debitId == Guid.Empty)
             {
-                throw new EmptyCreditIdException($"{nameof(debitId)} cannot be empty.");
+                throw new EmptyDebitIdException($"{nameof(debitId)} cannot be empty.");
             }
 
             _debitId = debitId;

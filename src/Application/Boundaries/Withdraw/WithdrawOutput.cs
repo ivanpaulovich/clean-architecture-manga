@@ -1,7 +1,7 @@
 namespace Application.Boundaries.Withdraw
 {
     using Domain.Accounts;
-    using Domain.ValueObjects;
+    using Domain.Accounts.Debits;
 
     public sealed class WithdrawOutput : IUseCaseOutput
     {

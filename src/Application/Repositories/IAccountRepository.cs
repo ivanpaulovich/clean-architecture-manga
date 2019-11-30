@@ -2,7 +2,8 @@ namespace Application.Repositories
 {
     using System.Threading.Tasks;
     using Domain.Accounts;
-    using Domain.ValueObjects;
+    using Domain.Accounts.Credits;
+    using Domain.Accounts.Debits;
 
     public interface IAccountRepository
     {

@@ -2,7 +2,8 @@ namespace WebApi.DependencyInjection.Authentication
 {
     using System;
     using Application.Services;
-    using Domain.ValueObjects;
+    using Domain.Customers;
+    using Domain.Users;
     using Microsoft.AspNetCore.Http;
 
     public sealed class UserService : IUserService

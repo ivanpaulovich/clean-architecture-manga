@@ -4,7 +4,6 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
     using System.Threading.Tasks;
     using Application.Repositories;
     using Domain.Customers;
-    using Domain.ValueObjects;
 
     public sealed class CustomerRepository : ICustomerRepository
     {

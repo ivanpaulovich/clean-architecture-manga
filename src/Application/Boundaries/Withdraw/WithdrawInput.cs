@@ -1,6 +1,6 @@
 namespace Application.Boundaries.Withdraw
 {
-    using Domain.ValueObjects;
+    using Domain.Accounts;
 
     public sealed class WithdrawInput : IUseCaseInput
     {

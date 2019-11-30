@@ -2,9 +2,10 @@ namespace Domain
 {
     using System;
     using Domain.Accounts;
+    using Domain.Accounts.Credits;
+    using Domain.Accounts.Debits;
     using Domain.Customers;
     using Domain.Users;
-    using Domain.ValueObjects;
 
     public interface IEntityFactory
     {

@@ -1,14 +1,14 @@
-namespace Domain.ValueObjects
+namespace Domain.Customers
 {
-    public readonly struct ExternalUserId
+    public readonly struct Name
     {
         private readonly string _text;
 
-        public ExternalUserId(string text)
+        public Name(string text)
         {
             if (string.IsNullOrWhiteSpace(text))
             {
-                throw new ExternalUserIdShouldNotBeEmptyException($"The '{nameof(text)}' field is required");
+                throw new NameShouldNotBeEmptyException($"The {nameof(text)} field is required.");
             }
 
             _text = text;

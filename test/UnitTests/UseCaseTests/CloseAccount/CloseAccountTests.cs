@@ -4,7 +4,8 @@ namespace UnitTests.UseCasesTests.CloseAccount
     using System.Threading.Tasks;
     using Application.Boundaries.CloseAccount;
     using Application.Boundaries.GetAccountDetails;
-    using Domain.ValueObjects;
+    using Domain.Accounts;
+    using Domain.Customers;
     using Infrastructure.InMemoryDataAccess.Presenters;
     using UnitTests.TestFixtures;
     using Xunit;

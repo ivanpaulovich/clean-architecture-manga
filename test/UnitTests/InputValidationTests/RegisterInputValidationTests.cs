@@ -1,7 +1,8 @@
 namespace UnitTests.InputValidationTests
 {
     using Application.Boundaries.Register;
-    using Domain.ValueObjects;
+    using Domain.Accounts;
+    using Domain.Customers;
     using Xunit;
 
     public sealed class RegisterInputValidationTests

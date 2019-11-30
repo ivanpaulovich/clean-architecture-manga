@@ -1,7 +1,9 @@
 namespace Infrastructure.InMemoryDataAccess
 {
     using System.Collections.ObjectModel;
-    using Domain.ValueObjects;
+    using Domain.Accounts;
+    using Domain.Customers;
+    using Domain.Users;
 
     public sealed class MangaContext
     {

@@ -1,4 +1,4 @@
-namespace Domain.ValueObjects
+namespace Domain.Customers
 {
     using System.Text.RegularExpressions;
 
@@ -12,7 +12,7 @@ namespace Domain.ValueObjects
         {
             if (string.IsNullOrWhiteSpace(text))
             {
-                throw new SSNShouldNotBeEmptyException("The 'SSN' field is required");
+                throw new SSNShouldNotBeEmptyException($"The {nameof(text)} field is required.");
             }
 
             Regex regex = new Regex(RegExForValidation);
@@ -20,7 +20,7 @@ namespace Domain.ValueObjects
 
             if (!match.Success)
             {
-                throw new InvalidSSNException("Invalid SSN format. Use YYMMDDNNNN.");
+                throw new InvalidSSNException($"Invalid {nameof(text)} format. Use YYMMDDNNNN.");
             }
 
             _text = text;

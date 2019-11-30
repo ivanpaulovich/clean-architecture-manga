@@ -1,4 +1,4 @@
-namespace Domain.ValueObjects
+namespace Domain.Accounts
 {
     public readonly struct PositiveMoney
     {

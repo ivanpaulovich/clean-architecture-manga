@@ -4,7 +4,7 @@ namespace UnitTests.UseCasesTests.Withdraw
     using System.Threading.Tasks;
     using Application.Boundaries.Withdraw;
     using Application.UseCases;
-    using Domain.ValueObjects;
+    using Domain.Accounts;
     using Infrastructure.InMemoryDataAccess.Presenters;
     using UnitTests.TestFixtures;
     using Xunit;

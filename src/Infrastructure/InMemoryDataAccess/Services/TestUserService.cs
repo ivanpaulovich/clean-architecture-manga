@@ -3,7 +3,8 @@ namespace Infrastructure.InMemoryDataAccess.Services
     using System;
     using System.Linq;
     using Application.Services;
-    using Domain.ValueObjects;
+    using Domain.Customers;
+    using Domain.Users;
 
     public sealed class TestUserService : IUserService
     {

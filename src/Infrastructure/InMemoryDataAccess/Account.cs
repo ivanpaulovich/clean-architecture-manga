@@ -3,8 +3,9 @@ namespace Infrastructure.InMemoryDataAccess
     using System;
     using System.Collections.Generic;
     using Domain.Accounts;
+    using Domain.Accounts.Credits;
+    using Domain.Accounts.Debits;
     using Domain.Customers;
-    using Domain.ValueObjects;
 
     public class Account : Domain.Accounts.Account
     {
