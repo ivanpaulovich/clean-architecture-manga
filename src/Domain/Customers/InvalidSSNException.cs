@@ -1,4 +1,4 @@
-namespace Domain.ValueObjects
+namespace Domain.Customers
 {
     internal sealed class InvalidSSNException : DomainException
     {

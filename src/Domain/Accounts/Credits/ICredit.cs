@@ -1,7 +1,5 @@
-namespace Domain.Accounts
+namespace Domain.Accounts.Credits
 {
-    using Domain.ValueObjects;
-
     public interface ICredit
     {
         PositiveMoney Sum(PositiveMoney amount);

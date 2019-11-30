@@ -1,7 +1,8 @@
 namespace Domain.Accounts
 {
     using System;
-    using Domain.ValueObjects;
+    using Domain.Accounts.Credits;
+    using Domain.Accounts.Debits;
 
     public class Account : IAccount
     {

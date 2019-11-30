@@ -1,7 +1,7 @@
 namespace Infrastructure.InMemoryDataAccess
 {
     using Domain.Customers;
-    using Domain.ValueObjects;
+    using Domain.Users;
 
     public class User : Domain.Users.User
     {

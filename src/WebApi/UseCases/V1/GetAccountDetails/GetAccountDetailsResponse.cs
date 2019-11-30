@@ -3,8 +3,8 @@ namespace WebApi.UseCases.V1.GetAccountDetails
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System;
-    using Domain.ValueObjects;
     using WebApi.ViewModels;
+    using Domain.Accounts;
 
     /// <summary>
     /// Get Account Details.

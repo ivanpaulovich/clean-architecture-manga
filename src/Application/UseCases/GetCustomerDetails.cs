@@ -7,7 +7,7 @@ namespace Application.UseCases
     using Application.Services;
     using Domain.Accounts;
     using Domain.Customers;
-    using Domain.ValueObjects;
+    using Domain.Users;
 
     public sealed class GetCustomerDetails : IUseCase
     {

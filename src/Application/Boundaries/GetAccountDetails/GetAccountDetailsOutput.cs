@@ -2,7 +2,8 @@ namespace Application.Boundaries.GetAccountDetails
 {
     using System.Collections.Generic;
     using Domain.Accounts;
-    using Domain.ValueObjects;
+    using Domain.Accounts.Credits;
+    using Domain.Accounts.Debits;
 
     public sealed class GetAccountDetailsOutput : IUseCaseOutput
     {

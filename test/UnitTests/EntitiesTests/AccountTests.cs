@@ -1,9 +1,8 @@
 namespace UnitTests.EntitiesTests
 {
-    using System;
     using Domain.Accounts;
+    using Domain.Accounts.Credits;
     using Domain.Customers;
-    using Domain.ValueObjects;
     using Xunit;
 
     public class AccountTests

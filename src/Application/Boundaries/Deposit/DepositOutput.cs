@@ -1,7 +1,7 @@
 namespace Application.Boundaries.Deposit
 {
     using Domain.Accounts;
-    using Domain.ValueObjects;
+    using Domain.Accounts.Credits;
 
     public sealed class DepositOutput : IUseCaseOutput
     {

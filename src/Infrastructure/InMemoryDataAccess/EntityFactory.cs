@@ -3,9 +3,10 @@ namespace Infrastructure.InMemoryDataAccess
     using System;
     using Domain;
     using Domain.Accounts;
+    using Domain.Accounts.Credits;
+    using Domain.Accounts.Debits;
     using Domain.Customers;
     using Domain.Users;
-    using Domain.ValueObjects;
 
     public sealed class EntityFactory : IEntityFactory
     {

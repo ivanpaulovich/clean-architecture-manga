@@ -5,7 +5,6 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
     using System.Threading.Tasks;
     using Application.Repositories;
     using Domain.Customers;
-    using Domain.ValueObjects;
     using Microsoft.EntityFrameworkCore;
 
     public sealed class CustomerRepository : ICustomerRepository
@@ -26,7 +25,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
 
         public async Task<ICustomer> GetBy(CustomerId customerId)
         {
-            EntityFrameworkDataAccess.Customer customer = await _context.Customers
+            var customer = await _context.Customers
                 .Where(c => c.Id.Equals(customerId))
                 .SingleOrDefaultAsync();
 

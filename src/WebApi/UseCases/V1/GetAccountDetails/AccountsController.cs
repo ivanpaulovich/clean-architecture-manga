@@ -3,7 +3,7 @@ namespace WebApi.UseCases.V1.GetAccountDetails
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Application.Boundaries.GetAccountDetails;
-    using Domain.ValueObjects;
+    using Domain.Accounts;
     using FluentMediator;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;

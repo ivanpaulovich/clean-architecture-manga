@@ -4,7 +4,7 @@ namespace UnitTests.UseCaseTests.Transfer
     using System.Threading.Tasks;
     using Application.Boundaries.Transfer;
     using Application.UseCases;
-    using Domain.ValueObjects;
+    using Domain.Accounts;
     using Infrastructure.InMemoryDataAccess.Presenters;
     using UnitTests.TestFixtures;
     using Xunit;

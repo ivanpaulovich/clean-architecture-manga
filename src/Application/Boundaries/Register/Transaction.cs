@@ -1,7 +1,7 @@
 namespace Application.Boundaries.Register
 {
     using System;
-    using Domain.ValueObjects;
+    using Domain.Accounts;
 
     public sealed class Transaction
     {

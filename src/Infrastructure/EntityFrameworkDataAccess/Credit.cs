@@ -2,9 +2,8 @@ namespace Infrastructure.EntityFrameworkDataAccess
 {
     using System;
     using Domain.Accounts;
-    using Domain.ValueObjects;
 
-    public class Credit : Domain.Accounts.Credit
+    public class Credit : Domain.Accounts.Credits.Credit
     {
         public Credit(IAccount account, PositiveMoney amountToDeposit, DateTime transactionDate)
         {

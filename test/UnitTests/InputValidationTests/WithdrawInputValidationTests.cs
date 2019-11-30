@@ -2,7 +2,7 @@ namespace UnitTests.InputValidationTests
 {
     using System;
     using Application.Boundaries.Withdraw;
-    using Domain.ValueObjects;
+    using Domain.Accounts;
     using Xunit;
 
     public sealed class WithdrawInputValidationTests

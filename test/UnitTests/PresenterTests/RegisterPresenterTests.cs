@@ -2,7 +2,8 @@ namespace UnitTests.PresenterTests
 {
     using System.Net;
     using Application.Boundaries.Register;
-    using Domain.ValueObjects;
+    using Domain.Customers;
+    using Domain.Users;
     using Microsoft.AspNetCore.Mvc;
     using WebApi.UseCases.V1.Register;
     using Xunit;

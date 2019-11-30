@@ -6,6 +6,7 @@ namespace Application.UseCases
     using Application.Services;
     using Domain;
     using Domain.Accounts;
+    using Domain.Accounts.Debits;
 
     public sealed class Transfer : IUseCase
     {

@@ -3,7 +3,8 @@ namespace WebApi.UseCases.V1.Register
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Application.Boundaries.Register;
-    using Domain.ValueObjects;
+    using Domain.Accounts;
+    using Domain.Customers;
     using FluentMediator;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;

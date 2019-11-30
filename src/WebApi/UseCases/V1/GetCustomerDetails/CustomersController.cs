@@ -2,7 +2,6 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
 {
     using System.Threading.Tasks;
     using Application.Boundaries.GetCustomerDetails;
-    using Domain.ValueObjects;
     using FluentMediator;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;

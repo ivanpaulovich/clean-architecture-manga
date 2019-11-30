@@ -1,4 +1,4 @@
-namespace Domain.ValueObjects
+namespace Domain.Accounts.Credits
 {
     public sealed class EmptyCreditIdException : DomainException
     {
