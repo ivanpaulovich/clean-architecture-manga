@@ -163,11 +163,22 @@
       "contributions": [
         "question"
       ]
+    },
+    {
+      "login": "bommen",
+      "name": "Bart van Ommen",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/52955252?v=4",
+      "profile": "https://github.com/bommen",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5,
   "projectName": "clean-architecture-manga",
   "projectOwner": "ivanpaulovich",
   "repoType": "github",
-  "repoHost": "https://github.com"
+  "repoHost": "https://github.com",
+  "skipCi": true
 }
