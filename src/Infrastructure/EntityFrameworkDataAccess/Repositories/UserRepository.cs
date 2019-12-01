@@ -3,8 +3,8 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using Application.Repositories;
-    using Domain.Users;
+    using Domain.Security;
+    using Domain.Security.ValueObjects;
     using Microsoft.EntityFrameworkCore;
 
     public sealed class UserRepository : IUserRepository

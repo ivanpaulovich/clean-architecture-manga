@@ -2,6 +2,7 @@ namespace Infrastructure.InMemoryDataAccess
 {
     using System;
     using Domain.Accounts;
+    using Domain.Accounts.ValueObjects;
 
     public class Debit : Domain.Accounts.Debits.Debit
     {

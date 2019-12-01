@@ -1,18 +1,13 @@
-namespace Domain
+namespace Domain.Accounts
 {
     using System;
-    using Domain.Accounts;
     using Domain.Accounts.Credits;
     using Domain.Accounts.Debits;
+    using Domain.Accounts.ValueObjects;
     using Domain.Customers;
-    using Domain.Users;
 
-    public interface IEntityFactory
+    public interface IAccountFactory
     {
-        IUser NewUser(ICustomer customer, ExternalUserId externalUserId);
-
-        ICustomer NewCustomer(SSN ssn, Name name);
-
         IAccount NewAccount(ICustomer customer);
 
         ICredit NewCredit(IAccount account, PositiveMoney amountToDeposit, DateTime transactionDate);

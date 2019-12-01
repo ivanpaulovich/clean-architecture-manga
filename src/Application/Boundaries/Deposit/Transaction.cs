@@ -1,7 +1,7 @@
 namespace Application.Boundaries.Deposit
 {
     using System;
-    using Domain.Accounts;
+    using Domain.Accounts.ValueObjects;
 
     public sealed class Transaction
     {

@@ -1,4 +1,4 @@
-namespace Domain.Users
+namespace Domain.Security
 {
     public sealed class UserNotFoundException : DomainException
     {

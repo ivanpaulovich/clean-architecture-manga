@@ -1,4 +1,4 @@
-namespace Domain.Customers
+namespace Domain.Customers.ValueObjects
 {
     public sealed class SSNShouldNotBeEmptyException : DomainException
     {

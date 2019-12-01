@@ -1,6 +1,7 @@
 namespace Domain.Accounts.Debits
 {
     using System;
+    using Domain.Accounts.ValueObjects;
 
     public class Debit : IDebit
     {

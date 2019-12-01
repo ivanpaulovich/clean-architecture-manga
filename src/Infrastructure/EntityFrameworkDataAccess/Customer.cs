@@ -2,8 +2,9 @@ namespace Infrastructure.EntityFrameworkDataAccess
 {
     using System;
     using System.Collections.Generic;
-    using Domain.Accounts;
+    using Domain.Accounts.ValueObjects;
     using Domain.Customers;
+    using Domain.Customers.ValueObjects;
 
     public class Customer : Domain.Customers.Customer
     {

@@ -1,4 +1,4 @@
-namespace Domain.Customers
+namespace Domain.Customers.ValueObjects
 {
     using System.Text.RegularExpressions;
 

@@ -1,4 +1,4 @@
-namespace Domain.Accounts
+namespace Domain.Accounts.ValueObjects
 {
     public sealed class EmptyAccountIdException : DomainException
     {

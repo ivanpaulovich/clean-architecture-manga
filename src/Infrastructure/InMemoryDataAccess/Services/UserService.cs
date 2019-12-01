@@ -1,9 +1,9 @@
 namespace Infrastructure.InMemoryDataAccess.Services
 {
     using System;
-    using Application.Services;
-    using Domain.Customers;
-    using Domain.Users;
+    using Domain.Customers.ValueObjects;
+    using Domain.Security.Services;
+    using Domain.Security.ValueObjects;
 
     public sealed class UserService : IUserService
     {

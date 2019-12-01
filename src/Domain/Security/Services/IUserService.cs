@@ -1,7 +1,7 @@
-namespace Application.Services
+namespace Domain.Security.Services
 {
-    using Domain.Customers;
-    using Domain.Users;
+    using Domain.Customers.ValueObjects;
+    using Domain.Security.ValueObjects;
 
     public interface IUserService
     {

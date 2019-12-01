@@ -2,6 +2,7 @@ namespace Infrastructure.EntityFrameworkDataAccess
 {
     using System;
     using Domain.Accounts;
+    using Domain.Accounts.ValueObjects;
 
     public class Credit : Domain.Accounts.Credits.Credit
     {

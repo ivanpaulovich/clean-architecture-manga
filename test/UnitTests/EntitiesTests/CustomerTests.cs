@@ -1,6 +1,7 @@
 namespace UnitTests.EntitiesTests
 {
     using Domain.Customers;
+    using Domain.Customers.ValueObjects;
     using Xunit;
 
     public class CustomerTests

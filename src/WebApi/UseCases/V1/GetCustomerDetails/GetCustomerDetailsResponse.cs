@@ -1,10 +1,10 @@
 namespace WebApi.UseCases.V1.GetCustomerDetails
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System;
+    using Domain.Customers.ValueObjects;
     using WebApi.ViewModels;
-    using Domain.Customers;
 
     /// <summary>
     /// The Customer Details.

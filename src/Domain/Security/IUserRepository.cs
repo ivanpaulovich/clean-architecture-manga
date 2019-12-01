@@ -1,7 +1,7 @@
-namespace Application.Repositories
+namespace Domain.Security
 {
     using System.Threading.Tasks;
-    using Domain.Users;
+    using Domain.Security.ValueObjects;
 
     public interface IUserRepository
     {

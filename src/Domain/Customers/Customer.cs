@@ -1,6 +1,7 @@
 namespace Domain.Customers
 {
     using Domain.Accounts;
+    using Domain.Customers.ValueObjects;
 
     public class Customer : ICustomer
     {

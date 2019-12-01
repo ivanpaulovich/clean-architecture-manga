@@ -1,4 +1,4 @@
-namespace Domain.Customers
+namespace Domain.Customers.ValueObjects
 {
     internal sealed class EmptyCustomerIdException : DomainException
     {
