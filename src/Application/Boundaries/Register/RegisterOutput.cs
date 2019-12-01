@@ -5,7 +5,7 @@ namespace Application.Boundaries.Register
     using Domain.Accounts.Credits;
     using Domain.Accounts.Debits;
     using Domain.Customers;
-    using Domain.Users;
+    using Domain.Security.ValueObjects;
 
     public sealed class RegisterOutput : IUseCaseOutput
     {

@@ -1,6 +1,8 @@
-namespace Domain.Users
+namespace Domain.Security
 {
     using Domain.Customers;
+    using Domain.Customers.ValueObjects;
+    using Domain.Security.ValueObjects;
 
     public class User : IUser
     {

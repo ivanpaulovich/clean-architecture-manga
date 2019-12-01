@@ -1,7 +1,7 @@
 namespace WebApi.UseCases.V1.Transfer
 {
-    using System.ComponentModel.DataAnnotations;
     using System;
+    using System.ComponentModel.DataAnnotations;
 
     /// <summary>
     /// Transfer Request.

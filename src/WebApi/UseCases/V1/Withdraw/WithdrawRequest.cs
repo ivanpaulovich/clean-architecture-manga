@@ -1,7 +1,7 @@
 namespace WebApi.UseCases.V1.Withdraw
 {
-    using System.ComponentModel.DataAnnotations;
     using System;
+    using System.ComponentModel.DataAnnotations;
 
     /// <summary>
     /// Withdraw Request.

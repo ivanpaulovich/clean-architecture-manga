@@ -1,7 +1,7 @@
-namespace Application.Repositories
+namespace Domain.Customers
 {
     using System.Threading.Tasks;
-    using Domain.Customers;
+    using Domain.Customers.ValueObjects;
 
     public interface ICustomerRepository
     {

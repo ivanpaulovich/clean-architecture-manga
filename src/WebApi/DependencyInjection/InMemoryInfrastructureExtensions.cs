@@ -1,17 +1,20 @@
 namespace WebApi.DependencyInjection
 {
-    using Application.Repositories;
     using Application.Services;
-    using Domain;
-    using Infrastructure.InMemoryDataAccess.Repositories;
+    using Domain.Accounts;
+    using Domain.Customers;
+    using Domain.Security;
     using Infrastructure.InMemoryDataAccess;
+    using Infrastructure.InMemoryDataAccess.Repositories;
     using Microsoft.Extensions.DependencyInjection;
 
     public static class InMemoryInfrastructureExtensions
     {
         public static IServiceCollection AddInMemoryPersistence(this IServiceCollection services)
         {
-            services.AddScoped<IEntityFactory, EntityFactory>();
+            services.AddScoped<IUserFactory, EntityFactory>();
+            services.AddScoped<ICustomerFactory, EntityFactory>();
+            services.AddScoped<IAccountFactory, EntityFactory>();
 
             services.AddSingleton<MangaContext, MangaContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();

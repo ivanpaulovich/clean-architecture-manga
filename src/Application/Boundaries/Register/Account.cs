@@ -4,6 +4,7 @@ namespace Application.Boundaries.Register
     using Domain.Accounts;
     using Domain.Accounts.Credits;
     using Domain.Accounts.Debits;
+    using Domain.Accounts.ValueObjects;
 
     public sealed class Account
     {

@@ -1,12 +1,12 @@
 namespace ComponentTests.V1
 {
+    using System;
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using System;
     using Microsoft.AspNetCore.Mvc.Testing;
-    using Newtonsoft.Json.Linq;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
     using WebApi;
     using Xunit;
 
@@ -51,7 +51,7 @@ namespace ComponentTests.V1
         {
             var client = _factory.CreateClient();
 
-            var content = new FormUrlEncodedContent(new []
+            var content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("ssn", "8608179999"),
                 new KeyValuePair<string, string>("initialAmount", initialAmount.ToString()),
@@ -67,7 +67,7 @@ namespace ComponentTests.V1
             JObject customer = JsonConvert.DeserializeObject<JObject>(responseString);
 
             string customerId = customer["customerId"].Value<string>();
-            string accountId = ((JContainer) customer["accounts"]).First["accountId"].Value<string>();
+            string accountId = ((JContainer)customer["accounts"]).First["accountId"].Value<string>();
 
             return new Tuple<string, string>(customerId, accountId);
         }
@@ -75,7 +75,7 @@ namespace ComponentTests.V1
         private async Task Deposit(string account, decimal amount)
         {
             var client = _factory.CreateClient();
-            var content = new FormUrlEncodedContent(new []
+            var content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("accountId", account),
                     new KeyValuePair<string, string>("amount", amount.ToString()),
@@ -91,7 +91,7 @@ namespace ComponentTests.V1
         {
             var client = _factory.CreateClient();
 
-            var content = new FormUrlEncodedContent(new []
+            var content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("accountId", account),
                     new KeyValuePair<string, string>("amount", amount.ToString()),

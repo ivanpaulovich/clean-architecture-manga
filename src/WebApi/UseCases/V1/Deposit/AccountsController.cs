@@ -4,6 +4,7 @@ namespace WebApi.UseCases.V1.Deposit
     using System.Threading.Tasks;
     using Application.Boundaries.Deposit;
     using Domain.Accounts;
+    using Domain.Accounts.ValueObjects;
     using FluentMediator;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;

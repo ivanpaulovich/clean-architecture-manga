@@ -1,9 +1,9 @@
 namespace Infrastructure.EntityFrameworkDataAccess
 {
     using Domain.Customers;
-    using Domain.Users;
+    using Domain.Security.ValueObjects;
 
-    public class User : Domain.Users.User
+    public class User : Domain.Security.User
     {
         public User(ICustomer customer, ExternalUserId externalUserId)
         {

@@ -3,10 +3,10 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using Application.Repositories;
     using Domain.Accounts;
     using Domain.Accounts.Credits;
     using Domain.Accounts.Debits;
+    using Domain.Accounts.ValueObjects;
     using Microsoft.Data.SqlClient;
     using Microsoft.EntityFrameworkCore;
 
