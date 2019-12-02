@@ -8,18 +8,18 @@ namespace Application.UseCases
 
     public sealed class Transfer : IUseCase
     {
-        private readonly IAccountFactory _accountFactory;
+        private readonly AccountService _accountService;
         private readonly IOutputPort _outputPort;
         private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public Transfer(
-            IAccountFactory accountFactory,
+            AccountService accountService,
             IOutputPort outputPort,
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
-            _accountFactory = accountFactory;
+            _accountService = accountService;
             _outputPort = outputPort;
             _accountRepository = accountRepository;
             _unitOfWork = unitOfWork;
@@ -27,30 +27,23 @@ namespace Application.UseCases
 
         public async Task Execute(TransferInput input)
         {
-            IAccount originAccount;
-            IAccount destinationAccount;
-
             try
             {
-                originAccount = await _accountRepository.Get(input.OriginAccountId);
+                var originAccount = await _accountRepository.Get(input.OriginAccountId);
+                var destinationAccount = await _accountRepository.Get(input.DestinationAccountId);
 
-                destinationAccount = await _accountRepository.Get(
-                    input.DestinationAccountId);
+                var debit = await _accountService.Withdraw(originAccount, input.Amount);
+                var credit = await _accountService.Deposit(destinationAccount, input.Amount);
+
+                await _unitOfWork.Save();
+
+                BuildOutput(debit, originAccount, destinationAccount);
             }
             catch (AccountNotFoundException ex)
             {
                 _outputPort.NotFound(ex.Message);
                 return;
             }
-
-            var debit = originAccount.Withdraw(_accountFactory, input.Amount);
-            var credit = destinationAccount.Deposit(_accountFactory, input.Amount);
-
-            await _accountRepository.Update(originAccount, debit);
-            await _accountRepository.Update(destinationAccount, credit);
-            await _unitOfWork.Save();
-
-            BuildOutput(debit, originAccount, destinationAccount);
         }
 
         public void BuildOutput(IDebit debit, IAccount originAccount, IAccount destinationAccount)

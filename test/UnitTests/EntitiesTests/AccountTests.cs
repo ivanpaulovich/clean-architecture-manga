@@ -20,7 +20,7 @@ namespace UnitTests.EntitiesTests
                 new SSN("198608179922"),
                 new Name("Ivan Paulovich"));
 
-            IAccount sut = entityFactory.NewAccount(customer);
+            IAccount sut = entityFactory.NewAccount(customer.Id);
 
             // Act
             Credit actual = (Credit)sut.Deposit(entityFactory, amount);
@@ -40,7 +40,7 @@ namespace UnitTests.EntitiesTests
                 new SSN("198608179922"),
                 new Name("Ivan Paulovich"));
 
-            IAccount sut = entityFactory.NewAccount(customer);
+            IAccount sut = entityFactory.NewAccount(customer.Id);
 
             sut.Deposit(entityFactory, new PositiveMoney(1000.0M));
 
@@ -61,7 +61,7 @@ namespace UnitTests.EntitiesTests
                 new SSN("198608179922"),
                 new Name("Ivan Paulovich"));
 
-            IAccount sut = entityFactory.NewAccount(customer);
+            IAccount sut = entityFactory.NewAccount(customer.Id);
 
             // Act
             bool actual = sut.IsClosingAllowed();
@@ -80,7 +80,7 @@ namespace UnitTests.EntitiesTests
                 new SSN("198608179922"),
                 new Name("Ivan Paulovich"));
 
-            IAccount sut = entityFactory.NewAccount(customer);
+            IAccount sut = entityFactory.NewAccount(customer.Id);
 
             ICredit credit = sut.Deposit(entityFactory, new PositiveMoney(200));
 
@@ -102,7 +102,7 @@ namespace UnitTests.EntitiesTests
                 new SSN("198608179922"),
                 new Name("Ivan Paulovich"));
 
-            IAccount sut = entityFactory.NewAccount(customer);
+            IAccount sut = entityFactory.NewAccount(customer.Id);
 
             sut.Deposit(entityFactory, new PositiveMoney(200));
             sut.Withdraw(entityFactory, new PositiveMoney(100));

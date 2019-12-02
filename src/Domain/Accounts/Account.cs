@@ -5,7 +5,7 @@ namespace Domain.Accounts
     using Domain.Accounts.Debits;
     using Domain.Accounts.ValueObjects;
 
-    public class Account : IAccount
+    public abstract class Account : IAccount
     {
         protected Account()
         {

@@ -1,13 +1,13 @@
 namespace Infrastructure.InMemoryDataAccess
 {
-    using Domain.Customers;
+    using Domain.Customers.ValueObjects;
     using Domain.Security.ValueObjects;
 
     public class User : Domain.Security.User
     {
-        public User(ICustomer customer, ExternalUserId externalUserId)
+        public User(CustomerId customerId, ExternalUserId externalUserId)
         {
-            CustomerId = customer.Id;
+            CustomerId = customerId;
             ExternalUserId = externalUserId;
         }
 

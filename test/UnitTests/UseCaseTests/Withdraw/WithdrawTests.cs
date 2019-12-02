@@ -4,7 +4,6 @@ namespace UnitTests.UseCasesTests.Withdraw
     using System.Threading.Tasks;
     using Application.Boundaries.Withdraw;
     using Application.UseCases;
-    using Domain.Accounts;
     using Domain.Accounts.ValueObjects;
     using Infrastructure.InMemoryDataAccess.Presenters;
     using UnitTests.TestFixtures;
@@ -27,7 +26,7 @@ namespace UnitTests.UseCasesTests.Withdraw
         {
             var presenter = new WithdrawPresenter();
             var sut = new Withdraw(
-                _fixture.EntityFactory,
+                _fixture.AccountService,
                 presenter,
                 _fixture.AccountRepository,
                 _fixture.UnitOfWork);

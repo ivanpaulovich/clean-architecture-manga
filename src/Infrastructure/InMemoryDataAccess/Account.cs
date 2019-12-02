@@ -2,19 +2,17 @@ namespace Infrastructure.InMemoryDataAccess
 {
     using System;
     using System.Collections.Generic;
-    using Domain.Accounts;
     using Domain.Accounts.Credits;
     using Domain.Accounts.Debits;
     using Domain.Accounts.ValueObjects;
-    using Domain.Customers;
     using Domain.Customers.ValueObjects;
 
     public class Account : Domain.Accounts.Account
     {
-        public Account(ICustomer customer)
+        public Account(CustomerId customerId)
         {
             Id = new AccountId(Guid.NewGuid());
-            CustomerId = customer.Id;
+            CustomerId = customerId;
         }
 
         protected Account()

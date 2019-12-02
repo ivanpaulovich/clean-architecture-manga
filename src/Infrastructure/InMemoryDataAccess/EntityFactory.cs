@@ -12,7 +12,7 @@ namespace Infrastructure.InMemoryDataAccess
 
     public sealed class EntityFactory : IUserFactory, ICustomerFactory, IAccountFactory
     {
-        public IAccount NewAccount(ICustomer customer) => new Account(customer);
+        public IAccount NewAccount(CustomerId customerId) => new Account(customerId);
 
         public ICredit NewCredit(
             IAccount account,
@@ -28,6 +28,6 @@ namespace Infrastructure.InMemoryDataAccess
             PositiveMoney amountToWithdraw,
             DateTime transactionDate) => new Debit(account, amountToWithdraw, transactionDate);
 
-        public IUser NewUser(ICustomer customer, ExternalUserId externalUserId) => new User(customer, externalUserId);
+        public IUser NewUser(CustomerId customerId, ExternalUserId externalUserId) => new User(customerId, externalUserId);
     }
 }

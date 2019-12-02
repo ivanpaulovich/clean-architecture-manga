@@ -9,18 +9,18 @@ namespace Application.UseCases
 
     public sealed class Withdraw : IUseCase
     {
-        private readonly IAccountFactory _accountFactory;
+        private readonly AccountService _accountService;
         private readonly IOutputPort _outputPort;
         private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public Withdraw(
-            IAccountFactory accountFactory,
+            AccountService accountService,
             IOutputPort outputPort,
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
-            _accountFactory = accountFactory;
+            _accountService = accountService;
             _outputPort = outputPort;
             _accountRepository = accountRepository;
             _unitOfWork = unitOfWork;
@@ -28,14 +28,14 @@ namespace Application.UseCases
 
         public async Task Execute(WithdrawInput input)
         {
-            IAccount account;
-            IDebit debit;
-
             try
             {
-                account = await _accountRepository.Get(input.AccountId);
+                var account = await _accountRepository.Get(input.AccountId);
+                var debit = await _accountService.Withdraw(account, input.Amount);
 
-                debit = account.Withdraw(_accountFactory, input.Amount);
+                await _unitOfWork.Save();
+
+                BuildOutput(debit, account);
             }
             catch (AccountNotFoundException notFoundEx)
             {
@@ -47,11 +47,6 @@ namespace Application.UseCases
                 _outputPort.OutOfBalance(outOfBalanceEx.Message);
                 return;
             }
-
-            await _accountRepository.Update(account, debit);
-            await _unitOfWork.Save();
-
-            BuildOutput(debit, account);
         }
 
         private void BuildOutput(IDebit debit, IAccount account)
