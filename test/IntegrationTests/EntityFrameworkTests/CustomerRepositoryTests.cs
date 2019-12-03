@@ -58,7 +58,7 @@ namespace IntegrationTests.EntityFrameworkTests
                 context.Database.EnsureCreated();
 
                 var repository = new CustomerRepository(context);
-                customer = await repository.GetBy(context.DefaultCustomerId);
+                customer = await repository.GetBy(SeedData.DefaultCustomerId);
 
                 Assert.NotNull(customer);
             }
