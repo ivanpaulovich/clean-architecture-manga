@@ -10,7 +10,6 @@ namespace Infrastructure.EntityFrameworkDataAccess
 
     public static class SeedData
     {
-
         public static readonly CustomerId DefaultCustomerId = new CustomerId(new Guid("197d0438-e04b-453d-b5de-eca05960c6ae"));
 
         public static readonly AccountId DefaultAccountId = new AccountId(new Guid("4c510cfe-5d61-4a46-a3d9-c4313426655f"));
