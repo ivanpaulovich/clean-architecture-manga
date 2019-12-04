@@ -1,7 +1,9 @@
 namespace Domain.Accounts
 {
     using System;
-    using Domain.ValueObjects;
+    using Domain.Accounts.Credits;
+    using Domain.Accounts.Debits;
+    using Domain.Accounts.ValueObjects;
 
     public class Account : IAccount
     {
@@ -17,14 +19,14 @@ namespace Domain.Accounts
 
         public DebitsCollection Debits { get; protected set; }
 
-        public ICredit Deposit(IEntityFactory entityFactory, PositiveMoney amountToDeposit)
+        public ICredit Deposit(IAccountFactory entityFactory, PositiveMoney amountToDeposit)
         {
             var credit = entityFactory.NewCredit(this, amountToDeposit, DateTime.UtcNow);
             Credits.Add(credit);
             return credit;
         }
 
-        public IDebit Withdraw(IEntityFactory entityFactory, PositiveMoney amountToWithdraw)
+        public IDebit Withdraw(IAccountFactory entityFactory, PositiveMoney amountToWithdraw)
         {
             if (GetCurrentBalance().LessThan(amountToWithdraw))
             {

@@ -3,9 +3,10 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using Application.Repositories;
     using Domain.Accounts;
-    using Domain.ValueObjects;
+    using Domain.Accounts.Credits;
+    using Domain.Accounts.Debits;
+    using Domain.Accounts.ValueObjects;
     using Microsoft.Data.SqlClient;
     using Microsoft.EntityFrameworkCore;
 
@@ -40,7 +41,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
 
         public async Task<IAccount> Get(AccountId id)
         {
-            Infrastructure.EntityFrameworkDataAccess.Account account = await _context
+            var account = await _context
                 .Accounts
                 .Where(a => a.Id.Equals(id))
                 .SingleOrDefaultAsync();

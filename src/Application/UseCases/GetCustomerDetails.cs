@@ -3,11 +3,12 @@ namespace Application.UseCases
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Application.Boundaries.GetCustomerDetails;
-    using Application.Repositories;
-    using Application.Services;
     using Domain.Accounts;
+    using Domain.Accounts.ValueObjects;
     using Domain.Customers;
-    using Domain.ValueObjects;
+    using Domain.Customers.ValueObjects;
+    using Domain.Security.Services;
+    using Domain.Security.ValueObjects;
 
     public sealed class GetCustomerDetails : IUseCase
     {

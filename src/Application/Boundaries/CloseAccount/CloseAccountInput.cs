@@ -1,6 +1,6 @@
 namespace Application.Boundaries.CloseAccount
 {
-    using Domain.ValueObjects;
+    using Domain.Accounts.ValueObjects;
 
     public sealed class CloseAccountInput : IUseCaseInput
     {

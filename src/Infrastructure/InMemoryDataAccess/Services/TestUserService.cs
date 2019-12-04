@@ -2,8 +2,9 @@ namespace Infrastructure.InMemoryDataAccess.Services
 {
     using System;
     using System.Linq;
-    using Application.Services;
-    using Domain.ValueObjects;
+    using Domain.Customers.ValueObjects;
+    using Domain.Security.Services;
+    using Domain.Security.ValueObjects;
 
     public sealed class TestUserService : IUserService
     {

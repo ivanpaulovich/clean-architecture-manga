@@ -2,9 +2,8 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
 {
     using System.Linq;
     using System.Threading.Tasks;
-    using Application.Repositories;
     using Domain.Customers;
-    using Domain.ValueObjects;
+    using Domain.Customers.ValueObjects;
 
     public sealed class CustomerRepository : ICustomerRepository
     {

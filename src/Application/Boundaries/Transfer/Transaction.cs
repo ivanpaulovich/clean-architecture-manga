@@ -1,7 +1,7 @@
 namespace Application.Boundaries.Transfer
 {
     using System;
-    using Domain.ValueObjects;
+    using Domain.Accounts.ValueObjects;
 
     public sealed class Transaction
     {

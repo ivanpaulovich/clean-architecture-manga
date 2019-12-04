@@ -2,7 +2,8 @@ namespace WebApi.ViewModels
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using Domain.ValueObjects;
+    using Domain.Accounts;
+    using Domain.Accounts.ValueObjects;
 
     /// <summary>
     /// Transaction.

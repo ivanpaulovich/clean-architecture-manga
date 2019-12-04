@@ -2,17 +2,20 @@ namespace Application.UseCases
 {
     using System.Threading.Tasks;
     using Application.Boundaries.Register;
-    using Application.Repositories;
     using Application.Services;
-    using Domain;
     using Domain.Accounts;
     using Domain.Customers;
-    using Domain.ValueObjects;
+    using Domain.Customers.ValueObjects;
+    using Domain.Security;
+    using Domain.Security.Services;
+    using Domain.Security.ValueObjects;
 
     public sealed class Register : IUseCase
     {
         private readonly IUserService _userService;
-        private readonly IEntityFactory _entityFactory;
+        private readonly ICustomerFactory _customerFactory;
+        private readonly IAccountFactory _accountFactory;
+        private readonly IUserFactory _userFactory;
         private readonly IOutputPort _outputPort;
         private readonly ICustomerRepository _customerRepository;
         private readonly IAccountRepository _accountRepository;
@@ -21,7 +24,9 @@ namespace Application.UseCases
 
         public Register(
             IUserService userService,
-            IEntityFactory entityFactory,
+            ICustomerFactory customerFactory,
+            IAccountFactory accountFactory,
+            IUserFactory userFactory,
             IOutputPort outputPort,
             ICustomerRepository customerRepository,
             IAccountRepository accountRepository,
@@ -29,7 +34,9 @@ namespace Application.UseCases
             IUnitOfWork unityOfWork)
         {
             _userService = userService;
-            _entityFactory = entityFactory;
+            _customerFactory = customerFactory;
+            _accountFactory = accountFactory;
+            _userFactory = userFactory;
             _outputPort = outputPort;
             _customerRepository = customerRepository;
             _accountRepository = accountRepository;
@@ -54,17 +61,17 @@ namespace Application.UseCases
                 }
             }
 
-            customer = _entityFactory.NewCustomer(input.SSN, _userService.GetUserName());
+            customer = _customerFactory.NewCustomer(input.SSN, _userService.GetUserName());
 
-            var account = _entityFactory.NewAccount(customer);
+            var account = _accountFactory.NewAccount(customer);
 
             var credit = account.Deposit(
-                _entityFactory,
+                _accountFactory,
                 input.InitialAmount);
 
             customer.Register(account);
 
-            var user = _entityFactory.NewUser(
+            var user = _userFactory.NewUser(
                 customer,
                 _userService.GetExternalUserId());
 

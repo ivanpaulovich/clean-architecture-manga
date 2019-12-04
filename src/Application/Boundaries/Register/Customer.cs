@@ -2,7 +2,8 @@ namespace Application.Boundaries.Register
 {
     using System.Collections.Generic;
     using Domain.Customers;
-    using Domain.ValueObjects;
+    using Domain.Customers.ValueObjects;
+    using Domain.Security.ValueObjects;
 
     public sealed class Customer
     {

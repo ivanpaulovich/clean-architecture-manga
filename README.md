@@ -1,5 +1,5 @@
 # Manga: The Clean Architecture Sample Implementation with .NET Core :cyclone:
-[![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors) [![Build Status](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_apis/build/status/ivanpaulovich.clean-architecture-manga?branchName=master)](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_build/latest?definitionId=20&branchName=master)
+[![All Contributors](https://img.shields.io/badge/all_contributors-16-orange.svg?style=flat-square)](#contributors) [![Build Status](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_apis/build/status/ivanpaulovich.clean-architecture-manga?branchName=master)](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_build/latest?definitionId=20&branchName=master)
 
 Sample implementation of the **Clean Architecture Principles with .NET Core**. Use cases as central organizing structure, decoupled from frameworks and technology details. Built with small components that are developed and tested in isolation.
 
@@ -1341,7 +1341,8 @@ To spin up a SQL Server in a docker container using the connection string `Serve
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 <table>
   <tr>
     <td align="center"><a href="https://paulovich.net"><img src="https://avatars3.githubusercontent.com/u/7133698?v=4" width="100px;" alt="Ivan Paulovich"/><br /><sub><b>Ivan Paulovich</b></sub></a><br /><a href="#design-ivanpaulovich" title="Design">🎨</a> <a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=ivanpaulovich" title="Tests">⚠️</a> <a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=ivanpaulovich" title="Code">💻</a></td>
@@ -1364,8 +1365,14 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/felpasl"><img src="https://avatars3.githubusercontent.com/u/5658895?v=4" width="100px;" alt="Felipe Lambert"/><br /><sub><b>Felipe Lambert</b></sub></a><br /><a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=felpasl" title="Tests">⚠️</a> <a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=felpasl" title="Code">💻</a></td>
     <td align="center"><a href="https://matray.website"><img src="https://avatars2.githubusercontent.com/u/9035444?v=4" width="100px;" alt="Philippe Matray"/><br /><sub><b>Philippe Matray</b></sub></a><br /><a href="#design-phmatray" title="Design">🎨</a> <a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=phmatray" title="Code">💻</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/leandrofagundes"><img src="https://avatars1.githubusercontent.com/u/10363927?v=4" width="100px;" alt="Leandro Fagundes"/><br /><sub><b>Leandro Fagundes</b></sub></a><br /><a href="#question-leandrofagundes" title="Answering Questions">💬</a></td>
+    <td align="center"><a href="https://github.com/bommen"><img src="https://avatars2.githubusercontent.com/u/52955252?v=4" width="100px;" alt="Bart van Ommen"/><br /><sub><b>Bart van Ommen</b></sub></a><br /><a href="#ideas-bommen" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=bommen" title="Code">💻</a></td>
+  </tr>
 </table>
 
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

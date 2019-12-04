@@ -4,7 +4,10 @@ namespace UnitTests.UseCasesTests.CloseAccount
     using System.Threading.Tasks;
     using Application.Boundaries.CloseAccount;
     using Application.Boundaries.GetAccountDetails;
-    using Domain.ValueObjects;
+    using Domain.Accounts;
+    using Domain.Accounts.ValueObjects;
+    using Domain.Customers;
+    using Domain.Customers.ValueObjects;
     using Infrastructure.InMemoryDataAccess.Presenters;
     using UnitTests.TestFixtures;
     using Xunit;
@@ -56,19 +59,16 @@ namespace UnitTests.UseCasesTests.CloseAccount
             var withdrawPresenter = new WithdrawPresenter();
 
             var getAccountUseCase = new Application.UseCases.GetAccountDetails(
-                _fixture.UserService,
                 getAccountPresenter,
                 _fixture.AccountRepository);
 
             var withdrawUseCase = new Application.UseCases.Withdraw(
-                _fixture.UserService,
                 _fixture.EntityFactory,
                 withdrawPresenter,
                 _fixture.AccountRepository,
                 _fixture.UnitOfWork);
 
             var sut = new Application.UseCases.CloseAccount(
-                _fixture.UserService,
                 closeAccountPresenter,
                 _fixture.AccountRepository);
 

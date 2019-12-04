@@ -1,6 +1,6 @@
 namespace Application.Boundaries.Transfer
 {
-    using Domain.ValueObjects;
+    using Domain.Accounts.ValueObjects;
 
     public sealed class TransferInput : IUseCaseInput
     {

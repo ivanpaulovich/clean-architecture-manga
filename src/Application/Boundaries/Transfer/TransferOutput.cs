@@ -1,7 +1,7 @@
 namespace Application.Boundaries.Transfer
 {
-    using Domain.Accounts;
-    using Domain.ValueObjects;
+    using Domain.Accounts.Debits;
+    using Domain.Accounts.ValueObjects;
 
     public sealed class TransferOutput : IUseCaseOutput
     {

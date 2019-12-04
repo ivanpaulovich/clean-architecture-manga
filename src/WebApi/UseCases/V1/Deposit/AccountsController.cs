@@ -3,7 +3,8 @@ namespace WebApi.UseCases.V1.Deposit
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Application.Boundaries.Deposit;
-    using Domain.ValueObjects;
+    using Domain.Accounts;
+    using Domain.Accounts.ValueObjects;
     using FluentMediator;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;

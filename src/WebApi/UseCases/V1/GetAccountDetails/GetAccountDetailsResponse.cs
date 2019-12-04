@@ -1,9 +1,9 @@
 namespace WebApi.UseCases.V1.GetAccountDetails
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System;
-    using Domain.ValueObjects;
+    using Domain.Accounts.ValueObjects;
     using WebApi.ViewModels;
 
     /// <summary>

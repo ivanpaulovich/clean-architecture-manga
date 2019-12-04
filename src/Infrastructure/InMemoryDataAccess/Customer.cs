@@ -2,8 +2,9 @@ namespace Infrastructure.InMemoryDataAccess
 {
     using System;
     using System.Collections.Generic;
+    using Domain.Accounts.ValueObjects;
     using Domain.Customers;
-    using Domain.ValueObjects;
+    using Domain.Customers.ValueObjects;
 
     public class Customer : Domain.Customers.Customer
     {

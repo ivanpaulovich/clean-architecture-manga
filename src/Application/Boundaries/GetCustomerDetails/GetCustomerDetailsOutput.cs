@@ -2,7 +2,9 @@ namespace Application.Boundaries.GetCustomerDetails
 {
     using System.Collections.Generic;
     using Domain.Customers;
-    using Domain.ValueObjects;
+    using Domain.Customers.ValueObjects;
+    using Domain.Security;
+    using Domain.Security.ValueObjects;
 
     public sealed class GetCustomerDetailsOutput : IUseCaseOutput
     {

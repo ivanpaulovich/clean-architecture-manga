@@ -2,28 +2,24 @@ namespace Application.UseCases
 {
     using System.Threading.Tasks;
     using Application.Boundaries.Deposit;
-    using Application.Repositories;
     using Application.Services;
-    using Domain;
     using Domain.Accounts;
+    using Domain.Accounts.Credits;
 
     public sealed class Deposit : IUseCase
     {
-        private readonly IUserService _userService;
-        private readonly IEntityFactory _entityFactory;
+        private readonly IAccountFactory _accountFactory;
         private readonly IOutputPort _outputPort;
         private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public Deposit(
-            IUserService userService,
-            IEntityFactory entityFactory,
+            IAccountFactory accountFactory,
             IOutputPort outputPort,
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
-            _userService = userService;
-            _entityFactory = entityFactory;
+            _accountFactory = accountFactory;
             _outputPort = outputPort;
             _accountRepository = accountRepository;
             _unitOfWork = unitOfWork;
@@ -43,7 +39,7 @@ namespace Application.UseCases
                 return;
             }
 
-            var credit = account.Deposit(_entityFactory, input.Amount);
+            var credit = account.Deposit(_accountFactory, input.Amount);
 
             await _accountRepository.Update(account, credit);
             await _unitOfWork.Save();

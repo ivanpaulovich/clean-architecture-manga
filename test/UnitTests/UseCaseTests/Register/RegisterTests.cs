@@ -1,11 +1,13 @@
 namespace UnitTests.UseCasesTests.Register
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using System;
     using Application.Boundaries.Register;
     using Application.UseCases;
-    using Domain.ValueObjects;
+    using Domain.Accounts.ValueObjects;
+    using Domain.Customers.ValueObjects;
+    using Domain.Security.ValueObjects;
     using Infrastructure.InMemoryDataAccess.Presenters;
     using Infrastructure.InMemoryDataAccess.Services;
     using UnitTests.TestFixtures;
@@ -23,8 +25,8 @@ namespace UnitTests.UseCasesTests.Register
         [Fact]
         public void GivenNullInput_ThrowsException()
         {
-            var register = new Register(null, null, null, null, null, null, null);
-            Assert.ThrowsAsync<Exception>(async() => await register.Execute(null));
+            var register = new Register(null, null, null, null, null, null, null, null, null);
+            Assert.ThrowsAsync<Exception>(async () => await register.Execute(null));
         }
 
         [Theory]
@@ -37,6 +39,8 @@ namespace UnitTests.UseCasesTests.Register
 
             var sut = new Register(
                 new TestUserService(_fixture.Context),
+                _fixture.EntityFactory,
+                _fixture.EntityFactory,
                 _fixture.EntityFactory,
                 presenter,
                 _fixture.CustomerRepository,

@@ -3,9 +3,8 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using Application.Repositories;
-    using Domain.Users;
-    using Domain.ValueObjects;
+    using Domain.Security;
+    using Domain.Security.ValueObjects;
     using Microsoft.EntityFrameworkCore;
 
     public sealed class UserRepository : IUserRepository
@@ -26,7 +25,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
 
         public async Task<IUser> Get(ExternalUserId externalUserId)
         {
-            Infrastructure.EntityFrameworkDataAccess.User user = await _context
+            var user = await _context
                 .Users
                 .Where(a => a.ExternalUserId.Equals(externalUserId))
                 .SingleOrDefaultAsync();

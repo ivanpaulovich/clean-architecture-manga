@@ -3,7 +3,7 @@ namespace WebApi.ViewModels
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using Domain.ValueObjects;
+    using Domain.Accounts.ValueObjects;
 
     /// <summary>
     /// Account Details.

@@ -2,7 +2,7 @@ namespace UnitTests.InputValidationTests
 {
     using System;
     using Application.Boundaries.Deposit;
-    using Domain.ValueObjects;
+    using Domain.Accounts.ValueObjects;
     using Xunit;
 
     public sealed class DepositInputValidationTests

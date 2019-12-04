@@ -2,28 +2,24 @@ namespace Application.UseCases
 {
     using System.Threading.Tasks;
     using Application.Boundaries.Transfer;
-    using Application.Repositories;
     using Application.Services;
-    using Domain;
     using Domain.Accounts;
+    using Domain.Accounts.Debits;
 
     public sealed class Transfer : IUseCase
     {
-        private readonly IUserService _userService;
-        private readonly IEntityFactory _entityFactory;
+        private readonly IAccountFactory _accountFactory;
         private readonly IOutputPort _outputPort;
         private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public Transfer(
-            IUserService userService,
-            IEntityFactory entityFactory,
+            IAccountFactory accountFactory,
             IOutputPort outputPort,
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
-            _userService = userService;
-            _entityFactory = entityFactory;
+            _accountFactory = accountFactory;
             _outputPort = outputPort;
             _accountRepository = accountRepository;
             _unitOfWork = unitOfWork;
@@ -47,8 +43,8 @@ namespace Application.UseCases
                 return;
             }
 
-            var debit = originAccount.Withdraw(_entityFactory, input.Amount);
-            var credit = destinationAccount.Deposit(_entityFactory, input.Amount);
+            var debit = originAccount.Withdraw(_accountFactory, input.Amount);
+            var credit = destinationAccount.Deposit(_accountFactory, input.Amount);
 
             await _accountRepository.Update(originAccount, debit);
             await _accountRepository.Update(destinationAccount, credit);

@@ -1,14 +1,15 @@
 namespace WebApi
 {
+    using Application.Services;
+    using Domain.Security.Services;
+    using Infrastructure.InMemoryDataAccess.Services;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Application.Services;
-    using Infrastructure.InMemoryDataAccess.Services;
-    using WebApi.DependencyInjection.FeatureFlags;
     using WebApi.DependencyInjection;
+    using WebApi.DependencyInjection.FeatureFlags;
 
     public sealed class Startup
     {

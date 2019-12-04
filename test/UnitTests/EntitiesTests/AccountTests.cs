@@ -1,9 +1,10 @@
 namespace UnitTests.EntitiesTests
 {
-    using System;
     using Domain.Accounts;
+    using Domain.Accounts.Credits;
+    using Domain.Accounts.ValueObjects;
     using Domain.Customers;
-    using Domain.ValueObjects;
+    using Domain.Customers.ValueObjects;
     using Xunit;
 
     public class AccountTests
@@ -107,8 +108,8 @@ namespace UnitTests.EntitiesTests
             sut.Withdraw(entityFactory, new PositiveMoney(100));
             sut.Deposit(entityFactory, new PositiveMoney(50));
 
-            Assert.Equal(2, ((Account) sut).Credits.GetTransactions().Count);
-            Assert.Equal(1, ((Account) sut).Debits.GetTransactions().Count);
+            Assert.Equal(2, ((Account)sut).Credits.GetTransactions().Count);
+            Assert.Equal(1, ((Account)sut).Debits.GetTransactions().Count);
         }
     }
 }

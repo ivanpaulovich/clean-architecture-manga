@@ -1,9 +1,9 @@
 namespace WebApi.UseCases.V1.GetCustomerDetails
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System;
-    using Domain.ValueObjects;
+    using Domain.Customers.ValueObjects;
     using WebApi.ViewModels;
 
     /// <summary>

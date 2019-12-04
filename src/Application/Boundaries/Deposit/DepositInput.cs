@@ -1,6 +1,6 @@
 namespace Application.Boundaries.Deposit
 {
-    using Domain.ValueObjects;
+    using Domain.Accounts.ValueObjects;
 
     public sealed class DepositInput : IUseCaseInput
     {

@@ -1,6 +1,7 @@
 namespace Application.Boundaries.Register
 {
-    using Domain.ValueObjects;
+    using Domain.Accounts.ValueObjects;
+    using Domain.Customers.ValueObjects;
 
     public sealed class RegisterInput : IUseCaseInput
     {

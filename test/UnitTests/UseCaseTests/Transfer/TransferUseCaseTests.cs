@@ -4,7 +4,7 @@ namespace UnitTests.UseCaseTests.Transfer
     using System.Threading.Tasks;
     using Application.Boundaries.Transfer;
     using Application.UseCases;
-    using Domain.ValueObjects;
+    using Domain.Accounts.ValueObjects;
     using Infrastructure.InMemoryDataAccess.Presenters;
     using UnitTests.TestFixtures;
     using Xunit;
@@ -26,7 +26,6 @@ namespace UnitTests.UseCaseTests.Transfer
         {
             var presenter = new TransferPresenter();
             var sut = new Transfer(
-                _fixture.UserService,
                 _fixture.EntityFactory,
                 presenter,
                 _fixture.AccountRepository,

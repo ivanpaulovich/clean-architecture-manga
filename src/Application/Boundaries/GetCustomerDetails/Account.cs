@@ -2,7 +2,9 @@ namespace Application.Boundaries.GetCustomerDetails
 {
     using System.Collections.Generic;
     using Domain.Accounts;
-    using Domain.ValueObjects;
+    using Domain.Accounts.Credits;
+    using Domain.Accounts.Debits;
+    using Domain.Accounts.ValueObjects;
 
     public sealed class Account
     {
@@ -21,15 +23,14 @@ namespace Application.Boundaries.GetCustomerDetails
             var accountEntity = (Domain.Accounts.Account)account;
 
             AccountId = account.Id;
-            CurrentBalance = account
-                .GetCurrentBalance();
+            CurrentBalance = account.GetCurrentBalance();
 
-            List<Transaction> transactionResults = new List<Transaction>();
+            var transactionResults = new List<Transaction>();
             foreach (var credit in accountEntity.Credits.GetTransactions())
             {
-                Credit creditEntity = (Credit)credit;
+                var creditEntity = (Credit)credit;
 
-                Transaction transactionOutput = new Transaction(
+                var transactionOutput = new Transaction(
                     creditEntity.Description,
                     creditEntity.Amount,
                     creditEntity.TransactionDate);
@@ -39,9 +40,9 @@ namespace Application.Boundaries.GetCustomerDetails
 
             foreach (var debit in accountEntity.Debits.GetTransactions())
             {
-                Debit debitEntity = (Debit)debit;
+                var debitEntity = (Debit)debit;
 
-                Transaction transactionOutput = new Transaction(
+                var transactionOutput = new Transaction(
                     debitEntity.Description,
                     debitEntity.Amount,
                     debitEntity.TransactionDate);

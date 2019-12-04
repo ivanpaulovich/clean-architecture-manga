@@ -2,9 +2,10 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
 {
     using System.Linq;
     using System.Threading.Tasks;
-    using Application.Repositories;
     using Domain.Accounts;
-    using Domain.ValueObjects;
+    using Domain.Accounts.Credits;
+    using Domain.Accounts.Debits;
+    using Domain.Accounts.ValueObjects;
 
     public sealed class AccountRepository : IAccountRepository
     {

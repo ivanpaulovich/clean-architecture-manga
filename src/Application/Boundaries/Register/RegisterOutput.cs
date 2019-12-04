@@ -2,8 +2,10 @@ namespace Application.Boundaries.Register
 {
     using System.Collections.Generic;
     using Domain.Accounts;
+    using Domain.Accounts.Credits;
+    using Domain.Accounts.Debits;
     using Domain.Customers;
-    using Domain.ValueObjects;
+    using Domain.Security.ValueObjects;
 
     public sealed class RegisterOutput : IUseCaseOutput
     {

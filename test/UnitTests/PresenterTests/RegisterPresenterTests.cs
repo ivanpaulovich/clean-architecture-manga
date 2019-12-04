@@ -2,7 +2,10 @@ namespace UnitTests.PresenterTests
 {
     using System.Net;
     using Application.Boundaries.Register;
-    using Domain.ValueObjects;
+    using Domain.Customers;
+    using Domain.Customers.ValueObjects;
+    using Domain.Security;
+    using Domain.Security.ValueObjects;
     using Microsoft.AspNetCore.Mvc;
     using WebApi.UseCases.V1.Register;
     using Xunit;
@@ -28,9 +31,9 @@ namespace UnitTests.PresenterTests
             sut.Standard(registerOutput);
 
             var actual = Assert.IsType<CreatedAtRouteResult>(sut.ViewModel);
-            Assert.Equal((int) HttpStatusCode.Created, actual.StatusCode);
+            Assert.Equal((int)HttpStatusCode.Created, actual.StatusCode);
 
-            var actualValue = (RegisterResponse) actual.Value;
+            var actualValue = (RegisterResponse)actual.Value;
             Assert.Equal(customer.Id.ToGuid(), actualValue.CustomerId);
         }
     }

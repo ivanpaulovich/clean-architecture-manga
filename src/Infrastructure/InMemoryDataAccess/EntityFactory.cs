@@ -1,13 +1,16 @@
 namespace Infrastructure.InMemoryDataAccess
 {
     using System;
-    using Domain;
     using Domain.Accounts;
+    using Domain.Accounts.Credits;
+    using Domain.Accounts.Debits;
+    using Domain.Accounts.ValueObjects;
     using Domain.Customers;
-    using Domain.Users;
-    using Domain.ValueObjects;
+    using Domain.Customers.ValueObjects;
+    using Domain.Security;
+    using Domain.Security.ValueObjects;
 
-    public sealed class EntityFactory : IEntityFactory
+    public sealed class EntityFactory : IUserFactory, ICustomerFactory, IAccountFactory
     {
         public IAccount NewAccount(ICustomer customer) => new Account(customer);
 

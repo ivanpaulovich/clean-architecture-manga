@@ -2,9 +2,8 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
 {
     using System.Linq;
     using System.Threading.Tasks;
-    using Application.Repositories;
-    using Domain.Users;
-    using Domain.ValueObjects;
+    using Domain.Security;
+    using Domain.Security.ValueObjects;
 
     public sealed class UserRepository : IUserRepository
     {

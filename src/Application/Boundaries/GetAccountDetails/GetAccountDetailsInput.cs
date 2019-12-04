@@ -1,6 +1,6 @@
 namespace Application.Boundaries.GetAccountDetails
 {
-    using Domain.ValueObjects;
+    using Domain.Accounts.ValueObjects;
 
     public sealed class GetAccountDetailsInput : IUseCaseInput
     {

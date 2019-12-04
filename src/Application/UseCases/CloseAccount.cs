@@ -2,22 +2,17 @@ namespace Application.UseCases
 {
     using System.Threading.Tasks;
     using Application.Boundaries.CloseAccount;
-    using Application.Repositories;
-    using Application.Services;
     using Domain.Accounts;
 
     public sealed class CloseAccount : IUseCase
     {
-        private readonly IUserService _userService;
         private readonly IOutputPort _outputPort;
         private readonly IAccountRepository _accountRepository;
 
         public CloseAccount(
-            IUserService userService,
             IOutputPort outputPort,
             IAccountRepository accountRepository)
         {
-            _userService = userService;
             _outputPort = outputPort;
             _accountRepository = accountRepository;
         }
