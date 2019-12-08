@@ -32,7 +32,12 @@ namespace WebApi.DependencyInjection.FeatureFlags
                         {
                             var typedArgument = (CustomAttributeTypedArgument)argumentValue;
                             var typedArgumentValue = (Features)(int)typedArgument.Value;
-                            if (!_featureManager.IsEnabled(typedArgumentValue.ToString()))
+                            var isFeatureEnabled = _featureManager.IsEnabledAsync(typedArgumentValue.ToString())
+                                .ConfigureAwait(false)
+                                .GetAwaiter()
+                                .GetResult();
+
+                            if (!isFeatureEnabled)
                             {
                                 feature.Controllers.RemoveAt(i);
                             }
