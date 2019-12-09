@@ -3,7 +3,6 @@ namespace WebApi.UseCases.V1.Withdraw
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Application.Boundaries.Withdraw;
-    using Domain.Accounts;
     using Domain.Accounts.ValueObjects;
     using FluentMediator;
     using Microsoft.AspNetCore.Http;
