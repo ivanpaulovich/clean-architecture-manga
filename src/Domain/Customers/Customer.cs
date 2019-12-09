@@ -1,9 +1,9 @@
 namespace Domain.Customers
 {
-    using Domain.Accounts;
+    using Domain.Accounts.ValueObjects;
     using Domain.Customers.ValueObjects;
 
-    public class Customer : ICustomer
+    public abstract class Customer : ICustomer
     {
         public Customer()
         {
@@ -18,10 +18,10 @@ namespace Domain.Customers
 
         public AccountCollection Accounts { get; protected set; }
 
-        public void Register(IAccount account)
+        public void Register(AccountId accountId)
         {
             Accounts ??= new AccountCollection();
-            Accounts.Add(account.Id);
+            Accounts.Add(accountId);
         }
     }
 }

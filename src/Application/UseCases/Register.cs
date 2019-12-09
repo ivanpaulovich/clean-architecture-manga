@@ -13,71 +13,45 @@ namespace Application.UseCases
     public sealed class Register : IUseCase
     {
         private readonly IUserService _userService;
-        private readonly ICustomerFactory _customerFactory;
-        private readonly IAccountFactory _accountFactory;
-        private readonly IUserFactory _userFactory;
+        private readonly CustomerService _customerService;
+        private readonly AccountService _accountService;
+        private readonly SecurityService _securityService;
         private readonly IOutputPort _outputPort;
-        private readonly ICustomerRepository _customerRepository;
-        private readonly IAccountRepository _accountRepository;
-        private readonly IUserRepository _userRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public Register(
             IUserService userService,
-            ICustomerFactory customerFactory,
-            IAccountFactory accountFactory,
-            IUserFactory userFactory,
+            CustomerService customerService,
+            AccountService accountService,
+            SecurityService securityService,
             IOutputPort outputPort,
-            ICustomerRepository customerRepository,
-            IAccountRepository accountRepository,
-            IUserRepository userRepository,
             IUnitOfWork unityOfWork)
         {
             _userService = userService;
-            _customerFactory = customerFactory;
-            _accountFactory = accountFactory;
-            _userFactory = userFactory;
+            _customerService = customerService;
+            _accountService = accountService;
+            _securityService = securityService;
             _outputPort = outputPort;
-            _customerRepository = customerRepository;
-            _accountRepository = accountRepository;
-            _userRepository = userRepository;
             _unitOfWork = unityOfWork;
         }
 
         public async Task Execute(RegisterInput input)
         {
-            ICustomer customer;
-
             if (_userService.GetCustomerId() is CustomerId customerId)
             {
-                try
+                if (await _customerService.IsCustomerRegistered(customerId))
                 {
-                    customer = await _customerRepository.GetBy(customerId);
                     _outputPort.CustomerAlreadyRegistered($"Customer already exists.");
                     return;
                 }
-                catch (CustomerNotFoundException)
-                {
-                }
             }
 
-            customer = _customerFactory.NewCustomer(input.SSN, _userService.GetUserName());
+            var customer = await _customerService.CreateCustomer(input.SSN, _userService.GetUserName());
+            var account = await _accountService.OpenCheckingAccount(customer.Id, input.InitialAmount);
+            var user = await _securityService.CreateUserCredentials(customer.Id, _userService.GetExternalUserId());
 
-            var account = _accountFactory.NewAccount(customer);
+            customer.Register(account.Id);
 
-            var credit = account.Deposit(
-                _accountFactory,
-                input.InitialAmount);
-
-            customer.Register(account);
-
-            var user = _userFactory.NewUser(
-                customer,
-                _userService.GetExternalUserId());
-
-            await _customerRepository.Add(customer);
-            await _accountRepository.Add(account, credit);
-            await _userRepository.Add(user);
             await _unitOfWork.Save();
 
             BuildOutput(_userService.GetExternalUserId(), customer, account);

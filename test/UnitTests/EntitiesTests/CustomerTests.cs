@@ -16,10 +16,10 @@ namespace UnitTests.EntitiesTests
                 new SSN("198608179922"),
                 new Name("Ivan Paulovich"));
 
-            var account = entityFactory.NewAccount(sut);
+            var account = entityFactory.NewAccount(sut.Id);
 
             // Act
-            sut.Register(account);
+            sut.Register(account.Id);
 
             // Assert
             Assert.Single(sut.Accounts.GetAccountIds());

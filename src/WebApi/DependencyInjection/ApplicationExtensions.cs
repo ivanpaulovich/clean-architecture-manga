@@ -1,5 +1,8 @@
 namespace WebApi.DependencyInjection
 {
+    using Domain.Accounts;
+    using Domain.Customers;
+    using Domain.Security;
     using Microsoft.Extensions.DependencyInjection;
 
     public static class ApplicationExtensions
@@ -13,6 +16,9 @@ namespace WebApi.DependencyInjection
             services.AddScoped<Application.Boundaries.Register.IUseCase, Application.UseCases.Register>();
             services.AddScoped<Application.Boundaries.Withdraw.IUseCase, Application.UseCases.Withdraw>();
             services.AddScoped<Application.Boundaries.Transfer.IUseCase, Application.UseCases.Transfer>();
+            services.AddScoped<CustomerService>();
+            services.AddScoped<SecurityService>();
+            services.AddScoped<AccountService>();
 
             return services;
         }

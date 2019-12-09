@@ -20,7 +20,7 @@ namespace UnitTests.PresenterTests
                 new Name("Ivan Paulovich"));
 
             var account = new Infrastructure.InMemoryDataAccess.Account(
-                customer);
+                customer.Id);
 
             var registerOutput = new RegisterOutput(
                 new ExternalUserId("github/ivanpaulovich"),

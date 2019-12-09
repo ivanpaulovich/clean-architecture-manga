@@ -3,7 +3,7 @@ namespace Domain.Accounts.Credits
     using System;
     using Domain.Accounts.ValueObjects;
 
-    public class Credit : ICredit
+    public abstract class Credit : ICredit
     {
         public CreditId Id { get; protected set; }
 

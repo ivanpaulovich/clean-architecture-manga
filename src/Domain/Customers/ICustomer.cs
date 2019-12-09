@@ -1,6 +1,6 @@
 namespace Domain.Customers
 {
-    using Domain.Accounts;
+    using Domain.Accounts.ValueObjects;
     using Domain.Customers.ValueObjects;
 
     public interface ICustomer
@@ -9,6 +9,6 @@ namespace Domain.Customers
 
         AccountCollection Accounts { get; }
 
-        void Register(IAccount account);
+        void Register(AccountId accountId);
     }
 }

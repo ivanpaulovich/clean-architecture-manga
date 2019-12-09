@@ -25,7 +25,7 @@ namespace UnitTests.UseCasesTests.Register
         [Fact]
         public void GivenNullInput_ThrowsException()
         {
-            var register = new Register(null, null, null, null, null, null, null, null, null);
+            var register = new Register(null, null, null, null, null, null);
             Assert.ThrowsAsync<Exception>(async () => await register.Execute(null));
         }
 
@@ -39,13 +39,10 @@ namespace UnitTests.UseCasesTests.Register
 
             var sut = new Register(
                 new TestUserService(_fixture.Context),
-                _fixture.EntityFactory,
-                _fixture.EntityFactory,
-                _fixture.EntityFactory,
+                _fixture.CustomerService,
+                _fixture.AccountService,
+                _fixture.SecurityService,
                 presenter,
-                _fixture.CustomerRepository,
-                _fixture.AccountRepository,
-                _fixture.UserRepository,
                 _fixture.UnitOfWork);
 
             await sut.Execute(new RegisterInput(

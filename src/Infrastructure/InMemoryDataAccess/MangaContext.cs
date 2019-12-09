@@ -23,16 +23,16 @@ namespace Infrastructure.InMemoryDataAccess
                 new SSN("8608179999"),
                 new Name("Ivan Paulovich"));
             var user1 = new User(
-                customer,
+                customer.Id,
                 new ExternalUserId("github/ivanpaulovich"));
-            var account = new Account(customer);
+            var account = new Account(customer.Id);
             var credit = account.Deposit(
                 entityFactory,
                 new PositiveMoney(800));
             var debit = account.Withdraw(
                 entityFactory,
                 new PositiveMoney(100));
-            customer.Register(account);
+            customer.Register(account.Id);
 
             Customers.Add(customer);
             Accounts.Add(account);
@@ -47,9 +47,9 @@ namespace Infrastructure.InMemoryDataAccess
                 new SSN("8408319999"),
                 new Name("Andre Paulovich"));
             var secondUser = new User(
-                secondCustomer,
+                secondCustomer.Id,
                 new ExternalUserId("github/andrepaulovich"));
-            var secondAccount = new Account(secondCustomer);
+            var secondAccount = new Account(secondCustomer.Id);
 
             Customers.Add(secondCustomer);
             Accounts.Add(secondAccount);
