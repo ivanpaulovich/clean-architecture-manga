@@ -4,9 +4,7 @@ namespace UnitTests.UseCasesTests.CloseAccount
     using System.Threading.Tasks;
     using Application.Boundaries.CloseAccount;
     using Application.Boundaries.GetAccountDetails;
-    using Domain.Accounts;
     using Domain.Accounts.ValueObjects;
-    using Domain.Customers;
     using Domain.Customers.ValueObjects;
     using Infrastructure.InMemoryDataAccess.Presenters;
     using UnitTests.TestFixtures;
@@ -29,7 +27,7 @@ namespace UnitTests.UseCasesTests.CloseAccount
                 new SSN("198608178899"),
                 new Name("Ivan Paulovich"));
 
-            var account = _fixture.EntityFactory.NewAccount(customer);
+            var account = _fixture.EntityFactory.NewAccount(customer.Id);
 
             account.Deposit(_fixture.EntityFactory, new PositiveMoney(amount));
 
@@ -45,7 +43,7 @@ namespace UnitTests.UseCasesTests.CloseAccount
                 new SSN("198608178899"),
                 new Name("Ivan Paulovich"));
 
-            var account = _fixture.EntityFactory.NewAccount(customer);
+            var account = _fixture.EntityFactory.NewAccount(customer.Id);
             bool actual = account.IsClosingAllowed();
 
             Assert.True(actual);
@@ -63,7 +61,7 @@ namespace UnitTests.UseCasesTests.CloseAccount
                 _fixture.AccountRepository);
 
             var withdrawUseCase = new Application.UseCases.Withdraw(
-                _fixture.EntityFactory,
+                _fixture.AccountService,
                 withdrawPresenter,
                 _fixture.AccountRepository,
                 _fixture.UnitOfWork);

@@ -8,18 +8,18 @@ namespace Application.UseCases
 
     public sealed class Deposit : IUseCase
     {
-        private readonly IAccountFactory _accountFactory;
+        private readonly AccountService _accountService;
         private readonly IOutputPort _outputPort;
         private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public Deposit(
-            IAccountFactory accountFactory,
+            AccountService accountService,
             IOutputPort outputPort,
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
-            _accountFactory = accountFactory;
+            _accountService = accountService;
             _outputPort = outputPort;
             _accountRepository = accountRepository;
             _unitOfWork = unitOfWork;
@@ -27,24 +27,19 @@ namespace Application.UseCases
 
         public async Task Execute(DepositInput input)
         {
-            IAccount account;
-
             try
             {
-                account = await _accountRepository.Get(input.AccountId);
+                var account = await _accountRepository.Get(input.AccountId);
+                var credit = await _accountService.Deposit(account, input.Amount);
+                await _unitOfWork.Save();
+
+                BuildOutput(credit, account);
             }
             catch (AccountNotFoundException ex)
             {
                 _outputPort.NotFound(ex.Message);
                 return;
             }
-
-            var credit = account.Deposit(_accountFactory, input.Amount);
-
-            await _accountRepository.Update(account, credit);
-            await _unitOfWork.Save();
-
-            BuildOutput(credit, account);
         }
 
         private void BuildOutput(ICredit credit, IAccount account)

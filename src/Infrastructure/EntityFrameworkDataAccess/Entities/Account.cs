@@ -10,10 +10,10 @@ namespace Infrastructure.EntityFrameworkDataAccess
 
     public class Account : Domain.Accounts.Account
     {
-        public Account(ICustomer customer)
+        public Account(CustomerId customerId)
         {
             Id = new AccountId(Guid.NewGuid());
-            CustomerId = customer.Id;
+            CustomerId = customerId;
         }
 
         protected Account()

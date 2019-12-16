@@ -1,5 +1,8 @@
 namespace UnitTests.TestFixtures
 {
+    using Domain.Accounts;
+    using Domain.Customers;
+    using Domain.Security;
     using Infrastructure.InMemoryDataAccess;
     using Infrastructure.InMemoryDataAccess.Repositories;
     using Infrastructure.InMemoryDataAccess.Services;
@@ -15,6 +18,9 @@ namespace UnitTests.TestFixtures
             UnitOfWork = new UnitOfWork(Context);
             EntityFactory = new EntityFactory();
             UserService = new UserService();
+            CustomerService = new CustomerService(EntityFactory, CustomerRepository);
+            SecurityService = new SecurityService(EntityFactory, UserRepository);
+            AccountService = new AccountService(EntityFactory, AccountRepository);
         }
 
         public EntityFactory EntityFactory { get; }
@@ -30,5 +36,11 @@ namespace UnitTests.TestFixtures
         public UnitOfWork UnitOfWork { get; }
 
         public UserService UserService { get; }
+
+        public CustomerService CustomerService { get; }
+
+        public SecurityService SecurityService { get; }
+
+        public AccountService AccountService { get; }
     }
 }
