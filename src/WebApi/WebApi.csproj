@@ -22,6 +22,7 @@
     <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.0.0" />
+    <PackageReference Include="prometheus-net.AspNetCore" Version="3.3.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
     <PackageReference Include="EPPlus.Core" Version="1.5.4" />

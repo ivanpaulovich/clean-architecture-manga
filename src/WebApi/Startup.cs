@@ -8,8 +8,10 @@ namespace WebApi
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Prometheus;
     using WebApi.DependencyInjection;
     using WebApi.DependencyInjection.FeatureFlags;
+    using WebApi.DependencyInjection.Metrics;
 
     public sealed class Startup
     {
@@ -43,6 +45,8 @@ namespace WebApi
             IApiVersionDescriptionProvider provider)
         {
             app.UseHttpsRedirection();
+            app.UseMetricServer();
+            app.UseRequestMiddleware();
             app.UseDeveloperExceptionPage();
             app.UseRouting();
             app.UseVersionedSwagger(provider);
@@ -80,6 +84,8 @@ namespace WebApi
             IApiVersionDescriptionProvider provider)
         {
             app.UseHttpsRedirection();
+            app.UseMetricServer();
+            app.UseRequestMiddleware();
             app.UseRouting();
             app.UseVersionedSwagger(provider);
             app.UseStaticFiles();
