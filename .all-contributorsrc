@@ -182,6 +182,15 @@
       "contributions": [
         "ideas"
       ]
+    },
+    {
+      "login": "cesinhaugusto",
+      "name": "Cesar Pereira",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/25554544?v=4",
+      "profile": "https://www.linkedin.com/in/cesinhaugusto/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5,
