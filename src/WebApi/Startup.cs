@@ -11,7 +11,6 @@ namespace WebApi
     using Prometheus;
     using WebApi.DependencyInjection;
     using WebApi.DependencyInjection.FeatureFlags;
-    using WebApi.DependencyInjection.Metrics;
 
     public sealed class Startup
     {
@@ -46,7 +45,7 @@ namespace WebApi
         {
             app.UseHttpsRedirection();
             app.UseMetricServer();
-            app.UseRequestMiddleware();
+            app.UseMangaHttpMetrics();
             app.UseDeveloperExceptionPage();
             app.UseRouting();
             app.UseVersionedSwagger(provider);
@@ -85,7 +84,7 @@ namespace WebApi
         {
             app.UseHttpsRedirection();
             app.UseMetricServer();
-            app.UseRequestMiddleware();
+            app.UseMangaHttpMetrics();
             app.UseRouting();
             app.UseVersionedSwagger(provider);
             app.UseStaticFiles();
