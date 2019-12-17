@@ -1369,6 +1369,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/leandrofagundes"><img src="https://avatars1.githubusercontent.com/u/10363927?v=4" width="100px;" alt=""/><br /><sub><b>Leandro Fagundes</b></sub></a><br /><a href="#question-leandrofagundes" title="Answering Questions">💬</a></td>
     <td align="center"><a href="https://github.com/bommen"><img src="https://avatars2.githubusercontent.com/u/52955252?v=4" width="100px;" alt=""/><br /><sub><b>Bart van Ommen</b></sub></a><br /><a href="#ideas-bommen" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=bommen" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/qpippop"><img src="https://avatars0.githubusercontent.com/u/57645455?v=4" width="100px;" alt=""/><br /><sub><b>qpippop</b></sub></a><br /><a href="#ideas-qpippop" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/cesinhaugusto/"><img src="https://avatars1.githubusercontent.com/u/25554544?v=4" width="100px;" alt=""/><br /><sub><b>Cesar Pereira</b></sub></a><br /><a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=cesinhaugusto" title="Code">💻</a></td>
   </tr>
 </table>
 
