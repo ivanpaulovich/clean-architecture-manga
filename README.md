@@ -273,7 +273,7 @@ public sealed class RegisterResponse
 
 ### Presenter
 
-Presenters are called by te application Use Cases and build the Response objects.
+Presenters are called by the application Use Cases and build the Response objects.
 
 ```c#
 public sealed class RegisterPresenter : IOutputPort
