@@ -5,8 +5,16 @@ namespace WebApi.DependencyInjection
     using Domain.Security;
     using Microsoft.Extensions.DependencyInjection;
 
+    /// <summary>
+    /// Adds Use Cases classes.
+    /// </summary>
     public static class ApplicationExtensions
     {
+        /// <summary>
+        /// Adds Use Cases to the ServiceCollection.
+        /// </summary>
+        /// <param name="services">Service Collection.</param>
+        /// <returns>The modified instance.</returns>
         public static IServiceCollection AddUseCases(this IServiceCollection services)
         {
             services.AddScoped<Application.Boundaries.CloseAccount.IUseCase, Application.UseCases.CloseAccount>();
