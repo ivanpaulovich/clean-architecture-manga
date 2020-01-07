@@ -1,6 +1,5 @@
 namespace WebApi
 {
-    using Application.Services;
     using Domain.Security.Services;
     using Infrastructure.InMemoryDataAccess.Services;
     using Microsoft.AspNetCore.Builder;
@@ -43,6 +42,7 @@ namespace WebApi
             IWebHostEnvironment env,
             IApiVersionDescriptionProvider provider)
         {
+            app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
             app.UseMetricServer();
             app.UseMangaHttpMetrics();
