@@ -5,8 +5,17 @@ namespace Application.Boundaries.Register
     using Domain.Customers.ValueObjects;
     using Domain.Security.ValueObjects;
 
+    /// <summary>
+    /// Customer.
+    /// </summary>
     public sealed class Customer
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Customer"/> class.
+        /// </summary>
+        /// <param name="externalUserId">External User Id.</param>
+        /// <param name="customer">Customer object.</param>
+        /// <param name="accounts">Accounts list.</param>
         public Customer(
             ExternalUserId externalUserId,
             ICustomer customer,
@@ -20,14 +29,29 @@ namespace Application.Boundaries.Register
             Accounts = accounts;
         }
 
+        /// <summary>
+        /// Gets the External User Id.
+        /// </summary>
         public ExternalUserId ExternalUserId { get; }
 
+        /// <summary>
+        /// Gets the Customer Id.
+        /// </summary>
         public CustomerId CustomerId { get; }
 
+        /// <summary>
+        /// Gets the SSN.
+        /// </summary>
         public SSN SSN { get; }
 
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
         public Name Name { get; }
 
+        /// <summary>
+        /// Gets the Accounts.
+        /// </summary>
         public IReadOnlyList<Account> Accounts { get; }
     }
 }

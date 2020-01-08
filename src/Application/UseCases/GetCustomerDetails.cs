@@ -10,6 +10,9 @@ namespace Application.UseCases
     using Domain.Security.Services;
     using Domain.Security.ValueObjects;
 
+    /// <summary>
+    /// Get Customer Details Use Case.
+    /// </summary>
     public sealed class GetCustomerDetails : IUseCase
     {
         private readonly IUserService _userService;
@@ -17,6 +20,13 @@ namespace Application.UseCases
         private readonly ICustomerRepository _customerRepository;
         private readonly IAccountRepository _accountRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetCustomerDetails"/> class.
+        /// </summary>
+        /// <param name="userService">User Service.</param>
+        /// <param name="outputPort">Output Port.</param>
+        /// <param name="customerRepository">Customer Repository.</param>
+        /// <param name="accountRepository">Account Repository.</param>
         public GetCustomerDetails(
             IUserService userService,
             IOutputPort outputPort,
@@ -29,6 +39,11 @@ namespace Application.UseCases
             _accountRepository = accountRepository;
         }
 
+        /// <summary>
+        /// Executes the Use Case.
+        /// </summary>
+        /// <param name="input">Input Message.</param>
+        /// <returns>Task.</returns>
         public async Task Execute(GetCustomerDetailsInput input)
         {
             ICustomer customer;

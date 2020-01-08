@@ -7,8 +7,17 @@ namespace Application.Boundaries.Register
     using Domain.Customers;
     using Domain.Security.ValueObjects;
 
+    /// <summary>
+    /// Register Output Message.
+    /// </summary>
     public sealed class RegisterOutput : IUseCaseOutput
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RegisterOutput"/> class.
+        /// </summary>
+        /// <param name="externalUserId">External User Id.</param>
+        /// <param name="customer">Customer object.</param>
+        /// <param name="account">Account object.</param>
         public RegisterOutput(ExternalUserId externalUserId, ICustomer customer, IAccount account)
         {
             var accountEntity = (Domain.Accounts.Account)account;
@@ -51,8 +60,14 @@ namespace Application.Boundaries.Register
             Customer = new Customer(externalUserId, customer, accountOutputs);
         }
 
+        /// <summary>
+        /// Gets the Customer.
+        /// </summary>
         public Customer Customer { get; }
 
+        /// <summary>
+        /// Gets the Account.
+        /// </summary>
         public Account Account { get; }
     }
 }

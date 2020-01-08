@@ -6,6 +6,9 @@ namespace Application.UseCases
     using Domain.Accounts;
     using Domain.Accounts.Debits;
 
+    /// <summary>
+    /// Transfer Use Case.
+    /// </summary>
     public sealed class Transfer : IUseCase
     {
         private readonly AccountService _accountService;
@@ -13,6 +16,13 @@ namespace Application.UseCases
         private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Transfer"/> class.
+        /// </summary>
+        /// <param name="accountService">Account Service.</param>
+        /// <param name="outputPort">Output Port.</param>
+        /// <param name="accountRepository">Account Repository.</param>
+        /// <param name="unitOfWork">Unit Of Work.</param>
         public Transfer(
             AccountService accountService,
             IOutputPort outputPort,
@@ -25,6 +35,11 @@ namespace Application.UseCases
             _unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Executes the Use Case.
+        /// </summary>
+        /// <param name="input">Input Message.</param>
+        /// <returns>Task.</returns>
         public async Task Execute(TransferInput input)
         {
             try
@@ -46,7 +61,7 @@ namespace Application.UseCases
             }
         }
 
-        public void BuildOutput(IDebit debit, IAccount originAccount, IAccount destinationAccount)
+        private void BuildOutput(IDebit debit, IAccount originAccount, IAccount destinationAccount)
         {
             var output = new TransferOutput(
                 debit,

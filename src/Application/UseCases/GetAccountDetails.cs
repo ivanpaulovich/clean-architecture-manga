@@ -4,11 +4,19 @@ namespace Application.UseCases
     using Application.Boundaries.GetAccountDetails;
     using Domain.Accounts;
 
+    /// <summary>
+    /// Get Account Details Use Case.
+    /// </summary>
     public sealed class GetAccountDetails : IUseCase, IUseCaseV2
     {
         private readonly IOutputPort _outputPort;
         private readonly IAccountRepository _accountRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetAccountDetails"/> class.
+        /// </summary>
+        /// <param name="outputPort">Output Port.</param>
+        /// <param name="accountRepository">Account Repository.</param>
         public GetAccountDetails(
             IOutputPort outputPort,
             IAccountRepository accountRepository)
@@ -17,6 +25,11 @@ namespace Application.UseCases
             _accountRepository = accountRepository;
         }
 
+        /// <summary>
+        /// Executes the Use Case.
+        /// </summary>
+        /// <param name="input">Input Message.</param>
+        /// <returns>Task.</returns>
         public async Task Execute(GetAccountDetailsInput input)
         {
             IAccount account;

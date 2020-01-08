@@ -10,6 +10,9 @@ namespace Application.UseCases
     using Domain.Security.Services;
     using Domain.Security.ValueObjects;
 
+    /// <summary>
+    /// Register Use Case.
+    /// </summary>
     public sealed class Register : IUseCase
     {
         private readonly IUserService _userService;
@@ -19,22 +22,36 @@ namespace Application.UseCases
         private readonly IOutputPort _outputPort;
         private readonly IUnitOfWork _unitOfWork;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Register"/> class.
+        /// </summary>
+        /// <param name="userService">User Service.</param>
+        /// <param name="customerService">Customer Service.</param>
+        /// <param name="accountService">Account Service.</param>
+        /// <param name="securityService">Security Service.</param>
+        /// <param name="outputPort">Output Port.</param>
+        /// <param name="unitOfWork">Unit of Work.</param>
         public Register(
             IUserService userService,
             CustomerService customerService,
             AccountService accountService,
             SecurityService securityService,
             IOutputPort outputPort,
-            IUnitOfWork unityOfWork)
+            IUnitOfWork unitOfWork)
         {
             _userService = userService;
             _customerService = customerService;
             _accountService = accountService;
             _securityService = securityService;
             _outputPort = outputPort;
-            _unitOfWork = unityOfWork;
+            _unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Executes the Use Case.
+        /// </summary>
+        /// <param name="input">Input Message.</param>
+        /// <returns>Task.</returns>
         public async Task Execute(RegisterInput input)
         {
             if (_userService.GetCustomerId() is CustomerId customerId)
@@ -57,7 +74,7 @@ namespace Application.UseCases
             BuildOutput(_userService.GetExternalUserId(), customer, account);
         }
 
-        public void BuildOutput(
+        private void BuildOutput(
             ExternalUserId externalUserId,
             ICustomer customer,
             IAccount account)
