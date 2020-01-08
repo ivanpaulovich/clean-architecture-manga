@@ -6,29 +6,29 @@ namespace Domain.Accounts.ValueObjects
 
         public Money(decimal value)
         {
-            _money = value;
+            this._money = value;
         }
 
-        public decimal ToDecimal() => _money;
+        public decimal ToDecimal() => this._money;
 
         internal bool LessThan(PositiveMoney amount)
         {
-            return _money < amount.ToMoney()._money;
+            return this._money < amount.ToMoney()._money;
         }
 
         internal bool IsZero()
         {
-            return _money == 0;
+            return this._money == 0;
         }
 
         internal PositiveMoney Add(Money value)
         {
-            return new PositiveMoney(_money + value.ToDecimal());
+            return new PositiveMoney(this._money + value.ToDecimal());
         }
 
         internal Money Subtract(Money value)
         {
-            return new Money(_money - value.ToDecimal());
+            return new Money(this._money - value.ToDecimal());
         }
     }
 }

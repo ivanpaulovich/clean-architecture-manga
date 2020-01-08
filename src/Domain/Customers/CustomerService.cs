@@ -12,14 +12,14 @@
             ICustomerFactory customerFactory,
             ICustomerRepository customerRepository)
         {
-            _customerFactory = customerFactory;
-            _customerRepository = customerRepository;
+            this._customerFactory = customerFactory;
+            this._customerRepository = customerRepository;
         }
 
         public async Task<ICustomer> CreateCustomer(SSN ssn, Name name)
         {
-            var customer = _customerFactory.NewCustomer(ssn, name);
-            await _customerRepository.Add(customer);
+            var customer = this._customerFactory.NewCustomer(ssn, name);
+            await this._customerRepository.Add(customer);
             return customer;
         }
 
@@ -27,7 +27,7 @@
         {
             try
             {
-                var customer = await _customerRepository.GetBy(customerId);
+                var customer = await this._customerRepository.GetBy(customerId);
                 return true;
             }
             catch (CustomerNotFoundException)

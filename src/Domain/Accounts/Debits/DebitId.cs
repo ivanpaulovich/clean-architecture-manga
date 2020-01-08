@@ -13,14 +13,14 @@ namespace Domain.Accounts.Debits
                 throw new EmptyDebitIdException($"{nameof(debitId)} cannot be empty.");
             }
 
-            _debitId = debitId;
+            this._debitId = debitId;
         }
 
         public override string ToString()
         {
-            return _debitId.ToString();
+            return this._debitId.ToString();
         }
 
-        public Guid ToGuid() => _debitId;
+        public Guid ToGuid() => this._debitId;
     }
 }

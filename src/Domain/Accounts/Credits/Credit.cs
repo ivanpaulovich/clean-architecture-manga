@@ -18,7 +18,7 @@ namespace Domain.Accounts.Credits
 
         public PositiveMoney Sum(PositiveMoney amount)
         {
-            return Amount.Add(amount);
+            return this.Amount.Add(amount);
         }
     }
 }

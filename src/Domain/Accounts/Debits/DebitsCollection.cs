@@ -10,7 +10,7 @@ namespace Domain.Accounts.Debits
 
         public DebitsCollection()
         {
-            _debits = new List<IDebit>();
+            this._debits = new List<IDebit>();
         }
 
         public void Add<T>(IEnumerable<T> debits)
@@ -18,15 +18,15 @@ namespace Domain.Accounts.Debits
         {
             foreach (var debit in debits)
             {
-                Add(debit);
+                this.Add(debit);
             }
         }
 
-        public void Add(IDebit debit) => _debits.Add(debit);
+        public void Add(IDebit debit) => this._debits.Add(debit);
 
         public IReadOnlyCollection<IDebit> GetTransactions()
         {
-            IReadOnlyCollection<IDebit> transactions = new ReadOnlyCollection<IDebit>(_debits);
+            IReadOnlyCollection<IDebit> transactions = new ReadOnlyCollection<IDebit>(this._debits);
             return transactions;
         }
 
@@ -34,7 +34,7 @@ namespace Domain.Accounts.Debits
         {
             PositiveMoney total = new PositiveMoney(0);
 
-            foreach (IDebit debit in _debits)
+            foreach (IDebit debit in this._debits)
             {
                 total = debit.Sum(total);
             }

@@ -13,14 +13,14 @@ namespace Domain.Customers.ValueObjects
                 throw new EmptyCustomerIdException($"{nameof(customerId)} cannot be empty.");
             }
 
-            _customerId = customerId;
+            this._customerId = customerId;
         }
 
         public override string ToString()
         {
-            return _customerId.ToString();
+            return this._customerId.ToString();
         }
 
-        public Guid ToGuid() => _customerId;
+        public Guid ToGuid() => this._customerId;
     }
 }

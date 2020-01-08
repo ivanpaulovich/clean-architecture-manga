@@ -23,9 +23,9 @@ namespace Domain.Customers.ValueObjects
                 throw new InvalidSSNException($"Invalid {nameof(text)} format. Use YYMMDDNNNN.");
             }
 
-            _text = text;
+            this._text = text;
         }
 
-        public override string ToString() => _text;
+        public override string ToString() => this._text;
     }
 }

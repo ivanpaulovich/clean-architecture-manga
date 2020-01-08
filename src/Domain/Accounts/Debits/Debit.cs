@@ -13,6 +13,6 @@ namespace Domain.Accounts.Debits
 
         public DateTime TransactionDate { get; protected set; }
 
-        public PositiveMoney Sum(PositiveMoney amount) => Amount.Add(amount);
+        public PositiveMoney Sum(PositiveMoney amount) => this.Amount.Add(amount);
     }
 }

@@ -10,7 +10,7 @@ namespace Domain.Accounts.Credits
 
         public CreditsCollection()
         {
-            _credits = new List<ICredit>();
+            this._credits = new List<ICredit>();
         }
 
         public void Add<T>(IEnumerable<T> credits)
@@ -18,15 +18,15 @@ namespace Domain.Accounts.Credits
         {
             foreach (var credit in credits)
             {
-                Add(credit);
+                this.Add(credit);
             }
         }
 
-        public void Add(ICredit credit) => _credits.Add(credit);
+        public void Add(ICredit credit) => this._credits.Add(credit);
 
         public IReadOnlyCollection<ICredit> GetTransactions()
         {
-            var transactions = new ReadOnlyCollection<ICredit>(_credits);
+            var transactions = new ReadOnlyCollection<ICredit>(this._credits);
             return transactions;
         }
 
@@ -34,7 +34,7 @@ namespace Domain.Accounts.Credits
         {
             PositiveMoney total = new PositiveMoney(0);
 
-            foreach (ICredit credit in _credits)
+            foreach (ICredit credit in this._credits)
             {
                 total = credit.Sum(total);
             }

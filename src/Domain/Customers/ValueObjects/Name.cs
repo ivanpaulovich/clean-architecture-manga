@@ -11,12 +11,12 @@ namespace Domain.Customers.ValueObjects
                 throw new NameShouldNotBeEmptyException($"The {nameof(text)} field is required.");
             }
 
-            _text = text;
+            this._text = text;
         }
 
         public override string ToString()
         {
-            return _text;
+            return this._text;
         }
     }
 }

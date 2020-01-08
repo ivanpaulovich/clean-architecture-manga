@@ -10,22 +10,22 @@ namespace Domain.Customers
 
         public AccountCollection()
         {
-            _accountIds = new List<AccountId>();
+            this._accountIds = new List<AccountId>();
         }
 
         public void Add(IEnumerable<AccountId> accounts)
         {
             foreach (var account in accounts)
             {
-                Add(account);
+                this.Add(account);
             }
         }
 
-        public void Add(AccountId accountId) => _accountIds.Add(accountId);
+        public void Add(AccountId accountId) => this._accountIds.Add(accountId);
 
         public IReadOnlyCollection<AccountId> GetAccountIds()
         {
-            IReadOnlyCollection<AccountId> accountIds = new ReadOnlyCollection<AccountId>(_accountIds);
+            IReadOnlyCollection<AccountId> accountIds = new ReadOnlyCollection<AccountId>(this._accountIds);
             return accountIds;
         }
     }

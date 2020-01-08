@@ -11,19 +11,19 @@ namespace Domain.Accounts.ValueObjects
                 throw new MoneyShouldBePositiveException("The 'Amount' should be positive.");
             }
 
-            _value = new Money(value);
+            this._value = new Money(value);
         }
 
-        public Money ToMoney() => _value;
+        public Money ToMoney() => this._value;
 
         internal PositiveMoney Add(PositiveMoney positiveAmount)
         {
-            return _value.Add(positiveAmount._value);
+            return this._value.Add(positiveAmount._value);
         }
 
         internal Money Subtract(PositiveMoney positiveAmount)
         {
-            return _value.Subtract(positiveAmount._value);
+            return this._value.Subtract(positiveAmount._value);
         }
     }
 }

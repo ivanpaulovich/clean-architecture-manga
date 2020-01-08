@@ -7,7 +7,7 @@ namespace Domain.Customers
     {
         public Customer()
         {
-            Accounts = new AccountCollection();
+            this.Accounts = new AccountCollection();
         }
 
         public CustomerId Id { get; protected set; }
@@ -20,8 +20,8 @@ namespace Domain.Customers
 
         public void Register(AccountId accountId)
         {
-            Accounts ??= new AccountCollection();
-            Accounts.Add(accountId);
+            this.Accounts ??= new AccountCollection();
+            this.Accounts.Add(accountId);
         }
     }
 }

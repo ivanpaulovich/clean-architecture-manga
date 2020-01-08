@@ -13,14 +13,14 @@
             IUserFactory userFactory,
             IUserRepository userRepository)
         {
-            _userFactory = userFactory;
-            _userRepository = userRepository;
+            this._userFactory = userFactory;
+            this._userRepository = userRepository;
         }
 
         public async Task<IUser> CreateUserCredentials(CustomerId customerId, ExternalUserId externalUserId)
         {
-            var user = _userFactory.NewUser(customerId, externalUserId);
-            await _userRepository.Add(user);
+            var user = this._userFactory.NewUser(customerId, externalUserId);
+            await this._userRepository.Add(user);
             return user;
         }
     }
