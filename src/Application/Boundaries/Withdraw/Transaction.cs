@@ -19,9 +19,9 @@ namespace Application.Boundaries.Withdraw
             PositiveMoney amount,
             DateTime transactionDate)
         {
-            Description = description;
-            Amount = amount;
-            TransactionDate = transactionDate;
+            this.Description = description;
+            this.Amount = amount;
+            this.TransactionDate = transactionDate;
         }
 
         /// <summary>

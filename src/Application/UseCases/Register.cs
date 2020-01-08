@@ -39,12 +39,12 @@ namespace Application.UseCases
             IOutputPort outputPort,
             IUnitOfWork unitOfWork)
         {
-            _userService = userService;
-            _customerService = customerService;
-            _accountService = accountService;
-            _securityService = securityService;
-            _outputPort = outputPort;
-            _unitOfWork = unitOfWork;
+            this._userService = userService;
+            this._customerService = customerService;
+            this._accountService = accountService;
+            this._securityService = securityService;
+            this._outputPort = outputPort;
+            this._unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -54,24 +54,24 @@ namespace Application.UseCases
         /// <returns>Task.</returns>
         public async Task Execute(RegisterInput input)
         {
-            if (_userService.GetCustomerId() is CustomerId customerId)
+            if (this._userService.GetCustomerId() is CustomerId customerId)
             {
-                if (await _customerService.IsCustomerRegistered(customerId))
+                if (await this._customerService.IsCustomerRegistered(customerId))
                 {
-                    _outputPort.CustomerAlreadyRegistered($"Customer already exists.");
+                    this._outputPort.CustomerAlreadyRegistered($"Customer already exists.");
                     return;
                 }
             }
 
-            var customer = await _customerService.CreateCustomer(input.SSN, _userService.GetUserName());
-            var account = await _accountService.OpenCheckingAccount(customer.Id, input.InitialAmount);
-            var user = await _securityService.CreateUserCredentials(customer.Id, _userService.GetExternalUserId());
+            var customer = await this._customerService.CreateCustomer(input.SSN, this._userService.GetUserName());
+            var account = await this._accountService.OpenCheckingAccount(customer.Id, input.InitialAmount);
+            var user = await this._securityService.CreateUserCredentials(customer.Id, this._userService.GetExternalUserId());
 
             customer.Register(account.Id);
 
-            await _unitOfWork.Save();
+            await this._unitOfWork.Save();
 
-            BuildOutput(_userService.GetExternalUserId(), customer, account);
+            this.BuildOutput(this._userService.GetExternalUserId(), customer, account);
         }
 
         private void BuildOutput(
@@ -83,7 +83,7 @@ namespace Application.UseCases
                 externalUserId,
                 customer,
                 account);
-            _outputPort.Standard(output);
+            this._outputPort.Standard(output);
         }
     }
 }

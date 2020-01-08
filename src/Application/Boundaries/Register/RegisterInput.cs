@@ -17,8 +17,8 @@ namespace Application.Boundaries.Register
             SSN ssn,
             PositiveMoney initialAmount)
         {
-            SSN = ssn;
-            InitialAmount = initialAmount;
+            this.SSN = ssn;
+            this.InitialAmount = initialAmount;
         }
 
         /// <summary>

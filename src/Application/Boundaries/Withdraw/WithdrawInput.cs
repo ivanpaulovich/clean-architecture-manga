@@ -16,8 +16,8 @@ namespace Application.Boundaries.Withdraw
             AccountId accountId,
             PositiveMoney amount)
         {
-            AccountId = accountId;
-            Amount = amount;
+            this.AccountId = accountId;
+            this.Amount = amount;
         }
 
         /// <summary>

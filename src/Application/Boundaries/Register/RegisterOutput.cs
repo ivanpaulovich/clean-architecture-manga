@@ -49,15 +49,15 @@ namespace Application.Boundaries.Register
                 transactionResults.Add(transactionOutput);
             }
 
-            Account = new Account(
+            this.Account = new Account(
                 account.Id,
                 account.GetCurrentBalance(),
                 transactionResults);
 
             List<Account> accountOutputs = new List<Account>();
-            accountOutputs.Add(Account);
+            accountOutputs.Add(this.Account);
 
-            Customer = new Customer(externalUserId, customer, accountOutputs);
+            this.Customer = new Customer(externalUserId, customer, accountOutputs);
         }
 
         /// <summary>

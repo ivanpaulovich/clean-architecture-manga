@@ -21,8 +21,8 @@ namespace Application.UseCases
             IOutputPort outputPort,
             IAccountRepository accountRepository)
         {
-            _outputPort = outputPort;
-            _accountRepository = accountRepository;
+            this._outputPort = outputPort;
+            this._accountRepository = accountRepository;
         }
 
         /// <summary>
@@ -36,26 +36,26 @@ namespace Application.UseCases
 
             try
             {
-                account = await _accountRepository.Get(input.AccountId);
+                account = await this._accountRepository.Get(input.AccountId);
             }
             catch (AccountNotFoundException ex)
             {
-                _outputPort.NotFound(ex.Message);
+                this._outputPort.NotFound(ex.Message);
                 return;
             }
 
             if (account.IsClosingAllowed())
             {
-                await _accountRepository.Delete(account);
+                await this._accountRepository.Delete(account);
             }
 
-            BuildOutput(account);
+            this.BuildOutput(account);
         }
 
         private void BuildOutput(IAccount account)
         {
             var closeAccountOutput = new CloseAccountOutput(account);
-            _outputPort.Standard(closeAccountOutput);
+            this._outputPort.Standard(closeAccountOutput);
         }
     }
 }

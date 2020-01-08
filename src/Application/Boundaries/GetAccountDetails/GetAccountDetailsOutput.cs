@@ -19,8 +19,8 @@ namespace Application.Boundaries.GetAccountDetails
         {
             var accountEntity = (Account)account;
 
-            AccountId = accountEntity.Id;
-            CurrentBalance = accountEntity
+            this.AccountId = accountEntity.Id;
+            this.CurrentBalance = accountEntity
                 .GetCurrentBalance();
 
             List<Transaction> transactionResults = new List<Transaction>();
@@ -50,7 +50,7 @@ namespace Application.Boundaries.GetAccountDetails
                 transactionResults.Add(transactionOutput);
             }
 
-            Transactions = transactionResults;
+            this.Transactions = transactionResults;
         }
 
         /// <summary>

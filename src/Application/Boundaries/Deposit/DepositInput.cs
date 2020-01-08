@@ -16,8 +16,8 @@ namespace Application.Boundaries.Deposit
             AccountId accountId,
             PositiveMoney amount)
         {
-            AccountId = accountId;
-            Amount = amount;
+            this.AccountId = accountId;
+            this.Amount = amount;
         }
 
         /// <summary>

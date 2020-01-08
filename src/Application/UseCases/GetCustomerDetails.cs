@@ -33,10 +33,10 @@ namespace Application.UseCases
             ICustomerRepository customerRepository,
             IAccountRepository accountRepository)
         {
-            _userService = userService;
-            _outputPort = outputPort;
-            _customerRepository = customerRepository;
-            _accountRepository = accountRepository;
+            this._userService = userService;
+            this._outputPort = outputPort;
+            this._customerRepository = customerRepository;
+            this._accountRepository = accountRepository;
         }
 
         /// <summary>
@@ -48,21 +48,21 @@ namespace Application.UseCases
         {
             ICustomer customer;
 
-            if (_userService.GetCustomerId() is CustomerId customerId)
+            if (this._userService.GetCustomerId() is CustomerId customerId)
             {
                 try
                 {
-                    customer = await _customerRepository.GetBy(customerId);
+                    customer = await this._customerRepository.GetBy(customerId);
                 }
                 catch (CustomerNotFoundException ex)
                 {
-                    _outputPort.NotFound(ex.Message);
+                    this._outputPort.NotFound(ex.Message);
                     return;
                 }
             }
             else
             {
-                _outputPort.NotFound("Customer does not exist.");
+                this._outputPort.NotFound("Customer does not exist.");
                 return;
             }
 
@@ -74,11 +74,11 @@ namespace Application.UseCases
 
                 try
                 {
-                    account = await _accountRepository.Get(accountId);
+                    account = await this._accountRepository.Get(accountId);
                 }
                 catch (AccountNotFoundException ex)
                 {
-                    _outputPort.NotFound(ex.Message);
+                    this._outputPort.NotFound(ex.Message);
                     return;
                 }
 
@@ -86,8 +86,8 @@ namespace Application.UseCases
                 accounts.Add(outputAccount);
             }
 
-            BuildOutput(
-                _userService.GetExternalUserId(),
+            this.BuildOutput(
+                this._userService.GetExternalUserId(),
                 customer,
                 accounts);
         }
@@ -101,7 +101,7 @@ namespace Application.UseCases
                 externalUserId,
                 customer,
                 accounts);
-            _outputPort.Standard(output);
+            this._outputPort.Standard(output);
         }
     }
 }

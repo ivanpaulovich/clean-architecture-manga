@@ -19,12 +19,12 @@ namespace Application.Boundaries.Deposit
         {
             Credit creditEntity = (Credit)credit;
 
-            Transaction = new Transaction(
+            this.Transaction = new Transaction(
                 creditEntity.Description,
                 creditEntity.Amount,
                 creditEntity.TransactionDate);
 
-            UpdatedBalance = updatedBalance;
+            this.UpdatedBalance = updatedBalance;
         }
 
         /// <summary>

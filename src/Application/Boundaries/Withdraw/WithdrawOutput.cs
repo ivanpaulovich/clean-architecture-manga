@@ -17,12 +17,12 @@ namespace Application.Boundaries.Withdraw
         {
             Debit debitEntity = (Debit)debit;
 
-            Transaction = new Transaction(
+            this.Transaction = new Transaction(
                 debitEntity.Description,
                 debitEntity.Amount,
                 debitEntity.TransactionDate);
 
-            UpdatedBalance = updatedBalance;
+            this.UpdatedBalance = updatedBalance;
         }
 
         /// <summary>

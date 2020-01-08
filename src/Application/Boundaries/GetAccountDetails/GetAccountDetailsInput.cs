@@ -13,7 +13,7 @@ namespace Application.Boundaries.GetAccountDetails
         /// <param name="accountId">Account Id.</param>
         public GetAccountDetailsInput(AccountId accountId)
         {
-            AccountId = accountId;
+            this.AccountId = accountId;
         }
 
         /// <summary>

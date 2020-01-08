@@ -19,8 +19,8 @@ namespace Application.Boundaries.GetCustomerDetails
         {
             var accountEntity = (Domain.Accounts.Account)account;
 
-            AccountId = account.Id;
-            CurrentBalance = account.GetCurrentBalance();
+            this.AccountId = account.Id;
+            this.CurrentBalance = account.GetCurrentBalance();
 
             var transactionResults = new List<Transaction>();
             foreach (var credit in accountEntity.Credits.GetTransactions())
@@ -47,7 +47,7 @@ namespace Application.Boundaries.GetCustomerDetails
                 transactionResults.Add(transactionOutput);
             }
 
-            Transactions = transactionResults;
+            this.Transactions = transactionResults;
         }
 
         /// <summary>

@@ -13,7 +13,7 @@ namespace Application.Boundaries.CloseAccount
         /// <param name="accountId">Account Id.</param>
         public CloseAccountInput(AccountId accountId)
         {
-            AccountId = accountId;
+            this.AccountId = accountId;
         }
 
         /// <summary>

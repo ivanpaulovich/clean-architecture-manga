@@ -23,14 +23,14 @@ namespace Application.Boundaries.Transfer
         {
             Debit debitEntity = (Debit)debit;
 
-            Transaction = new Transaction(
+            this.Transaction = new Transaction(
                 originAccountId,
                 destinationAccountId,
                 debitEntity.Description,
                 debitEntity.Amount,
                 debitEntity.TransactionDate);
 
-            UpdatedBalance = updatedBalance;
+            this.UpdatedBalance = updatedBalance;
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace Application.Boundaries.CloseAccount
         /// <param name="account">IAccount object.</param>
         public CloseAccountOutput(IAccount account)
         {
-            AccountId = account.Id;
+            this.AccountId = account.Id;
         }
 
         /// <summary>

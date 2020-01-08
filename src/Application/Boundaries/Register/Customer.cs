@@ -21,12 +21,12 @@ namespace Application.Boundaries.Register
             ICustomer customer,
             List<Account> accounts)
         {
-            ExternalUserId = externalUserId;
             var customerEntity = (Domain.Customers.Customer)customer;
-            CustomerId = customerEntity.Id;
-            SSN = customerEntity.SSN;
-            Name = customerEntity.Name;
-            Accounts = accounts;
+            this.ExternalUserId = externalUserId;
+            this.CustomerId = customerEntity.Id;
+            this.SSN = customerEntity.SSN;
+            this.Name = customerEntity.Name;
+            this.Accounts = accounts;
         }
 
         /// <summary>

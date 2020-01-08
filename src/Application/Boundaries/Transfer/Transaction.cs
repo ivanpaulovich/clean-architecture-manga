@@ -23,11 +23,11 @@ namespace Application.Boundaries.Transfer
             PositiveMoney amount,
             DateTime transactionDate)
         {
-            OriginAccountId = originAccountId;
-            DestinationAccountId = destinationAccountId;
-            Description = description;
-            Amount = amount;
-            TransactionDate = transactionDate;
+            this.OriginAccountId = originAccountId;
+            this.DestinationAccountId = destinationAccountId;
+            this.Description = description;
+            this.Amount = amount;
+            this.TransactionDate = transactionDate;
         }
 
         /// <summary>

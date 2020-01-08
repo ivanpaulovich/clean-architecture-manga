@@ -30,10 +30,10 @@ namespace Application.UseCases
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
-            _accountService = accountService;
-            _outputPort = outputPort;
-            _accountRepository = accountRepository;
-            _unitOfWork = unitOfWork;
+            this._accountService = accountService;
+            this._outputPort = outputPort;
+            this._accountRepository = accountRepository;
+            this._unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -45,21 +45,21 @@ namespace Application.UseCases
         {
             try
             {
-                var account = await _accountRepository.Get(input.AccountId);
-                var debit = await _accountService.Withdraw(account, input.Amount);
+                var account = await this._accountRepository.Get(input.AccountId);
+                var debit = await this._accountService.Withdraw(account, input.Amount);
 
-                await _unitOfWork.Save();
+                await this._unitOfWork.Save();
 
-                BuildOutput(debit, account);
+                this.BuildOutput(debit, account);
             }
             catch (AccountNotFoundException notFoundEx)
             {
-                _outputPort.NotFound(notFoundEx.Message);
+                this._outputPort.NotFound(notFoundEx.Message);
                 return;
             }
             catch (MoneyShouldBePositiveException outOfBalanceEx)
             {
-                _outputPort.OutOfBalance(outOfBalanceEx.Message);
+                this._outputPort.OutOfBalance(outOfBalanceEx.Message);
                 return;
             }
         }
@@ -70,7 +70,7 @@ namespace Application.UseCases
                 debit,
                 account.GetCurrentBalance());
 
-            _outputPort.Standard(output);
+            this._outputPort.Standard(output);
         }
     }
 }

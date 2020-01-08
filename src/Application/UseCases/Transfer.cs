@@ -29,10 +29,10 @@ namespace Application.UseCases
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
-            _accountService = accountService;
-            _outputPort = outputPort;
-            _accountRepository = accountRepository;
-            _unitOfWork = unitOfWork;
+            this._accountService = accountService;
+            this._outputPort = outputPort;
+            this._accountRepository = accountRepository;
+            this._unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -44,19 +44,19 @@ namespace Application.UseCases
         {
             try
             {
-                var originAccount = await _accountRepository.Get(input.OriginAccountId);
-                var destinationAccount = await _accountRepository.Get(input.DestinationAccountId);
+                var originAccount = await this._accountRepository.Get(input.OriginAccountId);
+                var destinationAccount = await this._accountRepository.Get(input.DestinationAccountId);
 
-                var debit = await _accountService.Withdraw(originAccount, input.Amount);
-                var credit = await _accountService.Deposit(destinationAccount, input.Amount);
+                var debit = await this._accountService.Withdraw(originAccount, input.Amount);
+                var credit = await this._accountService.Deposit(destinationAccount, input.Amount);
 
-                await _unitOfWork.Save();
+                await this._unitOfWork.Save();
 
-                BuildOutput(debit, originAccount, destinationAccount);
+                this.BuildOutput(debit, originAccount, destinationAccount);
             }
             catch (AccountNotFoundException ex)
             {
-                _outputPort.NotFound(ex.Message);
+                this._outputPort.NotFound(ex.Message);
                 return;
             }
         }
@@ -69,7 +69,7 @@ namespace Application.UseCases
                 originAccount.Id,
                 destinationAccount.Id);
 
-            _outputPort.Standard(output);
+            this._outputPort.Standard(output);
         }
     }
 }

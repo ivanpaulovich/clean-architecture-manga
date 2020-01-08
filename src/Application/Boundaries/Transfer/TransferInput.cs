@@ -18,9 +18,9 @@ namespace Application.Boundaries.Transfer
             AccountId destinationAccountId,
             PositiveMoney amount)
         {
-            OriginAccountId = originAccountId;
-            DestinationAccountId = destinationAccountId;
-            Amount = amount;
+            this.OriginAccountId = originAccountId;
+            this.DestinationAccountId = destinationAccountId;
+            this.Amount = amount;
         }
 
         /// <summary>

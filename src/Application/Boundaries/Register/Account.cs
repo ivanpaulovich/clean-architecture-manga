@@ -19,9 +19,9 @@ namespace Application.Boundaries.Register
             Money currentBalance,
             List<Transaction> transactions)
         {
-            AccountId = accountId;
-            CurrentBalance = currentBalance;
-            Transactions = transactions;
+            this.AccountId = accountId;
+            this.CurrentBalance = currentBalance;
+            this.Transactions = transactions;
         }
 
         /// <summary>
