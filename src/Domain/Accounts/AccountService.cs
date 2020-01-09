@@ -7,7 +7,7 @@
     using Domain.Customers.ValueObjects;
 
     /// <summary>
-    /// Account Service.
+    /// Account <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#domain-service">Domain Service Domain-Driven Design Pattern</see>.
     /// </summary>
     public class AccountService
     {

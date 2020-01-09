@@ -11,7 +11,7 @@ namespace Application.UseCases
     using Domain.Security.ValueObjects;
 
     /// <summary>
-    /// Get Customer Details Use Case.
+    /// Get Customer Details <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">Use Case Domain-Driven Design Pattern</see>.
     /// </summary>
     public sealed class GetCustomerDetails : IUseCase
     {

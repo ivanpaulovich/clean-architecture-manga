@@ -3,7 +3,7 @@ namespace Domain.Accounts.Credits
     using System;
 
     /// <summary>
-    /// CreditId Value Object.
+    /// CreditId <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#value-object">Value Object Domain-Driven Design Pattern</see>.
     /// </summary>
     public readonly struct CreditId
     {

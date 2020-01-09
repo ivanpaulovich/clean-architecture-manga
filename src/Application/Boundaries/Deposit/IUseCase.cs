@@ -1,7 +1,7 @@
 namespace Application.Boundaries.Deposit
 {
     /// <summary>
-    /// Deposit Use Case.
+    /// Deposit <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">Use Case Domain-Driven Design Pattern</see>.
     /// </summary>
     public interface IUseCase : IUseCase<DepositInput>
     {

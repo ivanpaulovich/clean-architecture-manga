@@ -5,9 +5,7 @@ namespace Domain.Accounts
     using Domain.Accounts.Debits;
     using Domain.Accounts.ValueObjects;
 
-    /// <summary>
-    /// Account Aggregate.
-    /// </summary>
+    /// <inheritdoc/>
     public abstract class Account : IAccount
     {
         /// <summary>
@@ -19,9 +17,7 @@ namespace Domain.Accounts
             this.Debits = new DebitsCollection();
         }
 
-        /// <summary>
-        /// Gets or sets the Id.
-        /// </summary>
+        /// <inheritdoc/>
         public AccountId Id { get; protected set; }
 
         /// <summary>
@@ -34,12 +30,7 @@ namespace Domain.Accounts
         /// </summary>
         public DebitsCollection Debits { get; protected set; }
 
-        /// <summary>
-        /// Deposits.
-        /// </summary>
-        /// <param name="entityFactory">Entity Factory Service.</param>
-        /// <param name="amountToDeposit">Amount to Deposit.</param>
-        /// <returns>The Credit Transaction.</returns>
+        /// <inheritdoc/>
         public ICredit Deposit(IAccountFactory entityFactory, PositiveMoney amountToDeposit)
         {
             var credit = entityFactory.NewCredit(this, amountToDeposit, DateTime.UtcNow);
@@ -47,12 +38,7 @@ namespace Domain.Accounts
             return credit;
         }
 
-        /// <summary>
-        /// Withdrawls.
-        /// </summary>
-        /// <param name="entityFactory">Entity Factory Service.</param>
-        /// <param name="amountToWithdraw">Amount to Withdrawl.</param>
-        /// <returns>The Debit Transaction.</returns>
+        /// <inheritdoc/>
         public IDebit Withdraw(IAccountFactory entityFactory, PositiveMoney amountToWithdraw)
         {
             if (this.GetCurrentBalance().LessThan(amountToWithdraw))
@@ -65,19 +51,13 @@ namespace Domain.Accounts
             return debit;
         }
 
-        /// <summary>
-        /// Returns true if closing account is allowed.
-        /// </summary>
-        /// <returns>True if can be closed.</returns>
+        /// <inheritdoc/>
         public bool IsClosingAllowed()
         {
             return this.GetCurrentBalance().IsZero();
         }
 
-        /// <summary>
-        /// Gets the Current Balance.
-        /// </summary>
-        /// <returns>Money.</returns>
+        /// <inheritdoc/>
         public Money GetCurrentBalance()
         {
             var totalCredits = this.Credits

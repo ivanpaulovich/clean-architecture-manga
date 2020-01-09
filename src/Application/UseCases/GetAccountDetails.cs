@@ -5,7 +5,7 @@ namespace Application.UseCases
     using Domain.Accounts;
 
     /// <summary>
-    /// Get Account Details Use Case.
+    /// Get Account Details <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">Use Case Domain-Driven Design Pattern</see>.
     /// </summary>
     public sealed class GetAccountDetails : IUseCase, IUseCaseV2
     {
