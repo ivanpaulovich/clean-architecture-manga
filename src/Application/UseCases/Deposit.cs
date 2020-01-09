@@ -6,6 +6,9 @@ namespace Application.UseCases
     using Domain.Accounts;
     using Domain.Accounts.Credits;
 
+    /// <summary>
+    /// Deposit <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">Use Case Domain-Driven Design Pattern</see>.
+    /// </summary>
     public sealed class Deposit : IUseCase
     {
         private readonly AccountService _accountService;
@@ -13,31 +16,43 @@ namespace Application.UseCases
         private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Deposit"/> class.
+        /// </summary>
+        /// <param name="accountService">Account Service.</param>
+        /// <param name="outputPort">Output Port.</param>
+        /// <param name="accountRepository">Account Repository.</param>
+        /// <param name="unitOfWork">Unit Of Work.</param>
         public Deposit(
             AccountService accountService,
             IOutputPort outputPort,
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
-            _accountService = accountService;
-            _outputPort = outputPort;
-            _accountRepository = accountRepository;
-            _unitOfWork = unitOfWork;
+            this._accountService = accountService;
+            this._outputPort = outputPort;
+            this._accountRepository = accountRepository;
+            this._unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Executes the Use Case.
+        /// </summary>
+        /// <param name="input">Input Message.</param>
+        /// <returns>Task.</returns>
         public async Task Execute(DepositInput input)
         {
             try
             {
-                var account = await _accountRepository.Get(input.AccountId);
-                var credit = await _accountService.Deposit(account, input.Amount);
-                await _unitOfWork.Save();
+                var account = await this._accountRepository.Get(input.AccountId);
+                var credit = await this._accountService.Deposit(account, input.Amount);
+                await this._unitOfWork.Save();
 
-                BuildOutput(credit, account);
+                this.BuildOutput(credit, account);
             }
             catch (AccountNotFoundException ex)
             {
-                _outputPort.NotFound(ex.Message);
+                this._outputPort.NotFound(ex.Message);
                 return;
             }
         }
@@ -48,7 +63,7 @@ namespace Application.UseCases
                 credit,
                 account.GetCurrentBalance());
 
-            _outputPort.Standard(output);
+            this._outputPort.Standard(output);
         }
     }
 }

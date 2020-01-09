@@ -10,6 +10,9 @@ namespace Application.UseCases
     using Domain.Security.Services;
     using Domain.Security.ValueObjects;
 
+    /// <summary>
+    /// Register <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">Use Case Domain-Driven Design Pattern</see>.
+    /// </summary>
     public sealed class Register : IUseCase
     {
         private readonly IUserService _userService;
@@ -19,45 +22,59 @@ namespace Application.UseCases
         private readonly IOutputPort _outputPort;
         private readonly IUnitOfWork _unitOfWork;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Register"/> class.
+        /// </summary>
+        /// <param name="userService">User Service.</param>
+        /// <param name="customerService">Customer Service.</param>
+        /// <param name="accountService">Account Service.</param>
+        /// <param name="securityService">Security Service.</param>
+        /// <param name="outputPort">Output Port.</param>
+        /// <param name="unitOfWork">Unit of Work.</param>
         public Register(
             IUserService userService,
             CustomerService customerService,
             AccountService accountService,
             SecurityService securityService,
             IOutputPort outputPort,
-            IUnitOfWork unityOfWork)
+            IUnitOfWork unitOfWork)
         {
-            _userService = userService;
-            _customerService = customerService;
-            _accountService = accountService;
-            _securityService = securityService;
-            _outputPort = outputPort;
-            _unitOfWork = unityOfWork;
+            this._userService = userService;
+            this._customerService = customerService;
+            this._accountService = accountService;
+            this._securityService = securityService;
+            this._outputPort = outputPort;
+            this._unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Executes the Use Case.
+        /// </summary>
+        /// <param name="input">Input Message.</param>
+        /// <returns>Task.</returns>
         public async Task Execute(RegisterInput input)
         {
-            if (_userService.GetCustomerId() is CustomerId customerId)
+            if (this._userService.GetCustomerId() is CustomerId customerId)
             {
-                if (await _customerService.IsCustomerRegistered(customerId))
+                if (await this._customerService.IsCustomerRegistered(customerId))
                 {
-                    _outputPort.CustomerAlreadyRegistered($"Customer already exists.");
+                    this._outputPort.CustomerAlreadyRegistered($"Customer already exists.");
                     return;
                 }
             }
 
-            var customer = await _customerService.CreateCustomer(input.SSN, _userService.GetUserName());
-            var account = await _accountService.OpenCheckingAccount(customer.Id, input.InitialAmount);
-            var user = await _securityService.CreateUserCredentials(customer.Id, _userService.GetExternalUserId());
+            var customer = await this._customerService.CreateCustomer(input.SSN, this._userService.GetUserName());
+            var account = await this._accountService.OpenCheckingAccount(customer.Id, input.InitialAmount);
+            var user = await this._securityService.CreateUserCredentials(customer.Id, this._userService.GetExternalUserId());
 
             customer.Register(account.Id);
 
-            await _unitOfWork.Save();
+            await this._unitOfWork.Save();
 
-            BuildOutput(_userService.GetExternalUserId(), customer, account);
+            this.BuildOutput(this._userService.GetExternalUserId(), customer, account);
         }
 
-        public void BuildOutput(
+        private void BuildOutput(
             ExternalUserId externalUserId,
             ICustomer customer,
             IAccount account)
@@ -66,7 +83,7 @@ namespace Application.UseCases
                 externalUserId,
                 customer,
                 account);
-            _outputPort.Standard(output);
+            this._outputPort.Standard(output);
         }
     }
 }

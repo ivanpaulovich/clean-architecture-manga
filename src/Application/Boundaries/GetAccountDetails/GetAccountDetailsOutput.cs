@@ -6,24 +6,21 @@ namespace Application.Boundaries.GetAccountDetails
     using Domain.Accounts.Debits;
     using Domain.Accounts.ValueObjects;
 
+    /// <summary>
+    /// Get Account Details Output Message.
+    /// </summary>
     public sealed class GetAccountDetailsOutput : IUseCaseOutput
     {
-        public GetAccountDetailsOutput(
-            AccountId accountId,
-            Money currentBalance,
-            List<Transaction> transactions)
-        {
-            AccountId = accountId;
-            CurrentBalance = currentBalance;
-            Transactions = transactions;
-        }
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetAccountDetailsOutput"/> class.
+        /// </summary>
+        /// <param name="account">Account object.</param>
         public GetAccountDetailsOutput(IAccount account)
         {
             var accountEntity = (Account)account;
 
-            AccountId = accountEntity.Id;
-            CurrentBalance = accountEntity
+            this.AccountId = accountEntity.Id;
+            this.CurrentBalance = accountEntity
                 .GetCurrentBalance();
 
             List<Transaction> transactionResults = new List<Transaction>();
@@ -53,13 +50,22 @@ namespace Application.Boundaries.GetAccountDetails
                 transactionResults.Add(transactionOutput);
             }
 
-            Transactions = transactionResults;
+            this.Transactions = transactionResults;
         }
 
+        /// <summary>
+        /// Gets the AccountId.
+        /// </summary>
         public AccountId AccountId { get; }
 
+        /// <summary>
+        /// Gets the Current balance.
+        /// </summary>
         public Money CurrentBalance { get; }
 
+        /// <summary>
+        /// Gets the Transactions.
+        /// </summary>
         public List<Transaction> Transactions { get; }
     }
 }
