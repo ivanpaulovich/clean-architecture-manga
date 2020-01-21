@@ -5,7 +5,7 @@ Sample implementation of the **Clean Architecture Principles with .NET Core**. U
 
 **ProTip #1:** To get the Clean Architecture updates hit the `WATCH` button :eyes:.
 
-**Manga** is a virtual Wallet application in which a customer can register an account then manage the balance with `Deposits`, `Withdraws` and `Transfers`.
+**Manga is a Virtual Wallet** application in which a customer can register an account then manage the balance with `Deposits`, `Withdraws` and `Transfers`.
 
 The Manga's demo is hosted on `Azure` servers and the `Swagger UI` client is available at [https://clean-architecture-manga.azurewebsites.net/swagger/index.html](https://clean-architecture-manga.azurewebsites.net/swagger/). It is just beautiful!
 [![Swagger Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-manga-swagger.png)](https://clean-architecture-manga.azurewebsites.net/swagger/index.html)
@@ -27,11 +27,11 @@ The Manga's demo is hosted on `Azure` servers and the `Swagger UI` client is ava
 
 ### Learn how to design modular applications
 
-Learning how to design modular applications will help you become a better engineer. Designing modular applications is the holy grail of software architecture, it is hard to find engineers experienced in designing applications which allows adding new features in a steady speed. 
+Learning how to design modular applications will help you become a better engineer. Designing modular applications is the holy grail of software architecture, it is hard to find engineers experienced on designing applications which allows adding new features in a steady speed.
 
 ### Explore the .NET Core features
 
-.NET Core brings a sweet development environment, an extensible and cross-platform framework. We will explore the benefits of it in the infrastructure layer and we will reduce its relevance in the application layer. The same rule is applied for modern C# language constructions.
+.NET Core brings a sweet development environment, an extensible and cross-platform framework. We will explore the benefits of it in the infrastructure layer and we will reduce its importance in the application and domain layers. The same rule is applied for modern C# language syntax.
 
 ### Learn from the open source community
 
@@ -45,10 +45,11 @@ This is continually updated, open source project.
 
 Feel free to submit pull requests to help:
 
-* Fix errors
-* Improve sections
-* Add new sections
-* Submit questions and bugs
+* Fix errors.
+* Improve sections.
+* Add new sections.
+* Submit questions and bugs.
+* I am part of a large network of Brazilian developers, to include them in the discussions I pinned the [Discussão em Português](https://github.com/ivanpaulovich/clean-architecture-manga/issues/149).
 
 ## Index of Clean Architecture Manga
 ### [Home](https://github.com/ivanpaulovich/clean-architecture-manga/wiki)
