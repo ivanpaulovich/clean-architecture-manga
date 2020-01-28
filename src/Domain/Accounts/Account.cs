@@ -5,50 +5,65 @@ namespace Domain.Accounts
     using Domain.Accounts.Debits;
     using Domain.Accounts.ValueObjects;
 
+    /// <inheritdoc/>
     public abstract class Account : IAccount
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Account"/> class.
+        /// </summary>
         protected Account()
         {
-            Credits = new CreditsCollection();
-            Debits = new DebitsCollection();
+            this.Credits = new CreditsCollection();
+            this.Debits = new DebitsCollection();
         }
 
+        /// <inheritdoc/>
         public AccountId Id { get; protected set; }
 
+        /// <summary>
+        /// Gets or sets Credits List.
+        /// </summary>
         public CreditsCollection Credits { get; protected set; }
 
+        /// <summary>
+        /// Gets or sets Debits List.
+        /// </summary>
         public DebitsCollection Debits { get; protected set; }
 
+        /// <inheritdoc/>
         public ICredit Deposit(IAccountFactory entityFactory, PositiveMoney amountToDeposit)
         {
             var credit = entityFactory.NewCredit(this, amountToDeposit, DateTime.UtcNow);
-            Credits.Add(credit);
+            this.Credits.Add(credit);
             return credit;
         }
 
+        /// <inheritdoc/>
         public IDebit Withdraw(IAccountFactory entityFactory, PositiveMoney amountToWithdraw)
         {
-            if (GetCurrentBalance().LessThan(amountToWithdraw))
+            if (this.GetCurrentBalance().LessThan(amountToWithdraw))
             {
                 throw new MoneyShouldBePositiveException("Account has not enough funds.");
             }
 
             var debit = entityFactory.NewDebit(this, amountToWithdraw, DateTime.UtcNow);
-            Debits.Add(debit);
+            this.Debits.Add(debit);
             return debit;
         }
 
+        /// <inheritdoc/>
         public bool IsClosingAllowed()
         {
-            return GetCurrentBalance().IsZero();
+            return this.GetCurrentBalance().IsZero();
         }
 
+        /// <inheritdoc/>
         public Money GetCurrentBalance()
         {
-            var totalCredits = Credits
+            var totalCredits = this.Credits
                 .GetTotal();
 
-            var totalDebits = Debits
+            var totalDebits = this.Debits
                 .GetTotal();
 
             var totalAmount = totalCredits

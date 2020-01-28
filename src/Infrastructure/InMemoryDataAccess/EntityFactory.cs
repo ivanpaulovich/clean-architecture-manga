@@ -10,6 +10,9 @@ namespace Infrastructure.InMemoryDataAccess
     using Domain.Security;
     using Domain.Security.ValueObjects;
 
+    /// <summary>
+    /// <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#entity-factory">Entity Factory Domain-Driven Design Pattern</see>.
+    /// </summary>
     public sealed class EntityFactory : IUserFactory, ICustomerFactory, IAccountFactory
     {
         public IAccount NewAccount(CustomerId customerId) => new Account(customerId);

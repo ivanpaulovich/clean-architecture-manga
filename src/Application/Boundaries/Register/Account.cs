@@ -1,65 +1,42 @@
 namespace Application.Boundaries.Register
 {
     using System.Collections.Generic;
-    using Domain.Accounts;
-    using Domain.Accounts.Credits;
-    using Domain.Accounts.Debits;
     using Domain.Accounts.ValueObjects;
 
+    /// <summary>
+    /// Account.
+    /// </summary>
     public sealed class Account
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Account"/> class.
+        /// </summary>
+        /// <param name="accountId">Account Id.</param>
+        /// <param name="currentBalance">Current Balance.</param>
+        /// <param name="transactions">Transactions list.</param>
         public Account(
             AccountId accountId,
             Money currentBalance,
             List<Transaction> transactions)
         {
-            AccountId = accountId;
-            CurrentBalance = currentBalance;
-            Transactions = transactions;
+            this.AccountId = accountId;
+            this.CurrentBalance = currentBalance;
+            this.Transactions = transactions;
         }
 
-        public Account(IAccount account)
-        {
-            var accountEntity = (Domain.Accounts.Account)account;
-
-            AccountId = account.Id;
-            CurrentBalance = account
-                .GetCurrentBalance();
-
-            List<Transaction> transactionResults = new List<Transaction>();
-            foreach (ICredit credit in accountEntity.Credits
-                .GetTransactions())
-            {
-                Credit creditEntity = (Credit)credit;
-
-                Transaction transactionOutput = new Transaction(
-                    creditEntity.Description,
-                    creditEntity.Amount,
-                    creditEntity.TransactionDate);
-
-                transactionResults.Add(transactionOutput);
-            }
-
-            foreach (IDebit debit in accountEntity.Debits
-                .GetTransactions())
-            {
-                Debit debitEntity = (Debit)debit;
-
-                Transaction transactionOutput = new Transaction(
-                    debitEntity.Description,
-                    debitEntity.Amount,
-                    debitEntity.TransactionDate);
-
-                transactionResults.Add(transactionOutput);
-            }
-
-            Transactions = transactionResults;
-        }
-
+        /// <summary>
+        /// Gets the AccountId.
+        /// </summary>
         public AccountId AccountId { get; }
 
+        /// <summary>
+        /// Gets the Current Balance.
+        /// </summary>
         public Money CurrentBalance { get; }
 
+        /// <summary>
+        /// Gets the Transactions.
+        /// </summary>
         public List<Transaction> Transactions { get; }
     }
 }

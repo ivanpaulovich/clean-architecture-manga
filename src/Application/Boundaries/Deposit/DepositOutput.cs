@@ -1,27 +1,40 @@
 namespace Application.Boundaries.Deposit
 {
-    using Domain.Accounts;
     using Domain.Accounts.Credits;
     using Domain.Accounts.ValueObjects;
 
+    /// <summary>
+    /// Deposit Output Message.
+    /// </summary>
     public sealed class DepositOutput : IUseCaseOutput
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DepositOutput"/> class.
+        /// </summary>
+        /// <param name="credit">Credit object.</param>
+        /// <param name="updatedBalance">The updated balance.</param>
         public DepositOutput(
             ICredit credit,
             Money updatedBalance)
         {
             Credit creditEntity = (Credit)credit;
 
-            Transaction = new Transaction(
+            this.Transaction = new Transaction(
                 creditEntity.Description,
                 creditEntity.Amount,
                 creditEntity.TransactionDate);
 
-            UpdatedBalance = updatedBalance;
+            this.UpdatedBalance = updatedBalance;
         }
 
+        /// <summary>
+        /// Gets the Transaction object.
+        /// </summary>
         public Transaction Transaction { get; }
 
+        /// <summary>
+        /// Gets the updated balance.
+        /// </summary>
         public Money UpdatedBalance { get; }
     }
 }

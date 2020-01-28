@@ -1,7 +1,6 @@
 namespace WebApi.DependencyInjection
 {
     using Domain.Accounts;
-    using Domain.Security.Services;
     using Microsoft.Extensions.DependencyInjection;
     using WebApi.UseCases.V2.GetAccountDetails;
 
