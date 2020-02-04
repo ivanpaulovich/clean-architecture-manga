@@ -1,4 +1,8 @@
-﻿namespace Domain.Accounts
+﻿// <copyright file="AccountService.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
+namespace Domain.Accounts
 {
     using System.Threading.Tasks;
     using Domain.Accounts.Credits;
@@ -11,8 +15,8 @@
     /// </summary>
     public class AccountService
     {
-        private readonly IAccountFactory _accountFactory;
-        private readonly IAccountRepository _accountRepository;
+        private readonly IAccountFactory accountFactory;
+        private readonly IAccountRepository accountRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountService"/> class.
@@ -23,8 +27,8 @@
             IAccountFactory accountFactory,
             IAccountRepository accountRepository)
         {
-            this._accountFactory = accountFactory;
-            this._accountRepository = accountRepository;
+            this.accountFactory = accountFactory;
+            this.accountRepository = accountRepository;
         }
 
         /// <summary>
@@ -35,9 +39,9 @@
         /// <returns>IAccount created.</returns>
         public async Task<IAccount> OpenCheckingAccount(CustomerId customerId, PositiveMoney amount)
         {
-            var account = this._accountFactory.NewAccount(customerId);
-            var credit = account.Deposit(this._accountFactory, amount);
-            await this._accountRepository.Add(account, credit);
+            var account = this.accountFactory.NewAccount(customerId);
+            var credit = account.Deposit(this.accountFactory, amount);
+            await this.accountRepository.Add(account, credit);
 
             return account;
         }
@@ -50,8 +54,8 @@
         /// <returns>Debit Transaction.</returns>
         public async Task<IDebit> Withdraw(IAccount account, PositiveMoney amount)
         {
-            var debit = account.Withdraw(this._accountFactory, amount);
-            await this._accountRepository.Update(account, debit);
+            var debit = account.Withdraw(this.accountFactory, amount);
+            await this.accountRepository.Update(account, debit);
 
             return debit;
         }
@@ -64,8 +68,8 @@
         /// <returns>Credit Transaction.</returns>
         public async Task<ICredit> Deposit(IAccount account, PositiveMoney amount)
         {
-            var credit = account.Deposit(this._accountFactory, amount);
-            await this._accountRepository.Update(account, credit);
+            var credit = account.Deposit(this.accountFactory, amount);
+            await this.accountRepository.Update(account, credit);
 
             return credit;
         }

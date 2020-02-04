@@ -1,3 +1,7 @@
+// <copyright file="AccountId.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Accounts.ValueObjects
 {
     using System;
@@ -7,7 +11,7 @@ namespace Domain.Accounts.ValueObjects
     /// </summary>
     public readonly struct AccountId
     {
-        private readonly Guid _accountId;
+        private readonly Guid accountId;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountId"/> struct.
@@ -20,7 +24,7 @@ namespace Domain.Accounts.ValueObjects
                 throw new EmptyAccountIdException($"{nameof(accountId)} cannot be empty.");
             }
 
-            this._accountId = accountId;
+            this.accountId = accountId;
         }
 
         /// <summary>
@@ -29,13 +33,13 @@ namespace Domain.Accounts.ValueObjects
         /// <returns>String.</returns>
         public override string ToString()
         {
-            return this._accountId.ToString();
+            return this.accountId.ToString();
         }
 
         /// <summary>
         /// Converts into Guid.
         /// </summary>
         /// <returns>Guid representation.</returns>
-        public Guid ToGuid() => this._accountId;
+        public Guid ToGuid() => this.accountId;
     }
 }

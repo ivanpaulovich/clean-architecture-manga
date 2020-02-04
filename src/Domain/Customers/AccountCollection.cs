@@ -1,3 +1,7 @@
+// <copyright file="AccountCollection.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Customers
 {
     using System.Collections.Generic;
@@ -9,14 +13,14 @@ namespace Domain.Customers
     /// </summary>
     public sealed class AccountCollection
     {
-        private readonly IList<AccountId> _accountIds;
+        private readonly IList<AccountId> accountIds;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountCollection"/> class.
         /// </summary>
         public AccountCollection()
         {
-            this._accountIds = new List<AccountId>();
+            this.accountIds = new List<AccountId>();
         }
 
         /// <summary>
@@ -35,7 +39,7 @@ namespace Domain.Customers
         /// Add a single account.
         /// </summary>
         /// <param name="accountId">AccountId.</param>
-        public void Add(AccountId accountId) => this._accountIds.Add(accountId);
+        public void Add(AccountId accountId) => this.accountIds.Add(accountId);
 
         /// <summary>
         /// Gets the AccountIds.
@@ -43,7 +47,7 @@ namespace Domain.Customers
         /// <returns>ReadOnlyCollection.</returns>
         public IReadOnlyCollection<AccountId> GetAccountIds()
         {
-            IReadOnlyCollection<AccountId> accountIds = new ReadOnlyCollection<AccountId>(this._accountIds);
+            IReadOnlyCollection<AccountId> accountIds = new ReadOnlyCollection<AccountId>(this.accountIds);
             return accountIds;
         }
     }

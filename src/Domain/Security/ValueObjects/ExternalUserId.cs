@@ -1,3 +1,7 @@
+// <copyright file="ExternalUserId.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Security.ValueObjects
 {
     /// <summary>
@@ -5,7 +9,7 @@ namespace Domain.Security.ValueObjects
     /// </summary>
     public readonly struct ExternalUserId
     {
-        private readonly string _text;
+        private readonly string text;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExternalUserId"/> struct.
@@ -18,7 +22,7 @@ namespace Domain.Security.ValueObjects
                 throw new ExternalUserIdShouldNotBeEmptyException($"The '{nameof(text)}' field is required.");
             }
 
-            this._text = text;
+            this.text = text;
         }
 
         /// <summary>
@@ -27,7 +31,7 @@ namespace Domain.Security.ValueObjects
         /// <returns>String.</returns>
         public override string ToString()
         {
-            return this._text;
+            return this.text;
         }
     }
 }

@@ -1,3 +1,7 @@
+// <copyright file="DebitId.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Accounts.Debits
 {
     using System;
@@ -7,7 +11,7 @@ namespace Domain.Accounts.Debits
     /// </summary>
     public readonly struct DebitId
     {
-        private readonly Guid _debitId;
+        private readonly Guid debitId;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DebitId"/> struct.
@@ -20,7 +24,7 @@ namespace Domain.Accounts.Debits
                 throw new EmptyDebitIdException($"{nameof(debitId)} cannot be empty.");
             }
 
-            this._debitId = debitId;
+            this.debitId = debitId;
         }
 
         /// <summary>
@@ -29,13 +33,13 @@ namespace Domain.Accounts.Debits
         /// <returns>Serialized string.</returns>
         public override string ToString()
         {
-            return this._debitId.ToString();
+            return this.debitId.ToString();
         }
 
         /// <summary>
         /// Converts into Guid.
         /// </summary>
         /// <returns>Guid representation.</returns>
-        public Guid ToGuid() => this._debitId;
+        public Guid ToGuid() => this.debitId;
     }
 }

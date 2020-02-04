@@ -1,3 +1,7 @@
+// <copyright file="EmptyDebitIdException.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Accounts.Debits
 {
     /// <summary>
@@ -5,6 +9,10 @@ namespace Domain.Accounts.Debits
     /// </summary>
     public sealed class EmptyDebitIdException : DomainException
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EmptyDebitIdException"/> class.
+        /// </summary>
+        /// <param name="message">Message.</param>
         internal EmptyDebitIdException(string message)
             : base(message)
         {

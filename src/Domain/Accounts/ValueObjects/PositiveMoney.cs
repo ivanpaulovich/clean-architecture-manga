@@ -1,3 +1,7 @@
+// <copyright file="PositiveMoney.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Accounts.ValueObjects
 {
     /// <summary>
@@ -5,7 +9,7 @@ namespace Domain.Accounts.ValueObjects
     /// </summary>
     public readonly struct PositiveMoney
     {
-        private readonly Money _value;
+        private readonly Money value;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PositiveMoney"/> struct.
@@ -18,23 +22,33 @@ namespace Domain.Accounts.ValueObjects
                 throw new MoneyShouldBePositiveException("The 'Amount' should be positive.");
             }
 
-            this._value = new Money(value);
+            this.value = new Money(value);
         }
 
         /// <summary>
         /// Converts into Money Value Object.
         /// </summary>
         /// <returns>Money.</returns>
-        public Money ToMoney() => this._value;
+        public Money ToMoney() => this.value;
 
+        /// <summary>
+        /// Adds Money.
+        /// </summary>
+        /// <param name="positiveAmount">Amount to Add.</param>
+        /// <returns>New Instance.</returns>
         internal PositiveMoney Add(PositiveMoney positiveAmount)
         {
-            return this._value.Add(positiveAmount._value);
+            return this.value.Add(positiveAmount.value);
         }
 
+        /// <summary>
+        /// Subtracts Money.
+        /// </summary>
+        /// <param name="positiveAmount">Amount to subtract.</param>
+        /// <returns>New Instance.</returns>
         internal Money Subtract(PositiveMoney positiveAmount)
         {
-            return this._value.Subtract(positiveAmount._value);
+            return this.value.Subtract(positiveAmount.value);
         }
     }
 }

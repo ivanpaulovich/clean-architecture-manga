@@ -1,3 +1,7 @@
+// <copyright file="SSN.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Customers.ValueObjects
 {
     using System.Text.RegularExpressions;
@@ -9,7 +13,7 @@ namespace Domain.Customers.ValueObjects
     {
         private const string RegExForValidation = @"^\d{6,8}[-|(\s)]{0,1}\d{4}$";
 
-        private readonly string _text;
+        private readonly string text;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SSN"/> struct.
@@ -30,13 +34,13 @@ namespace Domain.Customers.ValueObjects
                 throw new InvalidSSNException($"Invalid {nameof(text)} format. Use YYMMDDNNNN.");
             }
 
-            this._text = text;
+            this.text = text;
         }
 
         /// <summary>
         /// Converts into string.
         /// </summary>
         /// <returns>string.</returns>
-        public override string ToString() => this._text;
+        public override string ToString() => this.text;
     }
 }

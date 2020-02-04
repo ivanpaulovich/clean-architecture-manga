@@ -1,3 +1,7 @@
+// <copyright file="Name.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Customers.ValueObjects
 {
     /// <summary>
@@ -5,7 +9,7 @@ namespace Domain.Customers.ValueObjects
     /// </summary>
     public readonly struct Name
     {
-        private readonly string _text;
+        private readonly string text;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Name"/> struct.
@@ -18,7 +22,7 @@ namespace Domain.Customers.ValueObjects
                 throw new NameShouldNotBeEmptyException($"The {nameof(text)} field is required.");
             }
 
-            this._text = text;
+            this.text = text;
         }
 
         /// <summary>
@@ -27,7 +31,7 @@ namespace Domain.Customers.ValueObjects
         /// <returns>string.</returns>
         public override string ToString()
         {
-            return this._text;
+            return this.text;
         }
     }
 }

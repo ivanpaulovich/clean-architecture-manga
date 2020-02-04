@@ -1,3 +1,7 @@
+// <copyright file="CreditId.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Accounts.Credits
 {
     using System;
@@ -7,7 +11,7 @@ namespace Domain.Accounts.Credits
     /// </summary>
     public readonly struct CreditId
     {
-        private readonly Guid _creditId;
+        private readonly Guid creditId;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreditId"/> struct.
@@ -20,7 +24,7 @@ namespace Domain.Accounts.Credits
                 throw new EmptyCreditIdException($"{nameof(creditId)} cannot be empty.");
             }
 
-            this._creditId = creditId;
+            this.creditId = creditId;
         }
 
         /// <summary>
@@ -29,13 +33,13 @@ namespace Domain.Accounts.Credits
         /// <returns>String representation.</returns>
         public override string ToString()
         {
-            return this._creditId.ToString();
+            return this.creditId.ToString();
         }
 
         /// <summary>
         /// Converts into Guid.
         /// </summary>
         /// <returns>Guid representation.</returns>
-        public Guid ToGuid() => this._creditId;
+        public Guid ToGuid() => this.creditId;
     }
 }

@@ -1,3 +1,7 @@
+// <copyright file="CustomerId.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Customers.ValueObjects
 {
     using System;
@@ -7,7 +11,7 @@ namespace Domain.Customers.ValueObjects
     /// </summary>
     public readonly struct CustomerId
     {
-        private readonly Guid _customerId;
+        private readonly Guid customerId;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomerId"/> struct.
@@ -20,7 +24,7 @@ namespace Domain.Customers.ValueObjects
                 throw new EmptyCustomerIdException($"{nameof(customerId)} cannot be empty.");
             }
 
-            this._customerId = customerId;
+            this.customerId = customerId;
         }
 
         /// <summary>
@@ -29,13 +33,13 @@ namespace Domain.Customers.ValueObjects
         /// <returns>String.</returns>
         public override string ToString()
         {
-            return this._customerId.ToString();
+            return this.customerId.ToString();
         }
 
         /// <summary>
         /// Converts into Guid.
         /// </summary>
         /// <returns>Guid.</returns>
-        public Guid ToGuid() => this._customerId;
+        public Guid ToGuid() => this.customerId;
     }
 }
