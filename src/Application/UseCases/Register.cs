@@ -1,3 +1,7 @@
+// <copyright file="Register.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Application.UseCases
 {
     using System.Threading.Tasks;
@@ -15,12 +19,12 @@ namespace Application.UseCases
     /// </summary>
     public sealed class Register : IUseCase
     {
-        private readonly IUserService _userService;
-        private readonly CustomerService _customerService;
-        private readonly AccountService _accountService;
-        private readonly SecurityService _securityService;
-        private readonly IOutputPort _outputPort;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService userService;
+        private readonly CustomerService customerService;
+        private readonly AccountService accountService;
+        private readonly SecurityService securityService;
+        private readonly IOutputPort outputPort;
+        private readonly IUnitOfWork unitOfWork;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Register"/> class.
@@ -39,12 +43,12 @@ namespace Application.UseCases
             IOutputPort outputPort,
             IUnitOfWork unitOfWork)
         {
-            this._userService = userService;
-            this._customerService = customerService;
-            this._accountService = accountService;
-            this._securityService = securityService;
-            this._outputPort = outputPort;
-            this._unitOfWork = unitOfWork;
+            this.userService = userService;
+            this.customerService = customerService;
+            this.accountService = accountService;
+            this.securityService = securityService;
+            this.outputPort = outputPort;
+            this.unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -54,24 +58,24 @@ namespace Application.UseCases
         /// <returns>Task.</returns>
         public async Task Execute(RegisterInput input)
         {
-            if (this._userService.GetCustomerId() is CustomerId customerId)
+            if (this.userService.GetCustomerId() is CustomerId customerId)
             {
-                if (await this._customerService.IsCustomerRegistered(customerId))
+                if (await this.customerService.IsCustomerRegistered(customerId))
                 {
-                    this._outputPort.CustomerAlreadyRegistered($"Customer already exists.");
+                    this.outputPort.CustomerAlreadyRegistered($"Customer already exists.");
                     return;
                 }
             }
 
-            var customer = await this._customerService.CreateCustomer(input.SSN, this._userService.GetUserName());
-            var account = await this._accountService.OpenCheckingAccount(customer.Id, input.InitialAmount);
-            var user = await this._securityService.CreateUserCredentials(customer.Id, this._userService.GetExternalUserId());
+            var customer = await this.customerService.CreateCustomer(input.SSN, this.userService.GetUserName());
+            var account = await this.accountService.OpenCheckingAccount(customer.Id, input.InitialAmount);
+            var user = await this.securityService.CreateUserCredentials(customer.Id, this.userService.GetExternalUserId());
 
             customer.Register(account.Id);
 
-            await this._unitOfWork.Save();
+            await this.unitOfWork.Save();
 
-            this.BuildOutput(this._userService.GetExternalUserId(), customer, account);
+            this.BuildOutput(this.userService.GetExternalUserId(), customer, account);
         }
 
         private void BuildOutput(
@@ -83,7 +87,7 @@ namespace Application.UseCases
                 externalUserId,
                 customer,
                 account);
-            this._outputPort.Standard(output);
+            this.outputPort.Standard(output);
         }
     }
 }

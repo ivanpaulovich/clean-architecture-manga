@@ -1,3 +1,7 @@
+// <copyright file="GetAccountDetails.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Application.UseCases
 {
     using System.Threading.Tasks;
@@ -9,8 +13,8 @@ namespace Application.UseCases
     /// </summary>
     public sealed class GetAccountDetails : IUseCase, IUseCaseV2
     {
-        private readonly IOutputPort _outputPort;
-        private readonly IAccountRepository _accountRepository;
+        private readonly IOutputPort outputPort;
+        private readonly IAccountRepository accountRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAccountDetails"/> class.
@@ -21,8 +25,8 @@ namespace Application.UseCases
             IOutputPort outputPort,
             IAccountRepository accountRepository)
         {
-            this._outputPort = outputPort;
-            this._accountRepository = accountRepository;
+            this.outputPort = outputPort;
+            this.accountRepository = accountRepository;
         }
 
         /// <summary>
@@ -36,11 +40,11 @@ namespace Application.UseCases
 
             try
             {
-                account = await this._accountRepository.Get(input.AccountId);
+                account = await this.accountRepository.Get(input.AccountId);
             }
             catch (AccountNotFoundException ex)
             {
-                this._outputPort.NotFound(ex.Message);
+                this.outputPort.NotFound(ex.Message);
                 return;
             }
 
@@ -50,7 +54,7 @@ namespace Application.UseCases
         private void BuildOutput(IAccount account)
         {
             var output = new GetAccountDetailsOutput(account);
-            this._outputPort.Standard(output);
+            this.outputPort.Standard(output);
         }
     }
 }

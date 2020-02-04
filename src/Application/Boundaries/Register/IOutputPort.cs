@@ -1,3 +1,7 @@
+// <copyright file="IOutputPort.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Application.Boundaries.Register
 {
     /// <summary>

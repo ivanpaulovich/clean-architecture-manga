@@ -1,3 +1,7 @@
+// <copyright file="TransferOutput.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Application.Boundaries.Transfer
 {
     using Domain.Accounts.Debits;

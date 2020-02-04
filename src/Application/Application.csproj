@@ -12,16 +12,17 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <CodeAnalysisRuleSet>Application.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" />
+  </ItemGroup>
+
+  <ItemGroup>
+
+    <AdditionalFiles Include="$(SolutionDir)\stylecop.json" Link="stylecop.json" />
   </ItemGroup>
 
 </Project>
