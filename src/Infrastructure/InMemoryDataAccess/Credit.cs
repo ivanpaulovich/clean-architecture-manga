@@ -1,3 +1,7 @@
+// <copyright file="Credit.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Infrastructure.InMemoryDataAccess
 {
     using System;

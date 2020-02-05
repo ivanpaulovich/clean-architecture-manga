@@ -1,3 +1,7 @@
+// <copyright file="ContextFactory.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Infrastructure.EntityFrameworkDataAccess
 {
     using System.IO;

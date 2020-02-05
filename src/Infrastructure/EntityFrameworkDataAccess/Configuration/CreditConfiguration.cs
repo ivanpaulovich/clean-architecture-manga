@@ -1,12 +1,23 @@
-using Domain.Accounts.Credits;
-using Domain.Accounts.ValueObjects;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+// <copyright file="CreditConfiguration.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
 
 namespace Infrastructure.EntityFrameworkDataAccess.Configuration
 {
+    using Domain.Accounts.Credits;
+    using Domain.Accounts.ValueObjects;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+    /// <summary>
+    /// Credit Configuration.
+    /// </summary>
     public class CreditConfiguration : IEntityTypeConfiguration<Credit>
     {
+        /// <summary>
+        /// Configure Credit.
+        /// </summary>
+        /// <param name="builder">Builder.</param>
         public void Configure(EntityTypeBuilder<Credit> builder)
         {
             builder.ToTable("Credit");

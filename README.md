@@ -8,7 +8,7 @@ Sample implementation of the **Clean Architecture Principles with .NET Core**. U
 **Manga is a Virtual Wallet** application in which a customer can register an account then manage the balance with `Deposits`, `Withdraws` and `Transfers`.
 
 The Manga's demo is hosted on `Azure` servers and the `Swagger UI` client is available at [https://clean-architecture-manga.azurewebsites.net/swagger/index.html](https://clean-architecture-manga.azurewebsites.net/swagger/). It is just beautiful!
-[![Swagger Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docs/clean-architecture-manga-swagger.png)](https://clean-architecture-manga.azurewebsites.net/swagger/index.html)
+[![Swagger Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/docs/docs/clean-architecture-manga-swagger.png)](https://clean-architecture-manga.azurewebsites.net/swagger/index.html)
 
 
 <p align="center">
