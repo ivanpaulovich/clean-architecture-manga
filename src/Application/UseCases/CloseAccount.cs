@@ -40,7 +40,8 @@ namespace Application.UseCases
 
             try
             {
-                account = await this.accountRepository.Get(input.AccountId);
+                account = await this.accountRepository.GetAccount(input.AccountId)
+                    .ConfigureAwait(false);
             }
             catch (AccountNotFoundException ex)
             {
@@ -50,7 +51,8 @@ namespace Application.UseCases
 
             if (account.IsClosingAllowed())
             {
-                await this.accountRepository.Delete(account);
+                await this.accountRepository.Delete(account)
+                    .ConfigureAwait(false);
             }
 
             this.BuildOutput(account);

@@ -17,7 +17,7 @@ namespace Domain.Security
         /// </summary>
         /// <param name="externalUserId">External UserId.</param>
         /// <returns>User.</returns>
-        Task<IUser> Get(ExternalUserId externalUserId);
+        Task<IUser> GetUser(ExternalUserId externalUserId);
 
         /// <summary>
         /// Adds the User.

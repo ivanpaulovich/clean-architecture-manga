@@ -17,5 +17,21 @@ namespace Domain.Customers
             : base(message)
         {
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public CustomerNotFoundException()
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="innerException"></param>
+        public CustomerNotFoundException(string message, System.Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }

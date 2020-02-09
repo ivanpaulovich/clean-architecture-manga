@@ -7,7 +7,7 @@ namespace Domain.Accounts.ValueObjects
     /// <summary>
     /// Money <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#entity">Entity Design Pattern</see>.
     /// </summary>
-    public readonly struct Money
+    public readonly struct Money : System.IEquatable<Money>
     {
         private readonly decimal money;
 
@@ -63,6 +63,62 @@ namespace Domain.Accounts.ValueObjects
         internal Money Subtract(Money value)
         {
             return new Money(this.money - value.ToDecimal());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(object obj)
+        {
+            if (obj is Money moneyObj)
+            {
+                return Equals(moneyObj);
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            return money.GetHashCode();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator ==(Money left, Money right)
+        {
+            return left.Equals(right);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator !=(Money left, Money right)
+        {
+            return !(left == right);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool Equals(Money other)
+        {
+            return this.money == other.money;
         }
     }
 }

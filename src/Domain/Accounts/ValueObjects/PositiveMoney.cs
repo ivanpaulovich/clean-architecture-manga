@@ -7,7 +7,7 @@ namespace Domain.Accounts.ValueObjects
     /// <summary>
     /// PositiveMoney <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#entity">Entity Design Pattern</see>.
     /// </summary>
-    public readonly struct PositiveMoney
+    public readonly struct PositiveMoney : System.IEquatable<PositiveMoney>
     {
         private readonly Money value;
 
@@ -49,6 +49,62 @@ namespace Domain.Accounts.ValueObjects
         internal Money Subtract(PositiveMoney positiveAmount)
         {
             return this.value.Subtract(positiveAmount.value);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(object obj)
+        {
+            if (obj is PositiveMoney positiveMoneyObj)
+            {
+                return Equals(positiveMoneyObj);
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            return value.GetHashCode();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator ==(PositiveMoney left, PositiveMoney right)
+        {
+            return left.Equals(right);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator !=(PositiveMoney left, PositiveMoney right)
+        {
+            return !(left == right);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool Equals(PositiveMoney other)
+        {
+            return this.value.ToDecimal() == other.value.ToDecimal();
         }
     }
 }

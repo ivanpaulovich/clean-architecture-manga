@@ -23,7 +23,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IUser> Get(ExternalUserId externalUserId)
+        public async Task<IUser> GetUser(ExternalUserId externalUserId)
         {
             var user = await _context
                 .Users

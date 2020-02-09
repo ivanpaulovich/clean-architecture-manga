@@ -17,5 +17,21 @@ namespace Domain.Customers.ValueObjects
             : base(message)
         {
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public NameShouldNotBeEmptyException()
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="innerException"></param>
+        public NameShouldNotBeEmptyException(string message, System.Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }

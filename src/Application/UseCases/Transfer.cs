@@ -4,6 +4,7 @@
 
 namespace Application.UseCases
 {
+    using System;
     using System.Threading.Tasks;
     using Application.Boundaries.Transfer;
     using Application.Services;
@@ -48,13 +49,21 @@ namespace Application.UseCases
         {
             try
             {
-                var originAccount = await this.accountRepository.Get(input.OriginAccountId);
-                var destinationAccount = await this.accountRepository.Get(input.DestinationAccountId);
+                if (input is null)
+                    throw new ArgumentNullException(nameof(input));
 
-                var debit = await this.accountService.Withdraw(originAccount, input.Amount);
-                var credit = await this.accountService.Deposit(destinationAccount, input.Amount);
+                var originAccount = await this.accountRepository.GetAccount(input.OriginAccountId)
+                    .ConfigureAwait(false);
+                var destinationAccount = await this.accountRepository.GetAccount(input.DestinationAccountId)
+                    .ConfigureAwait(false);
 
-                await this.unitOfWork.Save();
+                var debit = await this.accountService.Withdraw(originAccount, input.Amount)
+                    .ConfigureAwait(false);
+                var credit = await this.accountService.Deposit(destinationAccount, input.Amount)
+                    .ConfigureAwait(false);
+
+                await this.unitOfWork.Save()
+                    .ConfigureAwait(false);
 
                 this.BuildOutput(debit, originAccount, destinationAccount);
             }

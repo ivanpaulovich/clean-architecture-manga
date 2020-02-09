@@ -17,5 +17,21 @@ namespace Domain.Security
             : base(message)
         {
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public UserNotFoundException()
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="innerException"></param>
+        public UserNotFoundException(string message, System.Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }

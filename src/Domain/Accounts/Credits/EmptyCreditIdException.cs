@@ -17,5 +17,21 @@ namespace Domain.Accounts.Credits
             : base(message)
         {
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public EmptyCreditIdException()
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message">Message.</param>
+        /// <param name="innerException">Inner Exception.</param>
+        public EmptyCreditIdException(string message, System.Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }

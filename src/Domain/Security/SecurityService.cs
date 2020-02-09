@@ -38,7 +38,8 @@ namespace Domain.Security
         public async Task<IUser> CreateUserCredentials(CustomerId customerId, ExternalUserId externalUserId)
         {
             var user = this.userFactory.NewUser(customerId, externalUserId);
-            await this.userRepository.Add(user);
+            await this.userRepository.Add(user)
+                .ConfigureAwait(false);
             return user;
         }
     }

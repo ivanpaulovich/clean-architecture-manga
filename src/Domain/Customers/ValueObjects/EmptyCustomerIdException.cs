@@ -17,5 +17,21 @@ namespace Domain.Customers.ValueObjects
             : base(message)
         {
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public EmptyCustomerIdException()
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="innerException"></param>
+        public EmptyCustomerIdException(string message, System.Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }

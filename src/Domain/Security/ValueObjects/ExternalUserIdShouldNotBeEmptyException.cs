@@ -17,5 +17,21 @@ namespace Domain.Security.ValueObjects
             : base(message)
         {
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ExternalUserIdShouldNotBeEmptyException()
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="innerException"></param>
+        public ExternalUserIdShouldNotBeEmptyException(string message, System.Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }

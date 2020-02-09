@@ -17,5 +17,21 @@ namespace Domain.Accounts.ValueObjects
             : base(message)
         {
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public EmptyAccountIdException()
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="innerException"></param>
+        public EmptyAccountIdException(string message, System.Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }

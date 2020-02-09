@@ -9,7 +9,7 @@ namespace Domain.Accounts.ValueObjects
     /// <summary>
     /// AccountId <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#entity">Entity Design Pattern</see>.
     /// </summary>
-    public readonly struct AccountId
+    public readonly struct AccountId : IEquatable<AccountId>
     {
         private readonly Guid accountId;
 
@@ -46,23 +46,54 @@ namespace Domain.Accounts.ValueObjects
         /// <summary>
         /// Check if objects are equals.
         /// </summary>
-        /// <param name="obj">Object.</param>
+        /// <param name="obj">Other object.</param>
         /// <returns>Returns true when equals.</returns>
         public override bool Equals(object obj)
         {
-            throw new NotImplementedException();
+            if (obj is AccountId accountIdObj)
+            {
+                return Equals(accountIdObj);
+            }
+
+            return false;
         }
 
+        /// <summary>
+        /// Get Hash Code.
+        /// </summary>
+        /// <returns>Hash Code.</returns>
         public override int GetHashCode()
         {
-            throw new NotImplementedException();
+            return this.accountId.GetHashCode();
         }
 
+        /// <summary>
+        /// Checks if other object is equals.
+        /// </summary>
+        /// <param name="other">Other AccountId.</param>
+        /// <returns>True if equals.</returns>
+        public bool Equals(AccountId other)
+        {
+            return this.accountId == other.accountId;
+        }
+
+        /// <summary>
+        /// Equals.
+        /// </summary>
+        /// <param name="left">Left object.</param>
+        /// <param name="right">Right object.</param>
+        /// <returns>True if equals.</returns>
         public static bool operator ==(AccountId left, AccountId right)
         {
             return left.Equals(right);
         }
 
+        /// <summary>
+        /// Different.
+        /// </summary>
+        /// <param name="left">Left object.</param>
+        /// <param name="right">Right object.</param>
+        /// <returns>True if different.</returns>
         public static bool operator !=(AccountId left, AccountId right)
         {
             return !(left == right);

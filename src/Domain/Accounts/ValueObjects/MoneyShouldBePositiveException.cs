@@ -17,5 +17,21 @@ namespace Domain.Accounts.ValueObjects
             : base(message)
         {
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public MoneyShouldBePositiveException()
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message">Message.</param>
+        /// <param name="innerException">Inner Exception.</param>
+        public MoneyShouldBePositiveException(string message, System.Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }

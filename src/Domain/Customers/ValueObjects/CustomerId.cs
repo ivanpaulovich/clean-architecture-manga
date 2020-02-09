@@ -9,7 +9,7 @@ namespace Domain.Customers.ValueObjects
     /// <summary>
     /// CustomerId <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#entity">Entity Design Pattern</see>.
     /// </summary>
-    public readonly struct CustomerId
+    public readonly struct CustomerId : IEquatable<CustomerId>
     {
         private readonly Guid customerId;
 
@@ -41,5 +41,61 @@ namespace Domain.Customers.ValueObjects
         /// </summary>
         /// <returns>Guid.</returns>
         public Guid ToGuid() => this.customerId;
+
+        /// <summary>
+        /// Equals.
+        /// </summary>
+        /// <param name="obj">Other object.</param>
+        /// <returns></returns>
+        public override bool Equals(object obj)
+        {
+            if (obj is CustomerId customerIdObj)
+            {
+                return Equals(customerIdObj);
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            return this.customerId.GetHashCode();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator ==(CustomerId left, CustomerId right)
+        {
+            return left.Equals(right);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator !=(CustomerId left, CustomerId right)
+        {
+            return !(left == right);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool Equals(CustomerId other)
+        {
+            return this.customerId == other.customerId;
+        }
     }
 }

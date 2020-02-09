@@ -37,6 +37,9 @@ namespace Domain.Accounts
         /// <inheritdoc/>
         public ICredit Deposit(IAccountFactory entityFactory, PositiveMoney amountToDeposit)
         {
+            if (entityFactory is null)
+                throw new ArgumentNullException(nameof(entityFactory));
+
             var credit = entityFactory.NewCredit(this, amountToDeposit, DateTime.UtcNow);
             this.Credits.Add(credit);
             return credit;
@@ -45,6 +48,9 @@ namespace Domain.Accounts
         /// <inheritdoc/>
         public IDebit Withdraw(IAccountFactory entityFactory, PositiveMoney amountToWithdraw)
         {
+            if (entityFactory is null)
+                throw new ArgumentNullException(nameof(entityFactory));
+
             if (this.GetCurrentBalance().LessThan(amountToWithdraw))
             {
                 throw new MoneyShouldBePositiveException("Account has not enough funds.");

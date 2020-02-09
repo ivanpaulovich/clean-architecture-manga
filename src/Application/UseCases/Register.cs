@@ -60,20 +60,25 @@ namespace Application.UseCases
         {
             if (this.userService.GetCustomerId() is CustomerId customerId)
             {
-                if (await this.customerService.IsCustomerRegistered(customerId))
+                if (await this.customerService.IsCustomerRegistered(customerId)
+                    .ConfigureAwait(false))
                 {
                     this.outputPort.CustomerAlreadyRegistered($"Customer already exists.");
                     return;
                 }
             }
 
-            var customer = await this.customerService.CreateCustomer(input.SSN, this.userService.GetUserName());
-            var account = await this.accountService.OpenCheckingAccount(customer.Id, input.InitialAmount);
-            var user = await this.securityService.CreateUserCredentials(customer.Id, this.userService.GetExternalUserId());
+            var customer = await this.customerService.CreateCustomer(input.SSN, this.userService.GetUserName())
+                .ConfigureAwait(false);
+            var account = await this.accountService.OpenCheckingAccount(customer.Id, input.InitialAmount)
+                .ConfigureAwait(false);
+            var user = await this.securityService.CreateUserCredentials(customer.Id, this.userService.GetExternalUserId())
+                .ConfigureAwait(false);
 
             customer.Register(account.Id);
 
-            await this.unitOfWork.Save();
+            await this.unitOfWork.Save()
+                .ConfigureAwait(false);
 
             this.BuildOutput(this.userService.GetExternalUserId(), customer, account);
         }

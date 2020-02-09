@@ -48,9 +48,12 @@ namespace Application.UseCases
         {
             try
             {
-                var account = await this.accountRepository.Get(input.AccountId);
-                var credit = await this.accountService.Deposit(account, input.Amount);
-                await this.unitOfWork.Save();
+                var account = await this.accountRepository.GetAccount(input.AccountId)
+                    .ConfigureAwait(false);
+                var credit = await this.accountService.Deposit(account, input.Amount)
+                    .ConfigureAwait(false);
+                await this.unitOfWork.Save()
+                    .ConfigureAwait(false);
 
                 this.BuildOutput(credit, account);
             }

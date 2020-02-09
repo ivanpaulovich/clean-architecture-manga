@@ -17,5 +17,21 @@ namespace Domain.Accounts.Debits
             : base(message)
         {
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public EmptyDebitIdException()
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="innerException"></param>
+        public EmptyDebitIdException(string message, System.Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }

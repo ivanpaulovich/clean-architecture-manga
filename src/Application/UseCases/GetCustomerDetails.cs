@@ -56,7 +56,8 @@ namespace Application.UseCases
             {
                 try
                 {
-                    customer = await this.customerRepository.GetBy(customerId);
+                    customer = await this.customerRepository.GetBy(customerId)
+                        .ConfigureAwait(false);
                 }
                 catch (CustomerNotFoundException ex)
                 {
@@ -78,7 +79,8 @@ namespace Application.UseCases
 
                 try
                 {
-                    account = await this.accountRepository.Get(accountId);
+                    account = await this.accountRepository.GetAccount(accountId)
+                        .ConfigureAwait(false);
                 }
                 catch (AccountNotFoundException ex)
                 {

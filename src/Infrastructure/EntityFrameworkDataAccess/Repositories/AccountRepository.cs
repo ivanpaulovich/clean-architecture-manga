@@ -39,7 +39,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
                 deleteSQL, id);
         }
 
-        public async Task<IAccount> Get(AccountId id)
+        public async Task<IAccount> GetAccount(AccountId id)
         {
             var account = await _context
                 .Accounts

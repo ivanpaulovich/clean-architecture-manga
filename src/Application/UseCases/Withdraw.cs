@@ -49,10 +49,13 @@ namespace Application.UseCases
         {
             try
             {
-                var account = await this.accountRepository.Get(input.AccountId);
-                var debit = await this.accountService.Withdraw(account, input.Amount);
+                var account = await this.accountRepository.GetAccount(input.AccountId)
+                    .ConfigureAwait(false);
+                var debit = await this.accountService.Withdraw(account, input.Amount)
+                    .ConfigureAwait(false);
 
-                await this.unitOfWork.Save();
+                await this.unitOfWork.Save()
+                    .ConfigureAwait(false);
 
                 this.BuildOutput(debit, account);
             }

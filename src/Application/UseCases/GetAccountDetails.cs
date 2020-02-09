@@ -40,7 +40,8 @@ namespace Application.UseCases
 
             try
             {
-                account = await this.accountRepository.Get(input.AccountId);
+                account = await this.accountRepository.GetAccount(input.AccountId)
+                    .ConfigureAwait(false);
             }
             catch (AccountNotFoundException ex)
             {

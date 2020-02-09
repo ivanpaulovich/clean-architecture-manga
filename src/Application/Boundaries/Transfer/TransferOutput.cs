@@ -4,6 +4,7 @@
 
 namespace Application.Boundaries.Transfer
 {
+    using System;
     using Domain.Accounts.Debits;
     using Domain.Accounts.ValueObjects;
 
@@ -25,16 +26,19 @@ namespace Application.Boundaries.Transfer
             AccountId originAccountId,
             AccountId destinationAccountId)
         {
-            Debit debitEntity = (Debit)debit;
+            if (debit is Debit debitEntity)
+            {
+                this.Transaction = new Transaction(
+                    originAccountId,
+                    destinationAccountId,
+                    Debit.Description,
+                    debitEntity.Amount,
+                    debitEntity.TransactionDate);
 
-            this.Transaction = new Transaction(
-                originAccountId,
-                destinationAccountId,
-                debitEntity.Description,
-                debitEntity.Amount,
-                debitEntity.TransactionDate);
-
-            this.UpdatedBalance = updatedBalance;
+                this.UpdatedBalance = updatedBalance;
+            }
+            else
+                throw new ArgumentNullException(nameof(debit));
         }
 
         /// <summary>
