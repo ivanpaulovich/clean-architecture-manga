@@ -27,7 +27,6 @@ namespace UnitTests.EntitiesTests
 
             // Assert
             Assert.Equal(100, actual.Amount.ToMoney().ToDecimal());
-            Assert.Equal("Credit", actual.Description);
         }
 
         [Fact]

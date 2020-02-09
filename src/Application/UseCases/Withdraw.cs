@@ -1,3 +1,7 @@
+// <copyright file="Withdraw.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Application.UseCases
 {
     using System.Threading.Tasks;
@@ -12,10 +16,10 @@ namespace Application.UseCases
     /// </summary>
     public sealed class Withdraw : IUseCase
     {
-        private readonly AccountService _accountService;
-        private readonly IOutputPort _outputPort;
-        private readonly IAccountRepository _accountRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly AccountService accountService;
+        private readonly IOutputPort outputPort;
+        private readonly IAccountRepository accountRepository;
+        private readonly IUnitOfWork unitOfWork;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Withdraw"/> class.
@@ -30,10 +34,10 @@ namespace Application.UseCases
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
-            this._accountService = accountService;
-            this._outputPort = outputPort;
-            this._accountRepository = accountRepository;
-            this._unitOfWork = unitOfWork;
+            this.accountService = accountService;
+            this.outputPort = outputPort;
+            this.accountRepository = accountRepository;
+            this.unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -45,21 +49,24 @@ namespace Application.UseCases
         {
             try
             {
-                var account = await this._accountRepository.Get(input.AccountId);
-                var debit = await this._accountService.Withdraw(account, input.Amount);
+                var account = await this.accountRepository.GetAccount(input.AccountId)
+                    .ConfigureAwait(false);
+                var debit = await this.accountService.Withdraw(account, input.Amount)
+                    .ConfigureAwait(false);
 
-                await this._unitOfWork.Save();
+                await this.unitOfWork.Save()
+                    .ConfigureAwait(false);
 
                 this.BuildOutput(debit, account);
             }
             catch (AccountNotFoundException notFoundEx)
             {
-                this._outputPort.NotFound(notFoundEx.Message);
+                this.outputPort.NotFound(notFoundEx.Message);
                 return;
             }
             catch (MoneyShouldBePositiveException outOfBalanceEx)
             {
-                this._outputPort.OutOfBalance(outOfBalanceEx.Message);
+                this.outputPort.OutOfBalance(outOfBalanceEx.Message);
                 return;
             }
         }
@@ -70,7 +77,7 @@ namespace Application.UseCases
                 debit,
                 account.GetCurrentBalance());
 
-            this._outputPort.Standard(output);
+            this.outputPort.Standard(output);
         }
     }
 }

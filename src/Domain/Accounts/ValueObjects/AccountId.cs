@@ -1,3 +1,7 @@
+// <copyright file="AccountId.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Accounts.ValueObjects
 {
     using System;
@@ -5,9 +9,9 @@ namespace Domain.Accounts.ValueObjects
     /// <summary>
     /// AccountId <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#entity">Entity Design Pattern</see>.
     /// </summary>
-    public readonly struct AccountId
+    public readonly struct AccountId : IEquatable<AccountId>
     {
-        private readonly Guid _accountId;
+        private readonly Guid accountId;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountId"/> struct.
@@ -17,10 +21,11 @@ namespace Domain.Accounts.ValueObjects
         {
             if (accountId == Guid.Empty)
             {
-                throw new EmptyAccountIdException($"{nameof(accountId)} cannot be empty.");
+                throw new EmptyAccountIdException(
+                    $"{nameof(accountId)} cannot be empty.");
             }
 
-            this._accountId = accountId;
+            this.accountId = accountId;
         }
 
         /// <summary>
@@ -29,13 +34,69 @@ namespace Domain.Accounts.ValueObjects
         /// <returns>String.</returns>
         public override string ToString()
         {
-            return this._accountId.ToString();
+            return this.accountId.ToString();
         }
 
         /// <summary>
         /// Converts into Guid.
         /// </summary>
         /// <returns>Guid representation.</returns>
-        public Guid ToGuid() => this._accountId;
+        public Guid ToGuid() => this.accountId;
+
+        /// <summary>
+        /// Check if objects are equals.
+        /// </summary>
+        /// <param name="obj">Other object.</param>
+        /// <returns>Returns true when equals.</returns>
+        public override bool Equals(object obj)
+        {
+            if (obj is AccountId accountIdObj)
+            {
+                return Equals(accountIdObj);
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Get Hash Code.
+        /// </summary>
+        /// <returns>Hash Code.</returns>
+        public override int GetHashCode()
+        {
+            return this.accountId.GetHashCode();
+        }
+
+        /// <summary>
+        /// Checks if other object is equals.
+        /// </summary>
+        /// <param name="other">Other AccountId.</param>
+        /// <returns>True if equals.</returns>
+        public bool Equals(AccountId other)
+        {
+            return this.accountId == other.accountId;
+        }
+
+        /// <summary>
+        /// Equals.
+        /// </summary>
+        /// <param name="left">Left object.</param>
+        /// <param name="right">Right object.</param>
+        /// <returns>True if equals.</returns>
+        public static bool operator ==(AccountId left, AccountId right)
+        {
+            return left.Equals(right);
+        }
+
+        /// <summary>
+        /// Different.
+        /// </summary>
+        /// <param name="left">Left object.</param>
+        /// <param name="right">Right object.</param>
+        /// <returns>True if different.</returns>
+        public static bool operator !=(AccountId left, AccountId right)
+        {
+            return !(left == right);
+        }
     }
 }

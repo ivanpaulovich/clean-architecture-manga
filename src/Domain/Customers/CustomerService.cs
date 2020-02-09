@@ -1,4 +1,8 @@
-﻿namespace Domain.Customers
+﻿// <copyright file="CustomerService.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
+namespace Domain.Customers
 {
     using System.Threading.Tasks;
     using Domain.Customers.ValueObjects;
@@ -8,8 +12,8 @@
     /// </summary>
     public class CustomerService
     {
-        private readonly ICustomerFactory _customerFactory;
-        private readonly ICustomerRepository _customerRepository;
+        private readonly ICustomerFactory customerFactory;
+        private readonly ICustomerRepository customerRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomerService"/> class.
@@ -20,8 +24,8 @@
             ICustomerFactory customerFactory,
             ICustomerRepository customerRepository)
         {
-            this._customerFactory = customerFactory;
-            this._customerRepository = customerRepository;
+            this.customerFactory = customerFactory;
+            this.customerRepository = customerRepository;
         }
 
         /// <summary>
@@ -32,8 +36,10 @@
         /// <returns>Created Customer.</returns>
         public async Task<ICustomer> CreateCustomer(SSN ssn, Name name)
         {
-            var customer = this._customerFactory.NewCustomer(ssn, name);
-            await this._customerRepository.Add(customer);
+            var customer = this.customerFactory.NewCustomer(ssn, name);
+            await this.customerRepository.Add(customer)
+                .ConfigureAwait(false);
+
             return customer;
         }
 
@@ -46,7 +52,9 @@
         {
             try
             {
-                var customer = await this._customerRepository.GetBy(customerId);
+                var customer = await this.customerRepository.GetBy(customerId)
+                    .ConfigureAwait(false);
+
                 return true;
             }
             catch (CustomerNotFoundException)

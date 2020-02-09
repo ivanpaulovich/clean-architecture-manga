@@ -1,3 +1,7 @@
+// <copyright file="GetCustomerDetails.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Application.UseCases
 {
     using System.Collections.Generic;
@@ -15,10 +19,10 @@ namespace Application.UseCases
     /// </summary>
     public sealed class GetCustomerDetails : IUseCase
     {
-        private readonly IUserService _userService;
-        private readonly IOutputPort _outputPort;
-        private readonly ICustomerRepository _customerRepository;
-        private readonly IAccountRepository _accountRepository;
+        private readonly IUserService userService;
+        private readonly IOutputPort outputPort;
+        private readonly ICustomerRepository customerRepository;
+        private readonly IAccountRepository accountRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GetCustomerDetails"/> class.
@@ -33,10 +37,10 @@ namespace Application.UseCases
             ICustomerRepository customerRepository,
             IAccountRepository accountRepository)
         {
-            this._userService = userService;
-            this._outputPort = outputPort;
-            this._customerRepository = customerRepository;
-            this._accountRepository = accountRepository;
+            this.userService = userService;
+            this.outputPort = outputPort;
+            this.customerRepository = customerRepository;
+            this.accountRepository = accountRepository;
         }
 
         /// <summary>
@@ -48,21 +52,22 @@ namespace Application.UseCases
         {
             ICustomer customer;
 
-            if (this._userService.GetCustomerId() is CustomerId customerId)
+            if (this.userService.GetCustomerId() is CustomerId customerId)
             {
                 try
                 {
-                    customer = await this._customerRepository.GetBy(customerId);
+                    customer = await this.customerRepository.GetBy(customerId)
+                        .ConfigureAwait(false);
                 }
                 catch (CustomerNotFoundException ex)
                 {
-                    this._outputPort.NotFound(ex.Message);
+                    this.outputPort.NotFound(ex.Message);
                     return;
                 }
             }
             else
             {
-                this._outputPort.NotFound("Customer does not exist.");
+                this.outputPort.NotFound("Customer does not exist.");
                 return;
             }
 
@@ -74,11 +79,12 @@ namespace Application.UseCases
 
                 try
                 {
-                    account = await this._accountRepository.Get(accountId);
+                    account = await this.accountRepository.GetAccount(accountId)
+                        .ConfigureAwait(false);
                 }
                 catch (AccountNotFoundException ex)
                 {
-                    this._outputPort.NotFound(ex.Message);
+                    this.outputPort.NotFound(ex.Message);
                     return;
                 }
 
@@ -87,7 +93,7 @@ namespace Application.UseCases
             }
 
             this.BuildOutput(
-                this._userService.GetExternalUserId(),
+                this.userService.GetExternalUserId(),
                 customer,
                 accounts);
         }
@@ -101,7 +107,7 @@ namespace Application.UseCases
                 externalUserId,
                 customer,
                 accounts);
-            this._outputPort.Standard(output);
+            this.outputPort.Standard(output);
         }
     }
 }

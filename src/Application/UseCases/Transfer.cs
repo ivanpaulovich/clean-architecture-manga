@@ -1,5 +1,10 @@
+// <copyright file="Transfer.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Application.UseCases
 {
+    using System;
     using System.Threading.Tasks;
     using Application.Boundaries.Transfer;
     using Application.Services;
@@ -11,10 +16,10 @@ namespace Application.UseCases
     /// </summary>
     public sealed class Transfer : IUseCase
     {
-        private readonly AccountService _accountService;
-        private readonly IOutputPort _outputPort;
-        private readonly IAccountRepository _accountRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly AccountService accountService;
+        private readonly IOutputPort outputPort;
+        private readonly IAccountRepository accountRepository;
+        private readonly IUnitOfWork unitOfWork;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Transfer"/> class.
@@ -29,10 +34,10 @@ namespace Application.UseCases
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
-            this._accountService = accountService;
-            this._outputPort = outputPort;
-            this._accountRepository = accountRepository;
-            this._unitOfWork = unitOfWork;
+            this.accountService = accountService;
+            this.outputPort = outputPort;
+            this.accountRepository = accountRepository;
+            this.unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -44,19 +49,27 @@ namespace Application.UseCases
         {
             try
             {
-                var originAccount = await this._accountRepository.Get(input.OriginAccountId);
-                var destinationAccount = await this._accountRepository.Get(input.DestinationAccountId);
+                if (input is null)
+                    throw new ArgumentNullException(nameof(input));
 
-                var debit = await this._accountService.Withdraw(originAccount, input.Amount);
-                var credit = await this._accountService.Deposit(destinationAccount, input.Amount);
+                var originAccount = await this.accountRepository.GetAccount(input.OriginAccountId)
+                    .ConfigureAwait(false);
+                var destinationAccount = await this.accountRepository.GetAccount(input.DestinationAccountId)
+                    .ConfigureAwait(false);
 
-                await this._unitOfWork.Save();
+                var debit = await this.accountService.Withdraw(originAccount, input.Amount)
+                    .ConfigureAwait(false);
+                var credit = await this.accountService.Deposit(destinationAccount, input.Amount)
+                    .ConfigureAwait(false);
+
+                await this.unitOfWork.Save()
+                    .ConfigureAwait(false);
 
                 this.BuildOutput(debit, originAccount, destinationAccount);
             }
             catch (AccountNotFoundException ex)
             {
-                this._outputPort.NotFound(ex.Message);
+                this.outputPort.NotFound(ex.Message);
                 return;
             }
         }
@@ -69,7 +82,7 @@ namespace Application.UseCases
                 originAccount.Id,
                 destinationAccount.Id);
 
-            this._outputPort.Standard(output);
+            this.outputPort.Standard(output);
         }
     }
 }

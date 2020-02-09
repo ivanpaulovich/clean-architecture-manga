@@ -1,3 +1,7 @@
+// <copyright file="ICustomerFactory.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Customers
 {
     using Domain.Customers.ValueObjects;

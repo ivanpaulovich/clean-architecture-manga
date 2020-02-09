@@ -1,3 +1,7 @@
+// <copyright file="CustomerNotFoundException.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Customers
 {
     /// <summary>
@@ -11,6 +15,22 @@ namespace Domain.Customers
         /// <param name="message">Message.</param>
         public CustomerNotFoundException(string message)
             : base(message)
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public CustomerNotFoundException()
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="innerException"></param>
+        public CustomerNotFoundException(string message, System.Exception innerException) : base(message, innerException)
         {
         }
     }

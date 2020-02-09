@@ -1,3 +1,7 @@
+// <copyright file="UserNotFoundException.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Security
 {
     /// <summary>
@@ -11,6 +15,22 @@ namespace Domain.Security
         /// <param name="message">Message.</param>
         public UserNotFoundException(string message)
             : base(message)
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public UserNotFoundException()
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="innerException"></param>
+        public UserNotFoundException(string message, System.Exception innerException) : base(message, innerException)
         {
         }
     }

@@ -1,4 +1,8 @@
-﻿namespace Domain.Security
+﻿// <copyright file="SecurityService.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
+namespace Domain.Security
 {
     using System.Threading.Tasks;
     using Domain.Customers.ValueObjects;
@@ -9,8 +13,8 @@
     /// </summary>
     public class SecurityService
     {
-        private readonly IUserFactory _userFactory;
-        private readonly IUserRepository _userRepository;
+        private readonly IUserFactory userFactory;
+        private readonly IUserRepository userRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SecurityService"/> class.
@@ -21,8 +25,8 @@
             IUserFactory userFactory,
             IUserRepository userRepository)
         {
-            this._userFactory = userFactory;
-            this._userRepository = userRepository;
+            this.userFactory = userFactory;
+            this.userRepository = userRepository;
         }
 
         /// <summary>
@@ -33,8 +37,9 @@
         /// <returns>The User.</returns>
         public async Task<IUser> CreateUserCredentials(CustomerId customerId, ExternalUserId externalUserId)
         {
-            var user = this._userFactory.NewUser(customerId, externalUserId);
-            await this._userRepository.Add(user);
+            var user = this.userFactory.NewUser(customerId, externalUserId);
+            await this.userRepository.Add(user)
+                .ConfigureAwait(false);
             return user;
         }
     }

@@ -1,3 +1,7 @@
+// <copyright file="IDebit.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Accounts.Debits
 {
     using Domain.Accounts.ValueObjects;

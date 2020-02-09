@@ -1,10 +1,20 @@
+// <copyright file="DepositPresenter.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Infrastructure.InMemoryDataAccess.Presenters
 {
     using System.Collections.ObjectModel;
     using Application.Boundaries.Deposit;
 
+    /// <summary>
+    /// Deposit Presenter.
+    /// </summary>
     public sealed class DepositPresenter : IOutputPort
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public DepositPresenter()
         {
             Deposits = new Collection<DepositOutput>();

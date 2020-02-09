@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>coverlet.console</id>
+    <version>1.7.0</version>
+    <authors>tonerdo</authors>
+    <owners>tonerdo</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <projectUrl>https://github.com/tonerdo/coverlet</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/tonerdo/coverlet/master/_assets/coverlet-icon.svg?sanitize=true</iconUrl>
+    <description>Coverlet is a cross platform code coverage tool for .NET, with support for line, branch and method coverage.</description>
+    <tags>coverage testing unit-test lcov opencover quality</tags>
+    <packageTypes>
+      <packageType name="DotnetTool" />
+    </packageTypes>
+    <repository type="git" url="https://github.com/MarcoRossignoli/coverlet.git" commit="0f031e29c264d8de1e8475606985e394033f6d5d" />
+  </metadata>
+</package>

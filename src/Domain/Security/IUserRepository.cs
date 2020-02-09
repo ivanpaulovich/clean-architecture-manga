@@ -1,3 +1,7 @@
+// <copyright file="IUserRepository.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Security
 {
     using System.Threading.Tasks;
@@ -13,7 +17,7 @@ namespace Domain.Security
         /// </summary>
         /// <param name="externalUserId">External UserId.</param>
         /// <returns>User.</returns>
-        Task<IUser> Get(ExternalUserId externalUserId);
+        Task<IUser> GetUser(ExternalUserId externalUserId);
 
         /// <summary>
         /// Adds the User.

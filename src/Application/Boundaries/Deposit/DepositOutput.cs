@@ -1,5 +1,10 @@
+// <copyright file="DepositOutput.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Application.Boundaries.Deposit
 {
+    using System;
     using Domain.Accounts.Credits;
     using Domain.Accounts.ValueObjects;
 
@@ -17,14 +22,17 @@ namespace Application.Boundaries.Deposit
             ICredit credit,
             Money updatedBalance)
         {
-            Credit creditEntity = (Credit)credit;
+            if (credit is Credit creditEntity)
+            {
+                this.Transaction = new Transaction(
+                    Credit.Description,
+                    creditEntity.Amount,
+                    creditEntity.TransactionDate);
 
-            this.Transaction = new Transaction(
-                creditEntity.Description,
-                creditEntity.Amount,
-                creditEntity.TransactionDate);
-
-            this.UpdatedBalance = updatedBalance;
+                this.UpdatedBalance = updatedBalance;
+            }
+            else
+                throw new ArgumentNullException(nameof(credit));
         }
 
         /// <summary>

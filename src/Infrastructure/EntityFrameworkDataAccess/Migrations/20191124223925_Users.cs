@@ -1,8 +1,12 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿// <copyright file="20191124223925_Users.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
 
 namespace Infrastructure.EntityFrameworkDataAccess.Migrations
 {
+    using System;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class Users : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

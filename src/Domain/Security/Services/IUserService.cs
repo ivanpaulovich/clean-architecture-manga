@@ -1,3 +1,7 @@
+// <copyright file="IUserService.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Security.Services
 {
     using Domain.Customers.ValueObjects;

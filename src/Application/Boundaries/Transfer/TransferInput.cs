@@ -1,3 +1,7 @@
+// <copyright file="TransferInput.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Application.Boundaries.Transfer
 {
     using Domain.Accounts.ValueObjects;
