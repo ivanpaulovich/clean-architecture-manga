@@ -25,7 +25,7 @@ namespace Domain.Accounts.Debits
         /// <summary>
         /// Gets Description.
         /// </summary>
-        public string Description { get => "Debit"; }
+        public static string Description { get => "Debit"; }
 
         /// <summary>
         /// Gets or sets Transaction Date.

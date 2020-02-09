@@ -4,6 +4,7 @@
 
 namespace Domain.Accounts
 {
+    using System;
     using System.Threading.Tasks;
     using Domain.Accounts.Credits;
     using Domain.Accounts.Debits;
@@ -41,7 +42,8 @@ namespace Domain.Accounts
         {
             var account = this.accountFactory.NewAccount(customerId);
             var credit = account.Deposit(this.accountFactory, amount);
-            await this.accountRepository.Add(account, credit);
+            await this.accountRepository.Add(account, credit)
+                .ConfigureAwait(false);
 
             return account;
         }
@@ -54,8 +56,12 @@ namespace Domain.Accounts
         /// <returns>Debit Transaction.</returns>
         public async Task<IDebit> Withdraw(IAccount account, PositiveMoney amount)
         {
+            if (account is null)
+                throw new ArgumentNullException(nameof(account));
+
             var debit = account.Withdraw(this.accountFactory, amount);
-            await this.accountRepository.Update(account, debit);
+            await this.accountRepository.Update(account, debit)
+                .ConfigureAwait(false);
 
             return debit;
         }
@@ -68,8 +74,12 @@ namespace Domain.Accounts
         /// <returns>Credit Transaction.</returns>
         public async Task<ICredit> Deposit(IAccount account, PositiveMoney amount)
         {
+            if (account is null)
+                throw new ArgumentNullException(nameof(account));
+
             var credit = account.Deposit(this.accountFactory, amount);
-            await this.accountRepository.Update(account, credit);
+            await this.accountRepository.Update(account, credit)
+                .ConfigureAwait(false);
 
             return credit;
         }

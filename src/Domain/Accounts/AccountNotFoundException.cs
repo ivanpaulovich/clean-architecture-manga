@@ -17,5 +17,22 @@ namespace Domain.Accounts
             : base(message)
         {
         }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountNotFoundException"/> class.
+        /// </summary>
+        public AccountNotFoundException()
+            : base(string.Empty)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountNotFoundException"/> class.
+        /// </summary>
+        /// <param name="message">Message.</param>
+        /// <param name="innerException">Inner Exception.</param>
+        public AccountNotFoundException(string message, System.Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }

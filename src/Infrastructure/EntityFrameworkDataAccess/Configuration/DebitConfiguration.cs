@@ -4,7 +4,6 @@
 
 namespace Infrastructure.EntityFrameworkDataAccess.Configuration
 {
-    using Domain.Accounts.Debits;
     using Domain.Accounts.ValueObjects;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -31,7 +30,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Configuration
             builder.Property(debit => debit.Id)
                 .HasConversion(
                     value => value.ToGuid(),
-                    value => new DebitId(value))
+                    value => new Domain.Accounts.Debits.DebitId(value))
                 .IsRequired();
 
             builder.Property(debit => debit.AccountId)

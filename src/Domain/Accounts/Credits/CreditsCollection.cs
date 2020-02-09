@@ -4,6 +4,7 @@
 
 namespace Domain.Accounts.Credits
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Domain.Accounts.ValueObjects;
@@ -31,8 +32,14 @@ namespace Domain.Accounts.Credits
         public void Add<T>(IEnumerable<T> credits)
             where T : ICredit
         {
+            if (credits is null)
+                throw new ArgumentNullException(nameof(credits));
+
             foreach (var credit in credits)
             {
+                if (credit is null)
+                    throw new ArgumentNullException(nameof(credits));
+
                 this.Add(credit);
             }
         }

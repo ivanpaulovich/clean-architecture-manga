@@ -37,7 +37,9 @@ namespace Domain.Customers
         public async Task<ICustomer> CreateCustomer(SSN ssn, Name name)
         {
             var customer = this.customerFactory.NewCustomer(ssn, name);
-            await this.customerRepository.Add(customer);
+            await this.customerRepository.Add(customer)
+                .ConfigureAwait(false);
+
             return customer;
         }
 
@@ -50,7 +52,9 @@ namespace Domain.Customers
         {
             try
             {
-                var customer = await this.customerRepository.GetBy(customerId);
+                var customer = await this.customerRepository.GetBy(customerId)
+                    .ConfigureAwait(false);
+
                 return true;
             }
             catch (CustomerNotFoundException)

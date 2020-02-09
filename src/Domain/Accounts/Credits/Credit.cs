@@ -25,7 +25,7 @@ namespace Domain.Accounts.Credits
         /// <summary>
         /// Gets Description.
         /// </summary>
-        public string Description
+        public static string Description
         {
             get { return "Credit"; }
         }

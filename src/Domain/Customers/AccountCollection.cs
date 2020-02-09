@@ -4,6 +4,7 @@
 
 namespace Domain.Customers
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Domain.Accounts.ValueObjects;
@@ -29,6 +30,9 @@ namespace Domain.Customers
         /// <param name="accounts">Accounts list.</param>
         public void Add(IEnumerable<AccountId> accounts)
         {
+            if (accounts is null)
+                throw new ArgumentNullException(nameof(accounts));
+
             foreach (var account in accounts)
             {
                 this.Add(account);

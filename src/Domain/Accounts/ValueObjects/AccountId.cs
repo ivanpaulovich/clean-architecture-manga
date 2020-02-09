@@ -21,7 +21,8 @@ namespace Domain.Accounts.ValueObjects
         {
             if (accountId == Guid.Empty)
             {
-                throw new EmptyAccountIdException($"{nameof(accountId)} cannot be empty.");
+                throw new EmptyAccountIdException(
+                    $"{nameof(accountId)} cannot be empty.");
             }
 
             this.accountId = accountId;
@@ -41,5 +42,30 @@ namespace Domain.Accounts.ValueObjects
         /// </summary>
         /// <returns>Guid representation.</returns>
         public Guid ToGuid() => this.accountId;
+
+        /// <summary>
+        /// Check if objects are equals.
+        /// </summary>
+        /// <param name="obj">Object.</param>
+        /// <returns>Returns true when equals.</returns>
+        public override bool Equals(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static bool operator ==(AccountId left, AccountId right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(AccountId left, AccountId right)
+        {
+            return !(left == right);
+        }
     }
 }

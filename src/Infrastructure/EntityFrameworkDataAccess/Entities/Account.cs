@@ -22,8 +22,8 @@ namespace Infrastructure.EntityFrameworkDataAccess
         /// <param name="customerId">CustomerId.</param>
         public Account(CustomerId customerId)
         {
-            Id = new AccountId(Guid.NewGuid());
-            CustomerId = customerId;
+            this.Id = new AccountId(Guid.NewGuid());
+            this.CustomerId = customerId;
         }
 
         /// <summary>
@@ -45,11 +45,11 @@ namespace Infrastructure.EntityFrameworkDataAccess
         /// <param name="debits">Debits.</param>
         public void Load(IList<Credit> credits, IList<Debit> debits)
         {
-            Credits = new CreditsCollection();
-            Credits.Add(credits);
+            this.Credits = new CreditsCollection();
+            this.Credits.Add(credits);
 
-            Debits = new DebitsCollection();
-            Debits.Add(debits);
+            this.Debits = new DebitsCollection();
+            this.Debits.Add(debits);
         }
     }
 }

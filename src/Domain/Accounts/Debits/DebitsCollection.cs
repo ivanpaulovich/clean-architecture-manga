@@ -4,6 +4,7 @@
 
 namespace Domain.Accounts.Debits
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Domain.Accounts.ValueObjects;
@@ -31,8 +32,14 @@ namespace Domain.Accounts.Debits
         public void Add<T>(IEnumerable<T> debits)
             where T : IDebit
         {
+            if (debits is null)
+                throw new ArgumentNullException(nameof(debits));
+
             foreach (var debit in debits)
             {
+                if (debit is null)
+                    throw new ArgumentNullException(nameof(debits));
+
                 this.Add(debit);
             }
         }

@@ -42,5 +42,25 @@ namespace Domain.Customers.ValueObjects
         /// </summary>
         /// <returns>string.</returns>
         public override string ToString() => this.text;
+
+        public override bool Equals(object obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override int GetHashCode()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public static bool operator ==(SSN left, SSN right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(SSN left, SSN right)
+        {
+            return !(left == right);
+        }
     }
 }
