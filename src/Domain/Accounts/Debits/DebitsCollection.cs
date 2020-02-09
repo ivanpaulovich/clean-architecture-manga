@@ -1,5 +1,10 @@
+// <copyright file="DebitsCollection.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Accounts.Debits
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Domain.Accounts.ValueObjects;
@@ -9,14 +14,14 @@ namespace Domain.Accounts.Debits
     /// </summary>
     public sealed class DebitsCollection
     {
-        private readonly IList<IDebit> _debits;
+        private readonly IList<IDebit> debits;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DebitsCollection"/> class.
         /// </summary>
         public DebitsCollection()
         {
-            this._debits = new List<IDebit>();
+            this.debits = new List<IDebit>();
         }
 
         /// <summary>
@@ -27,8 +32,14 @@ namespace Domain.Accounts.Debits
         public void Add<T>(IEnumerable<T> debits)
             where T : IDebit
         {
+            if (debits is null)
+                throw new ArgumentNullException(nameof(debits));
+
             foreach (var debit in debits)
             {
+                if (debit is null)
+                    throw new ArgumentNullException(nameof(debits));
+
                 this.Add(debit);
             }
         }
@@ -37,7 +48,7 @@ namespace Domain.Accounts.Debits
         /// Adds a Debit.
         /// </summary>
         /// <param name="debit">Debit instance.</param>
-        public void Add(IDebit debit) => this._debits.Add(debit);
+        public void Add(IDebit debit) => this.debits.Add(debit);
 
         /// <summary>
         /// Gets readonly transactions.
@@ -45,7 +56,7 @@ namespace Domain.Accounts.Debits
         /// <returns>Transactions.</returns>
         public IReadOnlyCollection<IDebit> GetTransactions()
         {
-            IReadOnlyCollection<IDebit> transactions = new ReadOnlyCollection<IDebit>(this._debits);
+            IReadOnlyCollection<IDebit> transactions = new ReadOnlyCollection<IDebit>(this.debits);
             return transactions;
         }
 
@@ -57,7 +68,7 @@ namespace Domain.Accounts.Debits
         {
             PositiveMoney total = new PositiveMoney(0);
 
-            foreach (IDebit debit in this._debits)
+            foreach (IDebit debit in this.debits)
             {
                 total = debit.Sum(total);
             }

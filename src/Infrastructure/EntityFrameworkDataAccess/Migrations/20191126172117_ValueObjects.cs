@@ -1,8 +1,12 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿// <copyright file="20191126172117_ValueObjects.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
 
 namespace Infrastructure.EntityFrameworkDataAccess.Migrations
 {
+    using System;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class ValueObjects : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

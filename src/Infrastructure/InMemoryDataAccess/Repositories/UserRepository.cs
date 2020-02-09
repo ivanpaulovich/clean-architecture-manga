@@ -20,7 +20,7 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
             await Task.CompletedTask;
         }
 
-        public async Task<IUser> Get(ExternalUserId externalUserId)
+        public async Task<IUser> GetUser(ExternalUserId externalUserId)
         {
             User user = _context.Users
                 .Where(e => e.ExternalUserId.Equals(externalUserId))

@@ -1,5 +1,10 @@
+// <copyright file="CreditsCollection.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Accounts.Credits
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Domain.Accounts.ValueObjects;
@@ -9,14 +14,14 @@ namespace Domain.Accounts.Credits
     /// </summary>
     public sealed class CreditsCollection
     {
-        private readonly IList<ICredit> _credits;
+        private readonly IList<ICredit> credits;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreditsCollection"/> class.
         /// </summary>
         public CreditsCollection()
         {
-            this._credits = new List<ICredit>();
+            this.credits = new List<ICredit>();
         }
 
         /// <summary>
@@ -27,8 +32,14 @@ namespace Domain.Accounts.Credits
         public void Add<T>(IEnumerable<T> credits)
             where T : ICredit
         {
+            if (credits is null)
+                throw new ArgumentNullException(nameof(credits));
+
             foreach (var credit in credits)
             {
+                if (credit is null)
+                    throw new ArgumentNullException(nameof(credits));
+
                 this.Add(credit);
             }
         }
@@ -37,7 +48,7 @@ namespace Domain.Accounts.Credits
         /// Adds a Credit.
         /// </summary>
         /// <param name="credit">ICredit implementation.</param>
-        public void Add(ICredit credit) => this._credits.Add(credit);
+        public void Add(ICredit credit) => this.credits.Add(credit);
 
         /// <summary>
         /// List Transactions.
@@ -45,7 +56,7 @@ namespace Domain.Accounts.Credits
         /// <returns>ReadOnly Transactions.</returns>
         public IReadOnlyCollection<ICredit> GetTransactions()
         {
-            var transactions = new ReadOnlyCollection<ICredit>(this._credits);
+            var transactions = new ReadOnlyCollection<ICredit>(this.credits);
             return transactions;
         }
 
@@ -57,7 +68,7 @@ namespace Domain.Accounts.Credits
         {
             PositiveMoney total = new PositiveMoney(0);
 
-            foreach (ICredit credit in this._credits)
+            foreach (ICredit credit in this.credits)
             {
                 total = credit.Sum(total);
             }

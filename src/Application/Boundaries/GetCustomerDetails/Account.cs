@@ -1,5 +1,10 @@
+// <copyright file="Account.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Application.Boundaries.GetCustomerDetails
 {
+    using System;
     using System.Collections.Generic;
     using Domain.Accounts;
     using Domain.Accounts.Credits;
@@ -17,37 +22,43 @@ namespace Application.Boundaries.GetCustomerDetails
         /// <param name="account">Account object.</param>
         public Account(IAccount account)
         {
-            var accountEntity = (Domain.Accounts.Account)account;
-
-            this.AccountId = account.Id;
-            this.CurrentBalance = account.GetCurrentBalance();
-
-            var transactionResults = new List<Transaction>();
-            foreach (var credit in accountEntity.Credits.GetTransactions())
+            if (account is Domain.Accounts.Account accountEntity)
             {
-                var creditEntity = (Credit)credit;
 
-                var transactionOutput = new Transaction(
-                    creditEntity.Description,
-                    creditEntity.Amount,
-                    creditEntity.TransactionDate);
+                this.AccountId = accountEntity.Id;
+                this.CurrentBalance = accountEntity.GetCurrentBalance();
 
-                transactionResults.Add(transactionOutput);
+                var transactionResults = new List<Transaction>();
+                foreach (var credit in accountEntity.Credits.GetTransactions())
+                {
+                    if (credit is Credit creditEntity)
+                    {
+                        var transactionOutput = new Transaction(
+                            Credit.Description,
+                            creditEntity.Amount,
+                            creditEntity.TransactionDate);
+
+                        transactionResults.Add(transactionOutput);
+                    }
+                }
+
+                foreach (var debit in accountEntity.Debits.GetTransactions())
+                {
+                    if (debit is Debit debitEntity)
+                    {
+                        var transactionOutput = new Transaction(
+                            Debit.Description,
+                            debitEntity.Amount,
+                            debitEntity.TransactionDate);
+
+                        transactionResults.Add(transactionOutput);
+                    }
+                }
+
+                this.Transactions = transactionResults;
             }
-
-            foreach (var debit in accountEntity.Debits.GetTransactions())
-            {
-                var debitEntity = (Debit)debit;
-
-                var transactionOutput = new Transaction(
-                    debitEntity.Description,
-                    debitEntity.Amount,
-                    debitEntity.TransactionDate);
-
-                transactionResults.Add(transactionOutput);
-            }
-
-            this.Transactions = transactionResults;
+            else
+                throw new ArgumentNullException(nameof(account));
         }
 
         /// <summary>

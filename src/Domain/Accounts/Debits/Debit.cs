@@ -1,3 +1,7 @@
+// <copyright file="Debit.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Accounts.Debits
 {
     using System;
@@ -21,7 +25,7 @@ namespace Domain.Accounts.Debits
         /// <summary>
         /// Gets Description.
         /// </summary>
-        public string Description { get => "Debit"; }
+        public static string Description { get => "Debit"; }
 
         /// <summary>
         /// Gets or sets Transaction Date.

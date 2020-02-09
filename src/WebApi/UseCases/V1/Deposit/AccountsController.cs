@@ -13,15 +13,15 @@ namespace WebApi.UseCases.V1.Deposit
     [ApiController]
     public sealed class AccountsController : ControllerBase
     {
-        private readonly IMediator _mediator;
-        private readonly DepositPresenter _presenter;
+        private readonly IMediator mediator;
+        private readonly DepositPresenter presenter;
 
         public AccountsController(
             IMediator mediator,
             DepositPresenter presenter)
         {
-            _mediator = mediator;
-            _presenter = presenter;
+            this.mediator = mediator;
+            this.presenter = presenter;
         }
 
         /// <summary>
@@ -42,8 +42,8 @@ namespace WebApi.UseCases.V1.Deposit
                 new AccountId(request.AccountId),
                 new PositiveMoney(request.Amount));
 
-            await _mediator.PublishAsync(input);
-            return _presenter.ViewModel;
+            await mediator.PublishAsync(input);
+            return presenter.ViewModel;
         }
     }
 }

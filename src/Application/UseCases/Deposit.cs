@@ -1,3 +1,7 @@
+// <copyright file="Deposit.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Application.UseCases
 {
     using System.Threading.Tasks;
@@ -11,10 +15,10 @@ namespace Application.UseCases
     /// </summary>
     public sealed class Deposit : IUseCase
     {
-        private readonly AccountService _accountService;
-        private readonly IOutputPort _outputPort;
-        private readonly IAccountRepository _accountRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly AccountService accountService;
+        private readonly IOutputPort outputPort;
+        private readonly IAccountRepository accountRepository;
+        private readonly IUnitOfWork unitOfWork;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Deposit"/> class.
@@ -29,10 +33,10 @@ namespace Application.UseCases
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
-            this._accountService = accountService;
-            this._outputPort = outputPort;
-            this._accountRepository = accountRepository;
-            this._unitOfWork = unitOfWork;
+            this.accountService = accountService;
+            this.outputPort = outputPort;
+            this.accountRepository = accountRepository;
+            this.unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -44,15 +48,18 @@ namespace Application.UseCases
         {
             try
             {
-                var account = await this._accountRepository.Get(input.AccountId);
-                var credit = await this._accountService.Deposit(account, input.Amount);
-                await this._unitOfWork.Save();
+                var account = await this.accountRepository.GetAccount(input.AccountId)
+                    .ConfigureAwait(false);
+                var credit = await this.accountService.Deposit(account, input.Amount)
+                    .ConfigureAwait(false);
+                await this.unitOfWork.Save()
+                    .ConfigureAwait(false);
 
                 this.BuildOutput(credit, account);
             }
             catch (AccountNotFoundException ex)
             {
-                this._outputPort.NotFound(ex.Message);
+                this.outputPort.NotFound(ex.Message);
                 return;
             }
         }
@@ -63,7 +70,7 @@ namespace Application.UseCases
                 credit,
                 account.GetCurrentBalance());
 
-            this._outputPort.Standard(output);
+            this.outputPort.Standard(output);
         }
     }
 }

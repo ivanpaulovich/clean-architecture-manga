@@ -1,3 +1,7 @@
+// <copyright file="WithdrawInput.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Application.Boundaries.Withdraw
 {
     using Domain.Accounts.ValueObjects;

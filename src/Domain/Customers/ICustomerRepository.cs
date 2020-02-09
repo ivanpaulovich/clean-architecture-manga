@@ -1,3 +1,7 @@
+// <copyright file="ICustomerRepository.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Customers
 {
     using System.Threading.Tasks;

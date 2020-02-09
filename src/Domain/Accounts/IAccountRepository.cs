@@ -1,3 +1,7 @@
+// <copyright file="IAccountRepository.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Accounts
 {
     using System.Threading.Tasks;
@@ -15,7 +19,7 @@ namespace Domain.Accounts
         /// </summary>
         /// <param name="id">AccountId.</param>
         /// <returns>An Account instance.</returns>
-        Task<IAccount> Get(AccountId id);
+        Task<IAccount> GetAccount(AccountId id);
 
         /// <summary>
         /// Adds an Account.

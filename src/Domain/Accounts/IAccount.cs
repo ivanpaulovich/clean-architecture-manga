@@ -1,3 +1,7 @@
+// <copyright file="IAccount.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Accounts
 {
     using Domain.Accounts.Credits;

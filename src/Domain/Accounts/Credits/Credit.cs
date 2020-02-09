@@ -1,3 +1,7 @@
+// <copyright file="Credit.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Domain.Accounts.Credits
 {
     using System;
@@ -21,7 +25,7 @@ namespace Domain.Accounts.Credits
         /// <summary>
         /// Gets Description.
         /// </summary>
-        public string Description
+        public static string Description
         {
             get { return "Credit"; }
         }

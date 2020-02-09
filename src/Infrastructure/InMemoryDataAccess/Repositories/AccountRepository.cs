@@ -34,7 +34,7 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
             await Task.CompletedTask;
         }
 
-        public async Task<IAccount> Get(AccountId accountId)
+        public async Task<IAccount> GetAccount(AccountId accountId)
         {
             var account = _context.Accounts
                 .Where(e => e.Id.Equals(accountId))

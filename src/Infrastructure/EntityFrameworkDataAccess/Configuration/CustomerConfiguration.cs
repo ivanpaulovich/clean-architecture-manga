@@ -1,11 +1,22 @@
+// <copyright file="CustomerConfiguration.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Infrastructure.EntityFrameworkDataAccess.Configuration
 {
     using Domain.Customers.ValueObjects;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+    /// <summary>
+    /// Customer Configuration.
+    /// </summary>
     public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
     {
+        /// <summary>
+        /// Configure Customer.
+        /// </summary>
+        /// <param name="builder">Builder.</param>
         public void Configure(EntityTypeBuilder
             <Customer> builder)
         {
