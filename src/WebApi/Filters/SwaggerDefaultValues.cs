@@ -5,14 +5,16 @@ namespace WebApi.Filters
     using Swashbuckle.AspNetCore.SwaggerGen;
 
     /// <summary>
-    /// Represents the Swagger/Swashbuckle operation filter used to document the implicit API version parameter.
+    ///     Represents the Swagger/Swashbuckle operation filter used to document the implicit API version parameter.
     /// </summary>
-    /// <remarks>This <see cref="IOperationFilter"/> is only required due to bugs in the <see cref="SwaggerGenerator"/>.
-    /// Once they are fixed and published, this class can be removed.</remarks>
+    /// <remarks>
+    ///     This <see cref="IOperationFilter" /> is only required due to bugs in the <see cref="SwaggerGenerator" />.
+    ///     Once they are fixed and published, this class can be removed.
+    /// </remarks>
     public class SwaggerDefaultValues : IOperationFilter
     {
         /// <summary>
-        /// Applies the filter to the specified operation using the given context.
+        ///     Applies the filter to the specified operation using the given context.
         /// </summary>
         /// <param name="operation">The operation to apply the filter to.</param>
         /// <param name="context">The current operation filter context.</param>
@@ -24,7 +26,6 @@ namespace WebApi.Filters
 
             if (operation.Parameters is null)
             {
-                return;
             }
         }
     }

@@ -7,12 +7,12 @@ namespace Domain
     using System;
 
     /// <summary>
-    /// Domain Exception.
+    ///     Domain Exception.
     /// </summary>
     public class DomainException : Exception
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DomainException"/> class.
+        ///     Initializes a new instance of the <see cref="DomainException" /> class.
         /// </summary>
         /// <param name="businessMessage">Message.</param>
         public DomainException(string businessMessage)
@@ -21,7 +21,7 @@ namespace Domain
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DomainException"/> class.
+        ///     Initializes a new instance of the <see cref="DomainException" /> class.
         /// </summary>
         public DomainException()
 
@@ -29,7 +29,7 @@ namespace Domain
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DomainException"/> class.
+        ///     Initializes a new instance of the <see cref="DomainException" /> class.
         /// </summary>
         /// <param name="message">Message.</param>
         /// <param name="innerException">Inner Exception.</param>

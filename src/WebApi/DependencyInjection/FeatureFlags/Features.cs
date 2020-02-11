@@ -3,6 +3,6 @@ namespace WebApi.DependencyInjection.FeatureFlags
     public enum Features
     {
         Transfer,
-        GetAccountDetailsV2,
+        GetAccountDetailsV2
     }
 }

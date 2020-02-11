@@ -4,13 +4,15 @@
 
 namespace Domain.Accounts.ValueObjects
 {
+    using System;
+
     /// <summary>
-    /// Empty Account Id Exception.
+    ///     Empty Account Id Exception.
     /// </summary>
     public sealed class EmptyAccountIdException : DomainException
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="EmptyAccountIdException"/> class.
+        ///     Initializes a new instance of the <see cref="EmptyAccountIdException" /> class.
         /// </summary>
         /// <param name="message">Message.</param>
         internal EmptyAccountIdException(string message)
@@ -19,18 +21,16 @@ namespace Domain.Accounts.ValueObjects
         }
 
         /// <summary>
-        /// 
         /// </summary>
         public EmptyAccountIdException()
         {
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="message"></param>
         /// <param name="innerException"></param>
-        public EmptyAccountIdException(string message, System.Exception innerException) : base(message, innerException)
+        public EmptyAccountIdException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

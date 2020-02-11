@@ -14,10 +14,7 @@ namespace WebApi.DependencyInjection
                 options.RequestCount.Counter = Metrics.CreateCounter(
                     "http_requests_total",
                     "HTTP Requests Total",
-                    new CounterConfiguration
-                    {
-                        LabelNames = new[] { "controller", "method", "code" },
-                    });
+                    new CounterConfiguration {LabelNames = new[] {"controller", "method", "code"}});
             });
         }
     }

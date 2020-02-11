@@ -9,7 +9,7 @@ namespace WebApi.UseCases.V1.Deposit
 
         public void NotFound(string message)
         {
-            ViewModel = new NotFoundObjectResult(message);
+            this.ViewModel = new NotFoundObjectResult(message);
         }
 
         public void Standard(DepositOutput depositOutput)
@@ -19,7 +19,12 @@ namespace WebApi.UseCases.V1.Deposit
                 depositOutput.Transaction.Description,
                 depositOutput.Transaction.TransactionDate,
                 depositOutput.UpdatedBalance.ToDecimal());
-            ViewModel = new ObjectResult(depositResponse);
+            this.ViewModel = new ObjectResult(depositResponse);
+        }
+
+        public void WriteError(string message)
+        {
+            this.ViewModel = new BadRequestObjectResult(message);
         }
     }
 }

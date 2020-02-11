@@ -8,12 +8,12 @@ namespace Application.Boundaries.Withdraw
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
-    /// Transaction.
+    ///     Transaction.
     /// </summary>
     public sealed class Transaction
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Transaction"/> class.
+        ///     Initializes a new instance of the <see cref="Transaction" /> class.
         /// </summary>
         /// <param name="description">Text description.</param>
         /// <param name="amount">Amount.</param>
@@ -29,17 +29,17 @@ namespace Application.Boundaries.Withdraw
         }
 
         /// <summary>
-        /// Gets the Description.
+        ///     Gets the Description.
         /// </summary>
         public string Description { get; }
 
         /// <summary>
-        /// Gets the Amount.
+        ///     Gets the Amount.
         /// </summary>
         public PositiveMoney Amount { get; }
 
         /// <summary>
-        /// Gets the Transaction Date.
+        ///     Gets the Transaction Date.
         /// </summary>
         public DateTime TransactionDate { get; }
     }

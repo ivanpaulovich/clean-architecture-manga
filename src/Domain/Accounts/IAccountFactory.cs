@@ -5,25 +5,31 @@
 namespace Domain.Accounts
 {
     using System;
-    using Domain.Accounts.Credits;
-    using Domain.Accounts.Debits;
-    using Domain.Accounts.ValueObjects;
-    using Domain.Customers.ValueObjects;
+    using Credits;
+    using Customers.ValueObjects;
+    using Debits;
+    using ValueObjects;
 
     /// <summary>
-    /// Account <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#entity-factory">Entity Factory Domain-Driven Design Pattern</see>.
+    ///     Account
+    ///     <see
+    ///         href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#entity-factory">
+    ///         Entity
+    ///         Factory Domain-Driven Design Pattern
+    ///     </see>
+    ///     .
     /// </summary>
     public interface IAccountFactory
     {
         /// <summary>
-        /// Creates a new Account.
+        ///     Creates a new Account.
         /// </summary>
         /// <param name="customerId">CustomerId.</param>
         /// <returns>New Account instance.</returns>
         IAccount NewAccount(CustomerId customerId);
 
         /// <summary>
-        /// Creates a new Credit.
+        ///     Creates a new Credit.
         /// </summary>
         /// <param name="account">Account object.</param>
         /// <param name="amountToDeposit">Amount to Deposit.</param>
@@ -32,7 +38,7 @@ namespace Domain.Accounts
         ICredit NewCredit(IAccount account, PositiveMoney amountToDeposit, DateTime transactionDate);
 
         /// <summary>
-        /// Creates a new Debit.
+        ///     Creates a new Debit.
         /// </summary>
         /// <param name="account">Account object.</param>
         /// <param name="amountToWithdraw">Amount to Withdraw.</param>

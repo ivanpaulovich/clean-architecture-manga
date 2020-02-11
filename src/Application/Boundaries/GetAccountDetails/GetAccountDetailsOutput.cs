@@ -12,12 +12,12 @@ namespace Application.Boundaries.GetAccountDetails
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
-    /// Get Account Details Output Message.
+    ///     Get Account Details Output Message.
     /// </summary>
     public sealed class GetAccountDetailsOutput : IUseCaseOutput
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetAccountDetailsOutput"/> class.
+        ///     Initializes a new instance of the <see cref="GetAccountDetailsOutput" /> class.
         /// </summary>
         /// <param name="account">Account object.</param>
         public GetAccountDetailsOutput(IAccount account)
@@ -30,7 +30,7 @@ namespace Application.Boundaries.GetAccountDetails
 
                 List<Transaction> transactionResults = new List<Transaction>();
                 foreach (var credit in accountEntity.Credits
-                        .GetTransactions())
+                    .GetTransactions())
                 {
                     if (credit is Credit creditEntity)
                     {
@@ -44,7 +44,7 @@ namespace Application.Boundaries.GetAccountDetails
                 }
 
                 foreach (var debit in accountEntity.Debits
-                        .GetTransactions())
+                    .GetTransactions())
                 {
                     if (debit is Debit debitEntity)
                     {
@@ -64,17 +64,17 @@ namespace Application.Boundaries.GetAccountDetails
         }
 
         /// <summary>
-        /// Gets the AccountId.
+        ///     Gets the AccountId.
         /// </summary>
         public AccountId AccountId { get; }
 
         /// <summary>
-        /// Gets the Current balance.
+        ///     Gets the Current balance.
         /// </summary>
         public Money CurrentBalance { get; }
 
         /// <summary>
-        /// Gets the Transactions.
+        ///     Gets the Transactions.
         /// </summary>
         public List<Transaction> Transactions { get; }
     }

@@ -12,7 +12,7 @@ namespace WebApi.UseCases.V2.GetAccountDetails
 
         public void NotFound(string message)
         {
-            ViewModel = new NotFoundObjectResult(message);
+            this.ViewModel = new NotFoundObjectResult(message);
         }
 
         public void Standard(GetAccountDetailsOutput getAccountDetailsOutput)
@@ -24,12 +24,7 @@ namespace WebApi.UseCases.V2.GetAccountDetails
 
             foreach (var item in getAccountDetailsOutput.Transactions)
             {
-                dataTable.Rows.Add(new object[]
-                {
-                    item.Amount.ToMoney().ToDecimal(),
-                    item.Description,
-                    item.TransactionDate,
-                });
+                dataTable.Rows.Add(item.Amount.ToMoney().ToDecimal(), item.Description, item.TransactionDate);
             }
 
             byte[] fileContents;
@@ -43,7 +38,13 @@ namespace WebApi.UseCases.V2.GetAccountDetails
                 fileContents = pck.GetAsByteArray();
             }
 
-            ViewModel = new FileContentResult(fileContents, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            this.ViewModel = new FileContentResult(fileContents,
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+        public void WriteError(string message)
+        {
+            this.ViewModel = new BadRequestObjectResult(message);
         }
     }
 }

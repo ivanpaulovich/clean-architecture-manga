@@ -15,7 +15,7 @@ namespace WebApi.DependencyInjection.FeatureFlags
 
         public CustomControllerFeatureProvider(IFeatureManager featureManager)
         {
-            _featureManager = featureManager;
+            this._featureManager = featureManager;
         }
 
         public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllerFeature feature)
@@ -32,7 +32,7 @@ namespace WebApi.DependencyInjection.FeatureFlags
                         {
                             var typedArgument = (CustomAttributeTypedArgument)argumentValue;
                             var typedArgumentValue = (Features)(int)typedArgument.Value;
-                            var isFeatureEnabled = _featureManager.IsEnabledAsync(typedArgumentValue.ToString())
+                            bool isFeatureEnabled = this._featureManager.IsEnabledAsync(typedArgumentValue.ToString())
                                 .ConfigureAwait(false)
                                 .GetAwaiter()
                                 .GetResult();

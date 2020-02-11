@@ -15,9 +15,9 @@ namespace Infrastructure.InMemoryDataAccess
             PositiveMoney amountToDeposit,
             DateTime transactionDate)
         {
-            AccountId = account.Id;
-            Amount = amountToDeposit;
-            TransactionDate = transactionDate;
+            this.AccountId = account.Id;
+            this.Amount = amountToDeposit;
+            this.TransactionDate = transactionDate;
         }
 
         protected Credit()

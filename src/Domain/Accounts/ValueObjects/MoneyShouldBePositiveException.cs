@@ -4,13 +4,15 @@
 
 namespace Domain.Accounts.ValueObjects
 {
+    using System;
+
     /// <summary>
-    /// Money Should Be Positive Exception.
+    ///     Money Should Be Positive Exception.
     /// </summary>
     public sealed class MoneyShouldBePositiveException : DomainException
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MoneyShouldBePositiveException"/> class.
+        ///     Initializes a new instance of the <see cref="MoneyShouldBePositiveException" /> class.
         /// </summary>
         /// <param name="message">Message.</param>
         internal MoneyShouldBePositiveException(string message)
@@ -19,18 +21,16 @@ namespace Domain.Accounts.ValueObjects
         }
 
         /// <summary>
-        /// 
         /// </summary>
         public MoneyShouldBePositiveException()
         {
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="message">Message.</param>
         /// <param name="innerException">Inner Exception.</param>
-        public MoneyShouldBePositiveException(string message, System.Exception innerException) : base(message, innerException)
+        public MoneyShouldBePositiveException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

@@ -4,13 +4,15 @@
 
 namespace Domain.Security
 {
+    using System;
+
     /// <summary>
-    /// User Not Found Exception.
+    ///     User Not Found Exception.
     /// </summary>
     public sealed class UserNotFoundException : DomainException
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserNotFoundException"/> class.
+        ///     Initializes a new instance of the <see cref="UserNotFoundException" /> class.
         /// </summary>
         /// <param name="message">Message.</param>
         public UserNotFoundException(string message)
@@ -19,18 +21,16 @@ namespace Domain.Security
         }
 
         /// <summary>
-        /// 
         /// </summary>
         public UserNotFoundException()
         {
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="message"></param>
         /// <param name="innerException"></param>
-        public UserNotFoundException(string message, System.Exception innerException) : base(message, innerException)
+        public UserNotFoundException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

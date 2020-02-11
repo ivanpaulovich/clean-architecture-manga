@@ -4,17 +4,19 @@
 
 namespace Infrastructure.EntityFrameworkDataAccess.Configuration
 {
+    using Domain.Accounts.Credits;
     using Domain.Accounts.ValueObjects;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using Credit = EntityFrameworkDataAccess.Credit;
 
     /// <summary>
-    /// Credit Configuration.
+    ///     Credit Configuration.
     /// </summary>
     public class CreditConfiguration : IEntityTypeConfiguration<Credit>
     {
         /// <summary>
-        /// Configure Credit.
+        ///     Configure Credit.
         /// </summary>
         /// <param name="builder">Builder.</param>
         public void Configure(EntityTypeBuilder<Credit> builder)
@@ -30,7 +32,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Configuration
             builder.Property(credit => credit.Id)
                 .HasConversion(
                     value => value.ToGuid(),
-                    value => new Domain.Accounts.Credits.CreditId(value))
+                    value => new CreditId(value))
                 .IsRequired();
 
             builder.Property(credit => credit.AccountId)

@@ -15,7 +15,7 @@ namespace UnitTests.InputValidationTests
                     new AccountId(Guid.Empty),
                     new AccountId(Guid.NewGuid()),
                     new PositiveMoney(10)));
-            Assert.Contains("accountId", actualEx.Message);
+            Assert.Contains("accountId", actualEx.Message, StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]
@@ -26,7 +26,7 @@ namespace UnitTests.InputValidationTests
                     new AccountId(Guid.NewGuid()),
                     new AccountId(Guid.Empty),
                     new PositiveMoney(10)));
-            Assert.Contains("accountId", actualEx.Message);
+            Assert.Contains("accountId", actualEx.Message, StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]

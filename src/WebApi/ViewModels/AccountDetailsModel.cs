@@ -6,7 +6,7 @@ namespace WebApi.ViewModels
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
-    /// Account Details.
+    ///     Account Details.
     /// </summary>
     public sealed class AccountDetailsModel
     {
@@ -15,25 +15,25 @@ namespace WebApi.ViewModels
             Money currentBalance,
             List<TransactionModel> transactions)
         {
-            AccountId = accountId.ToGuid();
-            CurrentBalance = currentBalance.ToDecimal();
-            Transactions = transactions;
+            this.AccountId = accountId.ToGuid();
+            this.CurrentBalance = currentBalance.ToDecimal();
+            this.Transactions = transactions;
         }
 
         /// <summary>
-        /// Gets account ID.
+        ///     Gets account ID.
         /// </summary>
         [Required]
         public Guid AccountId { get; }
 
         /// <summary>
-        /// Gets current Balance.
+        ///     Gets current Balance.
         /// </summary>
         [Required]
         public decimal CurrentBalance { get; }
 
         /// <summary>
-        /// Gets transactions.
+        ///     Gets transactions.
         /// </summary>
         [Required]
         public List<TransactionModel> Transactions { get; }

@@ -4,16 +4,16 @@
 
 namespace Domain.Security
 {
-    using Domain.Customers.ValueObjects;
-    using Domain.Security.ValueObjects;
+    using Customers.ValueObjects;
+    using ValueObjects;
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public abstract class User : IUser
     {
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public ExternalUserId ExternalUserId { get; set; }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public CustomerId CustomerId { get; set; }
     }
 }

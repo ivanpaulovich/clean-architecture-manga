@@ -13,7 +13,7 @@ namespace UnitTests.InputValidationTests
             var actualEx = Assert.Throws<EmptyAccountIdException>(
                 () => new GetAccountDetailsInput(
                     new AccountId(Guid.Empty)));
-            Assert.Contains("accountId", actualEx.Message);
+            Assert.Contains("accountId", actualEx.Message, StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]

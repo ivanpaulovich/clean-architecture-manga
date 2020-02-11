@@ -5,22 +5,27 @@
 namespace Domain.Security
 {
     using System.Threading.Tasks;
-    using Domain.Security.ValueObjects;
+    using ValueObjects;
 
     /// <summary>
-    /// User <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#repository">Repository Domain-Driven Design Pattern</see>.
+    ///     User
+    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#repository">
+    ///         Repository
+    ///         Domain-Driven Design Pattern
+    ///     </see>
+    ///     .
     /// </summary>
     public interface IUserRepository
     {
         /// <summary>
-        /// Gets User.
+        ///     Gets User.
         /// </summary>
         /// <param name="externalUserId">External UserId.</param>
         /// <returns>User.</returns>
         Task<IUser> GetUser(ExternalUserId externalUserId);
 
         /// <summary>
-        /// Adds the User.
+        ///     Adds the User.
         /// </summary>
         /// <param name="user">User instance.</param>
         /// <returns>Task.</returns>

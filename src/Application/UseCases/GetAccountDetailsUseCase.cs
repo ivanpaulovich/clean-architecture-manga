@@ -4,48 +4,60 @@
 
 namespace Application.UseCases
 {
+    using System;
     using System.Threading.Tasks;
-    using Application.Boundaries.GetAccountDetails;
+    using Boundaries.GetAccountDetails;
     using Domain.Accounts;
 
     /// <summary>
-    /// Get Account Details <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">Use Case Domain-Driven Design Pattern</see>.
+    ///     Get Account Details
+    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">
+    ///         Use
+    ///         Case Domain-Driven Design Pattern
+    ///     </see>
+    ///     .
     /// </summary>
-    public sealed class GetAccountDetails : IUseCase, IUseCaseV2
+    public sealed class GetAccountDetailsUseCase : IUseCase, IUseCaseV2
     {
-        private readonly IOutputPort outputPort;
-        private readonly IAccountRepository accountRepository;
+        private readonly IAccountRepository _accountRepository;
+        private readonly IOutputPort _outputPort;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetAccountDetails"/> class.
+        ///     Initializes a new instance of the <see cref="GetAccountDetailsUseCase" /> class.
         /// </summary>
         /// <param name="outputPort">Output Port.</param>
         /// <param name="accountRepository">Account Repository.</param>
-        public GetAccountDetails(
+        public GetAccountDetailsUseCase(
             IOutputPort outputPort,
             IAccountRepository accountRepository)
         {
-            this.outputPort = outputPort;
-            this.accountRepository = accountRepository;
+            this._outputPort = outputPort;
+            this._accountRepository = accountRepository;
         }
 
         /// <summary>
-        /// Executes the Use Case.
+        ///     Executes the Use Case.
         /// </summary>
         /// <param name="input">Input Message.</param>
         /// <returns>Task.</returns>
         public async Task Execute(GetAccountDetailsInput input)
         {
+            if (input is null)
+            {
+                this._outputPort.WriteError(Messages.InputIsNull);
+                return;
+            }
+
             IAccount account;
 
             try
             {
-                account = await this.accountRepository.GetAccount(input.AccountId)
+                account = await this._accountRepository.GetAccount(input.AccountId)
                     .ConfigureAwait(false);
             }
             catch (AccountNotFoundException ex)
             {
-                this.outputPort.NotFound(ex.Message);
+                this._outputPort.NotFound(ex.Message);
                 return;
             }
 
@@ -55,7 +67,7 @@ namespace Application.UseCases
         private void BuildOutput(IAccount account)
         {
             var output = new GetAccountDetailsOutput(account);
-            this.outputPort.Standard(output);
+            this._outputPort.Standard(output);
         }
     }
 }

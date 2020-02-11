@@ -7,22 +7,29 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
     {
         public TransferPresenter()
         {
-            Transfers = new Collection<TransferOutput>();
-            NotFounds = new Collection<string>();
+            this.Transfers = new Collection<TransferOutput>();
+            this.NotFounds = new Collection<string>();
         }
 
         public Collection<TransferOutput> Transfers { get; }
 
         public Collection<string> NotFounds { get; }
 
+        public Collection<string> Errors { get; }
+
         public void Standard(TransferOutput output)
         {
-            Transfers.Add(output);
+            this.Transfers.Add(output);
         }
 
         public void NotFound(string message)
         {
-            NotFounds.Add(message);
+            this.NotFounds.Add(message);
+        }
+
+        public void WriteError(string message)
+        {
+            this.Errors.Add(message);
         }
     }
 }

@@ -13,14 +13,14 @@ namespace Infrastructure.InMemoryDataAccess.Services
 
         public TestUserService(MangaContext mangaContext)
         {
-            _sessionId = Guid.NewGuid();
-            _mangaContext = mangaContext;
+            this._sessionId = Guid.NewGuid();
+            this._mangaContext = mangaContext;
         }
 
         public CustomerId? GetCustomerId()
         {
-            var user = _mangaContext.Users
-                .Where(e => e.ExternalUserId.Equals(GetExternalUserId()))
+            var user = this._mangaContext.Users
+                .Where(e => e.ExternalUserId.Equals(this.GetExternalUserId()))
                 .SingleOrDefault();
 
             if (user is null)
@@ -28,7 +28,7 @@ namespace Infrastructure.InMemoryDataAccess.Services
                 return null;
             }
 
-            var customer = _mangaContext.Customers
+            var customer = this._mangaContext.Customers
                 .Where(e => e.Id.Equals(user.CustomerId))
                 .SingleOrDefault();
 
@@ -42,12 +42,12 @@ namespace Infrastructure.InMemoryDataAccess.Services
 
         public ExternalUserId GetExternalUserId()
         {
-            return new ExternalUserId($"github/tempuser{_sessionId}");
+            return new ExternalUserId($"github/tempuser{this._sessionId}");
         }
 
         public Name GetUserName()
         {
-            return new Name($"Temporary User {_sessionId}");
+            return new Name($"Temporary User {this._sessionId}");
         }
     }
 }

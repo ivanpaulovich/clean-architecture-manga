@@ -6,6 +6,8 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
     using Domain.Accounts.Credits;
     using Domain.Accounts.Debits;
     using Domain.Accounts.ValueObjects;
+    using Account = InMemoryDataAccess.Account;
+    using Credit = InMemoryDataAccess.Credit;
 
     public sealed class AccountRepository : IAccountRepository
     {
@@ -13,30 +15,30 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
 
         public AccountRepository(MangaContext context)
         {
-            _context = context;
+            this._context = context;
         }
 
         public async Task Add(IAccount account, ICredit credit)
         {
-            _context.Accounts.Add((InMemoryDataAccess.Account)account);
-            _context.Credits.Add((InMemoryDataAccess.Credit)credit);
+            this._context.Accounts.Add((Account)account);
+            this._context.Credits.Add((Credit)credit);
             await Task.CompletedTask;
         }
 
         public async Task Delete(IAccount account)
         {
-            var accountOld = _context.Accounts
+            var accountOld = this._context.Accounts
                 .Where(e => e.Id.Equals(account.Id))
                 .SingleOrDefault();
 
-            _context.Accounts.Remove(accountOld);
+            this._context.Accounts.Remove(accountOld);
 
             await Task.CompletedTask;
         }
 
         public async Task<IAccount> GetAccount(AccountId accountId)
         {
-            var account = _context.Accounts
+            var account = this._context.Accounts
                 .Where(e => e.Id.Equals(accountId))
                 .SingleOrDefault();
 
@@ -45,26 +47,26 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
                 throw new AccountNotFoundException($"The account {accountId} does not exist or is not processed yet.");
             }
 
-            return await Task.FromResult<Account>(account);
+            return await Task.FromResult<Domain.Accounts.Account>(account);
         }
 
         public async Task Update(IAccount account, ICredit credit)
         {
-            Account accountOld = _context.Accounts
+            Domain.Accounts.Account accountOld = this._context.Accounts
                 .Where(e => e.Id.Equals(account.Id))
                 .SingleOrDefault();
 
-            accountOld = (Account)account;
+            accountOld = (Domain.Accounts.Account)account;
             await Task.CompletedTask;
         }
 
         public async Task Update(IAccount account, IDebit debit)
         {
-            Account accountOld = _context.Accounts
+            Domain.Accounts.Account accountOld = this._context.Accounts
                 .Where(e => e.Id.Equals(account.Id))
                 .SingleOrDefault();
 
-            accountOld = (Account)account;
+            accountOld = (Domain.Accounts.Account)account;
             await Task.CompletedTask;
         }
     }

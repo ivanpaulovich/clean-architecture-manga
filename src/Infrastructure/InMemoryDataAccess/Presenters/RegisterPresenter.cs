@@ -7,22 +7,29 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
     {
         public RegisterPresenter()
         {
-            Registers = new Collection<RegisterOutput>();
-            AlreadyRegistered = new Collection<string>();
+            this.Registers = new Collection<RegisterOutput>();
+            this.AlreadyRegistered = new Collection<string>();
         }
 
         public Collection<RegisterOutput> Registers { get; }
 
         public Collection<string> AlreadyRegistered { get; }
 
+        public Collection<string> Errors { get; }
+
         public void Standard(RegisterOutput output)
         {
-            Registers.Add(output);
+            this.Registers.Add(output);
         }
 
         public void CustomerAlreadyRegistered(string message)
         {
-            AlreadyRegistered.Add(message);
+            this.AlreadyRegistered.Add(message);
+        }
+
+        public void WriteError(string message)
+        {
+            this.Errors.Add(message);
         }
     }
 }

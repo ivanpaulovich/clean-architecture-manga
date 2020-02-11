@@ -5,10 +5,16 @@
 namespace Domain.Customers
 {
     using System.Threading.Tasks;
-    using Domain.Customers.ValueObjects;
+    using ValueObjects;
 
     /// <summary>
-    /// Customer <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#domain-service">Domain Service Domain-Driven Design Pattern</see>.
+    ///     Customer
+    ///     <see
+    ///         href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#domain-service">
+    ///         Domain
+    ///         Service Domain-Driven Design Pattern
+    ///     </see>
+    ///     .
     /// </summary>
     public class CustomerService
     {
@@ -16,7 +22,7 @@ namespace Domain.Customers
         private readonly ICustomerRepository customerRepository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CustomerService"/> class.
+        ///     Initializes a new instance of the <see cref="CustomerService" /> class.
         /// </summary>
         /// <param name="customerFactory">Customer Factory.</param>
         /// <param name="customerRepository">Customer Repository.</param>
@@ -29,7 +35,7 @@ namespace Domain.Customers
         }
 
         /// <summary>
-        /// Creates a Customer.
+        ///     Creates a Customer.
         /// </summary>
         /// <param name="ssn">SSN.</param>
         /// <param name="name">Name.</param>
@@ -44,7 +50,7 @@ namespace Domain.Customers
         }
 
         /// <summary>
-        /// Verifies if the customer is already registered.
+        ///     Verifies if the customer is already registered.
         /// </summary>
         /// <param name="customerId">Customer Id.</param>
         /// <returns>True if he is registered.</returns>

@@ -25,7 +25,7 @@ namespace UnitTests.UseCasesTests.Register
         [Fact]
         public void GivenNullInput_ThrowsException()
         {
-            var register = new Register(null, null, null, null, null, null);
+            var register = new RegisterUseCase(null, null, null, null, null, null);
             Assert.ThrowsAsync<Exception>(async () => await register.Execute(null));
         }
 
@@ -37,7 +37,7 @@ namespace UnitTests.UseCasesTests.Register
             var externalUserId = new ExternalUserId("github/ivanpaulovich");
             var ssn = new SSN("8608178888");
 
-            var sut = new Register(
+            var sut = new RegisterUseCase(
                 new TestUserService(_fixture.Context),
                 _fixture.CustomerService,
                 _fixture.AccountService,

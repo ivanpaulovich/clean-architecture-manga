@@ -4,6 +4,7 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
     using System.Threading.Tasks;
     using Domain.Security;
     using Domain.Security.ValueObjects;
+    using User = InMemoryDataAccess.User;
 
     public sealed class UserRepository : IUserRepository
     {
@@ -11,18 +12,18 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
 
         public UserRepository(MangaContext context)
         {
-            _context = context;
+            this._context = context;
         }
 
         public async Task Add(IUser user)
         {
-            _context.Users.Add((InMemoryDataAccess.User)user);
+            this._context.Users.Add((User)user);
             await Task.CompletedTask;
         }
 
         public async Task<IUser> GetUser(ExternalUserId externalUserId)
         {
-            User user = _context.Users
+            Domain.Security.User user = this._context.Users
                 .Where(e => e.ExternalUserId.Equals(externalUserId))
                 .SingleOrDefault();
 
@@ -31,7 +32,7 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
                 throw new UserNotFoundException($"The user {externalUserId} does not exist or is not processed yet.");
             }
 
-            return await Task.FromResult<User>(user);
+            return await Task.FromResult(user);
         }
     }
 }

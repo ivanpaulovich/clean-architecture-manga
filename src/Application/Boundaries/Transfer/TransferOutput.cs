@@ -9,12 +9,12 @@ namespace Application.Boundaries.Transfer
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
-    /// Transfer Output.
+    ///     Transfer Output.
     /// </summary>
     public sealed class TransferOutput : IUseCaseOutput
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TransferOutput"/> class.
+        ///     Initializes a new instance of the <see cref="TransferOutput" /> class.
         /// </summary>
         /// <param name="debit">Debit object.</param>
         /// <param name="updatedBalance">Updated balance.</param>
@@ -42,12 +42,12 @@ namespace Application.Boundaries.Transfer
         }
 
         /// <summary>
-        /// Gets the Transaction.
+        ///     Gets the Transaction.
         /// </summary>
         public Transaction Transaction { get; }
 
         /// <summary>
-        /// Gets the Updated Balance.
+        ///     Gets the Updated Balance.
         /// </summary>
         public Money UpdatedBalance { get; }
     }

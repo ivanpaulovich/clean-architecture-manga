@@ -4,22 +4,28 @@
 
 namespace Domain.Accounts
 {
-    using Domain.Accounts.Credits;
-    using Domain.Accounts.Debits;
-    using Domain.Accounts.ValueObjects;
+    using Credits;
+    using Debits;
+    using ValueObjects;
 
     /// <summary>
-    /// Account <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#aggregate-root">Aggregate Root Domain-Driven Design Pattern</see>.
+    ///     Account
+    ///     <see
+    ///         href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#aggregate-root">
+    ///         Aggregate
+    ///         Root Domain-Driven Design Pattern
+    ///     </see>
+    ///     .
     /// </summary>
     public interface IAccount
     {
         /// <summary>
-        /// Gets Id.
+        ///     Gets Id.
         /// </summary>
         AccountId Id { get; }
 
         /// <summary>
-        /// Deposits into account.
+        ///     Deposits into account.
         /// </summary>
         /// <param name="entityFactory">Factory to create new credits.</param>
         /// <param name="amountToDeposit">Amount.</param>
@@ -27,7 +33,7 @@ namespace Domain.Accounts
         ICredit Deposit(IAccountFactory entityFactory, PositiveMoney amountToDeposit);
 
         /// <summary>
-        /// Withdrawls from account.
+        ///     Withdrawls from account.
         /// </summary>
         /// <param name="entityFactory">Factory to create new debits.</param>
         /// <param name="amountToWithdraw">Amount.</param>
@@ -35,13 +41,13 @@ namespace Domain.Accounts
         IDebit Withdraw(IAccountFactory entityFactory, PositiveMoney amountToWithdraw);
 
         /// <summary>
-        /// Check if closing account is allowed.
+        ///     Check if closing account is allowed.
         /// </summary>
         /// <returns>True if is allowed.</returns>
         bool IsClosingAllowed();
 
         /// <summary>
-        /// Gets the current balance considering credits and debits totals.
+        ///     Gets the current balance considering credits and debits totals.
         /// </summary>
         /// <returns>The current balance.</returns>
         Money GetCurrentBalance();

@@ -5,31 +5,31 @@ namespace WebApi.ViewModels
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
-    /// Transaction.
+    ///     Transaction.
     /// </summary>
     public sealed class TransactionModel
     {
         public TransactionModel(PositiveMoney amount, string description, DateTime transactionDate)
         {
-            Amount = amount.ToMoney().ToDecimal();
-            Description = description;
-            TransactionDate = transactionDate;
+            this.Amount = amount.ToMoney().ToDecimal();
+            this.Description = description;
+            this.TransactionDate = transactionDate;
         }
 
         /// <summary>
-        /// Gets Amount.
+        ///     Gets Amount.
         /// </summary>
         [Required]
         public decimal Amount { get; }
 
         /// <summary>
-        /// Gets Description.
+        ///     Gets Description.
         /// </summary>
         [Required]
         public string Description { get; }
 
         /// <summary>
-        /// Gets Transaction Date.
+        ///     Gets Transaction Date.
         /// </summary>
         [Required]
         public DateTime TransactionDate { get; }

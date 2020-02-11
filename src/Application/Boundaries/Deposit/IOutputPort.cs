@@ -5,10 +5,10 @@
 namespace Application.Boundaries.Deposit
 {
     /// <summary>
-    /// Output Port.
+    ///     Output Port.
     /// </summary>
     public interface IOutputPort
-        : IOutputPortStandard<DepositOutput>, IOutputPortNotFound
+        : IOutputPortStandard<DepositOutput>, IOutputPortNotFound, IOutputPortError
     {
     }
 }

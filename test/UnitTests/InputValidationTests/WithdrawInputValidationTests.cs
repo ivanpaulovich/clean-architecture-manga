@@ -15,7 +15,7 @@ namespace UnitTests.InputValidationTests
                 () => new WithdrawInput(
                     new AccountId(Guid.Empty),
                     new PositiveMoney(10)));
-            Assert.Contains("accountId", actualEx.Message);
+            Assert.Contains("accountId", actualEx.Message, StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]

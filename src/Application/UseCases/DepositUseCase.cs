@@ -4,63 +4,74 @@
 
 namespace Application.UseCases
 {
+    using System;
     using System.Threading.Tasks;
-    using Application.Boundaries.Deposit;
-    using Application.Services;
+    using Boundaries.Deposit;
     using Domain.Accounts;
     using Domain.Accounts.Credits;
+    using Services;
 
     /// <summary>
-    /// Deposit <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">Use Case Domain-Driven Design Pattern</see>.
+    ///     Deposit
+    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">
+    ///         Use
+    ///         Case Domain-Driven Design Pattern
+    ///     </see>
+    ///     .
     /// </summary>
-    public sealed class Deposit : IUseCase
+    public sealed class DepositUseCase : IUseCase
     {
-        private readonly AccountService accountService;
-        private readonly IOutputPort outputPort;
-        private readonly IAccountRepository accountRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IAccountRepository _accountRepository;
+        private readonly AccountService _accountService;
+        private readonly IOutputPort _outputPort;
+        private readonly IUnitOfWork _unitOfWork;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Deposit"/> class.
+        ///     Initializes a new instance of the <see cref="DepositUseCase" /> class.
         /// </summary>
         /// <param name="accountService">Account Service.</param>
         /// <param name="outputPort">Output Port.</param>
         /// <param name="accountRepository">Account Repository.</param>
         /// <param name="unitOfWork">Unit Of Work.</param>
-        public Deposit(
+        public DepositUseCase(
             AccountService accountService,
             IOutputPort outputPort,
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
-            this.accountService = accountService;
-            this.outputPort = outputPort;
-            this.accountRepository = accountRepository;
-            this.unitOfWork = unitOfWork;
+            this._accountService = accountService;
+            this._outputPort = outputPort;
+            this._accountRepository = accountRepository;
+            this._unitOfWork = unitOfWork;
         }
 
         /// <summary>
-        /// Executes the Use Case.
+        ///     Executes the Use Case.
         /// </summary>
         /// <param name="input">Input Message.</param>
         /// <returns>Task.</returns>
         public async Task Execute(DepositInput input)
         {
+            if (input is null)
+            {
+                this._outputPort.WriteError(Messages.InputIsNull);
+                return;
+            }
+
             try
             {
-                var account = await this.accountRepository.GetAccount(input.AccountId)
+                var account = await this._accountRepository.GetAccount(input.AccountId)
                     .ConfigureAwait(false);
-                var credit = await this.accountService.Deposit(account, input.Amount)
+                var credit = await this._accountService.Deposit(account, input.Amount)
                     .ConfigureAwait(false);
-                await this.unitOfWork.Save()
+                await this._unitOfWork.Save()
                     .ConfigureAwait(false);
 
                 this.BuildOutput(credit, account);
             }
             catch (AccountNotFoundException ex)
             {
-                this.outputPort.NotFound(ex.Message);
-                return;
+                this._outputPort.NotFound(ex.Message);
             }
         }
 
@@ -70,7 +81,7 @@ namespace Application.UseCases
                 credit,
                 account.GetCurrentBalance());
 
-            this.outputPort.Standard(output);
+            this._outputPort.Standard(output);
         }
     }
 }

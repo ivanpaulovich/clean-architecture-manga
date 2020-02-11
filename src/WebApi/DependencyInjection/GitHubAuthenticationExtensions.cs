@@ -4,6 +4,7 @@ namespace WebApi.DependencyInjection
     using System.Net.Http.Headers;
     using System.Security.Claims;
     using System.Text.Json;
+    using Authentication;
     using Domain.Security.Services;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authentication.Cookies;
@@ -12,7 +13,6 @@ namespace WebApi.DependencyInjection
     using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using WebApi.DependencyInjection.Authentication;
 
     // https://www.jerriepelser.com/blog/authenticate-oauth-aspnet-core-2/
     public static class GitHubAuthenticationExtensions
@@ -57,17 +57,20 @@ namespace WebApi.DependencyInjection
                     {
                         OnCreatingTicket = async context =>
                         {
-                            var request = new HttpRequestMessage(HttpMethod.Get, context.Options.UserInformationEndpoint);
+                            var request =
+                                new HttpRequestMessage(HttpMethod.Get, context.Options.UserInformationEndpoint);
                             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", context.AccessToken);
+                            request.Headers.Authorization =
+                                new AuthenticationHeaderValue("Bearer", context.AccessToken);
 
-                            var response = await context.Backchannel.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, context.HttpContext.RequestAborted);
+                            var response = await context.Backchannel.SendAsync(request,
+                                HttpCompletionOption.ResponseHeadersRead, context.HttpContext.RequestAborted);
                             response.EnsureSuccessStatusCode();
 
                             var user = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
 
                             context.RunClaimActions(user.RootElement);
-                        },
+                        }
                     };
                 });
 

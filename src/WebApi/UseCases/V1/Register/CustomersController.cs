@@ -21,12 +21,12 @@ namespace WebApi.UseCases.V1.Register
             IMediator mediator,
             RegisterPresenter presenter)
         {
-            _mediator = mediator;
-            _presenter = presenter;
+            this._mediator = mediator;
+            this._presenter = presenter;
         }
 
         /// <summary>
-        /// Register a customer.
+        ///     Register a customer.
         /// </summary>
         /// <response code="200">The registered customer was create successfully.</response>
         /// <response code="400">Bad request.</response>
@@ -37,13 +37,13 @@ namespace WebApi.UseCases.V1.Register
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RegisterResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Post([FromForm][Required] RegisterRequest request)
+        public async Task<IActionResult> Post([FromForm] [Required] RegisterRequest request)
         {
             var input = new RegisterInput(
                 new SSN(request.SSN),
                 new PositiveMoney(request.InitialAmount));
-            await _mediator.PublishAsync(input);
-            return _presenter.ViewModel;
+            await this._mediator.PublishAsync(input);
+            return this._presenter.ViewModel;
         }
     }
 }

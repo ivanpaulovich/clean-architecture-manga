@@ -4,13 +4,15 @@
 
 namespace Domain.Security.ValueObjects
 {
+    using System;
+
     /// <summary>
-    /// External User Id Should Not Be Empty Exception.
+    ///     External User Id Should Not Be Empty Exception.
     /// </summary>
     public sealed class ExternalUserIdShouldNotBeEmptyException : DomainException
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExternalUserIdShouldNotBeEmptyException"/> class.
+        ///     Initializes a new instance of the <see cref="ExternalUserIdShouldNotBeEmptyException" /> class.
         /// </summary>
         /// <param name="message">Message.</param>
         internal ExternalUserIdShouldNotBeEmptyException(string message)
@@ -19,18 +21,17 @@ namespace Domain.Security.ValueObjects
         }
 
         /// <summary>
-        /// 
         /// </summary>
         public ExternalUserIdShouldNotBeEmptyException()
         {
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="message"></param>
         /// <param name="innerException"></param>
-        public ExternalUserIdShouldNotBeEmptyException(string message, System.Exception innerException) : base(message, innerException)
+        public ExternalUserIdShouldNotBeEmptyException(string message, Exception innerException) : base(message,
+            innerException)
         {
         }
     }

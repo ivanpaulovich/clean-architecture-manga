@@ -11,12 +11,12 @@ namespace Infrastructure.EntityFrameworkDataAccess
     using Domain.Customers.ValueObjects;
 
     /// <summary>
-    /// Customer.
+    ///     Customer.
     /// </summary>
     public class Customer : Domain.Customers.Customer
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Customer"/> class.
+        ///     Initializes a new instance of the <see cref="Customer" /> class.
         /// </summary>
         /// <param name="ssn">SSN.</param>
         /// <param name="name">Name.</param>
@@ -30,14 +30,14 @@ namespace Infrastructure.EntityFrameworkDataAccess
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Customer"/> class.
+        ///     Initializes a new instance of the <see cref="Customer" /> class.
         /// </summary>
         protected Customer()
         {
         }
 
         /// <summary>
-        /// Load related properties.
+        ///     Load related properties.
         /// </summary>
         /// <param name="accounts">Accounts.</param>
         public void LoadAccounts(IEnumerable<AccountId> accounts)

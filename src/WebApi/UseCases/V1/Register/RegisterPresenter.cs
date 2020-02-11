@@ -3,7 +3,7 @@ namespace WebApi.UseCases.V1.Register
     using System.Collections.Generic;
     using Application.Boundaries.Register;
     using Microsoft.AspNetCore.Mvc;
-    using WebApi.ViewModels;
+    using ViewModels;
 
     public sealed class RegisterPresenter : IOutputPort
     {
@@ -11,7 +11,7 @@ namespace WebApi.UseCases.V1.Register
 
         public void CustomerAlreadyRegistered(string message)
         {
-            ViewModel = new BadRequestObjectResult(message);
+            this.ViewModel = new BadRequestObjectResult(message);
         }
 
         public void Standard(RegisterOutput output)
@@ -42,14 +42,15 @@ namespace WebApi.UseCases.V1.Register
                 output.Customer.Name,
                 accounts);
 
-            ViewModel = new CreatedAtRouteResult(
+            this.ViewModel = new CreatedAtRouteResult(
                 "GetCustomer",
-                new
-                {
-                    customerId = registerResponse.CustomerId,
-                    version = "1.0",
-                },
+                new {customerId = registerResponse.CustomerId, version = "1.0"},
                 registerResponse);
+        }
+
+        public void WriteError(string message)
+        {
+            this.ViewModel = new BadRequestObjectResult(message);
         }
     }
 }

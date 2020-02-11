@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Domain {
+namespace Application {
     using System;
     
     
@@ -29,7 +29,7 @@ namespace Domain {
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Domain.Messages", typeof(Messages).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Application.Messages", typeof(Messages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -46,51 +46,27 @@ namespace Domain {
             }
         }
         
-        internal static string TheAmountShouldBePositive {
-            get {
-                return ResourceManager.GetString("TheAmountShouldBePositive", resourceCulture);
-            }
-        }
-        
-        internal static string CreditIdCannotBeEmpty {
-            get {
-                return ResourceManager.GetString("CreditIdCannotBeEmpty", resourceCulture);
-            }
-        }
-        
-        internal static string TheTextFieldIsRequired {
-            get {
-                return ResourceManager.GetString("TheTextFieldIsRequired", resourceCulture);
-            }
-        }
-        
-        internal static string DebitIdCannotBeEmpty {
-            get {
-                return ResourceManager.GetString("DebitIdCannotBeEmpty", resourceCulture);
-            }
-        }
-        
-        internal static string InvalidTextFormat {
-            get {
-                return ResourceManager.GetString("InvalidTextFormat", resourceCulture);
-            }
-        }
-        
-        internal static string AccountIdCannotBeEmpty {
-            get {
-                return ResourceManager.GetString("AccountIdCannotBeEmpty", resourceCulture);
-            }
-        }
-        
-        internal static string CustomerIdCannotBeEmpty {
-            get {
-                return ResourceManager.GetString("CustomerIdCannotBeEmpty", resourceCulture);
-            }
-        }
-        
         internal static string AccountHasNotEnoughFunds {
             get {
                 return ResourceManager.GetString("AccountHasNotEnoughFunds", resourceCulture);
+            }
+        }
+        
+        internal static string InputIsNull {
+            get {
+                return ResourceManager.GetString("InputIsNull", resourceCulture);
+            }
+        }
+        
+        internal static string CustomerAlreadyExists {
+            get {
+                return ResourceManager.GetString("CustomerAlreadyExists", resourceCulture);
+            }
+        }
+        
+        internal static string CustomerDoesNotExist {
+            get {
+                return ResourceManager.GetString("CustomerDoesNotExist", resourceCulture);
             }
         }
     }

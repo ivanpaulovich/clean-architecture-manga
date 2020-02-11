@@ -8,12 +8,12 @@ namespace Application.Boundaries.Deposit
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
-    /// Transaction Output object.
+    ///     Transaction Output object.
     /// </summary>
     public sealed class Transaction
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Transaction"/> class.
+        ///     Initializes a new instance of the <see cref="Transaction" /> class.
         /// </summary>
         /// <param name="description">Text Description.</param>
         /// <param name="amount">Positive amount.</param>
@@ -29,17 +29,17 @@ namespace Application.Boundaries.Deposit
         }
 
         /// <summary>
-        /// Gets the description.
+        ///     Gets the description.
         /// </summary>
         public string Description { get; }
 
         /// <summary>
-        /// Gets the amount.
+        ///     Gets the amount.
         /// </summary>
         public PositiveMoney Amount { get; }
 
         /// <summary>
-        /// Gets the transaction date.
+        ///     Gets the transaction date.
         /// </summary>
         public DateTime TransactionDate { get; }
     }

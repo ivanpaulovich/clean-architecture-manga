@@ -11,7 +11,7 @@ namespace WebApi.UseCases.V1.Login
         [HttpGet]
         public IActionResult Login(string returnUrl = "/")
         {
-            return Challenge(new AuthenticationProperties() { RedirectUri = returnUrl });
+            return this.Challenge(new AuthenticationProperties {RedirectUri = returnUrl});
         }
     }
 }

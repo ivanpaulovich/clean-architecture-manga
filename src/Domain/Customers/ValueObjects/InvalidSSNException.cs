@@ -4,13 +4,15 @@
 
 namespace Domain.Customers.ValueObjects
 {
+    using System;
+
     /// <summary>
-    /// InvalidSSNException.
+    ///     InvalidSSNException.
     /// </summary>
     internal sealed class InvalidSSNException : DomainException
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="InvalidSSNException"/> class.
+        ///     Initializes a new instance of the <see cref="InvalidSSNException" /> class.
         /// </summary>
         /// <param name="message">Message.</param>
         internal InvalidSSNException(string message)
@@ -19,18 +21,16 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        /// 
         /// </summary>
         public InvalidSSNException()
         {
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="message"></param>
         /// <param name="innerException"></param>
-        public InvalidSSNException(string message, System.Exception innerException) : base(message, innerException)
+        public InvalidSSNException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

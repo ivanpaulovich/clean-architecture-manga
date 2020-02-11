@@ -9,12 +9,12 @@ namespace Infrastructure.EntityFrameworkDataAccess
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
-    /// Debit.
+    ///     Debit.
     /// </summary>
     public class Debit : Domain.Accounts.Debits.Debit
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Debit"/> class.
+        ///     Initializes a new instance of the <see cref="Debit" /> class.
         /// </summary>
         /// <param name="account">Account.</param>
         /// <param name="amountToWithdraw">Amount to withdraw.</param>
@@ -27,14 +27,14 @@ namespace Infrastructure.EntityFrameworkDataAccess
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Debit"/> class.
+        ///     Initializes a new instance of the <see cref="Debit" /> class.
         /// </summary>
         protected Debit()
         {
         }
 
         /// <summary>
-        /// Gets or sets AccountId.
+        ///     Gets or sets AccountId.
         /// </summary>
         public AccountId AccountId { get; protected set; }
     }

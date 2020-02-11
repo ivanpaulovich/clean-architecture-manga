@@ -18,15 +18,15 @@ namespace Infrastructure.InMemoryDataAccess
 
         public Customer(SSN ssn, Name name)
         {
-            Id = new CustomerId(Guid.NewGuid());
-            SSN = ssn;
-            Name = name;
+            this.Id = new CustomerId(Guid.NewGuid());
+            this.SSN = ssn;
+            this.Name = name;
         }
 
         public void LoadAccounts(IEnumerable<AccountId> accounts)
         {
-            Accounts = new AccountCollection();
-            Accounts.Add(accounts);
+            this.Accounts = new AccountCollection();
+            this.Accounts.Add(accounts);
         }
     }
 }

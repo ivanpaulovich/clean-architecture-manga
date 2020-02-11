@@ -20,25 +20,25 @@ namespace WebApi.UseCases.V1.GetAccountDetails
             IMediator mediator,
             GetAccountDetailsPresenter presenter)
         {
-            _mediator = mediator;
-            _presenter = presenter;
+            this._mediator = mediator;
+            this._presenter = presenter;
         }
 
         /// <summary>
-        /// Get an account details.
+        ///     Get an account details.
         /// </summary>
         /// <param name="request">A <see cref="GetAccountDetailsRequest"></see>.</param>
-        /// <returns>An asynchronous <see cref="IActionResult"/>.</returns>
+        /// <returns>An asynchronous <see cref="IActionResult" />.</returns>
         [HttpGet("{AccountId}", Name = "GetAccount")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetAccountDetailsResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Get([FromRoute][Required] GetAccountDetailsRequest request)
+        public async Task<IActionResult> Get([FromRoute] [Required] GetAccountDetailsRequest request)
         {
             var input = new GetAccountDetailsInput(new AccountId(request.AccountId));
-            await _mediator.PublishAsync(input);
-            return _presenter.ViewModel;
+            await this._mediator.PublishAsync(input);
+            return this._presenter.ViewModel;
         }
     }
 }

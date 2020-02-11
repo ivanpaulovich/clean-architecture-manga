@@ -7,28 +7,34 @@ namespace Domain.Accounts.Debits
     using System;
 
     /// <summary>
-    /// Debit <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#value-object">Value Object Domain-Driven Design Pattern</see>.
+    ///     Debit
+    ///     <see
+    ///         href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#value-object">
+    ///         Value
+    ///         Object Domain-Driven Design Pattern
+    ///     </see>
+    ///     .
     /// </summary>
     public readonly struct DebitId : IEquatable<DebitId>
     {
         private readonly Guid debitId;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DebitId"/> struct.
+        ///     Initializes a new instance of the <see cref="DebitId" /> struct.
         /// </summary>
         /// <param name="debitId">DebitId Guid.</param>
         public DebitId(Guid debitId)
         {
             if (debitId == Guid.Empty)
             {
-                throw new EmptyDebitIdException($"{nameof(debitId)} cannot be empty.");
+                throw new EmptyDebitIdException(Messages.DebitIdCannotBeEmpty);
             }
 
             this.debitId = debitId;
         }
 
         /// <summary>
-        /// Converts into string.
+        ///     Converts into string.
         /// </summary>
         /// <returns>Serialized string.</returns>
         public override string ToString()
@@ -37,13 +43,12 @@ namespace Domain.Accounts.Debits
         }
 
         /// <summary>
-        /// Converts into Guid.
+        ///     Converts into Guid.
         /// </summary>
         /// <returns>Guid representation.</returns>
         public Guid ToGuid() => this.debitId;
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -51,23 +56,21 @@ namespace Domain.Accounts.Debits
         {
             if (obj is DebitId debitIdObj)
             {
-                return Equals(debitIdObj);
+                return this.Equals(debitIdObj);
             }
 
             return false;
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return debitId.GetHashCode();
+            return this.debitId.GetHashCode();
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
@@ -78,7 +81,6 @@ namespace Domain.Accounts.Debits
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
@@ -89,7 +91,6 @@ namespace Domain.Accounts.Debits
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>

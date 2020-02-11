@@ -6,13 +6,19 @@ namespace Domain.Accounts
 {
     using System;
     using System.Threading.Tasks;
-    using Domain.Accounts.Credits;
-    using Domain.Accounts.Debits;
-    using Domain.Accounts.ValueObjects;
-    using Domain.Customers.ValueObjects;
+    using Credits;
+    using Customers.ValueObjects;
+    using Debits;
+    using ValueObjects;
 
     /// <summary>
-    /// Account <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#domain-service">Domain Service Domain-Driven Design Pattern</see>.
+    ///     Account
+    ///     <see
+    ///         href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#domain-service">
+    ///         Domain
+    ///         Service Domain-Driven Design Pattern
+    ///     </see>
+    ///     .
     /// </summary>
     public class AccountService
     {
@@ -20,7 +26,7 @@ namespace Domain.Accounts
         private readonly IAccountRepository accountRepository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountService"/> class.
+        ///     Initializes a new instance of the <see cref="AccountService" /> class.
         /// </summary>
         /// <param name="accountFactory">Account Factory.</param>
         /// <param name="accountRepository">Account Repository.</param>
@@ -33,7 +39,7 @@ namespace Domain.Accounts
         }
 
         /// <summary>
-        /// Open Checking Account.
+        ///     Open Checking Account.
         /// </summary>
         /// <param name="customerId">Customer Id.</param>
         /// <param name="amount">Amount.</param>
@@ -49,7 +55,7 @@ namespace Domain.Accounts
         }
 
         /// <summary>
-        /// Withdrawls from Account.
+        ///     Withdrawls from Account.
         /// </summary>
         /// <param name="account">Account.</param>
         /// <param name="amount">Amount.</param>
@@ -67,7 +73,7 @@ namespace Domain.Accounts
         }
 
         /// <summary>
-        /// Deposits into Account.
+        ///     Deposits into Account.
         /// </summary>
         /// <param name="account">Account.</param>
         /// <param name="amount">Amount.</param>

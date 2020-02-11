@@ -4,6 +4,7 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
     using System.Threading.Tasks;
     using Domain.Customers;
     using Domain.Customers.ValueObjects;
+    using Customer = InMemoryDataAccess.Customer;
 
     public sealed class CustomerRepository : ICustomerRepository
     {
@@ -11,36 +12,37 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
 
         public CustomerRepository(MangaContext context)
         {
-            _context = context;
+            this._context = context;
         }
 
         public async Task Add(ICustomer customer)
         {
-            _context.Customers.Add((InMemoryDataAccess.Customer)customer);
+            this._context.Customers.Add((Customer)customer);
             await Task.CompletedTask;
         }
 
         public async Task<ICustomer> GetBy(CustomerId customerId)
         {
-            var customer = _context.Customers
+            var customer = this._context.Customers
                 .Where(e => e.Id.Equals(customerId))
                 .SingleOrDefault();
 
             if (customer is null)
             {
-                throw new CustomerNotFoundException($"The customer {customerId} does not exist or is not processed yet.");
+                throw new CustomerNotFoundException(
+                    $"The customer {customerId} does not exist or is not processed yet.");
             }
 
-            return await Task.FromResult<Customer>(customer);
+            return await Task.FromResult<Domain.Customers.Customer>(customer);
         }
 
         public async Task Update(ICustomer customer)
         {
-            Customer customerOld = _context.Customers
+            Domain.Customers.Customer customerOld = this._context.Customers
                 .Where(e => e.Id.Equals(customer.Id))
                 .SingleOrDefault();
 
-            customerOld = (Customer)customer;
+            customerOld = (Domain.Customers.Customer)customer;
             await Task.CompletedTask;
         }
     }

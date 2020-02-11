@@ -8,12 +8,12 @@ namespace Application.Boundaries.Register
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
-    /// Transaction.
+    ///     Transaction.
     /// </summary>
     public sealed class Transaction
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Transaction"/> class.
+        ///     Initializes a new instance of the <see cref="Transaction" /> class.
         /// </summary>
         /// <param name="description">Text description.</param>
         /// <param name="amount">Positive amount.</param>
@@ -29,17 +29,17 @@ namespace Application.Boundaries.Register
         }
 
         /// <summary>
-        /// Gets the text description.
+        ///     Gets the text description.
         /// </summary>
         public string Description { get; }
 
         /// <summary>
-        /// Gets the Amount.
+        ///     Gets the Amount.
         /// </summary>
         public PositiveMoney Amount { get; }
 
         /// <summary>
-        /// Gets the transaction date.
+        ///     Gets the transaction date.
         /// </summary>
         public DateTime TransactionDate { get; }
     }

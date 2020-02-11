@@ -9,19 +9,24 @@ namespace WebApi.UseCases.V1.Transfer
 
         public void NotFound(string message)
         {
-            ViewModel = new NotFoundObjectResult(message);
+            this.ViewModel = new NotFoundObjectResult(message);
         }
 
         public void Standard(TransferOutput transferOutput)
         {
             var transferResponse = new
             {
-                Amount = transferOutput.Transaction.Amount,
-                Description = transferOutput.Transaction.Description,
-                TransactionDate = transferOutput.Transaction.TransactionDate,
-                UpdatedBalance = transferOutput.UpdatedBalance,
+                transferOutput.Transaction.Amount,
+                transferOutput.Transaction.Description,
+                transferOutput.Transaction.TransactionDate,
+                transferOutput.UpdatedBalance
             };
-            ViewModel = new ObjectResult(transferResponse);
+            this.ViewModel = new ObjectResult(transferResponse);
+        }
+
+        public void WriteError(string message)
+        {
+            this.ViewModel = new BadRequestObjectResult(message);
         }
     }
 }

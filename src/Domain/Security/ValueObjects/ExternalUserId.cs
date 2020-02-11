@@ -4,29 +4,36 @@
 
 namespace Domain.Security.ValueObjects
 {
+    using System;
+
     /// <summary>
-    /// ExternalUserId <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#entity">Entity Design Pattern</see>.
+    ///     ExternalUserId
+    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#entity">
+    ///         Entity
+    ///         Design Pattern
+    ///     </see>
+    ///     .
     /// </summary>
-    public readonly struct ExternalUserId : System.IEquatable<ExternalUserId>
+    public readonly struct ExternalUserId : IEquatable<ExternalUserId>
     {
         private readonly string text;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExternalUserId"/> struct.
+        ///     Initializes a new instance of the <see cref="ExternalUserId" /> struct.
         /// </summary>
         /// <param name="text">External User Id.</param>
         public ExternalUserId(string text)
         {
             if (string.IsNullOrWhiteSpace(text))
             {
-                throw new ExternalUserIdShouldNotBeEmptyException($"The '{nameof(text)}' field is required.");
+                throw new ExternalUserIdShouldNotBeEmptyException(Messages.TheTextFieldIsRequired);
             }
 
             this.text = text;
         }
 
         /// <summary>
-        /// Converts into string.
+        ///     Converts into string.
         /// </summary>
         /// <returns>String.</returns>
         public override string ToString()
@@ -35,7 +42,6 @@ namespace Domain.Security.ValueObjects
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -43,23 +49,21 @@ namespace Domain.Security.ValueObjects
         {
             if (obj is ExternalUserId externalUserIdObj)
             {
-                return Equals(externalUserIdObj);
+                return this.Equals(externalUserIdObj);
             }
 
             return false;
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return this.text.GetHashCode(System.StringComparison.OrdinalIgnoreCase);
+            return this.text.GetHashCode(StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
@@ -70,7 +74,6 @@ namespace Domain.Security.ValueObjects
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
@@ -81,7 +84,6 @@ namespace Domain.Security.ValueObjects
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>

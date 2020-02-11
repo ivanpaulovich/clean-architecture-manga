@@ -4,17 +4,19 @@
 
 namespace Infrastructure.EntityFrameworkDataAccess.Configuration
 {
+    using Domain.Accounts.Debits;
     using Domain.Accounts.ValueObjects;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using Debit = EntityFrameworkDataAccess.Debit;
 
     /// <summary>
-    /// Debit Configuration.
+    ///     Debit Configuration.
     /// </summary>
     public class DebitConfiguration : IEntityTypeConfiguration<Debit>
     {
         /// <summary>
-        /// Configure Debit.
+        ///     Configure Debit.
         /// </summary>
         /// <param name="builder">Builder.</param>
         public void Configure(EntityTypeBuilder<Debit> builder)
@@ -30,7 +32,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Configuration
             builder.Property(debit => debit.Id)
                 .HasConversion(
                     value => value.ToGuid(),
-                    value => new Domain.Accounts.Debits.DebitId(value))
+                    value => new DebitId(value))
                 .IsRequired();
 
             builder.Property(debit => debit.AccountId)

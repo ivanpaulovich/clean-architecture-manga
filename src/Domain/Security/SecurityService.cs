@@ -5,11 +5,17 @@
 namespace Domain.Security
 {
     using System.Threading.Tasks;
-    using Domain.Customers.ValueObjects;
-    using Domain.Security.ValueObjects;
+    using Customers.ValueObjects;
+    using ValueObjects;
 
     /// <summary>
-    /// Security <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#domain-service">Domain Service Domain-Driven Design Pattern</see>.
+    ///     Security
+    ///     <see
+    ///         href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#domain-service">
+    ///         Domain
+    ///         Service Domain-Driven Design Pattern
+    ///     </see>
+    ///     .
     /// </summary>
     public class SecurityService
     {
@@ -17,7 +23,7 @@ namespace Domain.Security
         private readonly IUserRepository userRepository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SecurityService"/> class.
+        ///     Initializes a new instance of the <see cref="SecurityService" /> class.
         /// </summary>
         /// <param name="userFactory">User Factory.</param>
         /// <param name="userRepository">User Repository.</param>
@@ -30,7 +36,7 @@ namespace Domain.Security
         }
 
         /// <summary>
-        /// Create User Credentials.
+        ///     Create User Credentials.
         /// </summary>
         /// <param name="customerId">CustomerId.</param>
         /// <param name="externalUserId">External User Id.</param>
