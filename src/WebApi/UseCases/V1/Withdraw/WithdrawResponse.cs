@@ -11,22 +11,18 @@ namespace WebApi.UseCases.V1.Withdraw
             DateTime transactionDate,
             decimal updatedBalance)
         {
-            Amount = amount;
-            Description = description;
-            TransactionDate = transactionDate;
-            UpdateBalance = updatedBalance;
+            this.Amount = amount;
+            this.Description = description;
+            this.TransactionDate = transactionDate;
+            this.UpdateBalance = updatedBalance;
         }
 
-        [Required]
-        public decimal Amount { get; }
+        [Required] public decimal Amount { get; }
 
-        [Required]
-        public string Description { get; }
+        [Required] public string Description { get; }
 
-        [Required]
-        public DateTime TransactionDate { get; }
+        [Required] public DateTime TransactionDate { get; }
 
-        [Required]
-        public decimal UpdateBalance { get; }
+        [Required] public decimal UpdateBalance { get; }
     }
 }

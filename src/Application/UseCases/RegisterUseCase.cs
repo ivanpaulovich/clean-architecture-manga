@@ -6,29 +6,34 @@ namespace Application.UseCases
 {
     using System;
     using System.Threading.Tasks;
-    using Application.Boundaries.Register;
-    using Application.Services;
+    using Boundaries.Register;
     using Domain.Accounts;
     using Domain.Customers;
     using Domain.Customers.ValueObjects;
     using Domain.Security;
     using Domain.Security.Services;
     using Domain.Security.ValueObjects;
+    using Services;
 
     /// <summary>
-    /// Register <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">Use Case Domain-Driven Design Pattern</see>.
+    ///     Register
+    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">
+    ///         Use
+    ///         Case Domain-Driven Design Pattern
+    ///     </see>
+    ///     .
     /// </summary>
     public sealed class RegisterUseCase : IUseCase
     {
-        private readonly IUserService _userService;
-        private readonly CustomerService _customerService;
         private readonly AccountService _accountService;
-        private readonly SecurityService _securityService;
+        private readonly CustomerService _customerService;
         private readonly IOutputPort _outputPort;
+        private readonly SecurityService _securityService;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RegisterUseCase"/> class.
+        ///     Initializes a new instance of the <see cref="RegisterUseCase" /> class.
         /// </summary>
         /// <param name="userService">User Service.</param>
         /// <param name="customerService">Customer Service.</param>
@@ -53,21 +58,24 @@ namespace Application.UseCases
         }
 
         /// <summary>
-        /// Executes the Use Case.
+        ///     Executes the Use Case.
         /// </summary>
         /// <param name="input">Input Message.</param>
         /// <returns>Task.</returns>
         public async Task Execute(RegisterInput input)
         {
             if (input is null)
-                throw new ArgumentNullException(nameof(input));
+            {
+                this._outputPort.WriteError(Messages.InputIsNull);
+                return;
+            }
 
             if (this._userService.GetCustomerId() is CustomerId customerId)
             {
                 if (await this._customerService.IsCustomerRegistered(customerId)
                     .ConfigureAwait(false))
                 {
-                    this._outputPort.CustomerAlreadyRegistered($"Customer already exists.");
+                    this._outputPort.CustomerAlreadyRegistered(Messages.CustomerAlreadyExists);
                     return;
                 }
             }
@@ -76,7 +84,8 @@ namespace Application.UseCases
                 .ConfigureAwait(false);
             var account = await this._accountService.OpenCheckingAccount(customer.Id, input.InitialAmount)
                 .ConfigureAwait(false);
-            var user = await this._securityService.CreateUserCredentials(customer.Id, this._userService.GetExternalUserId())
+            var user = await this._securityService
+                .CreateUserCredentials(customer.Id, this._userService.GetExternalUserId())
                 .ConfigureAwait(false);
 
             customer.Register(account.Id);

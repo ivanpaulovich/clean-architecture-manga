@@ -12,19 +12,18 @@ namespace Application.Boundaries.GetCustomerDetails
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
-    /// Account.
+    ///     Account.
     /// </summary>
     public sealed class Account
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Account"/> class.
+        ///     Initializes a new instance of the <see cref="Account" /> class.
         /// </summary>
         /// <param name="account">Account object.</param>
         public Account(IAccount account)
         {
             if (account is Domain.Accounts.Account accountEntity)
             {
-
                 this.AccountId = accountEntity.Id;
                 this.CurrentBalance = accountEntity.GetCurrentBalance();
 
@@ -62,17 +61,17 @@ namespace Application.Boundaries.GetCustomerDetails
         }
 
         /// <summary>
-        /// Gets the Account Id.
+        ///     Gets the Account Id.
         /// </summary>
         public AccountId AccountId { get; }
 
         /// <summary>
-        /// Gets the Current Balance.
+        ///     Gets the Current Balance.
         /// </summary>
         public Money CurrentBalance { get; }
 
         /// <summary>
-        /// Gets the Transactions List.
+        ///     Gets the Transactions List.
         /// </summary>
         public List<Transaction> Transactions { get; }
     }

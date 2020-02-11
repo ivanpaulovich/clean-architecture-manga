@@ -6,23 +6,28 @@ namespace Application.UseCases
 {
     using System;
     using System.Threading.Tasks;
-    using Application.Boundaries.Transfer;
-    using Application.Services;
+    using Boundaries.Transfer;
     using Domain.Accounts;
     using Domain.Accounts.Debits;
+    using Services;
 
     /// <summary>
-    /// Transfer <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">Use Case Domain-Driven Design Pattern</see>.
+    ///     Transfer
+    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">
+    ///         Use
+    ///         Case Domain-Driven Design Pattern
+    ///     </see>
+    ///     .
     /// </summary>
     public sealed class TransferUseCase : IUseCase
     {
+        private readonly IAccountRepository _accountRepository;
         private readonly AccountService _accountService;
         private readonly IOutputPort _outputPort;
-        private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TransferUseCase"/> class.
+        ///     Initializes a new instance of the <see cref="TransferUseCase" /> class.
         /// </summary>
         /// <param name="accountService">Account Service.</param>
         /// <param name="outputPort">Output Port.</param>
@@ -41,17 +46,20 @@ namespace Application.UseCases
         }
 
         /// <summary>
-        /// Executes the Use Case.
+        ///     Executes the Use Case.
         /// </summary>
         /// <param name="input">Input Message.</param>
         /// <returns>Task.</returns>
         public async Task Execute(TransferInput input)
         {
+            if (input is null)
+            {
+                this._outputPort.WriteError(Messages.InputIsNull);
+                return;
+            }
+
             try
             {
-                if (input is null)
-                    throw new ArgumentNullException(nameof(input));
-
                 var originAccount = await this._accountRepository.GetAccount(input.OriginAccountId)
                     .ConfigureAwait(false);
                 var destinationAccount = await this._accountRepository.GetAccount(input.DestinationAccountId)
@@ -70,7 +78,6 @@ namespace Application.UseCases
             catch (AccountNotFoundException ex)
             {
                 this._outputPort.NotFound(ex.Message);
-                return;
             }
         }
 

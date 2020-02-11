@@ -4,13 +4,15 @@
 
 namespace Domain.Customers.ValueObjects
 {
+    using System;
+
     /// <summary>
-    /// EmptyCustomerIdException.
+    ///     EmptyCustomerIdException.
     /// </summary>
     internal sealed class EmptyCustomerIdException : DomainException
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="EmptyCustomerIdException"/> class.
+        ///     Initializes a new instance of the <see cref="EmptyCustomerIdException" /> class.
         /// </summary>
         /// <param name="message">Message.</param>
         internal EmptyCustomerIdException(string message)
@@ -19,18 +21,16 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        /// 
         /// </summary>
         public EmptyCustomerIdException()
         {
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="message"></param>
         /// <param name="innerException"></param>
-        public EmptyCustomerIdException(string message, System.Exception innerException) : base(message, innerException)
+        public EmptyCustomerIdException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

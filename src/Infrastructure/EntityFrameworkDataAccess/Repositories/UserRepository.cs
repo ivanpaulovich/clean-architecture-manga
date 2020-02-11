@@ -6,6 +6,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
     using Domain.Security;
     using Domain.Security.ValueObjects;
     using Microsoft.EntityFrameworkCore;
+    using User = EntityFrameworkDataAccess.User;
 
     public sealed class UserRepository : IUserRepository
     {
@@ -13,19 +14,19 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
 
         public UserRepository(MangaContext context)
         {
-            _context = context ??
-                throw new ArgumentNullException(nameof(context));
+            this._context = context ??
+                            throw new ArgumentNullException(nameof(context));
         }
 
         public async Task Add(IUser user)
         {
-            await _context.Users.AddAsync((EntityFrameworkDataAccess.User)user);
-            await _context.SaveChangesAsync();
+            await this._context.Users.AddAsync((User)user);
+            await this._context.SaveChangesAsync();
         }
 
         public async Task<IUser> GetUser(ExternalUserId externalUserId)
         {
-            var user = await _context
+            var user = await this._context
                 .Users
                 .Where(a => a.ExternalUserId.Equals(externalUserId))
                 .SingleOrDefaultAsync();

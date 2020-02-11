@@ -9,6 +9,7 @@ namespace WebApi.DependencyInjection
     using Application.Boundaries.Withdraw;
     using FluentMediator;
     using Microsoft.Extensions.DependencyInjection;
+    using IUseCase = Application.Boundaries.CloseAccount.IUseCase;
 
     public static class FluentMediatorExtensions
     {
@@ -18,16 +19,18 @@ namespace WebApi.DependencyInjection
                 builder =>
                 {
                     builder.On<CloseAccountInput>().PipelineAsync()
-                        .Call<Application.Boundaries.CloseAccount.IUseCase>((handler, request) => handler.Execute(request));
+                        .Call<IUseCase>((handler, request) => handler.Execute(request));
 
                     builder.On<DepositInput>().PipelineAsync()
                         .Call<Application.Boundaries.Deposit.IUseCase>((handler, request) => handler.Execute(request));
 
                     builder.On<GetAccountDetailsInput>().PipelineAsync()
-                        .Call<Application.Boundaries.GetAccountDetails.IUseCase>((handler, request) => handler.Execute(request));
+                        .Call<Application.Boundaries.GetAccountDetails.IUseCase>((handler, request) =>
+                            handler.Execute(request));
 
                     builder.On<GetCustomerDetailsInput>().PipelineAsync()
-                        .Call<Application.Boundaries.GetCustomerDetails.IUseCase>((handler, request) => handler.Execute(request));
+                        .Call<Application.Boundaries.GetCustomerDetails.IUseCase>((handler, request) =>
+                            handler.Execute(request));
 
                     builder.On<RegisterInput>().PipelineAsync()
                         .Call<Application.Boundaries.Register.IUseCase>((handler, request) => handler.Execute(request));

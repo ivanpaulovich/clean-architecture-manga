@@ -9,12 +9,12 @@ namespace Infrastructure.EntityFrameworkDataAccess.Configuration
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
     /// <summary>
-    /// Customer Configuration.
+    ///     Customer Configuration.
     /// </summary>
     public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
     {
         /// <summary>
-        /// Configure Customer.
+        ///     Configure Customer.
         /// </summary>
         /// <param name="builder">Builder.</param>
         public void Configure(EntityTypeBuilder

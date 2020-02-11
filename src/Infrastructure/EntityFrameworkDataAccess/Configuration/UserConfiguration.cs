@@ -10,12 +10,12 @@ namespace Infrastructure.EntityFrameworkDataAccess.Configuration
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
     /// <summary>
-    /// User Configuration.
+    ///     User Configuration.
     /// </summary>
     public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         /// <summary>
-        /// Configure User.
+        ///     Configure User.
         /// </summary>
         /// <param name="builder">Builder.</param>
         public void Configure(EntityTypeBuilder<User> builder)
@@ -35,7 +35,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Configuration
                 .IsRequired();
 
             builder.HasKey(
-                c => new { c.ExternalUserId, c.CustomerId });
+                c => new {c.ExternalUserId, c.CustomerId});
         }
     }
 }

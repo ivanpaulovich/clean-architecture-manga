@@ -3,7 +3,7 @@ namespace WebApi.UseCases.V1.GetAccountDetails
     using System.Collections.Generic;
     using Application.Boundaries.GetAccountDetails;
     using Microsoft.AspNetCore.Mvc;
-    using WebApi.ViewModels;
+    using ViewModels;
 
     public sealed class GetAccountDetailsPresenter : IOutputPort
     {
@@ -11,7 +11,7 @@ namespace WebApi.UseCases.V1.GetAccountDetails
 
         public void NotFound(string message)
         {
-            ViewModel = new NotFoundObjectResult(message);
+            this.ViewModel = new NotFoundObjectResult(message);
         }
 
         public void Standard(GetAccountDetailsOutput getAccountDetailsOutput)
@@ -33,7 +33,12 @@ namespace WebApi.UseCases.V1.GetAccountDetails
                 getAccountDetailsOutput.CurrentBalance,
                 transactions);
 
-            ViewModel = new OkObjectResult(getAccountDetailsResponse);
+            this.ViewModel = new OkObjectResult(getAccountDetailsResponse);
+        }
+
+        public void WriteError(string message)
+        {
+            this.ViewModel = new BadRequestObjectResult(message);
         }
     }
 }

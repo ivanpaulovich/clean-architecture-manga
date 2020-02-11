@@ -9,12 +9,12 @@ namespace Application.Boundaries.Withdraw
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
-    /// Withdraw Output Message.
+    ///     Withdraw Output Message.
     /// </summary>
     public sealed class WithdrawOutput : IUseCaseOutput
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WithdrawOutput"/> class.
+        ///     Initializes a new instance of the <see cref="WithdrawOutput" /> class.
         /// </summary>
         /// <param name="debit">Debit object.</param>
         /// <param name="updatedBalance">Updated balance.</param>
@@ -34,12 +34,12 @@ namespace Application.Boundaries.Withdraw
         }
 
         /// <summary>
-        /// Gets the Transaction.
+        ///     Gets the Transaction.
         /// </summary>
         public Transaction Transaction { get; }
 
         /// <summary>
-        /// Gets the Updated Balance.
+        ///     Gets the Updated Balance.
         /// </summary>
         public Money UpdatedBalance { get; }
     }

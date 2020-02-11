@@ -5,10 +5,10 @@
 namespace Application.Boundaries.GetAccountDetails
 {
     /// <summary>
-    /// Output Port.
+    ///     Output Port.
     /// </summary>
     public interface IOutputPort
-        : IOutputPortStandard<GetAccountDetailsOutput>, IOutputPortNotFound
+        : IOutputPortStandard<GetAccountDetailsOutput>, IOutputPortNotFound, IOutputPortError
     {
     }
 }

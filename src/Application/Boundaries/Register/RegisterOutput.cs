@@ -13,12 +13,12 @@ namespace Application.Boundaries.Register
     using Domain.Security.ValueObjects;
 
     /// <summary>
-    /// Register Output Message.
+    ///     Register Output Message.
     /// </summary>
     public sealed class RegisterOutput : IUseCaseOutput
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RegisterOutput"/> class.
+        ///     Initializes a new instance of the <see cref="RegisterOutput" /> class.
         /// </summary>
         /// <param name="externalUserId">External User Id.</param>
         /// <param name="customer">Customer object.</param>
@@ -69,12 +69,12 @@ namespace Application.Boundaries.Register
         }
 
         /// <summary>
-        /// Gets the Customer.
+        ///     Gets the Customer.
         /// </summary>
         public Customer Customer { get; }
 
         /// <summary>
-        /// Gets the Account.
+        ///     Gets the Account.
         /// </summary>
         public Account Account { get; }
     }

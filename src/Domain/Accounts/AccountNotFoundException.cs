@@ -4,13 +4,15 @@
 
 namespace Domain.Accounts
 {
+    using System;
+
     /// <summary>
-    /// Account Not Found Exception.
+    ///     Account Not Found Exception.
     /// </summary>
     public sealed class AccountNotFoundException : DomainException
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountNotFoundException"/> class.
+        ///     Initializes a new instance of the <see cref="AccountNotFoundException" /> class.
         /// </summary>
         /// <param name="message">Message.</param>
         public AccountNotFoundException(string message)
@@ -19,7 +21,7 @@ namespace Domain.Accounts
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountNotFoundException"/> class.
+        ///     Initializes a new instance of the <see cref="AccountNotFoundException" /> class.
         /// </summary>
         public AccountNotFoundException()
             : base(string.Empty)
@@ -27,11 +29,11 @@ namespace Domain.Accounts
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountNotFoundException"/> class.
+        ///     Initializes a new instance of the <see cref="AccountNotFoundException" /> class.
         /// </summary>
         /// <param name="message">Message.</param>
         /// <param name="innerException">Inner Exception.</param>
-        public AccountNotFoundException(string message, System.Exception innerException) : base(message, innerException)
+        public AccountNotFoundException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

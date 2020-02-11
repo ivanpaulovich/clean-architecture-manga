@@ -12,7 +12,7 @@ namespace WebApi.DependencyInjection.Authentication
 
         public UserService(IHttpContextAccessor httpContextAccessor)
         {
-            _httpContextAccessor = httpContextAccessor;
+            this._httpContextAccessor = httpContextAccessor;
         }
 
         public CustomerId? GetCustomerId()
@@ -22,9 +22,9 @@ namespace WebApi.DependencyInjection.Authentication
 
         public ExternalUserId GetExternalUserId()
         {
-            var user = _httpContextAccessor.HttpContext.User;
+            var user = this._httpContextAccessor.HttpContext.User;
 
-            var login = user.FindFirst(c => c.Type == "urn:github:login")?.Value;
+            string login = user.FindFirst(c => c.Type == "urn:github:login")?.Value;
             var externalUserId = new ExternalUserId($"{user.Identity.AuthenticationType}/{login}");
 
             return externalUserId;
@@ -32,7 +32,7 @@ namespace WebApi.DependencyInjection.Authentication
 
         public Name GetUserName()
         {
-            var user = _httpContextAccessor.HttpContext.User;
+            var user = this._httpContextAccessor.HttpContext.User;
 
             var username = new Name(user.Identity.Name);
 

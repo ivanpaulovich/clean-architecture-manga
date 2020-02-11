@@ -4,15 +4,22 @@
 
 namespace Domain.Customers.ValueObjects
 {
+    using System;
+
     /// <summary>
-    /// Name <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#entity">Entity Design Pattern</see>.
+    ///     Name
+    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#entity">
+    ///         Entity
+    ///         Design Pattern
+    ///     </see>
+    ///     .
     /// </summary>
-    public readonly struct Name : System.IEquatable<Name>
+    public readonly struct Name : IEquatable<Name>
     {
         private readonly string text;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Name"/> struct.
+        ///     Initializes a new instance of the <see cref="Name" /> struct.
         /// </summary>
         /// <param name="text">Name.</param>
         public Name(string text)
@@ -26,7 +33,7 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        /// Converts into string.
+        ///     Converts into string.
         /// </summary>
         /// <returns>string.</returns>
         public override string ToString()
@@ -35,7 +42,6 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        ///
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -43,23 +49,21 @@ namespace Domain.Customers.ValueObjects
         {
             if (obj is Name nameObj)
             {
-                return Equals(nameObj);
+                return this.Equals(nameObj);
             }
 
             return false;
         }
 
         /// <summary>
-        ///
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return this.text.GetHashCode(System.StringComparison.OrdinalIgnoreCase);
+            return this.text.GetHashCode(StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
-        ///
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
@@ -70,7 +74,6 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        ///
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
@@ -81,7 +84,6 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        ///
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>

@@ -51,5 +51,23 @@ namespace Application {
                 return ResourceManager.GetString("AccountHasNotEnoughFunds", resourceCulture);
             }
         }
+        
+        internal static string InputIsNull {
+            get {
+                return ResourceManager.GetString("InputIsNull", resourceCulture);
+            }
+        }
+        
+        internal static string CustomerAlreadyExists {
+            get {
+                return ResourceManager.GetString("CustomerAlreadyExists", resourceCulture);
+            }
+        }
+        
+        internal static string CustomerDoesNotExist {
+            get {
+                return ResourceManager.GetString("CustomerDoesNotExist", resourceCulture);
+            }
+        }
     }
 }

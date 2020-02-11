@@ -4,35 +4,42 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
     using Application.Boundaries.CloseAccount;
 
     /// <summary>
-    /// Close Account Presenter.
+    ///     Close Account Presenter.
     /// </summary>
     public sealed class CloseAccountPresenter : IOutputPort
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CloseAccountPresenter"/> class.
+        ///     Initializes a new instance of the <see cref="CloseAccountPresenter" /> class.
         /// </summary>
         public CloseAccountPresenter()
         {
-            ClosedAccounts = new Collection<CloseAccountOutput>();
-            NotFounds = new Collection<string>();
+            this.ClosedAccounts = new Collection<CloseAccountOutput>();
+            this.NotFounds = new Collection<string>();
         }
 
         /// <summary>
-        /// Gets the ClosedAccounts.
+        ///     Gets the ClosedAccounts.
         /// </summary>
         /// <value></value>
         public Collection<CloseAccountOutput> ClosedAccounts { get; }
 
         public Collection<string> NotFounds { get; }
 
+        public Collection<string> Errors { get; }
+
         public void Standard(CloseAccountOutput output)
         {
-            ClosedAccounts.Add(output);
+            this.ClosedAccounts.Add(output);
         }
 
         public void NotFound(string message)
         {
-            NotFounds.Add(message);
+            this.NotFounds.Add(message);
+        }
+
+        public void WriteError(string message)
+        {
+            this.Errors.Add(message);
         }
     }
 }

@@ -9,12 +9,17 @@ namespace WebApi.UseCases.V1.CloseAccount
 
         public void NotFound(string message)
         {
-            ViewModel = new NotFoundObjectResult(message);
+            this.ViewModel = new NotFoundObjectResult(message);
         }
 
         public void Standard(CloseAccountOutput closeAccountOutput)
         {
-            ViewModel = new OkObjectResult(closeAccountOutput.AccountId);
+            this.ViewModel = new OkObjectResult(closeAccountOutput.AccountId);
+        }
+
+        public void WriteError(string message)
+        {
+            this.ViewModel = new BadRequestObjectResult(message);
         }
     }
 }

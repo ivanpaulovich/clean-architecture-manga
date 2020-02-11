@@ -6,24 +6,29 @@ namespace Application.UseCases
 {
     using System;
     using System.Threading.Tasks;
-    using Application.Boundaries.Withdraw;
-    using Application.Services;
+    using Boundaries.Withdraw;
     using Domain.Accounts;
     using Domain.Accounts.Debits;
     using Domain.Accounts.ValueObjects;
+    using Services;
 
     /// <summary>
-    /// Withdraw <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">Use Case Domain-Driven Design Pattern</see>.
+    ///     Withdraw
+    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">
+    ///         Use
+    ///         Case Domain-Driven Design Pattern
+    ///     </see>
+    ///     .
     /// </summary>
     public sealed class WithdrawUseCase : IUseCase
     {
+        private readonly IAccountRepository _accountRepository;
         private readonly AccountService _accountService;
         private readonly IOutputPort _outputPort;
-        private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WithdrawUseCase"/> class.
+        ///     Initializes a new instance of the <see cref="WithdrawUseCase" /> class.
         /// </summary>
         /// <param name="accountService">Account Service.</param>
         /// <param name="outputPort">Output Port.</param>
@@ -42,14 +47,17 @@ namespace Application.UseCases
         }
 
         /// <summary>
-        /// Executes the Use Case.
+        ///     Executes the Use Case.
         /// </summary>
         /// <param name="input">Input Message.</param>
         /// <returns>Task.</returns>
         public async Task Execute(WithdrawInput input)
         {
             if (input is null)
-                throw new ArgumentNullException(nameof(input));
+            {
+                this._outputPort.WriteError(Messages.InputIsNull);
+                return;
+            }
 
             try
             {
@@ -66,12 +74,10 @@ namespace Application.UseCases
             catch (AccountNotFoundException notFoundEx)
             {
                 this._outputPort.NotFound(notFoundEx.Message);
-                return;
             }
             catch (MoneyShouldBePositiveException outOfBalanceEx)
             {
                 this._outputPort.OutOfBalance(outOfBalanceEx.Message);
-                return;
             }
         }
 

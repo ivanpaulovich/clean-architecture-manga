@@ -8,12 +8,12 @@ namespace Application.Boundaries.Register
     using Domain.Customers.ValueObjects;
 
     /// <summary>
-    /// Register Input Message.
+    ///     Register Input Message.
     /// </summary>
     public sealed class RegisterInput : IUseCaseInput
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RegisterInput"/> class.
+        ///     Initializes a new instance of the <see cref="RegisterInput" /> class.
         /// </summary>
         /// <param name="ssn">SSN.</param>
         /// <param name="initialAmount">Positive amount.</param>
@@ -26,12 +26,12 @@ namespace Application.Boundaries.Register
         }
 
         /// <summary>
-        /// Gets the SSN.
+        ///     Gets the SSN.
         /// </summary>
         public SSN SSN { get; }
 
         /// <summary>
-        /// Gets the Initial Amount.
+        ///     Gets the Initial Amount.
         /// </summary>
         public PositiveMoney InitialAmount { get; }
     }

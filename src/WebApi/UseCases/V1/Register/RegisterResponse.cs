@@ -4,10 +4,10 @@ namespace WebApi.UseCases.V1.Register
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Domain.Customers.ValueObjects;
-    using WebApi.ViewModels;
+    using ViewModels;
 
     /// <summary>
-    /// The response for Registration.
+    ///     The response for Registration.
     /// </summary>
     public sealed class RegisterResponse
     {
@@ -17,32 +17,32 @@ namespace WebApi.UseCases.V1.Register
             Name name,
             List<AccountDetailsModel> accounts)
         {
-            CustomerId = customerId.ToGuid();
-            SSN = ssn.ToString();
-            Name = name.ToString();
-            Accounts = accounts;
+            this.CustomerId = customerId.ToGuid();
+            this.SSN = ssn.ToString();
+            this.Name = name.ToString();
+            this.Accounts = accounts;
         }
 
         /// <summary>
-        /// Gets customer ID.
+        ///     Gets customer ID.
         /// </summary>
         [Required]
         public Guid CustomerId { get; }
 
         /// <summary>
-        /// Gets sSN.
+        ///     Gets sSN.
         /// </summary>
         [Required]
         public string SSN { get; }
 
         /// <summary>
-        /// Gets name.
+        ///     Gets name.
         /// </summary>
         [Required]
         public string Name { get; }
 
         /// <summary>
-        /// Gets accounts.
+        ///     Gets accounts.
         /// </summary>
         [Required]
         public List<AccountDetailsModel> Accounts { get; }

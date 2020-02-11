@@ -4,13 +4,15 @@
 
 namespace Domain.Customers.ValueObjects
 {
+    using System;
+
     /// <summary>
-    /// SSN Should Not Be Empty Exception.
+    ///     SSN Should Not Be Empty Exception.
     /// </summary>
     public sealed class SSNShouldNotBeEmptyException : DomainException
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SSNShouldNotBeEmptyException"/> class.
+        ///     Initializes a new instance of the <see cref="SSNShouldNotBeEmptyException" /> class.
         /// </summary>
         /// <param name="message">Message.</param>
         internal SSNShouldNotBeEmptyException(string message)
@@ -19,18 +21,16 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        /// 
         /// </summary>
         public SSNShouldNotBeEmptyException()
         {
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="message"></param>
         /// <param name="innerException"></param>
-        public SSNShouldNotBeEmptyException(string message, System.Exception innerException) : base(message, innerException)
+        public SSNShouldNotBeEmptyException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

@@ -5,15 +5,15 @@
 namespace Domain.Accounts
 {
     using System;
-    using Domain.Accounts.Credits;
-    using Domain.Accounts.Debits;
-    using Domain.Accounts.ValueObjects;
+    using Credits;
+    using Debits;
+    using ValueObjects;
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public abstract class Account : IAccount
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Account"/> class.
+        ///     Initializes a new instance of the <see cref="Account" /> class.
         /// </summary>
         protected Account()
         {
@@ -21,20 +21,20 @@ namespace Domain.Accounts
             this.Debits = new DebitsCollection();
         }
 
-        /// <inheritdoc/>
-        public AccountId Id { get; protected set; }
-
         /// <summary>
-        /// Gets or sets Credits List.
+        ///     Gets or sets Credits List.
         /// </summary>
         public CreditsCollection Credits { get; protected set; }
 
         /// <summary>
-        /// Gets or sets Debits List.
+        ///     Gets or sets Debits List.
         /// </summary>
         public DebitsCollection Debits { get; protected set; }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
+        public AccountId Id { get; protected set; }
+
+        /// <inheritdoc />
         public ICredit Deposit(IAccountFactory entityFactory, PositiveMoney amountToDeposit)
         {
             if (entityFactory is null)
@@ -45,7 +45,7 @@ namespace Domain.Accounts
             return credit;
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public IDebit Withdraw(IAccountFactory entityFactory, PositiveMoney amountToWithdraw)
         {
             if (entityFactory is null)
@@ -61,13 +61,13 @@ namespace Domain.Accounts
             return debit;
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public bool IsClosingAllowed()
         {
             return this.GetCurrentBalance().IsZero();
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public Money GetCurrentBalance()
         {
             var totalCredits = this.Credits

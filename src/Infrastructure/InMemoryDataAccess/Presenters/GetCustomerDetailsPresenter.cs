@@ -7,22 +7,29 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
     {
         public GetCustomerDetailsPresenter()
         {
-            GetCustomerDetails = new Collection<GetCustomerDetailsOutput>();
-            NotFounds = new Collection<string>();
+            this.GetCustomerDetails = new Collection<GetCustomerDetailsOutput>();
+            this.NotFounds = new Collection<string>();
         }
 
         public Collection<GetCustomerDetailsOutput> GetCustomerDetails { get; }
 
         public Collection<string> NotFounds { get; }
 
+        public Collection<string> Errors { get; }
+
         public void Standard(GetCustomerDetailsOutput output)
         {
-            GetCustomerDetails.Add(output);
+            this.GetCustomerDetails.Add(output);
         }
 
         public void NotFound(string message)
         {
-            NotFounds.Add(message);
+            this.NotFounds.Add(message);
+        }
+
+        public void WriteError(string message)
+        {
+            this.Errors.Add(message);
         }
     }
 }

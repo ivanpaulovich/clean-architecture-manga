@@ -4,13 +4,15 @@
 
 namespace Domain.Customers
 {
+    using System;
+
     /// <summary>
-    /// Customer Not Found Exception.
+    ///     Customer Not Found Exception.
     /// </summary>
     public sealed class CustomerNotFoundException : DomainException
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CustomerNotFoundException"/> class.
+        ///     Initializes a new instance of the <see cref="CustomerNotFoundException" /> class.
         /// </summary>
         /// <param name="message">Message.</param>
         public CustomerNotFoundException(string message)
@@ -19,18 +21,16 @@ namespace Domain.Customers
         }
 
         /// <summary>
-        /// 
         /// </summary>
         public CustomerNotFoundException()
         {
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="message"></param>
         /// <param name="innerException"></param>
-        public CustomerNotFoundException(string message, System.Exception innerException) : base(message, innerException)
+        public CustomerNotFoundException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

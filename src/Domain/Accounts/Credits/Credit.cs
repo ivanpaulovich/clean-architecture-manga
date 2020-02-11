@@ -5,25 +5,30 @@
 namespace Domain.Accounts.Credits
 {
     using System;
-    using Domain.Accounts.ValueObjects;
+    using ValueObjects;
 
     /// <summary>
-    /// Credit <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#entity">Entity Design Pattern</see>.
+    ///     Credit
+    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#entity">
+    ///         Entity
+    ///         Design Pattern
+    ///     </see>
+    ///     .
     /// </summary>
     public abstract class Credit : ICredit
     {
         /// <summary>
-        /// Gets or sets Id.
+        ///     Gets or sets Id.
         /// </summary>
         public CreditId Id { get; protected set; }
 
         /// <summary>
-        /// Gets or sets Amount.
+        ///     Gets or sets Amount.
         /// </summary>
         public PositiveMoney Amount { get; protected set; }
 
         /// <summary>
-        /// Gets Description.
+        ///     Gets Description.
         /// </summary>
         public static string Description
         {
@@ -31,12 +36,12 @@ namespace Domain.Accounts.Credits
         }
 
         /// <summary>
-        /// Gets or sets Transaction Date.
+        ///     Gets or sets Transaction Date.
         /// </summary>
         public DateTime TransactionDate { get; protected set; }
 
         /// <summary>
-        /// Calculate the sum of positive amounts.
+        ///     Calculate the sum of positive amounts.
         /// </summary>
         /// <param name="amount">Positive amount.</param>
         /// <returns>The positive sum.</returns>

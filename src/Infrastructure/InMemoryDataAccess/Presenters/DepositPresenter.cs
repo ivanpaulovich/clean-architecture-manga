@@ -8,31 +8,37 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
     using Application.Boundaries.Deposit;
 
     /// <summary>
-    /// Deposit Presenter.
+    ///     Deposit Presenter.
     /// </summary>
     public sealed class DepositPresenter : IOutputPort
     {
         /// <summary>
-        /// 
         /// </summary>
         public DepositPresenter()
         {
-            Deposits = new Collection<DepositOutput>();
-            NotFounds = new Collection<string>();
+            this.Deposits = new Collection<DepositOutput>();
+            this.NotFounds = new Collection<string>();
         }
 
         public Collection<DepositOutput> Deposits { get; }
 
         public Collection<string> NotFounds { get; }
 
+        public Collection<string> Errors { get; }
+
         public void Standard(DepositOutput output)
         {
-            Deposits.Add(output);
+            this.Deposits.Add(output);
         }
 
         public void NotFound(string message)
         {
-            NotFounds.Add(message);
+            this.NotFounds.Add(message);
+        }
+
+        public void WriteError(string message)
+        {
+            this.Errors.Add(message);
         }
     }
 }

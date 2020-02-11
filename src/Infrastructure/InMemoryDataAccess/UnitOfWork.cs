@@ -9,12 +9,12 @@ namespace Infrastructure.InMemoryDataAccess
 
         public UnitOfWork(MangaContext context)
         {
-            _context = context;
+            this._context = context;
         }
 
         public async Task<int> Save()
         {
-            return await Task.FromResult<int>(0);
+            return await Task.FromResult(0);
         }
     }
 }

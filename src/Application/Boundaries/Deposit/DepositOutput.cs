@@ -9,12 +9,12 @@ namespace Application.Boundaries.Deposit
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
-    /// Deposit Output Message.
+    ///     Deposit Output Message.
     /// </summary>
     public sealed class DepositOutput : IUseCaseOutput
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DepositOutput"/> class.
+        ///     Initializes a new instance of the <see cref="DepositOutput" /> class.
         /// </summary>
         /// <param name="credit">Credit object.</param>
         /// <param name="updatedBalance">The updated balance.</param>
@@ -36,12 +36,12 @@ namespace Application.Boundaries.Deposit
         }
 
         /// <summary>
-        /// Gets the Transaction object.
+        ///     Gets the Transaction object.
         /// </summary>
         public Transaction Transaction { get; }
 
         /// <summary>
-        /// Gets the updated balance.
+        ///     Gets the updated balance.
         /// </summary>
         public Money UpdatedBalance { get; }
     }

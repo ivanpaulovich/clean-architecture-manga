@@ -8,12 +8,12 @@ namespace Application.Boundaries.Register
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
-    /// Account.
+    ///     Account.
     /// </summary>
     public sealed class Account
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Account"/> class.
+        ///     Initializes a new instance of the <see cref="Account" /> class.
         /// </summary>
         /// <param name="accountId">Account Id.</param>
         /// <param name="currentBalance">Current Balance.</param>
@@ -29,17 +29,17 @@ namespace Application.Boundaries.Register
         }
 
         /// <summary>
-        /// Gets the AccountId.
+        ///     Gets the AccountId.
         /// </summary>
         public AccountId AccountId { get; }
 
         /// <summary>
-        /// Gets the Current Balance.
+        ///     Gets the Current Balance.
         /// </summary>
         public Money CurrentBalance { get; }
 
         /// <summary>
-        /// Gets the Transactions.
+        ///     Gets the Transactions.
         /// </summary>
         public List<Transaction> Transactions { get; }
     }

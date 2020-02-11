@@ -15,9 +15,9 @@ namespace Infrastructure.InMemoryDataAccess
             PositiveMoney amountToWithdraw,
             DateTime transactionDate)
         {
-            AccountId = account.Id;
-            Amount = amountToWithdraw;
-            TransactionDate = transactionDate;
+            this.AccountId = account.Id;
+            this.Amount = amountToWithdraw;
+            this.TransactionDate = transactionDate;
         }
 
         protected Debit()

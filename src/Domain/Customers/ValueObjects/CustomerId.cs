@@ -7,14 +7,19 @@ namespace Domain.Customers.ValueObjects
     using System;
 
     /// <summary>
-    /// CustomerId <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#entity">Entity Design Pattern</see>.
+    ///     CustomerId
+    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#entity">
+    ///         Entity
+    ///         Design Pattern
+    ///     </see>
+    ///     .
     /// </summary>
     public readonly struct CustomerId : IEquatable<CustomerId>
     {
         private readonly Guid customerId;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CustomerId"/> struct.
+        ///     Initializes a new instance of the <see cref="CustomerId" /> struct.
         /// </summary>
         /// <param name="customerId">Customer Guid.</param>
         public CustomerId(Guid customerId)
@@ -28,7 +33,7 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        /// Converts into String.
+        ///     Converts into String.
         /// </summary>
         /// <returns>String.</returns>
         public override string ToString()
@@ -37,13 +42,13 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        /// Converts into Guid.
+        ///     Converts into Guid.
         /// </summary>
         /// <returns>Guid.</returns>
         public Guid ToGuid() => this.customerId;
 
         /// <summary>
-        /// Equals.
+        ///     Equals.
         /// </summary>
         /// <param name="obj">Other object.</param>
         /// <returns></returns>
@@ -51,14 +56,13 @@ namespace Domain.Customers.ValueObjects
         {
             if (obj is CustomerId customerIdObj)
             {
-                return Equals(customerIdObj);
+                return this.Equals(customerIdObj);
             }
 
             return false;
         }
 
         /// <summary>
-        ///
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()
@@ -67,7 +71,6 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        ///
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
@@ -78,7 +81,6 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        ///
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
@@ -89,7 +91,6 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        ///
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>

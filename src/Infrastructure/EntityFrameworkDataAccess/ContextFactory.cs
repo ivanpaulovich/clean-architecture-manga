@@ -10,12 +10,12 @@ namespace Infrastructure.EntityFrameworkDataAccess
     using Microsoft.Extensions.Configuration;
 
     /// <summary>
-    /// ContextFactory.
+    ///     ContextFactory.
     /// </summary>
     public sealed class ContextFactory : IDesignTimeDbContextFactory<MangaContext>
     {
         /// <summary>
-        /// Instantiate a MangaContext.
+        ///     Instantiate a MangaContext.
         /// </summary>
         /// <param name="args">Command line args.</param>
         /// <returns>Manga Context.</returns>

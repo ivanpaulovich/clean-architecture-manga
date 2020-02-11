@@ -7,12 +7,12 @@ namespace Application.Boundaries.Withdraw
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
-    /// Withdraw Input Message.
+    ///     Withdraw Input Message.
     /// </summary>
     public sealed class WithdrawInput : IUseCaseInput
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WithdrawInput"/> class.
+        ///     Initializes a new instance of the <see cref="WithdrawInput" /> class.
         /// </summary>
         /// <param name="accountId">Account Id.</param>
         /// <param name="amount">Amount.</param>
@@ -25,12 +25,12 @@ namespace Application.Boundaries.Withdraw
         }
 
         /// <summary>
-        /// Gets the Account Id.
+        ///     Gets the Account Id.
         /// </summary>
         public AccountId AccountId { get; }
 
         /// <summary>
-        /// Gets the Amount.
+        ///     Gets the Amount.
         /// </summary>
         public PositiveMoney Amount { get; }
     }

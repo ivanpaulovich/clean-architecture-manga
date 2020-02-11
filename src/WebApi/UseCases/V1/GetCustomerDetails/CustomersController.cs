@@ -18,14 +18,14 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
             IMediator mediator,
             GetCustomerDetailsPresenter presenter)
         {
-            _mediator = mediator;
-            _presenter = presenter;
+            this._mediator = mediator;
+            this._presenter = presenter;
         }
 
         /// <summary>
-        /// Get the Customer details.
+        ///     Get the Customer details.
         /// </summary>
-        /// <returns>An asynchronous <see cref="IActionResult"/>.</returns>
+        /// <returns>An asynchronous <see cref="IActionResult" />.</returns>
         [HttpGet(Name = "GetCustomer")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetCustomerDetailsResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -34,8 +34,8 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
         public async Task<IActionResult> GetCustomer()
         {
             var input = new GetCustomerDetailsInput();
-            await _mediator.PublishAsync(input);
-            return _presenter.ViewModel;
+            await this._mediator.PublishAsync(input);
+            return this._presenter.ViewModel;
         }
     }
 }

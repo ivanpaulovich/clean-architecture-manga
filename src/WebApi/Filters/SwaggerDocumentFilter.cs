@@ -10,11 +10,7 @@ namespace WebApi.Filters
     {
         private readonly List<OpenApiTag> _tags = new List<OpenApiTag>
         {
-            new OpenApiTag
-            {
-            Name = "RoutingApi",
-            Description = "This is a description for the api routes",
-            },
+            new OpenApiTag {Name = "RoutingApi", Description = "This is a description for the api routes"}
         };
 
         public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
@@ -24,8 +20,8 @@ namespace WebApi.Filters
                 throw new ArgumentNullException(nameof(swaggerDoc));
             }
 
-            swaggerDoc.Tags = GetFilteredTagDefinitions(context);
-            swaggerDoc.Paths = GetSortedPaths(swaggerDoc);
+            swaggerDoc.Tags = this.GetFilteredTagDefinitions(context);
+            swaggerDoc.Paths = this.GetSortedPaths(swaggerDoc);
         }
 
         private List<OpenApiTag> GetFilteredTagDefinitions(DocumentFilterContext context)
@@ -34,7 +30,7 @@ namespace WebApi.Filters
             var currentGroupNames = context.ApiDescriptions
                 .Select(description => description.GroupName);
 
-            return _tags
+            return this._tags
                 .Where(tag => currentGroupNames.Contains(tag.Name))
                 .ToList();
         }

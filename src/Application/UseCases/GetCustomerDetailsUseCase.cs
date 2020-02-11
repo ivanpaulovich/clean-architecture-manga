@@ -6,26 +6,32 @@ namespace Application.UseCases
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Application.Boundaries.GetCustomerDetails;
+    using Boundaries.GetCustomerDetails;
     using Domain.Accounts;
     using Domain.Accounts.ValueObjects;
     using Domain.Customers;
     using Domain.Customers.ValueObjects;
     using Domain.Security.Services;
     using Domain.Security.ValueObjects;
+    using Account = Boundaries.GetCustomerDetails.Account;
 
     /// <summary>
-    /// Get Customer Details <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">Use Case Domain-Driven Design Pattern</see>.
+    ///     Get Customer Details
+    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">
+    ///         Use
+    ///         Case Domain-Driven Design Pattern
+    ///     </see>
+    ///     .
     /// </summary>
     public sealed class GetCustomerDetailsUseCase : IUseCase
     {
-        private readonly IUserService _userService;
-        private readonly IOutputPort _outputPort;
-        private readonly ICustomerRepository _customerRepository;
         private readonly IAccountRepository _accountRepository;
+        private readonly ICustomerRepository _customerRepository;
+        private readonly IOutputPort _outputPort;
+        private readonly IUserService _userService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetCustomerDetailsUseCase"/> class.
+        ///     Initializes a new instance of the <see cref="GetCustomerDetailsUseCase" /> class.
         /// </summary>
         /// <param name="userService">User Service.</param>
         /// <param name="outputPort">Output Port.</param>
@@ -44,12 +50,18 @@ namespace Application.UseCases
         }
 
         /// <summary>
-        /// Executes the Use Case.
+        ///     Executes the Use Case.
         /// </summary>
         /// <param name="input">Input Message.</param>
         /// <returns>Task.</returns>
         public async Task Execute(GetCustomerDetailsInput input)
         {
+            if (input is null)
+            {
+                this._outputPort.WriteError(Messages.InputIsNull);
+                return;
+            }
+
             ICustomer customer;
 
             if (this._userService.GetCustomerId() is CustomerId customerId)
@@ -67,11 +79,11 @@ namespace Application.UseCases
             }
             else
             {
-                this._outputPort.NotFound("Customer does not exist.");
+                this._outputPort.NotFound(Messages.CustomerDoesNotExist);
                 return;
             }
 
-            var accounts = new List<Boundaries.GetCustomerDetails.Account>();
+            var accounts = new List<Account>();
 
             foreach (AccountId accountId in customer.Accounts.GetAccountIds())
             {
@@ -88,7 +100,7 @@ namespace Application.UseCases
                     return;
                 }
 
-                var outputAccount = new Boundaries.GetCustomerDetails.Account(account);
+                var outputAccount = new Account(account);
                 accounts.Add(outputAccount);
             }
 
@@ -101,7 +113,7 @@ namespace Application.UseCases
         private void BuildOutput(
             ExternalUserId externalUserId,
             ICustomer customer,
-            List<Boundaries.GetCustomerDetails.Account> accounts)
+            List<Account> accounts)
         {
             var output = new GetCustomerDetailsOutput(
                 externalUserId,

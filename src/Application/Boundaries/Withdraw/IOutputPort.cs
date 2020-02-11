@@ -5,13 +5,13 @@
 namespace Application.Boundaries.Withdraw
 {
     /// <summary>
-    /// Output Port.
+    ///     Output Port.
     /// </summary>
     public interface IOutputPort
-        : IOutputPortStandard<WithdrawOutput>, IOutputPortNotFound
+        : IOutputPortStandard<WithdrawOutput>, IOutputPortNotFound, IOutputPortError
     {
         /// <summary>
-        /// Informs it is out of balance.
+        ///     Informs it is out of balance.
         /// </summary>
         /// <param name="message">Custom message.</param>
         void OutOfBalance(string message);

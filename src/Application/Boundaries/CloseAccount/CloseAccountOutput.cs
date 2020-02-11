@@ -9,12 +9,12 @@ namespace Application.Boundaries.CloseAccount
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
-    /// Close Account Output Message.
+    ///     Close Account Output Message.
     /// </summary>
     public sealed class CloseAccountOutput : IUseCaseOutput
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CloseAccountOutput"/> class.
+        ///     Initializes a new instance of the <see cref="CloseAccountOutput" /> class.
         /// </summary>
         /// <param name="account">IAccount object.</param>
         public CloseAccountOutput(IAccount account)
@@ -26,7 +26,7 @@ namespace Application.Boundaries.CloseAccount
         }
 
         /// <summary>
-        /// Gets AccountId.
+        ///     Gets AccountId.
         /// </summary>
         public AccountId AccountId { get; }
     }

@@ -9,12 +9,12 @@ namespace Infrastructure.EntityFrameworkDataAccess
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
-    /// Credit.
+    ///     Credit.
     /// </summary>
     public class Credit : Domain.Accounts.Credits.Credit
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Credit"/> class.
+        ///     Initializes a new instance of the <see cref="Credit" /> class.
         /// </summary>
         /// <param name="account">Account.</param>
         /// <param name="amountToDeposit">Amount to Deposit.</param>
@@ -27,14 +27,14 @@ namespace Infrastructure.EntityFrameworkDataAccess
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Credit"/> class.
+        ///     Initializes a new instance of the <see cref="Credit" /> class.
         /// </summary>
         protected Credit()
         {
         }
 
         /// <summary>
-        /// Gets or sets AccountId.
+        ///     Gets or sets AccountId.
         /// </summary>
         public AccountId AccountId { get; protected set; }
     }

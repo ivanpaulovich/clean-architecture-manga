@@ -7,17 +7,22 @@ namespace Domain.Customers
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using Domain.Accounts.ValueObjects;
+    using Accounts.ValueObjects;
 
     /// <summary>
-    /// Accounts <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Design-Patterns#first-class-collections">First-Class Collection Design Pattern</see>.
+    ///     Accounts
+    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Design-Patterns#first-class-collections">
+    ///         First-Class
+    ///         Collection Design Pattern
+    ///     </see>
+    ///     .
     /// </summary>
     public sealed class AccountCollection
     {
         private readonly IList<AccountId> accountIds;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountCollection"/> class.
+        ///     Initializes a new instance of the <see cref="AccountCollection" /> class.
         /// </summary>
         public AccountCollection()
         {
@@ -25,7 +30,7 @@ namespace Domain.Customers
         }
 
         /// <summary>
-        /// Adds Accounts.
+        ///     Adds Accounts.
         /// </summary>
         /// <param name="accounts">Accounts list.</param>
         public void Add(IEnumerable<AccountId> accounts)
@@ -40,13 +45,13 @@ namespace Domain.Customers
         }
 
         /// <summary>
-        /// Add a single account.
+        ///     Add a single account.
         /// </summary>
         /// <param name="accountId">AccountId.</param>
         public void Add(AccountId accountId) => this.accountIds.Add(accountId);
 
         /// <summary>
-        /// Gets the AccountIds.
+        ///     Gets the AccountIds.
         /// </summary>
         /// <returns>ReadOnlyCollection.</returns>
         public IReadOnlyCollection<AccountId> GetAccountIds()

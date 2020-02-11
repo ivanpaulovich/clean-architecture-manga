@@ -7,8 +7,8 @@ namespace Infrastructure.InMemoryDataAccess
     {
         public User(CustomerId customerId, ExternalUserId externalUserId)
         {
-            CustomerId = customerId;
-            ExternalUserId = externalUserId;
+            this.CustomerId = customerId;
+            this.ExternalUserId = externalUserId;
         }
 
         protected User()

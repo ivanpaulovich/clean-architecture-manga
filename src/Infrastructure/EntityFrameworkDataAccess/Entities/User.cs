@@ -8,12 +8,12 @@ namespace Infrastructure.EntityFrameworkDataAccess
     using Domain.Security.ValueObjects;
 
     /// <summary>
-    /// User.
+    ///     User.
     /// </summary>
     public class User : Domain.Security.User
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="User"/> class.
+        ///     Initializes a new instance of the <see cref="User" /> class.
         /// </summary>
         /// <param name="customerId">CustomerId.</param>
         /// <param name="externalUserId">External User Id.</param>
@@ -24,7 +24,7 @@ namespace Infrastructure.EntityFrameworkDataAccess
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="User"/> class.
+        ///     Initializes a new instance of the <see cref="User" /> class.
         /// </summary>
         protected User()
         {

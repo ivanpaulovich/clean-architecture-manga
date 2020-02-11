@@ -6,19 +6,24 @@ namespace Application.UseCases
 {
     using System;
     using System.Threading.Tasks;
-    using Application.Boundaries.GetAccountDetails;
+    using Boundaries.GetAccountDetails;
     using Domain.Accounts;
 
     /// <summary>
-    /// Get Account Details <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">Use Case Domain-Driven Design Pattern</see>.
+    ///     Get Account Details
+    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">
+    ///         Use
+    ///         Case Domain-Driven Design Pattern
+    ///     </see>
+    ///     .
     /// </summary>
     public sealed class GetAccountDetailsUseCase : IUseCase, IUseCaseV2
     {
-        private readonly IOutputPort _outputPort;
         private readonly IAccountRepository _accountRepository;
+        private readonly IOutputPort _outputPort;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetAccountDetailsUseCase"/> class.
+        ///     Initializes a new instance of the <see cref="GetAccountDetailsUseCase" /> class.
         /// </summary>
         /// <param name="outputPort">Output Port.</param>
         /// <param name="accountRepository">Account Repository.</param>
@@ -31,14 +36,17 @@ namespace Application.UseCases
         }
 
         /// <summary>
-        /// Executes the Use Case.
+        ///     Executes the Use Case.
         /// </summary>
         /// <param name="input">Input Message.</param>
         /// <returns>Task.</returns>
         public async Task Execute(GetAccountDetailsInput input)
         {
             if (input is null)
-                throw new ArgumentNullException(nameof(input));
+            {
+                this._outputPort.WriteError(Messages.InputIsNull);
+                return;
+            }
 
             IAccount account;
 

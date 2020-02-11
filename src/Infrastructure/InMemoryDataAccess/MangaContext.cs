@@ -14,11 +14,11 @@ namespace Infrastructure.InMemoryDataAccess
         public MangaContext()
         {
             var entityFactory = new EntityFactory();
-            Customers = new Collection<Customer>();
-            Accounts = new Collection<Account>();
-            Credits = new Collection<Credit>();
-            Debits = new Collection<Debit>();
-            Users = new Collection<User>();
+            this.Customers = new Collection<Customer>();
+            this.Accounts = new Collection<Account>();
+            this.Credits = new Collection<Credit>();
+            this.Debits = new Collection<Debit>();
+            this.Users = new Collection<User>();
 
             var customer = new Customer(
                 new SSN("8608179999"),
@@ -35,14 +35,14 @@ namespace Infrastructure.InMemoryDataAccess
                 new PositiveMoney(100));
             customer.Register(account.Id);
 
-            Customers.Add(customer);
-            Accounts.Add(account);
-            Credits.Add((Credit)credit);
-            Debits.Add((Debit)debit);
-            Users.Add(user1);
+            this.Customers.Add(customer);
+            this.Accounts.Add(account);
+            this.Credits.Add((Credit)credit);
+            this.Debits.Add((Debit)debit);
+            this.Users.Add(user1);
 
-            DefaultCustomerId = customer.Id;
-            DefaultAccountId = account.Id;
+            this.DefaultCustomerId = customer.Id;
+            this.DefaultAccountId = account.Id;
 
             var secondCustomer = new Customer(
                 new SSN("8408319999"),
@@ -52,12 +52,12 @@ namespace Infrastructure.InMemoryDataAccess
                 new ExternalUserId("github/andrepaulovich"));
             var secondAccount = new Account(secondCustomer.Id);
 
-            Customers.Add(secondCustomer);
-            Accounts.Add(secondAccount);
-            Users.Add(secondUser);
+            this.Customers.Add(secondCustomer);
+            this.Accounts.Add(secondAccount);
+            this.Users.Add(secondUser);
 
-            SecondCustomerId = secondCustomer.Id;
-            SecondAccountId = secondAccount.Id;
+            this.SecondCustomerId = secondCustomer.Id;
+            this.SecondAccountId = secondAccount.Id;
         }
 
         public Collection<User> Users { get; set; }

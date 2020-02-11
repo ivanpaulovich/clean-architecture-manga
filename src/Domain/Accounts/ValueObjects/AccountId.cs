@@ -7,14 +7,19 @@ namespace Domain.Accounts.ValueObjects
     using System;
 
     /// <summary>
-    /// AccountId <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#entity">Entity Design Pattern</see>.
+    ///     AccountId
+    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#entity">
+    ///         Entity
+    ///         Design Pattern
+    ///     </see>
+    ///     .
     /// </summary>
     public readonly struct AccountId : IEquatable<AccountId>
     {
         private readonly Guid accountId;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountId"/> struct.
+        ///     Initializes a new instance of the <see cref="AccountId" /> struct.
         /// </summary>
         /// <param name="accountId">AccountId Guid.</param>
         public AccountId(Guid accountId)
@@ -28,7 +33,7 @@ namespace Domain.Accounts.ValueObjects
         }
 
         /// <summary>
-        /// Converts into string.
+        ///     Converts into string.
         /// </summary>
         /// <returns>String.</returns>
         public override string ToString()
@@ -37,13 +42,13 @@ namespace Domain.Accounts.ValueObjects
         }
 
         /// <summary>
-        /// Converts into Guid.
+        ///     Converts into Guid.
         /// </summary>
         /// <returns>Guid representation.</returns>
         public Guid ToGuid() => this.accountId;
 
         /// <summary>
-        /// Check if objects are equals.
+        ///     Check if objects are equals.
         /// </summary>
         /// <param name="obj">Other object.</param>
         /// <returns>Returns true when equals.</returns>
@@ -51,14 +56,14 @@ namespace Domain.Accounts.ValueObjects
         {
             if (obj is AccountId accountIdObj)
             {
-                return Equals(accountIdObj);
+                return this.Equals(accountIdObj);
             }
 
             return false;
         }
 
         /// <summary>
-        /// Get Hash Code.
+        ///     Get Hash Code.
         /// </summary>
         /// <returns>Hash Code.</returns>
         public override int GetHashCode()
@@ -67,7 +72,7 @@ namespace Domain.Accounts.ValueObjects
         }
 
         /// <summary>
-        /// Checks if other object is equals.
+        ///     Checks if other object is equals.
         /// </summary>
         /// <param name="other">Other AccountId.</param>
         /// <returns>True if equals.</returns>
@@ -77,7 +82,7 @@ namespace Domain.Accounts.ValueObjects
         }
 
         /// <summary>
-        /// Equals.
+        ///     Equals.
         /// </summary>
         /// <param name="left">Left object.</param>
         /// <param name="right">Right object.</param>
@@ -88,7 +93,7 @@ namespace Domain.Accounts.ValueObjects
         }
 
         /// <summary>
-        /// Different.
+        ///     Different.
         /// </summary>
         /// <param name="left">Left object.</param>
         /// <param name="right">Right object.</param>
