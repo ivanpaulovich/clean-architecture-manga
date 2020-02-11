@@ -17,30 +17,30 @@ namespace Application.UseCases
     /// <summary>
     /// Get Customer Details <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">Use Case Domain-Driven Design Pattern</see>.
     /// </summary>
-    public sealed class GetCustomerDetails : IUseCase
+    public sealed class GetCustomerDetailsUseCase : IUseCase
     {
-        private readonly IUserService userService;
-        private readonly IOutputPort outputPort;
-        private readonly ICustomerRepository customerRepository;
-        private readonly IAccountRepository accountRepository;
+        private readonly IUserService _userService;
+        private readonly IOutputPort _outputPort;
+        private readonly ICustomerRepository _customerRepository;
+        private readonly IAccountRepository _accountRepository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetCustomerDetails"/> class.
+        /// Initializes a new instance of the <see cref="GetCustomerDetailsUseCase"/> class.
         /// </summary>
         /// <param name="userService">User Service.</param>
         /// <param name="outputPort">Output Port.</param>
         /// <param name="customerRepository">Customer Repository.</param>
         /// <param name="accountRepository">Account Repository.</param>
-        public GetCustomerDetails(
+        public GetCustomerDetailsUseCase(
             IUserService userService,
             IOutputPort outputPort,
             ICustomerRepository customerRepository,
             IAccountRepository accountRepository)
         {
-            this.userService = userService;
-            this.outputPort = outputPort;
-            this.customerRepository = customerRepository;
-            this.accountRepository = accountRepository;
+            this._userService = userService;
+            this._outputPort = outputPort;
+            this._customerRepository = customerRepository;
+            this._accountRepository = accountRepository;
         }
 
         /// <summary>
@@ -52,22 +52,22 @@ namespace Application.UseCases
         {
             ICustomer customer;
 
-            if (this.userService.GetCustomerId() is CustomerId customerId)
+            if (this._userService.GetCustomerId() is CustomerId customerId)
             {
                 try
                 {
-                    customer = await this.customerRepository.GetBy(customerId)
+                    customer = await this._customerRepository.GetBy(customerId)
                         .ConfigureAwait(false);
                 }
                 catch (CustomerNotFoundException ex)
                 {
-                    this.outputPort.NotFound(ex.Message);
+                    this._outputPort.NotFound(ex.Message);
                     return;
                 }
             }
             else
             {
-                this.outputPort.NotFound("Customer does not exist.");
+                this._outputPort.NotFound("Customer does not exist.");
                 return;
             }
 
@@ -79,12 +79,12 @@ namespace Application.UseCases
 
                 try
                 {
-                    account = await this.accountRepository.GetAccount(accountId)
+                    account = await this._accountRepository.GetAccount(accountId)
                         .ConfigureAwait(false);
                 }
                 catch (AccountNotFoundException ex)
                 {
-                    this.outputPort.NotFound(ex.Message);
+                    this._outputPort.NotFound(ex.Message);
                     return;
                 }
 
@@ -93,7 +93,7 @@ namespace Application.UseCases
             }
 
             this.BuildOutput(
-                this.userService.GetExternalUserId(),
+                this._userService.GetExternalUserId(),
                 customer,
                 accounts);
         }
@@ -107,7 +107,7 @@ namespace Application.UseCases
                 externalUserId,
                 customer,
                 accounts);
-            this.outputPort.Standard(output);
+            this._outputPort.Standard(output);
         }
     }
 }

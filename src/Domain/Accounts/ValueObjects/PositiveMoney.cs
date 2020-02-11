@@ -19,7 +19,7 @@ namespace Domain.Accounts.ValueObjects
         {
             if (value < 0)
             {
-                throw new MoneyShouldBePositiveException("The 'Amount' should be positive.");
+                throw new MoneyShouldBePositiveException(Messages.TheAmountShouldBePositive);
             }
 
             this.value = new Money(value);
@@ -52,7 +52,7 @@ namespace Domain.Accounts.ValueObjects
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -67,7 +67,7 @@ namespace Domain.Accounts.ValueObjects
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()
@@ -76,7 +76,7 @@ namespace Domain.Accounts.ValueObjects
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
@@ -87,7 +87,7 @@ namespace Domain.Accounts.ValueObjects
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
@@ -98,7 +98,7 @@ namespace Domain.Accounts.ValueObjects
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>

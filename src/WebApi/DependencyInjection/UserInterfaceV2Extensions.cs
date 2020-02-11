@@ -10,7 +10,7 @@ namespace WebApi.DependencyInjection
         {
             services.AddScoped<GetAccountDetailsPresenterV2, GetAccountDetailsPresenterV2>();
             services.AddScoped<Application.Boundaries.GetAccountDetails.IUseCaseV2>(
-                ctx => new Application.UseCases.GetAccountDetails(
+                ctx => new Application.UseCases.GetAccountDetailsUseCase(
                     ctx.GetRequiredService<GetAccountDetailsPresenterV2>(),
                     ctx.GetRequiredService<IAccountRepository>()));
 

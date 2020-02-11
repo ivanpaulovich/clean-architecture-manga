@@ -17,13 +17,13 @@ namespace WebApi.DependencyInjection
         /// <returns>The modified instance.</returns>
         public static IServiceCollection AddUseCases(this IServiceCollection services)
         {
-            services.AddScoped<Application.Boundaries.CloseAccount.IUseCase, Application.UseCases.CloseAccount>();
-            services.AddScoped<Application.Boundaries.Deposit.IUseCase, Application.UseCases.Deposit>();
-            services.AddScoped<Application.Boundaries.GetAccountDetails.IUseCase, Application.UseCases.GetAccountDetails>();
-            services.AddScoped<Application.Boundaries.GetCustomerDetails.IUseCase, Application.UseCases.GetCustomerDetails>();
-            services.AddScoped<Application.Boundaries.Register.IUseCase, Application.UseCases.Register>();
-            services.AddScoped<Application.Boundaries.Withdraw.IUseCase, Application.UseCases.Withdraw>();
-            services.AddScoped<Application.Boundaries.Transfer.IUseCase, Application.UseCases.Transfer>();
+            services.AddScoped<Application.Boundaries.CloseAccount.IUseCase, Application.UseCases.CloseAccountUseCase>();
+            services.AddScoped<Application.Boundaries.Deposit.IUseCase, Application.UseCases.DepositUseCase>();
+            services.AddScoped<Application.Boundaries.GetAccountDetails.IUseCase, Application.UseCases.GetAccountDetailsUseCase>();
+            services.AddScoped<Application.Boundaries.GetCustomerDetails.IUseCase, Application.UseCases.GetCustomerDetailsUseCase>();
+            services.AddScoped<Application.Boundaries.Register.IUseCase, Application.UseCases.RegisterUseCase>();
+            services.AddScoped<Application.Boundaries.Withdraw.IUseCase, Application.UseCases.WithdrawUseCase>();
+            services.AddScoped<Application.Boundaries.Transfer.IUseCase, Application.UseCases.TransferUseCase>();
             services.AddScoped<CustomerService>();
             services.AddScoped<SecurityService>();
             services.AddScoped<AccountService>();

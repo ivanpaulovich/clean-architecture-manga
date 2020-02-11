@@ -4,6 +4,7 @@
 
 namespace Application.Boundaries.Register
 {
+    using System;
     using System.Collections.Generic;
     using Domain.Customers;
     using Domain.Customers.ValueObjects;
@@ -25,6 +26,9 @@ namespace Application.Boundaries.Register
             ICustomer customer,
             List<Account> accounts)
         {
+            if (customer is null)
+                throw new ArgumentNullException(nameof(customer));
+
             var customerEntity = (Domain.Customers.Customer)customer;
             this.ExternalUserId = externalUserId;
             this.CustomerId = customerEntity.Id;

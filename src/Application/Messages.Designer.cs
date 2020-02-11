@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Domain {
+namespace Application {
     using System;
     
     
@@ -29,7 +29,7 @@ namespace Domain {
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Domain.Messages", typeof(Messages).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Application.Messages", typeof(Messages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -43,48 +43,6 @@ namespace Domain {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        internal static string TheAmountShouldBePositive {
-            get {
-                return ResourceManager.GetString("TheAmountShouldBePositive", resourceCulture);
-            }
-        }
-        
-        internal static string CreditIdCannotBeEmpty {
-            get {
-                return ResourceManager.GetString("CreditIdCannotBeEmpty", resourceCulture);
-            }
-        }
-        
-        internal static string TheTextFieldIsRequired {
-            get {
-                return ResourceManager.GetString("TheTextFieldIsRequired", resourceCulture);
-            }
-        }
-        
-        internal static string DebitIdCannotBeEmpty {
-            get {
-                return ResourceManager.GetString("DebitIdCannotBeEmpty", resourceCulture);
-            }
-        }
-        
-        internal static string InvalidTextFormat {
-            get {
-                return ResourceManager.GetString("InvalidTextFormat", resourceCulture);
-            }
-        }
-        
-        internal static string AccountIdCannotBeEmpty {
-            get {
-                return ResourceManager.GetString("AccountIdCannotBeEmpty", resourceCulture);
-            }
-        }
-        
-        internal static string CustomerIdCannotBeEmpty {
-            get {
-                return ResourceManager.GetString("CustomerIdCannotBeEmpty", resourceCulture);
             }
         }
         

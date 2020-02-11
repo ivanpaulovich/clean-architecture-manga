@@ -21,7 +21,7 @@ namespace Domain.Accounts.Debits
         {
             if (debitId == Guid.Empty)
             {
-                throw new EmptyDebitIdException($"{nameof(debitId)} cannot be empty.");
+                throw new EmptyDebitIdException(Messages.DebitIdCannotBeEmpty);
             }
 
             this.debitId = debitId;
@@ -43,7 +43,7 @@ namespace Domain.Accounts.Debits
         public Guid ToGuid() => this.debitId;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -58,7 +58,7 @@ namespace Domain.Accounts.Debits
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()
@@ -67,7 +67,7 @@ namespace Domain.Accounts.Debits
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
@@ -78,7 +78,7 @@ namespace Domain.Accounts.Debits
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
@@ -89,7 +89,7 @@ namespace Domain.Accounts.Debits
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>

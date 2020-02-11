@@ -53,7 +53,7 @@ namespace Domain.Accounts
 
             if (this.GetCurrentBalance().LessThan(amountToWithdraw))
             {
-                throw new MoneyShouldBePositiveException("Account has not enough funds.");
+                throw new MoneyShouldBePositiveException(Messages.AccountHasNotEnoughFunds);
             }
 
             var debit = entityFactory.NewDebit(this, amountToWithdraw, DateTime.UtcNow);

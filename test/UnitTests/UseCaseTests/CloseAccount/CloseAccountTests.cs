@@ -56,17 +56,17 @@ namespace UnitTests.UseCasesTests.CloseAccount
             var closeAccountPresenter = new CloseAccountPresenter();
             var withdrawPresenter = new WithdrawPresenter();
 
-            var getAccountUseCase = new Application.UseCases.GetAccountDetails(
+            var getAccountUseCase = new Application.UseCases.GetAccountDetailsUseCase(
                 getAccountPresenter,
                 _fixture.AccountRepository);
 
-            var withdrawUseCase = new Application.UseCases.Withdraw(
+            var withdrawUseCase = new Application.UseCases.WithdrawUseCase(
                 _fixture.AccountService,
                 withdrawPresenter,
                 _fixture.AccountRepository,
                 _fixture.UnitOfWork);
 
-            var sut = new Application.UseCases.CloseAccount(
+            var sut = new Application.UseCases.CloseAccountUseCase(
                 closeAccountPresenter,
                 _fixture.AccountRepository);
 

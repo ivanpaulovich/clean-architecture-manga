@@ -21,8 +21,7 @@ namespace Domain.Accounts.ValueObjects
         {
             if (accountId == Guid.Empty)
             {
-                throw new EmptyAccountIdException(
-                    $"{nameof(accountId)} cannot be empty.");
+                throw new EmptyAccountIdException(Messages.AccountIdCannotBeEmpty);
             }
 
             this.accountId = accountId;

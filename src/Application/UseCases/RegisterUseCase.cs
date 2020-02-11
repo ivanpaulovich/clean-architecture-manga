@@ -4,6 +4,7 @@
 
 namespace Application.UseCases
 {
+    using System;
     using System.Threading.Tasks;
     using Application.Boundaries.Register;
     using Application.Services;
@@ -17,17 +18,17 @@ namespace Application.UseCases
     /// <summary>
     /// Register <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">Use Case Domain-Driven Design Pattern</see>.
     /// </summary>
-    public sealed class Register : IUseCase
+    public sealed class RegisterUseCase : IUseCase
     {
-        private readonly IUserService userService;
-        private readonly CustomerService customerService;
-        private readonly AccountService accountService;
-        private readonly SecurityService securityService;
-        private readonly IOutputPort outputPort;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IUserService _userService;
+        private readonly CustomerService _customerService;
+        private readonly AccountService _accountService;
+        private readonly SecurityService _securityService;
+        private readonly IOutputPort _outputPort;
+        private readonly IUnitOfWork _unitOfWork;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Register"/> class.
+        /// Initializes a new instance of the <see cref="RegisterUseCase"/> class.
         /// </summary>
         /// <param name="userService">User Service.</param>
         /// <param name="customerService">Customer Service.</param>
@@ -35,7 +36,7 @@ namespace Application.UseCases
         /// <param name="securityService">Security Service.</param>
         /// <param name="outputPort">Output Port.</param>
         /// <param name="unitOfWork">Unit of Work.</param>
-        public Register(
+        public RegisterUseCase(
             IUserService userService,
             CustomerService customerService,
             AccountService accountService,
@@ -43,12 +44,12 @@ namespace Application.UseCases
             IOutputPort outputPort,
             IUnitOfWork unitOfWork)
         {
-            this.userService = userService;
-            this.customerService = customerService;
-            this.accountService = accountService;
-            this.securityService = securityService;
-            this.outputPort = outputPort;
-            this.unitOfWork = unitOfWork;
+            this._userService = userService;
+            this._customerService = customerService;
+            this._accountService = accountService;
+            this._securityService = securityService;
+            this._outputPort = outputPort;
+            this._unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -58,29 +59,32 @@ namespace Application.UseCases
         /// <returns>Task.</returns>
         public async Task Execute(RegisterInput input)
         {
-            if (this.userService.GetCustomerId() is CustomerId customerId)
+            if (input is null)
+                throw new ArgumentNullException(nameof(input));
+
+            if (this._userService.GetCustomerId() is CustomerId customerId)
             {
-                if (await this.customerService.IsCustomerRegistered(customerId)
+                if (await this._customerService.IsCustomerRegistered(customerId)
                     .ConfigureAwait(false))
                 {
-                    this.outputPort.CustomerAlreadyRegistered($"Customer already exists.");
+                    this._outputPort.CustomerAlreadyRegistered($"Customer already exists.");
                     return;
                 }
             }
 
-            var customer = await this.customerService.CreateCustomer(input.SSN, this.userService.GetUserName())
+            var customer = await this._customerService.CreateCustomer(input.SSN, this._userService.GetUserName())
                 .ConfigureAwait(false);
-            var account = await this.accountService.OpenCheckingAccount(customer.Id, input.InitialAmount)
+            var account = await this._accountService.OpenCheckingAccount(customer.Id, input.InitialAmount)
                 .ConfigureAwait(false);
-            var user = await this.securityService.CreateUserCredentials(customer.Id, this.userService.GetExternalUserId())
+            var user = await this._securityService.CreateUserCredentials(customer.Id, this._userService.GetExternalUserId())
                 .ConfigureAwait(false);
 
             customer.Register(account.Id);
 
-            await this.unitOfWork.Save()
+            await this._unitOfWork.Save()
                 .ConfigureAwait(false);
 
-            this.BuildOutput(this.userService.GetExternalUserId(), customer, account);
+            this.BuildOutput(this._userService.GetExternalUserId(), customer, account);
         }
 
         private void BuildOutput(
@@ -92,7 +96,7 @@ namespace Application.UseCases
                 externalUserId,
                 customer,
                 account);
-            this.outputPort.Standard(output);
+            this._outputPort.Standard(output);
         }
     }
 }

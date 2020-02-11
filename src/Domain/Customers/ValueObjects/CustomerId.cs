@@ -21,7 +21,7 @@ namespace Domain.Customers.ValueObjects
         {
             if (customerId == Guid.Empty)
             {
-                throw new EmptyCustomerIdException($"{nameof(customerId)} cannot be empty.");
+                throw new EmptyCustomerIdException(Messages.CustomerIdCannotBeEmpty);
             }
 
             this.customerId = customerId;
@@ -58,7 +58,7 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()
@@ -67,7 +67,7 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
@@ -78,7 +78,7 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
@@ -89,7 +89,7 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>

@@ -23,7 +23,7 @@ namespace Domain.Customers.ValueObjects
         {
             if (string.IsNullOrWhiteSpace(text))
             {
-                throw new SSNShouldNotBeEmptyException($"The {nameof(text)} field is required.");
+                throw new SSNShouldNotBeEmptyException(Messages.TheTextFieldIsRequired);
             }
 
             Regex regex = new Regex(RegExForValidation);
@@ -31,7 +31,7 @@ namespace Domain.Customers.ValueObjects
 
             if (!match.Success)
             {
-                throw new InvalidSSNException($"Invalid {nameof(text)} format. Use YYMMDDNNNN.");
+                throw new InvalidSSNException(Messages.InvalidTextFormat);
             }
 
             this.text = text;

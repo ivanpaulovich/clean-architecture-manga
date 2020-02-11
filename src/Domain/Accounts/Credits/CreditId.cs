@@ -21,7 +21,7 @@ namespace Domain.Accounts.Credits
         {
             if (creditId == Guid.Empty)
             {
-                throw new EmptyCreditIdException($"{nameof(creditId)} cannot be empty.");
+                throw new EmptyCreditIdException(Messages.CreditIdCannotBeEmpty);
             }
 
             this.creditId = creditId;

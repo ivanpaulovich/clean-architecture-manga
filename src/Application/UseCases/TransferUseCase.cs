@@ -14,30 +14,30 @@ namespace Application.UseCases
     /// <summary>
     /// Transfer <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">Use Case Domain-Driven Design Pattern</see>.
     /// </summary>
-    public sealed class Transfer : IUseCase
+    public sealed class TransferUseCase : IUseCase
     {
-        private readonly AccountService accountService;
-        private readonly IOutputPort outputPort;
-        private readonly IAccountRepository accountRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly AccountService _accountService;
+        private readonly IOutputPort _outputPort;
+        private readonly IAccountRepository _accountRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Transfer"/> class.
+        /// Initializes a new instance of the <see cref="TransferUseCase"/> class.
         /// </summary>
         /// <param name="accountService">Account Service.</param>
         /// <param name="outputPort">Output Port.</param>
         /// <param name="accountRepository">Account Repository.</param>
         /// <param name="unitOfWork">Unit Of Work.</param>
-        public Transfer(
+        public TransferUseCase(
             AccountService accountService,
             IOutputPort outputPort,
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
-            this.accountService = accountService;
-            this.outputPort = outputPort;
-            this.accountRepository = accountRepository;
-            this.unitOfWork = unitOfWork;
+            this._accountService = accountService;
+            this._outputPort = outputPort;
+            this._accountRepository = accountRepository;
+            this._unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -52,24 +52,24 @@ namespace Application.UseCases
                 if (input is null)
                     throw new ArgumentNullException(nameof(input));
 
-                var originAccount = await this.accountRepository.GetAccount(input.OriginAccountId)
+                var originAccount = await this._accountRepository.GetAccount(input.OriginAccountId)
                     .ConfigureAwait(false);
-                var destinationAccount = await this.accountRepository.GetAccount(input.DestinationAccountId)
-                    .ConfigureAwait(false);
-
-                var debit = await this.accountService.Withdraw(originAccount, input.Amount)
-                    .ConfigureAwait(false);
-                var credit = await this.accountService.Deposit(destinationAccount, input.Amount)
+                var destinationAccount = await this._accountRepository.GetAccount(input.DestinationAccountId)
                     .ConfigureAwait(false);
 
-                await this.unitOfWork.Save()
+                var debit = await this._accountService.Withdraw(originAccount, input.Amount)
+                    .ConfigureAwait(false);
+                var credit = await this._accountService.Deposit(destinationAccount, input.Amount)
+                    .ConfigureAwait(false);
+
+                await this._unitOfWork.Save()
                     .ConfigureAwait(false);
 
                 this.BuildOutput(debit, originAccount, destinationAccount);
             }
             catch (AccountNotFoundException ex)
             {
-                this.outputPort.NotFound(ex.Message);
+                this._outputPort.NotFound(ex.Message);
                 return;
             }
         }
@@ -82,7 +82,7 @@ namespace Application.UseCases
                 originAccount.Id,
                 destinationAccount.Id);
 
-            this.outputPort.Standard(output);
+            this._outputPort.Standard(output);
         }
     }
 }

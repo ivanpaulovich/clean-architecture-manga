@@ -4,6 +4,7 @@
 
 namespace Application.Boundaries.CloseAccount
 {
+    using System;
     using Domain.Accounts;
     using Domain.Accounts.ValueObjects;
 
@@ -18,6 +19,9 @@ namespace Application.Boundaries.CloseAccount
         /// <param name="account">IAccount object.</param>
         public CloseAccountOutput(IAccount account)
         {
+            if (account is null)
+                throw new ArgumentNullException(nameof(account));
+
             this.AccountId = account.Id;
         }
 

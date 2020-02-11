@@ -23,7 +23,7 @@ namespace UnitTests.UseCasesTests.Deposit
         public async Task Deposit_ChangesBalance(decimal amount)
         {
             var presenter = new DepositPresenter();
-            var sut = new Deposit(
+            var sut = new DepositUseCase(
                 _fixture.AccountService,
                 presenter,
                 _fixture.AccountRepository,
@@ -43,7 +43,7 @@ namespace UnitTests.UseCasesTests.Deposit
         public async Task Deposit_ShouldNot_ChangesBalance_WhenNegative(decimal amount)
         {
             var presenter = new DepositPresenter();
-            var sut = new Deposit(
+            var sut = new DepositUseCase(
                 _fixture.AccountService,
                 presenter,
                 _fixture.AccountRepository,

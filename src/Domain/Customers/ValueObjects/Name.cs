@@ -19,7 +19,7 @@ namespace Domain.Customers.ValueObjects
         {
             if (string.IsNullOrWhiteSpace(text))
             {
-                throw new NameShouldNotBeEmptyException($"The {nameof(text)} field is required.");
+                throw new NameShouldNotBeEmptyException(Messages.TheTextFieldIsRequired);
             }
 
             this.text = text;
@@ -35,7 +35,7 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -50,7 +50,7 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()
@@ -59,7 +59,7 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
@@ -70,7 +70,7 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
@@ -81,7 +81,7 @@ namespace Domain.Customers.ValueObjects
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
