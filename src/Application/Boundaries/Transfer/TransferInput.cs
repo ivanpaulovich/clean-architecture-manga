@@ -9,7 +9,7 @@ namespace Application.Boundaries.Transfer
     /// <summary>
     ///     Transfer Input Message.
     /// </summary>
-    public sealed class TransferInput : IUseCaseInput
+    public sealed class TransferInput
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="TransferInput" /> class.

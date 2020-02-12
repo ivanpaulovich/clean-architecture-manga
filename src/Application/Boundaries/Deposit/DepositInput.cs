@@ -9,7 +9,7 @@ namespace Application.Boundaries.Deposit
     /// <summary>
     ///     Deposit Input Message.
     /// </summary>
-    public sealed class DepositInput : IUseCaseInput
+    public sealed class DepositInput
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="DepositInput" /> class.

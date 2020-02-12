@@ -6,7 +6,7 @@ namespace UnitTests.UseCasesTests.Deposit
     {
         public NegativeDataSetup()
         {
-            Add(-100);
+            this.Add(-100);
         }
     }
 }

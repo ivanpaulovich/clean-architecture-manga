@@ -9,7 +9,7 @@ namespace Application.Boundaries.Withdraw
     /// <summary>
     ///     Withdraw Input Message.
     /// </summary>
-    public sealed class WithdrawInput : IUseCaseInput
+    public sealed class WithdrawInput //: IUseCaseInput
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="WithdrawInput" /> class.

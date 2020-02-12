@@ -6,7 +6,7 @@ namespace UnitTests.UseCasesTests.Withdraw
     {
         public PositiveDataSetup()
         {
-            Add(100, 600);
+            this.Add(100, 600);
         }
     }
 }

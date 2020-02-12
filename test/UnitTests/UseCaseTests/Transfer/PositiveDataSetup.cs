@@ -6,7 +6,7 @@ namespace UnitTests.UseCaseTests.Transfer
     {
         public PositiveDataSetup()
         {
-            Add(100, 600);
+            this.Add(100, 600);
         }
     }
 }

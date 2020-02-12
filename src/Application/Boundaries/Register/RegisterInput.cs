@@ -10,7 +10,7 @@ namespace Application.Boundaries.Register
     /// <summary>
     ///     Register Input Message.
     /// </summary>
-    public sealed class RegisterInput : IUseCaseInput
+    public sealed class RegisterInput
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="RegisterInput" /> class.

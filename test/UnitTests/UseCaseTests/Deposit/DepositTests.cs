@@ -6,7 +6,7 @@ namespace UnitTests.UseCasesTests.Deposit
     using Application.UseCases;
     using Domain.Accounts.ValueObjects;
     using Infrastructure.InMemoryDataAccess.Presenters;
-    using UnitTests.TestFixtures;
+    using TestFixtures;
     using Xunit;
 
     public sealed class DepositTests : IClassFixture<StandardFixture>
@@ -15,7 +15,7 @@ namespace UnitTests.UseCasesTests.Deposit
 
         public DepositTests(StandardFixture fixture)
         {
-            _fixture = fixture;
+            this._fixture = fixture;
         }
 
         [Theory]
@@ -23,15 +23,11 @@ namespace UnitTests.UseCasesTests.Deposit
         public async Task Deposit_ChangesBalance(decimal amount)
         {
             var presenter = new DepositPresenter();
-            var sut = new DepositUseCase(
-                _fixture.AccountService,
-                presenter,
-                _fixture.AccountRepository,
-                _fixture.UnitOfWork);
+            var sut = new DepositUseCase(this._fixture.AccountService,
+                presenter, this._fixture.AccountRepository, this._fixture.UnitOfWork);
 
             await sut.Execute(
-                new DepositInput(
-                    _fixture.Context.DefaultAccountId,
+                new DepositInput(this._fixture.Context.DefaultAccountId,
                     new PositiveMoney(amount)));
 
             var output = presenter.Deposits.Last();
@@ -43,16 +39,12 @@ namespace UnitTests.UseCasesTests.Deposit
         public async Task Deposit_ShouldNot_ChangesBalance_WhenNegative(decimal amount)
         {
             var presenter = new DepositPresenter();
-            var sut = new DepositUseCase(
-                _fixture.AccountService,
-                presenter,
-                _fixture.AccountRepository,
-                _fixture.UnitOfWork);
+            var sut = new DepositUseCase(this._fixture.AccountService,
+                presenter, this._fixture.AccountRepository, this._fixture.UnitOfWork);
 
             await Assert.ThrowsAsync<MoneyShouldBePositiveException>(() =>
                 sut.Execute(
-                    new DepositInput(
-                        _fixture.Context.DefaultAccountId,
+                    new DepositInput(this._fixture.Context.DefaultAccountId,
                         new PositiveMoney(amount))));
         }
     }

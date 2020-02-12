@@ -9,7 +9,6 @@ namespace Application.Boundaries
     /// </summary>
     /// <typeparam name="TUseCaseOutput">Any IUseCaseOutput.</typeparam>
     public interface IOutputPortStandard<in TUseCaseOutput>
-        where TUseCaseOutput : IUseCaseOutput
     {
         /// <summary>
         ///     Writes to the Standard Output.

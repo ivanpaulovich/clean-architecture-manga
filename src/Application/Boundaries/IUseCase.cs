@@ -11,7 +11,6 @@ namespace Application.Boundaries
     /// </summary>
     /// <typeparam name="TUseCaseInput">Any Input Message.</typeparam>
     public interface IUseCase<in TUseCaseInput>
-        where TUseCaseInput : IUseCaseInput
     {
         /// <summary>
         ///     Executes the Use Case.
