@@ -4,7 +4,6 @@
 
 namespace Application.UseCases
 {
-    using System;
     using System.Threading.Tasks;
     using Boundaries.Register;
     using Domain.Accounts;

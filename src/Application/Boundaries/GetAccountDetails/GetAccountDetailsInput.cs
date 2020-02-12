@@ -9,7 +9,7 @@ namespace Application.Boundaries.GetAccountDetails
     /// <summary>
     ///     Get Account Details Input Message.
     /// </summary>
-    public sealed class GetAccountDetailsInput : IUseCaseInput
+    public sealed class GetAccountDetailsInput
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="GetAccountDetailsInput" /> class.

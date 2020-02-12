@@ -13,7 +13,7 @@ namespace Application.Boundaries.GetCustomerDetails
     /// <summary>
     ///     Gets Customer Details Output Message.
     /// </summary>
-    public sealed class GetCustomerDetailsOutput : IUseCaseOutput
+    public sealed class GetCustomerDetailsOutput
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="GetCustomerDetailsOutput" /> class.

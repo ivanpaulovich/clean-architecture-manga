@@ -4,7 +4,6 @@ namespace IntegrationTests.EntityFrameworkTests
     using System.Threading.Tasks;
     using Domain.Customers;
     using Domain.Customers.ValueObjects;
-    using Domain.Security;
     using Domain.Security.ValueObjects;
     using Infrastructure.EntityFrameworkDataAccess;
     using Infrastructure.EntityFrameworkDataAccess.Repositories;
@@ -17,7 +16,7 @@ namespace IntegrationTests.EntityFrameworkTests
         public async Task Add_ChangesDatabase()
         {
             var options = new DbContextOptionsBuilder<MangaContext>()
-                .UseInMemoryDatabase(databaseName: "test_database")
+                .UseInMemoryDatabase("test_database")
                 .Options;
 
             var factory = new EntityFactory();
@@ -48,7 +47,7 @@ namespace IntegrationTests.EntityFrameworkTests
         public async Task Get_ReturnsCustomer()
         {
             var options = new DbContextOptionsBuilder<MangaContext>()
-                .UseInMemoryDatabase(databaseName: "test_database")
+                .UseInMemoryDatabase("test_database")
                 .Options;
 
             ICustomer customer = null;

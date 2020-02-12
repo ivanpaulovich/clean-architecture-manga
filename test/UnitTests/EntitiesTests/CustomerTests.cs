@@ -2,6 +2,7 @@ namespace UnitTests.EntitiesTests
 {
     using Domain.Customers;
     using Domain.Customers.ValueObjects;
+    using Infrastructure.InMemoryDataAccess;
     using Xunit;
 
     public class CustomerTests
@@ -9,7 +10,7 @@ namespace UnitTests.EntitiesTests
         [Fact]
         public void Customer_Should_Be_Registered_With_1_Account()
         {
-            var entityFactory = new Infrastructure.InMemoryDataAccess.EntityFactory();
+            var entityFactory = new EntityFactory();
 
             // Arrange
             ICustomer sut = entityFactory.NewCustomer(

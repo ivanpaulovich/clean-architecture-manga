@@ -11,7 +11,7 @@ namespace Application.Boundaries.Deposit
     /// <summary>
     ///     Deposit Output Message.
     /// </summary>
-    public sealed class DepositOutput : IUseCaseOutput
+    public sealed class DepositOutput
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="DepositOutput" /> class.

@@ -10,24 +10,17 @@ namespace UnitTests.UseCasesTests.Register
     using Domain.Security.ValueObjects;
     using Infrastructure.InMemoryDataAccess.Presenters;
     using Infrastructure.InMemoryDataAccess.Services;
-    using UnitTests.TestFixtures;
+    using TestFixtures;
     using Xunit;
 
     public sealed class RegisterTests : IClassFixture<StandardFixture>
     {
-        private readonly StandardFixture _fixture;
-
         public RegisterTests(StandardFixture fixture)
         {
-            _fixture = fixture;
+            this._fixture = fixture;
         }
 
-        [Fact]
-        public void GivenNullInput_ThrowsException()
-        {
-            var register = new RegisterUseCase(null, null, null, null, null, null);
-            Assert.ThrowsAsync<Exception>(async () => await register.Execute(null));
-        }
+        private readonly StandardFixture _fixture;
 
         [Theory]
         [ClassData(typeof(PositiveDataSetup))]
@@ -38,12 +31,9 @@ namespace UnitTests.UseCasesTests.Register
             var ssn = new SSN("8608178888");
 
             var sut = new RegisterUseCase(
-                new TestUserService(_fixture.Context),
-                _fixture.CustomerService,
-                _fixture.AccountService,
-                _fixture.SecurityService,
-                presenter,
-                _fixture.UnitOfWork);
+                new TestUserService(this._fixture.Context), this._fixture.CustomerService, this._fixture.AccountService,
+                this._fixture.SecurityService,
+                presenter, this._fixture.UnitOfWork);
 
             await sut.Execute(new RegisterInput(
                 ssn,
@@ -54,6 +44,13 @@ namespace UnitTests.UseCasesTests.Register
             Assert.Equal(ssn, actual.Customer.SSN);
             Assert.NotEmpty(actual.Customer.Name.ToString());
             Assert.Equal(amount, actual.Account.CurrentBalance.ToDecimal());
+        }
+
+        [Fact]
+        public void GivenNullInput_ThrowsException()
+        {
+            var register = new RegisterUseCase(null, null, null, null, null, null);
+            Assert.ThrowsAsync<Exception>(async () => await register.Execute(null));
         }
     }
 }

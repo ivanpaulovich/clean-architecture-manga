@@ -11,7 +11,7 @@ namespace Application.Boundaries.Transfer
     /// <summary>
     ///     Transfer Output.
     /// </summary>
-    public sealed class TransferOutput : IUseCaseOutput
+    public sealed class TransferOutput
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="TransferOutput" /> class.

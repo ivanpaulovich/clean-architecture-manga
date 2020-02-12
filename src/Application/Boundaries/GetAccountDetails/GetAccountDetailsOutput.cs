@@ -14,7 +14,7 @@ namespace Application.Boundaries.GetAccountDetails
     /// <summary>
     ///     Get Account Details Output Message.
     /// </summary>
-    public sealed class GetAccountDetailsOutput : IUseCaseOutput
+    public sealed class GetAccountDetailsOutput
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="GetAccountDetailsOutput" /> class.

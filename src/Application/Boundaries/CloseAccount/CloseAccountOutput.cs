@@ -11,7 +11,7 @@ namespace Application.Boundaries.CloseAccount
     /// <summary>
     ///     Close Account Output Message.
     /// </summary>
-    public sealed class CloseAccountOutput : IUseCaseOutput
+    public sealed class CloseAccountOutput
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="CloseAccountOutput" /> class.

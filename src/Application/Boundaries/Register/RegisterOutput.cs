@@ -15,7 +15,7 @@ namespace Application.Boundaries.Register
     /// <summary>
     ///     Register Output Message.
     /// </summary>
-    public sealed class RegisterOutput : IUseCaseOutput
+    public sealed class RegisterOutput
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="RegisterOutput" /> class.

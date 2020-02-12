@@ -9,7 +9,7 @@ namespace Application.Boundaries.CloseAccount
     /// <summary>
     ///     Close Account Input Message.
     /// </summary>
-    public sealed class CloseAccountInput : IUseCaseInput
+    public sealed class CloseAccountInput
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="CloseAccountInput" /> class.
