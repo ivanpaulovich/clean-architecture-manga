@@ -9,96 +9,83 @@ namespace WebApi
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Prometheus;
 
     public sealed class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             this.Configuration = configuration;
+            this.Env = env;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
+        private IWebHostEnvironment Env { get; }
 
-        #region Called for ASPNETCORE_ENVIRONMENT=Development
-
-        public void ConfigureDevelopmentServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddControllersAsServices();
-            services.AddBusinessExceptionFilter();
-            services.AddFeatureFlags(this.Configuration);
-            services.AddVersioning();
-            services.AddSwagger();
-            services.AddUseCases();
-            services.AddInMemoryPersistence();
-            services.AddPresentersV1();
-            services.AddPresentersV2();
-            services.AddMediator();
-            services.AddSingleton<IUserService, TestUserService>();
-        }
-
-        public void ConfigureDevelopment(
-            IApplicationBuilder app,
-            IWebHostEnvironment env,
-            IApiVersionDescriptionProvider provider)
-        {
-            app.UseDeveloperExceptionPage();
-            app.UseHttpsRedirection();
-            app.UseMetricServer();
-            app.UseMangaHttpMetrics();
-            app.UseDeveloperExceptionPage();
-            app.UseRouting();
-            app.UseVersionedSwagger(provider);
-            app.UseStaticFiles();
-            app.UseEndpoints(endpoints =>
+            if (this.Env.IsDevelopment())
             {
-                endpoints
-                    .MapControllers();
-            });
-        }
+                services.AddInMemoryPersistence();
+                services.AddSingleton<IUserService, TestUserService>();
+            }
 
-        #endregion
+            if (this.Env.IsProduction())
+            {
+                services.AddSQLServerPersistence(this.Configuration);
+                services.AddGitHubAuthentication(this.Configuration);
+            }
 
-        #region Called for ASPNETCORE_ENVIRONMENT=Production
-
-        public void ConfigureProductionServices(IServiceCollection services)
-        {
             services.AddControllers().AddControllersAsServices();
             services.AddBusinessExceptionFilter();
             services.AddFeatureFlags(this.Configuration);
             services.AddVersioning();
             services.AddSwagger();
             services.AddUseCases();
-            services.AddSQLServerPersistence(this.Configuration);
             services.AddPresentersV1();
             services.AddPresentersV2();
             services.AddMediator();
             services.AddHttpContextAccessor();
-            services.AddGitHubAuthentication(this.Configuration);
         }
 
-        public void ConfigureProduction(
+        public void Configure(
             IApplicationBuilder app,
-            IWebHostEnvironment env,
             IApiVersionDescriptionProvider provider)
         {
+            if (this.Env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
             app.UseHttpsRedirection();
             app.UseMetricServer();
             app.UseMangaHttpMetrics();
             app.UseRouting();
             app.UseVersionedSwagger(provider);
             app.UseStaticFiles();
-            app.UseAuthentication();
-            app.UseAuthorization();
-            app.UseCookiePolicy();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints
-                    .MapControllers()
-                    .RequireAuthorization();
-            });
-        }
 
-        #endregion
+            if (this.Env.IsProduction())
+            {
+                app.UseAuthentication();
+                app.UseAuthorization();
+                app.UseCookiePolicy();
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints
+                        .MapControllers()
+                        .RequireAuthorization();
+                });
+            }
+
+            if (this.Env.IsDevelopment())
+            {
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints
+                        .MapControllers();
+                });
+            }
+        }
     }
 }
