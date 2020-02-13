@@ -4,38 +4,49 @@ namespace UnitTests.UseCasesTests.CloseAccount
     using System.Threading.Tasks;
     using Application.Boundaries.CloseAccount;
     using Application.Boundaries.GetAccountDetails;
-    using Application.Boundaries.Withdraw;
-    using Application.UseCases;
     using Domain.Accounts.ValueObjects;
     using Domain.Customers.ValueObjects;
     using Infrastructure.InMemoryDataAccess.Presenters;
-    using TestFixtures;
+    using UnitTests.TestFixtures;
     using Xunit;
 
     public sealed class CloseAccountTests : IClassFixture<StandardFixture>
     {
+        private readonly StandardFixture _fixture;
+
         public CloseAccountTests(StandardFixture fixture)
         {
-            this._fixture = fixture;
+            _fixture = fixture;
         }
-
-        private readonly StandardFixture _fixture;
 
         [Theory]
         [ClassData(typeof(PositiveDataSetup))]
         public void PositiveBalance_Should_Not_Allow_Closing(decimal amount)
         {
-            var customer = this._fixture.EntityFactory.NewCustomer(
+            var customer = _fixture.EntityFactory.NewCustomer(
                 new SSN("198608178899"),
                 new Name("Ivan Paulovich"));
 
-            var account = this._fixture.EntityFactory.NewAccount(customer.Id);
+            var account = _fixture.EntityFactory.NewAccount(customer.Id);
 
-            account.Deposit(this._fixture.EntityFactory, new PositiveMoney(amount));
+            account.Deposit(_fixture.EntityFactory, new PositiveMoney(amount));
 
             bool actual = account.IsClosingAllowed();
 
             Assert.False(actual);
+        }
+
+        [Fact]
+        public void ZeroBalance_Should_Allow_Closing()
+        {
+            var customer = _fixture.EntityFactory.NewCustomer(
+                new SSN("198608178899"),
+                new Name("Ivan Paulovich"));
+
+            var account = _fixture.EntityFactory.NewAccount(customer.Id);
+            bool actual = account.IsClosingAllowed();
+
+            Assert.True(actual);
         }
 
         [Fact]
@@ -45,38 +56,33 @@ namespace UnitTests.UseCasesTests.CloseAccount
             var closeAccountPresenter = new CloseAccountPresenter();
             var withdrawPresenter = new WithdrawPresenter();
 
-            var getAccountUseCase = new GetAccountDetailsUseCase(
-                getAccountPresenter, this._fixture.AccountRepository);
+            var getAccountUseCase = new Application.UseCases.GetAccountDetailsUseCase(
+                getAccountPresenter,
+                _fixture.AccountRepository);
 
-            var withdrawUseCase = new WithdrawUseCase(this._fixture.AccountService,
-                withdrawPresenter, this._fixture.AccountRepository, this._fixture.UnitOfWork);
+            var withdrawUseCase = new Application.UseCases.WithdrawUseCase(
+                _fixture.AccountService,
+                withdrawPresenter,
+                _fixture.AccountRepository,
+                _fixture.UnitOfWork);
 
-            var sut = new CloseAccountUseCase(
-                closeAccountPresenter, this._fixture.AccountRepository);
+            var sut = new Application.UseCases.CloseAccountUseCase(
+                closeAccountPresenter,
+                _fixture.AccountRepository);
 
-            await getAccountUseCase.Execute(new GetAccountDetailsInput(this._fixture.Context.DefaultAccountId));
+            await getAccountUseCase.Execute(new GetAccountDetailsInput(
+                _fixture.Context.DefaultAccountId));
             var getAccountDetailtOutput = getAccountPresenter.GetAccountDetails.First();
 
-            await withdrawUseCase.Execute(new WithdrawInput(this._fixture.Context.DefaultAccountId,
+            await withdrawUseCase.Execute(new Application.Boundaries.Withdraw.WithdrawInput(
+                _fixture.Context.DefaultAccountId,
                 new PositiveMoney(getAccountDetailtOutput.CurrentBalance.ToDecimal())));
 
-            var input = new CloseAccountInput(this._fixture.Context.DefaultAccountId);
+            var input = new CloseAccountInput(
+                _fixture.Context.DefaultAccountId);
             await sut.Execute(input);
 
             Assert.Equal(input.AccountId, closeAccountPresenter.ClosedAccounts.First().AccountId);
-        }
-
-        [Fact]
-        public void ZeroBalance_Should_Allow_Closing()
-        {
-            var customer = this._fixture.EntityFactory.NewCustomer(
-                new SSN("198608178899"),
-                new Name("Ivan Paulovich"));
-
-            var account = this._fixture.EntityFactory.NewAccount(customer.Id);
-            bool actual = account.IsClosingAllowed();
-
-            Assert.True(actual);
         }
     }
 }

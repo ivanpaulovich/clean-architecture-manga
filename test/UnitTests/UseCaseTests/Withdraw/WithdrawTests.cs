@@ -6,7 +6,7 @@ namespace UnitTests.UseCasesTests.Withdraw
     using Application.UseCases;
     using Domain.Accounts.ValueObjects;
     using Infrastructure.InMemoryDataAccess.Presenters;
-    using TestFixtures;
+    using UnitTests.TestFixtures;
     using Xunit;
 
     public sealed class WithdrawTests : IClassFixture<StandardFixture>
@@ -15,7 +15,7 @@ namespace UnitTests.UseCasesTests.Withdraw
 
         public WithdrawTests(StandardFixture fixture)
         {
-            this._fixture = fixture;
+            _fixture = fixture;
         }
 
         [Theory]
@@ -25,10 +25,14 @@ namespace UnitTests.UseCasesTests.Withdraw
             decimal expectedBalance)
         {
             var presenter = new WithdrawPresenter();
-            var sut = new WithdrawUseCase(this._fixture.AccountService,
-                presenter, this._fixture.AccountRepository, this._fixture.UnitOfWork);
+            var sut = new WithdrawUseCase(
+                _fixture.AccountService,
+                presenter,
+                _fixture.AccountRepository,
+                _fixture.UnitOfWork);
 
-            await sut.Execute(new WithdrawInput(this._fixture.Context.DefaultAccountId,
+            await sut.Execute(new WithdrawInput(
+                _fixture.Context.DefaultAccountId,
                 new PositiveMoney(amount)));
 
             var actual = presenter.Withdrawals.Last();

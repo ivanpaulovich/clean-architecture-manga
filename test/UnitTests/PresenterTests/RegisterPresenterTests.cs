@@ -2,24 +2,24 @@ namespace UnitTests.PresenterTests
 {
     using System.Net;
     using Application.Boundaries.Register;
+    using Domain.Customers;
     using Domain.Customers.ValueObjects;
+    using Domain.Security;
     using Domain.Security.ValueObjects;
     using Microsoft.AspNetCore.Mvc;
     using WebApi.UseCases.V1.Register;
     using Xunit;
-    using Account = Infrastructure.InMemoryDataAccess.Account;
-    using Customer = Infrastructure.InMemoryDataAccess.Customer;
 
     public sealed class RegisterPresenterTests
     {
         [Fact]
         public void GivenValidData_Handle_WritesOkObjectResult()
         {
-            var customer = new Customer(
+            var customer = new Infrastructure.InMemoryDataAccess.Customer(
                 new SSN("198608178888"),
                 new Name("Ivan Paulovich"));
 
-            var account = new Account(
+            var account = new Infrastructure.InMemoryDataAccess.Account(
                 customer.Id);
 
             var registerOutput = new RegisterOutput(
