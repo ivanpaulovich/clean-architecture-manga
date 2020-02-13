@@ -11,7 +11,7 @@ namespace Application.Boundaries.Withdraw
     /// <summary>
     ///     Withdraw Output Message.
     /// </summary>
-    public sealed class WithdrawOutput //: IUseCaseOutput
+    public sealed class WithdrawOutput
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="WithdrawOutput" /> class.
