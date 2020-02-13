@@ -6,9 +6,9 @@ namespace UnitTests.UseCasesTests.CloseAccount
     {
         public PositiveDataSetup()
         {
-            this.Add(0.5M);
-            this.Add(100M);
-            this.Add(200M);
+            Add(0.5M);
+            Add(100M);
+            Add(200M);
         }
     }
 }

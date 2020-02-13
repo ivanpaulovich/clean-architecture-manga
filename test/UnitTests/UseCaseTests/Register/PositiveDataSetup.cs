@@ -6,9 +6,9 @@ namespace UnitTests.UseCasesTests.Register
     {
         public PositiveDataSetup()
         {
-            this.Add(0);
-            this.Add(100);
-            this.Add(200);
+            Add(0);
+            Add(100);
+            Add(200);
         }
     }
 }

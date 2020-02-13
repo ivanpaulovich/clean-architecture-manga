@@ -6,7 +6,7 @@ namespace UnitTests.UseCaseTests.Transfer
     using Application.UseCases;
     using Domain.Accounts.ValueObjects;
     using Infrastructure.InMemoryDataAccess.Presenters;
-    using TestFixtures;
+    using UnitTests.TestFixtures;
     using Xunit;
 
     public sealed class TransferUseCaseTests : IClassFixture<StandardFixture>
@@ -15,7 +15,7 @@ namespace UnitTests.UseCaseTests.Transfer
 
         public TransferUseCaseTests(StandardFixture fixture)
         {
-            this._fixture = fixture;
+            _fixture = fixture;
         }
 
         [Theory]
@@ -25,11 +25,16 @@ namespace UnitTests.UseCaseTests.Transfer
             decimal expectedOriginBalance)
         {
             var presenter = new TransferPresenter();
-            var sut = new TransferUseCase(this._fixture.AccountService,
-                presenter, this._fixture.AccountRepository, this._fixture.UnitOfWork);
+            var sut = new TransferUseCase(
+                _fixture.AccountService,
+                presenter,
+                _fixture.AccountRepository,
+                _fixture.UnitOfWork);
 
             await sut.Execute(
-                new TransferInput(this._fixture.Context.DefaultAccountId, this._fixture.Context.SecondAccountId,
+                new TransferInput(
+                    _fixture.Context.DefaultAccountId,
+                    _fixture.Context.SecondAccountId,
                     new PositiveMoney(amount)));
 
             var actual = presenter.Transfers.Last();
