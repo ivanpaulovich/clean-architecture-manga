@@ -11,17 +11,6 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
     [ApiController]
     public sealed class CustomersController : ControllerBase
     {
-        private readonly IMediator _mediator;
-        private readonly GetCustomerDetailsPresenter _presenter;
-
-        public CustomersController(
-            IMediator mediator,
-            GetCustomerDetailsPresenter presenter)
-        {
-            this._mediator = mediator;
-            this._presenter = presenter;
-        }
-
         /// <summary>
         ///     Get the Customer details.
         /// </summary>
@@ -31,11 +20,13 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetCustomer()
+        public async Task<IActionResult> GetCustomer(
+            [FromServices] IMediator mediator,
+            [FromServices] GetCustomerDetailsPresenter presenter)
         {
             var input = new GetCustomerDetailsInput();
-            await this._mediator.PublishAsync(input);
-            return this._presenter.ViewModel;
+            await mediator.PublishAsync(input);
+            return presenter.ViewModel;
         }
     }
 }

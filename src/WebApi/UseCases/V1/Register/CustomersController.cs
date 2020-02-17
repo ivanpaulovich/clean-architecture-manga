@@ -14,17 +14,6 @@ namespace WebApi.UseCases.V1.Register
     [ApiController]
     public sealed class CustomersController : ControllerBase
     {
-        private readonly IMediator _mediator;
-        private readonly RegisterPresenter _presenter;
-
-        public CustomersController(
-            IMediator mediator,
-            RegisterPresenter presenter)
-        {
-            this._mediator = mediator;
-            this._presenter = presenter;
-        }
-
         /// <summary>
         ///     Register a customer.
         /// </summary>
@@ -37,13 +26,16 @@ namespace WebApi.UseCases.V1.Register
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RegisterResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Post([FromForm] [Required] RegisterRequest request)
+        public async Task<IActionResult> Post(
+            [FromServices] IMediator mediator,
+            [FromServices] RegisterPresenter presenter,
+            [FromForm] [Required] RegisterRequest request)
         {
             var input = new RegisterInput(
                 new SSN(request.SSN),
                 new PositiveMoney(request.InitialAmount));
-            await this._mediator.PublishAsync(input);
-            return this._presenter.ViewModel;
+            await mediator.PublishAsync(input);
+            return presenter.ViewModel;
         }
     }
 }

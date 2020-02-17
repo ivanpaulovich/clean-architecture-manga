@@ -16,17 +16,6 @@ namespace WebApi.UseCases.V2.GetAccountDetails
     [ApiController]
     public sealed class AccountsController : ControllerBase
     {
-        private readonly IMediator _mediator;
-        private readonly GetAccountDetailsPresenterV2 _presenter;
-
-        public AccountsController(
-            IMediator mediator,
-            GetAccountDetailsPresenterV2 presenter)
-        {
-            this._mediator = mediator;
-            this._presenter = presenter;
-        }
-
         /// <summary>
         ///     Get an account details.
         /// </summary>
@@ -37,11 +26,14 @@ namespace WebApi.UseCases.V2.GetAccountDetails
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Get([FromRoute] [Required] GetAccountDetailsRequestV2 request)
+        public async Task<IActionResult> Get(
+            [FromServices] IMediator mediator,
+            [FromServices] GetAccountDetailsPresenterV2 presenter,
+            [FromRoute] [Required] GetAccountDetailsRequestV2 request)
         {
             var input = new GetAccountDetailsInput(new AccountId(request.AccountId));
-            await this._mediator.PublishAsync(input, "GetAccountDetailsV2");
-            return this._presenter.ViewModel;
+            await mediator.PublishAsync(input, "GetAccountDetailsV2");
+            return presenter.ViewModel;
         }
     }
 }

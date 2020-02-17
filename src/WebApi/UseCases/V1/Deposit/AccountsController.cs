@@ -13,17 +13,6 @@ namespace WebApi.UseCases.V1.Deposit
     [ApiController]
     public sealed class AccountsController : ControllerBase
     {
-        private readonly IMediator mediator;
-        private readonly DepositPresenter presenter;
-
-        public AccountsController(
-            IMediator mediator,
-            DepositPresenter presenter)
-        {
-            this.mediator = mediator;
-            this.presenter = presenter;
-        }
-
         /// <summary>
         ///     Deposit on an account.
         /// </summary>
@@ -36,14 +25,17 @@ namespace WebApi.UseCases.V1.Deposit
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DepositResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Deposit([FromForm] [Required] DepositRequest request)
+        public async Task<IActionResult> Deposit(
+            [FromServices] IMediator mediator,
+            [FromServices] DepositPresenter presenter,
+            [FromForm] [Required] DepositRequest request)
         {
             var input = new DepositInput(
                 new AccountId(request.AccountId),
                 new PositiveMoney(request.Amount));
 
-            await this.mediator.PublishAsync(input);
-            return this.presenter.ViewModel;
+            await mediator.PublishAsync(input);
+            return presenter.ViewModel;
         }
     }
 }
