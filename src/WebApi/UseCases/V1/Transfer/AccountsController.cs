@@ -16,17 +16,6 @@ namespace WebApi.UseCases.V1.Transfer
     [ApiController]
     public sealed class AccountsController : ControllerBase
     {
-        private readonly IMediator _mediator;
-        private readonly TransferPresenter _presenter;
-
-        public AccountsController(
-            IMediator mediator,
-            TransferPresenter presenter)
-        {
-            this._mediator = mediator;
-            this._presenter = presenter;
-        }
-
         /// <summary>
         ///     Transfer to an account.
         /// </summary>
@@ -39,15 +28,18 @@ namespace WebApi.UseCases.V1.Transfer
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransferResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Transfer([FromForm] [Required] TransferRequest request)
+        public async Task<IActionResult> Transfer(
+            [FromServices] IMediator mediator,
+            [FromServices] TransferPresenter presenter,
+            [FromForm] [Required] TransferRequest request)
         {
             var input = new TransferInput(
                 new AccountId(request.OriginAccountId),
                 new AccountId(request.DestinationAccountId),
                 new PositiveMoney(request.Amount));
 
-            await this._mediator.PublishAsync(input);
-            return this._presenter.ViewModel;
+            await mediator.PublishAsync(input);
+            return presenter.ViewModel;
         }
     }
 }

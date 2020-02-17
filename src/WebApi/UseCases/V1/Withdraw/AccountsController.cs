@@ -13,17 +13,6 @@ namespace WebApi.UseCases.V1.Withdraw
     [ApiController]
     public sealed class AccountsController : ControllerBase
     {
-        private readonly IMediator _mediator;
-        private readonly WithdrawPresenter _presenter;
-
-        public AccountsController(
-            IMediator mediator,
-            WithdrawPresenter presenter)
-        {
-            this._mediator = mediator;
-            this._presenter = presenter;
-        }
-
         /// <summary>
         ///     Withdraw on an account.
         /// </summary>
@@ -36,13 +25,16 @@ namespace WebApi.UseCases.V1.Withdraw
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WithdrawResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Withdraw([FromForm] [Required] WithdrawRequest request)
+        public async Task<IActionResult> Withdraw(
+            [FromServices] IMediator mediator,
+            [FromServices] WithdrawPresenter presenter,
+            [FromForm] [Required] WithdrawRequest request)
         {
             var input = new WithdrawInput(
                 new AccountId(request.AccountId),
                 new PositiveMoney(request.Amount));
-            await this._mediator.PublishAsync(input);
-            return this._presenter.ViewModel;
+            await mediator.PublishAsync(input);
+            return presenter.ViewModel;
         }
     }
 }

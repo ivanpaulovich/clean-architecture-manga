@@ -13,17 +13,6 @@ namespace WebApi.UseCases.V1.CloseAccount
     [ApiController]
     public sealed class AccountsController : ControllerBase
     {
-        private readonly IMediator _mediator;
-        private readonly CloseAccountPresenter _presenter;
-
-        public AccountsController(
-            IMediator mediator,
-            CloseAccountPresenter presenter)
-        {
-            this._mediator = mediator;
-            this._presenter = presenter;
-        }
-
         /// <summary>
         ///     Close an Account.
         /// </summary>
@@ -36,11 +25,14 @@ namespace WebApi.UseCases.V1.CloseAccount
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CloseAccountResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Close([FromRoute] [Required] CloseAccountRequest request)
+        public async Task<IActionResult> Close(
+            [FromServices] IMediator mediator,
+            [FromServices] CloseAccountPresenter presenter,
+            [FromRoute] [Required] CloseAccountRequest request)
         {
             var input = new CloseAccountInput(new AccountId(request.AccountId));
-            await this._mediator.PublishAsync(input);
-            return this._presenter.ViewModel;
+            await mediator.PublishAsync(input);
+            return presenter.ViewModel;
         }
     }
 }
