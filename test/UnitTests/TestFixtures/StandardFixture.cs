@@ -3,9 +3,9 @@ namespace UnitTests.TestFixtures
     using Domain.Accounts;
     using Domain.Customers;
     using Domain.Security;
+    using Infrastructure.GitHubAuthentication;
     using Infrastructure.InMemoryDataAccess;
     using Infrastructure.InMemoryDataAccess.Repositories;
-    using Infrastructure.InMemoryDataAccess.Services;
 
     public sealed class StandardFixture
     {

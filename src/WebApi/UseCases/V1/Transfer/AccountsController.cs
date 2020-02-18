@@ -3,12 +3,12 @@ namespace WebApi.UseCases.V1.Transfer
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Application.Boundaries.Transfer;
-    using DependencyInjection.FeatureFlags;
     using Domain.Accounts.ValueObjects;
     using FluentMediator;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;
+    using Modules.FeatureFlags;
 
     [FeatureGate(Features.Transfer)]
     [ApiVersion("1.0")]

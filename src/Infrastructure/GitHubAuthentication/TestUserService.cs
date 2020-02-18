@@ -1,10 +1,11 @@
-namespace Infrastructure.InMemoryDataAccess.Services
+namespace Infrastructure.GitHubAuthentication
 {
     using System;
     using System.Linq;
     using Domain.Customers.ValueObjects;
     using Domain.Security.Services;
     using Domain.Security.ValueObjects;
+    using InMemoryDataAccess;
 
     public sealed class TestUserService : IUserService
     {

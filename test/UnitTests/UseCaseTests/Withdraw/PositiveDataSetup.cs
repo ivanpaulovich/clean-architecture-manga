@@ -1,4 +1,4 @@
-namespace UnitTests.UseCasesTests.Withdraw
+namespace UnitTests.UseCaseTests.Withdraw
 {
     using Xunit;
 
@@ -6,7 +6,7 @@ namespace UnitTests.UseCasesTests.Withdraw
     {
         public PositiveDataSetup()
         {
-            Add(100, 600);
+            this.Add(100, 600);
         }
     }
 }

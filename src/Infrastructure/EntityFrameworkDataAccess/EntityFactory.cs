@@ -13,6 +13,11 @@ namespace Infrastructure.EntityFrameworkDataAccess
     using Domain.Customers.ValueObjects;
     using Domain.Security;
     using Domain.Security.ValueObjects;
+    using Account = Entities.Account;
+    using Credit = Entities.Credit;
+    using Customer = Entities.Customer;
+    using Debit = Entities.Debit;
+    using User = Entities.User;
 
     /// <summary>
     ///     <see

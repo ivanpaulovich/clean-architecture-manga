@@ -1,15 +1,14 @@
 namespace WebApi
 {
-    using DependencyInjection;
-    using DependencyInjection.FeatureFlags;
     using Domain.Security.Services;
-    using Infrastructure.InMemoryDataAccess.Services;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Modules;
+    using Modules.FeatureFlags;
     using Prometheus;
 
     public sealed class Startup
@@ -25,18 +24,8 @@ namespace WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            if (this.Env.IsDevelopment())
-            {
-                services.AddInMemoryPersistence();
-                services.AddSingleton<IUserService, TestUserService>();
-            }
-
-            if (this.Env.IsProduction())
-            {
-                services.AddSQLServerPersistence(this.Configuration);
-                services.AddGitHubAuthentication(this.Configuration);
-            }
-
+            services.AddPersistence(this.Configuration);
+            services.AddAuthentication(this.Configuration);
             services.AddControllers().AddControllersAsServices();
             services.AddBusinessExceptionFilter();
             services.AddFeatureFlags(this.Configuration);

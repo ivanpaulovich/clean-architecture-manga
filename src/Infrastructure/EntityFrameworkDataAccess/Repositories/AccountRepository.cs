@@ -9,9 +9,9 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
     using Domain.Accounts.ValueObjects;
     using Microsoft.Data.SqlClient;
     using Microsoft.EntityFrameworkCore;
-    using Account = EntityFrameworkDataAccess.Account;
-    using Credit = EntityFrameworkDataAccess.Credit;
-    using Debit = EntityFrameworkDataAccess.Debit;
+    using Account = Entities.Account;
+    using Credit = Entities.Credit;
+    using Debit = Entities.Debit;
 
     public sealed class AccountRepository : IAccountRepository
     {

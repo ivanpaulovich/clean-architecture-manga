@@ -1,4 +1,4 @@
-namespace WebApi.DependencyInjection.FeatureFlags
+namespace WebApi.Modules.FeatureFlags
 {
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;

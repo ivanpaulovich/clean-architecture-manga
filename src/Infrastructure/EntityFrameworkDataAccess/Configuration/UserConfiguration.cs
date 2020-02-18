@@ -6,6 +6,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Configuration
 {
     using Domain.Customers.ValueObjects;
     using Domain.Security.ValueObjects;
+    using Entities;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

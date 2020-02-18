@@ -3,12 +3,12 @@ namespace WebApi.UseCases.V2.GetAccountDetails
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Application.Boundaries.GetAccountDetails;
-    using DependencyInjection.FeatureFlags;
     using Domain.Accounts.ValueObjects;
     using FluentMediator;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;
+    using Modules.FeatureFlags;
 
     [FeatureGate(Features.GetAccountDetailsV2)]
     [ApiVersion("2.0")]

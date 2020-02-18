@@ -1,4 +1,4 @@
-namespace WebApi.DependencyInjection
+namespace WebApi.Modules
 {
     using Filters;
     using Microsoft.Extensions.DependencyInjection;

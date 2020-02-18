@@ -1,4 +1,4 @@
-namespace WebApi.DependencyInjection
+namespace WebApi.Modules
 {
     using Application.Boundaries.GetAccountDetails;
     using Application.UseCases;
