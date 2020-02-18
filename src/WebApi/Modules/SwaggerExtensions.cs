@@ -1,4 +1,4 @@
-namespace WebApi.DependencyInjection
+namespace WebApi.Modules
 {
     using System.IO;
     using System.Reflection;

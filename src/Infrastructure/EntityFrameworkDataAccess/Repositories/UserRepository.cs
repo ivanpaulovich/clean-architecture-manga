@@ -6,7 +6,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
     using Domain.Security;
     using Domain.Security.ValueObjects;
     using Microsoft.EntityFrameworkCore;
-    using User = EntityFrameworkDataAccess.User;
+    using User = Entities.User;
 
     public sealed class UserRepository : IUserRepository
     {

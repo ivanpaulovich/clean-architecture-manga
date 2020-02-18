@@ -6,7 +6,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
     using Domain.Customers;
     using Domain.Customers.ValueObjects;
     using Microsoft.EntityFrameworkCore;
-    using Customer = EntityFrameworkDataAccess.Customer;
+    using Customer = Entities.Customer;
 
     public sealed class CustomerRepository : ICustomerRepository
     {

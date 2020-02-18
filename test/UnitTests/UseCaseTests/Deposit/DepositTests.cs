@@ -1,4 +1,4 @@
-namespace UnitTests.UseCasesTests.Deposit
+namespace UnitTests.UseCaseTests.Deposit
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -6,7 +6,7 @@ namespace UnitTests.UseCasesTests.Deposit
     using Application.UseCases;
     using Domain.Accounts.ValueObjects;
     using Infrastructure.InMemoryDataAccess.Presenters;
-    using UnitTests.TestFixtures;
+    using TestFixtures;
     using Xunit;
 
     public sealed class DepositTests : IClassFixture<StandardFixture>
@@ -15,7 +15,7 @@ namespace UnitTests.UseCasesTests.Deposit
 
         public DepositTests(StandardFixture fixture)
         {
-            _fixture = fixture;
+            this._fixture = fixture;
         }
 
         [Theory]
@@ -24,14 +24,14 @@ namespace UnitTests.UseCasesTests.Deposit
         {
             var presenter = new DepositPresenter();
             var sut = new DepositUseCase(
-                _fixture.AccountService,
+                this._fixture.AccountService,
                 presenter,
-                _fixture.AccountRepository,
-                _fixture.UnitOfWork);
+                this._fixture.AccountRepository,
+                this._fixture.UnitOfWork);
 
             await sut.Execute(
                 new DepositInput(
-                    _fixture.Context.DefaultAccountId,
+                    this._fixture.Context.DefaultAccountId,
                     new PositiveMoney(amount)));
 
             var output = presenter.Deposits.Last();
@@ -44,15 +44,15 @@ namespace UnitTests.UseCasesTests.Deposit
         {
             var presenter = new DepositPresenter();
             var sut = new DepositUseCase(
-                _fixture.AccountService,
+                this._fixture.AccountService,
                 presenter,
-                _fixture.AccountRepository,
-                _fixture.UnitOfWork);
+                this._fixture.AccountRepository,
+                this._fixture.UnitOfWork);
 
             await Assert.ThrowsAsync<MoneyShouldBePositiveException>(() =>
                 sut.Execute(
                     new DepositInput(
-                        _fixture.Context.DefaultAccountId,
+                        this._fixture.Context.DefaultAccountId,
                         new PositiveMoney(amount))));
         }
     }

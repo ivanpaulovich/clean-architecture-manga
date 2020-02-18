@@ -4,6 +4,7 @@
 
 namespace Infrastructure.EntityFrameworkDataAccess
 {
+    using Entities;
     using Microsoft.EntityFrameworkCore;
 
     public sealed class MangaContext : DbContext

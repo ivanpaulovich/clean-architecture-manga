@@ -6,7 +6,10 @@ namespace Infrastructure.EntityFrameworkDataAccess
     using Domain.Accounts.ValueObjects;
     using Domain.Customers.ValueObjects;
     using Domain.Security.ValueObjects;
+    using Entities;
     using Microsoft.EntityFrameworkCore;
+    using Credit = Entities.Credit;
+    using Debit = Entities.Debit;
 
     public static class SeedData
     {

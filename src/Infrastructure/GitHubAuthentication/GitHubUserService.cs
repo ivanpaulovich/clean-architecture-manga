@@ -1,4 +1,4 @@
-namespace WebApi.DependencyInjection.Authentication
+namespace Infrastructure.GitHubAuthentication
 {
     using System;
     using Domain.Customers.ValueObjects;
@@ -6,11 +6,11 @@ namespace WebApi.DependencyInjection.Authentication
     using Domain.Security.ValueObjects;
     using Microsoft.AspNetCore.Http;
 
-    public sealed class UserService : IUserService
+    public sealed class GitHubUserService : IUserService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserService(IHttpContextAccessor httpContextAccessor)
+        public GitHubUserService(IHttpContextAccessor httpContextAccessor)
         {
             this._httpContextAccessor = httpContextAccessor;
         }

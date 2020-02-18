@@ -1,4 +1,4 @@
-namespace UnitTests.UseCasesTests.CloseAccount
+namespace UnitTests.UseCaseTests.CloseAccount
 {
     using Xunit;
 
@@ -6,9 +6,9 @@ namespace UnitTests.UseCasesTests.CloseAccount
     {
         public PositiveDataSetup()
         {
-            Add(0.5M);
-            Add(100M);
-            Add(200M);
+            this.Add(0.5M);
+            this.Add(100M);
+            this.Add(200M);
         }
     }
 }

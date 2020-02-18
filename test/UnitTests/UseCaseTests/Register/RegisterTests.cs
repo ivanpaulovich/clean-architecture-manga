@@ -1,4 +1,4 @@
-namespace UnitTests.UseCasesTests.Register
+namespace UnitTests.UseCaseTests.Register
 {
     using System;
     using System.Linq;
@@ -8,9 +8,9 @@ namespace UnitTests.UseCasesTests.Register
     using Domain.Accounts.ValueObjects;
     using Domain.Customers.ValueObjects;
     using Domain.Security.ValueObjects;
+    using Infrastructure.GitHubAuthentication;
     using Infrastructure.InMemoryDataAccess.Presenters;
-    using Infrastructure.InMemoryDataAccess.Services;
-    using UnitTests.TestFixtures;
+    using TestFixtures;
     using Xunit;
 
     public sealed class RegisterTests : IClassFixture<StandardFixture>
@@ -19,7 +19,7 @@ namespace UnitTests.UseCasesTests.Register
 
         public RegisterTests(StandardFixture fixture)
         {
-            _fixture = fixture;
+            this._fixture = fixture;
         }
 
         [Fact]
@@ -38,12 +38,12 @@ namespace UnitTests.UseCasesTests.Register
             var ssn = new SSN("8608178888");
 
             var sut = new RegisterUseCase(
-                new TestUserService(_fixture.Context),
-                _fixture.CustomerService,
-                _fixture.AccountService,
-                _fixture.SecurityService,
+                new TestUserService(this._fixture.Context),
+                this._fixture.CustomerService,
+                this._fixture.AccountService,
+                this._fixture.SecurityService,
                 presenter,
-                _fixture.UnitOfWork);
+                this._fixture.UnitOfWork);
 
             await sut.Execute(new RegisterInput(
                 ssn,

@@ -2,7 +2,7 @@
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
-namespace Infrastructure.EntityFrameworkDataAccess
+namespace Infrastructure.EntityFrameworkDataAccess.Entities
 {
     using Domain.Customers.ValueObjects;
     using Domain.Security.ValueObjects;

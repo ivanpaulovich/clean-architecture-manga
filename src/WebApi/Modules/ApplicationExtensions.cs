@@ -1,6 +1,5 @@
-namespace WebApi.DependencyInjection
+namespace WebApi.Modules
 {
-    using Application.Boundaries.CloseAccount;
     using Application.UseCases;
     using Domain.Accounts;
     using Domain.Customers;
@@ -19,13 +18,14 @@ namespace WebApi.DependencyInjection
         /// <returns>The modified instance.</returns>
         public static IServiceCollection AddUseCases(this IServiceCollection services)
         {
-            services.AddScoped<IUseCase, CloseAccountUseCase>();
+            services.AddScoped<Application.Boundaries.CloseAccount.IUseCase, CloseAccountUseCase>();
             services.AddScoped<Application.Boundaries.Deposit.IUseCase, DepositUseCase>();
             services.AddScoped<Application.Boundaries.GetAccountDetails.IUseCase, GetAccountDetailsUseCase>();
             services.AddScoped<Application.Boundaries.GetCustomerDetails.IUseCase, GetCustomerDetailsUseCase>();
             services.AddScoped<Application.Boundaries.Register.IUseCase, RegisterUseCase>();
             services.AddScoped<Application.Boundaries.Withdraw.IUseCase, WithdrawUseCase>();
             services.AddScoped<Application.Boundaries.Transfer.IUseCase, TransferUseCase>();
+
             services.AddScoped<CustomerService>();
             services.AddScoped<SecurityService>();
             services.AddScoped<AccountService>();

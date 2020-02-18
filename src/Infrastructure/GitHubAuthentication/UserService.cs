@@ -1,4 +1,4 @@
-namespace Infrastructure.InMemoryDataAccess.Services
+namespace Infrastructure.GitHubAuthentication
 {
     using System;
     using Domain.Customers.ValueObjects;

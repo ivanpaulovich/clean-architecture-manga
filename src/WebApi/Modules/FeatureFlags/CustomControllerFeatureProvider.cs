@@ -1,4 +1,4 @@
-namespace WebApi.DependencyInjection.FeatureFlags
+namespace WebApi.Modules.FeatureFlags
 {
     using System.Collections;
     using System.Collections.Generic;

@@ -8,7 +8,7 @@ namespace Infrastructure.EntityFrameworkDataAccess.Configuration
     using Domain.Accounts.ValueObjects;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using Credit = EntityFrameworkDataAccess.Credit;
+    using Credit = Entities.Credit;
 
     /// <summary>
     ///     Credit Configuration.
