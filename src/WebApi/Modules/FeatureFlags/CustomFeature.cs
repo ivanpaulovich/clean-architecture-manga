@@ -1,6 +1,6 @@
 namespace WebApi.Modules.FeatureFlags
 {
-    public enum Features
+    public enum CustomFeature
     {
         Transfer,
         GetAccountDetailsV2

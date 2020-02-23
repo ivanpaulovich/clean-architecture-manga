@@ -12,6 +12,6 @@ namespace WebApi.UseCases.V1.CloseAccount
         ///     Gets or sets account ID.
         /// </summary>
         [Required]
-        public Guid AccountId { get; set; }
+        public Guid AccountId { get; set; } = Guid.Empty;
     }
 }

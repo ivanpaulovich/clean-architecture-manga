@@ -19,6 +19,8 @@ namespace WebApi.UseCases.V1.Withdraw
         /// <response code="200">The updated balance.</response>
         /// <response code="400">Bad request.</response>
         /// <response code="500">Error.</response>
+        /// <param name="mediator"></param>
+        /// <param name="presenter"></param>
         /// <param name="request">The request to Withdraw.</param>
         /// <returns>The updated balance.</returns>
         [HttpPatch("Withdraw")]
@@ -33,7 +35,8 @@ namespace WebApi.UseCases.V1.Withdraw
             var input = new WithdrawInput(
                 new AccountId(request.AccountId),
                 new PositiveMoney(request.Amount));
-            await mediator.PublishAsync(input);
+            await mediator.PublishAsync(input)
+                .ConfigureAwait(false);
             return presenter.ViewModel;
         }
     }
