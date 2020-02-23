@@ -12,12 +12,12 @@ namespace WebApi.UseCases.V1.Deposit
         ///     Gets or sets the Account ID.
         /// </summary>
         [Required]
-        public Guid AccountId { get; set; }
+        public Guid AccountId { get; set; } = Guid.Empty;
 
         /// <summary>
         ///     Gets or sets the amount to Deposit.
         /// </summary>
         [Required]
-        public decimal Amount { get; set; }
+        public decimal Amount { get; set; } = .0M;
     }
 }

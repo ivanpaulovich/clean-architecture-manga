@@ -5,15 +5,30 @@ namespace WebApi.UseCases.V1.Register
     using Microsoft.AspNetCore.Mvc;
     using ViewModels;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public sealed class RegisterPresenter : IOutputPort
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult ViewModel { get; private set; } = new NoContentResult();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
         public void CustomerAlreadyRegistered(string message)
         {
             this.ViewModel = new BadRequestObjectResult(message);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="output"></param>
         public void Standard(RegisterOutput output)
         {
             var transactions = new List<TransactionModel>();
@@ -48,6 +63,10 @@ namespace WebApi.UseCases.V1.Register
                 registerResponse);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
         public void WriteError(string message)
         {
             this.ViewModel = new BadRequestObjectResult(message);

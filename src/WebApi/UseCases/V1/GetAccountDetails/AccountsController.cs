@@ -8,6 +8,13 @@ namespace WebApi.UseCases.V1.GetAccountDetails
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
+    /// <summary>
+    ///     Accounts
+    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Design-Patterns#controller">
+    ///         Controller Design Pattern
+    ///     </see>
+    ///     .
+    /// </summary>
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
@@ -16,6 +23,8 @@ namespace WebApi.UseCases.V1.GetAccountDetails
         /// <summary>
         ///     Get an account details.
         /// </summary>
+        /// <param name="mediator"></param>
+        /// <param name="presenter"></param>
         /// <param name="request">A <see cref="GetAccountDetailsRequest"></see>.</param>
         /// <returns>An asynchronous <see cref="IActionResult" />.</returns>
         [HttpGet("{AccountId}", Name = "GetAccount")]
@@ -29,7 +38,8 @@ namespace WebApi.UseCases.V1.GetAccountDetails
             [FromRoute] [Required] GetAccountDetailsRequest request)
         {
             var input = new GetAccountDetailsInput(new AccountId(request.AccountId));
-            await mediator.PublishAsync(input);
+            await mediator.PublishAsync(input)
+                .ConfigureAwait(false);
             return presenter.ViewModel;
         }
     }

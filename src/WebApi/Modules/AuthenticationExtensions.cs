@@ -71,10 +71,12 @@ namespace WebApi.Modules
                                     new AuthenticationHeaderValue("Bearer", context.AccessToken);
 
                                 var response = await context.Backchannel.SendAsync(request,
-                                    HttpCompletionOption.ResponseHeadersRead, context.HttpContext.RequestAborted);
+                                    HttpCompletionOption.ResponseHeadersRead, context.HttpContext.RequestAborted)
+                                    .ConfigureAwait(false);
                                 response.EnsureSuccessStatusCode();
 
-                                var user = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+                                var user = JsonDocument.Parse(await response.Content.ReadAsStringAsync()
+                                    .ConfigureAwait(false));
 
                                 context.RunClaimActions(user.RootElement);
                             }

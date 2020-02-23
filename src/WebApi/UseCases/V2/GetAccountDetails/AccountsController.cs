@@ -10,7 +10,14 @@ namespace WebApi.UseCases.V2.GetAccountDetails
     using Microsoft.FeatureManagement.Mvc;
     using Modules.FeatureFlags;
 
-    [FeatureGate(Feature.GetAccountDetailsV2)]
+    /// <summary>
+    ///     Accounts
+    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Design-Patterns#controller">
+    ///         Controller Design Pattern
+    ///     </see>
+    ///     .
+    /// </summary>
+    [FeatureGate(CustomFeature.GetAccountDetailsV2)]
     [ApiVersion("2.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
@@ -19,6 +26,8 @@ namespace WebApi.UseCases.V2.GetAccountDetails
         /// <summary>
         ///     Get an account details.
         /// </summary>
+        /// <param name="mediator"></param>
+        /// <param name="presenter"></param>
         /// <param name="request">A <see cref="GetAccountDetailsRequestV2"></see>.</param>
         /// <returns>An asynchronous <see cref="IActionResult" />.</returns>
         [HttpGet("{AccountId}", Name = "GetAccountV2")]
@@ -32,7 +41,8 @@ namespace WebApi.UseCases.V2.GetAccountDetails
             [FromRoute] [Required] GetAccountDetailsRequestV2 request)
         {
             var input = new GetAccountDetailsInput(new AccountId(request.AccountId));
-            await mediator.PublishAsync(input, "GetAccountDetailsV2");
+            await mediator.PublishAsync(input, "GetAccountDetailsV2")
+                .ConfigureAwait(false);
             return presenter.ViewModel;
         }
     }
