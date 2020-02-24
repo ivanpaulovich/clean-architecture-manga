@@ -46,8 +46,8 @@ namespace WebApi.Modules
                     .AddCookie()
                     .AddOAuth("GitHub", options =>
                     {
-                        options.ClientId = configuration["GitHub:ClientId"];
-                        options.ClientSecret = configuration["GitHub:ClientSecret"];
+                        options.ClientId = configuration["AuthenticationModule:ClientId"];
+                        options.ClientSecret = configuration["AuthenticationModule:ClientSecret"];
                         options.CallbackPath = new PathString("/signin-github");
 
                         options.AuthorizationEndpoint = "https://github.com/login/oauth/authorize";
