@@ -39,7 +39,8 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
             var id = new SqlParameter("@Id", account.Id);
 
             int affectedRows = await this._context.Database.ExecuteSqlRawAsync(
-                deleteSQL, id);
+                deleteSQL, id)
+                .ConfigureAwait(false);
         }
 
         public async Task<IAccount> GetAccount(AccountId id)
@@ -47,7 +48,8 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
             var account = await this._context
                 .Accounts
                 .Where(a => a.Id.Equals(id))
-                .SingleOrDefaultAsync();
+                .SingleOrDefaultAsync()
+                .ConfigureAwait(false);
 
             if (account is null)
             {

@@ -1,4 +1,4 @@
-namespace WebApi.Modules.FeatureFlags
+namespace WebApi.Modules.Common.FeatureFlags
 {
     public enum CustomFeature
     {

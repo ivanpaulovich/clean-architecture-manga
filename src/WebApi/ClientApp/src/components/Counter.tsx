@@ -27,7 +27,7 @@ class Counter extends React.PureComponent<CounterProps> {
             </React.Fragment>
         );
     }
-};
+}
 
 export default connect(
     (state: ApplicationState) => state.counter,

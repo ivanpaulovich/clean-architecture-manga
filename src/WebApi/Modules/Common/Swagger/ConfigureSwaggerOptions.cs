@@ -1,4 +1,4 @@
-namespace WebApi.Filters
+namespace WebApi.Modules.Common.Swagger
 {
     using System;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -42,12 +42,19 @@ namespace WebApi.Filters
         {
             var info = new OpenApiInfo
             {
-                Title = "Sample API",
+                Title = "Clean Architecture Manga API",
                 Version = description.ApiVersion.ToString(),
-                Description = "A sample application with Swagger, Swashbuckle, and API versioning.",
-                Contact = new OpenApiContact {Name = "Bill Mei", Email = "bill.mei@somewhere.com"},
-                TermsOfService = new Uri("http://Shareware.com"),
-                License = new OpenApiLicense {Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT")}
+                Description = "Clean Architecture, DDD and TDD implementation.",
+                Contact = new OpenApiContact
+                {
+                    Name = "Ivan Paulovich", Email = "ivan@paulovich.net"
+                },
+                TermsOfService = new Uri("http://paulovich.net"),
+                License = new OpenApiLicense
+                {
+                    Name = "Apache License",
+                    Url = new Uri("https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/README.md")
+                }
             };
 
             if (description.IsDeprecated)

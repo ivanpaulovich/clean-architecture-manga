@@ -22,34 +22,45 @@ namespace ComponentTests.V1
         [Fact]
         public async Task Register_Deposit_Withdraw_Close()
         {
-            Tuple<string, string> customerId_accountId = await Register(100);
-            await GetCustomer();
-            await GetAccount(customerId_accountId.Item2);
-            await Withdraw(customerId_accountId.Item2, 100);
-            await GetCustomer();
-            await Deposit(customerId_accountId.Item2, 500);
-            await Deposit(customerId_accountId.Item2, 400);
-            await GetCustomer();
-            await Withdraw(customerId_accountId.Item2, 400);
-            await Withdraw(customerId_accountId.Item2, 500);
-            await Close(customerId_accountId.Item2);
+            Tuple<string, string> customerId_accountId = await this.Register(100)
+                .ConfigureAwait(false);
+            await this.GetCustomer()
+                .ConfigureAwait(false);
+            await this.GetAccount(customerId_accountId.Item2)
+                .ConfigureAwait(false);
+            await this.Withdraw(customerId_accountId.Item2, 100)
+                .ConfigureAwait(false);
+            await this.GetCustomer()
+                .ConfigureAwait(false);
+            await this.Deposit(customerId_accountId.Item2, 500)
+                .ConfigureAwait(false);
+            await this.Deposit(customerId_accountId.Item2, 400)
+                .ConfigureAwait(false);
+            await this.GetCustomer()
+                .ConfigureAwait(false);
+            await this.Withdraw(customerId_accountId.Item2, 400)
+                .ConfigureAwait(false);
+            await this.Withdraw(customerId_accountId.Item2, 500)
+                .ConfigureAwait(false);
+            await this.Close(customerId_accountId.Item2)
+                .ConfigureAwait(false);
         }
 
         private async Task GetCustomer()
         {
-            var client = _factory.CreateClient();
+            var client = this._factory.CreateClient();
             string result = await client.GetStringAsync($"/api/v1/Customers/");
         }
 
         private async Task GetAccount(string accountId)
         {
-            var client = _factory.CreateClient();
+            var client = this._factory.CreateClient();
             string result = await client.GetStringAsync($"/api/v1/Accounts/{accountId}");
         }
 
         private async Task<Tuple<string, string>> Register(decimal initialAmount)
         {
-            var client = _factory.CreateClient();
+            var client = this._factory.CreateClient();
 
             var content = new FormUrlEncodedContent(new[]
             {
@@ -74,7 +85,7 @@ namespace ComponentTests.V1
 
         private async Task Deposit(string account, decimal amount)
         {
-            var client = _factory.CreateClient();
+            var client = this._factory.CreateClient();
             var content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("accountId", account),
@@ -89,7 +100,7 @@ namespace ComponentTests.V1
 
         private async Task Withdraw(string account, decimal amount)
         {
-            var client = _factory.CreateClient();
+            var client = this._factory.CreateClient();
 
             var content = new FormUrlEncodedContent(new[]
             {
@@ -105,7 +116,7 @@ namespace ComponentTests.V1
 
         private async Task Close(string account)
         {
-            var client = _factory.CreateClient();
+            var client = this._factory.CreateClient();
             var response = await client.DeleteAsync($"api/v1/Accounts/{account}");
             response.EnsureSuccessStatusCode();
         }

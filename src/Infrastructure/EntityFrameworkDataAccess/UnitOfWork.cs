@@ -22,7 +22,8 @@ namespace Infrastructure.EntityFrameworkDataAccess
 
         public async Task<int> Save()
         {
-            int affectedRows = await this._context.SaveChangesAsync();
+            int affectedRows = await this._context.SaveChangesAsync()
+                .ConfigureAwait(false);
             return affectedRows;
         }
 
