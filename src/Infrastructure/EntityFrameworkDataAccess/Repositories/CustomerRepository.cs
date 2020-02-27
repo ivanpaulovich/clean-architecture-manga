@@ -20,15 +20,18 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
 
         public async Task Add(ICustomer customer)
         {
-            await this._context.Customers.AddAsync((Customer)customer);
-            await this._context.SaveChangesAsync();
+            await this._context.Customers.AddAsync((Customer)customer)
+                .ConfigureAwait(false);
+            await this._context.SaveChangesAsync()
+                .ConfigureAwait(false);
         }
 
         public async Task<ICustomer> GetBy(CustomerId customerId)
         {
             var customer = await this._context.Customers
                 .Where(c => c.Id.Equals(customerId))
-                .SingleOrDefaultAsync();
+                .SingleOrDefaultAsync()
+                .ConfigureAwait(false);
 
             if (customer is null)
             {
@@ -49,7 +52,8 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
         public async Task Update(ICustomer customer)
         {
             this._context.Customers.Update((Customer)customer);
-            await this._context.SaveChangesAsync();
+            await this._context.SaveChangesAsync()
+                .ConfigureAwait(false);
         }
     }
 }

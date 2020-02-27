@@ -1,10 +1,10 @@
-namespace WebApi.Filters
+namespace WebApi.Modules.Common
 {
     using Domain;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Filters;
 
-    public sealed class BusinessExceptionFilter : IExceptionFilter
+    public sealed class ExceptionFilter : IExceptionFilter
     {
         public void OnException(ExceptionContext context)
         {

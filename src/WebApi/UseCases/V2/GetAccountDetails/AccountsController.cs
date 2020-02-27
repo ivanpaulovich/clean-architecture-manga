@@ -8,7 +8,7 @@ namespace WebApi.UseCases.V2.GetAccountDetails
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;
-    using Modules.FeatureFlags;
+    using Modules.Common.FeatureFlags;
 
     /// <summary>
     ///     Accounts

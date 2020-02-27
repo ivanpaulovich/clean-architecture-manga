@@ -18,7 +18,8 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
         public async Task Add(ICustomer customer)
         {
             this._context.Customers.Add((Customer)customer);
-            await Task.CompletedTask;
+            await Task.CompletedTask
+                .ConfigureAwait(false);
         }
 
         public async Task<ICustomer> GetBy(CustomerId customerId)
@@ -33,7 +34,8 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
                     $"The customer {customerId} does not exist or is not processed yet.");
             }
 
-            return await Task.FromResult<Domain.Customers.Customer>(customer);
+            return await Task.FromResult<Domain.Customers.Customer>(customer)
+                .ConfigureAwait(false);
         }
 
         public async Task Update(ICustomer customer)
@@ -43,7 +45,8 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
                 .SingleOrDefault();
 
             customerOld = (Domain.Customers.Customer)customer;
-            await Task.CompletedTask;
+            await Task.CompletedTask
+                .ConfigureAwait(false);
         }
     }
 }

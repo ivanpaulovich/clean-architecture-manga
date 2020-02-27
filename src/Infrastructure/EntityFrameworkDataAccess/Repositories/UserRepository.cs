@@ -20,8 +20,10 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
 
         public async Task Add(IUser user)
         {
-            await this._context.Users.AddAsync((User)user);
-            await this._context.SaveChangesAsync();
+            await this._context.Users.AddAsync((User)user)
+                .ConfigureAwait(false);
+            await this._context.SaveChangesAsync()
+                .ConfigureAwait(false);
         }
 
         public async Task<IUser> GetUser(ExternalUserId externalUserId)
@@ -29,7 +31,8 @@ namespace Infrastructure.EntityFrameworkDataAccess.Repositories
             var user = await this._context
                 .Users
                 .Where(a => a.ExternalUserId.Equals(externalUserId))
-                .SingleOrDefaultAsync();
+                .SingleOrDefaultAsync()
+                .ConfigureAwait(false);
 
             if (user is null)
             {

@@ -1,4 +1,4 @@
-namespace WebApi.Modules
+namespace WebApi.Modules.Common
 {
     using Application.Boundaries.CloseAccount;
     using Application.Boundaries.Deposit;

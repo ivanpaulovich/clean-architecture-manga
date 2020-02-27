@@ -8,7 +8,7 @@ namespace WebApi.UseCases.V1.Transfer
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;
-    using Modules.FeatureFlags;
+    using Modules.Common.FeatureFlags;
 
     /// <summary>
     ///     Accounts

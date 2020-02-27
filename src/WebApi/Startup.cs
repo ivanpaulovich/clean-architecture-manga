@@ -8,48 +8,45 @@ namespace WebApi
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Modules;
-    using Modules.FeatureFlags;
+    using Modules.Common;
+    using Modules.Common.FeatureFlags;
+    using Modules.Common.Swagger;
     using Prometheus;
 
     public sealed class Startup
     {
-        public Startup(IConfiguration configuration, IWebHostEnvironment env)
+        public Startup(IConfiguration configuration)
         {
             this.Configuration = configuration;
-            this.Env = env;
         }
 
         private IConfiguration Configuration { get; }
-        private IWebHostEnvironment Env { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddPersistence(this.Configuration);
-            services.AddAuthentication(this.Configuration);
-            services.AddControllers().AddControllersAsServices();
-            services.AddBusinessExceptionFilter();
-            services.AddFeatureFlags(this.Configuration);
-            services.AddVersioning();
-            services.AddSwagger();
-            services.AddUseCases();
-            services.AddPresentersV1();
-            services.AddPresentersV2();
-            services.AddMediator();
-            services.AddHttpContextAccessor();
-            services.AddControllersWithViews();
-
-            // In production, the React files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/build";
-            });
+            services
+                .AddPersistence(this.Configuration)
+                .AddAuthentication(this.Configuration)
+                .AddFeatureFlags(this.Configuration)
+                .AddVersioning()
+                .AddSwagger()
+                .AddMediator()
+                .AddUseCases()
+                .AddPresentersV1()
+                .AddPresentersV2()
+                .AddCustomControllers()
+                .AddSpaStaticFiles(configuration =>
+                {
+                    configuration.RootPath = "ClientApp/build";
+                });
         }
 
         public void Configure(
             IApplicationBuilder app,
+            IWebHostEnvironment env,
             IApiVersionDescriptionProvider provider)
         {
-            if (this.Env.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -69,7 +66,7 @@ namespace WebApi
             app.UseVersionedSwagger(provider);
             app.UseStaticFiles();
 
-            if (this.Env.IsProduction())
+            if (env.IsProduction())
             {
                 app.UseAuthentication();
                 app.UseAuthorization();
@@ -82,7 +79,7 @@ namespace WebApi
                 });
             }
 
-            if (this.Env.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 app.UseEndpoints(endpoints =>
                 {
@@ -95,7 +92,7 @@ namespace WebApi
             {
                 spa.Options.SourcePath = "ClientApp";
 
-                if (this.Env.IsDevelopment())
+                if (env.IsDevelopment())
                 {
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }

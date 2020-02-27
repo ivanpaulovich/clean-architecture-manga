@@ -18,7 +18,8 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
         public async Task Add(IUser user)
         {
             this._context.Users.Add((User)user);
-            await Task.CompletedTask;
+            await Task.CompletedTask
+                .ConfigureAwait(false);
         }
 
         public async Task<IUser> GetUser(ExternalUserId externalUserId)
@@ -32,7 +33,8 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
                 throw new UserNotFoundException($"The user {externalUserId} does not exist or is not processed yet.");
             }
 
-            return await Task.FromResult(user);
+            return await Task.FromResult(user)
+                .ConfigureAwait(false);
         }
     }
 }

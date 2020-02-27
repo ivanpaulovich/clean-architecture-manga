@@ -22,7 +22,8 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
         {
             this._context.Accounts.Add((Account)account);
             this._context.Credits.Add((Credit)credit);
-            await Task.CompletedTask;
+            await Task.CompletedTask
+                .ConfigureAwait(false);
         }
 
         public async Task Delete(IAccount account)
@@ -33,7 +34,8 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
 
             this._context.Accounts.Remove(accountOld);
 
-            await Task.CompletedTask;
+            await Task.CompletedTask
+                .ConfigureAwait(false);
         }
 
         public async Task<IAccount> GetAccount(AccountId accountId)
@@ -47,7 +49,8 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
                 throw new AccountNotFoundException($"The account {accountId} does not exist or is not processed yet.");
             }
 
-            return await Task.FromResult<Domain.Accounts.Account>(account);
+            return await Task.FromResult<Domain.Accounts.Account>(account)
+                .ConfigureAwait(false);
         }
 
         public async Task Update(IAccount account, ICredit credit)
@@ -57,7 +60,8 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
                 .SingleOrDefault();
 
             accountOld = (Domain.Accounts.Account)account;
-            await Task.CompletedTask;
+            await Task.CompletedTask
+                .ConfigureAwait(false);
         }
 
         public async Task Update(IAccount account, IDebit debit)
@@ -67,7 +71,8 @@ namespace Infrastructure.InMemoryDataAccess.Repositories
                 .SingleOrDefault();
 
             accountOld = (Domain.Accounts.Account)account;
-            await Task.CompletedTask;
+            await Task.CompletedTask
+                .ConfigureAwait(false);
         }
     }
 }

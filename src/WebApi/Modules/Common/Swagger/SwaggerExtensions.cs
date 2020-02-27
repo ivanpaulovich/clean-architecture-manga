@@ -1,8 +1,7 @@
-namespace WebApi.Modules
+namespace WebApi.Modules.Common.Swagger
 {
     using System.IO;
     using System.Reflection;
-    using Filters;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.Extensions.DependencyInjection;
