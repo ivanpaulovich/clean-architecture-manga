@@ -1,4 +1,4 @@
-namespace WebApi.Filters
+namespace WebApi.Modules.Common.Swagger
 {
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.OpenApi.Models;

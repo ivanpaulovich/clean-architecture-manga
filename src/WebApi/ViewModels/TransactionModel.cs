@@ -2,6 +2,7 @@ namespace WebApi.ViewModels
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
@@ -20,18 +21,21 @@ namespace WebApi.ViewModels
         ///     Gets Amount.
         /// </summary>
         [Required]
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public decimal Amount { get; }
 
         /// <summary>
         ///     Gets Description.
         /// </summary>
         [Required]
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public string Description { get; }
 
         /// <summary>
         ///     Gets Transaction Date.
         /// </summary>
         [Required]
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public DateTime TransactionDate { get; }
     }
 }

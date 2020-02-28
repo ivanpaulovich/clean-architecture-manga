@@ -1,4 +1,4 @@
-namespace WebApi.Modules.FeatureFlags
+namespace WebApi.Modules.Common.FeatureFlags
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -28,18 +28,22 @@ namespace WebApi.Modules.FeatureFlags
                     if (customAttribute.AttributeType.FullName == typeof(FeatureGateAttribute).FullName)
                     {
                         var constructorArgument = customAttribute.ConstructorArguments.First();
-                        foreach (var argumentValue in constructorArgument.Value as IEnumerable)
+                        if (constructorArgument.Value is IEnumerable arguments)
                         {
-                            var typedArgument = (CustomAttributeTypedArgument)argumentValue;
-                            var typedArgumentValue = (CustomFeature)(int)typedArgument.Value;
-                            bool isFeatureEnabled = this._featureManager.IsEnabledAsync(typedArgumentValue.ToString())
-                                .ConfigureAwait(false)
-                                .GetAwaiter()
-                                .GetResult();
-
-                            if (!isFeatureEnabled)
+                            foreach (var argumentValue in arguments)
                             {
-                                feature.Controllers.RemoveAt(i);
+                                var typedArgument = (CustomAttributeTypedArgument)argumentValue;
+                                var typedArgumentValue = (CustomFeature)(int)typedArgument.Value;
+                                bool isFeatureEnabled = this._featureManager
+                                    .IsEnabledAsync(typedArgumentValue.ToString())
+                                    .ConfigureAwait(false)
+                                    .GetAwaiter()
+                                    .GetResult();
+
+                                if (!isFeatureEnabled)
+                                {
+                                    feature.Controllers.RemoveAt(i);
+                                }
                             }
                         }
                     }

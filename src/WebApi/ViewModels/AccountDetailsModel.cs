@@ -3,6 +3,7 @@ namespace WebApi.ViewModels
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
@@ -24,18 +25,21 @@ namespace WebApi.ViewModels
         ///     Gets account ID.
         /// </summary>
         [Required]
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public Guid AccountId { get; }
 
         /// <summary>
         ///     Gets current Balance.
         /// </summary>
         [Required]
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public decimal CurrentBalance { get; }
 
         /// <summary>
         ///     Gets transactions.
         /// </summary>
         [Required]
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public List<TransactionModel> Transactions { get; }
     }
 }

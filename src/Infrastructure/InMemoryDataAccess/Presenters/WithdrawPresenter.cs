@@ -10,6 +10,7 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
             this.Withdrawals = new Collection<WithdrawOutput>();
             this.NotFounds = new Collection<string>();
             this.OutOfBalances = new Collection<string>();
+            this.Errors = new Collection<string>();
         }
 
         public Collection<WithdrawOutput> Withdrawals { get; }

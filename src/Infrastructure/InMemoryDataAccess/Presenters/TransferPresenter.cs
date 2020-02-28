@@ -9,6 +9,7 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
         {
             this.Transfers = new Collection<TransferOutput>();
             this.NotFounds = new Collection<string>();
+            this.Errors = new Collection<string>();
         }
 
         public Collection<TransferOutput> Transfers { get; }
