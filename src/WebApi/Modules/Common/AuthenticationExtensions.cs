@@ -33,32 +33,61 @@ namespace WebApi.Modules.Common
                         options.DefaultPolicy = new AuthorizationPolicyBuilder()
                             .RequireAuthenticatedUser()
                             .Build();
-                    }).AddAuthentication(o =>
+                    })
+                    .AddAuthentication(o =>
                     {
-                        o.DefaultScheme = "Application";
+                        o.DefaultScheme = "Google";
                         o.DefaultSignInScheme = "External";
                     })
-                    .AddCookie("Application")
                     .AddCookie("External")
-                    .AddGoogle(o =>
+                    .AddGoogle(options =>
                     {
-                        o.ClientId = configuration["AuthenticationModule:Google:ClientId"];
-                        o.ClientSecret = configuration["AuthenticationModule:Google:ClientSecret"];
-                        o.UserInformationEndpoint = "https://www.googleapis.com/oauth2/v2/userinfo";
-                        o.ClaimActions.Clear();
-                        o.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "id");
-                        o.ClaimActions.MapJsonKey(ClaimTypes.Name, "name");
-                        o.ClaimActions.MapJsonKey(ClaimTypes.GivenName, "given_name");
-                        o.ClaimActions.MapJsonKey(ClaimTypes.Surname, "family_name");
-                        o.ClaimActions.MapJsonKey("urn:google:profile", "link");
-                        o.ClaimActions.MapJsonKey("image", "picture");
-                        o.ClaimActions.MapJsonKey(ClaimTypes.Email, "email");
+                        options.ClientId = configuration["AuthenticationModule:Google:ClientId"];
+                        options.ClientSecret = configuration["AuthenticationModule:Google:ClientSecret"];
+                        options.CallbackPath = new PathString("/api/v1/Google/LoginCallback");
+                        options.UserInformationEndpoint = "https://www.googleapis.com/oauth2/v2/userinfo";
+                        options.ClaimActions.Clear();
+                        options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "id");
+                        options.ClaimActions.MapJsonKey(ClaimTypes.Name, "name");
+                        options.ClaimActions.MapJsonKey(ClaimTypes.GivenName, "given_name");
+                        options.ClaimActions.MapJsonKey(ClaimTypes.Surname, "family_name");
+                        options.ClaimActions.MapJsonKey("urn:google:profile", "link");
+                        options.ClaimActions.MapJsonKey("image", "picture");
+                        options.ClaimActions.MapJsonKey(ClaimTypes.Email, "email");
+
+                        options.Events = new OAuthEvents
+                        {
+                            OnCreatingTicket = async context =>
+                            {
+                                var request = new HttpRequestMessage(
+                                    HttpMethod.Get,
+                                    context.Options.UserInformationEndpoint);
+                                request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                                request.Headers.Authorization =
+                                    new AuthenticationHeaderValue("Bearer", context.AccessToken);
+
+                                var response = await context
+                                    .Backchannel
+                                    .SendAsync(
+                                        request,
+                                        HttpCompletionOption.ResponseHeadersRead,
+                                        context.HttpContext
+                                            .RequestAborted)
+                                    .ConfigureAwait(false);
+                                response.EnsureSuccessStatusCode();
+
+                                var user = JsonDocument.Parse(await response.Content.ReadAsStringAsync()
+                                    .ConfigureAwait(false));
+
+                                context.RunClaimActions(user.RootElement);
+                            }
+                        };
                     })
                     .AddOAuth("GitHub", options =>
                     {
                         options.ClientId = configuration["AuthenticationModule:GitHub:ClientId"];
                         options.ClientSecret = configuration["AuthenticationModule:GitHub:ClientSecret"];
-                        options.CallbackPath = new PathString("/signin-github");
+                        options.CallbackPath = new PathString("/api/v1/GitHub/LoginCallback");
 
                         options.AuthorizationEndpoint = "https://github.com/login/oauth/authorize";
                         options.TokenEndpoint = "https://github.com/login/oauth/access_token";
@@ -74,18 +103,26 @@ namespace WebApi.Modules.Common
                         {
                             OnCreatingTicket = async context =>
                             {
-                                var request =
-                                    new HttpRequestMessage(HttpMethod.Get, context.Options.UserInformationEndpoint);
+                                var request = new HttpRequestMessage(
+                                    HttpMethod.Get,
+                                    context.Options.UserInformationEndpoint);
                                 request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                                 request.Headers.Authorization =
                                     new AuthenticationHeaderValue("Bearer", context.AccessToken);
 
-                                var response = await context.Backchannel.SendAsync(request,
-                                    HttpCompletionOption.ResponseHeadersRead, context.HttpContext.RequestAborted)
+                                var response = await context
+                                    .Backchannel
+                                    .SendAsync(
+                                        request,
+                                        HttpCompletionOption.ResponseHeadersRead,
+                                        context.HttpContext
+                                            .RequestAborted)
                                     .ConfigureAwait(false);
                                 response.EnsureSuccessStatusCode();
 
-                                var user = JsonDocument.Parse(await response.Content.ReadAsStringAsync()
+                                var user = JsonDocument.Parse(await response
+                                    .Content.
+                                    ReadAsStringAsync()
                                     .ConfigureAwait(false));
 
                                 context.RunClaimActions(user.RootElement);
