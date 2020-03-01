@@ -5,6 +5,7 @@ namespace WebApi.UseCases.V1.Deposit
     using Application.Boundaries.Deposit;
     using Domain.Accounts.ValueObjects;
     using FluentMediator;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +31,7 @@ namespace WebApi.UseCases.V1.Deposit
         /// <param name="presenter"></param>
         /// <param name="request">The request to deposit.</param>
         /// <returns>The updated balance.</returns>
+        [Authorize]
         [HttpPatch("Deposit")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DepositResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

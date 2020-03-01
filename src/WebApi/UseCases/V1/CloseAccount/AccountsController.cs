@@ -5,6 +5,7 @@ namespace WebApi.UseCases.V1.CloseAccount
     using Application.Boundaries.CloseAccount;
     using Domain.Accounts.ValueObjects;
     using FluentMediator;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +31,7 @@ namespace WebApi.UseCases.V1.CloseAccount
         /// <param name="presenter"></param>
         /// <param name="request">The request to Close an Account.</param>
         /// <returns>The account id.</returns>
+        [Authorize]
         [HttpDelete("{AccountId}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CloseAccountResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

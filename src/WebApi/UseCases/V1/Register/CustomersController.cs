@@ -6,6 +6,7 @@ namespace WebApi.UseCases.V1.Register
     using Domain.Accounts.ValueObjects;
     using Domain.Customers.ValueObjects;
     using FluentMediator;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
@@ -31,6 +32,7 @@ namespace WebApi.UseCases.V1.Register
         /// <param name="presenter"></param>
         /// <param name="request">The request to register a customer.</param>
         /// <returns>The newly registered customer.</returns>
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RegisterResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

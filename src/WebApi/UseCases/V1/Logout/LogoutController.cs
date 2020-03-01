@@ -3,9 +3,8 @@ namespace WebApi.UseCases.V1.Logout
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Authentication.Google;
-    using System.Security.Claims;
     using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authentication.Cookies;
 
     /// <summary>
     ///
@@ -24,7 +23,7 @@ namespace WebApi.UseCases.V1.Logout
         public async Task<IActionResult> Logout()
         {
             await this.HttpContext
-                .SignOutAsync()
+                .SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme)
                 .ConfigureAwait(false);
             return this.Redirect("/swagger/index.html");
         }
