@@ -21,8 +21,7 @@ namespace Infrastructure.GitHubAuthentication
         public CustomerId? GetCustomerId()
         {
             var user = this._mangaContext.Users
-                .Where(e => e.ExternalUserId.Equals(this.GetExternalUserId()))
-                .SingleOrDefault();
+                .SingleOrDefault(e => e.ExternalUserId.Equals(this.GetExternalUserId();
 
             if (user is null)
             {
