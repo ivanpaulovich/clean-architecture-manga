@@ -19,7 +19,7 @@ namespace WebApi.UseCases.V1.GitHub
         /// <returns></returns>
         [HttpGet("GitHub")]
         [AllowAnonymous]
-        public IActionResult GitHub(string returnUrl = "/")
+        public IActionResult GitHub(string? returnUrl = "http://localhost:3000/")
         {
             return new ChallengeResult(
                 "GitHub",

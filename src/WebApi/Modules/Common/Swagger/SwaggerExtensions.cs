@@ -1,5 +1,6 @@
 namespace WebApi.Modules.Common.Swagger
 {
+    using System.Collections.Generic;
     using System.IO;
     using System.Reflection;
     using Microsoft.AspNetCore.Builder;
@@ -7,6 +8,7 @@ namespace WebApi.Modules.Common.Swagger
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
     using Microsoft.Extensions.PlatformAbstractions;
+    using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
 
     public static class SwaggerExtensions
@@ -25,13 +27,10 @@ namespace WebApi.Modules.Common.Swagger
         {
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
             services.AddSwaggerGen(
-                options =>
+                c =>
                 {
-                    // add a custom operation filter which sets default values
-                    options.OperationFilter<SwaggerDefaultValues>();
-
-                    // integrate xml comments
-                    options.IncludeXmlComments(XmlCommentsFilePath);
+                    c.IncludeXmlComments(XmlCommentsFilePath);
+                    c.OperationFilter<SecurityRequirementsOperationFilter>();
                 });
 
             return services;
@@ -44,7 +43,6 @@ namespace WebApi.Modules.Common.Swagger
             app.UseSwaggerUI(
                 options =>
                 {
-                    // build a swagger endpoint for each discovered API version
                     foreach (var description in provider.ApiVersionDescriptions)
                     {
                         options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",

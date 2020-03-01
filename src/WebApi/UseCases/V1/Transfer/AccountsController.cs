@@ -5,6 +5,7 @@ namespace WebApi.UseCases.V1.Transfer
     using Application.Boundaries.Transfer;
     using Domain.Accounts.ValueObjects;
     using FluentMediator;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;
@@ -33,6 +34,7 @@ namespace WebApi.UseCases.V1.Transfer
         /// <param name="presenter"></param>
         /// <param name="request">The request to Transfer.</param>
         /// <returns>The updated balance.</returns>
+        [Authorize]
         [HttpPatch("Transfer")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransferResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

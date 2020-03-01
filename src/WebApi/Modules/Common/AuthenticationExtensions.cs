@@ -1,5 +1,6 @@
 namespace WebApi.Modules.Common
 {
+    using System.Collections.Generic;
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Security.Claims;
@@ -7,6 +8,8 @@ namespace WebApi.Modules.Common
     using Domain.Security.Services;
     using Infrastructure.GitHubAuthentication;
     using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Authentication.Cookies;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Authentication.OAuth;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
@@ -28,24 +31,28 @@ namespace WebApi.Modules.Common
             else
             {
                 services.AddScoped<IUserService, GitHubUserService>();
-                services.AddAuthorization(options =>
+                services
+                    .AddAuthentication(options =>
                     {
-                        options.DefaultPolicy = new AuthorizationPolicyBuilder()
-                            .RequireAuthenticatedUser()
-                            .Build();
+                        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                        options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     })
-                    .AddAuthentication(o =>
-                    {
-                        o.DefaultScheme = "Google";
-                        o.DefaultSignInScheme = "External";
-                    })
-                    .AddCookie("External")
-                    .AddGoogle(options =>
+                    .AddCookie()
+                    .AddOAuth("Google", options =>
                     {
                         options.ClientId = configuration["AuthenticationModule:Google:ClientId"];
                         options.ClientSecret = configuration["AuthenticationModule:Google:ClientSecret"];
                         options.CallbackPath = new PathString("/api/v1/Google/LoginCallback");
+
+                        options.AuthorizationEndpoint = "https://accounts.google.com/o/oauth2/v2/auth";
+                        options.TokenEndpoint = "https://www.googleapis.com/oauth2/v4/token";
                         options.UserInformationEndpoint = "https://www.googleapis.com/oauth2/v2/userinfo";
+                        options.Scope.Add("openid");
+                        options.Scope.Add("profile");
+                        options.Scope.Add("email");
+
+                        options.SaveTokens = true;
+
                         options.ClaimActions.Clear();
                         options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "id");
                         options.ClaimActions.MapJsonKey(ClaimTypes.Name, "name");
@@ -93,6 +100,8 @@ namespace WebApi.Modules.Common
                         options.TokenEndpoint = "https://github.com/login/oauth/access_token";
                         options.UserInformationEndpoint = "https://api.github.com/user";
 
+                        options.SaveTokens = true;
+
                         options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "id");
                         options.ClaimActions.MapJsonKey(ClaimTypes.Name, "name");
                         options.ClaimActions.MapJsonKey("urn:github:login", "login");
@@ -115,8 +124,7 @@ namespace WebApi.Modules.Common
                                     .SendAsync(
                                         request,
                                         HttpCompletionOption.ResponseHeadersRead,
-                                        context.HttpContext
-                                            .RequestAborted)
+                                        context.HttpContext.RequestAborted)
                                     .ConfigureAwait(false);
                                 response.EnsureSuccessStatusCode();
 

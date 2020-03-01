@@ -5,6 +5,7 @@ namespace WebApi.UseCases.V1.Withdraw
     using Application.Boundaries.Withdraw;
     using Domain.Accounts.ValueObjects;
     using FluentMediator;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
@@ -23,6 +24,7 @@ namespace WebApi.UseCases.V1.Withdraw
         /// <param name="presenter"></param>
         /// <param name="request">The request to Withdraw.</param>
         /// <returns>The updated balance.</returns>
+        [Authorize]
         [HttpPatch("Withdraw")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WithdrawResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

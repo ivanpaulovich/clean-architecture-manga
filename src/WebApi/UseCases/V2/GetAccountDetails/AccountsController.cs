@@ -5,6 +5,7 @@ namespace WebApi.UseCases.V2.GetAccountDetails
     using Application.Boundaries.GetAccountDetails;
     using Domain.Accounts.ValueObjects;
     using FluentMediator;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;
@@ -30,6 +31,7 @@ namespace WebApi.UseCases.V2.GetAccountDetails
         /// <param name="presenter"></param>
         /// <param name="request">A <see cref="GetAccountDetailsRequestV2"></see>.</param>
         /// <returns>An asynchronous <see cref="IActionResult" />.</returns>
+        [Authorize]
         [HttpGet("{AccountId}", Name = "GetAccountV2")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

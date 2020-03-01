@@ -3,6 +3,7 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
     using System.Threading.Tasks;
     using Application.Boundaries.GetCustomerDetails;
     using FluentMediator;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +23,7 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
         ///     Get the Customer details.
         /// </summary>
         /// <returns>An asynchronous <see cref="IActionResult" />.</returns>
+        [Authorize]
         [HttpGet(Name = "GetCustomer")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetCustomerDetailsResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
