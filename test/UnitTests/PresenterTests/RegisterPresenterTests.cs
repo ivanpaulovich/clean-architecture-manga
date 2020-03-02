@@ -1,10 +1,10 @@
 namespace UnitTests.PresenterTests
 {
+    using System;
     using System.Net;
     using Application.Boundaries.Register;
-    using Domain.Customers;
+    using Domain.Accounts.ValueObjects;
     using Domain.Customers.ValueObjects;
-    using Domain.Security;
     using Domain.Security.ValueObjects;
     using Microsoft.AspNetCore.Mvc;
     using WebApi.UseCases.V1.Register;
@@ -16,11 +16,17 @@ namespace UnitTests.PresenterTests
         public void GivenValidData_Handle_WritesOkObjectResult()
         {
             var customer = new Infrastructure.InMemoryDataAccess.Customer(
+                new CustomerId(Guid.NewGuid()),
                 new SSN("198608178888"),
-                new Name("Ivan Paulovich"));
+                new Name("Ivan Paulovich"),
+                Array.Empty<AccountId>());
 
             var account = new Infrastructure.InMemoryDataAccess.Account(
-                customer.Id);
+                new AccountId(Guid.NewGuid()),
+                customer.Id,
+                Array.Empty<Infrastructure.InMemoryDataAccess.Credit>(),
+                Array.Empty<Infrastructure.InMemoryDataAccess.Debit>()
+                );
 
             var registerOutput = new RegisterOutput(
                 new ExternalUserId("github/ivanpaulovich"),

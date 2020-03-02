@@ -43,10 +43,12 @@ namespace WebApi.UseCases.V1.Register
             [FromForm] [Required] RegisterRequest request)
         {
             var input = new RegisterInput(
-                new SSN(request.SSN),
-                new PositiveMoney(request.InitialAmount));
+                request.SSN,
+                request.InitialAmount);
+
             await mediator.PublishAsync(input)
                 .ConfigureAwait(false);
+
             return presenter.ViewModel;
         }
     }

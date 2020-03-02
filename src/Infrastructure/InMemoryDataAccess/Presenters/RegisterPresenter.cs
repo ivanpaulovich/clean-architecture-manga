@@ -14,7 +14,7 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
         public RegisterPresenter()
         {
             this.Registers = new Collection<RegisterOutput>();
-            this.AlreadyRegistered = new Collection<string>();
+            this.AlreadyRegistered = new Collection<RegisterOutput>();
             this.Errors = new Collection<string>();
         }
 
@@ -26,7 +26,7 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
         /// <summary>
         ///
         /// </summary>
-        public Collection<string> AlreadyRegistered { get; }
+        public Collection<RegisterOutput> AlreadyRegistered { get; }
 
         /// <summary>
         ///
@@ -46,9 +46,9 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
         ///
         /// </summary>
         /// <param name="message"></param>
-        public void CustomerAlreadyRegistered(string message)
+        public void CustomerAlreadyRegistered(RegisterOutput output)
         {
-            this.AlreadyRegistered.Add(message);
+            this.AlreadyRegistered.Add(output);
         }
 
         /// <summary>

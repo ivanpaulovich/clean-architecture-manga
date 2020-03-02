@@ -10,21 +10,13 @@ namespace Infrastructure.InMemoryDataAccess
     using Domain.Customers;
     using Domain.Customers.ValueObjects;
 
-    public class Customer : Domain.Customers.Customer
+    public sealed class Customer : Domain.Customers.Customer
     {
-        public Customer()
+        public Customer(CustomerId customerId, SSN ssn, Name name, IEnumerable<AccountId> accounts)
         {
-        }
-
-        public Customer(SSN ssn, Name name)
-        {
-            this.Id = new CustomerId(Guid.NewGuid());
+            this.Id = customerId;
             this.SSN = ssn;
             this.Name = name;
-        }
-
-        public void LoadAccounts(IEnumerable<AccountId> accounts)
-        {
             this.Accounts = new AccountCollection();
             this.Accounts.Add(accounts);
         }

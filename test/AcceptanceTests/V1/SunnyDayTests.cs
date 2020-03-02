@@ -94,7 +94,7 @@ namespace ComponentTests.V1
             var content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("accountId", account),
-                    new KeyValuePair<string, string>("amount", amount.ToString()),
+                new KeyValuePair<string, string>("amount", amount.ToString()),
             });
 
             var response = await client.PatchAsync("api/v1/Accounts/Deposit", content)
@@ -113,7 +113,7 @@ namespace ComponentTests.V1
             var content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("accountId", account),
-                    new KeyValuePair<string, string>("amount", amount.ToString()),
+                new KeyValuePair<string, string>("amount", amount.ToString()),
             });
 
             var response = await client.PatchAsync("api/v1/Accounts/Withdraw", content)

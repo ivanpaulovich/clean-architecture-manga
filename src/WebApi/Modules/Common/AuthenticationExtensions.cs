@@ -1,6 +1,5 @@
 namespace WebApi.Modules.Common
 {
-    using System.Collections.Generic;
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Security.Claims;
@@ -9,14 +8,11 @@ namespace WebApi.Modules.Common
     using Infrastructure.ExternalAuthentication;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authentication.Cookies;
-    using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Authentication.OAuth;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
-    // https://www.jerriepelser.com/blog/authenticate-oauth-aspnet-core-2/
     public static class AuthenticationExtensions
     {
         public static IServiceCollection AddAuthentication(
@@ -30,7 +26,7 @@ namespace WebApi.Modules.Common
             }
             else
             {
-                services.AddScoped<IUserService, GitHubUserService>();
+                services.AddScoped<IUserService, ExternalUserService>();
                 services
                     .AddAuthentication(options =>
                     {

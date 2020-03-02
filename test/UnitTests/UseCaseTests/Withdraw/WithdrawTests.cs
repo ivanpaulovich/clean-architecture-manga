@@ -5,6 +5,7 @@ namespace UnitTests.UseCaseTests.Withdraw
     using Application.Boundaries.Withdraw;
     using Application.UseCases;
     using Domain.Accounts.ValueObjects;
+    using Infrastructure.InMemoryDataAccess;
     using Infrastructure.InMemoryDataAccess.Presenters;
     using TestFixtures;
     using Xunit;
@@ -32,7 +33,7 @@ namespace UnitTests.UseCaseTests.Withdraw
                 this._fixture.UnitOfWork);
 
             await sut.Execute(new WithdrawInput(
-                this._fixture.Context.DefaultAccountId,
+                MangaContext.DefaultAccountId,
                 new PositiveMoney(amount)));
 
             var actual = presenter.Withdrawals.Last();

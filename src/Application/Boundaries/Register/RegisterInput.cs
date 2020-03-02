@@ -18,11 +18,11 @@ namespace Application.Boundaries.Register
         /// <param name="ssn">SSN.</param>
         /// <param name="initialAmount">Positive amount.</param>
         public RegisterInput(
-            SSN ssn,
-            PositiveMoney initialAmount)
+            string ssn,
+            decimal initialAmount)
         {
-            this.SSN = ssn;
-            this.InitialAmount = initialAmount;
+            this.SSN = new SSN(ssn);
+            this.InitialAmount = new PositiveMoney(initialAmount);
         }
 
         /// <summary>
