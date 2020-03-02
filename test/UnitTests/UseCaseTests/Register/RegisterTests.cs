@@ -25,35 +25,32 @@ namespace UnitTests.UseCaseTests.Register
         [Fact]
         public void GivenNullInput_ThrowsException()
         {
-            var register = new RegisterUseCase(null, null, null, null, null, null);
+            var register = new RegisterUseCase(null, null, null, null, null, null, null, null);
             Assert.ThrowsAsync<Exception>(async () => await register.Execute(null));
         }
 
         [Theory]
         [ClassData(typeof(PositiveDataSetup))]
-        public async Task Register_WritesOutput_InputIsValid(decimal amount)
+        public async Task Register_WritesOutput_AlreadyRegisterested(decimal amount)
         {
             var presenter = new RegisterPresenter();
-            var externalUserId = new ExternalUserId("github/ivanpaulovich");
-            var ssn = new SSN("8608178888");
+            string ssn = "8608178888";
 
             var sut = new RegisterUseCase(
-                new TestUserService(this._fixture.Context),
+                this._fixture.TestUserService,
                 this._fixture.CustomerService,
                 this._fixture.AccountService,
                 this._fixture.SecurityService,
                 presenter,
-                this._fixture.UnitOfWork);
+                this._fixture.UnitOfWork,
+                this._fixture.CustomerRepository,
+                this._fixture.AccountRepository);
 
             await sut.Execute(new RegisterInput(
                 ssn,
-                new PositiveMoney(amount)));
+                amount));
 
-            var actual = presenter.Registers.Last();
-            Assert.NotNull(actual);
-            Assert.Equal(ssn, actual.Customer.SSN);
-            Assert.NotEmpty(actual.Customer.Name.ToString());
-            Assert.Equal(amount, actual.Account.CurrentBalance.ToDecimal());
+            Assert.NotEmpty(presenter.AlreadyRegistered);
         }
     }
 }

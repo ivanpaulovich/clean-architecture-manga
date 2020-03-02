@@ -7,20 +7,23 @@ namespace UnitTests.TestFixtures
     using Infrastructure.InMemoryDataAccess;
     using Infrastructure.InMemoryDataAccess.Repositories;
 
+    /// <summary>
+    ///
+    /// </summary>
     public sealed class StandardFixture
     {
         public StandardFixture()
         {
-            Context = new MangaContext();
-            AccountRepository = new AccountRepository(Context);
-            CustomerRepository = new CustomerRepository(Context);
-            UserRepository = new UserRepository(Context);
-            UnitOfWork = new UnitOfWork(Context);
-            EntityFactory = new EntityFactory();
-            UserService = new UserService();
-            CustomerService = new CustomerService(EntityFactory, CustomerRepository);
-            SecurityService = new SecurityService(EntityFactory, UserRepository);
-            AccountService = new AccountService(EntityFactory, AccountRepository);
+            this.Context = new MangaContext();
+            this.AccountRepository = new AccountRepository(this.Context);
+            this.CustomerRepository = new CustomerRepository(this.Context);
+            this.UserRepository = new UserRepository(this.Context);
+            this.UnitOfWork = new UnitOfWork(this.Context);
+            this.EntityFactory = new EntityFactory();
+            this.TestUserService = new TestUserService();
+            this.CustomerService = new CustomerService(this.EntityFactory, this.CustomerRepository);
+            this.SecurityService = new SecurityService(this.EntityFactory, this.UserRepository);
+            this.AccountService = new AccountService(this.EntityFactory, this.AccountRepository);
         }
 
         public EntityFactory EntityFactory { get; }
@@ -35,7 +38,7 @@ namespace UnitTests.TestFixtures
 
         public UnitOfWork UnitOfWork { get; }
 
-        public UserService UserService { get; }
+        public TestUserService TestUserService { get; }
 
         public CustomerService CustomerService { get; }
 

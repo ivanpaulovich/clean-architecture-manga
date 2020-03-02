@@ -6,6 +6,7 @@ namespace UnitTests.UseCaseTests.CloseAccount
     using Application.Boundaries.GetAccountDetails;
     using Domain.Accounts.ValueObjects;
     using Domain.Customers.ValueObjects;
+    using Infrastructure.InMemoryDataAccess;
     using Infrastructure.InMemoryDataAccess.Presenters;
     using TestFixtures;
     using Xunit;
@@ -71,15 +72,15 @@ namespace UnitTests.UseCaseTests.CloseAccount
                 this._fixture.AccountRepository);
 
             await getAccountUseCase.Execute(new GetAccountDetailsInput(
-                this._fixture.Context.DefaultAccountId));
+                MangaContext.DefaultAccountId));
             var getAccountDetailtOutput = getAccountPresenter.GetAccountDetails.First();
 
             await withdrawUseCase.Execute(new Application.Boundaries.Withdraw.WithdrawInput(
-                this._fixture.Context.DefaultAccountId,
+                MangaContext.DefaultAccountId,
                 new PositiveMoney(getAccountDetailtOutput.CurrentBalance.ToDecimal())));
 
             var input = new CloseAccountInput(
-                this._fixture.Context.DefaultAccountId);
+                MangaContext.DefaultAccountId);
             await sut.Execute(input);
 
             Assert.Equal(input.AccountId, closeAccountPresenter.ClosedAccounts.First().AccountId);

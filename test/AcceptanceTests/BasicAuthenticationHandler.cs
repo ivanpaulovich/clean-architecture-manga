@@ -3,6 +3,7 @@ namespace ComponentTests
     using System.Security.Claims;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
+    using Infrastructure.InMemoryDataAccess;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
@@ -31,7 +32,8 @@ namespace ComponentTests
             var claims = new[] {
                 new Claim(ClaimTypes.NameIdentifier, "test"),
                 new Claim(ClaimTypes.Name, "test"),
-                new Claim("id", "test")
+                new Claim("id", "92b93e37-0995-4849-a7ed-149e8706d8ef"),
+                new Claim("customerid", MangaContext.DefaultCustomerId.ToString()),
             };
 
             var identity = new ClaimsIdentity(claims, Scheme.Name);
