@@ -1,4 +1,4 @@
-namespace Infrastructure.GitHubAuthentication
+namespace Infrastructure.ExternalAuthentication
 {
     using System;
     using Domain.Customers.ValueObjects;
@@ -24,8 +24,8 @@ namespace Infrastructure.GitHubAuthentication
         {
             var user = this._httpContextAccessor.HttpContext.User;
 
-            string login = user.FindFirst(c => c.Type == "urn:github:login")?.Value;
-            var externalUserId = new ExternalUserId($"{user.Identity.AuthenticationType}/{login}");
+            string id = user.FindFirst(c => c.Type == "id")?.Value;
+            var externalUserId = new ExternalUserId($"{user.Identity.AuthenticationType}/{id}");
 
             return externalUserId;
         }

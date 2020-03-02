@@ -8,7 +8,7 @@ namespace UnitTests.UseCaseTests.Register
     using Domain.Accounts.ValueObjects;
     using Domain.Customers.ValueObjects;
     using Domain.Security.ValueObjects;
-    using Infrastructure.GitHubAuthentication;
+    using Infrastructure.ExternalAuthentication;
     using Infrastructure.InMemoryDataAccess.Presenters;
     using TestFixtures;
     using Xunit;

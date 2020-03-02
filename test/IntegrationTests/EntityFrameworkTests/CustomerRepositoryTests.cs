@@ -35,10 +35,12 @@ namespace IntegrationTests.EntityFrameworkTests
                 context.Database.EnsureCreated();
 
                 var userRepository = new UserRepository(context);
-                await userRepository.Add(user);
+                await userRepository.Add(user)
+                    .ConfigureAwait(false);
 
                 var customerRepository = new CustomerRepository(context);
-                await customerRepository.Add(customer);
+                await customerRepository.Add(customer)
+                    .ConfigureAwait(false);
 
                 Assert.Equal(2, context.Customers.Count());
             }
@@ -58,7 +60,8 @@ namespace IntegrationTests.EntityFrameworkTests
                 context.Database.EnsureCreated();
 
                 var repository = new CustomerRepository(context);
-                customer = await repository.GetBy(SeedData.DefaultCustomerId);
+                customer = await repository.GetBy(SeedData.DefaultCustomerId)
+                    .ConfigureAwait(false);
 
                 Assert.NotNull(customer);
             }

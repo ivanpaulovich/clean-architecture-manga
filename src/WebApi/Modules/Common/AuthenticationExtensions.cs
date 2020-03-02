@@ -6,7 +6,7 @@ namespace WebApi.Modules.Common
     using System.Security.Claims;
     using System.Text.Json;
     using Domain.Security.Services;
-    using Infrastructure.GitHubAuthentication;
+    using Infrastructure.ExternalAuthentication;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authentication.Cookies;
     using Microsoft.AspNetCore.Authentication.JwtBearer;

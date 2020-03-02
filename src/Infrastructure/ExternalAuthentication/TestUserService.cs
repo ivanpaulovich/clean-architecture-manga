@@ -1,4 +1,4 @@
-namespace Infrastructure.GitHubAuthentication
+namespace Infrastructure.ExternalAuthentication
 {
     using System;
     using System.Linq;
@@ -21,7 +21,7 @@ namespace Infrastructure.GitHubAuthentication
         public CustomerId? GetCustomerId()
         {
             var user = this._mangaContext.Users
-                .SingleOrDefault(e => e.ExternalUserId.Equals(this.GetExternalUserId();
+                .SingleOrDefault(e => e.ExternalUserId.Equals(this.GetExternalUserId()));
 
             if (user is null)
             {
@@ -29,15 +29,9 @@ namespace Infrastructure.GitHubAuthentication
             }
 
             var customer = this._mangaContext.Customers
-                .Where(e => e.Id.Equals(user.CustomerId))
-                .SingleOrDefault();
+                .SingleOrDefault(e => e.Id.Equals(user.CustomerId));
 
-            if (customer is null)
-            {
-                return null;
-            }
-
-            return customer.Id;
+            return customer?.Id;
         }
 
         public ExternalUserId GetExternalUserId()

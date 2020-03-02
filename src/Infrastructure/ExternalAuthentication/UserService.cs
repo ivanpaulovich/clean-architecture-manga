@@ -1,4 +1,4 @@
-namespace Infrastructure.GitHubAuthentication
+namespace Infrastructure.ExternalAuthentication
 {
     using System;
     using Domain.Customers.ValueObjects;
