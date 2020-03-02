@@ -53,35 +53,30 @@ namespace WebApi
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
             app.UseSpaStaticFiles();
-            app.UseMetricServer();
-            app.UseMangaHttpMetrics();
-            app.UseRouting();
-            app.UseVersionedSwagger(provider);
-            app.UseStaticFiles();
-            app.UseAuthentication();
-            app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints
-                    .MapControllers();
-            });
-
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "ClientApp";
-
-                if (env.IsDevelopment())
+            app.UseHttpsRedirection()
+                .UseStaticFiles()
+                .UseMetricServer()
+                .UseMangaHttpMetrics()
+                .UseRouting()
+                .UseVersionedSwagger(provider)
+                .UseStaticFiles()
+                .UseAuthentication()
+                .UseAuthorization()
+                .UseEndpoints(endpoints =>
                 {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
-                }
-            });
+                    endpoints.MapControllers();
+                }).UseSpa(spa =>
+                {
+                    spa.Options.SourcePath = "ClientApp";
+                    if (env.IsDevelopment())
+                    {
+                        spa.UseReactDevelopmentServer(npmScript: "start");
+                    }
+                });
         }
     }
 }

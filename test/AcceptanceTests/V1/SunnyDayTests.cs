@@ -10,52 +10,54 @@ namespace ComponentTests.V1
     using WebApi;
     using Xunit;
 
-    public sealed class SunnyDayTests : IClassFixture<WebApplicationFactory<Startup>>
+    public sealed class SunnyDayTests : IClassFixture<CustomWebApplicationFactory>
     {
-        private readonly WebApplicationFactory<Startup> _factory;
+        private readonly CustomWebApplicationFactory _factory;
 
-        public SunnyDayTests(WebApplicationFactory<Startup> factory)
+        public SunnyDayTests(CustomWebApplicationFactory factory)
         {
-            _factory = factory;
+            this._factory = factory;
         }
 
         [Fact]
         public async Task Register_Deposit_Withdraw_Close()
         {
-            Tuple<string, string> customerId_accountId = await this.Register(100)
+            (_, string item2) = await this.Register(100)
                 .ConfigureAwait(false);
             await this.GetCustomer()
                 .ConfigureAwait(false);
-            await this.GetAccount(customerId_accountId.Item2)
+            await this.GetAccount(item2)
                 .ConfigureAwait(false);
-            await this.Withdraw(customerId_accountId.Item2, 100)
-                .ConfigureAwait(false);
-            await this.GetCustomer()
-                .ConfigureAwait(false);
-            await this.Deposit(customerId_accountId.Item2, 500)
-                .ConfigureAwait(false);
-            await this.Deposit(customerId_accountId.Item2, 400)
+            await this.Withdraw(item2, 100)
                 .ConfigureAwait(false);
             await this.GetCustomer()
                 .ConfigureAwait(false);
-            await this.Withdraw(customerId_accountId.Item2, 400)
+            await this.Deposit(item2, 500)
                 .ConfigureAwait(false);
-            await this.Withdraw(customerId_accountId.Item2, 500)
+            await this.Deposit(item2, 400)
                 .ConfigureAwait(false);
-            await this.Close(customerId_accountId.Item2)
+            await this.GetCustomer()
+                .ConfigureAwait(false);
+            await this.Withdraw(item2, 400)
+                .ConfigureAwait(false);
+            await this.Withdraw(item2, 500)
+                .ConfigureAwait(false);
+            await this.Close(item2)
                 .ConfigureAwait(false);
         }
 
         private async Task GetCustomer()
         {
             var client = this._factory.CreateClient();
-            string result = await client.GetStringAsync($"/api/v1/Customers/");
+            string result = await client.GetStringAsync($"/api/v1/Customers/")
+                .ConfigureAwait(false);
         }
 
         private async Task GetAccount(string accountId)
         {
             var client = this._factory.CreateClient();
-            string result = await client.GetStringAsync($"/api/v1/Accounts/{accountId}");
+            string result = await client.GetStringAsync($"/api/v1/Accounts/{accountId}")
+                .ConfigureAwait(false);
         }
 
         private async Task<Tuple<string, string>> Register(decimal initialAmount)
@@ -68,11 +70,14 @@ namespace ComponentTests.V1
                 new KeyValuePair<string, string>("initialAmount", initialAmount.ToString()),
             });
 
-            var response = await client.PostAsync("api/v1/Customers", content);
+            var response = await client.PostAsync("api/v1/Customers", content)
+                .ConfigureAwait(false);
 
             response.EnsureSuccessStatusCode();
 
-            var responseString = await response.Content.ReadAsStringAsync();
+            string responseString = await response.Content
+                .ReadAsStringAsync()
+                .ConfigureAwait(false);
 
             Assert.Contains("customerId", responseString);
             JObject customer = JsonConvert.DeserializeObject<JObject>(responseString);
@@ -92,8 +97,11 @@ namespace ComponentTests.V1
                     new KeyValuePair<string, string>("amount", amount.ToString()),
             });
 
-            var response = await client.PatchAsync("api/v1/Accounts/Deposit", content);
-            string result = await response.Content.ReadAsStringAsync();
+            var response = await client.PatchAsync("api/v1/Accounts/Deposit", content)
+                .ConfigureAwait(false);
+            string result = await response.Content
+                .ReadAsStringAsync()
+                .ConfigureAwait(false);
 
             response.EnsureSuccessStatusCode();
         }
@@ -108,8 +116,11 @@ namespace ComponentTests.V1
                     new KeyValuePair<string, string>("amount", amount.ToString()),
             });
 
-            var response = await client.PatchAsync("api/v1/Accounts/Withdraw", content);
-            string result = await response.Content.ReadAsStringAsync();
+            var response = await client.PatchAsync("api/v1/Accounts/Withdraw", content)
+                .ConfigureAwait(false);
+            string result = await response.Content
+                .ReadAsStringAsync()
+                .ConfigureAwait(false);
 
             response.EnsureSuccessStatusCode();
         }
@@ -117,7 +128,8 @@ namespace ComponentTests.V1
         private async Task Close(string account)
         {
             var client = this._factory.CreateClient();
-            var response = await client.DeleteAsync($"api/v1/Accounts/{account}");
+            var response = await client.DeleteAsync($"api/v1/Accounts/{account}")
+                .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
     }

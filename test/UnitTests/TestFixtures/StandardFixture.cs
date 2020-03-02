@@ -3,7 +3,7 @@ namespace UnitTests.TestFixtures
     using Domain.Accounts;
     using Domain.Customers;
     using Domain.Security;
-    using Infrastructure.GitHubAuthentication;
+    using Infrastructure.ExternalAuthentication;
     using Infrastructure.InMemoryDataAccess;
     using Infrastructure.InMemoryDataAccess.Repositories;
 
