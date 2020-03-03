@@ -19,7 +19,7 @@ namespace WebApi.UseCases.V1.Google
         /// <returns></returns>
         [HttpGet("Google")]
         [AllowAnonymous]
-        public IActionResult Google(string? returnUrl = "http://localhost:3000/")
+        public IActionResult Google(string? returnUrl = "https://localhost:5001/")
         {
             return new ChallengeResult(
                 "Google",

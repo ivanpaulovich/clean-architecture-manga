@@ -40,8 +40,8 @@ namespace WebApi.Modules.Common.Swagger
                         {
                             Implicit = new OpenApiOAuthFlow()
                             {
-                                TokenUrl = new Uri("https://accounts.google.com/o/oauth2/v2/auth"),
-                                AuthorizationUrl = new Uri("https://accounts.google.com/o/oauth2/v2/auth"),
+                                TokenUrl = new Uri("https://www.googleapis.com/oauth2/v4/token"),
+                                AuthorizationUrl = new Uri( "https://accounts.google.com/o/oauth2/v2/auth"),
                                 Scopes =
                                 {
                                     { "openid", "OpenID" },
@@ -73,8 +73,6 @@ namespace WebApi.Modules.Common.Swagger
 
                     options.OAuthClientId(configuration["AuthenticationModule:Google:ClientId"]);
                     options.OAuthClientSecret(configuration["AuthenticationModule:Google:ClientSecret"]);
-                    options.OAuthScopeSeparator(" ");
-                    options.OAuth2RedirectUrl(configuration["AuthenticationModule:Google:RedirectUrlForSwagger"]);
                 });
 
             return app;
