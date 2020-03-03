@@ -62,7 +62,7 @@ namespace WebApi
                 .UseMetricServer()
                 .UseMangaHttpMetrics()
                 .UseRouting()
-                .UseVersionedSwagger(provider)
+                .UseVersionedSwagger(provider, this.Configuration)
                 .UseStaticFiles()
                 .UseAuthentication()
                 .UseAuthorization()
