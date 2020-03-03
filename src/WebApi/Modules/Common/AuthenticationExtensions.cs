@@ -20,6 +20,7 @@ namespace WebApi.Modules.Common
             IConfiguration configuration)
         {
             bool useFake = configuration.GetValue<bool>("AuthenticationModule:UseFake");
+
             if (useFake)
             {
                 services.AddSingleton<IUserService, TestUserService>();
@@ -27,8 +28,10 @@ namespace WebApi.Modules.Common
             else
             {
                 services.AddScoped<IUserService, ExternalUserService>();
-                services
-                    .AddAuthentication(options =>
+            }
+
+            services
+                .AddAuthentication(options =>
                     {
                         options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                         options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -133,8 +136,6 @@ namespace WebApi.Modules.Common
                             }
                         };
                     });
-            }
-
 
             return services;
         }
