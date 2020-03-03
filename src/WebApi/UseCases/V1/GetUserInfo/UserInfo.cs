@@ -10,8 +10,17 @@ namespace WebApi.UseCases.V1.GetUserInfo
         private readonly ClaimsPrincipal _user;
         public UserInfo(ClaimsPrincipal user) => this._user = user;
 
-        public string Name => this._user.FindFirst(ClaimTypes.Name).Value;
-        public string Email => this._user.FindFirst(ClaimTypes.Email).Value;
-        public string Image => this._user.FindFirst("image").Value;
+        public string Name
+        {
+            get
+            {
+                var name = this._user.FindFirst("name");
+                if (name is Claim)
+                    return name.Value;
+
+                name = this._user.FindFirst(ClaimTypes.Name);
+                return name.Value;
+            }
+        }
     }
 }
