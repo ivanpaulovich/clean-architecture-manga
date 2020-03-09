@@ -10,7 +10,7 @@ namespace WebApi.UseCases.V1.GetUserInfo
         private readonly ClaimsPrincipal _user;
         public UserInfo(ClaimsPrincipal user) => this._user = user;
 
-        public string Name
+        public string UserName
         {
             get
             {

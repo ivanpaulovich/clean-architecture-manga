@@ -7,7 +7,7 @@ export interface LoginState {
 }
 
 export interface Login {
-    name: string;
+    userName: string;
 }
 
 interface RequestLoginAction {
@@ -19,25 +19,21 @@ interface ReceiveLoginAction {
     login: Login;
 }
 
-
 type KnownAction = RequestLoginAction | ReceiveLoginAction;
 
 export const actionCreators = {
     requestLogin: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        const appState = getState();
-        if (appState && appState.login) {
-            fetch(`/api/v1/Login/GetUserInfo`)
-                .then(response => response.json() as Promise<Login>)
-                .then(login => {
-                    dispatch({ type: 'RECEIVE_LOGIN', login: login });
-                });
+        fetch(`/api/v1/Login/GetUserInfo`)
+            .then(response => response.json() as Promise<Login>)
+            .then(login => {
+                dispatch({ type: 'RECEIVE_LOGIN', login: login });
+            });
 
-            dispatch({ type: 'REQUEST_LOGIN' });
-        }
+        dispatch({ type: 'REQUEST_LOGIN' });
     }
 };
 
-const unloadedState: LoginState = { login: { name }, isLoading: false };
+const unloadedState: LoginState = { login: { userName: "" }, isLoading: false };
 
 export const reducer: Reducer<LoginState> = (state: LoginState | undefined, incomingAction: Action): LoginState => {
     if (state === undefined) {
@@ -52,12 +48,10 @@ export const reducer: Reducer<LoginState> = (state: LoginState | undefined, inco
                 isLoading: true
             };
         case 'RECEIVE_LOGIN':
-            if (action.login === state.login) {
-                return {
-                    isLoading: false,
-                    login: action.login
-                };
-            }
+            return {
+                isLoading: false,
+                login: action.login
+            };
             break;
     }
 
