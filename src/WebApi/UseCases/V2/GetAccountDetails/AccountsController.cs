@@ -10,7 +10,7 @@ namespace WebApi.UseCases.V2.GetAccountDetails
     using Microsoft.FeatureManagement.Mvc;
     using Modules.FeatureFlags;
 
-    [FeatureGate(Features.GetAccountDetailsV2)]
+    [FeatureGate(Feature.GetAccountDetailsV2)]
     [ApiVersion("2.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]

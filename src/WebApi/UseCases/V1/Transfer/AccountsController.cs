@@ -10,7 +10,7 @@ namespace WebApi.UseCases.V1.Transfer
     using Microsoft.FeatureManagement.Mvc;
     using Modules.FeatureFlags;
 
-    [FeatureGate(Features.Transfer)]
+    [FeatureGate(Feature.Transfer)]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
