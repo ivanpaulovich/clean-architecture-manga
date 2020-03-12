@@ -9,6 +9,7 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
         {
             this.GetAccountDetails = new Collection<GetAccountDetailsOutput>();
             this.NotFounds = new Collection<string>();
+            this.Errors = new Collection<string>();
         }
 
         public Collection<GetAccountDetailsOutput> GetAccountDetails { get; }

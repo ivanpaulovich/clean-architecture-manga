@@ -5,7 +5,7 @@ namespace WebApi.UseCases.V1.Transfer
 
     public sealed class TransferPresenter : IOutputPort
     {
-        public IActionResult ViewModel { get; private set; }
+        public IActionResult ViewModel { get; private set; } = new NoContentResult();
 
         public void NotFound(string message)
         {

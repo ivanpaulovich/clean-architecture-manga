@@ -7,7 +7,7 @@ namespace WebApi.UseCases.V1.GetAccountDetails
 
     public sealed class GetAccountDetailsPresenter : IOutputPort
     {
-        public IActionResult ViewModel { get; private set; }
+        public IActionResult ViewModel { get; private set; } = new NoContentResult();
 
         public void NotFound(string message)
         {

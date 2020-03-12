@@ -7,7 +7,7 @@ namespace WebApi.UseCases.V1.Register
 
     public sealed class RegisterPresenter : IOutputPort
     {
-        public IActionResult ViewModel { get; private set; }
+        public IActionResult ViewModel { get; private set; } = new NoContentResult();
 
         public void CustomerAlreadyRegistered(string message)
         {

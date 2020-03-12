@@ -5,7 +5,7 @@ namespace WebApi.UseCases.V1.Deposit
 
     public sealed class DepositPresenter : IOutputPort
     {
-        public IActionResult ViewModel { get; private set; }
+        public IActionResult ViewModel { get; private set; } = new NoContentResult();
 
         public void NotFound(string message)
         {

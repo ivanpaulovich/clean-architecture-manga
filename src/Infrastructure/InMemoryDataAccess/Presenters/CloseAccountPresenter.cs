@@ -15,6 +15,7 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
         {
             this.ClosedAccounts = new Collection<CloseAccountOutput>();
             this.NotFounds = new Collection<string>();
+            this.Errors = new Collection<string>();
         }
 
         /// <summary>
