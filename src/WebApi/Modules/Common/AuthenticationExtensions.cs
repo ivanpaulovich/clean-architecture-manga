@@ -1,9 +1,11 @@
 namespace WebApi.Modules.Common
 {
+    using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Security.Claims;
     using System.Text.Json;
+    using System.Threading.Tasks;
     using Domain.Security.Services;
     using Infrastructure.ExternalAuthentication;
     using Microsoft.AspNetCore.Authentication;
@@ -12,7 +14,6 @@ namespace WebApi.Modules.Common
     using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Newtonsoft.Json.Linq;
 
     public static class AuthenticationExtensions
     {
@@ -37,7 +38,22 @@ namespace WebApi.Modules.Common
                     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 })
-                .AddCookie()
+                .AddCookie(config =>
+                {
+                    config.Events = new CookieAuthenticationEvents
+                    {
+                        OnRedirectToLogin = ctx => {
+                            if (ctx.Request.Path.StartsWithSegments("/api"))
+                            {
+                                ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                            }
+                            else {
+                                ctx.Response.Redirect(ctx.RedirectUri);
+                            }
+                            return Task.FromResult(0);
+                        }
+                    };
+                })
                 .AddOAuth("Google", options =>
                 {
                     options.ClientId = configuration["AuthenticationModule:Google:ClientId"];
