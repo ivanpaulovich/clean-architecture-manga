@@ -18,6 +18,7 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
         {
             this.Deposits = new Collection<DepositOutput>();
             this.NotFounds = new Collection<string>();
+            this.Errors = new Collection<string>();
         }
 
         public Collection<DepositOutput> Deposits { get; }

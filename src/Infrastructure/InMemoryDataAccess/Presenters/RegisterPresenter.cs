@@ -9,6 +9,7 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
         {
             this.Registers = new Collection<RegisterOutput>();
             this.AlreadyRegistered = new Collection<string>();
+            this.Errors = new Collection<string>();
         }
 
         public Collection<RegisterOutput> Registers { get; }
