@@ -5,9 +5,17 @@ namespace WebApi.UseCases.V1.CloseAccount
     using Application.Boundaries.CloseAccount;
     using Domain.Accounts.ValueObjects;
     using FluentMediator;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
+    /// <summary>
+    ///     Accounts
+    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Design-Patterns#controller">
+    ///         Controller Design Pattern
+    ///     </see>
+    ///     .
+    /// </summary>
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
@@ -19,8 +27,11 @@ namespace WebApi.UseCases.V1.CloseAccount
         /// <response code="200">The closed account id.</response>
         /// <response code="400">Bad request.</response>
         /// <response code="500">Error.</response>
+        /// <param name="mediator"></param>
+        /// <param name="presenter"></param>
         /// <param name="request">The request to Close an Account.</param>
         /// <returns>The account id.</returns>
+        [Authorize]
         [HttpDelete("{AccountId}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CloseAccountResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -31,7 +42,8 @@ namespace WebApi.UseCases.V1.CloseAccount
             [FromRoute] [Required] CloseAccountRequest request)
         {
             var input = new CloseAccountInput(new AccountId(request.AccountId));
-            await mediator.PublishAsync(input);
+            await mediator.PublishAsync(input)
+                .ConfigureAwait(false);
             return presenter.ViewModel;
         }
     }

@@ -6,9 +6,17 @@ namespace WebApi.UseCases.V1.Register
     using Domain.Accounts.ValueObjects;
     using Domain.Customers.ValueObjects;
     using FluentMediator;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
+    /// <summary>
+    ///     Customers
+    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Design-Patterns#controller">
+    ///         Controller Design Pattern
+    ///     </see>
+    ///     .
+    /// </summary>
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
@@ -20,8 +28,11 @@ namespace WebApi.UseCases.V1.Register
         /// <response code="200">The registered customer was create successfully.</response>
         /// <response code="400">Bad request.</response>
         /// <response code="500">Error.</response>
+        /// <param name="mediator"></param>
+        /// <param name="presenter"></param>
         /// <param name="request">The request to register a customer.</param>
         /// <returns>The newly registered customer.</returns>
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RegisterResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -32,9 +43,12 @@ namespace WebApi.UseCases.V1.Register
             [FromForm] [Required] RegisterRequest request)
         {
             var input = new RegisterInput(
-                new SSN(request.SSN),
-                new PositiveMoney(request.InitialAmount));
-            await mediator.PublishAsync(input);
+                request.SSN,
+                request.InitialAmount);
+
+            await mediator.PublishAsync(input)
+                .ConfigureAwait(false);
+
             return presenter.ViewModel;
         }
     }

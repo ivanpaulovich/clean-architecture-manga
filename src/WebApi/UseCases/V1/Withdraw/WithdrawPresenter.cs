@@ -3,8 +3,15 @@ namespace WebApi.UseCases.V1.Withdraw
     using Application.Boundaries.Withdraw;
     using Microsoft.AspNetCore.Mvc;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public sealed class WithdrawPresenter : IOutputPort
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
         public IActionResult ViewModel { get; private set; } = new NoContentResult();
 
         public void NotFound(string message)

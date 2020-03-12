@@ -14,7 +14,8 @@ namespace Infrastructure.InMemoryDataAccess
 
         public async Task<int> Save()
         {
-            return await Task.FromResult(0);
+            return await Task.FromResult(0)
+                .ConfigureAwait(false);
         }
     }
 }

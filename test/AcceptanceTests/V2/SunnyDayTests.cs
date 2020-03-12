@@ -10,31 +10,34 @@ namespace ComponentTests.V2
     using WebApi;
     using Xunit;
 
-    public sealed class SunnyDayTests : IClassFixture<WebApplicationFactory<Startup>>
+    public sealed class SunnyDayTests : IClassFixture<CustomWebApplicationFactory>
     {
-        private readonly WebApplicationFactory<Startup> _factory;
+        private readonly CustomWebApplicationFactory _factory;
 
-        public SunnyDayTests(WebApplicationFactory<Startup> factory)
+        public SunnyDayTests(CustomWebApplicationFactory factory)
         {
-            _factory = factory;
+            this._factory = factory;
         }
 
         [Fact]
         public async Task Register_Deposit_Withdraw_Close()
         {
-            Tuple<string, string> customerId_accountId = await Register(100);
-            await GetAccount(customerId_accountId.Item2);
+            Tuple<string, string> customerIdAccountId = await this.Register(100)
+                .ConfigureAwait(false);
+            await this.GetAccount(customerIdAccountId.Item2)
+                .ConfigureAwait(false);
         }
 
         private async Task GetAccount(string accountId)
         {
-            var client = _factory.CreateClient();
-            string result = await client.GetStringAsync($"/api/v2/Accounts/{accountId}");
+            var client = this._factory.CreateClient();
+            string result = await client.GetStringAsync($"/api/v2/Accounts/{accountId}")
+                .ConfigureAwait(false);
         }
 
         private async Task<Tuple<string, string>> Register(decimal initialAmount)
         {
-            var client = _factory.CreateClient();
+            var client = this._factory.CreateClient();
 
             var content = new FormUrlEncodedContent(new[]
             {
@@ -42,11 +45,14 @@ namespace ComponentTests.V2
                 new KeyValuePair<string, string>("initialAmount", initialAmount.ToString()),
             });
 
-            var response = await client.PostAsync("api/v1/Customers", content);
+            var response = await client.PostAsync("api/v1/Customers", content)
+                .ConfigureAwait(false);
 
             response.EnsureSuccessStatusCode();
 
-            var responseString = await response.Content.ReadAsStringAsync();
+            string responseString = await response.Content
+                .ReadAsStringAsync()
+                .ConfigureAwait(false);
 
             Assert.Contains("customerId", responseString);
             JObject customer = JsonConvert.DeserializeObject<JObject>(responseString);

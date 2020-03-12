@@ -4,6 +4,7 @@
 
 namespace Application.UseCases
 {
+    using System.Linq;
     using System.Threading.Tasks;
     using Boundaries.Register;
     using Domain.Accounts;
@@ -26,6 +27,8 @@ namespace Application.UseCases
     {
         private readonly AccountService _accountService;
         private readonly CustomerService _customerService;
+        private readonly ICustomerRepository _customerRepository;
+        private readonly IAccountRepository _accountRepository;
         private readonly IOutputPort _outputPort;
         private readonly SecurityService _securityService;
         private readonly IUnitOfWork _unitOfWork;
@@ -46,7 +49,9 @@ namespace Application.UseCases
             AccountService accountService,
             SecurityService securityService,
             IOutputPort outputPort,
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork,
+            ICustomerRepository customerRepository,
+            IAccountRepository accountRepository)
         {
             this._userService = userService;
             this._customerService = customerService;
@@ -54,6 +59,8 @@ namespace Application.UseCases
             this._securityService = securityService;
             this._outputPort = outputPort;
             this._unitOfWork = unitOfWork;
+            this._customerRepository = customerRepository;
+            this._accountRepository = accountRepository;
         }
 
         /// <summary>
@@ -74,7 +81,17 @@ namespace Application.UseCases
                 if (await this._customerService.IsCustomerRegistered(customerId)
                     .ConfigureAwait(false))
                 {
-                    this._outputPort.CustomerAlreadyRegistered(Messages.CustomerAlreadyExists);
+                    var existingCustomer = await this._customerRepository.GetBy(customerId)
+                        .ConfigureAwait(false);
+                    var existingAccount = await this._accountRepository.GetAccount(existingCustomer.Accounts.GetAccountIds().First())
+                        .ConfigureAwait(false);
+
+                    var output = new RegisterOutput(
+                        this._userService.GetExternalUserId(),
+                        existingCustomer,
+                        existingAccount);
+
+                    this._outputPort.CustomerAlreadyRegistered(output);
                     return;
                 }
             }

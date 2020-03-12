@@ -5,6 +5,7 @@ namespace UnitTests.UseCaseTests.Deposit
     using Application.Boundaries.Deposit;
     using Application.UseCases;
     using Domain.Accounts.ValueObjects;
+    using Infrastructure.InMemoryDataAccess;
     using Infrastructure.InMemoryDataAccess.Presenters;
     using TestFixtures;
     using Xunit;
@@ -31,7 +32,7 @@ namespace UnitTests.UseCaseTests.Deposit
 
             await sut.Execute(
                 new DepositInput(
-                    this._fixture.Context.DefaultAccountId,
+                    MangaContext.DefaultAccountId,
                     new PositiveMoney(amount)));
 
             var output = presenter.Deposits.Last();
@@ -52,7 +53,7 @@ namespace UnitTests.UseCaseTests.Deposit
             await Assert.ThrowsAsync<MoneyShouldBePositiveException>(() =>
                 sut.Execute(
                     new DepositInput(
-                        this._fixture.Context.DefaultAccountId,
+                        MangaContext.DefaultAccountId,
                         new PositiveMoney(amount))));
         }
     }

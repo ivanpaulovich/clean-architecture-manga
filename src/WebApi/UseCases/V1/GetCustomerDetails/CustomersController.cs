@@ -3,9 +3,17 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
     using System.Threading.Tasks;
     using Application.Boundaries.GetCustomerDetails;
     using FluentMediator;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
+    /// <summary>
+    ///     Accounts
+    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Design-Patterns#controller">
+    ///         Controller Design Pattern
+    ///     </see>
+    ///     .
+    /// </summary>
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
@@ -15,6 +23,7 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
         ///     Get the Customer details.
         /// </summary>
         /// <returns>An asynchronous <see cref="IActionResult" />.</returns>
+        [Authorize]
         [HttpGet(Name = "GetCustomer")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetCustomerDetailsResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -25,7 +34,8 @@ namespace WebApi.UseCases.V1.GetCustomerDetails
             [FromServices] GetCustomerDetailsPresenter presenter)
         {
             var input = new GetCustomerDetailsInput();
-            await mediator.PublishAsync(input);
+            await mediator.PublishAsync(input)
+                .ConfigureAwait(false);
             return presenter.ViewModel;
         }
     }

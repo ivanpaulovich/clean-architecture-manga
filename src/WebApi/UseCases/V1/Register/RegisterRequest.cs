@@ -17,6 +17,6 @@ namespace WebApi.UseCases.V1.Register
         ///     Gets or sets initial Amount.
         /// </summary>
         [Required]
-        public decimal InitialAmount { get; set; }
+        public decimal InitialAmount { get; set; } = .0M;
     }
 }
