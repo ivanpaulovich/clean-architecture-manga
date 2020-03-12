@@ -28,7 +28,7 @@ class LoginStatus extends React.PureComponent<UserProps> {
             return (
                 <React.Fragment>
                     <NavItem>
-                        <Link className="text-dark" to="/api/v1/Logout">Logout</Link>
+                        <a href="/api/v1/Logout?RedirectUrl=/">Logout</a>
                     </NavItem>
                 </React.Fragment>
             )
@@ -38,10 +38,10 @@ class LoginStatus extends React.PureComponent<UserProps> {
             return (
                 <React.Fragment>
                     <NavItem>
-                        <Link className="text-dark" to="/api/v1/Login/GitHub">Login with GitHub</Link>
+                        <a href="/api/v1/Login/GitHub">Login with GitHub</a>
                     </NavItem>
                     <NavItem>
-                        <Link className="text-dark" to="/api/v1/Login/Google">Login with Google</Link>
+                        <a href="/api/v1/Login/Google">Login with Google</a>
                     </NavItem>
                 </React.Fragment>
             )

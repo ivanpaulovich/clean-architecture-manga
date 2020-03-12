@@ -20,12 +20,12 @@ namespace WebApi.UseCases.V1.Logout
         /// <returns></returns>
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> Logout(string? returnUrl = "/")
         {
             await this.HttpContext
                 .SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme)
                 .ConfigureAwait(false);
-            return this.Redirect("/swagger/index.html");
+            return this.Redirect(returnUrl);
         }
     }
 }
