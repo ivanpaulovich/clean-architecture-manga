@@ -1,36 +1,25 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router';
 import { ApplicationState } from '../store';
 import * as LoginStore from '../store/Logins';
 
 type LoginProps =
-  LoginStore.LoginState
-  & typeof LoginStore.actionCreators;
-
+    LoginStore.LoginState &
+    typeof LoginStore.actionCreators &
+    RouteComponentProps<{}>;
 
 class FetchLogin extends React.PureComponent<LoginProps> {
-  public componentDidMount() {
-    this.ensureDataFetched();
-  }
-
-  public componentDidUpdate() {
-    this.ensureDataFetched();
-  }
-
   public render() {
-    return (
-      <React.Fragment>
-          <li>{this.props.isLoading}a</li>
-      </React.Fragment>
-    );
-  }
-
-  private ensureDataFetched() {
-    this.props.requestLogin();
+      return (
+        <React.Fragment>
+          <button>Logout</button>
+        </React.Fragment>
+      );
   }
 }
 
 export default connect(
   (state: ApplicationState) => state.login,
-    LoginStore.actionCreators
+  LoginStore.actionCreators
 )(FetchLogin as any);
