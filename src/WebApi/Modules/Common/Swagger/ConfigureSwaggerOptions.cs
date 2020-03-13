@@ -45,15 +45,13 @@ namespace WebApi.Modules.Common.Swagger
                 Title = "Clean Architecture Manga API",
                 Version = description.ApiVersion.ToString(),
                 Description = "Clean Architecture, DDD and TDD implementation.",
-                Contact = new OpenApiContact
-                {
-                    Name = "Ivan Paulovich", Email = "ivan@paulovich.net"
-                },
+                Contact = new OpenApiContact {Name = "Ivan Paulovich", Email = "ivan@paulovich.net"},
                 TermsOfService = new Uri("http://paulovich.net"),
                 License = new OpenApiLicense
                 {
                     Name = "Apache License",
-                    Url = new Uri("https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/README.md")
+                    Url = new Uri(
+                        "https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/README.md")
                 }
             };
 

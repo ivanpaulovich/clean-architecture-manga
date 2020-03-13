@@ -5,7 +5,6 @@ namespace WebApi.UseCases.V1.Google
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
-    ///
     /// </summary>
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
@@ -13,7 +12,6 @@ namespace WebApi.UseCases.V1.Google
     public sealed class LoginController : Controller
     {
         /// <summary>
-        ///
         /// </summary>
         /// <param name="returnUrl"></param>
         /// <returns></returns>
@@ -23,10 +21,7 @@ namespace WebApi.UseCases.V1.Google
         {
             return new ChallengeResult(
                 "Google",
-                new AuthenticationProperties
-                {
-                    RedirectUri = returnUrl
-                });
+                new AuthenticationProperties {RedirectUri = returnUrl});
         }
     }
 }

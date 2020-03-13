@@ -1,5 +1,13 @@
 namespace WebApi.Modules
 {
+    using Application.Boundaries.CloseAccount;
+    using Application.Boundaries.Deposit;
+    using Application.Boundaries.GetAccount;
+    using Application.Boundaries.GetAccounts;
+    using Application.Boundaries.GetCustomer;
+    using Application.Boundaries.Register;
+    using Application.Boundaries.Transfer;
+    using Application.Boundaries.Withdraw;
     using Application.UseCases;
     using Domain.Accounts;
     using Domain.Customers;
@@ -18,13 +26,14 @@ namespace WebApi.Modules
         /// <returns>The modified instance.</returns>
         public static IServiceCollection AddUseCases(this IServiceCollection services)
         {
-            services.AddScoped<Application.Boundaries.CloseAccount.IUseCase, CloseAccountUseCase>();
-            services.AddScoped<Application.Boundaries.Deposit.IUseCase, DepositUseCase>();
-            services.AddScoped<Application.Boundaries.GetAccountDetails.IUseCase, GetAccountDetailsUseCase>();
-            services.AddScoped<Application.Boundaries.GetCustomerDetails.IUseCase, GetCustomerDetailsUseCase>();
-            services.AddScoped<Application.Boundaries.Register.IUseCase, RegisterUseCase>();
-            services.AddScoped<Application.Boundaries.Withdraw.IUseCase, WithdrawUseCase>();
-            services.AddScoped<Application.Boundaries.Transfer.IUseCase, TransferUseCase>();
+            services.AddScoped<ICloseAccountUseCase, CloseAccountCloseAccountUseCase>();
+            services.AddScoped<IDepositUseCase, DepositDepositUseCase>();
+            services.AddScoped<IGetAccountUseCase, GetAccountUseCase>();
+            services.AddScoped<IGetAccountsUseCase, GetAccountsUseCase>();
+            services.AddScoped<IGetCustomerUseCase, GetCustomerUseCase>();
+            services.AddScoped<IRegisterUseCase, RegisterRegisterUseCase>();
+            services.AddScoped<IWithdrawUseCase, WithdrawWithdrawUseCase>();
+            services.AddScoped<ITransferUseCase, TransferTransferUseCase>();
 
             services.AddScoped<CustomerService>();
             services.AddScoped<SecurityService>();

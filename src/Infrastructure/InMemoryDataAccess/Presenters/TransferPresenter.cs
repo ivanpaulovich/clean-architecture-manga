@@ -3,7 +3,7 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
     using System.Collections.ObjectModel;
     using Application.Boundaries.Transfer;
 
-    public sealed class TransferPresenter : IOutputPort
+    public sealed class TransferPresenter : ITransferOutputPort
     {
         public TransferPresenter()
         {

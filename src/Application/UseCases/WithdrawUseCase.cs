@@ -19,28 +19,28 @@ namespace Application.UseCases
     ///     </see>
     ///     .
     /// </summary>
-    public sealed class WithdrawUseCase : IUseCase
+    public sealed class WithdrawWithdrawUseCase : IWithdrawUseCase
     {
         private readonly IAccountRepository _accountRepository;
         private readonly AccountService _accountService;
-        private readonly IOutputPort _outputPort;
+        private readonly IWithdrawOutputPort _withdrawOutputPort;
         private readonly IUnitOfWork _unitOfWork;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="WithdrawUseCase" /> class.
+        ///     Initializes a new instance of the <see cref="WithdrawWithdrawUseCase" /> class.
         /// </summary>
         /// <param name="accountService">Account Service.</param>
-        /// <param name="outputPort">Output Port.</param>
+        /// <param name="withdrawOutputPort">Output Port.</param>
         /// <param name="accountRepository">Account Repository.</param>
         /// <param name="unitOfWork">Unit Of Work.</param>
-        public WithdrawUseCase(
+        public WithdrawWithdrawUseCase(
             AccountService accountService,
-            IOutputPort outputPort,
+            IWithdrawOutputPort withdrawOutputPort,
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
             this._accountService = accountService;
-            this._outputPort = outputPort;
+            this._withdrawOutputPort = withdrawOutputPort;
             this._accountRepository = accountRepository;
             this._unitOfWork = unitOfWork;
         }
@@ -54,7 +54,7 @@ namespace Application.UseCases
         {
             if (input is null)
             {
-                this._outputPort.WriteError(Messages.InputIsNull);
+                this._withdrawOutputPort.WriteError(Messages.InputIsNull);
                 return;
             }
 
@@ -72,11 +72,11 @@ namespace Application.UseCases
             }
             catch (AccountNotFoundException notFoundEx)
             {
-                this._outputPort.NotFound(notFoundEx.Message);
+                this._withdrawOutputPort.NotFound(notFoundEx.Message);
             }
             catch (MoneyShouldBePositiveException outOfBalanceEx)
             {
-                this._outputPort.OutOfBalance(outOfBalanceEx.Message);
+                this._withdrawOutputPort.OutOfBalance(outOfBalanceEx.Message);
             }
         }
 
@@ -86,7 +86,7 @@ namespace Application.UseCases
                 debit,
                 account.GetCurrentBalance());
 
-            this._outputPort.Standard(output);
+            this._withdrawOutputPort.Standard(output);
         }
     }
 }

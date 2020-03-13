@@ -28,7 +28,10 @@ class LoginStatus extends React.PureComponent<UserProps> {
             return (
                 <React.Fragment>
                     <NavItem>
-                        <a href="/api/v1/Logout?RedirectUrl=/">Logout</a>
+                        <NavLink tag={Link} className="text-dark" to="/accounts">Manage Accounts</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <a className="text-dark nav-link" href="/api/v1/Logout?RedirectUrl=/">Logout</a>
                     </NavItem>
                 </React.Fragment>
             )
@@ -38,16 +41,16 @@ class LoginStatus extends React.PureComponent<UserProps> {
             return (
                 <React.Fragment>
                     <NavItem>
-                        <a href="/api/v1/Login/GitHub">Login with GitHub</a>
+                        <a className="text-dark nav-link" href="/api/v1/Login/GitHub">Login with GitHub</a>
                     </NavItem>
                     <NavItem>
-                        <a href="/api/v1/Login/Google">Login with Google</a>
+                        <a className="text-dark nav-link" href="/api/v1/Login/Google">Login with Google</a>
                     </NavItem>
                 </React.Fragment>
             )
         }
     }
-};
+}
 
 export default connect(
     (state: ApplicationState) => state.user,

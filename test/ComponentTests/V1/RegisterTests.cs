@@ -1,0 +1,63 @@
+namespace ComponentTests.V1
+{
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Net;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using Xunit;
+
+    [Collection("WebApi Collection")]
+    public sealed class RegisterTests
+    {
+        private readonly CustomWebApplicationFactoryFixture _fixture;
+
+        public RegisterTests(CustomWebApplicationFactoryFixture fixture)
+        {
+            this._fixture = fixture;
+        }
+
+        [Fact]
+        public async Task RegisterReturnCustomerAndAccounts()
+        {
+            var client = this._fixture
+                .CustomWebApplicationFactory
+                .CreateClient();
+
+            var content = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("ssn", "8608179999"),
+                new KeyValuePair<string, string>("initialAmount", "300.5")
+            });
+
+            var actualResponse = await client
+                .PostAsync("api/v1/Customers", content)
+                .ConfigureAwait(false);
+
+            Assert.Equal(HttpStatusCode.Created, actualResponse.StatusCode);
+
+            string actualResponseString = await actualResponse.Content
+                .ReadAsStringAsync()
+                .ConfigureAwait(false);
+
+            using var stringReader = new StringReader(actualResponseString);
+            using var reader = new JsonTextReader(stringReader) {DateParseHandling = DateParseHandling.None};
+            var jsonResponse = JObject.Load(reader);
+
+            Assert.Equal(JTokenType.String, jsonResponse["customer"]["customerId"].Type);
+            Assert.Equal(JTokenType.String, jsonResponse["customer"]["ssn"].Type);
+            Assert.Equal(JTokenType.String, jsonResponse["customer"]["name"].Type);
+            Assert.Equal(JTokenType.String, jsonResponse["accounts"][0]["accountId"].Type);
+            Assert.Equal(JTokenType.Integer, jsonResponse["accounts"][0]["currentBalance"].Type);
+
+            Assert.True(Guid.TryParse(jsonResponse["customer"]["customerId"].Value<string>(), out var customerId));
+            Assert.Equal("8608179999", jsonResponse["customer"]["ssn"]);
+            Assert.Equal("Ivan Paulovich", jsonResponse["customer"]["name"]);
+            Assert.True(Guid.TryParse(jsonResponse["accounts"][0]["accountId"].Value<string>(), out var accountId));
+            Assert.Equal(500, jsonResponse["accounts"][0]["currentBalance"]);
+        }
+    }
+}

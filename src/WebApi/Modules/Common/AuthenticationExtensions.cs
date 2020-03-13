@@ -25,7 +25,7 @@ namespace WebApi.Modules.Common
 
             if (useFake)
             {
-                services.AddSingleton<IUserService, TestUserService>();
+                services.AddScoped<IUserService, TestUserService>();
             }
             else
             {
@@ -42,14 +42,17 @@ namespace WebApi.Modules.Common
                 {
                     config.Events = new CookieAuthenticationEvents
                     {
-                        OnRedirectToLogin = ctx => {
+                        OnRedirectToLogin = ctx =>
+                        {
                             if (ctx.Request.Path.StartsWithSegments("/api"))
                             {
                                 ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                             }
-                            else {
+                            else
+                            {
                                 ctx.Response.Redirect(ctx.RedirectUri);
                             }
+
                             return Task.FromResult(0);
                         }
                     };
@@ -105,7 +108,6 @@ namespace WebApi.Modules.Common
                             context.RunClaimActions(user.RootElement);
                         }
                     };
-
                 })
                 .AddOAuth("GitHub", options =>
                 {
@@ -129,16 +131,18 @@ namespace WebApi.Modules.Common
                     {
                         OnCreatingTicket = async context =>
                         {
-                            var request = new HttpRequestMessage(HttpMethod.Get, context.Options.UserInformationEndpoint);
+                            var request =
+                                new HttpRequestMessage(HttpMethod.Get, context.Options.UserInformationEndpoint);
                             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", context.AccessToken);
+                            request.Headers.Authorization =
+                                new AuthenticationHeaderValue("Bearer", context.AccessToken);
 
-                            var response = await context.Backchannel.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, context.HttpContext.RequestAborted);
+                            var response = await context.Backchannel.SendAsync(request,
+                                HttpCompletionOption.ResponseHeadersRead, context.HttpContext.RequestAborted);
                             response.EnsureSuccessStatusCode();
 
                             var user = JsonDocument.Parse(await response
-                                .Content.
-                                ReadAsStringAsync()
+                                .Content.ReadAsStringAsync()
                                 .ConfigureAwait(false));
 
                             context.RunClaimActions(user.RootElement);

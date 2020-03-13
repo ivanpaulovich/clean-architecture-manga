@@ -3,7 +3,6 @@ namespace WebApi.UseCases.V1.GetUserInfo
     using System.Security.Claims;
 
     /// <summary>
-    ///
     /// </summary>
     public class UserInfo
     {

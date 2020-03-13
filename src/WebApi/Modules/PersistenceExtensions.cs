@@ -4,6 +4,8 @@ namespace WebApi.Modules
     using Domain.Accounts;
     using Domain.Customers;
     using Domain.Security;
+    using Infrastructure.DataAccess;
+    using Infrastructure.DataAccess.Repositories;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -17,30 +19,26 @@ namespace WebApi.Modules
             bool useFake = configuration.GetValue<bool>("PersistenceModule:UseFake");
             if (useFake)
             {
-                services.AddScoped<IUserFactory, Infrastructure.InMemoryDataAccess.EntityFactory>();
-                services.AddScoped<ICustomerFactory, Infrastructure.InMemoryDataAccess.EntityFactory>();
-                services.AddScoped<IAccountFactory, Infrastructure.InMemoryDataAccess.EntityFactory>();
-
-                services.AddSingleton<Infrastructure.InMemoryDataAccess.MangaContext, Infrastructure.InMemoryDataAccess.MangaContext>();
-                services.AddScoped<IUnitOfWork, Infrastructure.InMemoryDataAccess.UnitOfWork>();
-
-                services.AddScoped<IAccountRepository, Infrastructure.InMemoryDataAccess.Repositories.AccountRepository>();
-                services.AddScoped<ICustomerRepository, Infrastructure.InMemoryDataAccess.Repositories.CustomerRepository>();
-                services.AddScoped<IUserRepository, Infrastructure.InMemoryDataAccess.Repositories.UserRepository>();
+                services.AddSingleton<MangaContextFake, MangaContextFake>();
+                services.AddScoped<IUnitOfWork, UnitOfWorkFake>();
+                services.AddScoped<IAccountRepository, AccountRepositoryFake>();
+                services.AddScoped<ICustomerRepository, CustomerRepositoryFake>();
+                services.AddScoped<IUserRepository, UserRepositoryFake>();
             }
             else
             {
-                services.AddScoped<IUserFactory, Infrastructure.EntityFrameworkDataAccess.EntityFactory>();
-                services.AddScoped<ICustomerFactory, Infrastructure.EntityFrameworkDataAccess.EntityFactory>();
-                services.AddScoped<IAccountFactory, Infrastructure.EntityFrameworkDataAccess.EntityFactory>();
-
-                services.AddDbContext<Infrastructure.EntityFrameworkDataAccess.MangaContext>(
+                services.AddDbContext<MangaContext>(
                     options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-                services.AddScoped<IUnitOfWork, Infrastructure.EntityFrameworkDataAccess.UnitOfWork>();
+                services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-                services.AddScoped<IAccountRepository, Infrastructure.EntityFrameworkDataAccess.Repositories.AccountRepository>();
-                services.AddScoped<ICustomerRepository, Infrastructure.EntityFrameworkDataAccess.Repositories.CustomerRepository>();
+                services.AddScoped<IAccountRepository, AccountRepository>();
+                services.AddScoped<ICustomerRepository, CustomerRepository>();
+                services.AddScoped<IUserRepository, UserRepository>();
             }
+
+            services.AddScoped<IUserFactory, EntityFactory>();
+            services.AddScoped<ICustomerFactory, EntityFactory>();
+            services.AddScoped<IAccountFactory, EntityFactory>();
 
             return services;
         }

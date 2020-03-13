@@ -3,7 +3,7 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
     using System.Collections.ObjectModel;
     using Application.Boundaries.Withdraw;
 
-    public sealed class WithdrawPresenter : IOutputPort
+    public sealed class WithdrawPresenter : IWithdrawOutputPort
     {
         public WithdrawPresenter()
         {

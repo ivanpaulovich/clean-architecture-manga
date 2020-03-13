@@ -26,8 +26,9 @@
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
-    <None Include="ClientApp\src\components\LoginStatus.tsx" />
-    <None Include="ClientApp\src\store\User.ts" />
+    <None Include="ClientApp\src\components\Transactions.tsx" />
+    <None Include="ClientApp\src\store\Customer.ts" />
+    <None Include="ClientApp\src\store\Transactions.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

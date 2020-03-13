@@ -3,40 +3,39 @@ namespace UnitTests.TestFixtures
     using Domain.Accounts;
     using Domain.Customers;
     using Domain.Security;
+    using Infrastructure.DataAccess;
+    using Infrastructure.DataAccess.Repositories;
     using Infrastructure.ExternalAuthentication;
-    using Infrastructure.InMemoryDataAccess;
-    using Infrastructure.InMemoryDataAccess.Repositories;
 
     /// <summary>
-    ///
     /// </summary>
     public sealed class StandardFixture
     {
         public StandardFixture()
         {
-            this.Context = new MangaContext();
-            this.AccountRepository = new AccountRepository(this.Context);
-            this.CustomerRepository = new CustomerRepository(this.Context);
-            this.UserRepository = new UserRepository(this.Context);
-            this.UnitOfWork = new UnitOfWork(this.Context);
+            this.Context = new MangaContextFake();
+            this.AccountRepositoryFake = new AccountRepositoryFake(this.Context);
+            this.CustomerRepositoryFake = new CustomerRepositoryFake(this.Context);
+            this.UserRepositoryFake = new UserRepositoryFake(this.Context);
+            this.UnitOfWork = new UnitOfWorkFake();
             this.EntityFactory = new EntityFactory();
-            this.TestUserService = new TestUserService();
-            this.CustomerService = new CustomerService(this.EntityFactory, this.CustomerRepository);
-            this.SecurityService = new SecurityService(this.EntityFactory, this.UserRepository);
-            this.AccountService = new AccountService(this.EntityFactory, this.AccountRepository);
+            this.TestUserService = new TestUserService(this.EntityFactory);
+            this.CustomerService = new CustomerService(this.EntityFactory, this.CustomerRepositoryFake);
+            this.SecurityService = new SecurityService(this.UserRepositoryFake);
+            this.AccountService = new AccountService(this.EntityFactory, this.AccountRepositoryFake);
         }
 
         public EntityFactory EntityFactory { get; }
 
-        public MangaContext Context { get; }
+        public MangaContextFake Context { get; }
 
-        public AccountRepository AccountRepository { get; }
+        public AccountRepositoryFake AccountRepositoryFake { get; }
 
-        public CustomerRepository CustomerRepository { get; }
+        public CustomerRepositoryFake CustomerRepositoryFake { get; }
 
-        public UserRepository UserRepository { get; }
+        public UserRepositoryFake UserRepositoryFake { get; }
 
-        public UnitOfWork UnitOfWork { get; }
+        public UnitOfWorkFake UnitOfWork { get; }
 
         public TestUserService TestUserService { get; }
 

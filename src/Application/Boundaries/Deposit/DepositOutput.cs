@@ -22,23 +22,14 @@ namespace Application.Boundaries.Deposit
             ICredit credit,
             Money updatedBalance)
         {
-            if (credit is Credit creditEntity)
-            {
-                this.Transaction = new Transaction(
-                    Credit.Description,
-                    creditEntity.Amount,
-                    creditEntity.TransactionDate);
-
-                this.UpdatedBalance = updatedBalance;
-            }
-            else
-                throw new ArgumentNullException(nameof(credit));
+            this.Transaction = credit ?? throw new ArgumentNullException(nameof(credit));
+            this.UpdatedBalance = updatedBalance;
         }
 
         /// <summary>
         ///     Gets the Transaction object.
         /// </summary>
-        public Transaction Transaction { get; }
+        public ICredit Transaction { get; }
 
         /// <summary>
         ///     Gets the updated balance.

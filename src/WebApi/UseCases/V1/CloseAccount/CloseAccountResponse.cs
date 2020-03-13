@@ -11,13 +11,13 @@ namespace WebApi.UseCases.V1.CloseAccount
     {
         public CloseAccountResponse(CloseAccountOutput output)
         {
-            this.AccountId = output.AccountId.ToGuid();
+            this.AccountId = output.Account.Id.ToGuid();
         }
 
         /// <summary>
         ///     Gets account ID.
         /// </summary>
         [Required]
-        public Guid AccountId { get; }  = Guid.Empty;
+        public Guid AccountId { get; } = Guid.Empty;
     }
 }

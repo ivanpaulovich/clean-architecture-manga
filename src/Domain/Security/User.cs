@@ -11,9 +11,18 @@ namespace Domain.Security
     public abstract class User : IUser
     {
         /// <inheritdoc />
-        public ExternalUserId ExternalUserId { get; set; }
+        public abstract ExternalUserId ExternalUserId { get; }
 
         /// <inheritdoc />
-        public CustomerId CustomerId { get; set; }
+        public abstract Name? Name { get; }
+
+        /// <inheritdoc />
+        public abstract CustomerId? CustomerId { get; protected set; }
+
+        /// <inheritdoc />
+        public void Assign(CustomerId customerId)
+        {
+            this.CustomerId = customerId;
+        }
     }
 }

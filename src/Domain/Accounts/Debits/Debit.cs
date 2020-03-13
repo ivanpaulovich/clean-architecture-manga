@@ -20,12 +20,12 @@ namespace Domain.Accounts.Debits
         /// <summary>
         ///     Gets or sets Id.
         /// </summary>
-        public DebitId Id { get; protected set; }
+        public abstract DebitId Id { get; }
 
         /// <summary>
         ///     Gets or sets Amount.
         /// </summary>
-        public PositiveMoney Amount { get; protected set; }
+        public abstract PositiveMoney Amount { get; }
 
         /// <summary>
         ///     Gets Description.
@@ -38,7 +38,7 @@ namespace Domain.Accounts.Debits
         /// <summary>
         ///     Gets or sets Transaction Date.
         /// </summary>
-        public DateTime TransactionDate { get; protected set; }
+        public abstract DateTime TransactionDate { get; }
 
         /// <summary>
         ///     Calculates the sum of amounts.

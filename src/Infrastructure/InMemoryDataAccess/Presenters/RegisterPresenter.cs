@@ -4,12 +4,10 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
     using Application.Boundaries.Register;
 
     /// <summary>
-    ///
     /// </summary>
-    public sealed class RegisterPresenter : IOutputPort
+    public sealed class RegisterPresenter : IRegisterOutputPort
     {
         /// <summary>
-        ///
         /// </summary>
         public RegisterPresenter()
         {
@@ -19,22 +17,18 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
         }
 
         /// <summary>
-        ///
         /// </summary>
         public Collection<RegisterOutput> Registers { get; }
 
         /// <summary>
-        ///
         /// </summary>
         public Collection<RegisterOutput> AlreadyRegistered { get; }
 
         /// <summary>
-        ///
         /// </summary>
         public Collection<string> Errors { get; }
 
         /// <summary>
-        ///
         /// </summary>
         /// <param name="output"></param>
         public void Standard(RegisterOutput output)
@@ -43,16 +37,14 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
         }
 
         /// <summary>
-        ///
         /// </summary>
         /// <param name="message"></param>
-        public void CustomerAlreadyRegistered(RegisterOutput output)
+        public void HandleAlreadyRegisteredCustomer(RegisterOutput output)
         {
             this.AlreadyRegistered.Add(output);
         }
 
         /// <summary>
-        ///
         /// </summary>
         /// <param name="message"></param>
         public void WriteError(string message)

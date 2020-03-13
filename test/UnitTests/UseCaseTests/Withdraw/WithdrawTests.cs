@@ -5,7 +5,7 @@ namespace UnitTests.UseCaseTests.Withdraw
     using Application.Boundaries.Withdraw;
     using Application.UseCases;
     using Domain.Accounts.ValueObjects;
-    using Infrastructure.InMemoryDataAccess;
+    using Infrastructure.DataAccess;
     using Infrastructure.InMemoryDataAccess.Presenters;
     using TestFixtures;
     using Xunit;
@@ -26,14 +26,14 @@ namespace UnitTests.UseCaseTests.Withdraw
             decimal expectedBalance)
         {
             var presenter = new WithdrawPresenter();
-            var sut = new WithdrawUseCase(
+            var sut = new WithdrawWithdrawUseCase(
                 this._fixture.AccountService,
                 presenter,
-                this._fixture.AccountRepository,
+                this._fixture.AccountRepositoryFake,
                 this._fixture.UnitOfWork);
 
             await sut.Execute(new WithdrawInput(
-                MangaContext.DefaultAccountId,
+                MangaContextFake.DefaultAccountId,
                 new PositiveMoney(amount)));
 
             var actual = presenter.Withdrawals.Last();

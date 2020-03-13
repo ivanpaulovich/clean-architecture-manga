@@ -6,7 +6,6 @@ namespace WebApi.Pages
     using Microsoft.Extensions.Logging;
 
     /// <summary>
-    /// 
     /// </summary>
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public class ErrorModel : PageModel
@@ -14,13 +13,13 @@ namespace WebApi.Pages
         private readonly ILogger<ErrorModel> logger;
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="logger"></param>
         public ErrorModel(ILogger<ErrorModel> logger)
         {
             this.logger = logger;
         }
+
         public string RequestId { get; set; } = string.Empty;
 
         public bool ShowRequestId => !string.IsNullOrEmpty(this.RequestId);

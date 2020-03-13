@@ -18,28 +18,28 @@ namespace Application.UseCases
     ///     </see>
     ///     .
     /// </summary>
-    public sealed class TransferUseCase : IUseCase
+    public sealed class TransferTransferUseCase : ITransferUseCase
     {
         private readonly IAccountRepository _accountRepository;
         private readonly AccountService _accountService;
-        private readonly IOutputPort _outputPort;
+        private readonly ITransferOutputPort _transferOutputPort;
         private readonly IUnitOfWork _unitOfWork;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="TransferUseCase" /> class.
+        ///     Initializes a new instance of the <see cref="TransferTransferUseCase" /> class.
         /// </summary>
         /// <param name="accountService">Account Service.</param>
-        /// <param name="outputPort">Output Port.</param>
+        /// <param name="transferOutputPort">Output Port.</param>
         /// <param name="accountRepository">Account Repository.</param>
         /// <param name="unitOfWork">Unit Of Work.</param>
-        public TransferUseCase(
+        public TransferTransferUseCase(
             AccountService accountService,
-            IOutputPort outputPort,
+            ITransferOutputPort transferOutputPort,
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {
             this._accountService = accountService;
-            this._outputPort = outputPort;
+            this._transferOutputPort = transferOutputPort;
             this._accountRepository = accountRepository;
             this._unitOfWork = unitOfWork;
         }
@@ -53,15 +53,17 @@ namespace Application.UseCases
         {
             if (input is null)
             {
-                this._outputPort.WriteError(Messages.InputIsNull);
+                this._transferOutputPort.WriteError(Messages.InputIsNull);
                 return;
             }
 
             try
             {
-                var originAccount = await this._accountRepository.GetAccount(input.OriginAccountId)
+                var originAccount = await this._accountRepository
+                    .GetAccount(input.OriginAccountId)
                     .ConfigureAwait(false);
-                var destinationAccount = await this._accountRepository.GetAccount(input.DestinationAccountId)
+                var destinationAccount = await this._accountRepository
+                    .GetAccount(input.DestinationAccountId)
                     .ConfigureAwait(false);
 
                 var debit = await this._accountService.Withdraw(originAccount, input.Amount)
@@ -76,7 +78,7 @@ namespace Application.UseCases
             }
             catch (AccountNotFoundException ex)
             {
-                this._outputPort.NotFound(ex.Message);
+                this._transferOutputPort.NotFound(ex.Message);
             }
         }
 
@@ -88,7 +90,7 @@ namespace Application.UseCases
                 originAccount.Id,
                 destinationAccount.Id);
 
-            this._outputPort.Standard(output);
+            this._transferOutputPort.Standard(output);
         }
     }
 }

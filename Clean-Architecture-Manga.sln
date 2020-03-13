@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationTests", "test\In
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "test\UnitTests\UnitTests.csproj", "{5185498B-241B-49DA-BDA7-F08A2ACA4886}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComponentTests", "test\AcceptanceTests\ComponentTests.csproj", "{95F75E96-7060-4612-A78F-C187D0B93331}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComponentTests", "test\ComponentTests\ComponentTests.csproj", "{95F75E96-7060-4612-A78F-C187D0B93331}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0A5F185E-DE63-4F81-AF29-2B5F6AEC7885}"
 	ProjectSection(SolutionItems) = preProject

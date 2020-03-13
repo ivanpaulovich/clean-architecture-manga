@@ -5,7 +5,8 @@ namespace UnitTests.UseCaseTests.Deposit
     using Application.Boundaries.Deposit;
     using Application.UseCases;
     using Domain.Accounts.ValueObjects;
-    using Infrastructure.InMemoryDataAccess;
+    using Infrastructure.DataAccess;
+    using Infrastructure.DataAccess.Entities;
     using Infrastructure.InMemoryDataAccess.Presenters;
     using TestFixtures;
     using Xunit;
@@ -23,37 +24,38 @@ namespace UnitTests.UseCaseTests.Deposit
         [ClassData(typeof(PositiveDataSetup))]
         public async Task Deposit_ChangesBalance(decimal amount)
         {
-            var presenter = new DepositPresenter();
-            var sut = new DepositUseCase(
+            var presenter = new DepositGetAccountsPresenter();
+            var sut = new DepositDepositUseCase(
                 this._fixture.AccountService,
                 presenter,
-                this._fixture.AccountRepository,
+                this._fixture.AccountRepositoryFake,
                 this._fixture.UnitOfWork);
 
             await sut.Execute(
                 new DepositInput(
-                    MangaContext.DefaultAccountId,
+                    MangaContextFake.DefaultAccountId,
                     new PositiveMoney(amount)));
 
             var output = presenter.Deposits.Last();
-            Assert.Equal(amount, output.Transaction.Amount.ToMoney().ToDecimal());
+            var actualCredit = Assert.IsType<Credit>(output.Transaction);
+            Assert.Equal(amount, actualCredit.Amount.ToMoney().ToDecimal());
         }
 
         [Theory]
         [ClassData(typeof(NegativeDataSetup))]
         public async Task Deposit_ShouldNot_ChangesBalance_WhenNegative(decimal amount)
         {
-            var presenter = new DepositPresenter();
-            var sut = new DepositUseCase(
+            var presenter = new DepositGetAccountsPresenter();
+            var sut = new DepositDepositUseCase(
                 this._fixture.AccountService,
                 presenter,
-                this._fixture.AccountRepository,
+                this._fixture.AccountRepositoryFake,
                 this._fixture.UnitOfWork);
 
             await Assert.ThrowsAsync<MoneyShouldBePositiveException>(() =>
                 sut.Execute(
                     new DepositInput(
-                        MangaContext.DefaultAccountId,
+                        MangaContextFake.DefaultAccountId,
                         new PositiveMoney(amount))));
         }
     }

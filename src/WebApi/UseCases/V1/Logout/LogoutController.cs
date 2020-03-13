@@ -1,13 +1,12 @@
 namespace WebApi.UseCases.V1.Logout
 {
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Authentication.Cookies;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Authentication.Cookies;
 
     /// <summary>
-    ///
     /// </summary>
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
@@ -15,7 +14,6 @@ namespace WebApi.UseCases.V1.Logout
     public sealed class LogoutController : Controller
     {
         /// <summary>
-        ///
         /// </summary>
         /// <returns></returns>
         [HttpGet]

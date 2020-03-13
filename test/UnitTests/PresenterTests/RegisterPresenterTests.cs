@@ -1,37 +1,42 @@
 namespace UnitTests.PresenterTests
 {
     using System;
+    using System.Collections.Generic;
     using System.Net;
     using Application.Boundaries.Register;
+    using Domain.Accounts;
     using Domain.Accounts.ValueObjects;
     using Domain.Customers.ValueObjects;
     using Domain.Security.ValueObjects;
+    using Infrastructure.DataAccess.Entities;
     using Microsoft.AspNetCore.Mvc;
     using WebApi.UseCases.V1.Register;
     using Xunit;
+    using Account = Infrastructure.DataAccess.Entities.Account;
 
     public sealed class RegisterPresenterTests
     {
         [Fact]
         public void GivenValidData_Handle_WritesOkObjectResult()
         {
-            var customer = new Infrastructure.InMemoryDataAccess.Customer(
+            var customer = new Customer(
                 new CustomerId(Guid.NewGuid()),
-                new SSN("198608178888"),
                 new Name("Ivan Paulovich"),
-                Array.Empty<AccountId>());
+                new SSN("198608178888"));
 
-            var account = new Infrastructure.InMemoryDataAccess.Account(
+            var account = new Account(
                 new AccountId(Guid.NewGuid()),
-                customer.Id,
-                Array.Empty<Infrastructure.InMemoryDataAccess.Credit>(),
-                Array.Empty<Infrastructure.InMemoryDataAccess.Debit>()
-                );
+                customer.Id);
+
+            var user = new User(
+                new ExternalUserId("github/ivanpaulovich"),
+                new Name("Ivan Paulovich"),
+                customer.Id);
 
             var registerOutput = new RegisterOutput(
-                new ExternalUserId("github/ivanpaulovich"),
+                user,
                 customer,
-                account);
+                new List<IAccount> {account});
 
             var sut = new RegisterPresenter();
             sut.Standard(registerOutput);
@@ -40,7 +45,7 @@ namespace UnitTests.PresenterTests
             Assert.Equal((int)HttpStatusCode.Created, actual.StatusCode);
 
             var actualValue = (RegisterResponse)actual.Value;
-            Assert.Equal(customer.Id.ToGuid(), actualValue.CustomerId);
+            Assert.Equal(customer.Id.ToGuid(), actualValue.Customer.CustomerId);
         }
     }
 }

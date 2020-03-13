@@ -5,7 +5,7 @@ namespace UnitTests.UseCaseTests.Transfer
     using Application.Boundaries.Transfer;
     using Application.UseCases;
     using Domain.Accounts.ValueObjects;
-    using Infrastructure.InMemoryDataAccess;
+    using Infrastructure.DataAccess;
     using Infrastructure.InMemoryDataAccess.Presenters;
     using TestFixtures;
     using Xunit;
@@ -26,16 +26,16 @@ namespace UnitTests.UseCaseTests.Transfer
             decimal expectedOriginBalance)
         {
             var presenter = new TransferPresenter();
-            var sut = new TransferUseCase(
+            var sut = new TransferTransferUseCase(
                 this._fixture.AccountService,
                 presenter,
-                this._fixture.AccountRepository,
+                this._fixture.AccountRepositoryFake,
                 this._fixture.UnitOfWork);
 
             await sut.Execute(
                 new TransferInput(
-                    MangaContext.DefaultAccountId,
-                    MangaContext.SecondAccountId,
+                    MangaContextFake.DefaultAccountId,
+                    MangaContextFake.SecondAccountId,
                     new PositiveMoney(amount)));
 
             var actual = presenter.Transfers.Last();

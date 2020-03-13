@@ -9,7 +9,7 @@ namespace Domain.Security.ValueObjects
     /// <summary>
     ///     External User Id Should Not Be Empty Exception.
     /// </summary>
-    public sealed class ExternalUserIdShouldNotBeEmptyException : DomainException
+    public class ExternalUserIdShouldNotBeEmptyException : DomainException
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExternalUserIdShouldNotBeEmptyException" /> class.
