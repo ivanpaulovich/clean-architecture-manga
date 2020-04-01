@@ -2,6 +2,10 @@ import { Action, Reducer } from 'redux';
 import { AppThunkAction } from './';
 
 export interface AccountsState {
+    accounts: Accounts;
+}
+
+export interface Accounts {
     accounts: Account[];
 }
 
@@ -16,7 +20,7 @@ interface RequestAccountsAction {
 
 interface ReceiveAccountsAction {
     type: 'RECEIVE_ACCOUNTS';
-    accounts: Account[];
+    accounts: Accounts;
 }
 
 type KnownAction = RequestAccountsAction | ReceiveAccountsAction;
@@ -24,14 +28,14 @@ type KnownAction = RequestAccountsAction | ReceiveAccountsAction;
 export const actionCreators = {
     requestAccounts: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
         fetch(`api/v1/accounts`)
-            .then(response => response.json() as Promise<Account[]>)
+            .then(response => response.json() as Promise<Accounts>)
             .then(data => {
                 dispatch({ type: 'RECEIVE_ACCOUNTS', accounts: data });
             });
     }
 };
 
-const unloadedState: AccountsState = { accounts: [] };
+const unloadedState: AccountsState = { accounts: { accounts: []}};
 
 export const reducer: Reducer<AccountsState> = (state: AccountsState | undefined, incomingAction: Action): AccountsState => {
     if (state === undefined) {

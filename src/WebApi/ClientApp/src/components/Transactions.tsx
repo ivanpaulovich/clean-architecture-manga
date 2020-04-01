@@ -26,7 +26,7 @@ class Transactions extends React.PureComponent<TransactionsProps> {
               </tr>
               </thead>
               <tbody>
-              {this.props.transactions.map((transaction: TransactionsStore.Transaction) =>
+              {this.props.transactions.credits.map((transaction: TransactionsStore.Credit) =>
                   <tr key={transaction.transactionId}>
                       <td>{transaction.transactionId}</td>
                       <td>{transaction.amount}</td>

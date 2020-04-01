@@ -51,7 +51,8 @@ namespace Application.UseCases
 
             try
             {
-                account = await this._accountRepository.GetAccount(input.AccountId)
+                account = await this._accountRepository
+                    .GetAccount(input.AccountId)
                     .ConfigureAwait(false);
             }
             catch (AccountNotFoundException ex)
