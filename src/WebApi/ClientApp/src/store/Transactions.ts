@@ -24,20 +24,14 @@ export interface Debit {
     transactionDate: Date;
 }
 
-interface RequestTransactionsAction {
-    type: 'REQUEST_TRANSACTIONS';
-}
-
 interface ReceiveTransactionsAction {
     type: 'RECEIVE_TRANSACTIONS';
     transactions: Transactions;
 }
 
-type KnownAction = RequestTransactionsAction | ReceiveTransactionsAction;
-
 export const actionCreators = {
-    requestTransactions: (accountId: number): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        fetch(`api/v1/Accounts/{accountId}`)
+    requestTransactions: (accountId: string): AppThunkAction<ReceiveTransactionsAction> => (dispatch, getState) => {
+        fetch(`api/v1/Accounts/${accountId}`)
             .then(response => response.json() as Promise<Transactions>)
             .then(data => {
                 dispatch({ type: 'RECEIVE_TRANSACTIONS', transactions: data });
@@ -52,7 +46,7 @@ export const reducer: Reducer<TransactionsState> = (state: TransactionsState | u
         return unloadedState;
     }
 
-    const action = incomingAction as KnownAction;
+    const action = incomingAction as ReceiveTransactionsAction;
     switch (action.type) {
         case 'RECEIVE_TRANSACTIONS':
             return {

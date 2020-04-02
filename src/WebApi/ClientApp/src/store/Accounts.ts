@@ -14,19 +14,13 @@ export interface Account {
     currentBalance: number;
 }
 
-interface RequestAccountsAction {
-    type: 'REQUEST_ACCOUNTS';
-}
-
 interface ReceiveAccountsAction {
     type: 'RECEIVE_ACCOUNTS';
     accounts: Accounts;
 }
 
-type KnownAction = RequestAccountsAction | ReceiveAccountsAction;
-
 export const actionCreators = {
-    requestAccounts: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    requestAccounts: (): AppThunkAction<ReceiveAccountsAction> => (dispatch, getState) => {
         fetch(`api/v1/accounts`)
             .then(response => response.json() as Promise<Accounts>)
             .then(data => {
@@ -42,7 +36,7 @@ export const reducer: Reducer<AccountsState> = (state: AccountsState | undefined
         return unloadedState;
     }
 
-    const action = incomingAction as KnownAction;
+    const action = incomingAction as ReceiveAccountsAction;
     switch (action.type) {
         case 'RECEIVE_ACCOUNTS':
             return {

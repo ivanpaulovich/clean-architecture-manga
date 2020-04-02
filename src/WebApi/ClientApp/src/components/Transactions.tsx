@@ -2,16 +2,22 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
 import * as TransactionsStore from '../store/Transactions';
+import {RouteComponentProps} from "react-router";
 
 type TransactionsProps =
     TransactionsStore.TransactionsState
-  & typeof TransactionsStore.actionCreators;
+    & typeof TransactionsStore.actionCreators
+    & RouteComponentProps<{ accountId: string }>;;
 
 
 class Transactions extends React.PureComponent<TransactionsProps> {
-  public componentDidMount() {
-    this.ensureDataFetched();
-  }
+    public componentDidMount() {
+        this.ensureDataFetched();
+    }
+
+    public componentDidUpdate() {
+        this.ensureDataFetched();
+    }
 
   public render() {
     return (
@@ -41,7 +47,7 @@ class Transactions extends React.PureComponent<TransactionsProps> {
   }
 
   private ensureDataFetched() {
-    this.props.requestTransactions(2);
+    this.props.requestTransactions(this.props.match.params.accountId);
   }
 }
 
