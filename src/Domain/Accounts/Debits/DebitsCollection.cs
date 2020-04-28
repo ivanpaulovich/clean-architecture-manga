@@ -4,9 +4,8 @@
 
 namespace Domain.Accounts.Debits
 {
-    using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
+    using System.Linq;
     using ValueObjects;
 
     /// <summary>
@@ -17,54 +16,8 @@ namespace Domain.Accounts.Debits
     ///     </see>
     ///     .
     /// </summary>
-    public sealed class DebitsCollection
+    public class DebitsCollection : List<IDebit>
     {
-        private readonly IList<IDebit> debits;
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="DebitsCollection" /> class.
-        /// </summary>
-        public DebitsCollection()
-        {
-            this.debits = new List<IDebit>();
-        }
-
-        /// <summary>
-        ///     Adds a list of debits.
-        /// </summary>
-        /// <typeparam name="T">An IDebit implementation.</typeparam>
-        /// <param name="debits">Debits List.</param>
-        public void Add<T>(IEnumerable<T> debits)
-            where T : IDebit
-        {
-            if (debits is null)
-                throw new ArgumentNullException(nameof(debits));
-
-            foreach (var debit in debits)
-            {
-                if (debit is null)
-                    throw new ArgumentNullException(nameof(debits));
-
-                this.Add(debit);
-            }
-        }
-
-        /// <summary>
-        ///     Adds a Debit.
-        /// </summary>
-        /// <param name="debit">Debit instance.</param>
-        public void Add(IDebit debit) => this.debits.Add(debit);
-
-        /// <summary>
-        ///     Gets readonly transactions.
-        /// </summary>
-        /// <returns>Transactions.</returns>
-        public IReadOnlyCollection<IDebit> GetTransactions()
-        {
-            IReadOnlyCollection<IDebit> transactions = new ReadOnlyCollection<IDebit>(this.debits);
-            return transactions;
-        }
-
         /// <summary>
         ///     Gets Total amount.
         /// </summary>
@@ -73,12 +26,7 @@ namespace Domain.Accounts.Debits
         {
             PositiveMoney total = new PositiveMoney(0);
 
-            foreach (IDebit debit in this.debits)
-            {
-                total = debit.Sum(total);
-            }
-
-            return total;
+            return this.Aggregate(total, (current, debit) => debit.Sum(current));
         }
     }
 }

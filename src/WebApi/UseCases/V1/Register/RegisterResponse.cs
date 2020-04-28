@@ -1,9 +1,7 @@
 namespace WebApi.UseCases.V1.Register
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using Domain.Customers.ValueObjects;
     using ViewModels;
 
     /// <summary>
@@ -12,39 +10,23 @@ namespace WebApi.UseCases.V1.Register
     public sealed class RegisterResponse
     {
         public RegisterResponse(
-            CustomerId customerId,
-            SSN ssn,
-            Name name,
-            List<AccountDetailsModel> accounts)
+            CustomerModel customerModel,
+            List<AccountModel> accountsModel)
         {
-            this.CustomerId = customerId.ToGuid();
-            this.SSN = ssn.ToString();
-            this.Name = name.ToString();
-            this.Accounts = accounts;
+            this.Customer = customerModel;
+            this.Accounts = accountsModel;
         }
 
         /// <summary>
-        ///     Gets customer ID.
+        ///     Gets customer.
         /// </summary>
         [Required]
-        public Guid CustomerId { get; }
-
-        /// <summary>
-        ///     Gets sSN.
-        /// </summary>
-        [Required]
-        public string SSN { get; }
-
-        /// <summary>
-        ///     Gets name.
-        /// </summary>
-        [Required]
-        public string Name { get; }
+        public CustomerModel Customer { get; }
 
         /// <summary>
         ///     Gets accounts.
         /// </summary>
         [Required]
-        public List<AccountDetailsModel> Accounts { get; }
+        public List<AccountModel> Accounts { get; }
     }
 }

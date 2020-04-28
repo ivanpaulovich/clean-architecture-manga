@@ -28,7 +28,7 @@ namespace WebApi.UseCases.V1.Deposit
         /// <response code="400">Bad request.</response>
         /// <response code="500">Error.</response>
         /// <param name="mediator"></param>
-        /// <param name="presenter"></param>
+        /// <param name="getAccountsPresenter"></param>
         /// <param name="request">The request to deposit.</param>
         /// <returns>The updated balance.</returns>
         [Authorize]
@@ -38,7 +38,7 @@ namespace WebApi.UseCases.V1.Deposit
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Deposit(
             [FromServices] IMediator mediator,
-            [FromServices] DepositPresenter presenter,
+            [FromServices] DepositGetAccountsPresenter getAccountsPresenter,
             [FromForm] [Required] DepositRequest request)
         {
             var input = new DepositInput(
@@ -47,7 +47,7 @@ namespace WebApi.UseCases.V1.Deposit
 
             await mediator.PublishAsync(input)
                 .ConfigureAwait(false);
-            return presenter.ViewModel;
+            return getAccountsPresenter.ViewModel;
         }
     }
 }

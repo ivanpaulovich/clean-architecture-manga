@@ -20,12 +20,12 @@ namespace Domain.Accounts.Credits
         /// <summary>
         ///     Gets or sets Id.
         /// </summary>
-        public CreditId Id { get; protected set; }
+        public abstract CreditId Id { get; }
 
         /// <summary>
         ///     Gets or sets Amount.
         /// </summary>
-        public PositiveMoney Amount { get; protected set; }
+        public abstract PositiveMoney Amount { get; }
 
         /// <summary>
         ///     Gets Description.
@@ -38,7 +38,7 @@ namespace Domain.Accounts.Credits
         /// <summary>
         ///     Gets or sets Transaction Date.
         /// </summary>
-        public DateTime TransactionDate { get; protected set; }
+        public abstract DateTime TransactionDate { get; }
 
         /// <summary>
         ///     Calculate the sum of positive amounts.

@@ -11,33 +11,24 @@ namespace Domain.Customers
     public abstract class Customer : ICustomer
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Customer" /> class.
-        /// </summary>
-        public Customer()
-        {
-            this.Accounts = new AccountCollection();
-        }
-
-        /// <summary>
         ///     Gets or sets Name.
         /// </summary>
-        public Name Name { get; protected set; }
+        public abstract Name Name { get; }
 
         /// <summary>
         ///     Gets or sets SSN.
         /// </summary>
-        public SSN SSN { get; protected set; }
+        public abstract SSN SSN { get; }
 
         /// <inheritdoc />
-        public CustomerId Id { get; protected set; }
+        public abstract CustomerId Id { get; }
 
         /// <inheritdoc />
-        public AccountCollection Accounts { get; protected set; }
+        public abstract AccountCollection Accounts { get; }
 
         /// <inheritdoc />
-        public void Register(AccountId accountId)
+        public void Assign(AccountId accountId)
         {
-            this.Accounts ??= new AccountCollection();
             this.Accounts.Add(accountId);
         }
     }

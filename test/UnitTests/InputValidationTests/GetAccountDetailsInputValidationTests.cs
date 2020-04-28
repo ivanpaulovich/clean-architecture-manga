@@ -1,7 +1,7 @@
 namespace UnitTests.InputValidationTests
 {
     using System;
-    using Application.Boundaries.GetAccountDetails;
+    using Application.Boundaries.GetAccount;
     using Domain.Accounts.ValueObjects;
     using Xunit;
 
@@ -11,7 +11,7 @@ namespace UnitTests.InputValidationTests
         public void GivenEmptyAccountId_InputNotCreated_ThrowsInputValidationException()
         {
             var actualEx = Assert.Throws<EmptyAccountIdException>(
-                () => new GetAccountDetailsInput(
+                () => new GetAccountInput(
                     new AccountId(Guid.Empty)));
             Assert.Contains("accountId", actualEx.Message, StringComparison.OrdinalIgnoreCase);
         }
@@ -19,7 +19,7 @@ namespace UnitTests.InputValidationTests
         [Fact]
         public void GivenValidData_InputCreated()
         {
-            var actual = new GetAccountDetailsInput(
+            var actual = new GetAccountInput(
                 new AccountId(Guid.NewGuid()));
             Assert.NotNull(actual);
         }

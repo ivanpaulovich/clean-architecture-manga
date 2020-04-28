@@ -3,7 +3,6 @@ namespace WebApi.UseCases.V1.GetUserInfo
     using System.Security.Claims;
 
     /// <summary>
-    ///
     /// </summary>
     public class UserInfo
     {
@@ -15,7 +14,7 @@ namespace WebApi.UseCases.V1.GetUserInfo
             get
             {
                 var name = this._user.FindFirst("name");
-                if (name is Claim)
+                if (name != null)
                     return name.Value;
 
                 name = this._user.FindFirst(ClaimTypes.Name);

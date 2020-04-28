@@ -1,15 +1,15 @@
 namespace WebApi.UseCases.V1.Withdraw
 {
     using Application.Boundaries.Withdraw;
+    using Domain.Accounts.Debits;
     using Microsoft.AspNetCore.Mvc;
+    using ViewModels;
 
     /// <summary>
-    /// 
     /// </summary>
-    public sealed class WithdrawPresenter : IOutputPort
+    public sealed class WithdrawPresenter : IWithdrawOutputPort
     {
         /// <summary>
-        /// 
         /// </summary>
         /// <value></value>
         public IActionResult ViewModel { get; private set; } = new NoContentResult();
@@ -26,10 +26,9 @@ namespace WebApi.UseCases.V1.Withdraw
 
         public void Standard(WithdrawOutput withdrawOutput)
         {
+            var debitModel = new DebitModel((Debit)withdrawOutput.Transaction);
             var withdrawResponse = new WithdrawResponse(
-                withdrawOutput.Transaction.Amount.ToMoney().ToDecimal(),
-                withdrawOutput.Transaction.Description,
-                withdrawOutput.Transaction.TransactionDate,
+                debitModel,
                 withdrawOutput.UpdatedBalance.ToDecimal());
             this.ViewModel = new ObjectResult(withdrawResponse);
         }

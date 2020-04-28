@@ -4,12 +4,10 @@ namespace WebApi
     using Microsoft.Extensions.Hosting;
 
     /// <summary>
-    ///
     /// </summary>
     public static class Program
     {
         /// <summary>
-        ///
         /// </summary>
         /// <param name="args"></param>
         public static void Main(string[] args)

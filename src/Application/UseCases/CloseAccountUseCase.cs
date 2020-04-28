@@ -16,21 +16,21 @@ namespace Application.UseCases
     ///     </see>
     ///     .
     /// </summary>
-    public sealed class CloseAccountUseCase : IUseCase
+    public sealed class CloseAccountUseCase : ICloseAccountUseCase
     {
         private readonly IAccountRepository _accountRepository;
-        private readonly IOutputPort _outputPort;
+        private readonly ICloseAccountGetAccountsOutputPort _closeAccountGetAccountsOutputPort;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CloseAccountUseCase" /> class.
         /// </summary>
-        /// <param name="outputPort">Output Port.</param>
+        /// <param name="closeAccountGetAccountsOutputPort">Output Port.</param>
         /// <param name="accountRepository">Account Repository.</param>
         public CloseAccountUseCase(
-            IOutputPort outputPort,
+            ICloseAccountGetAccountsOutputPort closeAccountGetAccountsOutputPort,
             IAccountRepository accountRepository)
         {
-            this._outputPort = outputPort;
+            this._closeAccountGetAccountsOutputPort = closeAccountGetAccountsOutputPort;
             this._accountRepository = accountRepository;
         }
 
@@ -43,26 +43,26 @@ namespace Application.UseCases
         {
             if (input is null)
             {
-                this._outputPort.WriteError(Messages.InputIsNull);
+                this._closeAccountGetAccountsOutputPort
+                    .WriteError(Messages.InputIsNull);
                 return;
             }
 
-            IAccount account;
-
-            try
-            {
-                account = await this._accountRepository.GetAccount(input.AccountId)
+            IAccount account = await this._accountRepository
+                    .GetAccount(input.AccountId)
                     .ConfigureAwait(false);
-            }
-            catch (AccountNotFoundException ex)
+
+            if (account is null)
             {
-                this._outputPort.NotFound(ex.Message);
+                this._closeAccountGetAccountsOutputPort
+                    .NotFound($"The account {input.AccountId.ToGuid()} does not exist or is not processed yet.");
                 return;
             }
 
             if (account.IsClosingAllowed())
             {
-                await this._accountRepository.Delete(account)
+                await this._accountRepository
+                    .Delete(account)
                     .ConfigureAwait(false);
             }
 
@@ -72,7 +72,8 @@ namespace Application.UseCases
         private void BuildOutput(IAccount account)
         {
             var closeAccountOutput = new CloseAccountOutput(account);
-            this._outputPort.Standard(closeAccountOutput);
+            this._closeAccountGetAccountsOutputPort
+                .Standard(closeAccountOutput);
         }
     }
 }

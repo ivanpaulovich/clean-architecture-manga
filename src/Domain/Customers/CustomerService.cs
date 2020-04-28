@@ -42,8 +42,11 @@ namespace Domain.Customers
         /// <returns>Created Customer.</returns>
         public async Task<ICustomer> CreateCustomer(SSN ssn, Name name)
         {
-            var customer = this.customerFactory.NewCustomer(ssn, name);
-            await this.customerRepository.Add(customer)
+            var customer = this.customerFactory
+                .NewCustomer(ssn, name);
+
+            await this.customerRepository
+                .Add(customer)
                 .ConfigureAwait(false);
 
             return customer;
@@ -56,17 +59,11 @@ namespace Domain.Customers
         /// <returns>True if he is registered.</returns>
         public async Task<bool> IsCustomerRegistered(CustomerId customerId)
         {
-            try
-            {
-                var customer = await this.customerRepository.GetBy(customerId)
-                    .ConfigureAwait(false);
+            var customer = await this.customerRepository
+                .GetBy(customerId)
+                .ConfigureAwait(false);
 
-                return true;
-            }
-            catch (CustomerNotFoundException)
-            {
-                return false;
-            }
+            return customer != null;
         }
     }
 }

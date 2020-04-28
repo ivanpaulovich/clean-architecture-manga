@@ -2,14 +2,14 @@ namespace WebApi.Modules.Common
 {
     using Application.Boundaries.CloseAccount;
     using Application.Boundaries.Deposit;
-    using Application.Boundaries.GetAccountDetails;
-    using Application.Boundaries.GetCustomerDetails;
+    using Application.Boundaries.GetAccount;
+    using Application.Boundaries.GetAccounts;
+    using Application.Boundaries.GetCustomer;
     using Application.Boundaries.Register;
     using Application.Boundaries.Transfer;
     using Application.Boundaries.Withdraw;
     using FluentMediator;
     using Microsoft.Extensions.DependencyInjection;
-    using IUseCase = Application.Boundaries.CloseAccount.IUseCase;
 
     public static class FluentMediatorExtensions
     {
@@ -19,30 +19,34 @@ namespace WebApi.Modules.Common
                 builder =>
                 {
                     builder.On<CloseAccountInput>().PipelineAsync()
-                        .Call<IUseCase>((handler, request) => handler.Execute(request));
+                        .Call<ICloseAccountUseCase>((handler, request) => handler.Execute(request));
 
                     builder.On<DepositInput>().PipelineAsync()
-                        .Call<Application.Boundaries.Deposit.IUseCase>((handler, request) => handler.Execute(request));
+                        .Call<IDepositUseCase>((handler, request) => handler.Execute(request));
 
-                    builder.On<GetAccountDetailsInput>().PipelineAsync()
-                        .Call<Application.Boundaries.GetAccountDetails.IUseCase>((handler, request) =>
+                    builder.On<GetAccountInput>().PipelineAsync()
+                        .Call<IGetAccountUseCase>((handler, request) =>
                             handler.Execute(request));
 
-                    builder.On<GetCustomerDetailsInput>().PipelineAsync()
-                        .Call<Application.Boundaries.GetCustomerDetails.IUseCase>((handler, request) =>
+                    builder.On<GetAccountsInput>().PipelineAsync()
+                        .Call<IGetAccountsUseCase>((handler, request) =>
+                            handler.Execute(request));
+
+                    builder.On<GetCustomerInput>().PipelineAsync()
+                        .Call<IGetCustomerUseCase>((handler, request) =>
                             handler.Execute(request));
 
                     builder.On<RegisterInput>().PipelineAsync()
-                        .Call<Application.Boundaries.Register.IUseCase>((handler, request) => handler.Execute(request));
+                        .Call<IRegisterUseCase>((handler, request) => handler.Execute(request));
 
                     builder.On<TransferInput>().PipelineAsync()
-                        .Call<Application.Boundaries.Transfer.IUseCase>((handler, request) => handler.Execute(request));
+                        .Call<ITransferUseCase>((handler, request) => handler.Execute(request));
 
                     builder.On<WithdrawInput>().PipelineAsync()
-                        .Call<Application.Boundaries.Withdraw.IUseCase>((handler, request) => handler.Execute(request));
+                        .Call<IWithdrawUseCase>((handler, request) => handler.Execute(request));
 
-                    builder.On<GetAccountDetailsInput>().PipelineAsync("GetAccountDetailsV2")
-                        .Call<IUseCaseV2>((handler, request) => handler.Execute(request));
+                    builder.On<GetAccountInput>().PipelineAsync("GetAccountDetailsV2")
+                        .Call<IGetAccountUseCaseV2>((handler, request) => handler.Execute(request));
                 });
 
             return services;

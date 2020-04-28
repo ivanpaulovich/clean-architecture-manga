@@ -25,26 +25,30 @@ namespace WebApi.Modules.Common.FeatureFlags
                 var controller = feature.Controllers[i].AsType();
                 foreach (var customAttribute in controller.CustomAttributes)
                 {
-                    if (customAttribute.AttributeType.FullName == typeof(FeatureGateAttribute).FullName)
+                    if (customAttribute.AttributeType.FullName != typeof(FeatureGateAttribute).FullName)
                     {
-                        var constructorArgument = customAttribute.ConstructorArguments.First();
-                        if (constructorArgument.Value is IEnumerable arguments)
-                        {
-                            foreach (var argumentValue in arguments)
-                            {
-                                var typedArgument = (CustomAttributeTypedArgument)argumentValue;
-                                var typedArgumentValue = (CustomFeature)(int)typedArgument.Value;
-                                bool isFeatureEnabled = this._featureManager
-                                    .IsEnabledAsync(typedArgumentValue.ToString())
-                                    .ConfigureAwait(false)
-                                    .GetAwaiter()
-                                    .GetResult();
+                        continue;
+                    }
 
-                                if (!isFeatureEnabled)
-                                {
-                                    feature.Controllers.RemoveAt(i);
-                                }
-                            }
+                    var constructorArgument = customAttribute.ConstructorArguments.First();
+                    if (!(constructorArgument.Value is IEnumerable arguments))
+                    {
+                        continue;
+                    }
+
+                    foreach (var argumentValue in arguments)
+                    {
+                        var typedArgument = (CustomAttributeTypedArgument)argumentValue;
+                        var typedArgumentValue = (CustomFeature)(int)typedArgument.Value;
+                        bool isFeatureEnabled = this._featureManager
+                            .IsEnabledAsync(typedArgumentValue.ToString())
+                            .ConfigureAwait(false)
+                            .GetAwaiter()
+                            .GetResult();
+
+                        if (!isFeatureEnabled)
+                        {
+                            feature.Controllers.RemoveAt(i);
                         }
                     }
                 }

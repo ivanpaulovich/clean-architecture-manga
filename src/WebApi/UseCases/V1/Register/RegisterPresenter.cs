@@ -1,99 +1,60 @@
 namespace WebApi.UseCases.V1.Register
 {
-    using System.Collections.Generic;
+    using System.Linq;
     using Application.Boundaries.Register;
+    using Domain.Accounts;
+    using Domain.Customers;
     using Microsoft.AspNetCore.Mvc;
     using ViewModels;
 
     /// <summary>
-    ///
     /// </summary>
-    public sealed class RegisterPresenter : IOutputPort
+    public sealed class RegisterPresenter : IRegisterOutputPort
     {
         /// <summary>
-        ///
         /// </summary>
         /// <returns></returns>
         public IActionResult ViewModel { get; private set; } = new NoContentResult();
 
         /// <summary>
-        ///
         /// </summary>
         /// <param name="output"></param>
-        public void CustomerAlreadyRegistered(RegisterOutput output)
+        public void HandleAlreadyRegisteredCustomer(RegisterOutput output)
         {
-            var transactions = new List<TransactionModel>();
+            var customerModel = new CustomerModel((Customer)output.Customer);
+            var accountsModel =
+                (from Account accountEntity in output.Accounts
+                    select new AccountModel(accountEntity))
+                .ToList();
 
-            foreach (var item in output.Account.Transactions)
-            {
-                var transaction = new TransactionModel(
-                    item.Amount,
-                    item.Description,
-                    item.TransactionDate);
-
-                transactions.Add(transaction);
-            }
-
-            var account = new AccountDetailsModel(
-                output.Account.AccountId,
-                output.Account.CurrentBalance,
-                transactions);
-
-            var accounts = new List<AccountDetailsModel>();
-            accounts.Add(account);
-
-            var registerResponse = new RegisterResponse(
-                output.Customer.CustomerId,
-                output.Customer.SSN,
-                output.Customer.Name,
-                accounts);
+            var registerResponse = new RegisterResponse(customerModel, accountsModel);
 
             this.ViewModel = new CreatedAtRouteResult(
                 "GetCustomer",
-                new {customerId = registerResponse.CustomerId, version = "1.0"},
+                new {customerId = registerResponse.Customer.CustomerId, version = "1.0"},
                 registerResponse);
         }
 
         /// <summary>
-        ///
         /// </summary>
         /// <param name="output"></param>
         public void Standard(RegisterOutput output)
         {
-            var transactions = new List<TransactionModel>();
+            var customerModel = new CustomerModel((Customer)output.Customer);
+            var accountsModel =
+                (from Account accountEntity in output.Accounts
+                    select new AccountModel(accountEntity))
+                .ToList();
 
-            foreach (var item in output.Account.Transactions)
-            {
-                var transaction = new TransactionModel(
-                    item.Amount,
-                    item.Description,
-                    item.TransactionDate);
-
-                transactions.Add(transaction);
-            }
-
-            var account = new AccountDetailsModel(
-                output.Account.AccountId,
-                output.Account.CurrentBalance,
-                transactions);
-
-            var accounts = new List<AccountDetailsModel>();
-            accounts.Add(account);
-
-            var registerResponse = new RegisterResponse(
-                output.Customer.CustomerId,
-                output.Customer.SSN,
-                output.Customer.Name,
-                accounts);
+            var registerResponse = new RegisterResponse(customerModel, accountsModel);
 
             this.ViewModel = new CreatedAtRouteResult(
                 "GetCustomer",
-                new {customerId = registerResponse.CustomerId, version = "1.0"},
+                new {customerId = registerResponse.Customer.CustomerId, version = "1.0"},
                 registerResponse);
         }
 
         /// <summary>
-        ///
         /// </summary>
         /// <param name="message"></param>
         public void WriteError(string message)

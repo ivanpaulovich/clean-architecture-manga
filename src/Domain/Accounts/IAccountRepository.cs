@@ -4,8 +4,10 @@
 
 namespace Domain.Accounts
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Credits;
+    using Customers.ValueObjects;
     using Debits;
     using ValueObjects;
 
@@ -20,11 +22,17 @@ namespace Domain.Accounts
     public interface IAccountRepository
     {
         /// <summary>
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <returns></returns>
+        Task<IAccount> GetAccount(AccountId accountId);
+
+        /// <summary>
         ///     Gets an Account.
         /// </summary>
-        /// <param name="id">AccountId.</param>
+        /// <param name="customerId">CustomerId.</param>
         /// <returns>An Account instance.</returns>
-        Task<IAccount> GetAccount(AccountId id);
+        Task<IList<IAccount>> GetBy(CustomerId customerId);
 
         /// <summary>
         ///     Adds an Account.

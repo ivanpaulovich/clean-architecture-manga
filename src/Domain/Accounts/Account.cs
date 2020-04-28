@@ -13,26 +13,17 @@ namespace Domain.Accounts
     public abstract class Account : IAccount
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Account" /> class.
-        /// </summary>
-        protected Account()
-        {
-            this.Credits = new CreditsCollection();
-            this.Debits = new DebitsCollection();
-        }
-
-        /// <summary>
         ///     Gets or sets Credits List.
         /// </summary>
-        public CreditsCollection Credits { get; protected set; }
+        public abstract CreditsCollection Credits { get; }
 
         /// <summary>
         ///     Gets or sets Debits List.
         /// </summary>
-        public DebitsCollection Debits { get; protected set; }
+        public abstract DebitsCollection Debits { get; }
 
         /// <inheritdoc />
-        public AccountId Id { get; protected set; }
+        public abstract AccountId Id { get; }
 
         /// <inheritdoc />
         public ICredit Deposit(IAccountFactory entityFactory, PositiveMoney amountToDeposit)
@@ -64,7 +55,8 @@ namespace Domain.Accounts
         /// <inheritdoc />
         public bool IsClosingAllowed()
         {
-            return this.GetCurrentBalance().IsZero();
+            return this.GetCurrentBalance()
+                .IsZero();
         }
 
         /// <inheritdoc />

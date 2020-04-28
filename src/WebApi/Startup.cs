@@ -35,10 +35,7 @@ namespace WebApi
                 .AddPresentersV1()
                 .AddPresentersV2()
                 .AddCustomControllers()
-                .AddSpaStaticFiles(configuration =>
-                {
-                    configuration.RootPath = "ClientApp/build";
-                });
+                .AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
         }
 
         public void Configure(
@@ -66,15 +63,12 @@ namespace WebApi
                 .UseStaticFiles()
                 .UseAuthentication()
                 .UseAuthorization()
-                .UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllers();
-                }).UseSpa(spa =>
+                .UseEndpoints(endpoints => { endpoints.MapControllers(); }).UseSpa(spa =>
                 {
                     spa.Options.SourcePath = "ClientApp";
                     if (env.IsDevelopment())
                     {
-                        spa.UseReactDevelopmentServer(npmScript: "start");
+                        spa.UseReactDevelopmentServer("start");
                     }
                 });
         }

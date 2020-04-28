@@ -32,6 +32,6 @@ namespace Domain.Customers
         ///     Register the Account into the Customer.
         /// </summary>
         /// <param name="accountId">Account Id.</param>
-        void Register(AccountId accountId);
+        void Assign(AccountId accountId);
     }
 }

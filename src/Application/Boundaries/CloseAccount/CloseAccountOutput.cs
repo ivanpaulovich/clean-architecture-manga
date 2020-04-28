@@ -6,7 +6,6 @@ namespace Application.Boundaries.CloseAccount
 {
     using System;
     using Domain.Accounts;
-    using Domain.Accounts.ValueObjects;
 
     /// <summary>
     ///     Close Account Output Message.
@@ -19,15 +18,12 @@ namespace Application.Boundaries.CloseAccount
         /// <param name="account">IAccount object.</param>
         public CloseAccountOutput(IAccount account)
         {
-            if (account is null)
-                throw new ArgumentNullException(nameof(account));
-
-            this.AccountId = account.Id;
+            this.Account = account ?? throw new ArgumentNullException(nameof(account));
         }
 
         /// <summary>
-        ///     Gets AccountId.
+        ///     Gets Account.
         /// </summary>
-        public AccountId AccountId { get; }
+        public IAccount Account { get; }
     }
 }

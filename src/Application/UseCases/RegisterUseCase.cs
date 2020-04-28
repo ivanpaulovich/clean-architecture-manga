@@ -4,15 +4,13 @@
 
 namespace Application.UseCases
 {
-    using System.Linq;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Boundaries.Register;
     using Domain.Accounts;
     using Domain.Customers;
-    using Domain.Customers.ValueObjects;
     using Domain.Security;
     using Domain.Security.Services;
-    using Domain.Security.ValueObjects;
     using Services;
 
     /// <summary>
@@ -23,32 +21,34 @@ namespace Application.UseCases
     ///     </see>
     ///     .
     /// </summary>
-    public sealed class RegisterUseCase : IUseCase
+    public sealed class RegisterRegisterUseCase : IRegisterUseCase
     {
-        private readonly AccountService _accountService;
-        private readonly CustomerService _customerService;
-        private readonly ICustomerRepository _customerRepository;
         private readonly IAccountRepository _accountRepository;
-        private readonly IOutputPort _outputPort;
+        private readonly AccountService _accountService;
+        private readonly ICustomerRepository _customerRepository;
+        private readonly CustomerService _customerService;
+        private readonly IRegisterOutputPort _registerOutputPort;
         private readonly SecurityService _securityService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserService _userService;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="RegisterUseCase" /> class.
+        ///     Initializes a new instance of the <see cref="RegisterRegisterUseCase" /> class.
         /// </summary>
         /// <param name="userService">User Service.</param>
         /// <param name="customerService">Customer Service.</param>
         /// <param name="accountService">Account Service.</param>
         /// <param name="securityService">Security Service.</param>
-        /// <param name="outputPort">Output Port.</param>
+        /// <param name="registerOutputPort">Output Port.</param>
         /// <param name="unitOfWork">Unit of Work.</param>
-        public RegisterUseCase(
+        /// <param name="customerRepository"></param>
+        /// <param name="accountRepository"></param>
+        public RegisterRegisterUseCase(
             IUserService userService,
             CustomerService customerService,
             AccountService accountService,
             SecurityService securityService,
-            IOutputPort outputPort,
+            IRegisterOutputPort registerOutputPort,
             IUnitOfWork unitOfWork,
             ICustomerRepository customerRepository,
             IAccountRepository accountRepository)
@@ -57,7 +57,7 @@ namespace Application.UseCases
             this._customerService = customerService;
             this._accountService = accountService;
             this._securityService = securityService;
-            this._outputPort = outputPort;
+            this._registerOutputPort = registerOutputPort;
             this._unitOfWork = unitOfWork;
             this._customerRepository = customerRepository;
             this._accountRepository = accountRepository;
@@ -72,56 +72,77 @@ namespace Application.UseCases
         {
             if (input is null)
             {
-                this._outputPort.WriteError(Messages.InputIsNull);
+                this._registerOutputPort.WriteError(Messages.InputIsNull);
                 return;
             }
 
-            if (this._userService.GetCustomerId() is CustomerId customerId)
+            var user = this._userService.GetUser();
+
+            if (await this.VerifyCustomerAlreadyRegistered(user)
+                .ConfigureAwait(false))
             {
-                if (await this._customerService.IsCustomerRegistered(customerId)
-                    .ConfigureAwait(false))
-                {
-                    var existingCustomer = await this._customerRepository.GetBy(customerId)
-                        .ConfigureAwait(false);
-                    var existingAccount = await this._accountRepository.GetAccount(existingCustomer.Accounts.GetAccountIds().First())
-                        .ConfigureAwait(false);
-
-                    var output = new RegisterOutput(
-                        this._userService.GetExternalUserId(),
-                        existingCustomer,
-                        existingAccount);
-
-                    this._outputPort.CustomerAlreadyRegistered(output);
-                    return;
-                }
+                return;
             }
 
-            var customer = await this._customerService.CreateCustomer(input.SSN, this._userService.GetUserName())
-                .ConfigureAwait(false);
-            var account = await this._accountService.OpenCheckingAccount(customer.Id, input.InitialAmount)
-                .ConfigureAwait(false);
-            var user = await this._securityService
-                .CreateUserCredentials(customer.Id, this._userService.GetExternalUserId())
+            var customer = await this._customerService
+                .CreateCustomer(input.SSN, user.Name.Value)
                 .ConfigureAwait(false);
 
-            customer.Register(account.Id);
+            var account = await this._accountService
+                .OpenCheckingAccount(customer.Id, input.InitialAmount)
+                .ConfigureAwait(false);
+
+            await this._securityService
+                .CreateUserCredentials(user, customer.Id)
+                .ConfigureAwait(false);
+
+            customer.Assign(account.Id);
 
             await this._unitOfWork.Save()
                 .ConfigureAwait(false);
 
-            this.BuildOutput(this._userService.GetExternalUserId(), customer, account);
+            this.BuildOutput(user, customer, new List<IAccount> {account});
+        }
+
+        private async Task<bool> VerifyCustomerAlreadyRegistered(IUser user)
+        {
+            if (!(user.CustomerId is { } customerId))
+            {
+                return false;
+            }
+
+            if (!await this._customerService.IsCustomerRegistered(customerId)
+                .ConfigureAwait(false))
+            {
+                return false;
+            }
+
+            var existingCustomer = await this._customerRepository.GetBy(customerId)
+                .ConfigureAwait(false);
+            var existingAccounts = await this._accountRepository.GetBy(customerId)
+                .ConfigureAwait(false);
+
+            var output = new RegisterOutput(
+                user,
+                existingCustomer,
+                existingAccounts);
+
+            this._registerOutputPort
+                .HandleAlreadyRegisteredCustomer(output);
+            return true;
         }
 
         private void BuildOutput(
-            ExternalUserId externalUserId,
+            IUser user,
             ICustomer customer,
-            IAccount account)
+            IList<IAccount> account)
         {
             var output = new RegisterOutput(
-                externalUserId,
+                user,
                 customer,
                 account);
-            this._outputPort.Standard(output);
+            this._registerOutputPort
+                .Standard(output);
         }
     }
 }

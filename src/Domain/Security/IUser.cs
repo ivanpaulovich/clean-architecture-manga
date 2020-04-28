@@ -26,6 +26,16 @@ namespace Domain.Security
         /// <summary>
         ///     Gets the CustomerId.
         /// </summary>
-        CustomerId CustomerId { get; }
+        CustomerId? CustomerId { get; }
+
+        /// <summary>
+        ///     Gets the Name.
+        /// </summary>
+        Name? Name { get; }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="customerId"></param>
+        void Assign(CustomerId customerId);
     }
 }

@@ -2,6 +2,7 @@ namespace Infrastructure.ExternalAuthentication
 {
     using System;
     using Domain.Customers.ValueObjects;
+    using Domain.Security;
     using Domain.Security.Services;
     using Domain.Security.ValueObjects;
     using Microsoft.AspNetCore.Http;
@@ -9,37 +10,38 @@ namespace Infrastructure.ExternalAuthentication
     public sealed class ExternalUserService : IUserService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IUserFactory _userFactory;
 
-        public ExternalUserService(IHttpContextAccessor httpContextAccessor)
+        public ExternalUserService(
+            IHttpContextAccessor httpContextAccessor,
+            IUserFactory userFactory)
         {
             this._httpContextAccessor = httpContextAccessor;
+            this._userFactory = userFactory;
         }
 
-        public CustomerId? GetCustomerId()
+        public IUser GetUser()
         {
-            var user = this._httpContextAccessor.HttpContext.User;
-            if (user.FindFirst(c => c.Type == "customerid") is System.Security.Claims.Claim value)
+            var user = this._httpContextAccessor
+                .HttpContext
+                .User;
+
+            string id = user.FindFirst(c => c.Type == "id")?.Value;
+            var externalUserId = new ExternalUserId($"{user.Identity.AuthenticationType}/{id}");
+            var username = new Name(user.Identity.Name);
+
+            CustomerId? customerId = null!;
+            if (user.FindFirst(c => c.Type == "customerid") is { } value)
             {
-                var customerId = new CustomerId(new Guid(value.Value));
-                return customerId;
+                customerId = new CustomerId(new Guid(value.Value));
             }
 
-            return null;
-        }
+            var domainUser = this._userFactory.NewUser(
+                customerId,
+                externalUserId,
+                username);
 
-        public ExternalUserId GetExternalUserId()
-        {
-            var user = this._httpContextAccessor.HttpContext.User;
-            string value = user.FindFirst(c => c.Type == "id")?.Value;
-            var externalUserId = new ExternalUserId($"{user.Identity.AuthenticationType}/{value}");
-            return externalUserId;
-        }
-
-        public Name GetUserName()
-        {
-            var user = this._httpContextAccessor.HttpContext.User;
-            var username = new Name(user.Identity.Name);
-            return username;
+            return domainUser;
         }
     }
 }

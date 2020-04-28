@@ -4,7 +4,6 @@
 
 namespace Application.Boundaries.Withdraw
 {
-    using System;
     using Domain.Accounts.Debits;
     using Domain.Accounts.ValueObjects;
 
@@ -20,23 +19,14 @@ namespace Application.Boundaries.Withdraw
         /// <param name="updatedBalance">Updated balance.</param>
         public WithdrawOutput(IDebit debit, Money updatedBalance)
         {
-            if (debit is Debit debitEntity)
-            {
-                this.Transaction = new Transaction(
-                    Debit.Description,
-                    debitEntity.Amount,
-                    debitEntity.TransactionDate);
-
-                this.UpdatedBalance = updatedBalance;
-            }
-            else
-                throw new ArgumentNullException(nameof(debit));
+            this.Transaction = debit;
+            this.UpdatedBalance = updatedBalance;
         }
 
         /// <summary>
         ///     Gets the Transaction.
         /// </summary>
-        public Transaction Transaction { get; }
+        public IDebit Transaction { get; }
 
         /// <summary>
         ///     Gets the Updated Balance.

@@ -25,4 +25,7 @@
   <data name="CustomerDoesNotExist" xml:space="preserve">
       <value>Customer does not exist.</value>
     </data>
+  <data name="AccountDoesNotExist" xml:space="preserve">
+      <value>Account does not exist.</value>
+    </data>
 </root>

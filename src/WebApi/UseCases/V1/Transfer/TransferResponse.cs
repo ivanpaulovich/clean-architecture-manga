@@ -1,23 +1,17 @@
 namespace WebApi.UseCases.V1.Transfer
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
+    using ViewModels;
 
     public sealed class TransferResponse
     {
-        public TransferResponse(decimal amount, string description, DateTime transactionDate, decimal updatedBalance)
+        public TransferResponse(DebitModel transaction, decimal updatedBalance)
         {
-            this.Amount = amount;
-            this.Description = description;
-            this.TransactionDate = transactionDate;
+            this.Transaction = transaction;
             this.UpdateBalance = updatedBalance;
         }
 
-        [Required] public decimal Amount { get; }
-
-        [Required] public string Description { get; }
-
-        [Required] public DateTime TransactionDate { get; }
+        [Required] public DebitModel Transaction { get; }
 
         [Required] public decimal UpdateBalance { get; }
     }

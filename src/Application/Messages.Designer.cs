@@ -69,5 +69,11 @@ namespace Application {
                 return ResourceManager.GetString("CustomerDoesNotExist", resourceCulture);
             }
         }
+        
+        internal static string AccountDoesNotExist {
+            get {
+                return ResourceManager.GetString("AccountDoesNotExist", resourceCulture);
+            }
+        }
     }
 }

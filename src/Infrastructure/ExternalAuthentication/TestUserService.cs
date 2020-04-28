@@ -1,25 +1,33 @@
 namespace Infrastructure.ExternalAuthentication
 {
+    using DataAccess;
     using Domain.Customers.ValueObjects;
+    using Domain.Security;
     using Domain.Security.Services;
     using Domain.Security.ValueObjects;
-    using InMemoryDataAccess;
 
     public sealed class TestUserService : IUserService
     {
-        public CustomerId? GetCustomerId()
+        private readonly IUserFactory _userFactory;
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="userFactory"></param>
+        public TestUserService(IUserFactory userFactory)
         {
-            return new CustomerId(MangaContext.DefaultCustomerId.ToGuid());
+            this._userFactory = userFactory;
         }
 
-        public ExternalUserId GetExternalUserId()
+        public IUser GetUser()
         {
-            return new ExternalUserId("github/ivanpaulovich");
-        }
+            var customerId = new CustomerId(MangaContextFake.DefaultCustomerId.ToGuid());
+            var externalUserId = new ExternalUserId("github/ivanpaulovich");
+            var name = new Name("Ivan Paulovich");
 
-        public Name GetUserName()
-        {
-            return new Name("Ivan Paulovich");
+            var user = this._userFactory
+                .NewUser(customerId, externalUserId, name);
+            return user;
         }
     }
 }

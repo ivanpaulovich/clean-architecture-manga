@@ -6,11 +6,10 @@ namespace Application.Boundaries.Register
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using Domain.Accounts;
-    using Domain.Accounts.Credits;
-    using Domain.Accounts.Debits;
     using Domain.Customers;
-    using Domain.Security.ValueObjects;
+    using Domain.Security;
 
     /// <summary>
     ///     Register Output Message.
@@ -18,64 +17,39 @@ namespace Application.Boundaries.Register
     public sealed class RegisterOutput
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="RegisterOutput" /> class.
+        ///     <summary>
+        ///         Initializes a new instance of the <see cref="RegisterOutput" /> class.
+        ///     </summary>
+        ///     <param name="user">User.</param>
+        ///     <param name="customer">Customer object.</param>
+        ///     <param name="accounts">Accounts list.</param>
         /// </summary>
-        /// <param name="externalUserId">External User Id.</param>
-        /// <param name="customer">Customer object.</param>
-        /// <param name="account">Account object.</param>
-        public RegisterOutput(ExternalUserId externalUserId, ICustomer customer, IAccount account)
+        public RegisterOutput(
+            IUser user,
+            ICustomer customer,
+            IList<IAccount> accounts)
         {
-            if (account is Domain.Accounts.Account accountEntity)
-            {
-                List<Transaction> transactionResults = new List<Transaction>();
-                foreach (ICredit credit in accountEntity.Credits
-                    .GetTransactions())
-                {
-                    Credit creditEntity = (Credit)credit;
+            if (accounts is null)
+                throw new ArgumentNullException(nameof(accounts));
 
-                    Transaction transactionOutput = new Transaction(
-                        Credit.Description,
-                        creditEntity.Amount,
-                        creditEntity.TransactionDate);
-
-                    transactionResults.Add(transactionOutput);
-                }
-
-                foreach (IDebit debit in accountEntity.Debits
-                    .GetTransactions())
-                {
-                    Debit debitEntity = (Debit)debit;
-
-                    Transaction transactionOutput = new Transaction(
-                        Debit.Description,
-                        debitEntity.Amount,
-                        debitEntity.TransactionDate);
-
-                    transactionResults.Add(transactionOutput);
-                }
-
-                this.Account = new Account(
-                    accountEntity.Id,
-                    accountEntity.GetCurrentBalance(),
-                    transactionResults);
-
-                List<Account> accountOutputs = new List<Account>();
-                accountOutputs.Add(this.Account);
-
-                this.Customer = new Customer(externalUserId, customer, accountOutputs);
-            }
-            else
-                throw new ArgumentNullException(nameof(account));
+            this.User = user ?? throw new ArgumentNullException(nameof(user));
+            this.Customer = customer ?? throw new ArgumentNullException(nameof(customer));
+            this.Accounts = new ReadOnlyCollection<IAccount>(accounts);
         }
+
+        /// <summary>
+        ///     Gets the User.
+        /// </summary>
+        public IUser User { get; }
 
         /// <summary>
         ///     Gets the Customer.
         /// </summary>
-        public Customer Customer { get; }
+        public ICustomer Customer { get; }
 
         /// <summary>
-        ///     Gets the Account.
+        ///     Gets the Accounts.
         /// </summary>
-        public Account Account { get; }
+        public IReadOnlyList<IAccount> Accounts { get; }
     }
 }
