@@ -40,8 +40,7 @@ namespace Infrastructure.DataAccess.Repositories
 
             if (customer is null)
             {
-                throw new CustomerNotFoundException(
-                    $"The customer {customerId} does not exist or is not processed yet.");
+                return null;
             }
 
             var accounts = this._context

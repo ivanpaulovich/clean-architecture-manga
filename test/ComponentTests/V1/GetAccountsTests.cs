@@ -1,10 +1,8 @@
 namespace ComponentTests.V1
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Net;
-    using System.Net.Http;
     using System.Threading.Tasks;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -44,8 +42,8 @@ namespace ComponentTests.V1
             Assert.Equal(JTokenType.String, jsonResponse["accounts"][0]["accountId"].Type);
             Assert.Equal(JTokenType.Integer, jsonResponse["accounts"][0]["currentBalance"].Type);
 
-            Assert.True(Guid.TryParse(jsonResponse["accounts"][0]["accountId"].Value<string>(), out var customerId));
-            Assert.True(Decimal.TryParse(jsonResponse["accounts"][0]["currentBalance"].Value<string>(), out var currentBalance));
+            Assert.True(Guid.TryParse(jsonResponse["accounts"][0]["accountId"].Value<string>(), out Guid _));
+            Assert.True(Decimal.TryParse(jsonResponse["accounts"][0]["currentBalance"].Value<string>(), out decimal _));
         }
     }
 }

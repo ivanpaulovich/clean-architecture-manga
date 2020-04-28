@@ -57,29 +57,41 @@ namespace Application.UseCases
                 return;
             }
 
-            try
+            var originAccount = await this._accountRepository
+                .GetAccount(input.OriginAccountId)
+                .ConfigureAwait(false);
+
+            if (originAccount == null)
             {
-                var originAccount = await this._accountRepository
-                    .GetAccount(input.OriginAccountId)
-                    .ConfigureAwait(false);
-                var destinationAccount = await this._accountRepository
-                    .GetAccount(input.DestinationAccountId)
-                    .ConfigureAwait(false);
-
-                var debit = await this._accountService.Withdraw(originAccount, input.Amount)
-                    .ConfigureAwait(false);
-                var credit = await this._accountService.Deposit(destinationAccount, input.Amount)
-                    .ConfigureAwait(false);
-
-                await this._unitOfWork.Save()
-                    .ConfigureAwait(false);
-
-                this.BuildOutput(debit, originAccount, destinationAccount);
+                this._transferOutputPort
+                    .NotFound(Messages.AccountDoesNotExist);
+                return;
             }
-            catch (AccountNotFoundException ex)
+
+            var destinationAccount = await this._accountRepository
+                .GetAccount(input.DestinationAccountId)
+                .ConfigureAwait(false);
+
+            if (destinationAccount == null)
             {
-                this._transferOutputPort.NotFound(ex.Message);
+                this._transferOutputPort
+                    .NotFound(Messages.AccountDoesNotExist);
+                return;
             }
+
+            var debit = await this._accountService
+                .Withdraw(originAccount, input.Amount)
+                .ConfigureAwait(false);
+
+            await this._accountService
+                .Deposit(destinationAccount, input.Amount)
+                .ConfigureAwait(false);
+
+            await this._unitOfWork
+                .Save()
+                .ConfigureAwait(false);
+
+            this.BuildOutput(debit, originAccount, destinationAccount);
         }
 
         private void BuildOutput(IDebit debit, IAccount originAccount, IAccount destinationAccount)
@@ -90,7 +102,8 @@ namespace Application.UseCases
                 originAccount.Id,
                 destinationAccount.Id);
 
-            this._transferOutputPort.Standard(output);
+            this._transferOutputPort
+                .Standard(output);
         }
     }
 }

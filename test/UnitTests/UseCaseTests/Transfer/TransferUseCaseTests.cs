@@ -6,7 +6,7 @@ namespace UnitTests.UseCaseTests.Transfer
     using Application.UseCases;
     using Domain.Accounts.ValueObjects;
     using Infrastructure.DataAccess;
-    using Infrastructure.InMemoryDataAccess.Presenters;
+    using Presenters;
     using TestFixtures;
     using Xunit;
 

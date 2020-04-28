@@ -22,7 +22,8 @@ namespace Infrastructure.DataAccess.Repositories
 
         public async Task<IList<IAccount>> GetBy(CustomerId customerId)
         {
-            var accounts = this._context.Accounts
+            var accounts = this._context
+                .Accounts
                 .Where(e => e.CustomerId.Equals(customerId))
                 .Select(e => (IAccount)e)
                 .ToList();
@@ -47,10 +48,13 @@ namespace Infrastructure.DataAccess.Repositories
 
         public async Task Delete(IAccount account)
         {
-            var accountOld = this._context.Accounts
+            var accountOld = this._context
+                .Accounts
                 .SingleOrDefault(e => e.Id.Equals(account.Id));
 
-            this._context.Accounts.Remove(accountOld);
+            this._context
+                .Accounts
+                .Remove(accountOld);
 
             await Task.CompletedTask
                 .ConfigureAwait(false);
@@ -58,12 +62,13 @@ namespace Infrastructure.DataAccess.Repositories
 
         public async Task<IAccount> GetAccount(AccountId accountId)
         {
-            var account = this._context.Accounts
+            var account = this._context
+                .Accounts
                 .SingleOrDefault(e => e.Id.Equals(accountId));
 
             if (account is null)
             {
-                throw new AccountNotFoundException($"The account {accountId} does not exist or is not processed yet.");
+                return null;
             }
 
             return await Task.FromResult<Domain.Accounts.Account>(account)
@@ -83,7 +88,8 @@ namespace Infrastructure.DataAccess.Repositories
 
         public async Task Update(IAccount account, IDebit debit)
         {
-            Domain.Accounts.Account accountOld = this._context.Accounts
+            Domain.Accounts.Account accountOld = this._context
+                .Accounts
                 .SingleOrDefault(e => e.Id.Equals(account.Id));
 
             accountOld = (Domain.Accounts.Account)account;

@@ -9,7 +9,6 @@ namespace Application.UseCases
     using Boundaries.Register;
     using Domain.Accounts;
     using Domain.Customers;
-    using Domain.Customers.ValueObjects;
     using Domain.Security;
     using Domain.Security.Services;
     using Services;
@@ -43,6 +42,7 @@ namespace Application.UseCases
         /// <param name="registerOutputPort">Output Port.</param>
         /// <param name="unitOfWork">Unit of Work.</param>
         /// <param name="customerRepository"></param>
+        /// <param name="accountRepository"></param>
         public RegisterRegisterUseCase(
             IUserService userService,
             CustomerService customerService,
@@ -106,7 +106,7 @@ namespace Application.UseCases
 
         private async Task<bool> VerifyCustomerAlreadyRegistered(IUser user)
         {
-            if (!(user.CustomerId is CustomerId customerId))
+            if (!(user.CustomerId is { } customerId))
             {
                 return false;
             }
@@ -127,7 +127,8 @@ namespace Application.UseCases
                 existingCustomer,
                 existingAccounts);
 
-            this._registerOutputPort.HandleAlreadyRegisteredCustomer(output);
+            this._registerOutputPort
+                .HandleAlreadyRegisteredCustomer(output);
             return true;
         }
 
@@ -140,7 +141,8 @@ namespace Application.UseCases
                 user,
                 customer,
                 account);
-            this._registerOutputPort.Standard(output);
+            this._registerOutputPort
+                .Standard(output);
         }
     }
 }

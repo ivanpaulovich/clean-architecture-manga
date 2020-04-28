@@ -29,24 +29,29 @@ namespace Infrastructure.DataAccess
     /// </summary>
     public sealed class EntityFactory : IUserFactory, ICustomerFactory, IAccountFactory
     {
+        /// <inheritdoc />
         public IAccount NewAccount(CustomerId customerId)
             => new Account(new AccountId(Guid.NewGuid()), customerId);
 
+        /// <inheritdoc />
         public ICredit NewCredit(
             IAccount account,
             PositiveMoney amountToDeposit,
             DateTime transactionDate)
             => new Credit(new CreditId(Guid.NewGuid()), account.Id, amountToDeposit, transactionDate);
 
+        /// <inheritdoc />
         public IDebit NewDebit(
             IAccount account,
             PositiveMoney amountToWithdraw,
             DateTime transactionDate)
             => new Debit(new DebitId(Guid.NewGuid()), account.Id, amountToWithdraw, transactionDate);
 
+        /// <inheritdoc />
         public ICustomer NewCustomer(SSN ssn, Name name)
             => new Customer(new CustomerId(Guid.NewGuid()), name, ssn);
 
+        /// <inheritdoc />
         public IUser NewUser(CustomerId? customerId, ExternalUserId externalUserId, Name? name)
             => new User(externalUserId, name, customerId);
     }

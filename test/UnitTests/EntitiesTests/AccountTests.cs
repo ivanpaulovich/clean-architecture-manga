@@ -22,7 +22,7 @@ namespace UnitTests.EntitiesTests
 
             IAccount sut = entityFactory.NewAccount(customer.Id);
 
-            ICredit credit = sut.Deposit(entityFactory, new PositiveMoney(200));
+            sut.Deposit(entityFactory, new PositiveMoney(200));
 
             // Act
             var ex = Record.Exception(() => sut.Withdraw(entityFactory, new PositiveMoney(5000)));

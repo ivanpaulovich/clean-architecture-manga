@@ -53,10 +53,10 @@ namespace ComponentTests.V1
             Assert.Equal(JTokenType.String, jsonResponse["accounts"][0]["accountId"].Type);
             Assert.Equal(JTokenType.Integer, jsonResponse["accounts"][0]["currentBalance"].Type);
 
-            Assert.True(Guid.TryParse(jsonResponse["customer"]["customerId"].Value<string>(), out var customerId));
+            Assert.True(Guid.TryParse(jsonResponse["customer"]["customerId"].Value<string>(), out Guid _));
             Assert.Equal("8608179999", jsonResponse["customer"]["ssn"]);
             Assert.Equal("Ivan Paulovich", jsonResponse["customer"]["name"]);
-            Assert.True(Guid.TryParse(jsonResponse["accounts"][0]["accountId"].Value<string>(), out var accountId));
+            Assert.True(Guid.TryParse(jsonResponse["accounts"][0]["accountId"].Value<string>(), out Guid _));
             Assert.Equal(500, jsonResponse["accounts"][0]["currentBalance"]);
         }
     }

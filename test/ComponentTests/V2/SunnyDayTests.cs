@@ -2,6 +2,7 @@ namespace ComponentTests.V2
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Net.Http;
     using System.Threading.Tasks;
     using Newtonsoft.Json;
@@ -20,7 +21,7 @@ namespace ComponentTests.V2
         private async Task GetAccount(string accountId)
         {
             var client = this._factory.CreateClient();
-            var result = await client.GetAsync($"/api/v2/Accounts/{accountId}")
+            await client.GetAsync($"/api/v2/Accounts/{accountId}")
                 .ConfigureAwait(false);
         }
 
@@ -31,7 +32,7 @@ namespace ComponentTests.V2
             var content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("ssn", "8608179999"),
-                new KeyValuePair<string, string>("initialAmount", initialAmount.ToString())
+                new KeyValuePair<string, string>("initialAmount", initialAmount.ToString(CultureInfo.InvariantCulture))
             });
 
             var response = await client.PostAsync("api/v1/Customers", content)

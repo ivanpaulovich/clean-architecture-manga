@@ -19,7 +19,7 @@ namespace Application.UseCases
     ///     </see>
     ///     .
     /// </summary>
-    public sealed class WithdrawWithdrawUseCase : IWithdrawUseCase
+    public sealed class WithdrawUseCase : IWithdrawUseCase
     {
         private readonly IAccountRepository _accountRepository;
         private readonly AccountService _accountService;
@@ -27,13 +27,13 @@ namespace Application.UseCases
         private readonly IUnitOfWork _unitOfWork;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="WithdrawWithdrawUseCase" /> class.
+        ///     Initializes a new instance of the <see cref="WithdrawUseCase" /> class.
         /// </summary>
         /// <param name="accountService">Account Service.</param>
         /// <param name="withdrawOutputPort">Output Port.</param>
         /// <param name="accountRepository">Account Repository.</param>
         /// <param name="unitOfWork">Unit Of Work.</param>
-        public WithdrawWithdrawUseCase(
+        public WithdrawUseCase(
             AccountService accountService,
             IWithdrawOutputPort withdrawOutputPort,
             IAccountRepository accountRepository,
@@ -54,29 +54,38 @@ namespace Application.UseCases
         {
             if (input is null)
             {
-                this._withdrawOutputPort.WriteError(Messages.InputIsNull);
+                this._withdrawOutputPort
+                    .WriteError(Messages.InputIsNull);
+                return;
+            }
+
+            var account = await this._accountRepository
+                .GetAccount(input.AccountId)
+                .ConfigureAwait(false);
+
+            if (account is null)
+            {
+                this._withdrawOutputPort
+                    .NotFound(Messages.AccountDoesNotExist);
                 return;
             }
 
             try
             {
-                var account = await this._accountRepository.GetAccount(input.AccountId)
-                    .ConfigureAwait(false);
-                var debit = await this._accountService.Withdraw(account, input.Amount)
+                var debit = await this._accountService
+                    .Withdraw(account, input.Amount)
                     .ConfigureAwait(false);
 
-                await this._unitOfWork.Save()
+                await this._unitOfWork
+                    .Save()
                     .ConfigureAwait(false);
 
                 this.BuildOutput(debit, account);
             }
-            catch (AccountNotFoundException notFoundEx)
-            {
-                this._withdrawOutputPort.NotFound(notFoundEx.Message);
-            }
             catch (MoneyShouldBePositiveException outOfBalanceEx)
             {
-                this._withdrawOutputPort.OutOfBalance(outOfBalanceEx.Message);
+                this._withdrawOutputPort
+                    .OutOfBalance(outOfBalanceEx.Message);
             }
         }
 

@@ -17,7 +17,10 @@ namespace Infrastructure.DataAccess.Repositories
 
         public async Task Add(ICustomer customer)
         {
-            this._context.Customers.Add((Customer)customer);
+            this._context
+                .Customers
+                .Add((Customer)customer);
+
             await Task.CompletedTask
                 .ConfigureAwait(false);
         }
@@ -30,8 +33,7 @@ namespace Infrastructure.DataAccess.Repositories
 
             if (customer is null)
             {
-                throw new CustomerNotFoundException(
-                    $"The customer {customerId} does not exist or is not processed yet.");
+                return null;
             }
 
             return await Task.FromResult<Domain.Customers.Customer>(customer)

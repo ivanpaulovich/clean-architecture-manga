@@ -37,11 +37,6 @@ namespace Infrastructure.DataAccess.Repositories
                 .SingleOrDefaultAsync()
                 .ConfigureAwait(false);
 
-            if (user is null)
-            {
-                throw new UserNotFoundException($"The user {externalUserId} does not exist or is not processed yet.");
-            }
-
             return user;
         }
     }

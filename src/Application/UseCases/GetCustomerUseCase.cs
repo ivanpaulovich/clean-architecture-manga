@@ -7,7 +7,6 @@ namespace Application.UseCases
     using System.Threading.Tasks;
     using Boundaries.GetCustomer;
     using Domain.Customers;
-    using Domain.Customers.ValueObjects;
     using Domain.Security;
     using Domain.Security.Services;
 
@@ -50,7 +49,8 @@ namespace Application.UseCases
         {
             if (input is null)
             {
-                this._getCustomerOutputPort.WriteError(Messages.InputIsNull);
+                this._getCustomerOutputPort
+                    .WriteError(Messages.InputIsNull);
                 return;
             }
 
@@ -58,23 +58,23 @@ namespace Application.UseCases
 
             ICustomer customer;
 
-            if (user.CustomerId is CustomerId customerId)
+            if (user.CustomerId is { } customerId)
             {
-                try
+                customer = await this._customerRepository
+                    .GetBy(customerId)
+                    .ConfigureAwait(false);
+
+                if (customer == null)
                 {
-                    customer = await this._customerRepository
-                        .GetBy(customerId)
-                        .ConfigureAwait(false);
-                }
-                catch (CustomerNotFoundException ex)
-                {
-                    this._getCustomerOutputPort.NotFound(ex.Message);
+                    this._getCustomerOutputPort
+                        .NotFound(Messages.CustomerDoesNotExist);
                     return;
                 }
             }
             else
             {
-                this._getCustomerOutputPort.NotFound(Messages.CustomerDoesNotExist);
+                this._getCustomerOutputPort
+                    .NotFound(Messages.CustomerDoesNotExist);
                 return;
             }
 
@@ -84,7 +84,8 @@ namespace Application.UseCases
         private void BuildOutput(ICustomer customer)
         {
             var output = new GetCustomerOutput(customer);
-            this._getCustomerOutputPort.Standard(output);
+            this._getCustomerOutputPort
+                .Standard(output);
         }
     }
 }

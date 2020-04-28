@@ -47,17 +47,14 @@ namespace Application.UseCases
                 return;
             }
 
-            IAccount account;
-
-            try
-            {
-                account = await this._accountRepository
+            IAccount account = await this._accountRepository
                     .GetAccount(input.AccountId)
                     .ConfigureAwait(false);
-            }
-            catch (AccountNotFoundException ex)
+
+            if (account is null)
             {
-                this._getAccountOutputPort.NotFound(ex.Message);
+                this._getAccountOutputPort
+                    .NotFound($"The account {input.AccountId.ToGuid()} does not exist or is not processed yet.");
                 return;
             }
 
@@ -67,7 +64,8 @@ namespace Application.UseCases
         private void BuildOutput(IAccount account)
         {
             var output = new GetAccountOutput(account);
-            this._getAccountOutputPort.Standard(output);
+            this._getAccountOutputPort
+                .Standard(output);
         }
     }
 }

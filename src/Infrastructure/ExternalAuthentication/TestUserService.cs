@@ -10,6 +10,10 @@ namespace Infrastructure.ExternalAuthentication
     {
         private readonly IUserFactory _userFactory;
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="userFactory"></param>
         public TestUserService(IUserFactory userFactory)
         {
             this._userFactory = userFactory;

@@ -17,7 +17,10 @@ namespace Infrastructure.DataAccess.Repositories
 
         public async Task Add(IUser user)
         {
-            this._context.Users.Add((User)user);
+            this._context
+                .Users
+                .Add((User)user);
+
             await Task.CompletedTask
                 .ConfigureAwait(false);
         }
@@ -30,7 +33,7 @@ namespace Infrastructure.DataAccess.Repositories
 
             if (user is null)
             {
-                throw new UserNotFoundException($"The user {externalUserId} does not exist or is not processed yet.");
+                return null;
             }
 
             return await Task.FromResult(user)

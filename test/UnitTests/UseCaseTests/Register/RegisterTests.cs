@@ -4,7 +4,7 @@ namespace UnitTests.UseCaseTests.Register
     using System.Threading.Tasks;
     using Application.Boundaries.Register;
     using Application.UseCases;
-    using Infrastructure.InMemoryDataAccess.Presenters;
+    using Presenters;
     using TestFixtures;
     using Xunit;
 
@@ -22,7 +22,7 @@ namespace UnitTests.UseCaseTests.Register
         public async Task Register_WritesOutput_AlreadyRegisterested(decimal amount)
         {
             var presenter = new RegisterPresenter();
-            string ssn = "8608178888";
+            const string ssn = "8608178888";
 
             var sut = new RegisterRegisterUseCase(
                 this._fixture.TestUserService,

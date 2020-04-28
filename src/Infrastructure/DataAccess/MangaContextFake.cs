@@ -15,8 +15,14 @@ namespace Infrastructure.DataAccess
     using Credit = Entities.Credit;
     using Debit = Entities.Debit;
 
+    /// <summary>
+    ///
+    /// </summary>
     public sealed class MangaContextFake
     {
+        /// <summary>
+        ///
+        /// </summary>
         public MangaContextFake()
         {
             var customer = new Customer(
@@ -86,13 +92,13 @@ namespace Infrastructure.DataAccess
 
         public Collection<Credit> Credits { get; } = new Collection<Credit>();
 
-        public Collection<Debit> Debits { get; } = new Collection<Debit>();
+        private Collection<Debit> Debits { get; } = new Collection<Debit>();
 
         public static CustomerId DefaultCustomerId { get; } = new CustomerId(Guid.NewGuid());
 
         public static AccountId DefaultAccountId { get; } = new AccountId(Guid.NewGuid());
 
-        public static CustomerId SecondCustomerId { get; } = new CustomerId(Guid.NewGuid());
+        private static CustomerId SecondCustomerId { get; } = new CustomerId(Guid.NewGuid());
 
         public static AccountId SecondAccountId { get; } = new AccountId(Guid.NewGuid());
     }

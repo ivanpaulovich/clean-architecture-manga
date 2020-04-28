@@ -2,7 +2,7 @@ namespace ComponentTests
 {
     using Xunit;
 
-    [CollectionDefinition(("WebApi Collection"))]
+    [CollectionDefinition("WebApi Collection")]
     public sealed class CustomWebApplicationFactoryCollection : ICollectionFixture<CustomWebApplicationFactoryFixture>
     {
     }

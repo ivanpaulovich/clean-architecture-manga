@@ -2,7 +2,7 @@
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
-namespace Infrastructure.EntityFrameworkDataAccess.Migrations
+namespace Infrastructure.DataAccess.Migrations
 {
     using System;
     using Microsoft.EntityFrameworkCore.Migrations;

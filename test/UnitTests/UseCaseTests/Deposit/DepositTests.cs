@@ -7,7 +7,7 @@ namespace UnitTests.UseCaseTests.Deposit
     using Domain.Accounts.ValueObjects;
     using Infrastructure.DataAccess;
     using Infrastructure.DataAccess.Entities;
-    using Infrastructure.InMemoryDataAccess.Presenters;
+    using Presenters;
     using TestFixtures;
     using Xunit;
 
@@ -25,7 +25,7 @@ namespace UnitTests.UseCaseTests.Deposit
         public async Task Deposit_ChangesBalance(decimal amount)
         {
             var presenter = new DepositGetAccountsPresenter();
-            var sut = new DepositDepositUseCase(
+            var sut = new DepositUseCase(
                 this._fixture.AccountService,
                 presenter,
                 this._fixture.AccountRepositoryFake,
@@ -46,7 +46,7 @@ namespace UnitTests.UseCaseTests.Deposit
         public async Task Deposit_ShouldNot_ChangesBalance_WhenNegative(decimal amount)
         {
             var presenter = new DepositGetAccountsPresenter();
-            var sut = new DepositDepositUseCase(
+            var sut = new DepositUseCase(
                 this._fixture.AccountService,
                 presenter,
                 this._fixture.AccountRepositoryFake,

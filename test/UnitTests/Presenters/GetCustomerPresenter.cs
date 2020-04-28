@@ -1,26 +1,26 @@
-namespace Infrastructure.InMemoryDataAccess.Presenters
+namespace UnitTests.Presenters
 {
     using System.Collections.ObjectModel;
-    using Application.Boundaries.Transfer;
+    using Application.Boundaries.GetCustomer;
 
-    public sealed class TransferPresenter : ITransferOutputPort
+    public sealed class GetCustomerPresenter : IGetCustomerOutputPort
     {
-        public TransferPresenter()
+        public GetCustomerPresenter()
         {
-            this.Transfers = new Collection<TransferOutput>();
+            this.GetCustomerDetails = new Collection<GetCustomerOutput>();
             this.NotFounds = new Collection<string>();
             this.Errors = new Collection<string>();
         }
 
-        public Collection<TransferOutput> Transfers { get; }
+        public Collection<GetCustomerOutput> GetCustomerDetails { get; }
 
         public Collection<string> NotFounds { get; }
 
         public Collection<string> Errors { get; }
 
-        public void Standard(TransferOutput output)
+        public void Standard(GetCustomerOutput output)
         {
-            this.Transfers.Add(output);
+            this.GetCustomerDetails.Add(output);
         }
 
         public void NotFound(string message)

@@ -26,13 +26,13 @@ namespace WebApi.Modules
         /// <returns>The modified instance.</returns>
         public static IServiceCollection AddUseCases(this IServiceCollection services)
         {
-            services.AddScoped<ICloseAccountUseCase, CloseAccountCloseAccountUseCase>();
-            services.AddScoped<IDepositUseCase, DepositDepositUseCase>();
+            services.AddScoped<ICloseAccountUseCase, CloseAccountUseCase>();
+            services.AddScoped<IDepositUseCase, DepositUseCase>();
             services.AddScoped<IGetAccountUseCase, GetAccountUseCase>();
             services.AddScoped<IGetAccountsUseCase, GetAccountsUseCase>();
             services.AddScoped<IGetCustomerUseCase, GetCustomerUseCase>();
             services.AddScoped<IRegisterUseCase, RegisterRegisterUseCase>();
-            services.AddScoped<IWithdrawUseCase, WithdrawWithdrawUseCase>();
+            services.AddScoped<IWithdrawUseCase, WithdrawUseCase>();
             services.AddScoped<ITransferUseCase, TransferTransferUseCase>();
 
             services.AddScoped<CustomerService>();

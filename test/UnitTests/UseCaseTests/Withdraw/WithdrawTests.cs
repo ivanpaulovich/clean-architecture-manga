@@ -6,7 +6,7 @@ namespace UnitTests.UseCaseTests.Withdraw
     using Application.UseCases;
     using Domain.Accounts.ValueObjects;
     using Infrastructure.DataAccess;
-    using Infrastructure.InMemoryDataAccess.Presenters;
+    using Presenters;
     using TestFixtures;
     using Xunit;
 
@@ -26,7 +26,7 @@ namespace UnitTests.UseCaseTests.Withdraw
             decimal expectedBalance)
         {
             var presenter = new WithdrawPresenter();
-            var sut = new WithdrawWithdrawUseCase(
+            var sut = new WithdrawUseCase(
                 this._fixture.AccountService,
                 presenter,
                 this._fixture.AccountRepositoryFake,

@@ -1,4 +1,4 @@
-namespace Infrastructure.InMemoryDataAccess.Presenters
+namespace UnitTests.Presenters
 {
     using System.Collections.ObjectModel;
     using Application.Boundaries.Register;
@@ -38,7 +38,7 @@ namespace Infrastructure.InMemoryDataAccess.Presenters
 
         /// <summary>
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="output"></param>
         public void HandleAlreadyRegisteredCustomer(RegisterOutput output)
         {
             this.AlreadyRegistered.Add(output);

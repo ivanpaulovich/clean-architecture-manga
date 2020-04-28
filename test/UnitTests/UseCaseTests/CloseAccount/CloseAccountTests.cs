@@ -9,7 +9,7 @@ namespace UnitTests.UseCaseTests.CloseAccount
     using Domain.Accounts.ValueObjects;
     using Domain.Customers.ValueObjects;
     using Infrastructure.DataAccess;
-    using Infrastructure.InMemoryDataAccess.Presenters;
+    using Presenters;
     using TestFixtures;
     using Xunit;
 
@@ -50,23 +50,23 @@ namespace UnitTests.UseCaseTests.CloseAccount
                 getAccountPresenter,
                 this._fixture.AccountRepositoryFake);
 
-            var withdrawUseCase = new WithdrawWithdrawUseCase(
+            var withdrawUseCase = new WithdrawUseCase(
                 this._fixture.AccountService,
                 withdrawPresenter,
                 this._fixture.AccountRepositoryFake,
                 this._fixture.UnitOfWork);
 
-            var sut = new CloseAccountCloseAccountUseCase(
+            var sut = new CloseAccountUseCase(
                 closeAccountPresenter,
                 this._fixture.AccountRepositoryFake);
 
             await getAccountUseCase.Execute(new GetAccountInput(
                 MangaContextFake.DefaultAccountId));
-            var getAccountDetailtOutput = getAccountPresenter.GetAccountDetails.First();
+            var getAccountDetailOutput = getAccountPresenter.GetAccountDetails.First();
 
             await withdrawUseCase.Execute(new WithdrawInput(
                 MangaContextFake.DefaultAccountId,
-                new PositiveMoney(getAccountDetailtOutput.Account.GetCurrentBalance().ToDecimal())));
+                new PositiveMoney(getAccountDetailOutput.Account.GetCurrentBalance().ToDecimal())));
 
             var input = new CloseAccountInput(
                 MangaContextFake.DefaultAccountId);

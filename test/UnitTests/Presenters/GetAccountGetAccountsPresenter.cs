@@ -1,26 +1,26 @@
-namespace Infrastructure.InMemoryDataAccess.Presenters
+namespace UnitTests.Presenters
 {
     using System.Collections.ObjectModel;
-    using Application.Boundaries.GetCustomer;
+    using Application.Boundaries.GetAccount;
 
-    public sealed class GetCustomerPresenter : IGetCustomerOutputPort
+    public sealed class GetAccountPresenter : IGetAccountOutputPort
     {
-        public GetCustomerPresenter()
+        public GetAccountPresenter()
         {
-            this.GetCustomerDetails = new Collection<GetCustomerOutput>();
+            this.GetAccountDetails = new Collection<GetAccountOutput>();
             this.NotFounds = new Collection<string>();
             this.Errors = new Collection<string>();
         }
 
-        public Collection<GetCustomerOutput> GetCustomerDetails { get; }
+        public Collection<GetAccountOutput> GetAccountDetails { get; }
 
         public Collection<string> NotFounds { get; }
 
         public Collection<string> Errors { get; }
 
-        public void Standard(GetCustomerOutput output)
+        public void Standard(GetAccountOutput output)
         {
-            this.GetCustomerDetails.Add(output);
+            this.GetAccountDetails.Add(output);
         }
 
         public void NotFound(string message)

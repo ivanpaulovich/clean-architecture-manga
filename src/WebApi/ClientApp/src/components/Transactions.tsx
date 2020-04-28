@@ -7,7 +7,7 @@ import {RouteComponentProps} from "react-router";
 type TransactionsProps =
     TransactionsStore.TransactionsState
     & typeof TransactionsStore.actionCreators
-    & RouteComponentProps<{ accountId: string }>;;
+    & RouteComponentProps<{ accountId: string }>;
 
 
 class Transactions extends React.PureComponent<TransactionsProps> {

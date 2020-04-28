@@ -8,7 +8,6 @@ namespace Application.UseCases
     using System.Threading.Tasks;
     using Boundaries.GetAccounts;
     using Domain.Accounts;
-    using Domain.Customers.ValueObjects;
     using Domain.Security.Services;
 
     /// <summary>
@@ -50,15 +49,17 @@ namespace Application.UseCases
         {
             if (input is null)
             {
-                this._getAccountsOutputPort.WriteError(Messages.InputIsNull);
+                this._getAccountsOutputPort
+                    .WriteError(Messages.InputIsNull);
                 return;
             }
 
-            var user = this._userService.GetUser();
+            var user = this._userService
+                .GetUser();
 
             List<IAccount> accounts = new List<IAccount>();
 
-            if (user.CustomerId is CustomerId customerId)
+            if (user.CustomerId is { } customerId)
             {
                 accounts.AddRange(await this._accountRepository
                     .GetBy(customerId)
@@ -66,7 +67,8 @@ namespace Application.UseCases
             }
 
             var output = new GetAccountsOutput(accounts);
-            this._getAccountsOutputPort.Standard(output);
+            this._getAccountsOutputPort
+                .Standard(output);
         }
     }
 }

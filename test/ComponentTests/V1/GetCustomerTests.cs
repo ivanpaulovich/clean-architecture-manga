@@ -1,10 +1,8 @@
 namespace ComponentTests.V1
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Net;
-    using System.Net.Http;
     using System.Threading.Tasks;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -45,7 +43,7 @@ namespace ComponentTests.V1
             Assert.Equal(JTokenType.String, jsonResponse["customer"]["ssn"].Type);
             Assert.Equal(JTokenType.String, jsonResponse["customer"]["name"].Type);
 
-            Assert.True(Guid.TryParse(jsonResponse["customer"]["customerId"].Value<string>(), out var customerId));
+            Assert.True(Guid.TryParse(jsonResponse["customer"]["customerId"].Value<string>(), out Guid _));
             Assert.Equal("8608179999", jsonResponse["customer"]["ssn"]);
             Assert.Equal("Ivan Paulovich", jsonResponse["customer"]["name"]);
         }

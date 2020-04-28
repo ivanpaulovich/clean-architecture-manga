@@ -1,7 +1,6 @@
 namespace Infrastructure.ExternalAuthentication
 {
     using System;
-    using System.Security.Claims;
     using Domain.Customers.ValueObjects;
     using Domain.Security;
     using Domain.Security.Services;
@@ -32,7 +31,7 @@ namespace Infrastructure.ExternalAuthentication
             var username = new Name(user.Identity.Name);
 
             CustomerId? customerId = null!;
-            if (user.FindFirst(c => c.Type == "customerid") is Claim value)
+            if (user.FindFirst(c => c.Type == "customerid") is { } value)
             {
                 customerId = new CustomerId(new Guid(value.Value));
             }

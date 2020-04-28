@@ -1,5 +1,6 @@
 namespace WebApi.Modules.Common
 {
+    using System;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
@@ -44,7 +45,7 @@ namespace WebApi.Modules.Common
                     {
                         OnRedirectToLogin = ctx =>
                         {
-                            if (ctx.Request.Path.StartsWithSegments("/api"))
+                            if (ctx.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase))
                             {
                                 ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                             }
@@ -138,7 +139,9 @@ namespace WebApi.Modules.Common
                                 new AuthenticationHeaderValue("Bearer", context.AccessToken);
 
                             var response = await context.Backchannel.SendAsync(request,
-                                HttpCompletionOption.ResponseHeadersRead, context.HttpContext.RequestAborted);
+                                HttpCompletionOption.ResponseHeadersRead, context.HttpContext.RequestAborted)
+                                .ConfigureAwait(false);
+
                             response.EnsureSuccessStatusCode();
 
                             var user = JsonDocument.Parse(await response

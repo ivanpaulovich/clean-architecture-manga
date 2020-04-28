@@ -16,7 +16,7 @@ namespace ComponentTests
         {
             builder.ConfigureAppConfiguration((context, config) =>
             {
-                config.AddInMemoryCollection(new Dictionary<string, string>()
+                config.AddInMemoryCollection(new Dictionary<string, string>
                 {
                     ["PersistenceModule:UseFake"] = "true"
                 });

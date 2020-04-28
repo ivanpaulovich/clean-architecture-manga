@@ -1,9 +1,7 @@
 namespace WebApi.UseCases.V1.GetAccounts
 {
-    using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Application.Boundaries.GetAccounts;
-    using Domain.Accounts.ValueObjects;
     using FluentMediator;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;

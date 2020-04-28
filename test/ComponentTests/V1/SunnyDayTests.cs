@@ -2,6 +2,7 @@ namespace ComponentTests.V1
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Net.Http;
     using System.Threading.Tasks;
     using Newtonsoft.Json;
@@ -20,14 +21,14 @@ namespace ComponentTests.V1
         private async Task GetCustomer()
         {
             var client = this._factory.CreateClient();
-            string result = await client.GetStringAsync("/api/v1/Customers/")
+            await client.GetStringAsync("/api/v1/Customers/")
                 .ConfigureAwait(false);
         }
 
         private async Task GetAccount(string accountId)
         {
             var client = this._factory.CreateClient();
-            string result = await client.GetStringAsync($"/api/v1/Accounts/{accountId}")
+            await client.GetStringAsync($"/api/v1/Accounts/{accountId}")
                 .ConfigureAwait(false);
         }
 
@@ -38,7 +39,7 @@ namespace ComponentTests.V1
             var content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("ssn", "8608179999"),
-                new KeyValuePair<string, string>("initialAmount", initialAmount.ToString())
+                new KeyValuePair<string, string>("initialAmount", initialAmount.ToString(CultureInfo.InvariantCulture))
             });
 
             var response = await client.PostAsync("api/v1/Customers", content)
@@ -65,12 +66,12 @@ namespace ComponentTests.V1
             var content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("accountId", account),
-                new KeyValuePair<string, string>("amount", amount.ToString())
+                new KeyValuePair<string, string>("amount", amount.ToString(CultureInfo.InvariantCulture))
             });
 
             var response = await client.PatchAsync("api/v1/Accounts/Deposit", content)
                 .ConfigureAwait(false);
-            string result = await response.Content
+            await response.Content
                 .ReadAsStringAsync()
                 .ConfigureAwait(false);
 
@@ -84,12 +85,12 @@ namespace ComponentTests.V1
             var content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("accountId", account),
-                new KeyValuePair<string, string>("amount", amount.ToString())
+                new KeyValuePair<string, string>("amount", amount.ToString(CultureInfo.InvariantCulture))
             });
 
             var response = await client.PatchAsync("api/v1/Accounts/Withdraw", content)
                 .ConfigureAwait(false);
-            string result = await response.Content
+            await response.Content
                 .ReadAsStringAsync()
                 .ConfigureAwait(false);
 

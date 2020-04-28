@@ -7,8 +7,13 @@ namespace Infrastructure.DataAccess
     using Entities;
     using Microsoft.EntityFrameworkCore;
 
+    /// <inheritdoc />
     public sealed class MangaContext : DbContext
     {
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="options"></param>
         public MangaContext(DbContextOptions options)
             : base(options)
         {

@@ -1,4 +1,4 @@
-namespace Infrastructure.InMemoryDataAccess.Presenters
+namespace UnitTests.Presenters
 {
     using System.Collections.ObjectModel;
     using Application.Boundaries.CloseAccount;
