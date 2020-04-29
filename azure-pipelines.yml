@@ -3,7 +3,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  system.debug: true
+  system.debug: false
 
 steps:
 - task: UseDotNet@2
@@ -30,14 +30,14 @@ steps:
   inputs:
     command: 'test'
     projects: '**/*Tests/*.csproj'
-    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)\TestResults\Coverage\'
+    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
 
-- script: reportgenerator "-reports:$(Build.SourcesDirectory)\TestResults\Coverage\coverage.cobertura.xml" "-targetdir:$(Build.SourcesDirectory)\TestResults\Coverage\Reports" -tag:$(Build.BuildNumber) -reportTypes:Html;HtmlSummary;HtmlInline;HtmlInline_AzurePipelines;HtmlInline_AzurePipelines_Dark;Cobertura;Badges
+- script: reportgenerator "-reports:$(Build.SourcesDirectory)/TestResults/Coverage/coverage.cobertura.xml" "-targetdir:$(Build.SourcesDirectory)/TestResults/Coverage/Reports" -tag:$(Build.BuildNumber) -reportTypes:Html;HtmlSummary;HtmlInline;HtmlInline_AzurePipelines;HtmlInline_AzurePipelines_Dark;Cobertura;Badges
   displayName: 'Generate Report'
 
 - task: PublishCodeCoverageResults@1
   displayName: 'Publish Report'
   inputs:
     codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Build.SourcesDirectory)\TestResults\Coverage\**\coverage.cobertura.xml'
-    reportDirectory: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports'
+    summaryFileLocation: '$(Build.SourcesDirectory)/TestResults/Coverage/**/coverage.cobertura.xml'
+    reportDirectory: '$(Build.SourcesDirectory)/TestResults/Coverage/Reports'
