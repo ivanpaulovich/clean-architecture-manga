@@ -4,6 +4,7 @@
 
 namespace Infrastructure.DataAccess.Configuration
 {
+    using System;
     using Domain.Accounts.Debits;
     using Domain.Accounts.ValueObjects;
     using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,11 @@ namespace Infrastructure.DataAccess.Configuration
         /// <param name="builder">Builder.</param>
         public void Configure(EntityTypeBuilder<Debit> builder)
         {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
             builder.ToTable("Debit");
 
             builder.Property(debit => debit.Amount)

@@ -1,5 +1,5 @@
 // <copyright file="TestUserService.cs" company="Ivan Paulovich">
-// Copyright © Ivan Paulovich. All rights reserved.
+// Copyright Â© Ivan Paulovich. All rights reserved.
 // </copyright>
 
 namespace Infrastructure.ExternalAuthentication
@@ -15,13 +15,9 @@ namespace Infrastructure.ExternalAuthentication
         private readonly IUserFactory _userFactory;
 
         /// <summary>
-        ///
         /// </summary>
         /// <param name="userFactory"></param>
-        public TestUserService(IUserFactory userFactory)
-        {
-            this._userFactory = userFactory;
-        }
+        public TestUserService(IUserFactory userFactory) => this._userFactory = userFactory;
 
         public IUser GetUser()
         {
@@ -29,7 +25,7 @@ namespace Infrastructure.ExternalAuthentication
             var externalUserId = new ExternalUserId("github/ivanpaulovich");
             var name = new Name("Ivan Paulovich");
 
-            var user = this._userFactory
+            IUser user = this._userFactory
                 .NewUser(customerId, externalUserId, name);
             return user;
         }

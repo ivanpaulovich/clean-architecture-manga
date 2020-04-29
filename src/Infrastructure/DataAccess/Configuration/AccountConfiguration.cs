@@ -4,6 +4,7 @@
 
 namespace Infrastructure.DataAccess.Configuration
 {
+    using System;
     using Domain.Accounts.ValueObjects;
     using Domain.Customers.ValueObjects;
     using Entities;
@@ -21,6 +22,11 @@ namespace Infrastructure.DataAccess.Configuration
         /// <param name="builder">Builder.</param>
         public void Configure(EntityTypeBuilder<Account> builder)
         {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
             builder.ToTable("Account");
 
             builder.Property(b => b.Id)

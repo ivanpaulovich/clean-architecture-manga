@@ -24,14 +24,14 @@ namespace WebApi.UseCases.V1.Register
             var customerModel = new CustomerModel((Customer)output.Customer);
             var accountsModel =
                 (from Account accountEntity in output.Accounts
-                    select new AccountModel(accountEntity))
+                 select new AccountModel(accountEntity))
                 .ToList();
 
             var registerResponse = new RegisterResponse(customerModel, accountsModel);
 
             this.ViewModel = new CreatedAtRouteResult(
                 "GetCustomer",
-                new {customerId = registerResponse.Customer.CustomerId, version = "1.0"},
+                new { customerId = registerResponse.Customer.CustomerId, version = "1.0" },
                 registerResponse);
         }
 
@@ -43,23 +43,20 @@ namespace WebApi.UseCases.V1.Register
             var customerModel = new CustomerModel((Customer)output.Customer);
             var accountsModel =
                 (from Account accountEntity in output.Accounts
-                    select new AccountModel(accountEntity))
+                 select new AccountModel(accountEntity))
                 .ToList();
 
             var registerResponse = new RegisterResponse(customerModel, accountsModel);
 
             this.ViewModel = new CreatedAtRouteResult(
                 "GetCustomer",
-                new {customerId = registerResponse.Customer.CustomerId, version = "1.0"},
+                new { customerId = registerResponse.Customer.CustomerId, version = "1.0" },
                 registerResponse);
         }
 
         /// <summary>
         /// </summary>
         /// <param name="message"></param>
-        public void WriteError(string message)
-        {
-            this.ViewModel = new BadRequestObjectResult(message);
-        }
+        public void WriteError(string message) => this.ViewModel = new BadRequestObjectResult(message);
     }
 }

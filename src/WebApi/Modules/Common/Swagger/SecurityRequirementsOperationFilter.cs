@@ -11,7 +11,7 @@ namespace WebApi.Modules.Common.Swagger
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             // Policy names map to scopes
-            var requiredScopes = context.MethodInfo
+            IEnumerable<string> requiredScopes = context.MethodInfo
                 .GetCustomAttributes(true)
                 .OfType<AuthorizeAttribute>()
                 .Select(attr => attr.Policy)
@@ -22,12 +22,12 @@ namespace WebApi.Modules.Common.Swagger
                 return;
             }
 
-            operation.Responses.Add("401", new OpenApiResponse {Description = "Unauthorized"});
-            operation.Responses.Add("403", new OpenApiResponse {Description = "Forbidden"});
+            operation.Responses.Add("401", new OpenApiResponse { Description = "Unauthorized" });
+            operation.Responses.Add("403", new OpenApiResponse { Description = "Forbidden" });
 
             var oAuthScheme = new OpenApiSecurityScheme
             {
-                Reference = new OpenApiReference {Type = ReferenceType.SecurityScheme, Id = "oauth2"}
+                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" }
             };
 
             operation.Security = new List<OpenApiSecurityRequirement>

@@ -25,7 +25,7 @@ namespace UnitTests.EntitiesTests
             sut.Deposit(entityFactory, new PositiveMoney(200));
 
             // Act
-            var ex = Record.Exception(() => sut.Withdraw(entityFactory, new PositiveMoney(5000)));
+            System.Exception ex = Record.Exception(() => sut.Withdraw(entityFactory, new PositiveMoney(5000)));
 
             // Act and Assert
             Assert.NotNull(ex);

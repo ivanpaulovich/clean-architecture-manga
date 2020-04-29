@@ -38,15 +38,28 @@ namespace Infrastructure.DataAccess
             IAccount account,
             PositiveMoney amountToDeposit,
             DateTime transactionDate)
-            => new Credit(new CreditId(Guid.NewGuid()), account.Id, amountToDeposit, transactionDate);
+        {
+            if (account is null)
+            {
+                throw new ArgumentNullException(nameof(account));
+            }
+
+            return new Credit(new CreditId(Guid.NewGuid()), account.Id, amountToDeposit, transactionDate);
+        }
 
         /// <inheritdoc />
         public IDebit NewDebit(
             IAccount account,
             PositiveMoney amountToWithdraw,
             DateTime transactionDate)
-            => new Debit(new DebitId(Guid.NewGuid()), account.Id, amountToWithdraw, transactionDate);
+        {
+            if (account is null)
+            {
+                throw new ArgumentNullException(nameof(account));
+            }
 
+            return new Debit(new DebitId(Guid.NewGuid()), account.Id, amountToWithdraw, transactionDate);
+        }
         /// <inheritdoc />
         public ICustomer NewCustomer(SSN ssn, Name name)
             => new Customer(new CustomerId(Guid.NewGuid()), name, ssn);

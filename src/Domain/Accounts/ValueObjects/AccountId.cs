@@ -16,7 +16,7 @@ namespace Domain.Accounts.ValueObjects
     /// </summary>
     public readonly struct AccountId : IEquatable<AccountId>
     {
-        private readonly Guid accountId;
+        private readonly Guid _accountId;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AccountId" /> struct.
@@ -29,23 +29,20 @@ namespace Domain.Accounts.ValueObjects
                 throw new EmptyAccountIdException(Messages.AccountIdCannotBeEmpty);
             }
 
-            this.accountId = accountId;
+            this._accountId = accountId;
         }
 
         /// <summary>
         ///     Converts into string.
         /// </summary>
         /// <returns>String.</returns>
-        public override string ToString()
-        {
-            return this.accountId.ToString();
-        }
+        public override string ToString() => this._accountId.ToString();
 
         /// <summary>
         ///     Converts into Guid.
         /// </summary>
         /// <returns>Guid representation.</returns>
-        public Guid ToGuid() => this.accountId;
+        public Guid ToGuid() => this._accountId;
 
         /// <summary>
         ///     Check if objects are equals.
@@ -66,20 +63,14 @@ namespace Domain.Accounts.ValueObjects
         ///     Get Hash Code.
         /// </summary>
         /// <returns>Hash Code.</returns>
-        public override int GetHashCode()
-        {
-            return this.accountId.GetHashCode();
-        }
+        public override int GetHashCode() => this._accountId.GetHashCode();
 
         /// <summary>
         ///     Checks if other object is equals.
         /// </summary>
         /// <param name="other">Other AccountId.</param>
         /// <returns>True if equals.</returns>
-        public bool Equals(AccountId other)
-        {
-            return this.accountId == other.accountId;
-        }
+        public bool Equals(AccountId other) => this._accountId == other._accountId;
 
         /// <summary>
         ///     Equals.
@@ -87,10 +78,7 @@ namespace Domain.Accounts.ValueObjects
         /// <param name="left">Left object.</param>
         /// <param name="right">Right object.</param>
         /// <returns>True if equals.</returns>
-        public static bool operator ==(AccountId left, AccountId right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(AccountId left, AccountId right) => left.Equals(right);
 
         /// <summary>
         ///     Different.
@@ -98,9 +86,6 @@ namespace Domain.Accounts.ValueObjects
         /// <param name="left">Left object.</param>
         /// <param name="right">Right object.</param>
         /// <returns>True if different.</returns>
-        public static bool operator !=(AccountId left, AccountId right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(AccountId left, AccountId right) => !(left == right);
     }
 }

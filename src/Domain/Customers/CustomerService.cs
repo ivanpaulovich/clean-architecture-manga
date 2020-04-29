@@ -18,8 +18,8 @@ namespace Domain.Customers
     /// </summary>
     public class CustomerService
     {
-        private readonly ICustomerFactory customerFactory;
-        private readonly ICustomerRepository customerRepository;
+        private readonly ICustomerFactory _customerFactory;
+        private readonly ICustomerRepository _customerRepository;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CustomerService" /> class.
@@ -30,8 +30,8 @@ namespace Domain.Customers
             ICustomerFactory customerFactory,
             ICustomerRepository customerRepository)
         {
-            this.customerFactory = customerFactory;
-            this.customerRepository = customerRepository;
+            this._customerFactory = customerFactory;
+            this._customerRepository = customerRepository;
         }
 
         /// <summary>
@@ -42,10 +42,10 @@ namespace Domain.Customers
         /// <returns>Created Customer.</returns>
         public async Task<ICustomer> CreateCustomer(SSN ssn, Name name)
         {
-            var customer = this.customerFactory
+            ICustomer customer = this._customerFactory
                 .NewCustomer(ssn, name);
 
-            await this.customerRepository
+            await this._customerRepository
                 .Add(customer)
                 .ConfigureAwait(false);
 
@@ -59,7 +59,7 @@ namespace Domain.Customers
         /// <returns>True if he is registered.</returns>
         public async Task<bool> IsCustomerRegistered(CustomerId customerId)
         {
-            var customer = await this.customerRepository
+            ICustomer customer = await this._customerRepository
                 .GetBy(customerId)
                 .ConfigureAwait(false);
 

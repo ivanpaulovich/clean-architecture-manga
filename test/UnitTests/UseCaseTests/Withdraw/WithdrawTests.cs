@@ -14,10 +14,7 @@ namespace UnitTests.UseCaseTests.Withdraw
     {
         private readonly StandardFixture _fixture;
 
-        public WithdrawTests(StandardFixture fixture)
-        {
-            this._fixture = fixture;
-        }
+        public WithdrawTests(StandardFixture fixture) => this._fixture = fixture;
 
         [Theory]
         [ClassData(typeof(PositiveDataSetup))]
@@ -36,7 +33,7 @@ namespace UnitTests.UseCaseTests.Withdraw
                 MangaContextFake.DefaultAccountId,
                 new PositiveMoney(amount)));
 
-            var actual = presenter.Withdrawals.Last();
+            WithdrawOutput actual = presenter.Withdrawals.Last();
             Assert.Equal(expectedBalance, actual.UpdatedBalance.ToDecimal());
         }
     }

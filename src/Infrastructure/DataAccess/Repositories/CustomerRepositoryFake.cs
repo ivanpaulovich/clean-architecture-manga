@@ -1,5 +1,5 @@
 // <copyright file="CustomerRepositoryFake.cs" company="Ivan Paulovich">
-// Copyright © Ivan Paulovich. All rights reserved.
+// Copyright Â© Ivan Paulovich. All rights reserved.
 // </copyright>
 
 namespace Infrastructure.DataAccess.Repositories
@@ -14,10 +14,7 @@ namespace Infrastructure.DataAccess.Repositories
     {
         private readonly MangaContextFake _context;
 
-        public CustomerRepositoryFake(MangaContextFake context)
-        {
-            this._context = context;
-        }
+        public CustomerRepositoryFake(MangaContextFake context) => this._context = context;
 
         public async Task Add(ICustomer customer)
         {
@@ -31,7 +28,7 @@ namespace Infrastructure.DataAccess.Repositories
 
         public async Task<ICustomer> GetBy(CustomerId customerId)
         {
-            var customer = this._context
+            Customer customer = this._context
                 .Customers
                 .SingleOrDefault(e => e.Id.Equals(customerId));
 

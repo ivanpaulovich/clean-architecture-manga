@@ -1,5 +1,5 @@
 // <copyright file="ExternalUserService.cs" company="Ivan Paulovich">
-// Copyright © Ivan Paulovich. All rights reserved.
+// Copyright Â© Ivan Paulovich. All rights reserved.
 // </copyright>
 
 namespace Infrastructure.ExternalAuthentication
@@ -26,7 +26,7 @@ namespace Infrastructure.ExternalAuthentication
 
         public IUser GetUser()
         {
-            var user = this._httpContextAccessor
+            System.Security.Claims.ClaimsPrincipal user = this._httpContextAccessor
                 .HttpContext
                 .User;
 
@@ -40,7 +40,7 @@ namespace Infrastructure.ExternalAuthentication
                 customerId = new CustomerId(new Guid(value.Value));
             }
 
-            var domainUser = this._userFactory.NewUser(
+            IUser domainUser = this._userFactory.NewUser(
                 customerId,
                 externalUserId,
                 username);

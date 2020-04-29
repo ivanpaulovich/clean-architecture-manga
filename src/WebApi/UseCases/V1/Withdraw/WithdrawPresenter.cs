@@ -14,15 +14,9 @@ namespace WebApi.UseCases.V1.Withdraw
         /// <value></value>
         public IActionResult ViewModel { get; private set; } = new NoContentResult();
 
-        public void NotFound(string message)
-        {
-            this.ViewModel = new NotFoundObjectResult(message);
-        }
+        public void NotFound(string message) => this.ViewModel = new NotFoundObjectResult(message);
 
-        public void OutOfBalance(string message)
-        {
-            this.ViewModel = new BadRequestObjectResult(message);
-        }
+        public void OutOfBalance(string message) => this.ViewModel = new BadRequestObjectResult(message);
 
         public void Standard(WithdrawOutput withdrawOutput)
         {
@@ -33,9 +27,6 @@ namespace WebApi.UseCases.V1.Withdraw
             this.ViewModel = new ObjectResult(withdrawResponse);
         }
 
-        public void WriteError(string message)
-        {
-            this.ViewModel = new BadRequestObjectResult(message);
-        }
+        public void WriteError(string message) => this.ViewModel = new BadRequestObjectResult(message);
     }
 }

@@ -16,10 +16,7 @@ namespace Application.Boundaries.GetAccounts
         ///     Initializes a new instance of the <see cref="GetAccountsOutput" /> class.
         /// </summary>
         /// <param name="accounts">Accounts list.</param>
-        public GetAccountsOutput(IList<IAccount> accounts)
-        {
-            this.Accounts = accounts;
-        }
+        public GetAccountsOutput(IList<IAccount> accounts) => this.Accounts = accounts;
 
         /// <summary>
         ///     Gets the Account.

@@ -9,10 +9,7 @@ namespace WebApi.UseCases.V1.GetCustomer
     {
         public IActionResult ViewModel { get; private set; } = new NoContentResult();
 
-        public void NotFound(string message)
-        {
-            this.ViewModel = new NotFoundObjectResult(message);
-        }
+        public void NotFound(string message) => this.ViewModel = new NotFoundObjectResult(message);
 
         public void Standard(GetCustomerOutput getCustomerDetailsOutput)
         {
@@ -21,9 +18,6 @@ namespace WebApi.UseCases.V1.GetCustomer
             this.ViewModel = new OkObjectResult(getCustomerDetailsResponse);
         }
 
-        public void WriteError(string message)
-        {
-            this.ViewModel = new BadRequestObjectResult(message);
-        }
+        public void WriteError(string message) => this.ViewModel = new BadRequestObjectResult(message);
     }
 }

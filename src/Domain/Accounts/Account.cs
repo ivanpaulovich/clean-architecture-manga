@@ -29,9 +29,11 @@ namespace Domain.Accounts
         public ICredit Deposit(IAccountFactory entityFactory, PositiveMoney amountToDeposit)
         {
             if (entityFactory is null)
+            {
                 throw new ArgumentNullException(nameof(entityFactory));
+            }
 
-            var credit = entityFactory.NewCredit(this, amountToDeposit, DateTime.UtcNow);
+            ICredit credit = entityFactory.NewCredit(this, amountToDeposit, DateTime.UtcNow);
             this.Credits.Add(credit);
             return credit;
         }
@@ -40,35 +42,34 @@ namespace Domain.Accounts
         public IDebit Withdraw(IAccountFactory entityFactory, PositiveMoney amountToWithdraw)
         {
             if (entityFactory is null)
+            {
                 throw new ArgumentNullException(nameof(entityFactory));
+            }
 
             if (this.GetCurrentBalance().LessThan(amountToWithdraw))
             {
                 throw new MoneyShouldBePositiveException(Messages.AccountHasNotEnoughFunds);
             }
 
-            var debit = entityFactory.NewDebit(this, amountToWithdraw, DateTime.UtcNow);
+            IDebit debit = entityFactory.NewDebit(this, amountToWithdraw, DateTime.UtcNow);
             this.Debits.Add(debit);
             return debit;
         }
 
         /// <inheritdoc />
-        public bool IsClosingAllowed()
-        {
-            return this.GetCurrentBalance()
+        public bool IsClosingAllowed() => this.GetCurrentBalance()
                 .IsZero();
-        }
 
         /// <inheritdoc />
         public Money GetCurrentBalance()
         {
-            var totalCredits = this.Credits
+            PositiveMoney totalCredits = this.Credits
                 .GetTotal();
 
-            var totalDebits = this.Debits
+            PositiveMoney totalDebits = this.Debits
                 .GetTotal();
 
-            var totalAmount = totalCredits
+            Money totalAmount = totalCredits
                 .Subtract(totalDebits);
 
             return totalAmount;

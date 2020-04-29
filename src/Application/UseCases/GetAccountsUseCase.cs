@@ -54,7 +54,7 @@ namespace Application.UseCases
                 return;
             }
 
-            var user = this._userService
+            Domain.Security.IUser user = this._userService
                 .GetUser();
 
             List<IAccount> accounts = new List<IAccount>();

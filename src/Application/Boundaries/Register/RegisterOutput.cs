@@ -30,7 +30,9 @@ namespace Application.Boundaries.Register
             IList<IAccount> accounts)
         {
             if (accounts is null)
+            {
                 throw new ArgumentNullException(nameof(accounts));
+            }
 
             this.User = user ?? throw new ArgumentNullException(nameof(user));
             this.Customer = customer ?? throw new ArgumentNullException(nameof(customer));

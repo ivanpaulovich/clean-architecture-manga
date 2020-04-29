@@ -13,17 +13,14 @@ namespace ComponentTests.V1
     [Collection("WebApi Collection")]
     public sealed class RegisterTests
     {
-        private readonly CustomWebApplicationFactoryFixture _fixture;
+        public RegisterTests(CustomWebApplicationFactoryFixture fixture) => this._fixture = fixture;
 
-        public RegisterTests(CustomWebApplicationFactoryFixture fixture)
-        {
-            this._fixture = fixture;
-        }
+        private readonly CustomWebApplicationFactoryFixture _fixture;
 
         [Fact]
         public async Task RegisterReturnCustomerAndAccounts()
         {
-            var client = this._fixture
+            HttpClient client = this._fixture
                 .CustomWebApplicationFactory
                 .CreateClient();
 
@@ -33,7 +30,7 @@ namespace ComponentTests.V1
                 new KeyValuePair<string, string>("initialAmount", "300.5")
             });
 
-            var actualResponse = await client
+            HttpResponseMessage actualResponse = await client
                 .PostAsync("api/v1/Customers", content)
                 .ConfigureAwait(false);
 
@@ -44,7 +41,7 @@ namespace ComponentTests.V1
                 .ConfigureAwait(false);
 
             using var stringReader = new StringReader(actualResponseString);
-            using var reader = new JsonTextReader(stringReader) {DateParseHandling = DateParseHandling.None};
+            using var reader = new JsonTextReader(stringReader) { DateParseHandling = DateParseHandling.None };
             var jsonResponse = JObject.Load(reader);
 
             Assert.Equal(JTokenType.String, jsonResponse["customer"]["customerId"].Type);

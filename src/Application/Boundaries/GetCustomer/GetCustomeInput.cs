@@ -1,5 +1,5 @@
 // <copyright file="GetCustomeInput.cs" company="Ivan Paulovich">
-// Copyright © Ivan Paulovich. All rights reserved.
+// Copyright Â© Ivan Paulovich. All rights reserved.
 // </copyright>
 
 namespace Application.Boundaries.GetCustomer

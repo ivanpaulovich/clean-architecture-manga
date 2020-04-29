@@ -16,7 +16,7 @@ namespace Domain.Accounts.ValueObjects
     /// </summary>
     public readonly struct PositiveMoney : IEquatable<PositiveMoney>
     {
-        private readonly Money value;
+        private readonly Money _value;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="PositiveMoney" /> struct.
@@ -29,34 +29,28 @@ namespace Domain.Accounts.ValueObjects
                 throw new MoneyShouldBePositiveException(Messages.TheAmountShouldBePositive);
             }
 
-            this.value = new Money(value);
+            this._value = new Money(value);
         }
 
         /// <summary>
         ///     Converts into Money Value Object.
         /// </summary>
         /// <returns>Money.</returns>
-        public Money ToMoney() => this.value;
+        public Money ToMoney() => this._value;
 
         /// <summary>
         ///     Adds Money.
         /// </summary>
         /// <param name="positiveAmount">Amount to Add.</param>
         /// <returns>New Instance.</returns>
-        internal PositiveMoney Add(PositiveMoney positiveAmount)
-        {
-            return this.value.Add(positiveAmount.value);
-        }
+        internal PositiveMoney Add(PositiveMoney positiveAmount) => this._value.Add(positiveAmount._value);
 
         /// <summary>
         ///     Subtracts Money.
         /// </summary>
         /// <param name="positiveAmount">Amount to subtract.</param>
         /// <returns>New Instance.</returns>
-        internal Money Subtract(PositiveMoney positiveAmount)
-        {
-            return this.value.Subtract(positiveAmount.value);
-        }
+        internal Money Subtract(PositiveMoney positiveAmount) => this._value.Subtract(positiveAmount._value);
 
         /// <summary>
         /// </summary>
@@ -75,38 +69,26 @@ namespace Domain.Accounts.ValueObjects
         /// <summary>
         /// </summary>
         /// <returns></returns>
-        public override int GetHashCode()
-        {
-            return this.value.GetHashCode();
-        }
+        public override int GetHashCode() => this._value.GetHashCode();
 
         /// <summary>
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator ==(PositiveMoney left, PositiveMoney right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(PositiveMoney left, PositiveMoney right) => left.Equals(right);
 
         /// <summary>
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator !=(PositiveMoney left, PositiveMoney right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(PositiveMoney left, PositiveMoney right) => !(left == right);
 
         /// <summary>
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(PositiveMoney other)
-        {
-            return this.value.ToDecimal() == other.value.ToDecimal();
-        }
+        public bool Equals(PositiveMoney other) => this._value.ToDecimal() == other._value.ToDecimal();
     }
 }

@@ -15,7 +15,7 @@ namespace IntegrationTests.EntityFrameworkTests
         [Fact]
         public async Task Add_ChangesDatabase()
         {
-            var options = new DbContextOptionsBuilder<MangaContext>()
+            DbContextOptions<MangaContext> options = new DbContextOptionsBuilder<MangaContext>()
                 .UseInMemoryDatabase("test_database")
                 .Options;
 
@@ -24,11 +24,11 @@ namespace IntegrationTests.EntityFrameworkTests
 
             var factory = new EntityFactory();
 
-            var customer = factory.NewCustomer(
+            ICustomer customer = factory.NewCustomer(
                 new SSN("198608177955"),
                 new Name("Ivan Paulovich"));
 
-            var user = factory.NewUser(
+            Domain.Security.IUser user = factory.NewUser(
                 customer.Id,
                 new ExternalUserId("github/ivanpaulovich"),
                 new Name("Ivan Paulovich"));
@@ -47,19 +47,15 @@ namespace IntegrationTests.EntityFrameworkTests
         [Fact]
         public async Task Get_ReturnsCustomer()
         {
-            var options = new DbContextOptionsBuilder<MangaContext>()
+            DbContextOptions<MangaContext> options = new DbContextOptionsBuilder<MangaContext>()
                 .UseInMemoryDatabase("test_database")
                 .Options;
-
-            ICustomer customer = null;
-
             await using var context = new MangaContext(options);
             context.Database.EnsureCreated();
 
             var repository = new CustomerRepository(context);
-            customer = await repository.GetBy(SeedData.DefaultCustomerId)
+            ICustomer customer = await repository.GetBy(SeedData.DefaultCustomerId)
                 .ConfigureAwait(false);
-
             Assert.NotNull(customer);
         }
     }

@@ -30,10 +30,7 @@ namespace Domain.Accounts.Credits
         /// <summary>
         ///     Gets Description.
         /// </summary>
-        public static string Description
-        {
-            get { return "Credit"; }
-        }
+        public static string Description => "Credit";
 
         /// <summary>
         ///     Gets or sets Transaction Date.
@@ -45,9 +42,6 @@ namespace Domain.Accounts.Credits
         /// </summary>
         /// <param name="amount">Positive amount.</param>
         /// <returns>The positive sum.</returns>
-        public PositiveMoney Sum(PositiveMoney amount)
-        {
-            return this.Amount.Add(amount);
-        }
+        public PositiveMoney Sum(PositiveMoney amount) => this.Amount.Add(amount);
     }
 }

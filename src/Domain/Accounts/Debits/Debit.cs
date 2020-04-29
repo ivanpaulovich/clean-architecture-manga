@@ -30,10 +30,7 @@ namespace Domain.Accounts.Debits
         /// <summary>
         ///     Gets Description.
         /// </summary>
-        public static string Description
-        {
-            get => "Debit";
-        }
+        public static string Description => "Debit";
 
         /// <summary>
         ///     Gets or sets Transaction Date.

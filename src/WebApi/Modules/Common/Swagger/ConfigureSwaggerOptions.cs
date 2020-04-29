@@ -32,7 +32,7 @@ namespace WebApi.Modules.Common.Swagger
         {
             // add a swagger document for each discovered API version
             // note: you might choose to skip or document deprecated API versions differently
-            foreach (var description in this._provider.ApiVersionDescriptions)
+            foreach (ApiVersionDescription description in this._provider.ApiVersionDescriptions)
             {
                 options.SwaggerDoc(description.GroupName, CreateInfoForApiVersion(description));
             }
@@ -45,7 +45,7 @@ namespace WebApi.Modules.Common.Swagger
                 Title = "Clean Architecture Manga API",
                 Version = description.ApiVersion.ToString(),
                 Description = "Clean Architecture, DDD and TDD implementation.",
-                Contact = new OpenApiContact {Name = "Ivan Paulovich", Email = "ivan@paulovich.net"},
+                Contact = new OpenApiContact { Name = "Ivan Paulovich", Email = "ivan@paulovich.net" },
                 TermsOfService = new Uri("http://paulovich.net"),
                 License = new OpenApiLicense
                 {

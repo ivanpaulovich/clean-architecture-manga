@@ -10,7 +10,7 @@ namespace UnitTests.InputValidationTests
         [Fact]
         public void GivenEmptyDestinationAccountId_InputNotCreated_ThrowsInputValidationException()
         {
-            var actualEx = Assert.Throws<EmptyAccountIdException>(
+            EmptyAccountIdException actualEx = Assert.Throws<EmptyAccountIdException>(
                 () => new TransferInput(
                     new AccountId(Guid.NewGuid()),
                     new AccountId(Guid.Empty),
@@ -21,7 +21,7 @@ namespace UnitTests.InputValidationTests
         [Fact]
         public void GivenEmptyOriginAccountId_InputNotCreated_ThrowsInputValidationException()
         {
-            var actualEx = Assert.Throws<EmptyAccountIdException>(
+            EmptyAccountIdException actualEx = Assert.Throws<EmptyAccountIdException>(
                 () => new TransferInput(
                     new AccountId(Guid.Empty),
                     new AccountId(Guid.NewGuid()),

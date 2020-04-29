@@ -16,7 +16,7 @@ namespace Domain.Customers.ValueObjects
     /// </summary>
     public readonly struct CustomerId : IEquatable<CustomerId>
     {
-        private readonly Guid customerId;
+        private readonly Guid _customerId;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CustomerId" /> struct.
@@ -29,23 +29,20 @@ namespace Domain.Customers.ValueObjects
                 throw new EmptyCustomerIdException(Messages.CustomerIdCannotBeEmpty);
             }
 
-            this.customerId = customerId;
+            this._customerId = customerId;
         }
 
         /// <summary>
         ///     Converts into String.
         /// </summary>
         /// <returns>String.</returns>
-        public override string ToString()
-        {
-            return this.customerId.ToString();
-        }
+        public override string ToString() => this._customerId.ToString();
 
         /// <summary>
         ///     Converts into Guid.
         /// </summary>
         /// <returns>Guid.</returns>
-        public Guid ToGuid() => this.customerId;
+        public Guid ToGuid() => this._customerId;
 
         /// <summary>
         ///     Equals.
@@ -65,38 +62,26 @@ namespace Domain.Customers.ValueObjects
         /// <summary>
         /// </summary>
         /// <returns></returns>
-        public override int GetHashCode()
-        {
-            return this.customerId.GetHashCode();
-        }
+        public override int GetHashCode() => this._customerId.GetHashCode();
 
         /// <summary>
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator ==(CustomerId left, CustomerId right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(CustomerId left, CustomerId right) => left.Equals(right);
 
         /// <summary>
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator !=(CustomerId left, CustomerId right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(CustomerId left, CustomerId right) => !(left == right);
 
         /// <summary>
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(CustomerId other)
-        {
-            return this.customerId == other.customerId;
-        }
+        public bool Equals(CustomerId other) => this._customerId == other._customerId;
     }
 }

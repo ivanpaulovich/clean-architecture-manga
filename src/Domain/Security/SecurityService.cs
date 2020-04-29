@@ -25,10 +25,7 @@ namespace Domain.Security
         ///     Initializes a new instance of the <see cref="SecurityService" /> class.
         /// </summary>
         /// <param name="userRepository">User Repository.</param>
-        public SecurityService(IUserRepository userRepository)
-        {
-            this._userRepository = userRepository;
-        }
+        public SecurityService(IUserRepository userRepository) => this._userRepository = userRepository;
 
         /// <summary>
         ///     Create User Credentials.
@@ -39,7 +36,9 @@ namespace Domain.Security
         public async Task<IUser> CreateUserCredentials(IUser user, CustomerId customerId)
         {
             if (user is null)
+            {
                 throw new ArgumentNullException(nameof(user));
+            }
 
             user.Assign(customerId);
             await this._userRepository.Add(user)

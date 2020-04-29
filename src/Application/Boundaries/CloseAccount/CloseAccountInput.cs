@@ -15,10 +15,7 @@ namespace Application.Boundaries.CloseAccount
         ///     Initializes a new instance of the <see cref="CloseAccountInput" /> class.
         /// </summary>
         /// <param name="accountId">Account Id.</param>
-        public CloseAccountInput(AccountId accountId)
-        {
-            this.AccountId = accountId;
-        }
+        public CloseAccountInput(AccountId accountId) => this.AccountId = accountId;
 
         /// <summary>
         ///     Gets AccountId.

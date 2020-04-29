@@ -4,9 +4,6 @@ namespace UnitTests.UseCaseTests.Deposit
 
     internal sealed class NegativeDataSetup : TheoryData<decimal>
     {
-        public NegativeDataSetup()
-        {
-            this.Add(-100);
-        }
+        public NegativeDataSetup() => this.Add(-100);
     }
 }

@@ -10,7 +10,7 @@ namespace UnitTests.InputValidationTests
         [Fact]
         public void GivenEmptyAccountId_InputNotCreated_ThrowsInputValidationException()
         {
-            var actualEx = Assert.Throws<EmptyAccountIdException>(
+            EmptyAccountIdException actualEx = Assert.Throws<EmptyAccountIdException>(
                 () => new AccountId(Guid.Empty));
             Assert.Contains("accountId", actualEx.Message, StringComparison.OrdinalIgnoreCase);
         }

@@ -8,10 +8,7 @@ namespace WebApi.UseCases.V1.GetAccount
     /// </summary>
     public sealed class GetAccountResponse
     {
-        public GetAccountResponse(AccountModel accountModel)
-        {
-            this.Account = accountModel;
-        }
+        public GetAccountResponse(AccountModel accountModel) => this.Account = accountModel;
 
         /// <summary>
         ///     Gets account ID.

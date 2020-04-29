@@ -22,8 +22,8 @@ namespace Domain.Accounts
     /// </summary>
     public class AccountService
     {
-        private readonly IAccountFactory accountFactory;
-        private readonly IAccountRepository accountRepository;
+        private readonly IAccountFactory _accountFactory;
+        private readonly IAccountRepository _accountRepository;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AccountService" /> class.
@@ -34,8 +34,8 @@ namespace Domain.Accounts
             IAccountFactory accountFactory,
             IAccountRepository accountRepository)
         {
-            this.accountFactory = accountFactory;
-            this.accountRepository = accountRepository;
+            this._accountFactory = accountFactory;
+            this._accountRepository = accountRepository;
         }
 
         /// <summary>
@@ -46,9 +46,9 @@ namespace Domain.Accounts
         /// <returns>IAccount created.</returns>
         public async Task<IAccount> OpenCheckingAccount(CustomerId customerId, PositiveMoney amount)
         {
-            var account = this.accountFactory.NewAccount(customerId);
-            var credit = account.Deposit(this.accountFactory, amount);
-            await this.accountRepository.Add(account, credit)
+            IAccount account = this._accountFactory.NewAccount(customerId);
+            ICredit credit = account.Deposit(this._accountFactory, amount);
+            await this._accountRepository.Add(account, credit)
                 .ConfigureAwait(false);
 
             return account;
@@ -63,10 +63,12 @@ namespace Domain.Accounts
         public async Task<IDebit> Withdraw(IAccount account, PositiveMoney amount)
         {
             if (account is null)
+            {
                 throw new ArgumentNullException(nameof(account));
+            }
 
-            var debit = account.Withdraw(this.accountFactory, amount);
-            await this.accountRepository.Update(account, debit)
+            IDebit debit = account.Withdraw(this._accountFactory, amount);
+            await this._accountRepository.Update(account, debit)
                 .ConfigureAwait(false);
 
             return debit;
@@ -81,10 +83,12 @@ namespace Domain.Accounts
         public async Task<ICredit> Deposit(IAccount account, PositiveMoney amount)
         {
             if (account is null)
+            {
                 throw new ArgumentNullException(nameof(account));
+            }
 
-            var credit = account.Deposit(this.accountFactory, amount);
-            await this.accountRepository.Update(account, credit)
+            ICredit credit = account.Deposit(this._accountFactory, amount);
+            await this._accountRepository.Update(account, credit)
                 .ConfigureAwait(false);
 
             return credit;

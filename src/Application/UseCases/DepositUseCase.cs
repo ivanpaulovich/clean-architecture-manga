@@ -58,7 +58,7 @@ namespace Application.UseCases
                 return;
             }
 
-            var account = await this._accountRepository
+            IAccount account = await this._accountRepository
                 .GetAccount(input.AccountId)
                 .ConfigureAwait(false);
 
@@ -69,7 +69,7 @@ namespace Application.UseCases
                 return;
             }
 
-            var credit = await this._accountService
+            ICredit credit = await this._accountService
                 .Deposit(account, input.Amount)
                 .ConfigureAwait(false);
 

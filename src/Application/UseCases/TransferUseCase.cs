@@ -57,7 +57,7 @@ namespace Application.UseCases
                 return;
             }
 
-            var originAccount = await this._accountRepository
+            IAccount originAccount = await this._accountRepository
                 .GetAccount(input.OriginAccountId)
                 .ConfigureAwait(false);
 
@@ -68,7 +68,7 @@ namespace Application.UseCases
                 return;
             }
 
-            var destinationAccount = await this._accountRepository
+            IAccount destinationAccount = await this._accountRepository
                 .GetAccount(input.DestinationAccountId)
                 .ConfigureAwait(false);
 
@@ -79,7 +79,7 @@ namespace Application.UseCases
                 return;
             }
 
-            var debit = await this._accountService
+            IDebit debit = await this._accountService
                 .Withdraw(originAccount, input.Amount)
                 .ConfigureAwait(false);
 

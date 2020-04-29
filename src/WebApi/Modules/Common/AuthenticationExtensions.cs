@@ -93,7 +93,7 @@ namespace WebApi.Modules.Common
                             request.Headers.Authorization =
                                 new AuthenticationHeaderValue("Bearer", context.AccessToken);
 
-                            var response = await context
+                            HttpResponseMessage response = await context
                                 .Backchannel
                                 .SendAsync(
                                     request,
@@ -138,8 +138,8 @@ namespace WebApi.Modules.Common
                             request.Headers.Authorization =
                                 new AuthenticationHeaderValue("Bearer", context.AccessToken);
 
-                            var response = await context.Backchannel.SendAsync(request,
-                                HttpCompletionOption.ResponseHeadersRead, context.HttpContext.RequestAborted)
+                            HttpResponseMessage response = await context.Backchannel.SendAsync(request,
+                                    HttpCompletionOption.ResponseHeadersRead, context.HttpContext.RequestAborted)
                                 .ConfigureAwait(false);
 
                             response.EnsureSuccessStatusCode();

@@ -15,25 +15,16 @@ namespace WebApi.UseCases.V1.CloseAccount
         /// <summary>
         /// </summary>
         /// <param name="message"></param>
-        public void NotFound(string message)
-        {
-            this.ViewModel = new NotFoundObjectResult(message);
-        }
+        public void NotFound(string message) => this.ViewModel = new NotFoundObjectResult(message);
 
         /// <summary>
         /// </summary>
         /// <param name="closeAccountOutput"></param>
-        public void Standard(CloseAccountOutput closeAccountOutput)
-        {
-            this.ViewModel = new OkObjectResult(closeAccountOutput.Account.Id);
-        }
+        public void Standard(CloseAccountOutput closeAccountOutput) => this.ViewModel = new OkObjectResult(closeAccountOutput.Account.Id);
 
         /// <summary>
         /// </summary>
         /// <param name="message"></param>
-        public void WriteError(string message)
-        {
-            this.ViewModel = new BadRequestObjectResult(message);
-        }
+        public void WriteError(string message) => this.ViewModel = new BadRequestObjectResult(message);
     }
 }

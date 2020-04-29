@@ -19,7 +19,7 @@ namespace Domain.Customers.ValueObjects
     {
         private const string RegExForValidation = @"^\d{6,8}[-|(\s)]{0,1}\d{4}$";
 
-        private readonly string text;
+        private readonly string _text;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SSN" /> struct.
@@ -40,14 +40,14 @@ namespace Domain.Customers.ValueObjects
                 throw new InvalidSSNException(Messages.InvalidTextFormat);
             }
 
-            this.text = text;
+            this._text = text;
         }
 
         /// <summary>
         ///     Converts into string.
         /// </summary>
         /// <returns>string.</returns>
-        public override string ToString() => this.text;
+        public override string ToString() => this._text;
 
         /// <summary>
         ///     Equals.
@@ -68,10 +68,7 @@ namespace Domain.Customers.ValueObjects
         ///     Get Hash Code.
         /// </summary>
         /// <returns>Hash Code.</returns>
-        public override int GetHashCode()
-        {
-            return this.text.GetHashCode(StringComparison.InvariantCulture);
-        }
+        public override int GetHashCode() => this._text.GetHashCode(StringComparison.InvariantCulture);
 
         /// <summary>
         ///     Equals.
@@ -79,10 +76,7 @@ namespace Domain.Customers.ValueObjects
         /// <param name="left">Left object.</param>
         /// <param name="right">Right object.</param>
         /// <returns>True if equals.</returns>
-        public static bool operator ==(SSN left, SSN right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(SSN left, SSN right) => left.Equals(right);
 
         /// <summary>
         ///     Different.
@@ -90,19 +84,13 @@ namespace Domain.Customers.ValueObjects
         /// <param name="left">Left object.</param>
         /// <param name="right">Right object.</param>
         /// <returns>True if different.</returns>
-        public static bool operator !=(SSN left, SSN right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(SSN left, SSN right) => !(left == right);
 
         /// <summary>
         ///     Equals.
         /// </summary>
         /// <param name="other">Other object.</param>
         /// <returns>True if equals.</returns>
-        public bool Equals(SSN other)
-        {
-            return string.Compare(this.text, other.text, StringComparison.OrdinalIgnoreCase) == 0;
-        }
+        public bool Equals(SSN other) => string.Compare(this._text, other._text, StringComparison.OrdinalIgnoreCase) == 0;
     }
 }

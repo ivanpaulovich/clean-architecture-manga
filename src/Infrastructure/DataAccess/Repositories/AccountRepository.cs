@@ -1,5 +1,5 @@
 // <copyright file="AccountRepository.cs" company="Ivan Paulovich">
-// Copyright © Ivan Paulovich. All rights reserved.
+// Copyright Â© Ivan Paulovich. All rights reserved.
 // </copyright>
 
 namespace Infrastructure.DataAccess.Repositories
@@ -19,16 +19,22 @@ namespace Infrastructure.DataAccess.Repositories
     using Credit = Entities.Credit;
     using Debit = Entities.Debit;
 
+    /// <inheritdoc/>
     public sealed class AccountRepository : IAccountRepository
     {
         private readonly MangaContext _context;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public AccountRepository(MangaContext context)
         {
             this._context = context ??
                             throw new ArgumentNullException(nameof(context));
         }
 
+        /// <inheritdoc/>
         public async Task<IList<IAccount>> GetBy(CustomerId customerId)
         {
             var accounts = this._context
@@ -41,6 +47,7 @@ namespace Infrastructure.DataAccess.Repositories
                 .ConfigureAwait(false);
         }
 
+        /// <inheritdoc/>
         public async Task Add(IAccount account, ICredit credit)
         {
             await this._context
@@ -54,8 +61,14 @@ namespace Infrastructure.DataAccess.Repositories
                 .ConfigureAwait(false);
         }
 
+        /// <inheritdoc/>
         public async Task Delete(IAccount account)
         {
+            if (account is null)
+            {
+                throw new ArgumentNullException(nameof(account));
+            }
+
             const string deleteSQL = @"DELETE FROM Credit WHERE AccountId = @Id;
                       DELETE FROM Debit WHERE AccountId = @Id;
                       DELETE FROM Account WHERE Id = @Id;";
@@ -69,9 +82,10 @@ namespace Infrastructure.DataAccess.Repositories
                 .ConfigureAwait(false);
         }
 
+        /// <inheritdoc/>
         public async Task<IAccount> GetAccount(AccountId id)
         {
-            var account = await this._context
+            Account account = await this._context
                 .Accounts
                 .Where(a => a.Id.Equals(id))
                 .SingleOrDefaultAsync()
@@ -79,7 +93,7 @@ namespace Infrastructure.DataAccess.Repositories
 
             if (account is null)
             {
-                return null;
+                return null!;
             }
 
             var credits = this._context
@@ -100,18 +114,14 @@ namespace Infrastructure.DataAccess.Repositories
             return account;
         }
 
-        public async Task Update(IAccount account, ICredit credit)
-        {
-            await this._context
+        /// <inheritdoc/>
+        public async Task Update(IAccount account, ICredit credit) => await this._context
                 .Credits
                 .AddAsync((Credit)credit);
-        }
 
-        public async Task Update(IAccount account, IDebit debit)
-        {
-            await this._context
+        /// <inheritdoc/>
+        public async Task Update(IAccount account, IDebit debit) => await this._context
                 .Debits
                 .AddAsync((Debit)debit);
-        }
     }
 }
