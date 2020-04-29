@@ -16,7 +16,6 @@ namespace Infrastructure.DataAccess
     using Debit = Entities.Debit;
 
     /// <summary>
-    /// 
     /// </summary>
     public static class SeedData
     {
@@ -37,11 +36,11 @@ namespace Infrastructure.DataAccess
 
             builder.Entity<Customer>()
                 .HasData(
-                    new { Id = DefaultCustomerId, Name = new Name("Test User"), SSN = new SSN("19860817-9999") });
+                    new {Id = DefaultCustomerId, Name = new Name(Messages.UserName), SSN = new SSN("19860817-9999")});
 
             builder.Entity<Account>()
                 .HasData(
-                    new { Id = s_defaultAccountId, CustomerId = DefaultCustomerId });
+                    new {Id = s_defaultAccountId, CustomerId = DefaultCustomerId});
 
             builder.Entity<Credit>()
                 .HasData(

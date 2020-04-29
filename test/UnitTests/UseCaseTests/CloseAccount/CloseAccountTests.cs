@@ -6,7 +6,9 @@ namespace UnitTests.UseCaseTests.CloseAccount
     using Application.Boundaries.GetAccount;
     using Application.Boundaries.Withdraw;
     using Application.UseCases;
+    using Domain.Accounts;
     using Domain.Accounts.ValueObjects;
+    using Domain.Customers;
     using Domain.Customers.ValueObjects;
     using Infrastructure.DataAccess;
     using Presenters;
@@ -23,11 +25,11 @@ namespace UnitTests.UseCaseTests.CloseAccount
         [ClassData(typeof(PositiveDataSetup))]
         public void PositiveBalance_Should_Not_Allow_Closing(decimal amount)
         {
-            Domain.Customers.ICustomer customer = this._fixture.EntityFactory.NewCustomer(
+            ICustomer customer = this._fixture.EntityFactory.NewCustomer(
                 new SSN("198608178899"),
                 new Name("Ivan Paulovich"));
 
-            Domain.Accounts.IAccount account = this._fixture.EntityFactory.NewAccount(customer.Id);
+            IAccount account = this._fixture.EntityFactory.NewAccount(customer.Id);
 
             account.Deposit(this._fixture.EntityFactory, new PositiveMoney(amount));
 
@@ -75,11 +77,11 @@ namespace UnitTests.UseCaseTests.CloseAccount
         [Fact]
         public void ZeroBalance_Should_Allow_Closing()
         {
-            Domain.Customers.ICustomer customer = this._fixture.EntityFactory.NewCustomer(
+            ICustomer customer = this._fixture.EntityFactory.NewCustomer(
                 new SSN("198608178899"),
                 new Name("Ivan Paulovich"));
 
-            Domain.Accounts.IAccount account = this._fixture.EntityFactory.NewAccount(customer.Id);
+            IAccount account = this._fixture.EntityFactory.NewAccount(customer.Id);
             bool actual = account.IsClosingAllowed();
 
             Assert.True(actual);

@@ -1,5 +1,6 @@
 namespace WebApi.Modules.Common.FeatureFlags
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
@@ -19,7 +20,7 @@ namespace WebApi.Modules.Common.FeatureFlags
         {
             for (int i = feature.Controllers.Count - 1; i >= 0; i--)
             {
-                System.Type controller = feature.Controllers[i].AsType();
+                Type controller = feature.Controllers[i].AsType();
                 foreach (CustomAttributeData customAttribute in controller.CustomAttributes)
                 {
                     if (customAttribute.AttributeType.FullName != typeof(FeatureGateAttribute).FullName)

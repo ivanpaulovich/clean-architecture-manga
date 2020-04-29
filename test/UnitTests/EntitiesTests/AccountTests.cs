@@ -1,5 +1,6 @@
 namespace UnitTests.EntitiesTests
 {
+    using System;
     using Domain.Accounts;
     using Domain.Accounts.Credits;
     using Domain.Accounts.ValueObjects;
@@ -25,7 +26,7 @@ namespace UnitTests.EntitiesTests
             sut.Deposit(entityFactory, new PositiveMoney(200));
 
             // Act
-            System.Exception ex = Record.Exception(() => sut.Withdraw(entityFactory, new PositiveMoney(5000)));
+            Exception ex = Record.Exception(() => sut.Withdraw(entityFactory, new PositiveMoney(5000)));
 
             // Act and Assert
             Assert.NotNull(ex);

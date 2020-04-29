@@ -15,6 +15,6 @@ namespace Infrastructure.DataAccess
         /// </summary>
         /// <returns></returns>
         public async Task<int> Save() => await Task.FromResult(0)
-                .ConfigureAwait(false);
+            .ConfigureAwait(false);
     }
 }

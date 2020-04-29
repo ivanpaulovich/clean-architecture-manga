@@ -15,18 +15,17 @@ namespace Infrastructure.DataAccess.Repositories
     using Account = Entities.Account;
     using Credit = Entities.Credit;
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public sealed class AccountRepositoryFake : IAccountRepository
     {
         private readonly MangaContextFake _context;
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="context"></param>
         public AccountRepositoryFake(MangaContextFake context) => this._context = context;
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public async Task<IList<IAccount>> GetBy(CustomerId customerId)
         {
             var accounts = this._context
@@ -39,7 +38,7 @@ namespace Infrastructure.DataAccess.Repositories
                 .ConfigureAwait(false);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public async Task Add(IAccount account, ICredit credit)
         {
             this._context
@@ -54,7 +53,7 @@ namespace Infrastructure.DataAccess.Repositories
                 .ConfigureAwait(false);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public async Task Delete(IAccount account)
         {
             Account accountOld = this._context
@@ -69,7 +68,7 @@ namespace Infrastructure.DataAccess.Repositories
                 .ConfigureAwait(false);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public async Task<IAccount> GetAccount(AccountId accountId)
         {
             Account account = this._context
@@ -85,7 +84,7 @@ namespace Infrastructure.DataAccess.Repositories
                 .ConfigureAwait(false);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public async Task Update(IAccount account, ICredit credit)
         {
             Domain.Accounts.Account accountOld = this._context
@@ -97,7 +96,7 @@ namespace Infrastructure.DataAccess.Repositories
                 .ConfigureAwait(false);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public async Task Update(IAccount account, IDebit debit)
         {
             Domain.Accounts.Account accountOld = this._context

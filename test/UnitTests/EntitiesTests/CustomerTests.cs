@@ -1,5 +1,6 @@
 namespace UnitTests.EntitiesTests
 {
+    using Domain.Accounts;
     using Domain.Customers;
     using Domain.Customers.ValueObjects;
     using Infrastructure.DataAccess;
@@ -17,7 +18,7 @@ namespace UnitTests.EntitiesTests
                 new SSN("198608179922"),
                 new Name("Ivan Paulovich"));
 
-            Domain.Accounts.IAccount account = entityFactory.NewAccount(sut.Id);
+            IAccount account = entityFactory.NewAccount(sut.Id);
 
             // Act
             sut.Assign(account.Id);

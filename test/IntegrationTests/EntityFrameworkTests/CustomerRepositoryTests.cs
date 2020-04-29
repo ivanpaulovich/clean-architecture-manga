@@ -4,6 +4,7 @@ namespace IntegrationTests.EntityFrameworkTests
     using System.Threading.Tasks;
     using Domain.Customers;
     using Domain.Customers.ValueObjects;
+    using Domain.Security;
     using Domain.Security.ValueObjects;
     using Infrastructure.DataAccess;
     using Infrastructure.DataAccess.Repositories;
@@ -28,7 +29,7 @@ namespace IntegrationTests.EntityFrameworkTests
                 new SSN("198608177955"),
                 new Name("Ivan Paulovich"));
 
-            Domain.Security.IUser user = factory.NewUser(
+            IUser user = factory.NewUser(
                 customer.Id,
                 new ExternalUserId("github/ivanpaulovich"),
                 new Name("Ivan Paulovich"));

@@ -10,6 +10,7 @@ namespace Infrastructure.ExternalAuthentication
     using Domain.Security.Services;
     using Domain.Security.ValueObjects;
 
+    /// <inheritdoc />
     public sealed class TestUserService : IUserService
     {
         private readonly IUserFactory _userFactory;
@@ -19,11 +20,12 @@ namespace Infrastructure.ExternalAuthentication
         /// <param name="userFactory"></param>
         public TestUserService(IUserFactory userFactory) => this._userFactory = userFactory;
 
+        /// <inheritdoc />
         public IUser GetUser()
         {
             var customerId = new CustomerId(MangaContextFake.DefaultCustomerId.ToGuid());
-            var externalUserId = new ExternalUserId("github/ivanpaulovich");
-            var name = new Name("Ivan Paulovich");
+            var externalUserId = new ExternalUserId(Messages.ExternalUserID);
+            var name = new Name(Messages.UserName);
 
             IUser user = this._userFactory
                 .NewUser(customerId, externalUserId, name);

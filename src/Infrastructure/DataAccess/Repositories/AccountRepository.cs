@@ -19,22 +19,19 @@ namespace Infrastructure.DataAccess.Repositories
     using Credit = Entities.Credit;
     using Debit = Entities.Debit;
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public sealed class AccountRepository : IAccountRepository
     {
         private readonly MangaContext _context;
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="context"></param>
-        public AccountRepository(MangaContext context)
-        {
-            this._context = context ??
-                            throw new ArgumentNullException(nameof(context));
-        }
+        public AccountRepository(MangaContext context) => this._context = context ??
+                                                                          throw new ArgumentNullException(
+                                                                              nameof(context));
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public async Task<IList<IAccount>> GetBy(CustomerId customerId)
         {
             var accounts = this._context
@@ -47,7 +44,7 @@ namespace Infrastructure.DataAccess.Repositories
                 .ConfigureAwait(false);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public async Task Add(IAccount account, ICredit credit)
         {
             await this._context
@@ -61,7 +58,7 @@ namespace Infrastructure.DataAccess.Repositories
                 .ConfigureAwait(false);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public async Task Delete(IAccount account)
         {
             if (account is null)
@@ -82,7 +79,7 @@ namespace Infrastructure.DataAccess.Repositories
                 .ConfigureAwait(false);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public async Task<IAccount> GetAccount(AccountId id)
         {
             Account account = await this._context
@@ -114,14 +111,14 @@ namespace Infrastructure.DataAccess.Repositories
             return account;
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public async Task Update(IAccount account, ICredit credit) => await this._context
-                .Credits
-                .AddAsync((Credit)credit);
+            .Credits
+            .AddAsync((Credit)credit);
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public async Task Update(IAccount account, IDebit debit) => await this._context
-                .Debits
-                .AddAsync((Debit)debit);
+            .Debits
+            .AddAsync((Debit)debit);
     }
 }

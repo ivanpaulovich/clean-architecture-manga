@@ -17,7 +17,7 @@ namespace Infrastructure.DataAccess.Repositories
         private readonly MangaContext _context;
 
         public UserRepository(MangaContext context) => this._context = context ??
-                            throw new ArgumentNullException(nameof(context));
+                                                                       throw new ArgumentNullException(nameof(context));
 
         public async Task Add(IUser user)
         {

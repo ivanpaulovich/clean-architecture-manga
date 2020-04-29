@@ -6,7 +6,8 @@ namespace ComponentTests
     /// </summary>
     public sealed class CustomWebApplicationFactoryFixture : IDisposable
     {
-        public CustomWebApplicationFactoryFixture() => this.CustomWebApplicationFactory = new CustomWebApplicationFactory();
+        public CustomWebApplicationFactoryFixture() =>
+            this.CustomWebApplicationFactory = new CustomWebApplicationFactory();
 
         /// <summary>
         /// </summary>

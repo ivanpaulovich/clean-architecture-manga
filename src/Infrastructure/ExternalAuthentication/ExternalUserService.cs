@@ -5,17 +5,23 @@
 namespace Infrastructure.ExternalAuthentication
 {
     using System;
+    using System.Security.Claims;
     using Domain.Customers.ValueObjects;
     using Domain.Security;
     using Domain.Security.Services;
     using Domain.Security.ValueObjects;
     using Microsoft.AspNetCore.Http;
 
+    /// <inheritdoc />
     public sealed class ExternalUserService : IUserService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUserFactory _userFactory;
 
+        /// <summary>
+        /// </summary>
+        /// <param name="httpContextAccessor"></param>
+        /// <param name="userFactory"></param>
         public ExternalUserService(
             IHttpContextAccessor httpContextAccessor,
             IUserFactory userFactory)
@@ -24,9 +30,10 @@ namespace Infrastructure.ExternalAuthentication
             this._userFactory = userFactory;
         }
 
+        /// <inheritdoc />
         public IUser GetUser()
         {
-            System.Security.Claims.ClaimsPrincipal user = this._httpContextAccessor
+            ClaimsPrincipal user = this._httpContextAccessor
                 .HttpContext
                 .User;
 

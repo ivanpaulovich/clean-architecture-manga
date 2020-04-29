@@ -20,7 +20,8 @@ namespace WebApi.UseCases.V1.CloseAccount
         /// <summary>
         /// </summary>
         /// <param name="closeAccountOutput"></param>
-        public void Standard(CloseAccountOutput closeAccountOutput) => this.ViewModel = new OkObjectResult(closeAccountOutput.Account.Id);
+        public void Standard(CloseAccountOutput closeAccountOutput) =>
+            this.ViewModel = new OkObjectResult(closeAccountOutput.Account.Id);
 
         /// <summary>
         /// </summary>

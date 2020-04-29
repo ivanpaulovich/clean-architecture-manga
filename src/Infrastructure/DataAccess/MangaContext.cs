@@ -22,32 +22,31 @@ namespace Infrastructure.DataAccess
         }
 
         /// <summary>
-        /// Gets or sets Users
+        ///     Gets or sets Users
         /// </summary>
         public DbSet<User> Users { get; set; }
 
         /// <summary>
-        /// Gets or sets Accounts
+        ///     Gets or sets Accounts
         /// </summary>
         public DbSet<Account> Accounts { get; set; }
 
         /// <summary>
-        /// Gets or sets Customers
+        ///     Gets or sets Customers
         /// </summary>
         public DbSet<Customer> Customers { get; set; }
 
         /// <summary>
-        /// Gets or sets Credits
+        ///     Gets or sets Credits
         /// </summary>
         public DbSet<Credit> Credits { get; set; }
 
         /// <summary>
-        /// Gets or sets Debits
+        ///     Gets or sets Debits
         /// </summary>
         public DbSet<Debit> Debits { get; set; }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="builder"></param>
         protected override void OnModelCreating(ModelBuilder builder)

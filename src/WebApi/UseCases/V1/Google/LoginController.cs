@@ -18,7 +18,7 @@ namespace WebApi.UseCases.V1.Google
         [HttpGet("Google")]
         [AllowAnonymous]
         public IActionResult Google(string? returnUrl = "https://localhost:5001/") => new ChallengeResult(
-                "Google",
-                new AuthenticationProperties { RedirectUri = returnUrl });
+            "Google",
+            new AuthenticationProperties {RedirectUri = returnUrl});
     }
 }

@@ -20,17 +20,17 @@ namespace WebApi
         private IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services) => services
-                .AddPersistence(this.Configuration)
-                .AddAuthentication(this.Configuration)
-                .AddFeatureFlags(this.Configuration)
-                .AddVersioning()
-                .AddSwagger()
-                .AddMediator()
-                .AddUseCases()
-                .AddPresentersV1()
-                .AddPresentersV2()
-                .AddCustomControllers()
-                .AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
+            .AddPersistence(this.Configuration)
+            .AddAuthentication(this.Configuration)
+            .AddFeatureFlags(this.Configuration)
+            .AddVersioning()
+            .AddSwagger()
+            .AddMediator()
+            .AddUseCases()
+            .AddPresentersV1()
+            .AddPresentersV2()
+            .AddCustomControllers()
+            .AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
 
         public void Configure(
             IApplicationBuilder app,

@@ -8,6 +8,7 @@ namespace Application.UseCases
     using System.Threading.Tasks;
     using Boundaries.GetAccounts;
     using Domain.Accounts;
+    using Domain.Security;
     using Domain.Security.Services;
 
     /// <summary>
@@ -54,7 +55,7 @@ namespace Application.UseCases
                 return;
             }
 
-            Domain.Security.IUser user = this._userService
+            IUser user = this._userService
                 .GetUser();
 
             List<IAccount> accounts = new List<IAccount>();

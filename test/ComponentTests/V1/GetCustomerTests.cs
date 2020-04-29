@@ -3,6 +3,7 @@ namespace ComponentTests.V1
     using System;
     using System.IO;
     using System.Net;
+    using System.Net.Http;
     using System.Threading.Tasks;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -18,11 +19,11 @@ namespace ComponentTests.V1
         [Fact]
         public async Task GetCustomerReturnsCustomer()
         {
-            System.Net.Http.HttpClient client = this._fixture
+            HttpClient client = this._fixture
                 .CustomWebApplicationFactory
                 .CreateClient();
 
-            System.Net.Http.HttpResponseMessage actualResponse = await client
+            HttpResponseMessage actualResponse = await client
                 .GetAsync("/api/v1/Customers/")
                 .ConfigureAwait(false);
 
@@ -33,7 +34,7 @@ namespace ComponentTests.V1
                 .ConfigureAwait(false);
 
             using var stringReader = new StringReader(actualResponseString);
-            using var reader = new JsonTextReader(stringReader) { DateParseHandling = DateParseHandling.None };
+            using var reader = new JsonTextReader(stringReader) {DateParseHandling = DateParseHandling.None};
             var jsonResponse = JObject.Load(reader);
 
             Assert.Equal(JTokenType.String, jsonResponse["customer"]["customerId"].Type);

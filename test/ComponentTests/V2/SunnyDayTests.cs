@@ -28,8 +28,7 @@ namespace ComponentTests.V2
 
             var content = new FormUrlEncodedContent(new[]
             {
-                new KeyValuePair<string, string>("ssn", "8608179999"),
-                new KeyValuePair<string, string>("initialAmount",
+                new KeyValuePair<string, string>("ssn", "8608179999"), new KeyValuePair<string, string>("initialAmount",
                     initialAmount.ToString(CultureInfo.InvariantCulture))
             });
 

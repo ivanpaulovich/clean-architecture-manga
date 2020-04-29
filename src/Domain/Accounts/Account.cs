@@ -58,7 +58,7 @@ namespace Domain.Accounts
 
         /// <inheritdoc />
         public bool IsClosingAllowed() => this.GetCurrentBalance()
-                .IsZero();
+            .IsZero();
 
         /// <inheritdoc />
         public Money GetCurrentBalance()

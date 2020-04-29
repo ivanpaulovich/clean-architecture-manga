@@ -29,7 +29,7 @@ namespace Infrastructure.DataAccess
                 new SSN(Messages.UserSSN));
 
             customer.Accounts
-                .AddRange(new[] { DefaultAccountId });
+                .AddRange(new[] {DefaultAccountId});
 
             var user1 = new User(
                 new ExternalUserId(Messages.ExternalUserID),
@@ -83,44 +83,44 @@ namespace Infrastructure.DataAccess
         }
 
         /// <summary>
-        /// Gets or sets Users.
+        ///     Gets or sets Users.
         /// </summary>
         public Collection<User> Users { get; } = new Collection<User>();
 
         /// <summary>
-        /// Gets or sets Customers.
+        ///     Gets or sets Customers.
         /// </summary>
         public Collection<Customer> Customers { get; } = new Collection<Customer>();
 
         /// <summary>
-        /// Gets or sets Accounts.
+        ///     Gets or sets Accounts.
         /// </summary>
         public Collection<Account> Accounts { get; } = new Collection<Account>();
 
         /// <summary>
-        /// Gets or sets Credits.
+        ///     Gets or sets Credits.
         /// </summary>
         public Collection<Credit> Credits { get; } = new Collection<Credit>();
 
         /// <summary>
-        /// Gets or sets Debits.
+        ///     Gets or sets Debits.
         /// </summary>
         private Collection<Debit> Debits { get; } = new Collection<Debit>();
 
         /// <summary>
-        /// Gets or sets DefaultCustomerId.
+        ///     Gets or sets DefaultCustomerId.
         /// </summary>
         public static CustomerId DefaultCustomerId { get; } = new CustomerId(Guid.NewGuid());
 
         /// <summary>
-        /// Gets or sets DefaultAccountId.
+        ///     Gets or sets DefaultAccountId.
         /// </summary>
         public static AccountId DefaultAccountId { get; } = new AccountId(Guid.NewGuid());
 
         private static CustomerId SecondCustomerId { get; } = new CustomerId(Guid.NewGuid());
 
         /// <summary>
-        /// Gets or sets SecondAccountId.
+        ///     Gets or sets SecondAccountId.
         /// </summary>
         public static AccountId SecondAccountId { get; } = new AccountId(Guid.NewGuid());
     }

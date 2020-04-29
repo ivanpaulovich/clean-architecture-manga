@@ -91,6 +91,7 @@ namespace Domain.Customers.ValueObjects
         /// </summary>
         /// <param name="other">Other object.</param>
         /// <returns>True if equals.</returns>
-        public bool Equals(SSN other) => string.Compare(this._text, other._text, StringComparison.OrdinalIgnoreCase) == 0;
+        public bool Equals(SSN other) =>
+            string.Compare(this._text, other._text, StringComparison.OrdinalIgnoreCase) == 0;
     }
 }

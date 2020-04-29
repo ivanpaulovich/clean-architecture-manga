@@ -60,6 +60,7 @@ namespace Infrastructure.DataAccess
 
             return new Debit(new DebitId(Guid.NewGuid()), account.Id, amountToWithdraw, transactionDate);
         }
+
         /// <inheritdoc />
         public ICustomer NewCustomer(SSN ssn, Name name)
             => new Customer(new CustomerId(Guid.NewGuid()), name, ssn);

@@ -41,7 +41,7 @@ namespace ComponentTests.V1
                 .ConfigureAwait(false);
 
             using var stringReader = new StringReader(actualResponseString);
-            using var reader = new JsonTextReader(stringReader) { DateParseHandling = DateParseHandling.None };
+            using var reader = new JsonTextReader(stringReader) {DateParseHandling = DateParseHandling.None};
             var jsonResponse = JObject.Load(reader);
 
             Assert.Equal(JTokenType.String, jsonResponse["customer"]["customerId"].Type);
