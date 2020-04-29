@@ -1,43 +1,45 @@
 pool:
-  vmImage: 'Ubuntu 16.04'
+  vmImage: "ubuntu-latest"
 
 variables:
+  solution: "./Clean-Architecture-Manga.sln"
+  buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  system.debug: false
+  DOTNET_CLI_TELEMETRY_OPTOUT: "true"
 
-steps:
-- task: UseDotNet@2
-  displayName: 'Use .NET Core sdk'
-  inputs:
-      packageType: sdk
-      version: 3.1.201
-      installationPath: $(Agent.ToolsDirectory)/dotnet
-
-- script: dotnet tool install coverlet.console --tool-path . --version 1.7.0
-  displayName: 'Install Coverlet'
-
-- script: dotnet tool install dotnet-reportgenerator-globaltool --tool-path . --version 4.4.0
-  displayName: 'Install ReportGenerator'
-
-- script: dotnet restore
-  displayName: 'dotnet restore'
-
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
-
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet test'
-  inputs:
-    command: 'test'
-    projects: '**/*Tests/*.csproj'
-    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
-
-- script: tools/reportgenerator "-reports:$(Build.SourcesDirectory)/TestResults/Coverage/coverage.cobertura.xml" "-targetdir:$(Build.SourcesDirectory)/TestResults/Coverage/Reports" -tag:$(Build.BuildNumber) -reportTypes:Html;HtmlSummary;HtmlInline;HtmlInline_AzurePipelines;HtmlInline_AzurePipelines_Dark;Cobertura;Badges
-  displayName: 'Generate Report'
-
-- task: PublishCodeCoverageResults@1
-  displayName: 'Publish Report'
-  inputs:
-    codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Build.SourcesDirectory)/TestResults/Coverage/**/coverage.cobertura.xml'
-    reportDirectory: '$(Build.SourcesDirectory)/TestResults/Coverage/Reports'
+stages:
+- stage: Build
+  jobs:
+  - job: BuildJob
+    steps:
+    - task: UseDotNet@2
+      displayName: "Install .NET Core"
+      inputs:
+        packageType: 'sdk'
+        version: '3.1.201'
+    - task: DotNetCoreCLI@2
+      displayName: "Compile VS solution"
+      inputs:
+        command: 'build'
+        projects: '$(solution)'
+        arguments: '--configuration "$(buildConfiguration)"
+    - task: DotNetCoreCLI@2
+      displayName: "Execute unit tests and calculate code-coverage"
+      inputs:
+        command: 'test'
+        projects: '$(solution)'
+        arguments: '"-p:CollectCoverage=true" "-p:CoverletOutputFormat=cobertura"'
+        nobuild: true
+    - task: CmdLine@2
+      displayName: Merge code-coverage files
+      inputs:
+        script: |
+          dotnet tool install -g dotnet-reportgenerator-globaltool
+          reportgenerator "-reports:./src/**/coverage.cobertura.xml" "-reporttypes:Cobertura" "-targetdir:./coverreport"
+        # reportgenerator "-reports:./coverreport/Cobertura.xml" "-reporttypes:Html" "-targetdir:./coverreport"
+    - task: PublishCodeCoverageResults@1
+      displayName: "Generate code-coverage HTML report"
+      inputs:
+        codeCoverageTool: 'Cobertura'
+        summaryFileLocation: './coverreport/Cobertura.xml'
+        failIfCoverageEmpty: true
