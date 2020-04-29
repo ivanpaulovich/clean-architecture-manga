@@ -10,14 +10,16 @@ variables:
 - task: UseDotNet@2
     displayName: "Install .NET Core"
     inputs:
-    packageType: 'sdk'
-    version: '3.1.201'
+        packageType: 'sdk'
+        version: '3.1.201'
+
 - task: DotNetCoreCLI@2
     displayName: "Compile VS solution"
     inputs:
-    command: 'build'
-    projects: '$(solution)'
-    arguments: '--configuration "$(buildConfiguration)"
+        command: 'build'
+        projects: '$(solution)'
+        arguments: '--configuration "$(buildConfiguration)"
+
 - task: DotNetCoreCLI@2
     displayName: "Execute unit tests and calculate code-coverage"
     inputs:
@@ -25,6 +27,7 @@ variables:
         projects: '$(solution)'
         arguments: '"-p:CollectCoverage=true" "-p:CoverletOutputFormat=cobertura"'
         nobuild: true
+
 - task: CmdLine@2
     displayName: Merge code-coverage files
     inputs:
