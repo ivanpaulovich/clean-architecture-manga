@@ -1,4 +1,4 @@
-// <copyright file="Transfer.cs" company="Ivan Paulovich">
+// <copyright file="TransferUseCase.cs" company="Ivan Paulovich">
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 

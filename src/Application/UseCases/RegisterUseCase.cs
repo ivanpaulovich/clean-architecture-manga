@@ -1,4 +1,4 @@
-// <copyright file="Register.cs" company="Ivan Paulovich">
+// <copyright file="RegisterUseCase.cs" company="Ivan Paulovich">
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 

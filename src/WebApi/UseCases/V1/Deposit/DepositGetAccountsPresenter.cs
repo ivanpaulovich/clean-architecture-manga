@@ -6,7 +6,7 @@ namespace WebApi.UseCases.V1.Deposit
 
     /// <summary>
     /// </summary>
-    public sealed class DepositGetAccountsPresenter : IDepositGetAccountsOutputPort
+    public sealed class DepositGetAccountsPresenter : IDepositOutputPort
     {
         /// <summary>
         /// </summary>

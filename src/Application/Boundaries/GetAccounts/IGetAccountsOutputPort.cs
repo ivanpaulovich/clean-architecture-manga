@@ -1,4 +1,4 @@
-// <copyright file="IRegisterOutputPort.cs" company="Ivan Paulovich">
+// <copyright file="IGetAccountsOutputPort.cs" company="Ivan Paulovich">
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
@@ -8,7 +8,7 @@ namespace Application.Boundaries.GetAccounts
     ///     Output Port.
     /// </summary>
     public interface IGetAccountsOutputPort
-        : IOutputPortStandard<GetAccountsOutput>, IGetAccountsOutputPortError
+        : IOutputPortStandard<GetAccountsOutput>, IOutputPortError
     {
     }
 }

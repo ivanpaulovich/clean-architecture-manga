@@ -1,4 +1,4 @@
-// <copyright file="GetAccountDetailsInput.cs" company="Ivan Paulovich">
+// <copyright file="GetAccountInput.cs" company="Ivan Paulovich">
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 

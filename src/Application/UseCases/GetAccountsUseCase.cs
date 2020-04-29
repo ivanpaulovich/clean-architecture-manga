@@ -1,4 +1,4 @@
-// <copyright file="GetCustomerDetails.cs" company="Ivan Paulovich">
+// <copyright file="GetAccountsUseCase.cs" company="Ivan Paulovich">
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 

@@ -23,10 +23,10 @@ namespace WebApi.Modules
         public static IServiceCollection AddPresentersV1(this IServiceCollection services)
         {
             services.AddScoped<CloseAccountGetAccountsPresenter, CloseAccountGetAccountsPresenter>();
-            services.AddScoped<ICloseAccountGetAccountsOutputPort>(x => x.GetRequiredService<CloseAccountGetAccountsPresenter>());
+            services.AddScoped<ICloseAccountOutputPort>(x => x.GetRequiredService<CloseAccountGetAccountsPresenter>());
 
             services.AddScoped<DepositGetAccountsPresenter, DepositGetAccountsPresenter>();
-            services.AddScoped<IDepositGetAccountsOutputPort>(
+            services.AddScoped<IDepositOutputPort>(
                 x => x.GetRequiredService<DepositGetAccountsPresenter>());
 
             services.AddScoped<GetAccountPresenter, GetAccountPresenter>();

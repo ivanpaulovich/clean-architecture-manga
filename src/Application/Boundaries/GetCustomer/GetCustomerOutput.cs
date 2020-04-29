@@ -1,4 +1,4 @@
-// <copyright file="GetCustomerDetailsOutput.cs" company="Ivan Paulovich">
+// <copyright file="GetCustomerOutput.cs" company="Ivan Paulovich">
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 

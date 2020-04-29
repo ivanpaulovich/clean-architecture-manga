@@ -1,4 +1,4 @@
-// <copyright file="Deposit.cs" company="Ivan Paulovich">
+// <copyright file="DepositUseCase.cs" company="Ivan Paulovich">
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
@@ -22,7 +22,7 @@ namespace Application.UseCases
     {
         private readonly IAccountRepository _accountRepository;
         private readonly AccountService _accountService;
-        private readonly IDepositGetAccountsOutputPort _depositGetAccountsOutputPort;
+        private readonly IDepositOutputPort _depositGetAccountsOutputPort;
         private readonly IUnitOfWork _unitOfWork;
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Application.UseCases
         /// <param name="unitOfWork">Unit Of Work.</param>
         public DepositUseCase(
             AccountService accountService,
-            IDepositGetAccountsOutputPort depositGetAccountsOutputPort,
+            IDepositOutputPort depositGetAccountsOutputPort,
             IAccountRepository accountRepository,
             IUnitOfWork unitOfWork)
         {

@@ -6,7 +6,7 @@ namespace UnitTests.Presenters
     /// <summary>
     ///     Close Account Presenter.
     /// </summary>
-    public sealed class CloseAccountGetAccountsPresenter : ICloseAccountGetAccountsOutputPort
+    public sealed class CloseAccountGetAccountsPresenter : ICloseAccountOutputPort
     {
         /// <summary>
         ///     Gets the ClosedAccounts.

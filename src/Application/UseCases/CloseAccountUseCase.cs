@@ -1,4 +1,4 @@
-// <copyright file="CloseAccount.cs" company="Ivan Paulovich">
+// <copyright file="CloseAccountUseCase.cs" company="Ivan Paulovich">
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
@@ -19,7 +19,7 @@ namespace Application.UseCases
     public sealed class CloseAccountUseCase : ICloseAccountUseCase
     {
         private readonly IAccountRepository _accountRepository;
-        private readonly ICloseAccountGetAccountsOutputPort _closeAccountGetAccountsOutputPort;
+        private readonly ICloseAccountOutputPort _closeAccountGetAccountsOutputPort;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CloseAccountUseCase" /> class.
@@ -27,7 +27,7 @@ namespace Application.UseCases
         /// <param name="closeAccountGetAccountsOutputPort">Output Port.</param>
         /// <param name="accountRepository">Account Repository.</param>
         public CloseAccountUseCase(
-            ICloseAccountGetAccountsOutputPort closeAccountGetAccountsOutputPort,
+            ICloseAccountOutputPort closeAccountGetAccountsOutputPort,
             IAccountRepository accountRepository)
         {
             this._closeAccountGetAccountsOutputPort = closeAccountGetAccountsOutputPort;

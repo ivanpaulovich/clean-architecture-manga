@@ -1,3 +1,7 @@
+// <copyright file="UserRepositoryFake.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Infrastructure.DataAccess.Repositories
 {
     using System.Linq;

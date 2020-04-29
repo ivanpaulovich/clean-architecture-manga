@@ -3,6 +3,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  system.debug: true
 
 steps:
 - task: UseDotNet@2
@@ -12,6 +13,12 @@ steps:
       version: 3.1.201
       installationPath: $(Agent.ToolsDirectory)/dotnet
 
+- script: dotnet tool install coverlet.console --tool-path . --version 1.7.0
+  displayName: 'Install Coverlet'
+
+- script: dotnet tool install dotnet-reportgenerator-globaltool --tool-path . --version 4.4.0
+  displayName: 'Install ReportGenerator'
+
 - script: dotnet restore
   displayName: 'dotnet restore'
 
@@ -19,8 +26,18 @@ steps:
   displayName: 'dotnet build $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
-  displayName: 'dotnet test $(buildConfiguration)'
+  displayName: 'dotnet test'
   inputs:
-    command: test
+    command: 'test'
     projects: '**/*Tests/*.csproj'
-    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)\TestResults\Coverage\'
+
+- script: reportgenerator "-reports:$(Build.SourcesDirectory)\TestResults\Coverage\coverage.cobertura.xml" "-targetdir:$(Build.SourcesDirectory)\TestResults\Coverage\Reports" -tag:$(Build.BuildNumber) -reportTypes:Html;HtmlSummary;HtmlInline;HtmlInline_AzurePipelines;HtmlInline_AzurePipelines_Dark;Cobertura;Badges
+  displayName: 'Generate Report'
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish Report'
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Build.SourcesDirectory)\TestResults\Coverage\**\coverage.cobertura.xml'
+    reportDirectory: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports'

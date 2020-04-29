@@ -10,7 +10,7 @@ namespace UnitTests.Presenters
     /// <summary>
     ///     Deposit Presenter.
     /// </summary>
-    public sealed class DepositGetAccountsPresenter : IDepositGetAccountsOutputPort
+    public sealed class DepositGetAccountsPresenter : IDepositOutputPort
     {
         /// <summary>
         /// </summary>

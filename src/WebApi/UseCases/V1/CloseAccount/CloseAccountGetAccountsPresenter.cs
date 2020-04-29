@@ -5,7 +5,7 @@ namespace WebApi.UseCases.V1.CloseAccount
 
     /// <summary>
     /// </summary>
-    public sealed class CloseAccountGetAccountsPresenter : ICloseAccountGetAccountsOutputPort
+    public sealed class CloseAccountGetAccountsPresenter : ICloseAccountOutputPort
     {
         /// <summary>
         /// </summary>
