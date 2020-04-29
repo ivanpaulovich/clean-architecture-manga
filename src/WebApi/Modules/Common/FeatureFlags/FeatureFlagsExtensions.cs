@@ -10,7 +10,7 @@ namespace WebApi.Modules.Common.FeatureFlags
         {
             services.AddFeatureManagement(configuration);
 
-            var featureManager = services.BuildServiceProvider()
+            IFeatureManager featureManager = services.BuildServiceProvider()
                 .GetRequiredService<IFeatureManager>();
 
             services.AddMvc()

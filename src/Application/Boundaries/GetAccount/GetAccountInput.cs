@@ -1,4 +1,4 @@
-// <copyright file="GetAccountDetailsInput.cs" company="Ivan Paulovich">
+// <copyright file="GetAccountInput.cs" company="Ivan Paulovich">
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
@@ -15,10 +15,7 @@ namespace Application.Boundaries.GetAccount
         ///     Initializes a new instance of the <see cref="GetAccountInput" /> class.
         /// </summary>
         /// <param name="accountId">Account Id.</param>
-        public GetAccountInput(AccountId accountId)
-        {
-            this.AccountId = accountId;
-        }
+        public GetAccountInput(AccountId accountId) => this.AccountId = accountId;
 
         /// <summary>
         ///     Gets the AccountId.

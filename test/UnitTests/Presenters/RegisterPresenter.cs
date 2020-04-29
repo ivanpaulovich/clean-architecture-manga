@@ -31,25 +31,16 @@ namespace UnitTests.Presenters
         /// <summary>
         /// </summary>
         /// <param name="output"></param>
-        public void Standard(RegisterOutput output)
-        {
-            this.Registers.Add(output);
-        }
+        public void Standard(RegisterOutput output) => this.Registers.Add(output);
 
         /// <summary>
         /// </summary>
         /// <param name="output"></param>
-        public void HandleAlreadyRegisteredCustomer(RegisterOutput output)
-        {
-            this.AlreadyRegistered.Add(output);
-        }
+        public void HandleAlreadyRegisteredCustomer(RegisterOutput output) => this.AlreadyRegistered.Add(output);
 
         /// <summary>
         /// </summary>
         /// <param name="message"></param>
-        public void WriteError(string message)
-        {
-            this.Errors.Add(message);
-        }
+        public void WriteError(string message) => this.Errors.Add(message);
     }
 }

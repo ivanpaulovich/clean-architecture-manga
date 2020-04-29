@@ -3,6 +3,7 @@ namespace ComponentTests.V1
     using System;
     using System.IO;
     using System.Net;
+    using System.Net.Http;
     using System.Threading.Tasks;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -11,21 +12,18 @@ namespace ComponentTests.V1
     [Collection("WebApi Collection")]
     public sealed class GetAccountsTests
     {
-        private readonly CustomWebApplicationFactoryFixture _fixture;
+        public GetAccountsTests(CustomWebApplicationFactoryFixture fixture) => this._fixture = fixture;
 
-        public GetAccountsTests(CustomWebApplicationFactoryFixture fixture)
-        {
-            this._fixture = fixture;
-        }
+        private readonly CustomWebApplicationFactoryFixture _fixture;
 
         [Fact]
         public async Task GetAccountsReturnsList()
         {
-            var client = this._fixture
+            HttpClient client = this._fixture
                 .CustomWebApplicationFactory
                 .CreateClient();
 
-            var actualResponse = await client
+            HttpResponseMessage actualResponse = await client
                 .GetAsync("/api/v1/Accounts/")
                 .ConfigureAwait(false);
 
@@ -43,7 +41,7 @@ namespace ComponentTests.V1
             Assert.Equal(JTokenType.Integer, jsonResponse["accounts"][0]["currentBalance"].Type);
 
             Assert.True(Guid.TryParse(jsonResponse["accounts"][0]["accountId"].Value<string>(), out Guid _));
-            Assert.True(Decimal.TryParse(jsonResponse["accounts"][0]["currentBalance"].Value<string>(), out decimal _));
+            Assert.True(decimal.TryParse(jsonResponse["accounts"][0]["currentBalance"].Value<string>(), out decimal _));
         }
     }
 }

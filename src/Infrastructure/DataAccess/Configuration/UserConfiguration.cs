@@ -4,6 +4,7 @@
 
 namespace Infrastructure.DataAccess.Configuration
 {
+    using System;
     using Domain.Customers.ValueObjects;
     using Domain.Security.ValueObjects;
     using Entities;
@@ -21,6 +22,11 @@ namespace Infrastructure.DataAccess.Configuration
         /// <param name="builder">Builder.</param>
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
             builder.ToTable("User");
 
             builder.Property(b => b.ExternalUserId)
@@ -31,7 +37,7 @@ namespace Infrastructure.DataAccess.Configuration
 
             builder.Property(b => b.CustomerId)
                 .HasConversion(
-                    v => v.Value.ToGuid(),
+                    v => v.HasValue ? v.Value.ToGuid() : Guid.Empty,
                     v => new CustomerId(v))
                 .IsRequired();
 

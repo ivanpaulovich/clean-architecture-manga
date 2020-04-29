@@ -4,6 +4,7 @@
 
 namespace Infrastructure.DataAccess.Configuration
 {
+    using System;
     using Domain.Customers.ValueObjects;
     using Entities;
     using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,11 @@ namespace Infrastructure.DataAccess.Configuration
         public void Configure(EntityTypeBuilder
             <Customer> builder)
         {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
             builder.ToTable("Customer");
 
             builder.Property(b => b.SSN)

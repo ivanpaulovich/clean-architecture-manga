@@ -15,10 +15,7 @@ namespace UnitTests.UseCaseTests.Deposit
     {
         private readonly StandardFixture _fixture;
 
-        public DepositTests(StandardFixture fixture)
-        {
-            this._fixture = fixture;
-        }
+        public DepositTests(StandardFixture fixture) => this._fixture = fixture;
 
         [Theory]
         [ClassData(typeof(PositiveDataSetup))]
@@ -36,8 +33,8 @@ namespace UnitTests.UseCaseTests.Deposit
                     MangaContextFake.DefaultAccountId,
                     new PositiveMoney(amount)));
 
-            var output = presenter.Deposits.Last();
-            var actualCredit = Assert.IsType<Credit>(output.Transaction);
+            DepositOutput output = presenter.Deposits.Last();
+            Credit actualCredit = Assert.IsType<Credit>(output.Transaction);
             Assert.Equal(amount, actualCredit.Amount.ToMoney().ToDecimal());
         }
 

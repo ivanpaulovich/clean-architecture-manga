@@ -1,3 +1,7 @@
+// <copyright file="GetCustomeInput.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Application.Boundaries.GetCustomer
 {
     /// <summary>

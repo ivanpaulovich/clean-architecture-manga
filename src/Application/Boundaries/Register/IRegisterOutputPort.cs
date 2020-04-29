@@ -1,4 +1,4 @@
-// <copyright file="ICloseAccountGetAccountsOutputPort.cs" company="Ivan Paulovich">
+// <copyright file="IRegisterOutputPort.cs" company="Ivan Paulovich">
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
@@ -8,7 +8,7 @@ namespace Application.Boundaries.Register
     ///     Output Port.
     /// </summary>
     public interface IRegisterOutputPort
-        : IOutputPortStandard<RegisterOutput>, IGetAccountsOutputPortError
+        : IOutputPortStandard<RegisterOutput>, IOutputPortError
     {
         /// <summary>
         ///     Informs the user is already registered.

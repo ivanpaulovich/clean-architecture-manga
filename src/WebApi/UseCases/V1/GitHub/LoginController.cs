@@ -17,11 +17,8 @@ namespace WebApi.UseCases.V1.GitHub
         /// <returns></returns>
         [HttpGet("GitHub")]
         [AllowAnonymous]
-        public IActionResult GitHub(string? returnUrl = "https://localhost:5001/")
-        {
-            return new ChallengeResult(
-                "GitHub",
-                new AuthenticationProperties {RedirectUri = returnUrl});
-        }
+        public IActionResult GitHub(string? returnUrl = "https://localhost:5001/") => new ChallengeResult(
+            "GitHub",
+            new AuthenticationProperties {RedirectUri = returnUrl});
     }
 }

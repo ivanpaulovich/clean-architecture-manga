@@ -11,38 +11,35 @@ namespace ComponentTests.V1
 
     public sealed class SunnyDayTests : IClassFixture<CustomWebApplicationFactory>
     {
-        public SunnyDayTests(CustomWebApplicationFactory factory)
-        {
-            this._factory = factory;
-        }
+        public SunnyDayTests(CustomWebApplicationFactory factory) => this._factory = factory;
 
         private readonly CustomWebApplicationFactory _factory;
 
         private async Task GetCustomer()
         {
-            var client = this._factory.CreateClient();
+            HttpClient client = this._factory.CreateClient();
             await client.GetStringAsync("/api/v1/Customers/")
                 .ConfigureAwait(false);
         }
 
         private async Task GetAccount(string accountId)
         {
-            var client = this._factory.CreateClient();
+            HttpClient client = this._factory.CreateClient();
             await client.GetStringAsync($"/api/v1/Accounts/{accountId}")
                 .ConfigureAwait(false);
         }
 
         private async Task<Tuple<string, string>> Register(decimal initialAmount)
         {
-            var client = this._factory.CreateClient();
+            HttpClient client = this._factory.CreateClient();
 
             var content = new FormUrlEncodedContent(new[]
             {
-                new KeyValuePair<string, string>("ssn", "8608179999"),
-                new KeyValuePair<string, string>("initialAmount", initialAmount.ToString(CultureInfo.InvariantCulture))
+                new KeyValuePair<string, string>("ssn", "8608179999"), new KeyValuePair<string, string>("initialAmount",
+                    initialAmount.ToString(CultureInfo.InvariantCulture))
             });
 
-            var response = await client.PostAsync("api/v1/Customers", content)
+            HttpResponseMessage response = await client.PostAsync("api/v1/Customers", content)
                 .ConfigureAwait(false);
 
             response.EnsureSuccessStatusCode();
@@ -62,14 +59,14 @@ namespace ComponentTests.V1
 
         private async Task Deposit(string account, decimal amount)
         {
-            var client = this._factory.CreateClient();
+            HttpClient client = this._factory.CreateClient();
             var content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("accountId", account),
                 new KeyValuePair<string, string>("amount", amount.ToString(CultureInfo.InvariantCulture))
             });
 
-            var response = await client.PatchAsync("api/v1/Accounts/Deposit", content)
+            HttpResponseMessage response = await client.PatchAsync("api/v1/Accounts/Deposit", content)
                 .ConfigureAwait(false);
             await response.Content
                 .ReadAsStringAsync()
@@ -80,7 +77,7 @@ namespace ComponentTests.V1
 
         private async Task Withdraw(string account, decimal amount)
         {
-            var client = this._factory.CreateClient();
+            HttpClient client = this._factory.CreateClient();
 
             var content = new FormUrlEncodedContent(new[]
             {
@@ -88,7 +85,7 @@ namespace ComponentTests.V1
                 new KeyValuePair<string, string>("amount", amount.ToString(CultureInfo.InvariantCulture))
             });
 
-            var response = await client.PatchAsync("api/v1/Accounts/Withdraw", content)
+            HttpResponseMessage response = await client.PatchAsync("api/v1/Accounts/Withdraw", content)
                 .ConfigureAwait(false);
             await response.Content
                 .ReadAsStringAsync()
@@ -99,8 +96,8 @@ namespace ComponentTests.V1
 
         private async Task Close(string account)
         {
-            var client = this._factory.CreateClient();
-            var response = await client.DeleteAsync($"api/v1/Accounts/{account}")
+            HttpClient client = this._factory.CreateClient();
+            HttpResponseMessage response = await client.DeleteAsync($"api/v1/Accounts/{account}")
                 .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }

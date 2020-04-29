@@ -20,9 +20,6 @@ namespace Domain.Security
         public abstract CustomerId? CustomerId { get; protected set; }
 
         /// <inheritdoc />
-        public void Assign(CustomerId customerId)
-        {
-            this.CustomerId = customerId;
-        }
+        public void Assign(CustomerId customerId) => this.CustomerId = customerId;
     }
 }

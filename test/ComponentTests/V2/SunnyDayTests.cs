@@ -11,31 +11,28 @@ namespace ComponentTests.V2
 
     public sealed class SunnyDayTests : IClassFixture<CustomWebApplicationFactory>
     {
-        public SunnyDayTests(CustomWebApplicationFactory factory)
-        {
-            this._factory = factory;
-        }
+        public SunnyDayTests(CustomWebApplicationFactory factory) => this._factory = factory;
 
         private readonly CustomWebApplicationFactory _factory;
 
         private async Task GetAccount(string accountId)
         {
-            var client = this._factory.CreateClient();
+            HttpClient client = this._factory.CreateClient();
             await client.GetAsync($"/api/v2/Accounts/{accountId}")
                 .ConfigureAwait(false);
         }
 
         private async Task<Tuple<string, string>> Register(decimal initialAmount)
         {
-            var client = this._factory.CreateClient();
+            HttpClient client = this._factory.CreateClient();
 
             var content = new FormUrlEncodedContent(new[]
             {
-                new KeyValuePair<string, string>("ssn", "8608179999"),
-                new KeyValuePair<string, string>("initialAmount", initialAmount.ToString(CultureInfo.InvariantCulture))
+                new KeyValuePair<string, string>("ssn", "8608179999"), new KeyValuePair<string, string>("initialAmount",
+                    initialAmount.ToString(CultureInfo.InvariantCulture))
             });
 
-            var response = await client.PostAsync("api/v1/Customers", content)
+            HttpResponseMessage response = await client.PostAsync("api/v1/Customers", content)
                 .ConfigureAwait(false);
 
             string responseString = await response.Content

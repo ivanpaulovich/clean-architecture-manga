@@ -1,4 +1,4 @@
-// <copyright file="IUseCaseV2.cs" company="Ivan Paulovich">
+// <copyright file="IGetAccountUseCaseV2.cs" company="Ivan Paulovich">
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 

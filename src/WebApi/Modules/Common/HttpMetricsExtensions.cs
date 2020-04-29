@@ -5,9 +5,8 @@ namespace WebApi.Modules.Common
 
     public static class HttpMetricsExtensions
     {
-        public static IApplicationBuilder UseMangaHttpMetrics(this IApplicationBuilder appBuilder)
-        {
-            return appBuilder.UseHttpMetrics(options =>
+        public static IApplicationBuilder UseMangaHttpMetrics(this IApplicationBuilder appBuilder) =>
+            appBuilder.UseHttpMetrics(options =>
             {
                 options.RequestDuration.Enabled = false;
                 options.InProgress.Enabled = false;
@@ -16,6 +15,5 @@ namespace WebApi.Modules.Common
                     "HTTP Requests Total",
                     new CounterConfiguration {LabelNames = new[] {"controller", "method", "code"}});
             });
-        }
     }
 }

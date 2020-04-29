@@ -14,10 +14,7 @@ namespace UnitTests.UseCaseTests.Transfer
     {
         private readonly StandardFixture _fixture;
 
-        public TransferUseCaseTests(StandardFixture fixture)
-        {
-            this._fixture = fixture;
-        }
+        public TransferUseCaseTests(StandardFixture fixture) => this._fixture = fixture;
 
         [Theory]
         [ClassData(typeof(PositiveDataSetup))]
@@ -38,7 +35,7 @@ namespace UnitTests.UseCaseTests.Transfer
                     MangaContextFake.SecondAccountId,
                     new PositiveMoney(amount)));
 
-            var actual = presenter.Transfers.Last();
+            TransferOutput actual = presenter.Transfers.Last();
             Assert.Equal(expectedOriginBalance, actual.UpdatedBalance.ToDecimal());
         }
     }

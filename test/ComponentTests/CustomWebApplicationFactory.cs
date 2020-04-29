@@ -12,24 +12,20 @@ namespace ComponentTests
     /// </summary>
     public sealed class CustomWebApplicationFactory : WebApplicationFactory<Startup>
     {
-        protected override void ConfigureWebHost(IWebHostBuilder builder)
-        {
-            builder.ConfigureAppConfiguration((context, config) =>
+        protected override void ConfigureWebHost(IWebHostBuilder builder) => builder.ConfigureAppConfiguration(
+            (context, config) =>
             {
-                config.AddInMemoryCollection(new Dictionary<string, string>
-                {
-                    ["PersistenceModule:UseFake"] = "true"
-                });
+                config.AddInMemoryCollection(
+                    new Dictionary<string, string> {["PersistenceModule:UseFake"] = "true"});
             }).ConfigureServices(services =>
-            {
-                services.AddAuthentication(x =>
-                    {
-                        x.DefaultAuthenticateScheme = "Test";
-                        x.DefaultChallengeScheme = "Test";
-                    })
-                    .AddScheme<AuthenticationSchemeOptions, TestAuthenticationHandler>(
-                        "Test", options => { });
-            });
-        }
+        {
+            services.AddAuthentication(x =>
+                {
+                    x.DefaultAuthenticateScheme = "Test";
+                    x.DefaultChallengeScheme = "Test";
+                })
+                .AddScheme<AuthenticationSchemeOptions, TestAuthenticationHandler>(
+                    "Test", options => { });
+        });
     }
 }

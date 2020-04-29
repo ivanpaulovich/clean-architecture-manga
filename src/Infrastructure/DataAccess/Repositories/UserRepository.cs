@@ -1,3 +1,7 @@
+// <copyright file="UserRepository.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Infrastructure.DataAccess.Repositories
 {
     using System;
@@ -12,11 +16,8 @@ namespace Infrastructure.DataAccess.Repositories
     {
         private readonly MangaContext _context;
 
-        public UserRepository(MangaContext context)
-        {
-            this._context = context ??
-                            throw new ArgumentNullException(nameof(context));
-        }
+        public UserRepository(MangaContext context) => this._context = context ??
+                                                                       throw new ArgumentNullException(nameof(context));
 
         public async Task Add(IUser user)
         {
@@ -31,7 +32,7 @@ namespace Infrastructure.DataAccess.Repositories
 
         public async Task<IUser> GetUser(ExternalUserId externalUserId)
         {
-            var user = await this._context
+            User user = await this._context
                 .Users
                 .Where(a => a.ExternalUserId.Equals(externalUserId))
                 .SingleOrDefaultAsync()

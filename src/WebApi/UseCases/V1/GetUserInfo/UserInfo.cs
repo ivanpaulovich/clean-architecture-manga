@@ -13,9 +13,11 @@ namespace WebApi.UseCases.V1.GetUserInfo
         {
             get
             {
-                var name = this._user.FindFirst("name");
+                Claim name = this._user.FindFirst("name");
                 if (name != null)
+                {
                     return name.Value;
+                }
 
                 name = this._user.FindFirst(ClaimTypes.Name);
                 return name.Value;

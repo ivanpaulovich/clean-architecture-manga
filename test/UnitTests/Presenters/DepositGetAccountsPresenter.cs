@@ -10,7 +10,7 @@ namespace UnitTests.Presenters
     /// <summary>
     ///     Deposit Presenter.
     /// </summary>
-    public sealed class DepositGetAccountsPresenter : IDepositGetAccountsOutputPort
+    public sealed class DepositGetAccountsPresenter : IDepositOutputPort
     {
         /// <summary>
         /// </summary>
@@ -27,19 +27,10 @@ namespace UnitTests.Presenters
 
         public Collection<string> Errors { get; }
 
-        public void Standard(DepositOutput output)
-        {
-            this.Deposits.Add(output);
-        }
+        public void Standard(DepositOutput output) => this.Deposits.Add(output);
 
-        public void NotFound(string message)
-        {
-            this.NotFounds.Add(message);
-        }
+        public void NotFound(string message) => this.NotFounds.Add(message);
 
-        public void WriteError(string message)
-        {
-            this.Errors.Add(message);
-        }
+        public void WriteError(string message) => this.Errors.Add(message);
     }
 }

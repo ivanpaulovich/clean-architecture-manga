@@ -41,10 +41,8 @@ namespace WebApi.ViewModels
         [Required]
         public decimal CurrentBalance { get; }
 
-        [Required]
-        public List<CreditModel> Credits { get; } = new List<CreditModel>();
+        [Required] public List<CreditModel> Credits { get; } = new List<CreditModel>();
 
-        [Required]
-        public List<DebitModel> Debits { get; } = new List<DebitModel>();
+        [Required] public List<DebitModel> Debits { get; } = new List<DebitModel>();
     }
 }

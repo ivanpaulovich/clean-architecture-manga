@@ -1,4 +1,4 @@
-// <copyright file="GetAccountDetails.cs" company="Ivan Paulovich">
+// <copyright file="GetAccountUseCase.cs" company="Ivan Paulovich">
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
@@ -48,8 +48,8 @@ namespace Application.UseCases
             }
 
             IAccount account = await this._accountRepository
-                    .GetAccount(input.AccountId)
-                    .ConfigureAwait(false);
+                .GetAccount(input.AccountId)
+                .ConfigureAwait(false);
 
             if (account is null)
             {

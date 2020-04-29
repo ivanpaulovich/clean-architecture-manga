@@ -1,3 +1,7 @@
+// <copyright file="AccountRepositoryFake.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Infrastructure.DataAccess.Repositories
 {
     using System.Collections.Generic;
@@ -11,15 +15,17 @@ namespace Infrastructure.DataAccess.Repositories
     using Account = Entities.Account;
     using Credit = Entities.Credit;
 
+    /// <inheritdoc />
     public sealed class AccountRepositoryFake : IAccountRepository
     {
         private readonly MangaContextFake _context;
 
-        public AccountRepositoryFake(MangaContextFake context)
-        {
-            this._context = context;
-        }
+        /// <summary>
+        /// </summary>
+        /// <param name="context"></param>
+        public AccountRepositoryFake(MangaContextFake context) => this._context = context;
 
+        /// <inheritdoc />
         public async Task<IList<IAccount>> GetBy(CustomerId customerId)
         {
             var accounts = this._context
@@ -32,6 +38,7 @@ namespace Infrastructure.DataAccess.Repositories
                 .ConfigureAwait(false);
         }
 
+        /// <inheritdoc />
         public async Task Add(IAccount account, ICredit credit)
         {
             this._context
@@ -46,9 +53,10 @@ namespace Infrastructure.DataAccess.Repositories
                 .ConfigureAwait(false);
         }
 
+        /// <inheritdoc />
         public async Task Delete(IAccount account)
         {
-            var accountOld = this._context
+            Account accountOld = this._context
                 .Accounts
                 .SingleOrDefault(e => e.Id.Equals(account.Id));
 
@@ -60,21 +68,23 @@ namespace Infrastructure.DataAccess.Repositories
                 .ConfigureAwait(false);
         }
 
+        /// <inheritdoc />
         public async Task<IAccount> GetAccount(AccountId accountId)
         {
-            var account = this._context
+            Account account = this._context
                 .Accounts
                 .SingleOrDefault(e => e.Id.Equals(accountId));
 
             if (account is null)
             {
-                return null;
+                return null!;
             }
 
             return await Task.FromResult<Domain.Accounts.Account>(account)
                 .ConfigureAwait(false);
         }
 
+        /// <inheritdoc />
         public async Task Update(IAccount account, ICredit credit)
         {
             Domain.Accounts.Account accountOld = this._context
@@ -86,6 +96,7 @@ namespace Infrastructure.DataAccess.Repositories
                 .ConfigureAwait(false);
         }
 
+        /// <inheritdoc />
         public async Task Update(IAccount account, IDebit debit)
         {
             Domain.Accounts.Account accountOld = this._context

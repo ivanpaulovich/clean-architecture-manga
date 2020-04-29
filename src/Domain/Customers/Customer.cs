@@ -27,9 +27,6 @@ namespace Domain.Customers
         public abstract AccountCollection Accounts { get; }
 
         /// <inheritdoc />
-        public void Assign(AccountId accountId)
-        {
-            this.Accounts.Add(accountId);
-        }
+        public void Assign(AccountId accountId) => this.Accounts.Add(accountId);
     }
 }

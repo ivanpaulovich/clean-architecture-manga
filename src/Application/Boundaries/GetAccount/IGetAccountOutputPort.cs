@@ -1,4 +1,4 @@
-// <copyright file="ICloseAccountGetAccountsOutputPort.cs" company="Ivan Paulovich">
+// <copyright file="IGetAccountOutputPort.cs" company="Ivan Paulovich">
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
@@ -8,7 +8,7 @@ namespace Application.Boundaries.GetAccount
     ///     Output Port.
     /// </summary>
     public interface IGetAccountOutputPort
-        : IOutputPortStandard<GetAccountOutput>, IOutputPortNotFound, IGetAccountsOutputPortError
+        : IOutputPortStandard<GetAccountOutput>, IOutputPortNotFound, IOutputPortError
     {
     }
 }

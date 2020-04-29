@@ -1,3 +1,7 @@
+// <copyright file="UnitOfWork.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Infrastructure.DataAccess
 {
     using System;
@@ -10,10 +14,7 @@ namespace Infrastructure.DataAccess
         private readonly MangaContext _context;
         private bool _disposed;
 
-        public UnitOfWork(MangaContext context)
-        {
-            this._context = context;
-        }
+        public UnitOfWork(MangaContext context) => this._context = context;
 
         /// <inheritdoc />
         public void Dispose()

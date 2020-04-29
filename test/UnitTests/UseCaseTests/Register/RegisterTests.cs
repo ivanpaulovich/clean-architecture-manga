@@ -10,10 +10,7 @@ namespace UnitTests.UseCaseTests.Register
 
     public sealed class RegisterTests : IClassFixture<StandardFixture>
     {
-        public RegisterTests(StandardFixture fixture)
-        {
-            this._fixture = fixture;
-        }
+        public RegisterTests(StandardFixture fixture) => this._fixture = fixture;
 
         private readonly StandardFixture _fixture;
 

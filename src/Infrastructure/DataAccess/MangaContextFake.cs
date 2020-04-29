@@ -1,4 +1,4 @@
-// <copyright file="MangaContext.cs" company="Ivan Paulovich">
+// <copyright file="MangaContextFake.cs" company="Ivan Paulovich">
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
@@ -16,25 +16,23 @@ namespace Infrastructure.DataAccess
     using Debit = Entities.Debit;
 
     /// <summary>
-    ///
     /// </summary>
     public sealed class MangaContextFake
     {
         /// <summary>
-        ///
         /// </summary>
         public MangaContextFake()
         {
             var customer = new Customer(
                 DefaultCustomerId,
-                new Name("Ivan Paulovich"),
-                new SSN("8608179999"));
+                new Name(Messages.UserName),
+                new SSN(Messages.UserSSN));
 
             customer.Accounts
                 .AddRange(new[] {DefaultAccountId});
 
             var user1 = new User(
-                new ExternalUserId("github/ivanpaulovich"),
+                new ExternalUserId(Messages.ExternalUserID),
                 customer.Name,
                 customer.Id);
 
@@ -65,13 +63,13 @@ namespace Infrastructure.DataAccess
 
             var secondCustomer = new Customer(
                 SecondCustomerId,
-                new Name("Andre Paulovich"),
-                new SSN("8408319999"));
+                new Name(Messages.UserName1),
+                new SSN(Messages.UserSSN1));
 
             secondCustomer.Accounts.Add(SecondAccountId);
 
             var secondUser = new User(
-                new ExternalUserId("github/andrepaulovich"),
+                new ExternalUserId(Messages.ExternalUserID1),
                 secondCustomer.Name,
                 secondCustomer.Id);
 
@@ -84,22 +82,46 @@ namespace Infrastructure.DataAccess
             this.Users.Add(secondUser);
         }
 
+        /// <summary>
+        ///     Gets or sets Users.
+        /// </summary>
         public Collection<User> Users { get; } = new Collection<User>();
 
+        /// <summary>
+        ///     Gets or sets Customers.
+        /// </summary>
         public Collection<Customer> Customers { get; } = new Collection<Customer>();
 
+        /// <summary>
+        ///     Gets or sets Accounts.
+        /// </summary>
         public Collection<Account> Accounts { get; } = new Collection<Account>();
 
+        /// <summary>
+        ///     Gets or sets Credits.
+        /// </summary>
         public Collection<Credit> Credits { get; } = new Collection<Credit>();
 
+        /// <summary>
+        ///     Gets or sets Debits.
+        /// </summary>
         private Collection<Debit> Debits { get; } = new Collection<Debit>();
 
+        /// <summary>
+        ///     Gets or sets DefaultCustomerId.
+        /// </summary>
         public static CustomerId DefaultCustomerId { get; } = new CustomerId(Guid.NewGuid());
 
+        /// <summary>
+        ///     Gets or sets DefaultAccountId.
+        /// </summary>
         public static AccountId DefaultAccountId { get; } = new AccountId(Guid.NewGuid());
 
         private static CustomerId SecondCustomerId { get; } = new CustomerId(Guid.NewGuid());
 
+        /// <summary>
+        ///     Gets or sets SecondAccountId.
+        /// </summary>
         public static AccountId SecondAccountId { get; } = new AccountId(Guid.NewGuid());
     }
 }

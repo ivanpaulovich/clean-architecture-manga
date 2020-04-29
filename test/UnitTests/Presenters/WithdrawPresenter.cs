@@ -21,24 +21,12 @@ namespace UnitTests.Presenters
 
         public Collection<string> Errors { get; }
 
-        public void Standard(WithdrawOutput output)
-        {
-            this.Withdrawals.Add(output);
-        }
+        public void Standard(WithdrawOutput output) => this.Withdrawals.Add(output);
 
-        public void NotFound(string message)
-        {
-            this.NotFounds.Add(message);
-        }
+        public void NotFound(string message) => this.NotFounds.Add(message);
 
-        public void OutOfBalance(string message)
-        {
-            this.OutOfBalances.Add(message);
-        }
+        public void OutOfBalance(string message) => this.OutOfBalances.Add(message);
 
-        public void WriteError(string message)
-        {
-            this.Errors.Add(message);
-        }
+        public void WriteError(string message) => this.Errors.Add(message);
     }
 }

@@ -17,7 +17,7 @@ namespace Domain.Accounts.Credits
     /// </summary>
     public readonly struct CreditId : IEquatable<CreditId>
     {
-        private readonly Guid creditId;
+        private readonly Guid _creditId;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CreditId" /> struct.
@@ -30,23 +30,20 @@ namespace Domain.Accounts.Credits
                 throw new EmptyCreditIdException(Messages.CreditIdCannotBeEmpty);
             }
 
-            this.creditId = creditId;
+            this._creditId = creditId;
         }
 
         /// <summary>
         ///     Converts into string.
         /// </summary>
         /// <returns>String representation.</returns>
-        public override string ToString()
-        {
-            return this.creditId.ToString();
-        }
+        public override string ToString() => this._creditId.ToString();
 
         /// <summary>
         ///     Converts into Guid.
         /// </summary>
         /// <returns>Guid representation.</returns>
-        public Guid ToGuid() => this.creditId;
+        public Guid ToGuid() => this._creditId;
 
         /// <summary>
         ///     Equals.
@@ -67,10 +64,7 @@ namespace Domain.Accounts.Credits
         ///     Returns the Hash code.
         /// </summary>
         /// <returns>Hash code.</returns>
-        public override int GetHashCode()
-        {
-            return this.creditId.GetHashCode();
-        }
+        public override int GetHashCode() => this._creditId.GetHashCode();
 
         /// <summary>
         ///     Equals operator.
@@ -78,10 +72,7 @@ namespace Domain.Accounts.Credits
         /// <param name="left">Left object.</param>
         /// <param name="right">Right object.</param>
         /// <returns>True if equals.</returns>
-        public static bool operator ==(CreditId left, CreditId right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(CreditId left, CreditId right) => left.Equals(right);
 
         /// <summary>
         ///     Is different.
@@ -89,19 +80,13 @@ namespace Domain.Accounts.Credits
         /// <param name="left">Left object.</param>
         /// <param name="right">Right object.</param>
         /// <returns>True if different.</returns>
-        public static bool operator !=(CreditId left, CreditId right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(CreditId left, CreditId right) => !(left == right);
 
         /// <summary>
         ///     True if equals.
         /// </summary>
         /// <param name="other">Other object.</param>
         /// <returns>True if equals.</returns>
-        public bool Equals(CreditId other)
-        {
-            return this.creditId == other.creditId;
-        }
+        public bool Equals(CreditId other) => this._creditId == other._creditId;
     }
 }

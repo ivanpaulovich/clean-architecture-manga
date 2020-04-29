@@ -16,10 +16,8 @@ namespace Application.Boundaries.CloseAccount
         ///     Initializes a new instance of the <see cref="CloseAccountOutput" /> class.
         /// </summary>
         /// <param name="account">IAccount object.</param>
-        public CloseAccountOutput(IAccount account)
-        {
+        public CloseAccountOutput(IAccount account) =>
             this.Account = account ?? throw new ArgumentNullException(nameof(account));
-        }
 
         /// <summary>
         ///     Gets Account.

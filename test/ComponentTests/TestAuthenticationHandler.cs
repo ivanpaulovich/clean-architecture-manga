@@ -28,7 +28,7 @@ namespace ComponentTests
         /// <returns></returns>
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            var claims = new[]
+            Claim[] claims =
             {
                 new Claim(ClaimTypes.NameIdentifier, "test"), new Claim(ClaimTypes.Name, "test"),
                 new Claim("id", "92b93e37-0995-4849-a7ed-149e8706d8ef"),

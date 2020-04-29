@@ -9,10 +9,7 @@ namespace WebApi.UseCases.V1.CloseAccount
     /// </summary>
     public sealed class CloseAccountResponse
     {
-        public CloseAccountResponse(CloseAccountOutput output)
-        {
-            this.AccountId = output.Account.Id.ToGuid();
-        }
+        public CloseAccountResponse(CloseAccountOutput output) => this.AccountId = output.Account.Id.ToGuid();
 
         /// <summary>
         ///     Gets account ID.

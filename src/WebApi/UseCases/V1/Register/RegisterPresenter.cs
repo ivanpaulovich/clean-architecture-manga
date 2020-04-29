@@ -57,9 +57,6 @@ namespace WebApi.UseCases.V1.Register
         /// <summary>
         /// </summary>
         /// <param name="message"></param>
-        public void WriteError(string message)
-        {
-            this.ViewModel = new BadRequestObjectResult(message);
-        }
+        public void WriteError(string message) => this.ViewModel = new BadRequestObjectResult(message);
     }
 }

@@ -44,12 +44,7 @@ namespace WebApi.Modules.Common.Swagger
                                     TokenUrl = new Uri("https://www.googleapis.com/oauth2/v4/token"),
                                     AuthorizationUrl =
                                         new Uri("https://accounts.google.com/o/oauth2/v2/auth"),
-                                    Scopes =
-                                    {
-                                        {"openid", "OpenID"},
-                                        {"profile", "Profile"},
-                                        {"email", "E-mail"}
-                                    }
+                                    Scopes = {{"openid", "OpenID"}, {"profile", "Profile"}, {"email", "E-mail"}}
                                 }
                             }
                         });
@@ -67,7 +62,7 @@ namespace WebApi.Modules.Common.Swagger
             app.UseSwaggerUI(
                 options =>
                 {
-                    foreach (var description in provider.ApiVersionDescriptions)
+                    foreach (ApiVersionDescription description in provider.ApiVersionDescriptions)
                     {
                         options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
                             description.GroupName.ToUpperInvariant());

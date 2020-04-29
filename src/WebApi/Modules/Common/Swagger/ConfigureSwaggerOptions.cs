@@ -32,7 +32,7 @@ namespace WebApi.Modules.Common.Swagger
         {
             // add a swagger document for each discovered API version
             // note: you might choose to skip or document deprecated API versions differently
-            foreach (var description in this._provider.ApiVersionDescriptions)
+            foreach (ApiVersionDescription description in this._provider.ApiVersionDescriptions)
             {
                 options.SwaggerDoc(description.GroupName, CreateInfoForApiVersion(description));
             }

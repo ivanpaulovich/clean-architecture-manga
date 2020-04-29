@@ -11,10 +11,7 @@ namespace WebApi.UseCases.V2.GetAccount
     {
         public IActionResult ViewModel { get; private set; } = new NoContentResult();
 
-        public void NotFound(string message)
-        {
-            this.ViewModel = new NotFoundObjectResult(message);
-        }
+        public void NotFound(string message) => this.ViewModel = new NotFoundObjectResult(message);
 
         public void Standard(GetAccountOutput getAccountOutput)
         {
@@ -41,9 +38,6 @@ namespace WebApi.UseCases.V2.GetAccount
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
-        public void WriteError(string message)
-        {
-            this.ViewModel = new BadRequestObjectResult(message);
-        }
+        public void WriteError(string message) => this.ViewModel = new BadRequestObjectResult(message);
     }
 }

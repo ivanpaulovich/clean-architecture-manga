@@ -1,4 +1,4 @@
-// <copyright file="Withdraw.cs" company="Ivan Paulovich">
+// <copyright file="WithdrawUseCase.cs" company="Ivan Paulovich">
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
@@ -23,8 +23,8 @@ namespace Application.UseCases
     {
         private readonly IAccountRepository _accountRepository;
         private readonly AccountService _accountService;
-        private readonly IWithdrawOutputPort _withdrawOutputPort;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IWithdrawOutputPort _withdrawOutputPort;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="WithdrawUseCase" /> class.
@@ -59,7 +59,7 @@ namespace Application.UseCases
                 return;
             }
 
-            var account = await this._accountRepository
+            IAccount account = await this._accountRepository
                 .GetAccount(input.AccountId)
                 .ConfigureAwait(false);
 
@@ -72,7 +72,7 @@ namespace Application.UseCases
 
             try
             {
-                var debit = await this._accountService
+                IDebit debit = await this._accountService
                     .Withdraw(account, input.Amount)
                     .ConfigureAwait(false);
 

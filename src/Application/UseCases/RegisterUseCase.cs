@@ -1,4 +1,4 @@
-// <copyright file="Register.cs" company="Ivan Paulovich">
+// <copyright file="RegisterUseCase.cs" company="Ivan Paulovich">
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
@@ -76,7 +76,7 @@ namespace Application.UseCases
                 return;
             }
 
-            var user = this._userService.GetUser();
+            IUser user = this._userService.GetUser();
 
             if (await this.VerifyCustomerAlreadyRegistered(user)
                 .ConfigureAwait(false))
@@ -84,11 +84,11 @@ namespace Application.UseCases
                 return;
             }
 
-            var customer = await this._customerService
+            ICustomer customer = await this._customerService
                 .CreateCustomer(input.SSN, user.Name.Value)
                 .ConfigureAwait(false);
 
-            var account = await this._accountService
+            IAccount account = await this._accountService
                 .OpenCheckingAccount(customer.Id, input.InitialAmount)
                 .ConfigureAwait(false);
 
@@ -117,9 +117,9 @@ namespace Application.UseCases
                 return false;
             }
 
-            var existingCustomer = await this._customerRepository.GetBy(customerId)
+            ICustomer existingCustomer = await this._customerRepository.GetBy(customerId)
                 .ConfigureAwait(false);
-            var existingAccounts = await this._accountRepository.GetBy(customerId)
+            IList<IAccount> existingAccounts = await this._accountRepository.GetBy(customerId)
                 .ConfigureAwait(false);
 
             var output = new RegisterOutput(

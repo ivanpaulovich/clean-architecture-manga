@@ -1,3 +1,7 @@
+// <copyright file="CustomerRepository.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Infrastructure.DataAccess.Repositories
 {
     using System;
@@ -12,11 +16,9 @@ namespace Infrastructure.DataAccess.Repositories
     {
         private readonly MangaContext _context;
 
-        public CustomerRepository(MangaContext context)
-        {
-            this._context = context ??
-                            throw new ArgumentNullException(nameof(context));
-        }
+        public CustomerRepository(MangaContext context) => this._context = context ??
+                                                                           throw new ArgumentNullException(
+                                                                               nameof(context));
 
         public async Task Add(ICustomer customer)
         {
@@ -32,7 +34,7 @@ namespace Infrastructure.DataAccess.Repositories
 
         public async Task<ICustomer> GetBy(CustomerId customerId)
         {
-            var customer = await this._context
+            Customer customer = await this._context
                 .Customers
                 .Where(c => c.Id.Equals(customerId))
                 .SingleOrDefaultAsync()

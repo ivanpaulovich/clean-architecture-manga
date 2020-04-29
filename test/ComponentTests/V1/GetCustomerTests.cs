@@ -3,6 +3,7 @@ namespace ComponentTests.V1
     using System;
     using System.IO;
     using System.Net;
+    using System.Net.Http;
     using System.Threading.Tasks;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -11,21 +12,18 @@ namespace ComponentTests.V1
     [Collection("WebApi Collection")]
     public sealed class GetCustomerTests
     {
-        private readonly CustomWebApplicationFactoryFixture _fixture;
+        public GetCustomerTests(CustomWebApplicationFactoryFixture fixture) => this._fixture = fixture;
 
-        public GetCustomerTests(CustomWebApplicationFactoryFixture fixture)
-        {
-            this._fixture = fixture;
-        }
+        private readonly CustomWebApplicationFactoryFixture _fixture;
 
         [Fact]
         public async Task GetCustomerReturnsCustomer()
         {
-            var client = this._fixture
+            HttpClient client = this._fixture
                 .CustomWebApplicationFactory
                 .CreateClient();
 
-            var actualResponse = await client
+            HttpResponseMessage actualResponse = await client
                 .GetAsync("/api/v1/Customers/")
                 .ConfigureAwait(false);
 

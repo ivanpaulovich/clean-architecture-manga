@@ -1,3 +1,7 @@
+// <copyright file="UserRepositoryFake.cs" company="Ivan Paulovich">
+// Copyright © Ivan Paulovich. All rights reserved.
+// </copyright>
+
 namespace Infrastructure.DataAccess.Repositories
 {
     using System.Linq;
@@ -10,10 +14,7 @@ namespace Infrastructure.DataAccess.Repositories
     {
         private readonly MangaContextFake _context;
 
-        public UserRepositoryFake(MangaContextFake context)
-        {
-            this._context = context;
-        }
+        public UserRepositoryFake(MangaContextFake context) => this._context = context;
 
         public async Task Add(IUser user)
         {

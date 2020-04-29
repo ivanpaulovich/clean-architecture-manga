@@ -16,7 +16,7 @@ namespace Domain.Security.ValueObjects
     /// </summary>
     public readonly struct ExternalUserId : IEquatable<ExternalUserId>
     {
-        private readonly string text;
+        private readonly string _text;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExternalUserId" /> struct.
@@ -29,17 +29,14 @@ namespace Domain.Security.ValueObjects
                 throw new ExternalUserIdShouldNotBeEmptyException(Messages.TheTextFieldIsRequired);
             }
 
-            this.text = text;
+            this._text = text;
         }
 
         /// <summary>
         ///     Converts into string.
         /// </summary>
         /// <returns>String.</returns>
-        public override string ToString()
-        {
-            return this.text;
-        }
+        public override string ToString() => this._text;
 
         /// <summary>
         /// </summary>
@@ -58,38 +55,26 @@ namespace Domain.Security.ValueObjects
         /// <summary>
         /// </summary>
         /// <returns></returns>
-        public override int GetHashCode()
-        {
-            return this.text.GetHashCode(StringComparison.OrdinalIgnoreCase);
-        }
+        public override int GetHashCode() => this._text.GetHashCode(StringComparison.OrdinalIgnoreCase);
 
         /// <summary>
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator ==(ExternalUserId left, ExternalUserId right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(ExternalUserId left, ExternalUserId right) => left.Equals(right);
 
         /// <summary>
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator !=(ExternalUserId left, ExternalUserId right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(ExternalUserId left, ExternalUserId right) => !(left == right);
 
         /// <summary>
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(ExternalUserId other)
-        {
-            return this.text == other.text;
-        }
+        public bool Equals(ExternalUserId other) => this._text == other._text;
     }
 }

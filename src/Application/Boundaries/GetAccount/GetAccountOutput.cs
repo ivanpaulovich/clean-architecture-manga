@@ -1,4 +1,4 @@
-// <copyright file="GetAccountDetailsOutput.cs" company="Ivan Paulovich">
+// <copyright file="GetAccountOutput.cs" company="Ivan Paulovich">
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
@@ -15,10 +15,7 @@ namespace Application.Boundaries.GetAccount
         ///     Initializes a new instance of the <see cref="GetAccountOutput" /> class.
         /// </summary>
         /// <param name="account">Account object.</param>
-        public GetAccountOutput(IAccount account)
-        {
-            this.Account = account;
-        }
+        public GetAccountOutput(IAccount account) => this.Account = account;
 
         /// <summary>
         ///     Gets the Account.

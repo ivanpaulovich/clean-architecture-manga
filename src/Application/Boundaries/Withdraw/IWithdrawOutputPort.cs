@@ -1,4 +1,4 @@
-// <copyright file="ICloseAccountGetAccountsOutputPort.cs" company="Ivan Paulovich">
+// <copyright file="IWithdrawOutputPort.cs" company="Ivan Paulovich">
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
@@ -8,7 +8,7 @@ namespace Application.Boundaries.Withdraw
     ///     Output Port.
     /// </summary>
     public interface IWithdrawOutputPort
-        : IOutputPortStandard<WithdrawOutput>, IOutputPortNotFound, IGetAccountsOutputPortError
+        : IOutputPortStandard<WithdrawOutput>, IOutputPortNotFound, IOutputPortError
     {
         /// <summary>
         ///     Informs it is out of balance.
