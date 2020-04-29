@@ -32,7 +32,7 @@ steps:
     projects: '**/*Tests/*.csproj'
     arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
 
-- script: reportgenerator "-reports:$(Build.SourcesDirectory)/TestResults/Coverage/coverage.cobertura.xml" "-targetdir:$(Build.SourcesDirectory)/TestResults/Coverage/Reports" -tag:$(Build.BuildNumber) -reportTypes:Html;HtmlSummary;HtmlInline;HtmlInline_AzurePipelines;HtmlInline_AzurePipelines_Dark;Cobertura;Badges
+- script: tools/reportgenerator "-reports:$(Build.SourcesDirectory)/TestResults/Coverage/coverage.cobertura.xml" "-targetdir:$(Build.SourcesDirectory)/TestResults/Coverage/Reports" -tag:$(Build.BuildNumber) -reportTypes:Html;HtmlSummary;HtmlInline;HtmlInline_AzurePipelines;HtmlInline_AzurePipelines_Dark;Cobertura;Badges
   displayName: 'Generate Report'
 
 - task: PublishCodeCoverageResults@1
