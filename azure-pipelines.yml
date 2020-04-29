@@ -23,9 +23,9 @@ steps:
     arguments: '--configuration "$(buildConfiguration)"
 
 - task: DotNetCoreCLI@2
-  displayName: "Execute unit tests and calculate code-coverage"
+  displayName: 'dotnet test $(buildConfiguration)'
   inputs:
-    command: 'test'
+    command: test
     projects: '$(solution)'
     arguments: '"-p:CollectCoverage=true" "-p:CoverletOutputFormat=cobertura"'
     nobuild: true
