@@ -21,6 +21,7 @@ steps:
         projects: '$(solution)'
         arguments: '--configuration "$(buildConfiguration)"
 
+#
 - task: DotNetCoreCLI@2
     displayName: "Execute unit tests and calculate code-coverage"
     inputs:
