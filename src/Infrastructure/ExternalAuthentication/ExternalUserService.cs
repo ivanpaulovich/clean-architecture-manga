@@ -37,9 +37,9 @@ namespace Infrastructure.ExternalAuthentication
                 .HttpContext
                 .User;
 
-            string id = user.FindFirst(c => c.Type == "id")?.Value;
+            string id = user.FindFirst(c => c.Type == "id")?.Value!;
             var externalUserId = new ExternalUserId($"{user.Identity.AuthenticationType}/{id}");
-            var username = new Name(user.Identity.Name);
+            var username = new Name(user.Identity.Name!);
 
             CustomerId? customerId = null!;
             if (user.FindFirst(c => c.Type == "customerid") is { } value)
