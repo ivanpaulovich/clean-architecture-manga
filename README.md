@@ -1,14 +1,16 @@
-# Manga: The Clean Architecture Sample Implementation with .NET Core :cyclone:
+# Manga: The Clean Architecture Sample with .NET Core & React+Redux :cyclone:
 [![All Contributors](https://img.shields.io/badge/all_contributors-16-orange.svg?style=flat-square)](#contributors) [![Build Status](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_apis/build/status/ivanpaulovich.clean-architecture-manga?branchName=master)](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_build/latest?definitionId=20&branchName=master)
 
 Sample implementation of the **Clean Architecture Principles with .NET Core**. Use cases as central organizing structure, decoupled from frameworks and technology details. Built with small components that are developed and tested in isolation.
 
-**ProTip #1:** To get the Clean Architecture updates hit the `WATCH` button :eyes:.
+**ProTip #1:** Hit the `WATCH` button :eyes: to get the latest Clean Architecture updates.
 
-**Manga is a Virtual Wallet** application in which a customer can register an account then manage the balance with `Deposits`, `Withdraws` and `Transfers`.
+**Manga is a Virtual Wallet** application in which the customer could register an account then manage the balance by `Deposits`, `Withdraws` and `Transfers`.
 
 The Manga's demo is hosted on `Azure` servers and the `Swagger UI` client is available at [https://clean-architecture-manga.azurewebsites.net/swagger/index.html](https://clean-architecture-manga.azurewebsites.net/swagger/). It is just beautiful!
-[![Swagger Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/docs/docs/clean-architecture-manga-swagger.png)](https://clean-architecture-manga.azurewebsites.net/swagger/index.html)
+[![Swagger Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/docs/docs/clean-architecture-manga-swagger-v2.jpg)](https://clean-architecture-manga.azurewebsites.net/swagger/index.html)
+
+[![React+Redux Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/docs/docs/clean-architecture-manga-react.png)](https://clean-architecture-manga.azurewebsites.net)
 
 
 <p align="center">
@@ -18,6 +20,29 @@ The Manga's demo is hosted on `Azure` servers and the `Swagger UI` client is ava
   <a href="https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docker-compose.yml&amp;stack_name=clean-architecture-manga" rel="nofollow"><img src="https://raw.githubusercontent.com/play-with-docker/stacks/master/assets/images/button.png" alt="Try in PWD" style="max-width:100%;"></a>
 </p>
 
+## Build & Run
+
+```sh
+pushd src/WebApi/ClientApp
+npm install
+popd
+dotnet run --project src/WebApi/WebApi.csproj --environment="Development"
+```
+
+Then navigate to:
+
+- App: `http://localhost:5001`
+- Swagger: `http://localhost:5001/swagger/index.html`
+
+or try the Docker approach:
+
+```sh
+docker build -t my-app . -f src/WebApi/Dockerfile
+docker run -p 6001:80 my-app
+```
+
+- App: `http://localhost:6001`
+- Swagger: `http://localhost:6001/swagger/index.html`
 
 ## Motivation
 
