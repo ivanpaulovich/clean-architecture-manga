@@ -23,6 +23,18 @@ class LoginStatus extends React.PureComponent<UserProps> {
         this.props.requestLogin();
     }
 
+    loginWithGitHub() {
+        window.location.href = "/api/v1/Login/GitHub?ReturnUrl=" + window.location.href;
+    }
+
+    loginWithGoogle() {
+        window.location.href = "/api/v1/Login/Google?ReturnUrl=" + window.location.href;
+    }
+
+    logout() {
+        window.location.href = "/api/v1/Logout?ReturnUrl=" + window.location.href;
+    }
+
     public render() {
         if (this.props.isLoggedIn) {
             return (
@@ -31,7 +43,7 @@ class LoginStatus extends React.PureComponent<UserProps> {
                         <NavLink tag={Link} className="text-dark" to="/accounts">Manage Accounts</NavLink>
                     </NavItem>
                     <NavItem>
-                        <a className="text-dark nav-link" href="/api/v1/Logout?RedirectUrl=/">Logout</a>
+                        <a className="text-dark nav-link" onClick={this.logout.bind(this)} href="#">Logout</a>
                     </NavItem>
                 </React.Fragment>
             )
@@ -41,10 +53,10 @@ class LoginStatus extends React.PureComponent<UserProps> {
             return (
                 <React.Fragment>
                     <NavItem>
-                        <a className="text-dark nav-link" href="/api/v1/Login/GitHub">Login with GitHub</a>
+                        <a className="text-dark nav-link" onClick={this.loginWithGitHub.bind(this)} href="#">Login with GitHub</a>
                     </NavItem>
                     <NavItem>
-                        <a className="text-dark nav-link" href="/api/v1/Login/Google">Login with Google</a>
+                        <a className="text-dark nav-link" onClick={this.loginWithGoogle.bind(this)} href="#">Login with Google</a>
                     </NavItem>
                 </React.Fragment>
             )
