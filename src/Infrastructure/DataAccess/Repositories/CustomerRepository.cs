@@ -42,7 +42,7 @@ namespace Infrastructure.DataAccess.Repositories
 
             if (customer is null)
             {
-                return null;
+                return null!;
             }
 
             var accounts = this._context

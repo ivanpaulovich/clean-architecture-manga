@@ -36,8 +36,8 @@ namespace WebApi.Modules.Common.FeatureFlags
 
                     foreach (object? argumentValue in arguments)
                     {
-                        var typedArgument = (CustomAttributeTypedArgument)argumentValue;
-                        var typedArgumentValue = (CustomFeature)(int)typedArgument.Value;
+                        var typedArgument = (CustomAttributeTypedArgument)argumentValue!;
+                        var typedArgumentValue = (CustomFeature)(int)typedArgument.Value!;
                         bool isFeatureEnabled = this._featureManager
                             .IsEnabledAsync(typedArgumentValue.ToString())
                             .ConfigureAwait(false)

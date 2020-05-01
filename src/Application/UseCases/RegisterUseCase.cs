@@ -72,11 +72,13 @@ namespace Application.UseCases
         {
             if (input is null)
             {
-                this._registerOutputPort.WriteError(Messages.InputIsNull);
+                this._registerOutputPort
+                    .WriteError(Messages.InputIsNull);
                 return;
             }
 
-            IUser user = this._userService.GetUser();
+            IUser user = this._userService
+                .GetUser();
 
             if (await this.VerifyCustomerAlreadyRegistered(user)
                 .ConfigureAwait(false))
@@ -85,7 +87,7 @@ namespace Application.UseCases
             }
 
             ICustomer customer = await this._customerService
-                .CreateCustomer(input.SSN, user.Name.Value)
+                .CreateCustomer(input.SSN, user.Name)
                 .ConfigureAwait(false);
 
             IAccount account = await this._accountService
@@ -111,15 +113,19 @@ namespace Application.UseCases
                 return false;
             }
 
-            if (!await this._customerService.IsCustomerRegistered(customerId)
+            if (!await this._customerService
+                .IsCustomerRegistered(customerId)
                 .ConfigureAwait(false))
             {
                 return false;
             }
 
-            ICustomer existingCustomer = await this._customerRepository.GetBy(customerId)
+            ICustomer existingCustomer = await this._customerRepository
+                .GetBy(customerId)
                 .ConfigureAwait(false);
-            IList<IAccount> existingAccounts = await this._accountRepository.GetBy(customerId)
+
+            IList<IAccount> existingAccounts = await this._accountRepository
+                .GetBy(customerId)
                 .ConfigureAwait(false);
 
             var output = new RegisterOutput(

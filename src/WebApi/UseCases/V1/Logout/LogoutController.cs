@@ -1,5 +1,6 @@
 namespace WebApi.UseCases.V1.Logout
 {
+    using System;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authentication.Cookies;
@@ -18,12 +19,12 @@ namespace WebApi.UseCases.V1.Logout
         /// <returns></returns>
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Logout(string? returnUrl = "/")
+        public async Task<IActionResult> Logout(Uri returnUrl)
         {
             await this.HttpContext
                 .SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme)
                 .ConfigureAwait(false);
-            return this.Redirect(returnUrl);
+            return this.Redirect(returnUrl.ToString());
         }
     }
 }

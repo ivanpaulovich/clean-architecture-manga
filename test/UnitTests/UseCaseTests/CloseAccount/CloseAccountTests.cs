@@ -12,7 +12,6 @@ namespace UnitTests.UseCaseTests.CloseAccount
     using Domain.Customers.ValueObjects;
     using Infrastructure.DataAccess;
     using Presenters;
-    using TestFixtures;
     using Xunit;
 
     public sealed class CloseAccountTests : IClassFixture<StandardFixture>
@@ -22,7 +21,7 @@ namespace UnitTests.UseCaseTests.CloseAccount
         private readonly StandardFixture _fixture;
 
         [Theory]
-        [ClassData(typeof(PositiveDataSetup))]
+        [ClassData(typeof(ValidDataSetup))]
         public void PositiveBalance_Should_Not_Allow_Closing(decimal amount)
         {
             ICustomer customer = this._fixture.EntityFactory.NewCustomer(
