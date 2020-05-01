@@ -1,4 +1,4 @@
-# Manga: The Clean Architecture Sample with .NET Core and React+Redux :cyclone:
+# Manga: The Clean Architecture Sample with .NET Core & React+Redux :cyclone:
 [![All Contributors](https://img.shields.io/badge/all_contributors-16-orange.svg?style=flat-square)](#contributors) [![Build Status](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_apis/build/status/ivanpaulovich.clean-architecture-manga?branchName=master)](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_build/latest?definitionId=20&branchName=master)
 
 Sample implementation of the **Clean Architecture Principles with .NET Core**. Use cases as central organizing structure, decoupled from frameworks and technology details. Built with small components that are developed and tested in isolation.
