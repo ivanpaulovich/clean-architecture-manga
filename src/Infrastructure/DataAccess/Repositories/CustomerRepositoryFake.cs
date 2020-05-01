@@ -32,11 +32,6 @@ namespace Infrastructure.DataAccess.Repositories
                 .Customers
                 .SingleOrDefault(e => e.Id.Equals(customerId));
 
-            if (customer is null)
-            {
-                return null;
-            }
-
             return await Task.FromResult<Domain.Customers.Customer>(customer)
                 .ConfigureAwait(false);
         }

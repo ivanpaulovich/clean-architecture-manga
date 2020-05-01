@@ -7,7 +7,6 @@ namespace UnitTests.UseCaseTests.Transfer
     using Domain.Accounts.ValueObjects;
     using Infrastructure.DataAccess;
     using Presenters;
-    using TestFixtures;
     using Xunit;
 
     public sealed class TransferUseCaseTests : IClassFixture<StandardFixture>
@@ -17,7 +16,7 @@ namespace UnitTests.UseCaseTests.Transfer
         public TransferUseCaseTests(StandardFixture fixture) => this._fixture = fixture;
 
         [Theory]
-        [ClassData(typeof(PositiveDataSetup))]
+        [ClassData(typeof(ValidDataSetup))]
         public async Task Transfer_ChangesBalance_WhenAccountExists(
             decimal amount,
             decimal expectedOriginBalance)

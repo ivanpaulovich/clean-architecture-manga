@@ -5,7 +5,6 @@ namespace UnitTests.UseCaseTests.Register
     using Application.Boundaries.Register;
     using Application.UseCases;
     using Presenters;
-    using TestFixtures;
     using Xunit;
 
     public sealed class RegisterTests : IClassFixture<StandardFixture>
@@ -15,7 +14,7 @@ namespace UnitTests.UseCaseTests.Register
         private readonly StandardFixture _fixture;
 
         [Theory]
-        [ClassData(typeof(PositiveDataSetup))]
+        [ClassData(typeof(ValidDataSetup))]
         public async Task Register_WritesOutput_AlreadyRegisterested(decimal amount)
         {
             var presenter = new RegisterPresenter();

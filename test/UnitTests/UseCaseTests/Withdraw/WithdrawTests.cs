@@ -7,7 +7,6 @@ namespace UnitTests.UseCaseTests.Withdraw
     using Domain.Accounts.ValueObjects;
     using Infrastructure.DataAccess;
     using Presenters;
-    using TestFixtures;
     using Xunit;
 
     public sealed class WithdrawTests : IClassFixture<StandardFixture>
@@ -17,7 +16,7 @@ namespace UnitTests.UseCaseTests.Withdraw
         public WithdrawTests(StandardFixture fixture) => this._fixture = fixture;
 
         [Theory]
-        [ClassData(typeof(PositiveDataSetup))]
+        [ClassData(typeof(ValidDataSetup))]
         public async Task Withdraw_Valid_Amount(
             decimal amount,
             decimal expectedBalance)

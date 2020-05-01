@@ -1,5 +1,6 @@
 namespace WebApi.UseCases.V1.Google
 {
+    using System;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -17,8 +18,8 @@ namespace WebApi.UseCases.V1.Google
         /// <returns></returns>
         [HttpGet("Google")]
         [AllowAnonymous]
-        public IActionResult Google(string? returnUrl = "https://localhost:5001/") => new ChallengeResult(
+        public IActionResult Google(Uri returnUrl) => new ChallengeResult(
             "Google",
-            new AuthenticationProperties {RedirectUri = returnUrl});
+            new AuthenticationProperties {RedirectUri = returnUrl.ToString()});
     }
 }

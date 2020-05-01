@@ -16,7 +16,7 @@ namespace Infrastructure.DataAccess.Entities
         {
         }
 
-        public User(ExternalUserId externalUserId, Name? name, CustomerId? customerId)
+        public User(ExternalUserId externalUserId, Name name, CustomerId? customerId)
         {
             this.ExternalUserId = externalUserId;
             this.Name = name;
@@ -24,10 +24,10 @@ namespace Infrastructure.DataAccess.Entities
         }
 
         /// <inheritdoc />
-        public override ExternalUserId ExternalUserId { get; }
+        public ExternalUserId ExternalUserId { get; }
 
         /// <inheritdoc />
-        public override Name? Name { get; }
+        public override Name Name { get; }
 
         /// <inheritdoc />
         public override CustomerId? CustomerId { get; protected set; }

@@ -2,9 +2,9 @@ namespace UnitTests.UseCaseTests.Register
 {
     using Xunit;
 
-    internal sealed class PositiveDataSetup : TheoryData<decimal>
+    internal sealed class ValidDataSetup : TheoryData<decimal>
     {
-        public PositiveDataSetup()
+        public ValidDataSetup()
         {
             this.Add(0);
             this.Add(100);

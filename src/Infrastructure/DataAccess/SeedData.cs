@@ -36,7 +36,7 @@ namespace Infrastructure.DataAccess
 
             builder.Entity<Customer>()
                 .HasData(
-                    new {Id = DefaultCustomerId, Name = new Name(Messages.UserName), SSN = new SSN("19860817-9999")});
+                    new {Id = DefaultCustomerId, Name = new Name(Messages.UserName), SSN = new SSN(Messages.UserSSN)});
 
             builder.Entity<Account>()
                 .HasData(
@@ -69,8 +69,8 @@ namespace Infrastructure.DataAccess
                     new
                     {
                         CustomerId = DefaultCustomerId,
-                        ExternalUserId = new ExternalUserId("github/ivanpaulovich"),
-                        Name = new Name("Ivan Paulovich")
+                        ExternalUserId = new ExternalUserId(Messages.UserName),
+                        Name = new Name(Messages.UserSSN)
                     });
         }
     }

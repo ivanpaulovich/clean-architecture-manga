@@ -1,4 +1,4 @@
-namespace UnitTests.TestFixtures
+namespace UnitTests.UseCaseTests
 {
     using Domain.Accounts;
     using Domain.Customers;

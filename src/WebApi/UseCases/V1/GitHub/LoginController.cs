@@ -1,5 +1,6 @@
 namespace WebApi.UseCases.V1.GitHub
 {
+    using System;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -17,8 +18,8 @@ namespace WebApi.UseCases.V1.GitHub
         /// <returns></returns>
         [HttpGet("GitHub")]
         [AllowAnonymous]
-        public IActionResult GitHub(string? returnUrl = "https://localhost:5001/") => new ChallengeResult(
+        public IActionResult GitHub(Uri returnUrl) => new ChallengeResult(
             "GitHub",
-            new AuthenticationProperties {RedirectUri = returnUrl});
+            new AuthenticationProperties {RedirectUri = returnUrl.ToString()});
     }
 }

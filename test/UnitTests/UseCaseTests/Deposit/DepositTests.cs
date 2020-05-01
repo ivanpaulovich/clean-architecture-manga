@@ -8,7 +8,6 @@ namespace UnitTests.UseCaseTests.Deposit
     using Infrastructure.DataAccess;
     using Infrastructure.DataAccess.Entities;
     using Presenters;
-    using TestFixtures;
     using Xunit;
 
     public sealed class DepositTests : IClassFixture<StandardFixture>
@@ -18,7 +17,7 @@ namespace UnitTests.UseCaseTests.Deposit
         public DepositTests(StandardFixture fixture) => this._fixture = fixture;
 
         [Theory]
-        [ClassData(typeof(PositiveDataSetup))]
+        [ClassData(typeof(ValidDataSetup))]
         public async Task Deposit_ChangesBalance(decimal amount)
         {
             var presenter = new DepositGetAccountsPresenter();
@@ -39,7 +38,7 @@ namespace UnitTests.UseCaseTests.Deposit
         }
 
         [Theory]
-        [ClassData(typeof(NegativeDataSetup))]
+        [ClassData(typeof(InvalidDataSetup))]
         public async Task Deposit_ShouldNot_ChangesBalance_WhenNegative(decimal amount)
         {
             var presenter = new DepositGetAccountsPresenter();

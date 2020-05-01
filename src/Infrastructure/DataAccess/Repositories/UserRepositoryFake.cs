@@ -32,11 +32,6 @@ namespace Infrastructure.DataAccess.Repositories
                 .Users
                 .SingleOrDefault(e => e.ExternalUserId.Equals(externalUserId));
 
-            if (user is null)
-            {
-                return null;
-            }
-
             return await Task.FromResult(user)
                 .ConfigureAwait(false);
         }
