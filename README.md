@@ -18,7 +18,7 @@ The Manga's demo is hosted on `Azure` servers and the `Swagger UI` client is ava
   <a href="https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docker-compose.yml&amp;stack_name=clean-architecture-manga" rel="nofollow"><img src="https://raw.githubusercontent.com/play-with-docker/stacks/master/assets/images/button.png" alt="Try in PWD" style="max-width:100%;"></a>
 </p>
 
-## Build and Run
+## Build & Run
 
 ```sh
 pushd src/WebApi/ClientApp
