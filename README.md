@@ -27,6 +27,21 @@ popd
 dotnet run --project src/WebApi/WebApi.csproj --environment="Development"
 ```
 
+Then navigate to:
+
+- App: `http://localhost:5001`
+- Swagger: `http://localhost:5001/swagger/index.html`
+
+or try the Docker approach:
+
+```sh
+docker build -t my-app . -f src/WebApi/Dockerfile
+docker run -p 6001:80 my-app
+```
+
+- App: `http://localhost:6001`
+- Swagger: `http://localhost:6001/swagger/index.html`
+
 ## Motivation
 
 > Learn how to design modular applications.
