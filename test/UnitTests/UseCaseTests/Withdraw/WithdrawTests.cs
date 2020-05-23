@@ -21,8 +21,8 @@ namespace UnitTests.UseCaseTests.Withdraw
             decimal amount,
             decimal expectedBalance)
         {
-            var presenter = new WithdrawPresenter();
-            var sut = new WithdrawUseCase(
+            WithdrawPresenter presenter = new WithdrawPresenter();
+            WithdrawUseCase sut = new WithdrawUseCase(
                 this._fixture.AccountService,
                 presenter,
                 this._fixture.AccountRepositoryFake,

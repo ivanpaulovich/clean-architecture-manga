@@ -14,7 +14,7 @@ namespace UnitTests.EntitiesTests
         [Fact]
         public void Account_With_200_Balance_Should_Not_Allow_50000_Withdraw()
         {
-            var entityFactory = new EntityFactory();
+            EntityFactory entityFactory = new EntityFactory();
 
             // Arrange
             ICustomer customer = entityFactory.NewCustomer(
@@ -36,7 +36,7 @@ namespace UnitTests.EntitiesTests
         [Fact]
         public void Account_With_Three_Transactions_Should_Be_Consistent()
         {
-            var entityFactory = new EntityFactory();
+            EntityFactory entityFactory = new EntityFactory();
 
             // Arrange
             ICustomer customer = entityFactory.NewCustomer(
@@ -56,7 +56,7 @@ namespace UnitTests.EntitiesTests
         [Fact]
         public void New_Account_Should_Allow_Closing()
         {
-            var entityFactory = new EntityFactory();
+            EntityFactory entityFactory = new EntityFactory();
 
             // Arrange
             ICustomer customer = entityFactory.NewCustomer(
@@ -75,7 +75,7 @@ namespace UnitTests.EntitiesTests
         [Fact]
         public void New_Account_Should_Have_100_Credit_After_Deposit()
         {
-            var entityFactory = new EntityFactory();
+            EntityFactory entityFactory = new EntityFactory();
 
             // Arrange
             PositiveMoney amount = new PositiveMoney(100.0M);
@@ -96,7 +96,7 @@ namespace UnitTests.EntitiesTests
         public void New_Account_With_1000_Balance_Should_Have_900_Credit_After_Withdraw()
         {
             // Arrange
-            var entityFactory = new EntityFactory();
+            EntityFactory entityFactory = new EntityFactory();
 
             ICustomer customer = entityFactory.NewCustomer(
                 new SSN("198608179922"),

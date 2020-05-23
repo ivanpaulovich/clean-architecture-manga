@@ -11,7 +11,7 @@ namespace UnitTests.EntitiesTests
         [Fact]
         public void Customer_Should_Be_Registered_With_1_Account()
         {
-            var entityFactory = new EntityFactory();
+            EntityFactory entityFactory = new EntityFactory();
 
             // Arrange
             ICustomer sut = entityFactory.NewCustomer(

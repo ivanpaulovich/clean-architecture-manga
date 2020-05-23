@@ -26,7 +26,7 @@ namespace ComponentTests.V2
         {
             HttpClient client = this._factory.CreateClient();
 
-            var content = new FormUrlEncodedContent(new[]
+            FormUrlEncodedContent content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("ssn", "8608179999"), new KeyValuePair<string, string>("initialAmount",
                     initialAmount.ToString(CultureInfo.InvariantCulture))

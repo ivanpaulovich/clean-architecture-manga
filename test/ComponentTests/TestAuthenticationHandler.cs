@@ -35,9 +35,9 @@ namespace ComponentTests
                 new Claim("customerid", MangaContextFake.DefaultCustomerId.ToString())
             };
 
-            var identity = new ClaimsIdentity(claims, this.Scheme.Name);
-            var principal = new ClaimsPrincipal(identity);
-            var ticket = new AuthenticationTicket(principal, this.Scheme.Name);
+            ClaimsIdentity identity = new ClaimsIdentity(claims, this.Scheme.Name);
+            ClaimsPrincipal principal = new ClaimsPrincipal(identity);
+            AuthenticationTicket ticket = new AuthenticationTicket(principal, this.Scheme.Name);
 
             return await Task.FromResult(AuthenticateResult.Success(ticket));
         }

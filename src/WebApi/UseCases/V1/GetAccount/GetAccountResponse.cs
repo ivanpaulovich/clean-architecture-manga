@@ -1,6 +1,7 @@
 namespace WebApi.UseCases.V1.GetAccount
 {
     using System.ComponentModel.DataAnnotations;
+    using Domain.Accounts;
     using ViewModels;
 
     /// <summary>
@@ -8,12 +9,12 @@ namespace WebApi.UseCases.V1.GetAccount
     /// </summary>
     public sealed class GetAccountResponse
     {
-        public GetAccountResponse(AccountModel accountModel) => this.Account = accountModel;
+        public GetAccountResponse(IAccount account) => this.Account = new AccountDetailsModel(account);
 
         /// <summary>
         ///     Gets account ID.
         /// </summary>
         [Required]
-        public AccountModel Account { get; }
+        public AccountDetailsModel Account { get; }
     }
 }

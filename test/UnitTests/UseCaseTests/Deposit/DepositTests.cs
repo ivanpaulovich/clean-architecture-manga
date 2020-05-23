@@ -20,8 +20,8 @@ namespace UnitTests.UseCaseTests.Deposit
         [ClassData(typeof(ValidDataSetup))]
         public async Task Deposit_ChangesBalance(decimal amount)
         {
-            var presenter = new DepositGetAccountsPresenter();
-            var sut = new DepositUseCase(
+            DepositGetAccountsPresenter presenter = new DepositGetAccountsPresenter();
+            DepositUseCase sut = new DepositUseCase(
                 this._fixture.AccountService,
                 presenter,
                 this._fixture.AccountRepositoryFake,
@@ -41,8 +41,8 @@ namespace UnitTests.UseCaseTests.Deposit
         [ClassData(typeof(InvalidDataSetup))]
         public async Task Deposit_ShouldNot_ChangesBalance_WhenNegative(decimal amount)
         {
-            var presenter = new DepositGetAccountsPresenter();
-            var sut = new DepositUseCase(
+            DepositGetAccountsPresenter presenter = new DepositGetAccountsPresenter();
+            DepositUseCase sut = new DepositUseCase(
                 this._fixture.AccountService,
                 presenter,
                 this._fixture.AccountRepositoryFake,

@@ -33,9 +33,9 @@ namespace ComponentTests.V1
 
             Assert.Equal(HttpStatusCode.OK, actualResponse.StatusCode);
 
-            using var stringReader = new StringReader(actualResponseString);
-            using var reader = new JsonTextReader(stringReader) {DateParseHandling = DateParseHandling.None};
-            var jsonResponse = JObject.Load(reader);
+            using StringReader stringReader = new StringReader(actualResponseString);
+            using JsonTextReader reader = new JsonTextReader(stringReader) {DateParseHandling = DateParseHandling.None};
+            JObject jsonResponse = JObject.Load(reader);
 
             Assert.Equal(JTokenType.String, jsonResponse["accounts"][0]["accountId"].Type);
             Assert.Equal(JTokenType.Integer, jsonResponse["accounts"][0]["currentBalance"].Type);

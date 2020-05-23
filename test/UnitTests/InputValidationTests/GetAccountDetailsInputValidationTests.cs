@@ -19,7 +19,7 @@ namespace UnitTests.InputValidationTests
         [Fact]
         public void GivenValidData_InputCreated()
         {
-            var actual = new GetAccountInput(
+            GetAccountInput actual = new GetAccountInput(
                 new AccountId(Guid.NewGuid()));
             Assert.NotNull(actual);
         }

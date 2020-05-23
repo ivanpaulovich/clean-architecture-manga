@@ -20,7 +20,7 @@ namespace UnitTests.InputValidationTests
         [Fact]
         public void GivenValidData_InputCreated()
         {
-            var actual = new WithdrawInput(
+            WithdrawInput actual = new WithdrawInput(
                 new AccountId(Guid.NewGuid()),
                 new PositiveMoney(10));
             Assert.NotNull(actual);

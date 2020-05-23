@@ -21,8 +21,8 @@ namespace UnitTests.UseCaseTests.Transfer
             decimal amount,
             decimal expectedOriginBalance)
         {
-            var presenter = new TransferPresenter();
-            var sut = new TransferTransferUseCase(
+            TransferPresenter presenter = new TransferPresenter();
+            TransferTransferUseCase sut = new TransferTransferUseCase(
                 this._fixture.AccountService,
                 presenter,
                 this._fixture.AccountRepositoryFake,

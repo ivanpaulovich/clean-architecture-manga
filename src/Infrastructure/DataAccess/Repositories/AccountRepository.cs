@@ -114,11 +114,13 @@ namespace Infrastructure.DataAccess.Repositories
         /// <inheritdoc />
         public async Task Update(IAccount account, ICredit credit) => await this._context
             .Credits
-            .AddAsync((Credit)credit);
+            .AddAsync((Credit)credit)
+            .ConfigureAwait(false);
 
         /// <inheritdoc />
         public async Task Update(IAccount account, IDebit debit) => await this._context
             .Debits
-            .AddAsync((Debit)debit);
+            .AddAsync((Debit)debit)
+            .ConfigureAwait(false);
     }
 }
