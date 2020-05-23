@@ -1,5 +1,5 @@
-import { Action, Reducer } from 'redux';
-import { AppThunkAction } from './';
+import { Action, Reducer } from "redux";
+import { AppThunkAction } from "./";
 
 export interface TransactionsState {
     transactions: Transactions;
@@ -24,33 +24,47 @@ export interface Debit {
     transactionDate: Date;
 }
 
+interface RequestTransactionsAction {
+    type: "REQUEST_TRANSACTIONS";
+}
+
 interface ReceiveTransactionsAction {
-    type: 'RECEIVE_TRANSACTIONS';
+    type: "RECEIVE_TRANSACTIONS";
     transactions: Transactions;
 }
 
+type KnownAction = RequestTransactionsAction | ReceiveTransactionsAction;
+
 export const actionCreators = {
-    requestTransactions: (accountId: string): AppThunkAction<ReceiveTransactionsAction> => (dispatch, getState) => {
+    requestTransactions: (accountId: string): AppThunkAction<KnownAction> => (
+        dispatch,
+        getState
+    ) => {
         fetch(`api/v1/Accounts/${accountId}`)
-            .then(response => response.json() as Promise<Transactions>)
-            .then(data => {
-                dispatch({ type: 'RECEIVE_TRANSACTIONS', transactions: data });
+            .then((response) => response.json() as Promise<Transactions>)
+            .then((data) => {
+                dispatch({ type: "RECEIVE_TRANSACTIONS", transactions: data });
             });
-    }
+    },
 };
 
-const unloadedState: TransactionsState = { transactions: { credits: [], debits: [] } };
+const unloadedState: TransactionsState = {
+    transactions: { credits: [], debits: [] },
+};
 
-export const reducer: Reducer<TransactionsState> = (state: TransactionsState | undefined, incomingAction: Action): TransactionsState => {
+export const reducer: Reducer<TransactionsState> = (
+    state: TransactionsState | undefined,
+    incomingAction: Action
+): TransactionsState => {
     if (state === undefined) {
         return unloadedState;
     }
 
-    const action = incomingAction as ReceiveTransactionsAction;
+    const action = incomingAction as KnownAction;
     switch (action.type) {
-        case 'RECEIVE_TRANSACTIONS':
+        case "RECEIVE_TRANSACTIONS":
             return {
-                transactions: action.transactions
+                transactions: action.transactions,
             };
             break;
     }

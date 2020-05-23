@@ -1,12 +1,12 @@
-import * as Counter from './Counter';
-import * as User from './User';
-import * as Accounts from './Accounts';
+import * as Counter from "./Counter";
+import * as User from "./User";
+import * as Accounts from "./Accounts";
 
 // The top-level state object
 export interface ApplicationState {
     counter: Counter.CounterState | undefined;
     user: User.UserState | undefined;
-    accounts: Accounts.AccountsState | undefined
+    accounts: Accounts.AccountsState | undefined;
 }
 
 // Whenever an action is dispatched, Redux will update each top-level application state property using
@@ -15,11 +15,14 @@ export interface ApplicationState {
 export const reducers = {
     counter: Counter.reducer,
     user: User.reducer,
-    accounts: Accounts.reducer
+    accounts: Accounts.reducer,
 };
 
 // This type can be used as a hint on action creators so that its 'dispatch' and 'getState' params are
 // correctly typed to match your store.
 export interface AppThunkAction<TAction> {
-    (dispatch: (action: TAction) => void, getState: () => ApplicationState): void;
+    (
+        dispatch: (action: TAction) => void,
+        getState: () => ApplicationState
+    ): void;
 }
