@@ -21,7 +21,8 @@ namespace IntegrationTests.EntityFrameworkTests
                 .Options;
 
             await using MangaContext context = new MangaContext(options);
-            context.Database.EnsureCreated();
+            await context.Database.EnsureCreatedAsync()
+                .ConfigureAwait(false);
 
             EntityFactory factory = new EntityFactory();
 
@@ -42,6 +43,9 @@ namespace IntegrationTests.EntityFrameworkTests
             await customerRepository.Add(customer)
                 .ConfigureAwait(false);
 
+            await context.SaveChangesAsync()
+                .ConfigureAwait(false);
+
             Assert.Equal(2, context.Customers.Count());
         }
 
@@ -52,7 +56,8 @@ namespace IntegrationTests.EntityFrameworkTests
                 .UseInMemoryDatabase("test_database")
                 .Options;
             await using MangaContext context = new MangaContext(options);
-            context.Database.EnsureCreated();
+            await context.Database.EnsureCreatedAsync()
+                .ConfigureAwait(false);
 
             CustomerRepository repository = new CustomerRepository(context);
             ICustomer customer = await repository.GetBy(SeedData.DefaultCustomerId)
