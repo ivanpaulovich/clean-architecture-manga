@@ -17,5 +17,16 @@
         "statusBar.border": "#1857a4",
         "titleBar.border": "#1857a4"
     },
-    "peacock.color": "#1857a4"
+    "peacock.color": "#1857a4",
+    "editor.formatOnSave": true,
+    "[javascript]": {
+        "editor.formatOnSave": false
+    },
+    "prettier.disableLanguages": ["js", "md"],
+    "eslint.alwaysShowStatus": true,
+    "files.autoSave": "onFocusChange",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "eslint.validate": ["typescript", "typescriptreact"]
 }

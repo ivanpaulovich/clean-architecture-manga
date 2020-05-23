@@ -33,7 +33,7 @@ namespace ComponentTests.V1
         {
             HttpClient client = this._factory.CreateClient();
 
-            var content = new FormUrlEncodedContent(new[]
+            FormUrlEncodedContent content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("ssn", "8608179999"), new KeyValuePair<string, string>("initialAmount",
                     initialAmount.ToString(CultureInfo.InvariantCulture))
@@ -60,7 +60,7 @@ namespace ComponentTests.V1
         private async Task Deposit(string account, decimal amount)
         {
             HttpClient client = this._factory.CreateClient();
-            var content = new FormUrlEncodedContent(new[]
+            FormUrlEncodedContent content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("accountId", account),
                 new KeyValuePair<string, string>("amount", amount.ToString(CultureInfo.InvariantCulture))
@@ -79,7 +79,7 @@ namespace ComponentTests.V1
         {
             HttpClient client = this._factory.CreateClient();
 
-            var content = new FormUrlEncodedContent(new[]
+            FormUrlEncodedContent content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("accountId", account),
                 new KeyValuePair<string, string>("amount", amount.ToString(CultureInfo.InvariantCulture))

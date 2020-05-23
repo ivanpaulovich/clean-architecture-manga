@@ -32,7 +32,7 @@ namespace UnitTests.InputValidationTests
         [Fact]
         public void GivenValidData_InputCreated()
         {
-            var actual = new TransferInput(
+            TransferInput actual = new TransferInput(
                 new AccountId(Guid.NewGuid()),
                 new AccountId(Guid.NewGuid()),
                 new PositiveMoney(10));

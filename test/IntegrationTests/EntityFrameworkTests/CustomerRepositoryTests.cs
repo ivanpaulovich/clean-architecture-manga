@@ -20,10 +20,10 @@ namespace IntegrationTests.EntityFrameworkTests
                 .UseInMemoryDatabase("test_database")
                 .Options;
 
-            await using var context = new MangaContext(options);
+            await using MangaContext context = new MangaContext(options);
             context.Database.EnsureCreated();
 
-            var factory = new EntityFactory();
+            EntityFactory factory = new EntityFactory();
 
             ICustomer customer = factory.NewCustomer(
                 new SSN("198608177955"),
@@ -34,11 +34,11 @@ namespace IntegrationTests.EntityFrameworkTests
                 new ExternalUserId("github/ivanpaulovich"),
                 new Name("Ivan Paulovich"));
 
-            var userRepository = new UserRepository(context);
+            UserRepository userRepository = new UserRepository(context);
             await userRepository.Add(user)
                 .ConfigureAwait(false);
 
-            var customerRepository = new CustomerRepository(context);
+            CustomerRepository customerRepository = new CustomerRepository(context);
             await customerRepository.Add(customer)
                 .ConfigureAwait(false);
 
@@ -51,10 +51,10 @@ namespace IntegrationTests.EntityFrameworkTests
             DbContextOptions<MangaContext> options = new DbContextOptionsBuilder<MangaContext>()
                 .UseInMemoryDatabase("test_database")
                 .Options;
-            await using var context = new MangaContext(options);
+            await using MangaContext context = new MangaContext(options);
             context.Database.EnsureCreated();
 
-            var repository = new CustomerRepository(context);
+            CustomerRepository repository = new CustomerRepository(context);
             ICustomer customer = await repository.GetBy(SeedData.DefaultCustomerId)
                 .ConfigureAwait(false);
             Assert.NotNull(customer);

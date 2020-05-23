@@ -33,9 +33,9 @@ namespace ComponentTests.V1
                 .ReadAsStringAsync()
                 .ConfigureAwait(false);
 
-            using var stringReader = new StringReader(actualResponseString);
-            using var reader = new JsonTextReader(stringReader) {DateParseHandling = DateParseHandling.None};
-            var jsonResponse = JObject.Load(reader);
+            using StringReader stringReader = new StringReader(actualResponseString);
+            using JsonTextReader reader = new JsonTextReader(stringReader) {DateParseHandling = DateParseHandling.None};
+            JObject jsonResponse = JObject.Load(reader);
 
             Assert.Equal(JTokenType.String, jsonResponse["customer"]["customerId"].Type);
             Assert.Equal(JTokenType.String, jsonResponse["customer"]["ssn"].Type);

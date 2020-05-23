@@ -23,9 +23,9 @@ namespace Infrastructure.ExternalAuthentication
         /// <inheritdoc />
         public IUser GetUser()
         {
-            var customerId = new CustomerId(MangaContextFake.DefaultCustomerId.ToGuid());
-            var externalUserId = new ExternalUserId(Messages.ExternalUserID);
-            var name = new Name(Messages.UserName);
+            CustomerId customerId = new CustomerId(MangaContextFake.DefaultCustomerId.ToGuid());
+            ExternalUserId externalUserId = new ExternalUserId(Messages.ExternalUserID);
+            Name name = new Name(Messages.UserName);
 
             IUser user = this._userFactory
                 .NewUser(customerId, externalUserId, name);

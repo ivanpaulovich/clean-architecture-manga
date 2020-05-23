@@ -15,10 +15,7 @@ namespace WebApi
 
         private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((hostContext, configApp) =>
-                {
-                    configApp.AddCommandLine(args);
-                })
+                .ConfigureAppConfiguration((hostContext, configApp) => { configApp.AddCommandLine(args); })
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
     }
 }

@@ -38,8 +38,8 @@ namespace Infrastructure.ExternalAuthentication
                 .User;
 
             string id = user.FindFirst(c => c.Type == "id")?.Value!;
-            var externalUserId = new ExternalUserId($"{user.Identity.AuthenticationType}/{id}");
-            var username = new Name(user.Identity.Name!);
+            ExternalUserId externalUserId = new ExternalUserId($"{user.Identity.AuthenticationType}/{id}");
+            Name username = new Name(user.Identity.Name!);
 
             CustomerId? customerId = null;
             if (user.FindFirst(c => c.Type == "customerid") is { } value)

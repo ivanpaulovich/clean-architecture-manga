@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.2] - 2020-05-23
+
+### Security
+
+- .NET Core SDK version to 3.1.300.
+- Azure pipeline changed to use .NET Core 3.1.300.
+
+### Changed
+
+- VSCode and Rider environment variables.
+
+### Removed
+
+- Debits and Credits transactions from List Accounts Response.
+
+### Added
+
+- .prettierignore file do ignore markdown.
+
 ## [3.0.1] - 2020-05-01
 
 ### Changed

@@ -18,7 +18,7 @@ namespace UnitTests.InputValidationTests
         [Fact]
         public void GivenValidData_InputCreated()
         {
-            var actual = new CloseAccountInput(
+            CloseAccountInput actual = new CloseAccountInput(
                 new AccountId(Guid.NewGuid()));
             Assert.NotNull(actual);
         }

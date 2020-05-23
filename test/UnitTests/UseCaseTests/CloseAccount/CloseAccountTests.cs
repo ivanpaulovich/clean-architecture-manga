@@ -40,21 +40,21 @@ namespace UnitTests.UseCaseTests.CloseAccount
         [Fact]
         public async Task NewAccount_Should_Allows_Closing2()
         {
-            var getAccountPresenter = new GetAccountPresenter();
-            var closeAccountPresenter = new CloseAccountGetAccountsPresenter();
-            var withdrawPresenter = new WithdrawPresenter();
+            GetAccountPresenter getAccountPresenter = new GetAccountPresenter();
+            CloseAccountGetAccountsPresenter closeAccountPresenter = new CloseAccountGetAccountsPresenter();
+            WithdrawPresenter withdrawPresenter = new WithdrawPresenter();
 
-            var getAccountUseCase = new GetAccountUseCase(
+            GetAccountUseCase getAccountUseCase = new GetAccountUseCase(
                 getAccountPresenter,
                 this._fixture.AccountRepositoryFake);
 
-            var withdrawUseCase = new WithdrawUseCase(
+            WithdrawUseCase withdrawUseCase = new WithdrawUseCase(
                 this._fixture.AccountService,
                 withdrawPresenter,
                 this._fixture.AccountRepositoryFake,
                 this._fixture.UnitOfWork);
 
-            var sut = new CloseAccountUseCase(
+            CloseAccountUseCase sut = new CloseAccountUseCase(
                 closeAccountPresenter,
                 this._fixture.AccountRepositoryFake);
 
@@ -66,7 +66,7 @@ namespace UnitTests.UseCaseTests.CloseAccount
                 MangaContextFake.DefaultAccountId,
                 new PositiveMoney(getAccountDetailOutput.Account.GetCurrentBalance().ToDecimal())));
 
-            var input = new CloseAccountInput(
+            CloseAccountInput input = new CloseAccountInput(
                 MangaContextFake.DefaultAccountId);
             await sut.Execute(input);
 

@@ -19,15 +19,18 @@
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Development' ">
     <StartAction>Project</StartAction>
+    <ExternalConsole>true</ExternalConsole>
     <ApplicationURL>https://localhost:5001</ApplicationURL>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Production' ">
     <StartAction>Project</StartAction>
+    <ExternalConsole>true</ExternalConsole>
     <EnvironmentVariables>
       <Variable name="ASPNETCORE_ENVIRONMENT" value="Production" />
     </EnvironmentVariables>
     <ApplicationURL>https://localhost:5001</ApplicationURL>
   </PropertyGroup>
+  
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(SpaRoot)**" />
@@ -73,7 +76,7 @@
     <PackageReference Include="prometheus-net.AspNetCore" Version="3.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.4.1" />
     <PackageReference Include="EPPlus.Core" Version="1.5.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
     <PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="2.0.0" />
     <PackageReference Include="FluentMediator" Version="0.4.7" />
     <PackageReference Include="FluentMediator.Microsoft.Extensions.DependencyInjection" Version="0.4.7" />

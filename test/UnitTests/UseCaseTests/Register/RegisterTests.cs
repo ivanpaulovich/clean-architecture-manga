@@ -17,10 +17,10 @@ namespace UnitTests.UseCaseTests.Register
         [ClassData(typeof(ValidDataSetup))]
         public async Task Register_WritesOutput_AlreadyRegisterested(decimal amount)
         {
-            var presenter = new RegisterPresenter();
+            RegisterPresenter presenter = new RegisterPresenter();
             const string ssn = "8608178888";
 
-            var sut = new RegisterRegisterUseCase(
+            RegisterRegisterUseCase sut = new RegisterRegisterUseCase(
                 this._fixture.TestUserService,
                 this._fixture.CustomerService,
                 this._fixture.AccountService,
@@ -40,7 +40,8 @@ namespace UnitTests.UseCaseTests.Register
         [Fact]
         public void GivenNullInput_ThrowsException()
         {
-            var register = new RegisterRegisterUseCase(null, null, null, null, null, null, null, null);
+            RegisterRegisterUseCase register =
+                new RegisterRegisterUseCase(null, null, null, null, null, null, null, null);
             Assert.ThrowsAsync<Exception>(async () => await register.Execute(null));
         }
     }
