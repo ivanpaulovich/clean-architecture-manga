@@ -26,10 +26,6 @@ namespace Infrastructure.DataAccess.Repositories
                 .Customers
                 .AddAsync((Customer)customer)
                 .ConfigureAwait(false);
-
-            await this._context
-                .SaveChangesAsync()
-                .ConfigureAwait(false);
         }
 
         public async Task<ICustomer> GetBy(CustomerId customerId)
@@ -63,8 +59,7 @@ namespace Infrastructure.DataAccess.Repositories
                 .Customers
                 .Update((Customer)customer);
 
-            await this._context
-                .SaveChangesAsync()
+            await Task.CompletedTask
                 .ConfigureAwait(false);
         }
     }

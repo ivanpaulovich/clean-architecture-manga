@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Debits and Credits transactions from List Accounts Response.
+- SaveChanges from CustomerRepository class. Thanks @aschle.
 
 ### Added
 
