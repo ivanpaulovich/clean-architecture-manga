@@ -1,0 +1,43 @@
+﻿<Properties NuGet.AddPackagesDialog.IncludePrerelease="True">
+  <MonoDevelop.Ide.Workbench ActiveDocument="src/Application/UseCases/RegisterRegisterUseCase.cs">
+    <Files>
+      <File FileName="src/Domain/Security/ValueObjects/ExternalUserId.cs" Line="45" Column="30" />
+      <File FileName="src/Domain/Domain.csproj" Line="1" Column="1" />
+      <File FileName="README.md" Line="1" Column="1" />
+      <File FileName="CHANGELOG.md" Line="14" Column="28" />
+      <File FileName="src/Domain/Accounts/Debits/DebitId.cs" Line="52" Column="30" />
+      <File FileName="src/Domain/Accounts/Credits/CreditId.cs" Line="53" Column="44" />
+      <File FileName="src/Domain/Accounts/ValueObjects/AccountId.cs" Line="52" Column="44" />
+      <File FileName="src/Domain/Customers/ValueObjects/CustomerId.cs" Line="52" Column="44" />
+      <File FileName="src/Domain/Accounts/ValueObjects/Money.cs" Line="64" Column="44" />
+      <File FileName="src/Domain/Accounts/ValueObjects/PositiveMoney.cs" Line="59" Column="44" />
+      <File FileName="src/Domain/Customers/ValueObjects/Name.cs" Line="45" Column="44" />
+      <File FileName="src/Domain/Customers/ValueObjects/SSN.cs" Line="57" Column="44" />
+      <File FileName="src/Infrastructure/DataAccess/Repositories/UserRepositoryFake.cs" Line="35" Column="20" />
+      <File FileName="src/Infrastructure/DataAccess/Repositories/AccountRepositoryFake.cs" Line="104" Column="64" />
+      <File FileName="src/Application/UseCases/RegisterRegisterUseCase.cs" Line="83" Column="33" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Clean-Architecture-Manga" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <DisabledProjects>
+    <String>test/UnitTests/UnitTests.csproj</String>
+    <String>test/IntegrationTests/IntegrationTests.csproj</String>
+    <String>test/ComponentTests/ComponentTests.csproj</String>
+    <String>src/WebApi/WebApi.csproj</String>
+    <String>src/Infrastructure/Infrastructure.csproj</String>
+    <String>src/Domain/Domain.csproj</String>
+    <String>src/Application/Application.csproj</String>
+  </DisabledProjects>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
