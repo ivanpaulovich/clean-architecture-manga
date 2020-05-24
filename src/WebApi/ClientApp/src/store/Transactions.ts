@@ -2,10 +2,12 @@ import { Action, Reducer } from "redux";
 import { AppThunkAction } from "./";
 
 export interface TransactionsState {
-    transactions: Transactions;
+    account: AccountDetails;
 }
 
-export interface Transactions {
+export interface AccountDetails {
+    accountId: string;
+    currentBalance: number;
     credits: Credit[];
     debits: Debit[];
 }
@@ -30,7 +32,7 @@ interface RequestTransactionsAction {
 
 interface ReceiveTransactionsAction {
     type: "RECEIVE_TRANSACTIONS";
-    transactions: Transactions;
+    transactionState: TransactionsState;
 }
 
 type KnownAction = RequestTransactionsAction | ReceiveTransactionsAction;
@@ -41,15 +43,18 @@ export const actionCreators = {
         getState
     ) => {
         fetch(`api/v1/Accounts/${accountId}`)
-            .then((response) => response.json() as Promise<Transactions>)
+            .then((response) => response.json() as Promise<TransactionsState>)
             .then((data) => {
-                dispatch({ type: "RECEIVE_TRANSACTIONS", transactions: data });
+                dispatch({
+                    type: "RECEIVE_TRANSACTIONS",
+                    transactionState: data,
+                });
             });
     },
 };
 
 const unloadedState: TransactionsState = {
-    transactions: { credits: [], debits: [] },
+    account: { credits: [], debits: [], accountId: "", currentBalance: 0 },
 };
 
 export const reducer: Reducer<TransactionsState> = (
@@ -63,9 +68,7 @@ export const reducer: Reducer<TransactionsState> = (
     const action = incomingAction as KnownAction;
     switch (action.type) {
         case "RECEIVE_TRANSACTIONS":
-            return {
-                transactions: action.transactions,
-            };
+            return action.transactionState;
             break;
     }
 
