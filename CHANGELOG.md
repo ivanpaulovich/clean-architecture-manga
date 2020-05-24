@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#181](https://github.com/ivanpaulovich/clean-architecture-manga/issues/181) TypeScript Exception.
 
+### Changed
+
+- NPM packages updated.
+
 ## [3.0.2] - 2020-05-23
 
 ### Security
