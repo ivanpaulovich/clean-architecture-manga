@@ -9,15 +9,15 @@
             "type": "chrome",
             "request": "launch",
             "url": "https://localhost:5001",
-            "webRoot": "${workspaceFolder}/src/WebApi/Admin"
+            "webRoot": "${workspaceFolder}/src/WebApi/ClientApp"
         },
         {
-            "name": "Attach to url with files served from ./out",
+            "name": "Attach to url with files served from ./src/WebApi/ClientApp",
             "type": "chrome",
             "request": "attach",
             "port": 9222,
             "url": "https://localhost:5001",
-            "webRoot": "${workspaceFolder}/src/WebApi/Admin"
+            "webRoot": "${workspaceFolder}/src/WebApi/ClientApp"
         },
         {
             "name": "Development",
