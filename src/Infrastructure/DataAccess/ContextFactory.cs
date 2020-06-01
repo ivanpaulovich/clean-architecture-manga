@@ -35,7 +35,7 @@ namespace Infrastructure.DataAccess
                 .AddJsonFile("appsettings.Production.json")
                 .Build();
 
-            string connectionString = configuration.GetConnectionString("DefaultConnection");
+            string connectionString = configuration.GetValue<string>("PersistenceModule:DefaultConnection");
             return connectionString;
         }
     }
