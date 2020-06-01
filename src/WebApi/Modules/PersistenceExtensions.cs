@@ -28,7 +28,7 @@ namespace WebApi.Modules
             else
             {
                 services.AddDbContext<MangaContext>(
-                    options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+                    options => options.UseSqlServer(configuration.GetValue<string>("PersistenceModule:DefaultConnection")));
                 services.AddScoped<IUnitOfWork, UnitOfWork>();
 
                 services.AddScoped<IAccountRepository, AccountRepository>();
