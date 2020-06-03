@@ -9,7 +9,7 @@ namespace UnitTests.EntitiesTests
     using Infrastructure.DataAccess;
     using Xunit;
 
-    public class AccountTests
+    public sealed class AccountTests
     {
         [Fact]
         public void Account_With_200_Balance_Should_Not_Allow_50000_Withdraw()

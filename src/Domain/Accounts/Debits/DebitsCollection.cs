@@ -16,7 +16,7 @@ namespace Domain.Accounts.Debits
     ///     </see>
     ///     .
     /// </summary>
-    public class DebitsCollection : List<IDebit>
+    public sealed class DebitsCollection : List<IDebit>
     {
         /// <summary>
         ///     Gets Total amount.

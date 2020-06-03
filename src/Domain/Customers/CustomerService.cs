@@ -16,7 +16,7 @@ namespace Domain.Customers
     ///     </see>
     ///     .
     /// </summary>
-    public class CustomerService
+    public sealed class CustomerService
     {
         private readonly ICustomerFactory _customerFactory;
         private readonly ICustomerRepository _customerRepository;

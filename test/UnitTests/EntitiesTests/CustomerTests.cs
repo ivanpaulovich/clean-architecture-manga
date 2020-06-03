@@ -6,7 +6,7 @@ namespace UnitTests.EntitiesTests
     using Infrastructure.DataAccess;
     using Xunit;
 
-    public class CustomerTests
+    public sealed class CustomerTests
     {
         [Fact]
         public void Customer_Should_Be_Registered_With_1_Account()

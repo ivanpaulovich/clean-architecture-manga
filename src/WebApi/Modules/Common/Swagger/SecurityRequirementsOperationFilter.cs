@@ -6,7 +6,7 @@ namespace WebApi.Modules.Common.Swagger
     using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
 
-    public class SecurityRequirementsOperationFilter : IOperationFilter
+    public sealed class SecurityRequirementsOperationFilter : IOperationFilter
     {
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
@@ -22,12 +22,12 @@ namespace WebApi.Modules.Common.Swagger
                 return;
             }
 
-            operation.Responses.Add("401", new OpenApiResponse {Description = "Unauthorized"});
-            operation.Responses.Add("403", new OpenApiResponse {Description = "Forbidden"});
+            operation.Responses.Add("401", new OpenApiResponse { Description = "Unauthorized" });
+            operation.Responses.Add("403", new OpenApiResponse { Description = "Forbidden" });
 
             var oAuthScheme = new OpenApiSecurityScheme
             {
-                Reference = new OpenApiReference {Type = ReferenceType.SecurityScheme, Id = "oauth2"}
+                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" }
             };
 
             operation.Security = new List<OpenApiSecurityRequirement>

@@ -6,7 +6,7 @@ namespace WebApi.UseCases.V1.Withdraw
     /// <summary>
     ///     Withdraw Request.
     /// </summary>
-    public class WithdrawRequest
+    public sealed class WithdrawRequest
     {
         /// <summary>
         ///     Gets or sets the Account ID.

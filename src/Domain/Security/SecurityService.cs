@@ -17,7 +17,7 @@ namespace Domain.Security
     ///     </see>
     ///     .
     /// </summary>
-    public class SecurityService
+    public sealed class SecurityService
     {
         private readonly IUserRepository _userRepository;
 

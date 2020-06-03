@@ -43,21 +43,22 @@ namespace WebApi
             }
             else
             {
-                app.UseExceptionHandler("/Error");
-                app.UseHsts();
+                app.UseExceptionHandler("/api/V1/CustomError")
+                    .UseHsts();
             }
 
             app.UseSpaStaticFiles();
+
             app.UseHttpsRedirection()
                 .UseStaticFiles()
                 .UseMetricServer()
                 .UseMangaHttpMetrics()
                 .UseRouting()
                 .UseVersionedSwagger(provider, this.Configuration)
-                .UseStaticFiles()
                 .UseAuthentication()
                 .UseAuthorization()
-                .UseEndpoints(endpoints => { endpoints.MapControllers(); }).UseSpa(spa =>
+                .UseEndpoints(endpoints => { endpoints.MapControllers(); })
+                .UseSpa(spa =>
                 {
                     spa.Options.SourcePath = "ClientApp";
                     if (env.IsDevelopment())

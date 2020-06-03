@@ -14,7 +14,7 @@ namespace WebApi.Modules.Common.Swagger
     ///     This allows API versioning to define a Swagger document per API version after the
     ///     <see cref="IApiVersionDescriptionProvider" /> service has been resolved from the service container.
     /// </remarks>
-    public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
+    public sealed class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
     {
         private readonly IApiVersionDescriptionProvider _provider;
 
@@ -45,7 +45,7 @@ namespace WebApi.Modules.Common.Swagger
                 Title = "Clean Architecture Manga API",
                 Version = description.ApiVersion.ToString(),
                 Description = "Clean Architecture, DDD and TDD implementation.",
-                Contact = new OpenApiContact {Name = "Ivan Paulovich", Email = "ivan@paulovich.net"},
+                Contact = new OpenApiContact { Name = "Ivan Paulovich", Email = "ivan@paulovich.net" },
                 TermsOfService = new Uri("http://paulovich.net"),
                 License = new OpenApiLicense
                 {
