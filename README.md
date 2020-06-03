@@ -181,6 +181,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://www.linkedin.com/in/cesinhaugusto/"><img src="https://avatars1.githubusercontent.com/u/25554544?v=4" width="100px;" alt=""/><br /><sub><b>Cesar Pereira</b></sub></a><br /><a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=cesinhaugusto" title="Code">💻</a></td>
     <td align="center"><a href="http://www.edvaldofarias.com.br"><img src="https://avatars2.githubusercontent.com/u/40303187?v=4" width="100px;" alt=""/><br /><sub><b>Edvaldo Farias</b></sub></a><br /><a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=edvaldofarias" title="Code">💻</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://codepen.io/sergiobroccardi/posts/published/"><img src="https://avatars1.githubusercontent.com/u/25184212?v=4" width="100px;" alt=""/><br /><sub><b>Sergio Broccardi</b></sub></a><br /><a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=sbroccardi" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-enable -->
