@@ -14,7 +14,7 @@ namespace Infrastructure.DataAccess.Configuration
     /// <summary>
     ///     Debit Configuration.
     /// </summary>
-    public class DebitConfiguration : IEntityTypeConfiguration<Debit>
+    public sealed class DebitConfiguration : IEntityTypeConfiguration<Debit>
     {
         /// <summary>
         ///     Configure Debit.

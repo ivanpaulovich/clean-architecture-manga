@@ -14,7 +14,7 @@ namespace Infrastructure.DataAccess.Configuration
     /// <summary>
     ///     Credit Configuration.
     /// </summary>
-    public class CreditConfiguration : IEntityTypeConfiguration<Credit>
+    public sealed class CreditConfiguration : IEntityTypeConfiguration<Credit>
     {
         /// <summary>
         ///     Configure Credit.

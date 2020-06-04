@@ -20,7 +20,7 @@ namespace Domain.Accounts
     ///     </see>
     ///     .
     /// </summary>
-    public class AccountService
+    public sealed class AccountService
     {
         private readonly IAccountFactory _accountFactory;
         private readonly IAccountRepository _accountRepository;

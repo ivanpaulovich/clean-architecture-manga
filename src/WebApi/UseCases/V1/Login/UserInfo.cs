@@ -1,10 +1,10 @@
-namespace WebApi.UseCases.V1.GetUserInfo
+namespace WebApi.UseCases.V1.Login
 {
     using System.Security.Claims;
 
     /// <summary>
     /// </summary>
-    public class UserInfo
+    public sealed class UserInfo
     {
         private readonly ClaimsPrincipal _user;
         public UserInfo(ClaimsPrincipal user) => this._user = user;

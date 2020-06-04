@@ -9,7 +9,7 @@ namespace Domain.Accounts.Debits
     /// <summary>
     ///     Empty DebitId Exception.
     /// </summary>
-    public class EmptyDebitIdException : DomainException
+    public sealed class EmptyDebitIdException : DomainException
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="EmptyDebitIdException" /> class.

@@ -16,7 +16,7 @@ namespace Domain.Accounts.Credits
     ///     </see>
     ///     .
     /// </summary>
-    public class CreditsCollection : List<ICredit>
+    public sealed class CreditsCollection : List<ICredit>
     {
         /// <summary>
         ///     Gets Total amount.

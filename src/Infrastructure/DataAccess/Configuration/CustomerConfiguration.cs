@@ -13,7 +13,7 @@ namespace Infrastructure.DataAccess.Configuration
     /// <summary>
     ///     Customer Configuration.
     /// </summary>
-    public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
+    public sealed class CustomerConfiguration : IEntityTypeConfiguration<Customer>
     {
         /// <summary>
         ///     Configure Customer.

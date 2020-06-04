@@ -16,7 +16,7 @@ namespace Domain.Customers
     ///     </see>
     ///     .
     /// </summary>
-    public class AccountCollection : List<AccountId>
+    public sealed class AccountCollection : List<AccountId>
     {
         /// <summary>
         ///     Gets the AccountIds.

@@ -14,7 +14,7 @@ namespace Infrastructure.DataAccess.Configuration
     /// <summary>
     ///     User Configuration.
     /// </summary>
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    public sealed class UserConfiguration : IEntityTypeConfiguration<User>
     {
         /// <summary>
         ///     Configure User.
@@ -42,7 +42,7 @@ namespace Infrastructure.DataAccess.Configuration
                 .IsRequired();
 
             builder.HasKey(
-                c => new {c.ExternalUserId, c.CustomerId});
+                c => new { c.ExternalUserId, c.CustomerId });
         }
     }
 }
