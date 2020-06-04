@@ -20,7 +20,7 @@ namespace UnitTests.UseCaseTests.Register
             RegisterPresenter presenter = new RegisterPresenter();
             const string ssn = "8608178888";
 
-            RegisterRegisterUseCase sut = new RegisterRegisterUseCase(
+            RegisterUseCase sut = new RegisterUseCase(
                 this._fixture.TestUserService,
                 this._fixture.CustomerService,
                 this._fixture.AccountService,
@@ -40,8 +40,8 @@ namespace UnitTests.UseCaseTests.Register
         [Fact]
         public void GivenNullInput_ThrowsException()
         {
-            RegisterRegisterUseCase register =
-                new RegisterRegisterUseCase(null, null, null, null, null, null, null, null);
+            RegisterUseCase register =
+                new RegisterUseCase(null, null, null, null, null, null, null, null);
             Assert.ThrowsAsync<Exception>(async () => await register.Execute(null));
         }
     }

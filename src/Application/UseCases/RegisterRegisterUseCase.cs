@@ -21,7 +21,7 @@ namespace Application.UseCases
     ///     </see>
     ///     .
     /// </summary>
-    public sealed class RegisterRegisterUseCase : IRegisterUseCase
+    public sealed class RegisterUseCase : IRegisterUseCase
     {
         private readonly IAccountRepository _accountRepository;
         private readonly AccountService _accountService;
@@ -33,7 +33,7 @@ namespace Application.UseCases
         private readonly IUserService _userService;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="RegisterRegisterUseCase" /> class.
+        ///     Initializes a new instance of the <see cref="RegisterUseCase" /> class.
         /// </summary>
         /// <param name="userService">User Service.</param>
         /// <param name="customerService">Customer Service.</param>
@@ -43,7 +43,7 @@ namespace Application.UseCases
         /// <param name="unitOfWork">Unit of Work.</param>
         /// <param name="customerRepository"></param>
         /// <param name="accountRepository"></param>
-        public RegisterRegisterUseCase(
+        public RegisterUseCase(
             IUserService userService,
             CustomerService customerService,
             AccountService accountService,
