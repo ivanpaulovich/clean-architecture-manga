@@ -183,6 +183,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://codepen.io/sergiobroccardi/posts/published/"><img src="https://avatars1.githubusercontent.com/u/25184212?v=4" width="100px;" alt=""/><br /><sub><b>Sergio Broccardi</b></sub></a><br /><a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=sbroccardi" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/cuno92"><img src="https://avatars0.githubusercontent.com/u/58431215?v=4" width="100px;" alt=""/><br /><sub><b>cuno92</b></sub></a><br /><a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=cuno92" title="Code">💻</a></td>
   </tr>
 </table>
 
