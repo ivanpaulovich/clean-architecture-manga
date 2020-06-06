@@ -8,11 +8,11 @@ We maintain two versions:
 - [.NET Core 3.1](https://github.com/ivanpaulovich/clean-architecture-manga) - Stable implementation on master branch.
 - [.NET 5](https://github.com/ivanpaulovich/clean-architecture-manga/tree/dotnet5) - Experimental features and .NET 5.
 
-> Hit the `WATCH` button :eyes: to get the latest Clean Architecture updates. <img src="https://emojis.slackmojis.com/emojis/images/1471045863/884/ninja.gif?1471045863" width="32" height="32" />
+> Hit the `WATCH` button to get the latest Clean Architecture updates. <img src="https://emojis.slackmojis.com/emojis/images/1471045863/884/ninja.gif?1471045863" width="32" height="32" />
 
-**Manga is a Virtual Wallet** software in which the customer register an account then manage the balance by `Deposits`, `Withdraws` and `Transfers`.
+Manga is a Virtual Wallet software in which the customer register an account then manage the balance by `Deposits`, `Withdraws` and `Transfers`.
 
-The Web API's demo is hosted on `Azure` servers and the `Swagger UI` client is available at [https://clean-architecture-manga.azurewebsites.net/swagger/index.html](https://clean-architecture-manga.azurewebsites.net/swagger/). It is just beautiful!
+The Web API's demo is hosted on Azure servers and the `Swagger UI` client is available at [https://clean-architecture-manga.azurewebsites.net/swagger/index.html](https://clean-architecture-manga.azurewebsites.net/swagger/). It is just beautiful!
 [![Swagger Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/docs/docs/clean-architecture-manga-swagger-v2.jpg)](https://clean-architecture-manga.azurewebsites.net/swagger/index.html)
 
 We also support the React client:
