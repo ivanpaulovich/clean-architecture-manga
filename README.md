@@ -12,7 +12,7 @@ We maintain two versions:
 
 Manga is a Virtual Wallet software in which the customer register an account then manage the balance by `Deposits`, `Withdraws` and `Transfers`.
 
-The Web API's demo is hosted on Azure servers and there beautiful [Swagger Client](https://clean-architecture-manga.azurewebsites.net/swagger/index.html) available.
+The Web API's demo is hosted on Azure servers and there's a beautiful [Swagger Client](https://clean-architecture-manga.azurewebsites.net/swagger/index.html) available.
 [![Swagger Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/docs/docs/clean-architecture-manga-swagger-v2.jpg)](https://clean-architecture-manga.azurewebsites.net/swagger/index.html)
 
 We also support the React client:
