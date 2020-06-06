@@ -1,7 +1,7 @@
 # Clean Architecture with .NET Core & React+Redux :cyclone:
 [![All Contributors](https://img.shields.io/badge/all_contributors-16-orange.svg?style=flat-square)](#contributors) [![Build Status](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_apis/build/status/ivanpaulovich.clean-architecture-manga?branchName=master)](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_build/latest?definitionId=20&branchName=master)
 
-Sample implementation of the **Clean Architecture Principles with .NET Core**. Use cases as central organizing structure, decoupled from frameworks and technology details. Built with small components that are developed and tested in isolation.
+Sample implementation of the **Clean Architecture Principles with .NET Core**. Use cases as central organizing structure, decoupled from frameworks and technology details. Built by small components that are developed and tested in isolation.
 
 We maintain two versions:
 
@@ -10,10 +10,12 @@ We maintain two versions:
 
 > Hit the `WATCH` button :eyes: to get the latest Clean Architecture updates. <img src="https://emojis.slackmojis.com/emojis/images/1471045863/884/ninja.gif?1471045863" width="32" height="32" />
 
-**Manga is a Virtual Wallet** application in which the customer could register an account then manage the balance by `Deposits`, `Withdraws` and `Transfers`.
+**Manga is a Virtual Wallet** software in which the customer register an account then manage the balance by `Deposits`, `Withdraws` and `Transfers`.
 
-The Manga's demo is hosted on `Azure` servers and the `Swagger UI` client is available at [https://clean-architecture-manga.azurewebsites.net/swagger/index.html](https://clean-architecture-manga.azurewebsites.net/swagger/). It is just beautiful!
+The Web API's demo is hosted on `Azure` servers and the `Swagger UI` client is available at [https://clean-architecture-manga.azurewebsites.net/swagger/index.html](https://clean-architecture-manga.azurewebsites.net/swagger/). It is just beautiful!
 [![Swagger Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/docs/docs/clean-architecture-manga-swagger-v2.jpg)](https://clean-architecture-manga.azurewebsites.net/swagger/index.html)
+
+We also support the React client:
 
 [![React+Redux Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/docs/docs/clean-architecture-manga-react.png)](https://clean-architecture-manga.azurewebsites.net)
 
