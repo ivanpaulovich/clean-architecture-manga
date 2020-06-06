@@ -200,4 +200,4 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
-**ProTip #3:** Would you like to show Clean Architecture on your GitHub profile? Hit the `FORK` button :hearts:.
+> Hit the `FORK` button and show Clean Architecture on your profile. <img src="https://emojis.slackmojis.com/emojis/images/1471045863/884/ninja.gif?1471045863" width="32" height="32" />
