@@ -5,7 +5,7 @@ Sample implementation of the **Clean Architecture Principles with .NET Core**. U
 
 We maintain two versions:
 
-- [.NET Core 3.1](https://github.com/ivanpaulovich/clean-architecture-manga) - Stable implementation on master branch.
+- [Latest .NET Core 3.1 release](https://github.com/ivanpaulovich/clean-architecture-manga) - Check the .NET Core SDK on `global.json`.
 - [.NET 5](https://github.com/ivanpaulovich/clean-architecture-manga/tree/dotnet5) - Experimental features and .NET 5.
 
 > Hit the `WATCH` button to get the latest Clean Architecture updates. <img src="https://emojis.slackmojis.com/emojis/images/1471045863/884/ninja.gif?1471045863" width="32" height="32" />
