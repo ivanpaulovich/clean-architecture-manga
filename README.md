@@ -78,10 +78,10 @@ This is continually updated, open source project.
 Feel free to submit pull requests to help:
 
 * Fix errors.
-* Improve sections.
-* Add new sections.
-* Submit questions and bugs.
-* I am part of a large network of Brazilian developers, to include them in the discussions I pinned the [Discussão em Português](https://github.com/ivanpaulovich/clean-architecture-manga/issues/149).
+* Refactoring.
+* Build the Front End.
+* Submit issues and bugs.
+* I pinned the [Discussão em Português](https://github.com/ivanpaulovich/clean-architecture-manga/issues/149) for our large community of brazillian developers <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAMAAABiM0N1AAAAwFBMVEVHcEwAmzoAmzoAmzoAmzoAmzoAmzogpDNPsCju2wWPwRr+3wHO0gwQnzbeyBC/sR5ArCzu1AiJijdAVVkAJ3ahnjh/vR4QM2+/zg/OvRcgPmcwSmD74A4zWI4ZP4LO6MfL6dSfv8B5mq5McJmvyhPo5F6y0cgmS4ivpiYwqC/e1wja55lZfJ8NM3xAi9Bye0RvuSG/3c1VrO6DvttBeLiMrLc/ZJNmodiIyfkra7JmeWpfbErt3Cw7iMMeWJ1PYVFgrcoWAAAAB3RSTlMAYL//IM/vVZgOvgAAAg1JREFUeAHsz8UBAlAAgFB+5/7r2p4xTsabAPj7Xn8hpjfEwFUu6U0lA+Sa3lYz4D2teROEZPoYPZlATGKuk5lExLb2uti2h22tG9tDt+5kD926kz106072eGzL946UlUWWAzEMBWevpFFhZmbm+99qniH+IQVqYFnPpTZIoiSyPN/3kJf8TRTYrDCKWROnQpsX/CJKXzUZdmQiMqS/FiWzpMnl+Y5CjjTZ5DciZOUy/EAmJ+f9CVnw3Jk8Me9PyKKwwC+IiZAni5BFxVSpVCrzEyki5AkiZClRpaqo1Rv3tjw50qIo2SRHq+po1zsMuuRoJl+Len0Cg+ot7eGIeTxWogmBfu+VaEq3zKr3zOrl+fw6bjCFCFl3sKLUqNfgWixZQQ7kQYQsiAyjxsqtag3RU54o2myY7VxGw7ZVrUaySErbbpVIzUXRsKp2JyOlCcMuLPVEdrvr12rMTN5eGrbw+Q9swKpGZlatj5//Pq/LdkpqVeaP12pRx7usz0eE8mpKjtNJ/e/MqoMPRwSHFksyUzKcz3pWndkRh/bLa4Qu0GBWk2+vEeThQlJrsbMqIOvrqxYm7KYYL8lPl384YXw3Rpd8+Yt5fsyOSw5Zvz+Q5EWXOJOJL5FHyPr9yQZ4sv/br4MiAAAABGH9W1tiLw9SDI8IzxoALU8/j1HAYwV2txBoathmqfGzK1p12ABfT4B+/1w1nQAAAABJRU5ErkJggg==" width="32" height="32" />.
 
 ## Index of Clean Architecture Manga
 ### [Home](https://github.com/ivanpaulovich/clean-architecture-manga/wiki)
