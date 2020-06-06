@@ -81,7 +81,8 @@ Feel free to submit pull requests to help:
 * Refactoring.
 * Build the Front End.
 * Submit issues and bugs.
-* I pinned the [Discussão em Português](https://github.com/ivanpaulovich/clean-architecture-manga/issues/149) for our large community of brazillian developers <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/twitter/248/flag-brazil_1f1e7-1f1f7.png" width="32" height="32" />.
+
+> I pinned the [Discussão em Português](https://github.com/ivanpaulovich/clean-architecture-manga/issues/149) for our large community of brazillian developers. <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/twitter/248/flag-brazil_1f1e7-1f1f7.png" width="32" height="32" />
 
 ## Index of Clean Architecture Manga
 ### [Home](https://github.com/ivanpaulovich/clean-architecture-manga/wiki)
