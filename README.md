@@ -1,14 +1,21 @@
-# Manga: The Clean Architecture Sample with .NET Core & React+Redux :cyclone:
+# Clean Architecture with .NET Core & React+Redux :cyclone:
 [![All Contributors](https://img.shields.io/badge/all_contributors-16-orange.svg?style=flat-square)](#contributors) [![Build Status](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_apis/build/status/ivanpaulovich.clean-architecture-manga?branchName=master)](https://dev.azure.com/ivanpaulovich/clean-architecture-manga/_build/latest?definitionId=20&branchName=master)
 
-Sample implementation of the **Clean Architecture Principles with .NET Core**. Use cases as central organizing structure, decoupled from frameworks and technology details. Built with small components that are developed and tested in isolation.
+Sample implementation of the **Clean Architecture Principles with .NET Core**. Use cases as central organizing structure, decoupled from frameworks and technology details. Built by small components that are developed and tested in isolation.
 
-**ProTip #1:** Hit the `WATCH` button :eyes: to get the latest Clean Architecture updates.
+We maintain two versions:
 
-**Manga is a Virtual Wallet** application in which the customer could register an account then manage the balance by `Deposits`, `Withdraws` and `Transfers`.
+- [Latest .NET Core 3.1 release](https://github.com/ivanpaulovich/clean-architecture-manga) - Check the .NET Core SDK on `global.json`.
+- [.NET 5](https://github.com/ivanpaulovich/clean-architecture-manga/tree/dotnet5) - Experimental features and .NET 5.
 
-The Manga's demo is hosted on `Azure` servers and the `Swagger UI` client is available at [https://clean-architecture-manga.azurewebsites.net/swagger/index.html](https://clean-architecture-manga.azurewebsites.net/swagger/). It is just beautiful!
+> Hit the `WATCH` button to get the latest Clean Architecture updates. <img src="https://emojis.slackmojis.com/emojis/images/1471045863/884/ninja.gif?1471045863" width="32" height="32" />
+
+Manga is a Virtual Wallet software in which the customer register an account then manage the balance by `Deposits`, `Withdraws` and `Transfers`.
+
+The Web API's demo is hosted on Azure servers and there's a beautiful [Swagger Client](https://clean-architecture-manga.azurewebsites.net/swagger/index.html) available.
 [![Swagger Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/docs/docs/clean-architecture-manga-swagger-v2.jpg)](https://clean-architecture-manga.azurewebsites.net/swagger/index.html)
+
+We also support the React client:
 
 [![React+Redux Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/docs/docs/clean-architecture-manga-react.png)](https://clean-architecture-manga.azurewebsites.net)
 
@@ -71,10 +78,11 @@ This is continually updated, open source project.
 Feel free to submit pull requests to help:
 
 * Fix errors.
-* Improve sections.
-* Add new sections.
-* Submit questions and bugs.
-* I am part of a large network of Brazilian developers, to include them in the discussions I pinned the [Discussão em Português](https://github.com/ivanpaulovich/clean-architecture-manga/issues/149).
+* Refactoring.
+* Build the Front End.
+* Submit issues and bugs.
+
+> The [Discussão em Português](https://github.com/ivanpaulovich/clean-architecture-manga/issues/149) is pinned for the large community of brazillian developers. <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/twitter/248/flag-brazil_1f1e7-1f1f7.png" width="32" height="32" />
 
 ## Index of Clean Architecture Manga
 ### [Home](https://github.com/ivanpaulovich/clean-architecture-manga/wiki)
@@ -193,4 +201,4 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
-**ProTip #3:** Would you like to show Clean Architecture on your GitHub profile? Hit the `FORK` button :hearts:.
+> Hit the `FORK` button and show Clean Architecture on your profile. <img src="https://emojis.slackmojis.com/emojis/images/1469223471/679/charmander_dancing.gif?1469223471" width="32" height="32" />
