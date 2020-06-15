@@ -22,7 +22,7 @@ namespace UnitTests.UseCaseTests.Transfer
             decimal expectedOriginBalance)
         {
             TransferPresenter presenter = new TransferPresenter();
-            TransferTransferUseCase sut = new TransferTransferUseCase(
+            TransferUseCase sut = new TransferUseCase(
                 this._fixture.AccountService,
                 presenter,
                 this._fixture.AccountRepositoryFake,
