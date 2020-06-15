@@ -33,7 +33,7 @@ namespace WebApi.Modules
             services.AddScoped<IGetCustomerUseCase, GetCustomerUseCase>();
             services.AddScoped<IRegisterUseCase, RegisterUseCase>();
             services.AddScoped<IWithdrawUseCase, WithdrawUseCase>();
-            services.AddScoped<ITransferUseCase, TransferTransferUseCase>();
+            services.AddScoped<ITransferUseCase, TransferUseCase>();
 
             services.AddScoped<CustomerService>();
             services.AddScoped<SecurityService>();

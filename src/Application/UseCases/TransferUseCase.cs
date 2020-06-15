@@ -6,8 +6,8 @@ namespace Application.UseCases
 {
     using System.Threading.Tasks;
     using Boundaries.Transfer;
-    using Domain.Accounts;
     using Domain.Accounts.Debits;
+    using Domain.Accounts;
     using Services;
 
     /// <summary>
@@ -18,7 +18,7 @@ namespace Application.UseCases
     ///     </see>
     ///     .
     /// </summary>
-    public sealed class TransferTransferUseCase : ITransferUseCase
+    public sealed class TransferUseCase : ITransferUseCase
     {
         private readonly IAccountRepository _accountRepository;
         private readonly AccountService _accountService;
@@ -26,13 +26,13 @@ namespace Application.UseCases
         private readonly IUnitOfWork _unitOfWork;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="TransferTransferUseCase" /> class.
+        ///     Initializes a new instance of the <see cref="TransferUseCase" /> class.
         /// </summary>
         /// <param name="accountService">Account Service.</param>
         /// <param name="transferOutputPort">Output Port.</param>
         /// <param name="accountRepository">Account Repository.</param>
         /// <param name="unitOfWork">Unit Of Work.</param>
-        public TransferTransferUseCase(
+        public TransferUseCase(
             AccountService accountService,
             ITransferOutputPort transferOutputPort,
             IAccountRepository accountRepository,
