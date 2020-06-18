@@ -22,12 +22,12 @@ namespace WebApi.Modules
     {
         public static IServiceCollection AddPresentersV1(this IServiceCollection services)
         {
-            services.AddScoped<CloseAccountGetAccountsPresenter, CloseAccountGetAccountsPresenter>();
-            services.AddScoped<ICloseAccountOutputPort>(x => x.GetRequiredService<CloseAccountGetAccountsPresenter>());
+            services.AddScoped<CloseAccountPresenter, CloseAccountPresenter>();
+            services.AddScoped<ICloseAccountOutputPort>(x => x.GetRequiredService<CloseAccountPresenter>());
 
-            services.AddScoped<DepositGetAccountsPresenter, DepositGetAccountsPresenter>();
+            services.AddScoped<DepositPresenter, DepositPresenter>();
             services.AddScoped<IDepositOutputPort>(
-                x => x.GetRequiredService<DepositGetAccountsPresenter>());
+                x => x.GetRequiredService<DepositPresenter>());
 
             services.AddScoped<GetAccountPresenter, GetAccountPresenter>();
             services.AddScoped<IGetAccountOutputPort>(x =>

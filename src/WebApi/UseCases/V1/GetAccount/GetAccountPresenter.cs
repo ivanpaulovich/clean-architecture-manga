@@ -23,10 +23,10 @@ namespace WebApi.UseCases.V1.GetAccount
         /// <summary>
         ///     Account details and its transactions.
         /// </summary>
-        /// <param name="getAccountOutput">Transaction details.</param>
-        public void Standard(GetAccountOutput getAccountOutput)
+        /// <param name="output">Transaction details.</param>
+        public void Standard(GetAccountOutput output)
         {
-            var getAccountResponse = new GetAccountResponse(getAccountOutput.Account);
+            var getAccountResponse = new GetAccountResponse(output.Account);
             this.ViewModel = new OkObjectResult(getAccountResponse);
         }
 

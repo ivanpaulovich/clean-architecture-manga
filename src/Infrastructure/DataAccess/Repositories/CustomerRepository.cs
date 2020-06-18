@@ -20,13 +20,11 @@ namespace Infrastructure.DataAccess.Repositories
                                                                            throw new ArgumentNullException(
                                                                                nameof(context));
 
-        public async Task Add(ICustomer customer)
-        {
+        public async Task Add(ICustomer customer) =>
             await this._context
                 .Customers
                 .AddAsync((Customer)customer)
                 .ConfigureAwait(false);
-        }
 
         public async Task<ICustomer> GetBy(CustomerId customerId)
         {

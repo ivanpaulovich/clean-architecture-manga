@@ -14,10 +14,10 @@ namespace WebApi.UseCases.V1.GetAccounts
 
         /// <summary>
         /// </summary>
-        /// <param name="getAccountsOutput"></param>
-        public void Standard(GetAccountsOutput getAccountsOutput)
+        /// <param name="output"></param>
+        public void Standard(GetAccountsOutput output)
         {
-            var getAccountDetailsResponse = new GetAccountsResponse(getAccountsOutput.Accounts);
+            var getAccountDetailsResponse = new GetAccountsResponse(output.Accounts);
             this.ViewModel = new OkObjectResult(getAccountDetailsResponse);
         }
 

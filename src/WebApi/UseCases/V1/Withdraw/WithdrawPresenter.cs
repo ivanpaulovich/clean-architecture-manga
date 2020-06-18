@@ -18,12 +18,12 @@ namespace WebApi.UseCases.V1.Withdraw
 
         public void OutOfBalance(string message) => this.ViewModel = new BadRequestObjectResult(message);
 
-        public void Standard(WithdrawOutput withdrawOutput)
+        public void Standard(WithdrawOutput output)
         {
-            var debitModel = new DebitModel((Debit)withdrawOutput.Transaction);
+            var debitModel = new DebitModel((Debit)output.Transaction);
             var withdrawResponse = new WithdrawResponse(
                 debitModel,
-                withdrawOutput.UpdatedBalance.ToDecimal());
+                output.UpdatedBalance.ToDecimal());
             this.ViewModel = new ObjectResult(withdrawResponse);
         }
 

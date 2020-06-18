@@ -13,13 +13,13 @@ namespace WebApi.UseCases.V2.GetAccount
 
         public void NotFound(string message) => this.ViewModel = new NotFoundObjectResult(message);
 
-        public void Standard(GetAccountOutput getAccountOutput)
+        public void Standard(GetAccountOutput output)
         {
             using var dataTable = new DataTable();
             dataTable.Columns.Add("AccountId", typeof(Guid));
             dataTable.Columns.Add("Amount", typeof(decimal));
 
-            var account = (Account)getAccountOutput.Account;
+            var account = (Account)output.Account;
 
             dataTable.Rows.Add(account.Id.ToGuid(), account.GetCurrentBalance().ToDecimal());
 
