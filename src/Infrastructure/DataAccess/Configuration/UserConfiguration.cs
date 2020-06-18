@@ -42,7 +42,7 @@ namespace Infrastructure.DataAccess.Configuration
                 .IsRequired();
 
             builder.HasKey(
-                c => new { c.ExternalUserId, c.CustomerId });
+                c => new {c.ExternalUserId, c.CustomerId});
         }
     }
 }

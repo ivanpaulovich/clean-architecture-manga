@@ -6,8 +6,8 @@ namespace Application.UseCases
 {
     using System.Threading.Tasks;
     using Boundaries.Transfer;
-    using Domain.Accounts.Debits;
     using Domain.Accounts;
+    using Domain.Accounts.Debits;
     using Services;
 
     /// <summary>

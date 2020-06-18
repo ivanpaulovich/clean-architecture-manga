@@ -5,7 +5,7 @@ namespace WebApi.UseCases.V1.CloseAccount
 
     /// <summary>
     /// </summary>
-    public sealed class CloseAccountGetAccountsPresenter : ICloseAccountOutputPort
+    public sealed class CloseAccountPresenter : ICloseAccountOutputPort
     {
         /// <summary>
         /// </summary>
@@ -19,9 +19,9 @@ namespace WebApi.UseCases.V1.CloseAccount
 
         /// <summary>
         /// </summary>
-        /// <param name="closeAccountOutput"></param>
-        public void Standard(CloseAccountOutput closeAccountOutput) =>
-            this.ViewModel = new OkObjectResult(closeAccountOutput.Account.Id);
+        /// <param name="output"></param>
+        public void Standard(CloseAccountOutput output) =>
+            this.ViewModel = new OkObjectResult(output.Account.Id);
 
         /// <summary>
         /// </summary>

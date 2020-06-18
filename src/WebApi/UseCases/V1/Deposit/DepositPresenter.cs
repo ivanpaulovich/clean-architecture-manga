@@ -6,7 +6,7 @@ namespace WebApi.UseCases.V1.Deposit
 
     /// <summary>
     /// </summary>
-    public sealed class DepositGetAccountsPresenter : IDepositOutputPort
+    public sealed class DepositPresenter : IDepositOutputPort
     {
         /// <summary>
         /// </summary>
@@ -20,15 +20,15 @@ namespace WebApi.UseCases.V1.Deposit
 
         /// <summary>
         /// </summary>
-        /// <param name="depositOutput"></param>
-        public void Standard(DepositOutput depositOutput)
+        /// <param name="output"></param>
+        public void Standard(DepositOutput output)
         {
-            var depositEntity = (Credit)depositOutput.Transaction;
+            var depositEntity = (Credit)output.Transaction;
             var depositResponse = new DepositResponse(
                 depositEntity.Amount.ToMoney().ToDecimal(),
                 Credit.Description,
                 depositEntity.TransactionDate,
-                depositOutput.UpdatedBalance.ToDecimal());
+                output.UpdatedBalance.ToDecimal());
             this.ViewModel = new ObjectResult(depositResponse);
         }
 

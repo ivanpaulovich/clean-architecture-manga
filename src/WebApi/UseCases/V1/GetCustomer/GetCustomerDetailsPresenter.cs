@@ -11,9 +11,9 @@ namespace WebApi.UseCases.V1.GetCustomer
 
         public void NotFound(string message) => this.ViewModel = new NotFoundObjectResult(message);
 
-        public void Standard(GetCustomerOutput getCustomerDetailsOutput)
+        public void Standard(GetCustomerOutput output)
         {
-            var customerModel = new CustomerModel((Customer)getCustomerDetailsOutput.Customer);
+            var customerModel = new CustomerModel((Customer)output.Customer);
             var getCustomerDetailsResponse = new GetCustomerDetailsResponse(customerModel);
             this.ViewModel = new OkObjectResult(getCustomerDetailsResponse);
         }

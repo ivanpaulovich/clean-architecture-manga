@@ -22,7 +22,7 @@ namespace WebApi.UseCases.V1.Login
         [AllowAnonymous]
         public IActionResult Google(Uri returnUrl) => new ChallengeResult(
             "Google",
-            new AuthenticationProperties { RedirectUri = returnUrl.ToString() });
+            new AuthenticationProperties {RedirectUri = returnUrl.ToString()});
 
         /// <summary>
         /// </summary>
@@ -32,7 +32,7 @@ namespace WebApi.UseCases.V1.Login
         [AllowAnonymous]
         public IActionResult GitHub(Uri returnUrl) => new ChallengeResult(
             "GitHub",
-            new AuthenticationProperties { RedirectUri = returnUrl.ToString() });
+            new AuthenticationProperties {RedirectUri = returnUrl.ToString()});
 
         /// <summary>
         /// </summary>

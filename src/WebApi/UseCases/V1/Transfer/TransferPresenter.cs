@@ -11,10 +11,10 @@ namespace WebApi.UseCases.V1.Transfer
 
         public void NotFound(string message) => this.ViewModel = new NotFoundObjectResult(message);
 
-        public void Standard(TransferOutput transferOutput)
+        public void Standard(TransferOutput output)
         {
-            var transactionModel = new DebitModel((Debit)transferOutput.Transaction);
-            var transferResponse = new TransferResponse(transactionModel, transferOutput.UpdatedBalance.ToDecimal());
+            var transactionModel = new DebitModel((Debit)output.Transaction);
+            var transferResponse = new TransferResponse(transactionModel, output.UpdatedBalance.ToDecimal());
             this.ViewModel = new ObjectResult(transferResponse);
         }
 
