@@ -5,10 +5,13 @@ namespace WebApi.UseCases.V1.CloseAccount
     using Application.Boundaries.CloseAccount;
 
     /// <summary>
-    ///     Close Account Response.
+    ///     The response Close an Account.
     /// </summary>
     public sealed class CloseAccountResponse
     {
+        /// <summary>
+        ///     Close Account Response constructor.
+        /// </summary>
         public CloseAccountResponse(CloseAccountOutput output) => this.AccountId = output.Account.Id.ToGuid();
 
         /// <summary>

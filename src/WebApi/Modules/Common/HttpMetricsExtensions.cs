@@ -3,8 +3,14 @@ namespace WebApi.Modules.Common
     using Microsoft.AspNetCore.Builder;
     using Prometheus;
 
+    /// <summary>
+    /// Http Metrics Extensions.
+    /// </summary>
     public static class HttpMetricsExtensions
     {
+        /// <summary>
+        /// Add Prometheus dependencies.
+        /// </summary>
         public static IApplicationBuilder UseMangaHttpMetrics(this IApplicationBuilder appBuilder) =>
             appBuilder.UseHttpMetrics(options =>
             {

@@ -5,10 +5,13 @@ namespace WebApi.ViewModels
     using Domain.Customers;
 
     /// <summary>
-    ///     Transaction.
+    ///     Customer.
     /// </summary>
     public sealed class CustomerModel
     {
+        /// <summary>
+        ///     Customer constructor.
+        /// </summary>
         public CustomerModel(Customer customer)
         {
             this.CustomerId = customer.Id.ToGuid();

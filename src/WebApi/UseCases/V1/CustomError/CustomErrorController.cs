@@ -16,6 +16,10 @@ namespace WebApi.UseCases.V1.CustomError
     [ApiController]
     public sealed class CustomErrorController : Controller
     {
+        /// <summary>
+        ///     Get an custom error.
+        /// </summary>
+        /// <returns>The custom error model.</returns>
         [HttpGet]
         [AllowAnonymous]
         public IActionResult CustomError()

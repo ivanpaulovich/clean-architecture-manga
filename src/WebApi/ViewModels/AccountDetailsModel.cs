@@ -13,6 +13,9 @@ namespace WebApi.ViewModels
     /// </summary>
     public sealed class AccountDetailsModel
     {
+        /// <summary>
+        ///     Account Details constructor.
+        /// </summary>
         public AccountDetailsModel(IAccount account)
         {
             var accountEntity = (Account)account;
@@ -41,8 +44,14 @@ namespace WebApi.ViewModels
         [Required]
         public decimal CurrentBalance { get; }
 
+        /// <summary>
+        ///     Gets Credits.
+        /// </summary>
         [Required] public List<CreditModel> Credits { get; } = new List<CreditModel>();
 
+        /// <summary>
+        ///     Gets Debits.
+        /// </summary>
         [Required] public List<DebitModel> Debits { get; } = new List<DebitModel>();
     }
 }

@@ -5,10 +5,13 @@ namespace WebApi.ViewModels
     using Domain.Accounts.Credits;
 
     /// <summary>
-    ///     Transaction.
+    ///     Credit.
     /// </summary>
     public sealed class CreditModel
     {
+        /// <summary>
+        ///     Credit constructor.
+        /// </summary>
         public CreditModel(Credit credit)
         {
             this.TransactionId = credit.Id.ToGuid();

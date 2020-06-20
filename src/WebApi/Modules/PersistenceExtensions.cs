@@ -10,8 +10,14 @@ namespace WebApi.Modules
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
+    /// <summary>
+    ///     Persistencce Extensions.
+    /// </summary>
     public static class PersistenceExtensions
     {
+        /// <summary>
+        ///     Add Persistences dependencies varying on configuration.
+        /// </summary>
         public static IServiceCollection AddPersistence(
             this IServiceCollection services,
             IConfiguration configuration)
