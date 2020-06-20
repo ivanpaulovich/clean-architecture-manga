@@ -218,6 +218,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "vmamore",
+      "name": "Vinícius Mamoré",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/26505439?v=4",
+      "profile": "http://vmamore.com.br",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5,
