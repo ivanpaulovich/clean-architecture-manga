@@ -4,8 +4,14 @@ namespace WebApi.Modules.Common
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Filters;
 
+    /// <summary>
+    /// Exception Filter.
+    /// </summary>
     public sealed class ExceptionFilter : IExceptionFilter
     {
+        /// <summary>
+        /// Add Problem Details when occurs Domain Exception.
+        /// </summary>
         public void OnException(ExceptionContext context)
         {
             if (!(context.Exception is DomainException))

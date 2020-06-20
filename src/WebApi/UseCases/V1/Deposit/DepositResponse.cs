@@ -8,6 +8,9 @@ namespace WebApi.UseCases.V1.Deposit
     /// </summary>
     public sealed class DepositResponse
     {
+        /// <summary>
+        ///     The Deposit response constructor.
+        /// </summary>
         public DepositResponse(
             decimal amount,
             string description,

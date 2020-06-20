@@ -9,6 +9,9 @@ namespace WebApi.UseCases.V1.Register
     /// </summary>
     public sealed class RegisterResponse
     {
+        /// <summary>
+        ///     The Response Registration Constructor.
+        /// </summary>
         public RegisterResponse(
             CustomerModel customerModel,
             List<AccountModel> accountsModel)

@@ -2,8 +2,14 @@ namespace WebApi.Modules.Common
 {
     using Microsoft.Extensions.DependencyInjection;
 
+    /// <summary>
+    /// Versioning Extensions.
+    /// </summary>
     public static class VersioningExtensions
     {
+        /// <summary>
+        /// Method that adds versioning to the api.
+        /// </summary>
         public static IServiceCollection AddVersioning(this IServiceCollection services)
         {
             services.AddApiVersioning(

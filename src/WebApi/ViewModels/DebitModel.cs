@@ -5,10 +5,13 @@ namespace WebApi.ViewModels
     using Domain.Accounts.Debits;
 
     /// <summary>
-    ///     Transaction.
+    ///     Debit.
     /// </summary>
     public sealed class DebitModel
     {
+        /// <summary>
+        ///     Debit constructor.
+        /// </summary>
         public DebitModel(Debit credit)
         {
             this.TransactionId = credit.Id.ToGuid();

@@ -9,6 +9,9 @@ namespace WebApi.ViewModels
     /// </summary>
     public sealed class AccountModel
     {
+        /// <summary>
+        ///     Account Details constructor.
+        /// </summary>
         public AccountModel(IAccount account)
         {
             var accountEntity = (Account)account;

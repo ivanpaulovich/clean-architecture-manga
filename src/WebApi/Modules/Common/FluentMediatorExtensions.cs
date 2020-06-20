@@ -11,8 +11,14 @@ namespace WebApi.Modules.Common
     using FluentMediator;
     using Microsoft.Extensions.DependencyInjection;
 
+    /// <summary>
+    /// Fluent Mediator.
+    /// </summary>
     public static class FluentMediatorExtensions
     {
+        /// <summary>
+        /// Register Inputs dependencies.
+        /// </summary>
         public static IServiceCollection AddMediator(this IServiceCollection services)
         {
             services.AddFluentMediator(

@@ -12,6 +12,9 @@ namespace WebApi.Modules.Common.Swagger
     using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
 
+    /// <summary>
+    /// Swagger Extenions.
+    /// </summary>
     public static class SwaggerExtensions
     {
         private static string XmlCommentsFilePath
@@ -24,6 +27,9 @@ namespace WebApi.Modules.Common.Swagger
             }
         }
 
+        /// <summary>
+        /// Add Swagger Configuration dependencies.
+        /// </summary>
         public static IServiceCollection AddSwagger(this IServiceCollection services)
         {
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
@@ -53,6 +59,9 @@ namespace WebApi.Modules.Common.Swagger
             return services;
         }
 
+        /// <summary>
+        /// Add Swagger dependencies.
+        /// </summary>
         public static IApplicationBuilder UseVersionedSwagger(
             this IApplicationBuilder app,
             IApiVersionDescriptionProvider provider,

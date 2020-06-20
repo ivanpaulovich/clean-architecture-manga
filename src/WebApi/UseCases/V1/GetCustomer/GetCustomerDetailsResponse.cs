@@ -8,6 +8,9 @@ namespace WebApi.UseCases.V1.GetCustomer
     /// </summary>
     public sealed class GetCustomerDetailsResponse
     {
+        /// <summary>
+        ///     The Get Customer Details Response constructor.
+        /// </summary>
         public GetCustomerDetailsResponse(CustomerModel customerModel) => this.Customer = customerModel;
 
         /// <summary>

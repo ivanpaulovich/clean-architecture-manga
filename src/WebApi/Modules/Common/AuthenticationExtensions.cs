@@ -16,8 +16,14 @@ namespace WebApi.Modules.Common
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
+    /// <summary>
+    /// Authentication Extensions.
+    /// </summary>
     public static class AuthenticationExtensions
     {
+        /// <summary>
+        /// Add Authentication Extensions.
+        /// </summary>
         public static IServiceCollection AddAuthentication(
             this IServiceCollection services,
             IConfiguration configuration)

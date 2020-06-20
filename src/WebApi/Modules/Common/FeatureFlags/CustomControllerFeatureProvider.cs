@@ -10,12 +10,21 @@ namespace WebApi.Modules.Common.FeatureFlags
     using Microsoft.FeatureManagement;
     using Microsoft.FeatureManagement.Mvc;
 
+    /// <summary>
+    /// Custom Controller Feature Provider.
+    /// </summary>
     public sealed class CustomControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
     {
         private readonly IFeatureManager _featureManager;
 
+        /// <summary>
+        /// Custom Controller Feature Provider constructor.
+        /// </summary>
         public CustomControllerFeatureProvider(IFeatureManager featureManager) => this._featureManager = featureManager;
 
+        /// <summary>
+        /// Populate Features.
+        /// </summary>
         public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllerFeature feature)
         {
             for (int i = feature.Controllers.Count - 1; i >= 0; i--)

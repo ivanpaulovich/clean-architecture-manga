@@ -6,8 +6,14 @@ namespace WebApi.Modules.Common.Swagger
     using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
 
+    /// <summary>
+    ///     The Security Requirements Operation Filter class.
+    /// </summary>
     public sealed class SecurityRequirementsOperationFilter : IOperationFilter
     {
+        /// <summary>
+        ///     Apply filters.
+        /// </summary>
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             // Policy names map to scopes

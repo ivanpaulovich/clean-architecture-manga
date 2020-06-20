@@ -6,10 +6,14 @@ namespace WebApi.UseCases.V1.GetAccounts
     using ViewModels;
 
     /// <summary>
-    ///     Get Account Details.
+    ///     Get Accounts Response.
     /// </summary>
     public sealed class GetAccountsResponse
     {
+        /// <summary>
+        ///     The Get Accounts Response constructor.
+        /// </summary>
+        /// 
         public GetAccountsResponse(IEnumerable<IAccount> accounts)
         {
             foreach (IAccount account in accounts)

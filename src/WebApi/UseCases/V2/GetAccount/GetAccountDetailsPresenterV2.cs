@@ -7,12 +7,22 @@ namespace WebApi.UseCases.V2.GetAccount
     using Microsoft.AspNetCore.Mvc;
     using OfficeOpenXml;
 
+    /// <summary>
+    /// </summary>
     public sealed class GetAccountDetailsPresenterV2 : IGetAccountOutputPort
     {
+        /// <summary>
+        /// </summary>
         public IActionResult ViewModel { get; private set; } = new NoContentResult();
 
+        /// <summary>
+        /// </summary>
+        /// <param name="message"></param>
         public void NotFound(string message) => this.ViewModel = new NotFoundObjectResult(message);
 
+        /// <summary>
+        /// </summary>
+        /// <param name="output"></param>
         public void Standard(GetAccountOutput output)
         {
             using var dataTable = new DataTable();
@@ -38,6 +48,9 @@ namespace WebApi.UseCases.V2.GetAccount
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="message"></param>
         public void WriteError(string message) => this.ViewModel = new BadRequestObjectResult(message);
     }
 }
