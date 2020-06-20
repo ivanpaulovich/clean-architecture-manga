@@ -14,7 +14,7 @@
 
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn);CA1062;CA1822</NoWarn>
+    <NoWarn>$(NoWarn);CA1062</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Development' ">
