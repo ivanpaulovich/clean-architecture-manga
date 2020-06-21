@@ -8,8 +8,8 @@ namespace Domain.Accounts.ValueObjects
 
     /// <summary>
     ///     PositiveMoney
-    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#entity">
-    ///         Entity
+    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#value-object">
+    ///         Value Object
     ///         Design Pattern
     ///     </see>
     ///     .
@@ -22,14 +22,16 @@ namespace Domain.Accounts.ValueObjects
         ///     Initializes a new instance of the <see cref="PositiveMoney" /> struct.
         /// </summary>
         /// <param name="value">Decimal amount.</param>
-        public PositiveMoney(decimal value)
+        /// <param name="currency">Currency type.</param>
+        public PositiveMoney(decimal value, string? currency = "USD")
         {
             if (value < 0)
             {
                 throw new MoneyShouldBePositiveException(Messages.TheAmountShouldBePositive);
             }
 
-            this._value = new Money(value);
+            var tempCurrency = currency == "USD" || currency is null ? Currency.Dollar() : Currency.Create(currency);
+            this._value = new Money(value, tempCurrency);
         }
 
         /// <summary>
@@ -90,5 +92,17 @@ namespace Domain.Accounts.ValueObjects
         /// <param name="other"></param>
         /// <returns></returns>
         public bool Equals(PositiveMoney other) => this._value.ToDecimal() == other._value.ToDecimal();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        public bool IsCurrencyEqualsTo(string currency) => this._value.GetCurrency().ToString() == currency;
+
+        /// <summary>
+        /// </summary>
+        /// <returns></returns>
+        public Currency GetCurrency() => this._value.GetCurrency();
     }
 }

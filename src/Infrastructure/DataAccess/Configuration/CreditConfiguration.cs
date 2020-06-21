@@ -32,7 +32,7 @@ namespace Infrastructure.DataAccess.Configuration
             builder.Property(credit => credit.Amount)
                 .HasConversion(
                     value => value.ToMoney().ToDecimal(),
-                    value => new PositiveMoney(value))
+                    value => new PositiveMoney(value, "USD"))
                 .IsRequired();
 
             builder.Property(credit => credit.Id)

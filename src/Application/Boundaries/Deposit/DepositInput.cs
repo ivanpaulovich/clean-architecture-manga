@@ -34,5 +34,10 @@ namespace Application.Boundaries.Deposit
         ///     Gets the Amount.
         /// </summary>
         public PositiveMoney Amount { get; }
+
+        /// <summary>
+        ///     Gets the Currency.
+        /// </summary>
+        public Currency Currency { get; }
     }
 }

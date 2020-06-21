@@ -6,6 +6,7 @@ namespace WebApi.Modules
     using Domain.Security;
     using Infrastructure.DataAccess;
     using Infrastructure.DataAccess.Repositories;
+    using Infrastructure.Integrations.HTTP;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -46,6 +47,7 @@ namespace WebApi.Modules
             services.AddScoped<IUserFactory, EntityFactory>();
             services.AddScoped<ICustomerFactory, EntityFactory>();
             services.AddScoped<IAccountFactory, EntityFactory>();
+            services.AddScoped<ICurrencyExchangeAPI, CurrencyExchangeAPI>();
 
             return services;
         }

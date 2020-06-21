@@ -16,13 +16,20 @@ namespace Domain.Accounts.ValueObjects
     /// </summary>
     public readonly struct Money : IEquatable<Money>
     {
+        private readonly Currency _currency;
+
         private readonly decimal _money;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Money" /> struct.
         /// </summary>
         /// <param name="value">Decimal amount.</param>
-        public Money(decimal value) => this._money = value;
+        /// <param name="currency">The currency used, default is USD.</param>
+        public Money(decimal value, Currency currency = default(Currency))
+        {
+            this._currency = currency == default ? Currency.Dollar() : currency;
+            this._money = value;
+        }
 
         /// <summary>
         ///     Converts into decimal.
@@ -95,5 +102,10 @@ namespace Domain.Accounts.ValueObjects
         /// <param name="other"></param>
         /// <returns></returns>
         public bool Equals(Money other) => this._money == other._money;
+
+        /// <summary>
+        /// </summary>
+        /// <returns></returns>
+        public Currency GetCurrency() => this._currency;
     }
 }
