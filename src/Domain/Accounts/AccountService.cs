@@ -88,6 +88,7 @@ namespace Domain.Accounts
             }
 
             ICredit credit = account.Deposit(this._accountFactory, amount);
+
             await this._accountRepository.Update(account, credit)
                 .ConfigureAwait(false);
 

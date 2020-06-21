@@ -38,6 +38,7 @@ namespace WebApi.Modules
             services.AddScoped<CustomerService>();
             services.AddScoped<SecurityService>();
             services.AddScoped<AccountService>();
+            services.AddScoped<CurrencyExchange>();
 
             return services;
         }

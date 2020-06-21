@@ -63,12 +63,13 @@ namespace ComponentTests.V1
             FormUrlEncodedContent content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("accountId", account),
-                new KeyValuePair<string, string>("amount", amount.ToString(CultureInfo.InvariantCulture))
+                new KeyValuePair<string, string>("amount", amount.ToString(CultureInfo.InvariantCulture)),
+                new KeyValuePair<string, string>("currency", null)
             });
 
             HttpResponseMessage response = await client.PatchAsync("api/v1/Accounts/Deposit", content)
                 .ConfigureAwait(false);
-            await response.Content
+            var result = await response.Content
                 .ReadAsStringAsync()
                 .ConfigureAwait(false);
 
