@@ -45,7 +45,7 @@ namespace Application.UseCases
         }
 
         /// <summary>
-        ///     Executes the Use Case.
+        /// ///     Executes the Use Case.
         /// </summary>
         /// <param name="input">Input Message.</param>
         /// <returns>Task.</returns>
