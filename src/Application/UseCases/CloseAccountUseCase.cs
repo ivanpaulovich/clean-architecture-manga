@@ -55,7 +55,7 @@ namespace Application.UseCases
             if (account is null)
             {
                 this._closeAccountGetAccountsOutputPort
-                    .NotFound($"The account {input.AccountId.ToGuid()} does not exist or is not processed yet.");
+                    .NotFound(Messages.AccountDoesNotExist);
                 return;
             }
 

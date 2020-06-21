@@ -14,18 +14,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AccountHasNotEnoughFunds" xml:space="preserve">
-      <value>Account has not enough funds.</value>
-    </data>
+    <value>Account has not enough funds.</value>
+  </data>
   <data name="InputIsNull" xml:space="preserve">
-      <value>Input is null.</value>
-    </data>
+    <value>Input is null.</value>
+  </data>
   <data name="CustomerAlreadyExists" xml:space="preserve">
-      <value>Customer already exists.</value>
-    </data>
+    <value>Customer already exists.</value>
+  </data>
   <data name="CustomerDoesNotExist" xml:space="preserve">
-      <value>Customer does not exist.</value>
-    </data>
+    <value>Customer does not exist.</value>
+  </data>
   <data name="AccountDoesNotExist" xml:space="preserve">
-      <value>Account does not exist.</value>
-    </data>
+    <value>Account does not exist.</value>
+  </data>
 </root>

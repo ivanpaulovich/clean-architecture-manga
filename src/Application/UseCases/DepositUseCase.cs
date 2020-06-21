@@ -6,8 +6,8 @@ namespace Application.UseCases
 {
     using System.Threading.Tasks;
     using Boundaries.Deposit;
-    using Domain.Accounts;
     using Domain.Accounts.Credits;
+    using Domain.Accounts;
     using Services;
 
     /// <summary>
@@ -65,7 +65,7 @@ namespace Application.UseCases
             if (account is null)
             {
                 this._depositGetAccountsOutputPort
-                    .NotFound($"The account {input.AccountId.ToGuid()} does not exist or is not processed yet.");
+                    .NotFound(Messages.AccountDoesNotExist);
                 return;
             }
 
