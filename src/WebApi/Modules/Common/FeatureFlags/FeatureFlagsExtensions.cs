@@ -5,12 +5,12 @@ namespace WebApi.Modules.Common.FeatureFlags
     using Microsoft.FeatureManagement;
 
     /// <summary>
-    /// Feature Flags Extension.
+    ///     Feature Flags Extension.
     /// </summary>
     public static class FeatureFlagsExtensions
     {
         /// <summary>
-        /// Add Feature Flags dependencies.
+        ///     Add Feature Flags dependencies.
         /// </summary>
         public static IServiceCollection AddFeatureFlags(this IServiceCollection services, IConfiguration configuration)
         {

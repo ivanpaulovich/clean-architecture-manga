@@ -1,6 +1,5 @@
 namespace UnitTests.UseCaseTests.CloseAccount
 {
-    using System.Linq;
     using System.Threading.Tasks;
     using Application.Boundaries.CloseAccount;
     using Application.Boundaries.GetAccount;
@@ -40,9 +39,9 @@ namespace UnitTests.UseCaseTests.CloseAccount
         [Fact]
         public async Task NewAccount_Should_Allows_Closing2()
         {
-            GetAccountPresenter getAccountPresenter = new GetAccountPresenter();
-            CloseAccountGetAccountsPresenter closeAccountPresenter = new CloseAccountGetAccountsPresenter();
-            WithdrawPresenter withdrawPresenter = new WithdrawPresenter();
+            GetAccountPresenterFake getAccountPresenter = new GetAccountPresenterFake();
+            CloseAccountPresenterFake closeAccountPresenter = new CloseAccountPresenterFake();
+            WithdrawPresenterFake withdrawPresenter = new WithdrawPresenterFake();
 
             GetAccountUseCase getAccountUseCase = new GetAccountUseCase(
                 getAccountPresenter,
@@ -60,7 +59,7 @@ namespace UnitTests.UseCaseTests.CloseAccount
 
             await getAccountUseCase.Execute(new GetAccountInput(
                 MangaContextFake.DefaultAccountId));
-            GetAccountOutput getAccountDetailOutput = getAccountPresenter.GetAccountDetails.First();
+            GetAccountOutput getAccountDetailOutput = getAccountPresenter.StandardOutput!;
 
             await withdrawUseCase.Execute(new WithdrawInput(
                 MangaContextFake.DefaultAccountId,
@@ -70,7 +69,7 @@ namespace UnitTests.UseCaseTests.CloseAccount
                 MangaContextFake.DefaultAccountId);
             await sut.Execute(input);
 
-            Assert.Equal(input.AccountId, closeAccountPresenter.ClosedAccounts.First().Account.Id);
+            Assert.Equal(input.AccountId, closeAccountPresenter.StandardOutput!.Account.Id);
         }
 
         [Fact]

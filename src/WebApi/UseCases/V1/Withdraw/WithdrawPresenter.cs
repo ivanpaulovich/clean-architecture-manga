@@ -6,7 +6,7 @@ namespace WebApi.UseCases.V1.Withdraw
     using ViewModels;
 
     /// <summary>
-    /// Withdraw Presenter.
+    ///     Withdraw Presenter.
     /// </summary>
     public sealed class WithdrawPresenter : IWithdrawOutputPort
     {
