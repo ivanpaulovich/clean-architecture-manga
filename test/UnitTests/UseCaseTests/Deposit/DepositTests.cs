@@ -28,8 +28,8 @@ namespace UnitTests.UseCaseTests.Deposit
 
             await sut.Execute(
                 new DepositInput(
-                    MangaContextFake.DefaultAccountId,
-                    new PositiveMoney(amount)));
+                    MangaContextFake.DefaultAccountId.ToGuid(),
+                    amount));
 
             DepositOutput output = presenter.StandardOutput!;
             Credit actualCredit = Assert.IsType<Credit>(output.Transaction);
@@ -50,8 +50,8 @@ namespace UnitTests.UseCaseTests.Deposit
             await Assert.ThrowsAsync<MoneyShouldBePositiveException>(() =>
                 sut.Execute(
                     new DepositInput(
-                        MangaContextFake.DefaultAccountId,
-                        new PositiveMoney(amount))));
+                        MangaContextFake.DefaultAccountId.ToGuid(),
+                        amount)));
         }
     }
 }

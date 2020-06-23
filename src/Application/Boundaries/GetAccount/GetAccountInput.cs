@@ -4,6 +4,7 @@
 
 namespace Application.Boundaries.GetAccount
 {
+    using System;
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
@@ -15,7 +16,7 @@ namespace Application.Boundaries.GetAccount
         ///     Initializes a new instance of the <see cref="GetAccountInput" /> class.
         /// </summary>
         /// <param name="accountId">Account Id.</param>
-        public GetAccountInput(AccountId accountId) => this.AccountId = accountId;
+        public GetAccountInput(Guid accountId) => this.AccountId = new AccountId(accountId);
 
         /// <summary>
         ///     Gets the AccountId.

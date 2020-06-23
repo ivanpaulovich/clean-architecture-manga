@@ -58,15 +58,15 @@ namespace UnitTests.UseCaseTests.CloseAccount
                 this._fixture.AccountRepositoryFake);
 
             await getAccountUseCase.Execute(new GetAccountInput(
-                MangaContextFake.DefaultAccountId));
+                MangaContextFake.DefaultAccountId.ToGuid()));
             GetAccountOutput getAccountDetailOutput = getAccountPresenter.StandardOutput!;
 
             await withdrawUseCase.Execute(new WithdrawInput(
-                MangaContextFake.DefaultAccountId,
-                new PositiveMoney(getAccountDetailOutput.Account.GetCurrentBalance().ToDecimal())));
+                MangaContextFake.DefaultAccountId.ToGuid(),
+                getAccountDetailOutput.Account.GetCurrentBalance().ToDecimal()));
 
             CloseAccountInput input = new CloseAccountInput(
-                MangaContextFake.DefaultAccountId);
+                MangaContextFake.DefaultAccountId.ToGuid());
             await sut.Execute(input);
 
             Assert.Equal(input.AccountId, closeAccountPresenter.StandardOutput!.Account.Id);

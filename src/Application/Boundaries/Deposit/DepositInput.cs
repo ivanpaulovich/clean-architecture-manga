@@ -4,6 +4,7 @@
 
 namespace Application.Boundaries.Deposit
 {
+    using System;
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
@@ -17,11 +18,11 @@ namespace Application.Boundaries.Deposit
         /// <param name="accountId">AccountId.</param>
         /// <param name="amount">Positive amount to deposit.</param>
         public DepositInput(
-            AccountId accountId,
-            PositiveMoney amount)
+            Guid accountId,
+            decimal amount)
         {
-            this.AccountId = accountId;
-            this.Amount = amount;
+            this.AccountId = new AccountId(accountId);
+            this.Amount = new PositiveMoney(amount);
         }
 
         /// <summary>

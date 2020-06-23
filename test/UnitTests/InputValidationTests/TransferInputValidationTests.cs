@@ -11,10 +11,7 @@ namespace UnitTests.InputValidationTests
         public void GivenEmptyDestinationAccountId_InputNotCreated_ThrowsInputValidationException()
         {
             EmptyAccountIdException actualEx = Assert.Throws<EmptyAccountIdException>(
-                () => new TransferInput(
-                    new AccountId(Guid.NewGuid()),
-                    new AccountId(Guid.Empty),
-                    new PositiveMoney(10)));
+                () => new TransferInput(Guid.NewGuid(), Guid.Empty, 10));
             Assert.Contains("accountId", actualEx.Message, StringComparison.OrdinalIgnoreCase);
         }
 
@@ -22,20 +19,14 @@ namespace UnitTests.InputValidationTests
         public void GivenEmptyOriginAccountId_InputNotCreated_ThrowsInputValidationException()
         {
             EmptyAccountIdException actualEx = Assert.Throws<EmptyAccountIdException>(
-                () => new TransferInput(
-                    new AccountId(Guid.Empty),
-                    new AccountId(Guid.NewGuid()),
-                    new PositiveMoney(10)));
+                () => new TransferInput(Guid.Empty, Guid.NewGuid(), 10));
             Assert.Contains("accountId", actualEx.Message, StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]
         public void GivenValidData_InputCreated()
         {
-            TransferInput actual = new TransferInput(
-                new AccountId(Guid.NewGuid()),
-                new AccountId(Guid.NewGuid()),
-                new PositiveMoney(10));
+            TransferInput actual = new TransferInput(Guid.NewGuid(), Guid.NewGuid(), 10);
             Assert.NotNull(actual);
         }
     }

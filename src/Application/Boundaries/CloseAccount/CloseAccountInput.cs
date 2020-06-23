@@ -4,6 +4,7 @@
 
 namespace Application.Boundaries.CloseAccount
 {
+    using System;
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
@@ -15,7 +16,7 @@ namespace Application.Boundaries.CloseAccount
         ///     Initializes a new instance of the <see cref="CloseAccountInput" /> class.
         /// </summary>
         /// <param name="accountId">Account Id.</param>
-        public CloseAccountInput(AccountId accountId) => this.AccountId = accountId;
+        public CloseAccountInput(Guid accountId) => this.AccountId = new AccountId(accountId);
 
         /// <summary>
         ///     Gets AccountId.
