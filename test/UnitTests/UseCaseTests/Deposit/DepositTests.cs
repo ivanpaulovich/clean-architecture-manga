@@ -1,6 +1,5 @@
 namespace UnitTests.UseCaseTests.Deposit
 {
-    using System.Linq;
     using System.Threading.Tasks;
     using Application.Boundaries.Deposit;
     using Application.UseCases;
@@ -20,7 +19,7 @@ namespace UnitTests.UseCaseTests.Deposit
         [ClassData(typeof(ValidDataSetup))]
         public async Task Deposit_ChangesBalance(decimal amount)
         {
-            DepositGetAccountsPresenter presenter = new DepositGetAccountsPresenter();
+            DepositPresenterFake presenter = new DepositPresenterFake();
             DepositUseCase sut = new DepositUseCase(
                 this._fixture.AccountService,
                 presenter,
@@ -32,7 +31,7 @@ namespace UnitTests.UseCaseTests.Deposit
                     MangaContextFake.DefaultAccountId,
                     new PositiveMoney(amount)));
 
-            DepositOutput output = presenter.Deposits.Last();
+            DepositOutput output = presenter.StandardOutput!;
             Credit actualCredit = Assert.IsType<Credit>(output.Transaction);
             Assert.Equal(amount, actualCredit.Amount.ToMoney().ToDecimal());
         }
@@ -41,7 +40,7 @@ namespace UnitTests.UseCaseTests.Deposit
         [ClassData(typeof(InvalidDataSetup))]
         public async Task Deposit_ShouldNot_ChangesBalance_WhenNegative(decimal amount)
         {
-            DepositGetAccountsPresenter presenter = new DepositGetAccountsPresenter();
+            DepositPresenterFake presenter = new DepositPresenterFake();
             DepositUseCase sut = new DepositUseCase(
                 this._fixture.AccountService,
                 presenter,

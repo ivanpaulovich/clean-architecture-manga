@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
@@ -30,7 +29,7 @@
     </EnvironmentVariables>
     <ApplicationURL>https://localhost:5001</ApplicationURL>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(SpaRoot)**" />

@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>false</IsPackable>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +13,7 @@
     <PackageReference Include="coverlet.msbuild" Version="2.9.0" />
   </ItemGroup>
 
-   <ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\src\Domain\Domain.csproj" />
     <ProjectReference Include="..\..\src\Application\Application.csproj" />
     <ProjectReference Include="..\..\src\Infrastructure\Infrastructure.csproj" />

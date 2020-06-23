@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <NoWarn>1591</NoWarn>
   </PropertyGroup>
 

@@ -1,6 +1,5 @@
 namespace UnitTests.UseCaseTests.Transfer
 {
-    using System.Linq;
     using System.Threading.Tasks;
     using Application.Boundaries.Transfer;
     using Application.UseCases;
@@ -21,7 +20,7 @@ namespace UnitTests.UseCaseTests.Transfer
             decimal amount,
             decimal expectedOriginBalance)
         {
-            TransferPresenter presenter = new TransferPresenter();
+            TransferPresenterFake presenter = new TransferPresenterFake();
             TransferUseCase sut = new TransferUseCase(
                 this._fixture.AccountService,
                 presenter,
@@ -34,7 +33,7 @@ namespace UnitTests.UseCaseTests.Transfer
                     MangaContextFake.SecondAccountId,
                     new PositiveMoney(amount)));
 
-            TransferOutput actual = presenter.Transfers.Last();
+            TransferOutput actual = presenter.TransferOutput!;
             Assert.Equal(expectedOriginBalance, actual.UpdatedBalance.ToDecimal());
         }
     }
