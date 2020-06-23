@@ -19,12 +19,12 @@ namespace WebApi.Modules
     using UseCases.V1.Withdraw;
 
     /// <summary>
-    /// The User Interface V1 Extensions.
+    ///     The User Interface V1 Extensions.
     /// </summary>
     public static class UserInterfaceV1Extensions
     {
         /// <summary>
-        /// Inject All V1 Presenters dependencies;
+        ///     Inject All V1 Presenters dependencies;
         /// </summary>
         public static IServiceCollection AddPresentersV1(this IServiceCollection services)
         {

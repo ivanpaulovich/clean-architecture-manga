@@ -14,19 +14,19 @@ namespace WebApi
     using Prometheus;
 
     /// <summary>
-    /// Startup.
+    ///     Startup.
     /// </summary>
     public sealed class Startup
     {
         /// <summary>
-        /// Startup constructor.
+        ///     Startup constructor.
         /// </summary>
         public Startup(IConfiguration configuration) => this.Configuration = configuration;
 
         private IConfiguration Configuration { get; }
 
         /// <summary>
-        /// Configure dependencies from application.
+        ///     Configure dependencies from application.
         /// </summary>
         public void ConfigureServices(IServiceCollection services) => services
             .AddPersistence(this.Configuration)
@@ -42,7 +42,7 @@ namespace WebApi
             .AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
 
         /// <summary>
-        /// Configure http request pipeline.
+        ///     Configure http request pipeline.
         /// </summary>
         public void Configure(
             IApplicationBuilder app,

@@ -1,6 +1,5 @@
 namespace UnitTests.UseCaseTests.Withdraw
 {
-    using System.Linq;
     using System.Threading.Tasks;
     using Application.Boundaries.Withdraw;
     using Application.UseCases;

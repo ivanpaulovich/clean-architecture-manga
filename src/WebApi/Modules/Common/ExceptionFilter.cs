@@ -5,12 +5,12 @@ namespace WebApi.Modules.Common
     using Microsoft.AspNetCore.Mvc.Filters;
 
     /// <summary>
-    /// Exception Filter.
+    ///     Exception Filter.
     /// </summary>
     public sealed class ExceptionFilter : IExceptionFilter
     {
         /// <summary>
-        /// Add Problem Details when occurs Domain Exception.
+        ///     Add Problem Details when occurs Domain Exception.
         /// </summary>
         public void OnException(ExceptionContext context)
         {

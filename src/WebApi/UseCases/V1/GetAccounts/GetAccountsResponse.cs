@@ -13,7 +13,6 @@ namespace WebApi.UseCases.V1.GetAccounts
         /// <summary>
         ///     The Get Accounts Response constructor.
         /// </summary>
-        /// 
         public GetAccountsResponse(IEnumerable<IAccount> accounts)
         {
             foreach (IAccount account in accounts)

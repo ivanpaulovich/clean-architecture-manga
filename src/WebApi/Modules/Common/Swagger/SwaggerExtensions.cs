@@ -13,7 +13,7 @@ namespace WebApi.Modules.Common.Swagger
     using Swashbuckle.AspNetCore.SwaggerGen;
 
     /// <summary>
-    /// Swagger Extenions.
+    ///     Swagger Extenions.
     /// </summary>
     public static class SwaggerExtensions
     {
@@ -28,7 +28,7 @@ namespace WebApi.Modules.Common.Swagger
         }
 
         /// <summary>
-        /// Add Swagger Configuration dependencies.
+        ///     Add Swagger Configuration dependencies.
         /// </summary>
         public static IServiceCollection AddSwagger(this IServiceCollection services)
         {
@@ -60,7 +60,7 @@ namespace WebApi.Modules.Common.Swagger
         }
 
         /// <summary>
-        /// Add Swagger dependencies.
+        ///     Add Swagger dependencies.
         /// </summary>
         public static IApplicationBuilder UseVersionedSwagger(
             this IApplicationBuilder app,

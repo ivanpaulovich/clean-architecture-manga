@@ -26,19 +26,19 @@ namespace UnitTests.Presenters
         public string? ErrorOutput { get; private set; }
 
         /// <summary>
-        /// Standard Output
+        ///     Standard Output
         /// </summary>
         /// <param name="output">Output message.</param>
         public void Standard(CloseAccountOutput output) => this.StandardOutput = output;
 
         /// <summary>
-        /// Not Found
+        ///     Not Found
         /// </summary>
         /// <param name="message">Output message.</param>
         public void NotFound(string message) => this.NotFoundOutput = message;
 
         /// <summary>
-        /// Error
+        ///     Error
         /// </summary>
         /// <param name="message">Error message.</param>
         public void WriteError(string message) => this.ErrorOutput = message;

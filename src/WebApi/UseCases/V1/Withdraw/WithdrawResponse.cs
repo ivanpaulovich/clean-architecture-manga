@@ -22,11 +22,13 @@ namespace WebApi.UseCases.V1.Withdraw
         /// <summary>
         ///     Gets Transaction.
         /// </summary>
-        [Required] public DebitModel Transaction { get; }
+        [Required]
+        public DebitModel Transaction { get; }
 
         /// <summary>
         ///     Gets Update Balance.
         /// </summary>
-        [Required] public decimal UpdateBalance { get; }
+        [Required]
+        public decimal UpdateBalance { get; }
     }
 }

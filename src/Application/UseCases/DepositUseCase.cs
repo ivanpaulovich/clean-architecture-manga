@@ -6,8 +6,8 @@ namespace Application.UseCases
 {
     using System.Threading.Tasks;
     using Boundaries.Deposit;
-    using Domain.Accounts.Credits;
     using Domain.Accounts;
+    using Domain.Accounts.Credits;
     using Services;
 
     /// <summary>
@@ -45,7 +45,7 @@ namespace Application.UseCases
         }
 
         /// <summary>
-        /// ///     Executes the Use Case.
+        ///     ///     Executes the Use Case.
         /// </summary>
         /// <param name="input">Input Message.</param>
         /// <returns>Task.</returns>

@@ -47,11 +47,13 @@ namespace WebApi.ViewModels
         /// <summary>
         ///     Gets Credits.
         /// </summary>
-        [Required] public List<CreditModel> Credits { get; } = new List<CreditModel>();
+        [Required]
+        public List<CreditModel> Credits { get; } = new List<CreditModel>();
 
         /// <summary>
         ///     Gets Debits.
         /// </summary>
-        [Required] public List<DebitModel> Debits { get; } = new List<DebitModel>();
+        [Required]
+        public List<DebitModel> Debits { get; } = new List<DebitModel>();
     }
 }
