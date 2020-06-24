@@ -28,8 +28,8 @@ namespace UnitTests.UseCaseTests.Withdraw
                 this._fixture.UnitOfWork);
 
             await sut.Execute(new WithdrawInput(
-                MangaContextFake.DefaultAccountId,
-                new PositiveMoney(amount)));
+                MangaContextFake.DefaultAccountId.ToGuid(),
+                amount));
 
             WithdrawOutput actual = presenter.StandardOutput!;
             Assert.Equal(expectedBalance, actual.UpdatedBalance.ToDecimal());

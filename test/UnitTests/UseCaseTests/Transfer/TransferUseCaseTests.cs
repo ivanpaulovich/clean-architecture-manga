@@ -29,9 +29,9 @@ namespace UnitTests.UseCaseTests.Transfer
 
             await sut.Execute(
                 new TransferInput(
-                    MangaContextFake.DefaultAccountId,
-                    MangaContextFake.SecondAccountId,
-                    new PositiveMoney(amount)));
+                    MangaContextFake.DefaultAccountId.ToGuid(),
+                    MangaContextFake.SecondAccountId.ToGuid(),
+                    amount));
 
             TransferOutput actual = presenter.TransferOutput!;
             Assert.Equal(expectedOriginBalance, actual.UpdatedBalance.ToDecimal());

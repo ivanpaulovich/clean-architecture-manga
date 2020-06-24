@@ -4,6 +4,7 @@
 
 namespace Application.Boundaries.Transfer
 {
+    using System;
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
@@ -18,13 +19,13 @@ namespace Application.Boundaries.Transfer
         /// <param name="destinationAccountId">Destination Account Id.</param>
         /// <param name="amount">Positive amount.</param>
         public TransferInput(
-            AccountId originAccountId,
-            AccountId destinationAccountId,
-            PositiveMoney amount)
+            Guid originAccountId,
+            Guid destinationAccountId,
+            decimal amount)
         {
-            this.OriginAccountId = originAccountId;
-            this.DestinationAccountId = destinationAccountId;
-            this.Amount = amount;
+            this.OriginAccountId = new AccountId(originAccountId);
+            this.DestinationAccountId = new AccountId(destinationAccountId);
+            this.Amount = new PositiveMoney(amount);
         }
 
         /// <summary>

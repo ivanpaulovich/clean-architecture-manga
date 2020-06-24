@@ -4,6 +4,7 @@
 
 namespace Application.Boundaries.Withdraw
 {
+    using System;
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
@@ -17,11 +18,11 @@ namespace Application.Boundaries.Withdraw
         /// <param name="accountId">Account Id.</param>
         /// <param name="amount">Amount.</param>
         public WithdrawInput(
-            AccountId accountId,
-            PositiveMoney amount)
+            Guid accountId,
+            decimal amount)
         {
-            this.AccountId = accountId;
-            this.Amount = amount;
+            this.AccountId = new AccountId(accountId);
+            this.Amount = new PositiveMoney(amount);
         }
 
         /// <summary>

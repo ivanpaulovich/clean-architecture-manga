@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.8] - 2020-06-23
+
+### Changed
+
+- Value Objects removed from Input constructors.
+
 ## [3.0.7] - 2020-06-23
 
 ### Changed

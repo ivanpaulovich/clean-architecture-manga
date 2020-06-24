@@ -3,7 +3,6 @@ namespace WebApi.UseCases.V1.CloseAccount
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Application.Boundaries.CloseAccount;
-    using Domain.Accounts.ValueObjects;
     using FluentMediator;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
@@ -38,9 +37,9 @@ namespace WebApi.UseCases.V1.CloseAccount
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Close(
             [FromServices] IMediator mediator, [FromServices] CloseAccountPresenter presenter,
-            [FromRoute] [Required] CloseAccountRequest request)
+            [FromRoute][Required] CloseAccountRequest request)
         {
-            var input = new CloseAccountInput(new AccountId(request.AccountId));
+            var input = new CloseAccountInput(request.AccountId);
             await mediator.PublishAsync(input)
                 .ConfigureAwait(false);
             return presenter.ViewModel;

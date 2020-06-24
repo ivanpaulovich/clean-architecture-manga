@@ -3,7 +3,6 @@ namespace WebApi.UseCases.V1.Transfer
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Application.Boundaries.Transfer;
-    using Domain.Accounts.ValueObjects;
     using FluentMediator;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
@@ -42,12 +41,12 @@ namespace WebApi.UseCases.V1.Transfer
         public async Task<IActionResult> Transfer(
             [FromServices] IMediator mediator,
             [FromServices] TransferPresenter presenter,
-            [FromForm] [Required] TransferRequest request)
+            [FromForm][Required] TransferRequest request)
         {
             var input = new TransferInput(
-                new AccountId(request.OriginAccountId),
-                new AccountId(request.DestinationAccountId),
-                new PositiveMoney(request.Amount));
+                request.OriginAccountId,
+                request.DestinationAccountId,
+                request.Amount);
 
             await mediator.PublishAsync(input)
                 .ConfigureAwait(false);

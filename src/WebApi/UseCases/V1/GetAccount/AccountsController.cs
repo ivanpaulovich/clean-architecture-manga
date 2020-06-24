@@ -3,7 +3,6 @@ namespace WebApi.UseCases.V1.GetAccount
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Application.Boundaries.GetAccount;
-    using Domain.Accounts.ValueObjects;
     using FluentMediator;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
@@ -37,9 +36,9 @@ namespace WebApi.UseCases.V1.GetAccount
         public async Task<IActionResult> Get(
             [FromServices] IMediator mediator,
             [FromServices] GetAccountPresenter presenter,
-            [FromRoute] [Required] GetAccountRequest request)
+            [FromRoute][Required] GetAccountRequest request)
         {
-            var input = new GetAccountInput(new AccountId(request.AccountId));
+            var input = new GetAccountInput(request.AccountId);
             await mediator.PublishAsync(input)
                 .ConfigureAwait(false);
             return presenter.ViewModel;
