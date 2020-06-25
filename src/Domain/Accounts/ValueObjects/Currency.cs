@@ -1,6 +1,8 @@
 ﻿namespace Domain.Accounts.ValueObjects
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     ///     Currency
@@ -12,20 +14,25 @@
     /// </summary>
     public readonly struct Currency : IEquatable<Currency>
     {
+        private static readonly IReadOnlyList<string> allowedCurrencies = new[] { "USD" };
+
         private readonly string _value;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Currency" /> struct.
         /// </summary>
         /// <param name="value">String type.</param>
-        private Currency(string value)
+        public Currency(string? value)
         {
+            if (string.IsNullOrEmpty(value) || !allowedCurrencies.Contains(value))
+                throw new CurrencyNotAllowedException($"\"{value}\" not allowed as a currency.");
+
             this._value = value;
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Currency" /> with Dollar struct.
         /// </summary>
+        /// <returns></returns>
         public static Currency Dollar()
         {
             return new Currency("USD");
@@ -43,17 +50,6 @@
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="currency"></param>
-        /// <returns></returns>
-        public static Currency Create(string? currency)
-        {
-            if (currency == "USD") return Dollar();
-
-            throw new CurrencyNotFoundException($"{currency} not implemented yet.");
         }
 
         /// <summary>

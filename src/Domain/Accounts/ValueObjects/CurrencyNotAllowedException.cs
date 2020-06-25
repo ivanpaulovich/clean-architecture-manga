@@ -9,20 +9,20 @@ namespace Domain.Accounts.ValueObjects
     /// <summary>
     ///     Currency Not FoundException.
     /// </summary>
-    public sealed class CurrencyNotFoundException : DomainException
+    public sealed class CurrencyNotAllowedException : DomainException
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="CurrencyNotFoundException" /> class.
+        ///     Initializes a new instance of the <see cref="CurrencyNotAllowedException" /> class.
         /// </summary>
         /// <param name="message">Message.</param>
-        internal CurrencyNotFoundException(string message)
+        internal CurrencyNotAllowedException(string message)
             : base(message)
         {
         }
 
         /// <summary>
         /// </summary>
-        public CurrencyNotFoundException()
+        public CurrencyNotAllowedException()
         {
         }
 
@@ -30,7 +30,7 @@ namespace Domain.Accounts.ValueObjects
         /// </summary>
         /// <param name="message">Message.</param>
         /// <param name="innerException">Inner Exception.</param>
-        public CurrencyNotFoundException(string message, Exception innerException) : base(message, innerException)
+        public CurrencyNotAllowedException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

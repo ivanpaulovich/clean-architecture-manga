@@ -24,8 +24,7 @@ namespace UnitTests.UseCaseTests
             this.CustomerService = new CustomerService(this.EntityFactory, this.CustomerRepositoryFake);
             this.SecurityService = new SecurityService(this.UserRepositoryFake);
             this.AccountService = new AccountService(this.EntityFactory, this.AccountRepositoryFake);
-            this.ExchangeAPI = new CurrencyExchangeAPI();
-            this.CurrencyExchangeService = new CurrencyExchange(this.ExchangeAPI);
+            this.CurrencyExchangeAPI = new CurrencyExchangeAPI();
         }
 
         public EntityFactory EntityFactory { get; }
@@ -48,8 +47,6 @@ namespace UnitTests.UseCaseTests
 
         public AccountService AccountService { get; }
 
-        public CurrencyExchangeAPI ExchangeAPI { get; }
-
-        public CurrencyExchange CurrencyExchangeService { get; }
+        public CurrencyExchangeAPI CurrencyExchangeAPI { get; }
     }
 }

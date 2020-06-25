@@ -64,7 +64,7 @@ namespace ComponentTests.V1
             {
                 new KeyValuePair<string, string>("accountId", account),
                 new KeyValuePair<string, string>("amount", amount.ToString(CultureInfo.InvariantCulture)),
-                new KeyValuePair<string, string>("currency", null)
+                new KeyValuePair<string, string>("currency", string.Empty)
             });
 
             HttpResponseMessage response = await client.PatchAsync("api/v1/Accounts/Deposit", content)
