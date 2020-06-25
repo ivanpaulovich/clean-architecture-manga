@@ -40,9 +40,9 @@ namespace WebApi.UseCases.V1.Deposit
             [FromServices] IMediator mediator, [FromServices] DepositPresenter presenter, [FromForm][Required] DepositRequest request)
         {
             var input = new DepositInput(
-                new AccountId(request.AccountId),
-                new PositiveMoney(request.Amount,
-                    request.Currency));
+                request.AccountId,
+                request.Amount,
+                request.Currency);
 
             await mediator.PublishAsync(input)
                 .ConfigureAwait(false);

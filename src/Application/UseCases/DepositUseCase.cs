@@ -24,7 +24,7 @@ namespace Application.UseCases
         private readonly AccountService _accountService;
         private readonly IDepositOutputPort _depositOutputPort;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ICurrencyExchangeAPI _currencyExchangeServiceApi;
+        private readonly ICurrencyExchange _currencyExchange;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DepositUseCase" /> class.
@@ -32,19 +32,19 @@ namespace Application.UseCases
         /// <param name="accountService">Account Service.</param>
         /// <param name="depositOutputPort">Output Port.</param>
         /// <param name="accountRepository">Account Repository.</param>
-        /// <param name="currencyExchangeServiceApi">Currency Exchange Service.</param>
+        /// <param name="currencyExchange">Currency Exchange Service.</param>
         /// <param name="unitOfWork">Unit Of Work.</param>
         public DepositUseCase(
             AccountService accountService,
             IDepositOutputPort depositOutputPort,
             IAccountRepository accountRepository,
-            ICurrencyExchangeAPI currencyExchangeServiceApi,
+            ICurrencyExchange currencyExchange,
             IUnitOfWork unitOfWork)
         {
             this._accountService = accountService;
             this._depositOutputPort = depositOutputPort;
             this._accountRepository = accountRepository;
-            this._currencyExchangeServiceApi = currencyExchangeServiceApi;
+            this._currencyExchange = currencyExchange;
             this._unitOfWork = unitOfWork;
         }
 
@@ -73,7 +73,7 @@ namespace Application.UseCases
                 return;
             }
 
-            var amountConverted = await _currencyExchangeServiceApi
+            var amountConverted = await _currencyExchange
                 .ConvertToUSD(input.Amount)
                 .ConfigureAwait(false);
 

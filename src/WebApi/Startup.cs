@@ -29,6 +29,7 @@ namespace WebApi
         ///     Configure dependencies from application.
         /// </summary>
         public void ConfigureServices(IServiceCollection services) => services
+            .AddCurrencyExchange(this.Configuration)
             .AddPersistence(this.Configuration)
             .AddAuthentication(this.Configuration)
             .AddFeatureFlags(this.Configuration)

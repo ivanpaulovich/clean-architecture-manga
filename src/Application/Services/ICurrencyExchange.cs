@@ -5,7 +5,7 @@
 
     /// <summary>
     /// </summary>
-    public interface ICurrencyExchangeAPI
+    public interface ICurrencyExchange
     {
         /// <summary>
         /// </summary>

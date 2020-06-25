@@ -24,7 +24,7 @@ namespace UnitTests.UseCaseTests.Deposit
                 this._fixture.AccountService,
                 presenter,
                 this._fixture.AccountRepositoryFake,
-                this._fixture.CurrencyExchangeAPI,
+                this._fixture.CurrencyExchange,
                 this._fixture.UnitOfWork);
 
             await sut.Execute(
@@ -46,7 +46,7 @@ namespace UnitTests.UseCaseTests.Deposit
                 this._fixture.AccountService,
                 presenter,
                 this._fixture.AccountRepositoryFake,
-                this._fixture.CurrencyExchangeAPI,
+                this._fixture.CurrencyExchange,
                 this._fixture.UnitOfWork);
 
             await Assert.ThrowsAsync<MoneyShouldBePositiveException>(() =>

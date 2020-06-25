@@ -6,18 +6,18 @@ namespace WebApi.Modules
     using Domain.Security;
     using Infrastructure.DataAccess;
     using Infrastructure.DataAccess.Repositories;
-    using Infrastructure.Integrations.HTTP;
+    using Infrastructure.CurrencyExchange;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
-    ///     Persistencce Extensions.
+    ///     Persistence Extensions.
     /// </summary>
     public static class PersistenceExtensions
     {
         /// <summary>
-        ///     Add Persistences dependencies varying on configuration.
+        ///     Add Persistence dependencies varying on configuration.
         /// </summary>
         public static IServiceCollection AddPersistence(
             this IServiceCollection services,
@@ -47,7 +47,6 @@ namespace WebApi.Modules
             services.AddScoped<IUserFactory, EntityFactory>();
             services.AddScoped<ICustomerFactory, EntityFactory>();
             services.AddScoped<IAccountFactory, EntityFactory>();
-            services.AddScoped<ICurrencyExchangeAPI, CurrencyExchangeAPI>();
 
             return services;
         }

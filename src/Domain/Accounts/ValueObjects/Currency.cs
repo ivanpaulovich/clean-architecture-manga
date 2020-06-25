@@ -14,7 +14,7 @@
     /// </summary>
     public readonly struct Currency : IEquatable<Currency>
     {
-        private static readonly IReadOnlyList<string> allowedCurrencies = new[] { "USD" };
+        private static readonly IReadOnlyList<string> allowedCurrencies = new[] { "USD", "EUR", "CAD", "BRL", "SEK", "GBP" };
 
         private readonly string _value;
 
@@ -24,19 +24,50 @@
         /// <param name="value">String type.</param>
         public Currency(string? value)
         {
-            if (string.IsNullOrEmpty(value) || !allowedCurrencies.Contains(value))
-                throw new CurrencyNotAllowedException($"\"{value}\" not allowed as a currency.");
+            if (string.IsNullOrEmpty(value))
+                value = "USD";
+
+            if (!allowedCurrencies.Contains(value))
+                throw new CurrencyNotAllowedException($"\"{value}\" currency is not allowed.");
 
             this._value = value;
         }
 
         /// <summary>
+        /// Dollar.
         /// </summary>
-        /// <returns></returns>
-        public static Currency Dollar()
-        {
-            return new Currency("USD");
-        }
+        /// <returns>Currency.</returns>
+        public static readonly Currency Dollar = new Currency("USD");
+
+        /// <summary>
+        /// Euro.
+        /// </summary>
+        /// <returns>Currency.</returns>
+        public static readonly Currency Euro = new Currency("EUR");
+
+        /// <summary>
+        /// British Pound.
+        /// </summary>
+        /// <returns>Currency.</returns>
+        public static readonly Currency BritishPound = new Currency("GBP");
+
+        /// <summary>
+        /// Canadian Dollar.
+        /// </summary>
+        /// <returns>Currency.</returns>
+        public static readonly Currency Canadian = new Currency("CAD");
+
+        /// <summary>
+        /// Brazillian Real.
+        /// </summary>
+        /// <returns>Currency.</returns>
+        public static readonly Currency Real = new Currency("BRL");
+
+        /// <summary>
+        /// Swedish Krona.
+        /// </summary>
+        /// <returns>Currency.</returns>
+        public static readonly Currency Krona = new Currency("SEK");
 
         /// <summary>
         /// </summary>

@@ -7,7 +7,7 @@ namespace Domain.Accounts
     using System;
     using Credits;
     using Debits;
-    using Domain.Accounts.ValueObjects;
+    using ValueObjects;
 
     /// <inheritdoc />
     public abstract class Account : IAccount
