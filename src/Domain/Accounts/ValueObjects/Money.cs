@@ -27,7 +27,7 @@ namespace Domain.Accounts.ValueObjects
         /// <param name="currency">The currency used, default is USD.</param>
         public Money(decimal value, Currency currency = default)
         {
-            this._currency = currency == default ? Currency.Dollar() : currency;
+            this._currency = currency == default ? Currency.Dollar : currency;
             this._money = value;
         }
 

@@ -23,6 +23,6 @@ namespace WebApi.UseCases.V1.Deposit
         /// <summary>
         ///     Gets or sets the Currency.
         /// </summary>
-        public string Currency { get; set; } = "USD";
+        public string? Currency { get; set; } = "USD";
     }
 }

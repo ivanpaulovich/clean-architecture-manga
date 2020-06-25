@@ -6,7 +6,7 @@ namespace UnitTests.UseCaseTests
     using Infrastructure.DataAccess;
     using Infrastructure.DataAccess.Repositories;
     using Infrastructure.ExternalAuthentication;
-    using Infrastructure.Integrations.HTTP;
+    using Infrastructure.CurrencyExchange;
 
     /// <summary>
     /// </summary>
@@ -24,7 +24,7 @@ namespace UnitTests.UseCaseTests
             this.CustomerService = new CustomerService(this.EntityFactory, this.CustomerRepositoryFake);
             this.SecurityService = new SecurityService(this.UserRepositoryFake);
             this.AccountService = new AccountService(this.EntityFactory, this.AccountRepositoryFake);
-            this.CurrencyExchangeAPI = new CurrencyExchangeAPI();
+            this.CurrencyExchange = new CurrencyExchangeServiceFake();
         }
 
         public EntityFactory EntityFactory { get; }
@@ -47,6 +47,6 @@ namespace UnitTests.UseCaseTests
 
         public AccountService AccountService { get; }
 
-        public CurrencyExchangeAPI CurrencyExchangeAPI { get; }
+        public CurrencyExchangeServiceFake CurrencyExchange { get; }
     }
 }
