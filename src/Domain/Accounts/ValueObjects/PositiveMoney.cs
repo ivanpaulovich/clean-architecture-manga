@@ -30,7 +30,7 @@ namespace Domain.Accounts.ValueObjects
                 throw new MoneyShouldBePositiveException(Messages.TheAmountShouldBePositive);
             }
 
-            var tempCurrency = currency == "USD" || currency is null ? Currency.Dollar() : Currency.Create(currency);
+            var tempCurrency = new Currency(currency);
             this._value = new Money(value, tempCurrency);
         }
 

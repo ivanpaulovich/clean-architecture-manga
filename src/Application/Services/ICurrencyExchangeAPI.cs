@@ -1,4 +1,4 @@
-﻿namespace Domain.Accounts
+﻿namespace Application.Services
 {
     using System.Threading.Tasks;
     using Domain.Accounts.ValueObjects;
@@ -9,8 +9,8 @@
     {
         /// <summary>
         /// </summary>
-        /// <param name="currency"></param>
+        /// <param name="money"></param>
         /// <returns></returns>
-        Task<decimal> ReturnValueOfCurrencyFromToday(Currency currency);
+        Task<PositiveMoney> ConvertToUSD(PositiveMoney money);
     }
 }

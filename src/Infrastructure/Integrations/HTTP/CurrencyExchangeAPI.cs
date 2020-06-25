@@ -1,7 +1,7 @@
 ﻿namespace Infrastructure.Integrations.HTTP
 {
     using System.Threading.Tasks;
-    using Domain.Accounts;
+    using Application.Services;
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
@@ -11,11 +11,11 @@
     {
         /// <summary>
         /// </summary>
-        /// <param name="currency"></param>
+        /// <param name="money"></param>
         /// <returns></returns>
-        public Task<decimal> ReturnValueOfCurrencyFromToday(Currency currency)
+        public Task<PositiveMoney> ConvertToUSD(PositiveMoney money)
         {
-            return Task.FromResult(1.0m);
+            return Task.FromResult(money);
         }
     }
 }
