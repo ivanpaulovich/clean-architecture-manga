@@ -19,18 +19,18 @@ namespace Application.UseCases
     public sealed class CloseAccountUseCase : ICloseAccountUseCase
     {
         private readonly IAccountRepository _accountRepository;
-        private readonly ICloseAccountOutputPort _closeAccountGetAccountsOutputPort;
+        private readonly ICloseAccountOutputPort _closeAccountOutputPort;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CloseAccountUseCase" /> class.
         /// </summary>
-        /// <param name="closeAccountGetAccountsOutputPort">Output Port.</param>
+        /// <param name="closeAccountOutputPort">Output Port.</param>
         /// <param name="accountRepository">Account Repository.</param>
         public CloseAccountUseCase(
-            ICloseAccountOutputPort closeAccountGetAccountsOutputPort,
+            ICloseAccountOutputPort closeAccountOutputPort,
             IAccountRepository accountRepository)
         {
-            this._closeAccountGetAccountsOutputPort = closeAccountGetAccountsOutputPort;
+            this._closeAccountOutputPort = closeAccountOutputPort;
             this._accountRepository = accountRepository;
         }
 
@@ -43,7 +43,7 @@ namespace Application.UseCases
         {
             if (input is null)
             {
-                this._closeAccountGetAccountsOutputPort
+                this._closeAccountOutputPort
                     .WriteError(Messages.InputIsNull);
                 return;
             }
@@ -54,7 +54,7 @@ namespace Application.UseCases
 
             if (account is null)
             {
-                this._closeAccountGetAccountsOutputPort
+                this._closeAccountOutputPort
                     .NotFound(Messages.AccountDoesNotExist);
                 return;
             }
@@ -72,7 +72,7 @@ namespace Application.UseCases
         private void BuildOutput(IAccount account)
         {
             var closeAccountOutput = new CloseAccountOutput(account);
-            this._closeAccountGetAccountsOutputPort
+            this._closeAccountOutputPort
                 .Standard(closeAccountOutput);
         }
     }

@@ -9,8 +9,8 @@ namespace Application.UseCases
     using Boundaries.Register;
     using Domain.Accounts;
     using Domain.Customers;
-    using Domain.Security;
     using Domain.Security.Services;
+    using Domain.Security;
     using Services;
 
     /// <summary>
@@ -41,8 +41,8 @@ namespace Application.UseCases
         /// <param name="securityService">Security Service.</param>
         /// <param name="registerOutputPort">Output Port.</param>
         /// <param name="unitOfWork">Unit of Work.</param>
-        /// <param name="customerRepository"></param>
-        /// <param name="accountRepository"></param>
+        /// <param name="customerRepository">Customer Repository.</param>
+        /// <param name="accountRepository">Account Repository.</param>
         public RegisterUseCase(
             IUserService userService,
             CustomerService customerService,
@@ -103,7 +103,7 @@ namespace Application.UseCases
             await this._unitOfWork.Save()
                 .ConfigureAwait(false);
 
-            this.BuildOutput(user, customer, new List<IAccount> {account});
+            this.BuildOutput(user, customer, new List<IAccount> { account });
         }
 
         private async Task<bool> VerifyCustomerAlreadyRegistered(IUser user)
