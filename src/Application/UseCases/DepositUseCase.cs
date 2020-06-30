@@ -20,6 +20,30 @@ namespace Application.UseCases
     /// </summary>
     public sealed class DepositUseCase : IDepositUseCase
     {
+        private readonly IAccountRepository _accountRepository;
+        private readonly AccountService _accountService;
+        private readonly IDepositOutputPort _depositOutputPort;
+        private readonly IUnitOfWork _unitOfWork;
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="DepositUseCase" /> class.
+        /// </summary>
+        /// <param name="accountService">Account Service.</param>
+        /// <param name="depositOutputPort">Output Port.</param>
+        /// <param name="accountRepository">Account Repository.</param>
+        /// <param name="unitOfWork">Unit Of Work.</param>
+        public DepositUseCase(
+            AccountService accountService,
+            IDepositOutputPort depositOutputPort,
+            IAccountRepository accountRepository,
+            IUnitOfWork unitOfWork)
+        {
+            this._accountService = accountService;
+            this._depositOutputPort = depositOutputPort;
+            this._accountRepository = accountRepository;
+            this._unitOfWork = unitOfWork;
+        }
+
         /// <summary>
         ///     ///     Executes the Use Case.
         /// </summary>
@@ -64,30 +88,5 @@ namespace Application.UseCases
 
             this._depositOutputPort.Standard(output);
         }
-
-        private readonly IAccountRepository _accountRepository;
-        private readonly AccountService _accountService;
-        private readonly IDepositOutputPort _depositOutputPort;
-        private readonly IUnitOfWork _unitOfWork;
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="DepositUseCase" /> class.
-        /// </summary>
-        /// <param name="accountService">Account Service.</param>
-        /// <param name="depositOutputPort">Output Port.</param>
-        /// <param name="accountRepository">Account Repository.</param>
-        /// <param name="unitOfWork">Unit Of Work.</param>
-        public DepositUseCase(
-            AccountService accountService,
-            IDepositOutputPort depositOutputPort,
-            IAccountRepository accountRepository,
-            IUnitOfWork unitOfWork)
-        {
-            this._accountService = accountService;
-            this._depositOutputPort = depositOutputPort;
-            this._accountRepository = accountRepository;
-            this._unitOfWork = unitOfWork;
-        }
-
     }
 }
