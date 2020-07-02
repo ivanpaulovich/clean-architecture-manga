@@ -7,7 +7,6 @@
     using Xunit;
 
     /// <summary>
-    /// 
     /// </summary>
     public sealed class ConvertEuroToDollarTests
     {
@@ -22,8 +21,8 @@
             var serviceProvider = serviceCollection.BuildServiceProvider();
             var sut = serviceProvider.GetRequiredService<CurrencyExchangeService>();
 
-            var usdMoney = new PositiveMoney(100, "EUR");
-            var actual = await sut.ConvertToUSD(usdMoney);
+            PositiveMoney usdMoney = new PositiveMoney(100, "EUR");
+            PositiveMoney actual = await sut.ConvertToUSD(usdMoney);
 
             Assert.True(actual.ToMoney().ToDecimal() > 100);
             Assert.Equal("USD", actual.GetCurrency().ToString());

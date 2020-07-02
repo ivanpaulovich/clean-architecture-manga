@@ -2,7 +2,6 @@ namespace WebApi.UseCases.V1.Deposit
 {
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
-    using System;
     using Application.Boundaries.Deposit;
     using FluentMediator;
     using Microsoft.AspNetCore.Authorization;
@@ -37,7 +36,8 @@ namespace WebApi.UseCases.V1.Deposit
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Deposit(
-            [FromServices] IMediator mediator, [FromServices] DepositPresenter presenter, [FromForm][Required] DepositRequest request)
+            [FromServices] IMediator mediator, [FromServices] DepositPresenter presenter,
+            [FromForm] [Required] DepositRequest request)
         {
             var input = new DepositInput(
                 request.AccountId,

@@ -50,11 +50,11 @@ export const reducer: Reducer<AccountsState> = (
 
     const action = incomingAction as KnownAction;
     switch (action.type) {
-        case "RECEIVE_ACCOUNTS":
-            return {
-                accounts: action.accounts,
-            };
-            break;
+    case "RECEIVE_ACCOUNTS":
+        return {
+            accounts: action.accounts,
+        };
+        break;
     }
 
     return state;

@@ -9,8 +9,8 @@ namespace Application.UseCases
     using Boundaries.Register;
     using Domain.Accounts;
     using Domain.Customers;
-    using Domain.Security.Services;
     using Domain.Security;
+    using Domain.Security.Services;
     using Services;
 
     /// <summary>
@@ -103,7 +103,7 @@ namespace Application.UseCases
             await this._unitOfWork.Save()
                 .ConfigureAwait(false);
 
-            this.BuildOutput(user, customer, new List<IAccount> { account });
+            this.BuildOutput(user, customer, new List<IAccount> {account});
         }
 
         private async Task<bool> VerifyCustomerAlreadyRegistered(IUser user)

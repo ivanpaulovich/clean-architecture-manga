@@ -1,21 +1,21 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import { ApplicationState } from '../store';
-import * as UserStore from '../store/User';
-import {Link} from "react-router-dom";
-import {NavItem, NavLink} from "reactstrap";
+import * as React from "react";
+import { connect } from "react-redux";
+import { ApplicationState } from "../store";
+import * as UserStore from "../store/User";
+import { Link } from "react-router-dom";
+import { NavItem, NavLink } from "reactstrap";
 
 type UserProps =
     UserStore.UserState &
     typeof UserStore.actionCreators;
 
 class LoginStatus extends React.PureComponent<UserProps> {
-    public componentDidMount() {
+    componentDidMount() {
         this.ensureDataFetched();
     }
 
     // This method is called when the route parameters change
-    public componentDidUpdate() {
+    componentDidUpdate() {
         this.ensureDataFetched();
     }
 
@@ -24,18 +24,18 @@ class LoginStatus extends React.PureComponent<UserProps> {
     }
 
     loginWithGitHub() {
-        window.location.href = "/api/v1/Login/GitHub?ReturnUrl=" + window.location.href;
+        window.location.href = `/api/v1/Login/GitHub?ReturnUrl=${window.location.href}`;
     }
 
     loginWithGoogle() {
-        window.location.href = "/api/v1/Login/Google?ReturnUrl=" + window.location.href;
+        window.location.href = `/api/v1/Login/Google?ReturnUrl=${window.location.href}`;
     }
 
     logout() {
-        window.location.href = "/api/v1/Logout?ReturnUrl=" + window.location.href;
+        window.location.href = `/api/v1/Logout?ReturnUrl=${window.location.href}`;
     }
 
-    public render() {
+    render() {
         if (this.props.isLoggedIn) {
             return (
                 <React.Fragment>
@@ -46,20 +46,20 @@ class LoginStatus extends React.PureComponent<UserProps> {
                         <a className="text-dark nav-link" onClick={this.logout.bind(this)} href="#">Logout</a>
                     </NavItem>
                 </React.Fragment>
-            )
-        }
-        else
-        {
+            );
+        } else {
             return (
                 <React.Fragment>
                     <NavItem>
-                        <a className="text-dark nav-link" onClick={this.loginWithGitHub.bind(this)} href="#">Login with GitHub</a>
+                        <a className="text-dark nav-link" onClick={this.loginWithGitHub.bind(this)
+} href="#">Login with GitHub</a>
                     </NavItem>
                     <NavItem>
-                        <a className="text-dark nav-link" onClick={this.loginWithGoogle.bind(this)} href="#">Login with Google</a>
+                        <a className="text-dark nav-link" onClick={this.loginWithGoogle.bind(this)
+} href="#">Login with Google</a>
                     </NavItem>
                 </React.Fragment>
-            )
+            );
         }
     }
 }

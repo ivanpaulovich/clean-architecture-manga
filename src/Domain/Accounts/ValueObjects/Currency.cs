@@ -6,7 +6,8 @@
 
     /// <summary>
     ///     Currency
-    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#value-object">
+    ///     <see
+    ///         href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#value-object">
     ///         Value Object
     ///         Design Pattern
     ///     </see>
@@ -14,7 +15,8 @@
     /// </summary>
     public readonly struct Currency : IEquatable<Currency>
     {
-        private static readonly IReadOnlyList<string> allowedCurrencies = new[] { "USD", "EUR", "CAD", "BRL", "SEK", "GBP" };
+        private static readonly IReadOnlyList<string> allowedCurrencies =
+            new[] {"USD", "EUR", "CAD", "BRL", "SEK", "GBP"};
 
         private readonly string _value;
 
@@ -25,46 +27,50 @@
         public Currency(string? value)
         {
             if (string.IsNullOrEmpty(value))
+            {
                 value = "USD";
+            }
 
             if (!allowedCurrencies.Contains(value))
+            {
                 throw new CurrencyNotAllowedException($"\"{value}\" currency is not allowed.");
+            }
 
             this._value = value;
         }
 
         /// <summary>
-        /// Dollar.
+        ///     Dollar.
         /// </summary>
         /// <returns>Currency.</returns>
         public static readonly Currency Dollar = new Currency("USD");
 
         /// <summary>
-        /// Euro.
+        ///     Euro.
         /// </summary>
         /// <returns>Currency.</returns>
         public static readonly Currency Euro = new Currency("EUR");
 
         /// <summary>
-        /// British Pound.
+        ///     British Pound.
         /// </summary>
         /// <returns>Currency.</returns>
         public static readonly Currency BritishPound = new Currency("GBP");
 
         /// <summary>
-        /// Canadian Dollar.
+        ///     Canadian Dollar.
         /// </summary>
         /// <returns>Currency.</returns>
         public static readonly Currency Canadian = new Currency("CAD");
 
         /// <summary>
-        /// Brazillian Real.
+        ///     Brazillian Real.
         /// </summary>
         /// <returns>Currency.</returns>
         public static readonly Currency Real = new Currency("BRL");
 
         /// <summary>
-        /// Swedish Krona.
+        ///     Swedish Krona.
         /// </summary>
         /// <returns>Currency.</returns>
         public static readonly Currency Krona = new Currency("SEK");
@@ -87,10 +93,7 @@
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(Currency other)
-        {
-            return this._value == other._value;
-        }
+        public bool Equals(Currency other) => this._value == other._value;
 
         /// <summary>
         /// </summary>

@@ -1,8 +1,8 @@
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import thunk from 'redux-thunk';
-import { connectRouter, routerMiddleware } from 'connected-react-router';
-import { History } from 'history';
-import { ApplicationState, reducers } from './';
+import { applyMiddleware, combineReducers, compose, createStore } from "redux";
+import thunk from "redux-thunk";
+import { connectRouter, routerMiddleware } from "connected-react-router";
+import { History } from "history";
+import { ApplicationState, reducers } from "./";
 
 export default function configureStore(history: History, initialState?: ApplicationState) {
     const middleware = [
@@ -15,8 +15,8 @@ export default function configureStore(history: History, initialState?: Applicat
         router: connectRouter(history)
     });
 
-    const enhancers = [];
-    const windowIfDefined = typeof window === 'undefined' ? null : window as any;
+    const enhancers: any[] = [];
+    const windowIfDefined = typeof window === "undefined" ? null : window as any;
     if (windowIfDefined && windowIfDefined.__REDUX_DEVTOOLS_EXTENSION__) {
         enhancers.push(windowIfDefined.__REDUX_DEVTOOLS_EXTENSION__());
     }

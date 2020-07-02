@@ -33,7 +33,7 @@ We also support the React client:
 pushd src/WebApi/ClientApp
 npm install
 popd
-dotnet run --project src/WebApi/WebApi.csproj --environment="Development"
+dotnet run --project src/WebApi/WebApi.csproj --launch-profile Development
 ```
 
 Then navigate to:

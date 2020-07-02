@@ -1,9 +1,7 @@
 import React from "react";
-import Styles from "../Styles";
 import { Form, Field } from "react-final-form";
 import NumberInput from "../components/NumberInput";
-import {connect} from "react-redux";
-import {RouteComponentProps} from "react-router";
+import { RouteComponentProps } from "react-router";
 
 type WithdrawProps = RouteComponentProps<{ accountId: string }>;
 
@@ -14,25 +12,26 @@ interface Values {
 class Withdraw extends React.PureComponent<WithdrawProps> {
 
     private async onSubmit(values: Values) {
-        const formData  = new FormData();
+        const formData = new FormData();
 
-        formData.append('accountId', this.props.match.params.accountId);
-        formData.append('amount', values.amount.toString());
+        formData.append("accountId", this.props.match.params.accountId);
+        formData.append("amount", values.amount.toString());
 
-        await fetch('api/v1/Accounts/Withdraw', {
-            method: 'POST',
-            body: formData
-        });
+        await fetch("api/v1/Accounts/Withdraw",
+            {
+                method: "POST",
+                body: formData
+            });
     }
 
-    public render() {
+    render() {
         return (
             <Styles>
                 <h1>Withdraw</h1>
                 <Form
                     onSubmit={this.onSubmit}
-                    initialValues={{accountId: '', amount: 0}}
-                    render={({handleSubmit, form, submitting, pristine, values}) => (
+                    initialValues={{ accountId: "", amount: 0 }}
+                    render={({ handleSubmit, form, submitting, pristine, values }) => (
                         <form onSubmit={handleSubmit}>
                             <div>
                                 <label>Amount</label>
@@ -48,11 +47,10 @@ class Withdraw extends React.PureComponent<WithdrawProps> {
                                 </button>
                             </div>
                         </form>
-                    )}
-                />
+                    )}/>
             </Styles>
-        );
-    }
+);
+}
 }
 
-export default connect()(Withdraw);
+export default connect()(Withdraw);;

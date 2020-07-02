@@ -18,8 +18,7 @@ namespace ComponentTests
                 config.AddInMemoryCollection(
                     new Dictionary<string, string>
                     {
-                        ["PersistenceModule:UseFake"] = "true",
-                        ["CurrencyExchangeModule:UseFake"] = "true",
+                        ["PersistenceModule:UseFake"] = "true", ["CurrencyExchangeModule:UseFake"] = "true"
                     });
             }).ConfigureServices(services =>
         {

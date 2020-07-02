@@ -39,7 +39,7 @@ namespace WebApi.UseCases.V2.GetAccount
         public async Task<IActionResult> Get(
             [FromServices] IMediator mediator,
             [FromServices] GetAccountDetailsPresenterV2 presenter,
-            [FromRoute][Required] GetAccountDetailsRequestV2 request)
+            [FromRoute] [Required] GetAccountDetailsRequestV2 request)
         {
             var input = new GetAccountInput(request.AccountId);
             await mediator.PublishAsync(input, "GetAccountDetailsV2")
