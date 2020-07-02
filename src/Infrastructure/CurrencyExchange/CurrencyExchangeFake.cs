@@ -10,7 +10,7 @@
     public sealed class CurrencyExchangeFake : ICurrencyExchange
     {
         /// <summary>
-        ///     Convets allowed currencies into USD.
+        ///     Converts allowed currencies into USD.
         /// </summary>
         /// <param name="money">Money.</param>
         /// <returns>Money.</returns>
