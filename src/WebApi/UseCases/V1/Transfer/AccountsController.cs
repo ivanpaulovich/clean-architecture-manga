@@ -41,7 +41,7 @@ namespace WebApi.UseCases.V1.Transfer
         public async Task<IActionResult> Transfer(
             [FromServices] IMediator mediator,
             [FromServices] TransferPresenter presenter,
-            [FromForm][Required] TransferRequest request)
+            [FromForm] [Required] TransferRequest request)
         {
             var input = new TransferInput(
                 request.OriginAccountId,

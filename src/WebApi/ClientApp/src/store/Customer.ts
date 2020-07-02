@@ -49,11 +49,11 @@ export const reducer: Reducer<CustomerState> = (
 
     const action = incomingAction as KnownAction;
     switch (action.type) {
-        case "RECEIVE_CUSTOMER":
-            return {
-                customer: action.customer,
-            };
-            break;
+    case "RECEIVE_CUSTOMER":
+        return {
+            customer: action.customer,
+        };
+        break;
     }
 
     return state;

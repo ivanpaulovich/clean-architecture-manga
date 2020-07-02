@@ -3,7 +3,6 @@ namespace UnitTests.UseCaseTests.Transfer
     using System.Threading.Tasks;
     using Application.Boundaries.Transfer;
     using Application.UseCases;
-    using Domain.Accounts.ValueObjects;
     using Infrastructure.DataAccess;
     using Presenters;
     using Xunit;

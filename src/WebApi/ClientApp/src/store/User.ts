@@ -1,5 +1,5 @@
-import { Action, Reducer } from 'redux';
-import {AppThunkAction} from "./index";
+import { Action, Reducer } from "redux";
+import { AppThunkAction } from "./index";
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
@@ -14,11 +14,11 @@ export interface UserState {
 // Use @typeName and isActionType for type detection that works even after serialization/deserialization.
 
 export interface RequestLoginAction {
-    type: 'REQUEST_LOGIN'
+    type: "REQUEST_LOGIN"
 }
 
 export interface ReceiveLoginAction {
-    type: 'RECEIVE_LOGIN';
+    type: "RECEIVE_LOGIN";
     isLoggedIn: boolean;
 }
 
@@ -34,14 +34,14 @@ export const actionCreators = {
     requestLogin: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
         fetch(`api/v1/Login/GetUserInfo`)
             .then((response) => {
-                if(response.status === 200){
-                    dispatch({ type: 'RECEIVE_LOGIN',  isLoggedIn: true });
-                } else if(response.status === 401){
-                    dispatch({ type: 'RECEIVE_LOGIN',  isLoggedIn: false });
+                if (response.status === 200) {
+                    dispatch({ type: "RECEIVE_LOGIN", isLoggedIn: true });
+                } else if (response.status === 401) {
+                    dispatch({ type: "RECEIVE_LOGIN", isLoggedIn: false });
                 }
             })
-            .catch((err)=>{
-                dispatch({ type: 'RECEIVE_LOGIN',  isLoggedIn: false });
+            .catch((err) => {
+                dispatch({ type: "RECEIVE_LOGIN", isLoggedIn: false });
             });
     }
 };
@@ -56,9 +56,9 @@ export const reducer: Reducer<UserState> = (state: UserState | undefined, incomi
 
     const action = incomingAction as KnownAction;
     switch (action.type) {
-        case 'RECEIVE_LOGIN':
-            return { isLoggedIn: action.isLoggedIn };
-        default:
-            return state;
+    case "RECEIVE_LOGIN":
+        return { isLoggedIn: action.isLoggedIn };
+    default:
+        return state;
     }
 };

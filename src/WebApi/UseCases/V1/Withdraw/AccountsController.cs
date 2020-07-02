@@ -38,7 +38,7 @@ namespace WebApi.UseCases.V1.Withdraw
         public async Task<IActionResult> Withdraw(
             [FromServices] IMediator mediator,
             [FromServices] WithdrawPresenter presenter,
-            [FromForm][Required] WithdrawRequest request)
+            [FromForm] [Required] WithdrawRequest request)
         {
             var input = new WithdrawInput(
                 request.AccountId,

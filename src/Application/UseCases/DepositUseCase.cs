@@ -6,8 +6,9 @@ namespace Application.UseCases
 {
     using System.Threading.Tasks;
     using Boundaries.Deposit;
-    using Domain.Accounts.Credits;
     using Domain.Accounts;
+    using Domain.Accounts.Credits;
+    using Domain.Accounts.ValueObjects;
     using Services;
 
     /// <summary>
@@ -22,9 +23,9 @@ namespace Application.UseCases
     {
         private readonly IAccountRepository _accountRepository;
         private readonly AccountService _accountService;
+        private readonly ICurrencyExchange _currencyExchange;
         private readonly IDepositOutputPort _depositOutputPort;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ICurrencyExchange _currencyExchange;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DepositUseCase" /> class.
@@ -73,7 +74,7 @@ namespace Application.UseCases
                 return;
             }
 
-            var amountConverted = await _currencyExchange
+            PositiveMoney amountConverted = await this._currencyExchange
                 .ConvertToUSD(input.Amount)
                 .ConfigureAwait(false);
 

@@ -8,7 +8,8 @@ namespace Domain.Accounts.ValueObjects
 
     /// <summary>
     ///     PositiveMoney
-    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#value-object">
+    ///     <see
+    ///         href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#value-object">
     ///         Value Object
     ///         Design Pattern
     ///     </see>
@@ -30,7 +31,7 @@ namespace Domain.Accounts.ValueObjects
                 throw new MoneyShouldBePositiveException(Messages.TheAmountShouldBePositive);
             }
 
-            var tempCurrency = new Currency(currency);
+            Currency tempCurrency = new Currency(currency);
             this._value = new Money(value, tempCurrency);
         }
 
@@ -94,7 +95,6 @@ namespace Domain.Accounts.ValueObjects
         public bool Equals(PositiveMoney other) => this._value.ToDecimal() == other._value.ToDecimal();
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="currency"></param>
         /// <returns></returns>

@@ -6,7 +6,6 @@ namespace WebApi.Modules
     using Domain.Security;
     using Infrastructure.DataAccess;
     using Infrastructure.DataAccess.Repositories;
-    using Infrastructure.CurrencyExchange;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;

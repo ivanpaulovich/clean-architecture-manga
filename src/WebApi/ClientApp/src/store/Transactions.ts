@@ -67,9 +67,9 @@ export const reducer: Reducer<TransactionsState> = (
 
     const action = incomingAction as KnownAction;
     switch (action.type) {
-        case "RECEIVE_TRANSACTIONS":
-            return action.transactionState;
-            break;
+    case "RECEIVE_TRANSACTIONS":
+        return action.transactionState;
+        break;
     }
 
     return state;

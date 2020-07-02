@@ -48,7 +48,7 @@ namespace WebApi.UseCases.V1.Deposit
         public decimal UpdateBalance { get; }
 
         /// <summary>
-        /// Get Currency.
+        ///     Get Currency.
         /// </summary>
         public string? Currency { get; set; } = "USD";
     }
