@@ -1,7 +1,9 @@
-import React from "react";
+import * as React from "react";
+import { connect } from "react-redux";
 import { Form, Field } from "react-final-form";
 import TextInput from "../components/TextInput";
 import NumberInput from "../components/NumberInput";
+import Styles from "../Styles"
 
 interface Values {
     firstName: string;
