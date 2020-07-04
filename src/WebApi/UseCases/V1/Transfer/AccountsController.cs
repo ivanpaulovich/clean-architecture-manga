@@ -9,6 +9,7 @@ namespace WebApi.UseCases.V1.Transfer
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;
     using Modules.Common.FeatureFlags;
+    using WebApi.Modules.Common;
 
     /// <summary>
     ///     Accounts
@@ -28,7 +29,7 @@ namespace WebApi.UseCases.V1.Transfer
         /// </summary>
         /// <response code="200">The updated balance.</response>
         /// <response code="400">Bad request.</response>
-        /// <response code="500">Error.</response>
+        /// <response code="404">Not Found.</response>
         /// <param name="mediator"></param>
         /// <param name="presenter"></param>
         /// <param name="request">The request to Transfer.</param>
@@ -36,12 +37,11 @@ namespace WebApi.UseCases.V1.Transfer
         [Authorize]
         [HttpPatch("Transfer")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransferResponse))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Patch))]
         public async Task<IActionResult> Transfer(
             [FromServices] IMediator mediator,
             [FromServices] TransferPresenter presenter,
-            [FromForm] [Required] TransferRequest request)
+            [FromForm][Required] TransferRequest request)
         {
             var input = new TransferInput(
                 request.OriginAccountId,
@@ -50,7 +50,8 @@ namespace WebApi.UseCases.V1.Transfer
 
             await mediator.PublishAsync(input)
                 .ConfigureAwait(false);
-            return presenter.ViewModel;
+
+            return presenter.ViewModel!;
         }
     }
 }

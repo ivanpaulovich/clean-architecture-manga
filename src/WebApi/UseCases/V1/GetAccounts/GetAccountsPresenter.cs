@@ -8,9 +8,10 @@ namespace WebApi.UseCases.V1.GetAccounts
     public sealed class GetAccountsPresenter : IGetAccountsOutputPort
     {
         /// <summary>
+        /// ViewModel result.
         /// </summary>
-        /// <returns></returns>
-        public IActionResult ViewModel { get; private set; } = new NoContentResult();
+        /// <returns>IActionResult</returns>
+        public IActionResult? ViewModel { get; private set; }
 
         /// <summary>
         /// </summary>

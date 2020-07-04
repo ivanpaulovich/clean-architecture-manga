@@ -9,10 +9,10 @@ namespace WebApi.UseCases.V1.GetAccount
     public sealed class GetAccountPresenter : IGetAccountOutputPort
     {
         /// <summary>
-        ///     ViewModel
+        /// ViewModel result.
         /// </summary>
         /// <returns>IActionResult</returns>
-        public IActionResult ViewModel { get; private set; } = new NoContentResult();
+        public IActionResult? ViewModel { get; private set; }
 
         /// <summary>
         ///     The Account does not exist.

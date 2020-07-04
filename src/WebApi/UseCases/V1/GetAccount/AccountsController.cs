@@ -7,6 +7,7 @@ namespace WebApi.UseCases.V1.GetAccount
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using WebApi.Modules.Common;
 
     /// <summary>
     ///     Accounts
@@ -23,25 +24,27 @@ namespace WebApi.UseCases.V1.GetAccount
         /// <summary>
         ///     Get an account details.
         /// </summary>
-        /// <param name="mediator"></param>
-        /// <param name="presenter"></param>
+        /// <response code="200">The Account.</response>
+        /// <response code="404">Not Found.</response>
+        /// <param name="mediator">Mediator.</param>
+        /// <param name="presenter">Presenter.</param>
         /// <param name="request">A <see cref="GetAccountRequest"></see>.</param>
         /// <returns>An asynchronous <see cref="IActionResult" />.</returns>
         [Authorize]
-        [HttpGet("{AccountId}", Name = "GetAccount")]
+        [HttpGet("{AccountId:guid}", Name = "GetAccount")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetAccountResponse))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Find))]
         public async Task<IActionResult> Get(
             [FromServices] IMediator mediator,
             [FromServices] GetAccountPresenter presenter,
-            [FromRoute] [Required] GetAccountRequest request)
+            [FromRoute][Required] GetAccountRequest request)
         {
             var input = new GetAccountInput(request.AccountId);
+
             await mediator.PublishAsync(input)
                 .ConfigureAwait(false);
-            return presenter.ViewModel;
+
+            return presenter.ViewModel!;
         }
     }
 }

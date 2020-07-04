@@ -31,7 +31,7 @@ namespace WebApi.UseCases.V2.GetAccount
         /// <param name="request">A <see cref="GetAccountDetailsRequestV2"></see>.</param>
         /// <returns>An asynchronous <see cref="IActionResult" />.</returns>
         [Authorize]
-        [HttpGet("{AccountId}", Name = "GetAccountV2")]
+        [HttpGet("{AccountId:guid}", Name = "GetAccountV2")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -39,7 +39,7 @@ namespace WebApi.UseCases.V2.GetAccount
         public async Task<IActionResult> Get(
             [FromServices] IMediator mediator,
             [FromServices] GetAccountDetailsPresenterV2 presenter,
-            [FromRoute] [Required] GetAccountDetailsRequestV2 request)
+            [FromRoute][Required] GetAccountDetailsRequestV2 request)
         {
             var input = new GetAccountInput(request.AccountId);
             await mediator.PublishAsync(input, "GetAccountDetailsV2")

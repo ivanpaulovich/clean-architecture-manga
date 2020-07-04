@@ -7,6 +7,7 @@ namespace WebApi.UseCases.V1.Register
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using WebApi.Modules.Common;
 
     /// <summary>
     ///     Customers
@@ -23,22 +24,22 @@ namespace WebApi.UseCases.V1.Register
         /// <summary>
         ///     Register a customer.
         /// </summary>
-        /// <response code="200">The registered customer was create successfully.</response>
+        /// <response code="200">Customer already exists.</response>
+        /// <response code="201">The registered customer was created successfully.</response>
         /// <response code="400">Bad request.</response>
-        /// <response code="500">Error.</response>
-        /// <param name="mediator"></param>
-        /// <param name="presenter"></param>
+        /// <param name="mediator">Mediator.</param>
+        /// <param name="presenter">Presenter.</param>
         /// <param name="request">The request to register a customer.</param>
         /// <returns>The newly registered customer.</returns>
         [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RegisterResponse))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(RegisterResponse))]
+        [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Post))]
         public async Task<IActionResult> Post(
             [FromServices] IMediator mediator,
             [FromServices] RegisterPresenter presenter,
-            [FromForm] [Required] RegisterRequest request)
+            [FromForm][Required] RegisterRequest request)
         {
             var input = new RegisterInput(
                 request.SSN,
@@ -47,7 +48,7 @@ namespace WebApi.UseCases.V1.Register
             await mediator.PublishAsync(input)
                 .ConfigureAwait(false);
 
-            return presenter.ViewModel;
+            return presenter.ViewModel!;
         }
     }
 }

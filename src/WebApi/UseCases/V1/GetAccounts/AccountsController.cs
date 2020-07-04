@@ -6,6 +6,7 @@ namespace WebApi.UseCases.V1.GetAccounts
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using WebApi.Modules.Common;
 
     /// <summary>
     ///     Accounts
@@ -20,24 +21,27 @@ namespace WebApi.UseCases.V1.GetAccounts
     public sealed class AccountsController : ControllerBase
     {
         /// <summary>
-        ///     Get an account details.
+        ///     Get Accounts.
         /// </summary>
-        /// <param name="mediator"></param>
-        /// <param name="presenter"></param>
+        /// <response code="200">The List of Accounts.</response>
+        /// <response code="404">Not Found.</response>
+        /// <param name="mediator">Mediator.</param>
+        /// <param name="presenter">Presenter.</param>
         /// <returns>An asynchronous <see cref="IActionResult" />.</returns>
         [Authorize]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetAccountsResponse))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
         public async Task<IActionResult> Get(
             [FromServices] IMediator mediator,
             [FromServices] GetAccountsPresenter presenter)
         {
             var input = new GetAccountsInput();
+
             await mediator.PublishAsync(input)
                 .ConfigureAwait(false);
-            return presenter.ViewModel;
+
+            return presenter.ViewModel!;
         }
     }
 }
