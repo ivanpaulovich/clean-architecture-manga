@@ -88,7 +88,7 @@ namespace ComponentTests.V1
 
             HttpResponseMessage response = await client.PatchAsync("api/v1/Accounts/Withdraw", content)
                 .ConfigureAwait(false);
-            await response.Content
+            var responseBody = await response.Content
                 .ReadAsStringAsync()
                 .ConfigureAwait(false);
 
@@ -106,23 +106,23 @@ namespace ComponentTests.V1
         [Fact]
         public async Task Register_Deposit_Withdraw_Close()
         {
-            (_, string item2) = await this.Register(100)
+            (_, string item2) = await this.Register(500)
                 .ConfigureAwait(false);
             await this.GetCustomer()
                 .ConfigureAwait(false);
             await this.GetAccount(item2)
                 .ConfigureAwait(false);
-            await this.Withdraw(item2, 100)
+            await this.Withdraw(item2, 300)
                 .ConfigureAwait(false);
             await this.GetCustomer()
                 .ConfigureAwait(false);
             await this.Deposit(item2, 500)
                 .ConfigureAwait(false);
-            await this.Deposit(item2, 400)
+            await this.Deposit(item2, 300)
                 .ConfigureAwait(false);
             await this.GetCustomer()
                 .ConfigureAwait(false);
-            await this.Withdraw(item2, 400)
+            await this.Withdraw(item2, 500)
                 .ConfigureAwait(false);
             await this.Withdraw(item2, 500)
                 .ConfigureAwait(false);
