@@ -6,6 +6,7 @@ namespace WebApi.UseCases.V1.GetCustomer
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using WebApi.Modules.Common;
 
     /// <summary>
     ///     Accounts
@@ -22,21 +23,23 @@ namespace WebApi.UseCases.V1.GetCustomer
         /// <summary>
         ///     Get the Customer details.
         /// </summary>
+        /// <response code="200">The Customer.</response>
+        /// <response code="404">Not Found.</response>
         /// <returns>An asynchronous <see cref="IActionResult" />.</returns>
         [Authorize]
         [HttpGet(Name = "GetCustomer")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetCustomerDetailsResponse))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Get))]
         public async Task<IActionResult> GetCustomer(
             [FromServices] IMediator mediator,
             [FromServices] GetCustomerDetailsPresenter presenter)
         {
             var input = new GetCustomerInput();
+
             await mediator.PublishAsync(input)
                 .ConfigureAwait(false);
-            return presenter.ViewModel;
+
+            return presenter.ViewModel!;
         }
     }
 }

@@ -5,22 +5,26 @@ namespace WebApi.UseCases.V1.Deposit
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
+    /// Generates Deposit presentations.
     /// </summary>
     public sealed class DepositPresenter : IDepositOutputPort
     {
         /// <summary>
+        /// ViewModel result.
         /// </summary>
-        /// <returns></returns>
-        public IActionResult ViewModel { get; private set; } = new NoContentResult();
+        /// <returns>IActionResult</returns>
+        public IActionResult? ViewModel { get; private set; }
 
         /// <summary>
+        /// Account not found.
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">Message.</param>
         public void NotFound(string message) => this.ViewModel = new NotFoundObjectResult(message);
 
         /// <summary>
+        /// Standard.
         /// </summary>
-        /// <param name="output"></param>
+        /// <param name="output">Output.</param>
         public void Standard(DepositOutput output)
         {
             var depositEntity = (Credit)output.Transaction;
@@ -33,8 +37,9 @@ namespace WebApi.UseCases.V1.Deposit
         }
 
         /// <summary>
+        /// An error happened.
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">Message.</param>
         public void WriteError(string message) => this.ViewModel = new BadRequestObjectResult(message);
     }
 }

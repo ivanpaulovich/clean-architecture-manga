@@ -34,14 +34,14 @@ namespace ComponentTests.V1
                 .PostAsync("api/v1/Customers", content)
                 .ConfigureAwait(false);
 
-            Assert.Equal(HttpStatusCode.Created, actualResponse.StatusCode);
+            Assert.Equal(HttpStatusCode.OK, actualResponse.StatusCode);
 
             string actualResponseString = await actualResponse.Content
                 .ReadAsStringAsync()
                 .ConfigureAwait(false);
 
             using StringReader stringReader = new StringReader(actualResponseString);
-            using JsonTextReader reader = new JsonTextReader(stringReader) {DateParseHandling = DateParseHandling.None};
+            using JsonTextReader reader = new JsonTextReader(stringReader) { DateParseHandling = DateParseHandling.None };
             JObject jsonResponse = JObject.Load(reader);
 
             Assert.Equal(JTokenType.String, jsonResponse["customer"]["customerId"].Type);

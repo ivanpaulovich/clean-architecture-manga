@@ -6,19 +6,24 @@ namespace WebApi.UseCases.V1.GetCustomer
     using ViewModels;
 
     /// <summary>
+    /// Generates Get Customer presentations.
     /// </summary>
     public sealed class GetCustomerDetailsPresenter : IGetCustomerOutputPort
     {
         /// <summary>
+        /// ViewModel result.
         /// </summary>
-        public IActionResult ViewModel { get; private set; } = new NoContentResult();
+        /// <returns>IActionResult</returns>
+        public IActionResult? ViewModel { get; private set; }
 
         /// <summary>
+        /// Customer Not found.
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">Message.</param>
         public void NotFound(string message) => this.ViewModel = new NotFoundObjectResult(message);
 
         /// <summary>
+        /// 
         /// </summary>
         /// <param name="output"></param>
         public void Standard(GetCustomerOutput output)

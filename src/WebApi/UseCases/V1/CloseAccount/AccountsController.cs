@@ -7,6 +7,7 @@ namespace WebApi.UseCases.V1.CloseAccount
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using WebApi.Modules.Common;
 
     /// <summary>
     ///     Accounts
@@ -25,24 +26,26 @@ namespace WebApi.UseCases.V1.CloseAccount
         /// </summary>
         /// <response code="200">The closed account id.</response>
         /// <response code="400">Bad request.</response>
-        /// <response code="500">Error.</response>
-        /// <param name="mediator"></param>
-        /// <param name="presenter"></param>
+        /// <response code="404">Not Found.</response>
+        /// <param name="mediator">Mediator.</param>
+        /// <param name="presenter">Presenter.</param>
         /// <param name="request">The request to Close an Account.</param>
-        /// <returns>The account id.</returns>
+        /// <returns>ViewModel.</returns>
         [Authorize]
-        [HttpDelete("{AccountId}")]
+        [HttpDelete("{AccountId:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CloseAccountResponse))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Delete))]
         public async Task<IActionResult> Close(
-            [FromServices] IMediator mediator, [FromServices] CloseAccountPresenter presenter,
-            [FromRoute] [Required] CloseAccountRequest request)
+            [FromServices] IMediator mediator,
+            [FromServices] CloseAccountPresenter presenter,
+            [FromRoute][Required] CloseAccountRequest request)
         {
             var input = new CloseAccountInput(request.AccountId);
+
             await mediator.PublishAsync(input)
                 .ConfigureAwait(false);
-            return presenter.ViewModel;
+
+            return presenter.ViewModel!;
         }
     }
 }

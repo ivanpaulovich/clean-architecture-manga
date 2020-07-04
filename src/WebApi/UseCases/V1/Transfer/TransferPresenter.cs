@@ -1,36 +1,37 @@
 namespace WebApi.UseCases.V1.Transfer
 {
     using Application.Boundaries.Transfer;
-    using Domain.Accounts.Debits;
     using Microsoft.AspNetCore.Mvc;
-    using ViewModels;
 
     /// <summary>
     /// </summary>
     public sealed class TransferPresenter : ITransferOutputPort
     {
         /// <summary>
+        /// ViewModel result.
         /// </summary>
-        public IActionResult ViewModel { get; private set; } = new NoContentResult();
+        /// <returns>IActionResult</returns>
+        public IActionResult? ViewModel { get; private set; }
 
         /// <summary>
+        /// Account does not exist.
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">Message.</param>
         public void NotFound(string message) => this.ViewModel = new NotFoundObjectResult(message);
 
         /// <summary>
+        /// Standard output.
         /// </summary>
-        /// <param name="output"></param>
+        /// <param name="output">Output.</param>
         public void Standard(TransferOutput output)
         {
-            var transactionModel = new DebitModel((Debit)output.Transaction);
-            var transferResponse = new TransferResponse(transactionModel, output.UpdatedBalance.ToDecimal());
-            this.ViewModel = new ObjectResult(transferResponse);
+            this.ViewModel = new NoContentResult();
         }
 
         /// <summary>
+        /// An error happened.
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">Message.</param>
         public void WriteError(string message) => this.ViewModel = new BadRequestObjectResult(message);
     }
 }

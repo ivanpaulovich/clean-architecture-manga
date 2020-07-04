@@ -28,4 +28,7 @@
   <data name="AccountDoesNotExist" xml:space="preserve">
     <value>Account does not exist.</value>
   </data>
+  <data name="AccountHasFunds" xml:space="preserve">
+    <value>Account can't be closed because it has funds.</value>
+  </data>
 </root>

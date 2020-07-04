@@ -65,12 +65,13 @@ namespace Application.UseCases
                     .Delete(account)
                     .ConfigureAwait(false);
             }
+            else
+            {
+                this._closeAccountOutputPort
+                    .WriteError(Messages.AccountHasFunds);
+                return;
+            }
 
-            this.BuildOutput(account);
-        }
-
-        private void BuildOutput(IAccount account)
-        {
             var closeAccountOutput = new CloseAccountOutput(account);
             this._closeAccountOutputPort
                 .Standard(closeAccountOutput);
