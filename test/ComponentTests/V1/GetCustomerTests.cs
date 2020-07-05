@@ -29,7 +29,8 @@ namespace ComponentTests.V1
 
             Assert.Equal(HttpStatusCode.OK, actualResponse.StatusCode);
 
-            string actualResponseString = await actualResponse.Content
+            string actualResponseString = await actualResponse
+                .Content!
                 .ReadAsStringAsync()
                 .ConfigureAwait(false);
 

@@ -38,7 +38,7 @@ namespace Infrastructure.ExternalAuthentication
                 .User;
 
             string id = user.FindFirst(c => c.Type == "id")?.Value!;
-            ExternalUserId externalUserId = new ExternalUserId($"{user.Identity.AuthenticationType}/{id}");
+            ExternalUserId externalUserId = new ExternalUserId($"{user?.Identity!.AuthenticationType}/{id}");
             Name username = new Name(user.Identity.Name!);
 
             CustomerId? customerId = null;

@@ -49,7 +49,7 @@ namespace Domain.Accounts.ValueObjects
         /// </summary>
         /// <param name="obj">Other object.</param>
         /// <returns>Returns true when equals.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is AccountId accountIdObj)
             {

@@ -54,7 +54,7 @@ namespace Domain.Customers.ValueObjects
         /// </summary>
         /// <param name="obj">Other object.</param>
         /// <returns>True when equals.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is SSN ssnObj)
             {

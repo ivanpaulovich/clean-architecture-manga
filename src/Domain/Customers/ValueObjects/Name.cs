@@ -42,7 +42,7 @@ namespace Domain.Customers.ValueObjects
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is Name nameObj)
             {

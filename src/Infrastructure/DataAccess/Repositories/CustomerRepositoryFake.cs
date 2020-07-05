@@ -30,7 +30,7 @@ namespace Infrastructure.DataAccess.Repositories
         {
             Customer customer = this._context
                 .Customers
-                .SingleOrDefault(e => e.Id.Equals(customerId));
+                .SingleOrDefault(e => e.Id.Equals(customerId))!;
 
             return await Task.FromResult<Domain.Customers.Customer>(customer)
                 .ConfigureAwait(false);
@@ -40,7 +40,7 @@ namespace Infrastructure.DataAccess.Repositories
         {
             Domain.Customers.Customer customerOld = this._context
                 .Customers
-                .SingleOrDefault(e => e.Id.Equals(customer.Id));
+                .SingleOrDefault(e => e.Id.Equals(customer.Id))!;
 
             customerOld = (Domain.Customers.Customer)customer;
             await Task.CompletedTask

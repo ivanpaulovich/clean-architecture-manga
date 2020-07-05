@@ -50,7 +50,7 @@ namespace Domain.Accounts.Credits
         /// </summary>
         /// <param name="obj">Other object.</param>
         /// <returns>True if equals.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is CreditId creditIdObj)
             {

@@ -27,7 +27,8 @@ namespace ComponentTests.V1
                 .GetAsync("/api/v1/Accounts/")
                 .ConfigureAwait(false);
 
-            string actualResponseString = await actualResponse.Content
+            string actualResponseString = await actualResponse
+                .Content!
                 .ReadAsStringAsync()
                 .ConfigureAwait(false);
 

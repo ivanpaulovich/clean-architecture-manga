@@ -1,23 +1,23 @@
 {
     "workbench.colorCustomizations": {
-        "activityBar.background": "#1f6fd0",
-        "activityBar.activeBackground": "#1f6fd0",
-        "activityBar.activeBorder": "#ee90bb",
+        "activityBar.background": "#8a2ca2",
+        "activityBar.activeBackground": "#8a2ca2",
+        "activityBar.activeBorder": "#af9530",
         "activityBar.foreground": "#e7e7e7",
         "activityBar.inactiveForeground": "#e7e7e799",
-        "activityBarBadge.background": "#ee90bb",
+        "activityBarBadge.background": "#af9530",
         "activityBarBadge.foreground": "#15202b",
-        "titleBar.activeBackground": "#1857a4",
-        "titleBar.inactiveBackground": "#1857a499",
+        "titleBar.activeBackground": "#68217a",
+        "titleBar.inactiveBackground": "#68217a99",
         "titleBar.activeForeground": "#e7e7e7",
         "titleBar.inactiveForeground": "#e7e7e799",
-        "statusBar.background": "#1857a4",
-        "statusBarItem.hoverBackground": "#1f6fd0",
+        "statusBar.background": "#68217a",
+        "statusBarItem.hoverBackground": "#8a2ca2",
         "statusBar.foreground": "#e7e7e7",
-        "statusBar.border": "#1857a4",
-        "titleBar.border": "#1857a4"
+        "statusBar.border": "#68217a",
+        "titleBar.border": "#68217a"
     },
-    "peacock.color": "#1857a4",
+    "peacock.color": "#68217A",
     "editor.formatOnSave": true,
     "[javascript]": {
         "editor.formatOnSave": false

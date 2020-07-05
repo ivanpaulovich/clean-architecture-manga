@@ -28,14 +28,15 @@ namespace ComponentTests.V2
 
             FormUrlEncodedContent content = new FormUrlEncodedContent(new[]
             {
-                new KeyValuePair<string, string>("ssn", "8608179999"), new KeyValuePair<string, string>("initialAmount",
-                    initialAmount.ToString(CultureInfo.InvariantCulture))
+                new KeyValuePair<string?, string?>("ssn", "8608179999"),
+                new KeyValuePair<string?, string?>("initialAmount", initialAmount.ToString(CultureInfo.InvariantCulture))
             });
 
             HttpResponseMessage response = await client.PostAsync("api/v1/Customers", content)
                 .ConfigureAwait(false);
 
-            string responseString = await response.Content
+            string responseString = await response
+                .Content!
                 .ReadAsStringAsync()
                 .ConfigureAwait(false);
 

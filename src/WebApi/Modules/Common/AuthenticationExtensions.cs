@@ -109,7 +109,9 @@ namespace WebApi.Modules.Common
                                 .ConfigureAwait(false);
                             response.EnsureSuccessStatusCode();
 
-                            var user = JsonDocument.Parse(await response.Content.ReadAsStringAsync()
+                            var user = JsonDocument.Parse(await response
+                                    .Content!
+                                    .ReadAsStringAsync()
                                 .ConfigureAwait(false));
 
                             context.RunClaimActions(user.RootElement);
@@ -151,7 +153,8 @@ namespace WebApi.Modules.Common
                             response.EnsureSuccessStatusCode();
 
                             var user = JsonDocument.Parse(await response
-                                .Content.ReadAsStringAsync()
+                                    .Content!
+                                    .ReadAsStringAsync()
                                 .ConfigureAwait(false));
 
                             context.RunClaimActions(user.RootElement);

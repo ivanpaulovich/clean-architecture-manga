@@ -26,8 +26,8 @@ namespace ComponentTests.V1
 
             FormUrlEncodedContent content = new FormUrlEncodedContent(new[]
             {
-                new KeyValuePair<string, string>("ssn", "8608179999"),
-                new KeyValuePair<string, string>("initialAmount", "300.5")
+                new KeyValuePair<string?, string?>("ssn", "8608179999"),
+                new KeyValuePair<string?, string?>("initialAmount", "300.5")
             });
 
             HttpResponseMessage actualResponse = await client
@@ -36,7 +36,8 @@ namespace ComponentTests.V1
 
             Assert.Equal(HttpStatusCode.OK, actualResponse.StatusCode);
 
-            string actualResponseString = await actualResponse.Content
+            string actualResponseString = await actualResponse
+                .Content!
                 .ReadAsStringAsync()
                 .ConfigureAwait(false);
 

@@ -72,6 +72,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Nuget packages upgrades.
 - `TransferTransferUseCase` renamed to `TransferUseCase`
 
+## [5.0.0] - 2020-05-24
+
+### Changed
+
+- [#184](https://github.com/ivanpaulovich/clean-architecture-manga/issues/184) .NET SDK updated to .NET 5.
+- Projects updated to use C# preview features a.k.a C#9.
+
 ## [3.0.3] - 2020-05-24
 
 ### Fixed

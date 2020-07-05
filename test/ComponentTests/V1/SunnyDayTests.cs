@@ -35,7 +35,8 @@ namespace ComponentTests.V1
 
             FormUrlEncodedContent content = new FormUrlEncodedContent(new[]
             {
-                new KeyValuePair<string, string>("ssn", "8608179999"), new KeyValuePair<string, string>("initialAmount",
+                new KeyValuePair<string?, string?>("ssn", "8608179999"),
+                new KeyValuePair<string?, string?>("initialAmount",
                     initialAmount.ToString(CultureInfo.InvariantCulture))
             });
 
@@ -44,7 +45,8 @@ namespace ComponentTests.V1
 
             response.EnsureSuccessStatusCode();
 
-            string responseString = await response.Content
+            string responseString = await response
+                .Content!
                 .ReadAsStringAsync()
                 .ConfigureAwait(false);
 
@@ -82,13 +84,14 @@ namespace ComponentTests.V1
 
             FormUrlEncodedContent content = new FormUrlEncodedContent(new[]
             {
-                new KeyValuePair<string, string>("accountId", account),
-                new KeyValuePair<string, string>("amount", amount.ToString(CultureInfo.InvariantCulture))
+                new KeyValuePair<string?, string?>("accountId", account),
+                new KeyValuePair<string?, string?>("amount", amount.ToString(CultureInfo.InvariantCulture))
             });
 
             HttpResponseMessage response = await client.PatchAsync("api/v1/Accounts/Withdraw", content)
                 .ConfigureAwait(false);
-            var responseBody = await response.Content
+            await response
+                .Content!
                 .ReadAsStringAsync()
                 .ConfigureAwait(false);
 

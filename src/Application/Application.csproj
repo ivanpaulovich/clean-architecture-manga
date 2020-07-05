@@ -1,6 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
+    <TargetFramework>net50</TargetFramework>
+    <LangVersion>preview</LangVersion>
+    <IsPackable>false</IsPackable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Nullable>enable</Nullable>
+    <NullableReferenceTypes>true</NullableReferenceTypes>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>

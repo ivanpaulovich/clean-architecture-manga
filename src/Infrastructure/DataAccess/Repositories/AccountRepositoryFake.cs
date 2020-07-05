@@ -58,7 +58,7 @@ namespace Infrastructure.DataAccess.Repositories
         {
             Account accountOld = this._context
                 .Accounts
-                .SingleOrDefault(e => e.Id.Equals(account.Id));
+                .SingleOrDefault(e => e.Id.Equals(account.Id))!;
 
             this._context
                 .Accounts
@@ -73,7 +73,7 @@ namespace Infrastructure.DataAccess.Repositories
         {
             Account account = this._context
                 .Accounts
-                .SingleOrDefault(e => e.Id.Equals(accountId));
+                .SingleOrDefault(e => e.Id.Equals(accountId))!;
 
             if (account is null)
             {
@@ -89,7 +89,7 @@ namespace Infrastructure.DataAccess.Repositories
         {
             Domain.Accounts.Account accountOld = this._context
                 .Accounts
-                .SingleOrDefault(e => e.Id.Equals(account.Id));
+                .SingleOrDefault(e => e.Id.Equals(account.Id))!;
 
             accountOld = (Domain.Accounts.Account)account;
             await Task.CompletedTask
@@ -101,7 +101,7 @@ namespace Infrastructure.DataAccess.Repositories
         {
             Domain.Accounts.Account accountOld = this._context
                 .Accounts
-                .SingleOrDefault(e => e.Id.Equals(account.Id));
+                .SingleOrDefault(e => e.Id.Equals(account.Id))!;
 
             accountOld = (Domain.Accounts.Account)account;
             await Task.CompletedTask

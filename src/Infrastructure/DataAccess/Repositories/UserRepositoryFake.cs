@@ -30,7 +30,7 @@ namespace Infrastructure.DataAccess.Repositories
         {
             Domain.Security.User user = this._context
                 .Users
-                .SingleOrDefault(e => e.ExternalUserId.Equals(externalUserId));
+                .SingleOrDefault(e => e.ExternalUserId.Equals(externalUserId))!;
 
             return await Task.FromResult(user)
                 .ConfigureAwait(false);
