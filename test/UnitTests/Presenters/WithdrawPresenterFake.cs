@@ -1,23 +1,25 @@
 namespace UnitTests.Presenters
 {
-    using Application.Boundaries.Withdraw;
+    using System;
+    using Application.Services;
+    using Application.UseCases.Withdraw;
+    using Domain.Accounts;
+    using Domain.Accounts.Debits;
 
-    public sealed class WithdrawPresenterFake : IWithdrawOutputPort
+    public sealed class WithdrawPresenterFake : IOutputPort
     {
-        public WithdrawOutput? StandardOutput { get; private set; }
+        public Account? Account { get; private set; }
+        public Debit? Debit { get; private set; }
+        public bool InvalidOutput { get; private set; }
+        public bool NotFoundOutput { get; private set; }
+        public void Invalid(Notification notification) => this.InvalidOutput = true;
+        public void NotFound() => this.NotFoundOutput = true;
+        public void OutOfFunds() => throw new NotImplementedException();
 
-        public string? NotFoundOutput { get; private set; }
-
-        public string? OutOfBalanceOutput { get; private set; }
-
-        public string? ErrorOutput { get; private set; }
-
-        public void Standard(WithdrawOutput output) => this.StandardOutput = output;
-
-        public void NotFound(string message) => this.NotFoundOutput = message;
-
-        public void OutOfBalance(string message) => this.OutOfBalanceOutput = message;
-
-        public void WriteError(string message) => this.ErrorOutput = message;
+        public void Ok(Debit debit, Account account)
+        {
+            this.Account = account;
+            this.Debit = debit;
+        }
     }
 }

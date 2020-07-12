@@ -34,12 +34,9 @@ namespace Infrastructure.DataAccess
 
         private void Dispose(bool disposing)
         {
-            if (!this._disposed)
+            if (!this._disposed && disposing)
             {
-                if (disposing)
-                {
-                    this._context.Dispose();
-                }
+                this._context.Dispose();
             }
 
             this._disposed = true;

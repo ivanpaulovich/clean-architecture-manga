@@ -1,8 +1,6 @@
 namespace UnitTests.UseCaseTests
 {
-    using Domain.Accounts;
-    using Domain.Customers;
-    using Domain.Security;
+    using Application.Services;
     using Infrastructure.CurrencyExchange;
     using Infrastructure.DataAccess;
     using Infrastructure.DataAccess.Repositories;
@@ -20,11 +18,8 @@ namespace UnitTests.UseCaseTests
             this.UserRepositoryFake = new UserRepositoryFake(this.Context);
             this.UnitOfWork = new UnitOfWorkFake();
             this.EntityFactory = new EntityFactory();
-            this.TestUserService = new TestUserService(this.EntityFactory);
-            this.CustomerService = new CustomerService(this.EntityFactory, this.CustomerRepositoryFake);
-            this.SecurityService = new SecurityService(this.UserRepositoryFake);
-            this.AccountService = new AccountService(this.EntityFactory, this.AccountRepositoryFake);
-            this.CurrencyExchange = new CurrencyExchangeServiceFake();
+            this.TestUserService = new TestUserService();
+            this.CurrencyExchangeFake = new CurrencyExchangeFake();
         }
 
         public EntityFactory EntityFactory { get; }
@@ -41,12 +36,6 @@ namespace UnitTests.UseCaseTests
 
         public TestUserService TestUserService { get; }
 
-        public CustomerService CustomerService { get; }
-
-        public SecurityService SecurityService { get; }
-
-        public AccountService AccountService { get; }
-
-        public CurrencyExchangeServiceFake CurrencyExchange { get; }
+        public CurrencyExchangeFake CurrencyExchangeFake { get; }
     }
 }

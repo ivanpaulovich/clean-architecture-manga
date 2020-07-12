@@ -7,7 +7,7 @@ namespace WebApi.Modules.Common
     using System.Security.Claims;
     using System.Text.Json;
     using System.Threading.Tasks;
-    using Domain.Security.Services;
+    using Application.Services;
     using Infrastructure.ExternalAuthentication;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authentication.Cookies;

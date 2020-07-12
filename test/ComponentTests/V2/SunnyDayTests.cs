@@ -1,8 +1,7 @@
 namespace ComponentTests.V2
 {
     using System;
-    using System.Collections.Generic;
-    using System.Globalization;
+    using System.IO;
     using System.Net.Http;
     using System.Threading.Tasks;
     using Newtonsoft.Json;
@@ -15,6 +14,30 @@ namespace ComponentTests.V2
 
         private readonly CustomWebApplicationFactory _factory;
 
+        private async Task<Tuple<Guid, decimal>> GetAccounts()
+        {
+            HttpClient client = this._factory.CreateClient();
+            HttpResponseMessage actualResponse = await client
+                .GetAsync("/api/v1/Accounts/")
+                .ConfigureAwait(false);
+
+            string actualResponseString = await actualResponse.Content
+                .ReadAsStringAsync()
+                .ConfigureAwait(false);
+
+            using StringReader stringReader = new StringReader(actualResponseString);
+            using JsonTextReader reader = new JsonTextReader(stringReader) {DateParseHandling = DateParseHandling.None};
+
+            JObject jsonResponse = await JObject.LoadAsync(reader)
+                .ConfigureAwait(false);
+
+            Guid.TryParse(jsonResponse["accounts"]![0]!["accountId"]!.Value<string>(), out Guid accountId);
+            decimal.TryParse(jsonResponse["accounts"]![0]!["currentBalance"]!.Value<string>(),
+                out decimal currentBalance);
+
+            return new Tuple<Guid, decimal>(accountId, currentBalance);
+        }
+
         private async Task GetAccount(string accountId)
         {
             HttpClient client = this._factory.CreateClient();
@@ -22,40 +45,12 @@ namespace ComponentTests.V2
                 .ConfigureAwait(false);
         }
 
-        private async Task<Tuple<string, string>> Register(decimal initialAmount)
-        {
-            HttpClient client = this._factory.CreateClient();
-
-            FormUrlEncodedContent content = new FormUrlEncodedContent(new[]
-            {
-                new KeyValuePair<string, string>("ssn", "8608179999"), new KeyValuePair<string, string>("initialAmount",
-                    initialAmount.ToString(CultureInfo.InvariantCulture))
-            });
-
-            HttpResponseMessage response = await client.PostAsync("api/v1/Customers", content)
-                .ConfigureAwait(false);
-
-            string responseString = await response.Content
-                .ReadAsStringAsync()
-                .ConfigureAwait(false);
-
-            response.EnsureSuccessStatusCode();
-
-            Assert.Contains("customerId", responseString);
-            JObject customer = JsonConvert.DeserializeObject<JObject>(responseString);
-
-            string customerId = customer["customer"]["customerId"].Value<string>();
-            string accountId = ((JContainer)customer["accounts"]).First["accountId"].Value<string>();
-
-            return new Tuple<string, string>(customerId, accountId);
-        }
-
         [Fact]
-        public async Task Register_Deposit_Withdraw_Close()
+        public async Task GetAccounts_GetAccount()
         {
-            Tuple<string, string> customerIdAccountId = await this.Register(100)
+            var account = await this.GetAccounts()
                 .ConfigureAwait(false);
-            await this.GetAccount(customerIdAccountId.Item2)
+            await this.GetAccount(account.Item1.ToString())
                 .ConfigureAwait(false);
         }
     }

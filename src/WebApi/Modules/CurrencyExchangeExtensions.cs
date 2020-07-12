@@ -20,7 +20,7 @@ namespace WebApi.Modules
             bool useFake = configuration.GetValue<bool>("CurrencyExchangeModule:UseFake");
             if (useFake)
             {
-                services.AddScoped<ICurrencyExchange, CurrencyExchangeServiceFake>();
+                services.AddScoped<ICurrencyExchange, CurrencyExchangeFake>();
             }
             else
             {

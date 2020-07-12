@@ -35,13 +35,15 @@ namespace ComponentTests.V1
 
             using StringReader stringReader = new StringReader(actualResponseString);
             using JsonTextReader reader = new JsonTextReader(stringReader) {DateParseHandling = DateParseHandling.None};
-            JObject jsonResponse = JObject.Load(reader);
+            JObject jsonResponse = await JObject.LoadAsync(reader)
+                .ConfigureAwait(false);
 
-            Assert.Equal(JTokenType.String, jsonResponse["accounts"][0]["accountId"].Type);
-            Assert.Equal(JTokenType.Integer, jsonResponse["accounts"][0]["currentBalance"].Type);
+            Assert.Equal(JTokenType.String, jsonResponse["accounts"]![0]!["accountId"]!.Type);
+            Assert.Equal(JTokenType.Integer, jsonResponse["accounts"]![0]!["currentBalance"]!.Type);
 
-            Assert.True(Guid.TryParse(jsonResponse["accounts"][0]["accountId"].Value<string>(), out Guid _));
-            Assert.True(decimal.TryParse(jsonResponse["accounts"][0]["currentBalance"].Value<string>(), out decimal _));
+            Assert.True(Guid.TryParse(jsonResponse["accounts"]![0]!["accountId"]!.Value<string>(), out Guid _));
+            Assert.True(decimal.TryParse(jsonResponse["accounts"]![0]!["currentBalance"]!.Value<string>(),
+                out decimal _));
         }
     }
 }

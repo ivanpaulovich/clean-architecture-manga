@@ -43,7 +43,7 @@ class LoginStatus extends React.PureComponent<UserProps> {
                         <NavLink tag={Link} className="text-dark" to="/accounts">Manage Accounts</NavLink>
                     </NavItem>
                     <NavItem>
-                        <a className="text-dark nav-link" onClick={this.logout.bind(this)} href="#">Logout</a>
+                        <button className="text-dark nav-link" onClick={this.logout.bind(this)}>Logout</button>
                     </NavItem>
                 </React.Fragment>
             );
@@ -51,12 +51,12 @@ class LoginStatus extends React.PureComponent<UserProps> {
             return (
                 <React.Fragment>
                     <NavItem>
-                        <a className="text-dark nav-link" onClick={this.loginWithGitHub.bind(this)
-} href="#">Login with GitHub</a>
+                        <button className="text-dark nav-link" onClick={this.loginWithGitHub.bind(this)
+}>Login with GitHub</button>
                     </NavItem>
                     <NavItem>
-                        <a className="text-dark nav-link" onClick={this.loginWithGoogle.bind(this)
-} href="#">Login with Google</a>
+                        <button className="text-dark nav-link" onClick={this.loginWithGoogle.bind(this)
+}>Login with Google</button>
                     </NavItem>
                 </React.Fragment>
             );

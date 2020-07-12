@@ -48,16 +48,16 @@ namespace Infrastructure.DataAccess
 
         /// <summary>
         /// </summary>
-        /// <param name="builder"></param>
-        protected override void OnModelCreating(ModelBuilder builder)
+        /// <param name="modelBuilder"></param>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            if (builder is null)
+            if (modelBuilder is null)
             {
-                throw new ArgumentNullException(nameof(builder));
+                throw new ArgumentNullException(nameof(modelBuilder));
             }
 
-            builder.ApplyConfigurationsFromAssembly(typeof(MangaContext).Assembly);
-            SeedData.Seed(builder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(MangaContext).Assembly);
+            SeedData.Seed(modelBuilder);
         }
     }
 }

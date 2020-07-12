@@ -6,14 +6,9 @@ namespace Infrastructure.DataAccess
 {
     using System;
     using System.Collections.ObjectModel;
-    using Domain.Accounts.Credits;
-    using Domain.Accounts.Debits;
     using Domain.Accounts.ValueObjects;
     using Domain.Customers.ValueObjects;
-    using Domain.Security.ValueObjects;
     using Entities;
-    using Credit = Entities.Credit;
-    using Debit = Entities.Debit;
 
     /// <summary>
     /// </summary>
@@ -23,63 +18,64 @@ namespace Infrastructure.DataAccess
         /// </summary>
         public MangaContextFake()
         {
-            var customer = new Customer(
-                DefaultCustomerId,
-                new Name(Messages.UserName),
-                new SSN(Messages.UserSSN));
-
-            customer.Accounts
-                .AddRange(new[] {DefaultAccountId});
-
             var user1 = new User(
-                new ExternalUserId(Messages.ExternalUserID),
-                customer.Name,
-                customer.Id);
+                SeedData.DefaultUserId,
+                SeedData.DefaultExternalUserId);
+
+            var customer = new Customer(
+                SeedData.DefaultCustomerId,
+                new Name(Messages.UserName),
+                new Name(Messages.UserName),
+                new SSN(Messages.UserSSN),
+                user1.UserId);
 
             var credit = new Credit(
                 new CreditId(Guid.NewGuid()),
-                DefaultAccountId,
-                new PositiveMoney(800),
-                DateTime.Now);
+                SeedData.DefaultAccountId,
+                DateTime.Now,
+                800,
+                Currency.Dollar.Code);
 
             var debit = new Debit(
                 new DebitId(Guid.NewGuid()),
-                DefaultAccountId,
-                new PositiveMoney(300),
-                DateTime.Now);
+                SeedData.DefaultAccountId,
+                DateTime.Now,
+                300,
+                Currency.Dollar.Code);
 
             var account = new Account(
-                DefaultAccountId,
-                DefaultCustomerId);
+                SeedData.DefaultAccountId,
+                SeedData.DefaultCustomerId,
+                Currency.Dollar);
 
             account.Credits.Add(credit);
             account.Debits.Add(debit);
 
+            this.Users.Add(user1);
             this.Customers.Add(customer);
             this.Accounts.Add(account);
             this.Credits.Add(credit);
             this.Debits.Add(debit);
-            this.Users.Add(user1);
 
-            var secondCustomer = new Customer(
-                SecondCustomerId,
-                new Name(Messages.UserName1),
-                new SSN(Messages.UserSSN1));
+            var user2 = new User(
+                SeedData.SecondUserId,
+                SeedData.SecondExternalUserId);
 
-            secondCustomer.Accounts.Add(SecondAccountId);
+            var customer2 = new Customer(
+                SeedData.SecondCustomerId,
+                new Name(Messages.UserName),
+                new Name(Messages.UserName),
+                new SSN(Messages.UserSSN),
+                SeedData.SecondUserId);
 
-            var secondUser = new User(
-                new ExternalUserId(Messages.ExternalUserID1),
-                secondCustomer.Name,
-                secondCustomer.Id);
+            var account2 = new Account(
+                SeedData.SecondAccountId,
+                SeedData.SecondCustomerId,
+                Currency.Dollar);
 
-            var secondAccount = new Account(
-                SecondAccountId,
-                SecondCustomerId);
-
-            this.Customers.Add(secondCustomer);
-            this.Accounts.Add(secondAccount);
-            this.Users.Add(secondUser);
+            this.Users.Add(user2);
+            this.Customers.Add(customer2);
+            this.Accounts.Add(account2);
         }
 
         /// <summary>
@@ -105,23 +101,6 @@ namespace Infrastructure.DataAccess
         /// <summary>
         ///     Gets or sets Debits.
         /// </summary>
-        private Collection<Debit> Debits { get; } = new Collection<Debit>();
-
-        /// <summary>
-        ///     Gets or sets DefaultCustomerId.
-        /// </summary>
-        public static CustomerId DefaultCustomerId { get; } = new CustomerId(Guid.NewGuid());
-
-        /// <summary>
-        ///     Gets or sets DefaultAccountId.
-        /// </summary>
-        public static AccountId DefaultAccountId { get; } = new AccountId(Guid.NewGuid());
-
-        private static CustomerId SecondCustomerId { get; } = new CustomerId(Guid.NewGuid());
-
-        /// <summary>
-        ///     Gets or sets SecondAccountId.
-        /// </summary>
-        public static AccountId SecondAccountId { get; } = new AccountId(Guid.NewGuid());
+        public Collection<Debit> Debits { get; } = new Collection<Debit>();
     }
 }

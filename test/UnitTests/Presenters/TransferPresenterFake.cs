@@ -1,19 +1,31 @@
 namespace UnitTests.Presenters
 {
-    using Application.Boundaries.Transfer;
+    using System;
+    using Application.Services;
+    using Application.UseCases.Transfer;
+    using Domain.Accounts;
+    using Domain.Accounts.Credits;
+    using Domain.Accounts.Debits;
 
-    public sealed class TransferPresenterFake : ITransferOutputPort
+    public sealed class TransferPresenterFake : IOutputPort
     {
-        public TransferOutput? TransferOutput { get; private set; }
+        public Account? OriginAccount { get; private set; }
+        public Account? DestinationAccount { get; private set; }
+        public Credit? Credit { get; private set; }
+        public Debit? Debit { get; private set; }
+        public bool InvalidOutput { get; private set; }
+        public bool NotFoundOutput { get; private set; }
+        public void Invalid(Notification notification) => this.InvalidOutput = true;
+        public void NotFound() => this.NotFoundOutput = true;
 
-        public string? NotFoundOutput { get; private set; }
+        public void Ok(Account originAccount, Debit debit, Account destinationAccount, Credit credit)
+        {
+            this.OriginAccount = originAccount;
+            this.Debit = debit;
+            this.DestinationAccount = destinationAccount;
+            this.Credit = credit;
+        }
 
-        public string? ErrorOutput { get; private set; }
-
-        public void Standard(TransferOutput output) => this.TransferOutput = output;
-
-        public void NotFound(string message) => this.NotFoundOutput = message;
-
-        public void WriteError(string message) => this.ErrorOutput = message;
+        public void OutOfFunds() => throw new NotImplementedException();
     }
 }

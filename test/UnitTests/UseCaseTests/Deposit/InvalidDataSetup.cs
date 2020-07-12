@@ -4,6 +4,10 @@ namespace UnitTests.UseCaseTests.Deposit
 
     internal sealed class InvalidDataSetup : TheoryData<decimal>
     {
-        public InvalidDataSetup() => this.Add(-100);
+        public InvalidDataSetup()
+        {
+            this.Add(-100);
+            this.Add(0);
+        }
     }
 }

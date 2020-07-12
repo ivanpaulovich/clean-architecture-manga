@@ -6,7 +6,6 @@ namespace UnitTests.UseCaseTests.Deposit
     {
         public ValidDataSetup()
         {
-            this.Add(0);
             this.Add(100);
             this.Add(200);
         }

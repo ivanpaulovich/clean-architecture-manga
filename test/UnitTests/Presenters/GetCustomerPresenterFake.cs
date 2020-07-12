@@ -1,19 +1,13 @@
 namespace UnitTests.Presenters
 {
-    using Application.Boundaries.GetCustomer;
+    using Application.UseCases.GetCustomer;
+    using Domain.Customers;
 
-    public sealed class GetCustomerPresenterFake : IGetCustomerOutputPort
+    public sealed class GetCustomerPresenterFake : IOutputPort
     {
-        public GetCustomerOutput? StandardOutput { get; private set; }
-
-        public string? NotFoundOutput { get; private set; }
-
-        public string? ErrorOutput { get; private set; }
-
-        public void Standard(GetCustomerOutput output) => this.StandardOutput = output;
-
-        public void NotFound(string message) => this.NotFoundOutput = message;
-
-        public void WriteError(string message) => this.ErrorOutput = message;
+        public Customer? Customer { get; private set; }
+        public bool NotFoundOutput { get; private set; }
+        public void NotFound() => this.NotFoundOutput = true;
+        public void Ok(Customer customer) => this.Customer = customer;
     }
 }

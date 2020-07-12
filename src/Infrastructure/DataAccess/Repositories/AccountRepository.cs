@@ -8,16 +8,12 @@ namespace Infrastructure.DataAccess.Repositories
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Common;
     using Domain.Accounts;
     using Domain.Accounts.Credits;
     using Domain.Accounts.Debits;
     using Domain.Accounts.ValueObjects;
-    using Domain.Customers.ValueObjects;
-    using Microsoft.Data.SqlClient;
     using Microsoft.EntityFrameworkCore;
-    using Account = Entities.Account;
-    using Credit = Entities.Credit;
-    using Debit = Entities.Debit;
 
     /// <inheritdoc />
     public sealed class AccountRepository : IAccountRepository
@@ -32,95 +28,112 @@ namespace Infrastructure.DataAccess.Repositories
                                                                               nameof(context));
 
         /// <inheritdoc />
-        public async Task<IList<IAccount>> GetBy(CustomerId customerId)
-        {
-            var accounts = this._context
-                .Accounts
-                .Where(e => e.CustomerId.Equals(customerId))
-                .Select(e => (IAccount)e)
-                .ToList();
-
-            return await Task.FromResult(accounts)
-                .ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        public async Task Add(IAccount account, ICredit credit)
+        public async Task Add(Account account, Credit credit)
         {
             await this._context
                 .Accounts
-                .AddAsync((Account)account)
+                .AddAsync((Entities.Account)account)
                 .ConfigureAwait(false);
 
             await this._context
                 .Credits
-                .AddAsync((Credit)credit)
+                .AddAsync((Entities.Credit)credit)
                 .ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task Delete(IAccount account)
-        {
-            if (account is null)
-            {
-                throw new ArgumentNullException(nameof(account));
-            }
-
-            const string deleteSQL = @"DELETE FROM Credit WHERE AccountId = @Id;
-                      DELETE FROM Debit WHERE AccountId = @Id;
-                      DELETE FROM Account WHERE Id = @Id;";
-
-            var id = new SqlParameter("@Id", account.Id);
-
-            await this._context
-                .Database
-                .ExecuteSqlRawAsync(
-                    deleteSQL, id)
-                .ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        public async Task<IAccount> GetAccount(AccountId id)
+        public async Task Delete(AccountId accountId)
         {
             Account account = await this._context
                 .Accounts
-                .Where(a => a.Id.Equals(id))
-                .SingleOrDefaultAsync()
+                .FindAsync(accountId)
                 .ConfigureAwait(false);
 
-            if (account is null)
+            if (account != null)
             {
-                return null!;
+                this._context.Accounts.Remove((Entities.Account)account);
             }
-
-            var credits = this._context
-                .Credits
-                .Where(e => e.AccountId.Equals(id))
-                .ToList();
-
-            var debits = this._context
-                .Debits
-                .Where(e => e.AccountId.Equals(id))
-                .ToList();
-
-            account.Credits
-                .AddRange(credits);
-            account.Debits
-                .AddRange(debits);
-
-            return account;
         }
 
         /// <inheritdoc />
-        public async Task Update(IAccount account, ICredit credit) => await this._context
+        public async Task<IAccount> GetAccount(AccountId accountId)
+        {
+            Entities.Account account = await this._context
+                .Accounts
+                .Where(e => e.AccountId == accountId)
+                .Select(e => e)
+                .SingleOrDefaultAsync()
+                .ConfigureAwait(false);
+
+            if (account is Account findAccount)
+            {
+                List<Entities.Credit> credits = await this._context
+                    .Credits
+                    .Where(e => e.AccountId.Equals(accountId))
+                    .ToListAsync()
+                    .ConfigureAwait(false);
+
+                List<Entities.Debit> debits = await this._context
+                    .Debits
+                    .Where(e => e.AccountId.Equals(accountId))
+                    .ToListAsync()
+                    .ConfigureAwait(false);
+
+                findAccount.Credits
+                    .AddRange(credits);
+                findAccount.Debits
+                    .AddRange(debits);
+
+                return findAccount;
+            }
+
+            return AccountNull.Instance;
+        }
+
+        /// <inheritdoc />
+        public async Task Update(Account account, Credit credit) => await this._context
             .Credits
-            .AddAsync((Credit)credit)
+            .AddAsync((Entities.Credit)credit)
             .ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task Update(IAccount account, IDebit debit) => await this._context
+        public async Task Update(Account account, Debit debit) => await this._context
             .Debits
-            .AddAsync((Debit)debit)
+            .AddAsync((Entities.Debit)debit)
             .ConfigureAwait(false);
+
+        public async Task<IAccount> Find(AccountId accountId, CustomerId customerId)
+        {
+            Entities.Account account = await this._context
+                .Accounts
+                .Where(e => e.CustomerId == customerId && e.AccountId == accountId)
+                .Select(e => e)
+                .SingleOrDefaultAsync()
+                .ConfigureAwait(false);
+
+            if (account is Account findAccount)
+            {
+                List<Entities.Credit> credits = await this._context
+                    .Credits
+                    .Where(e => e.AccountId.Equals(accountId))
+                    .ToListAsync()
+                    .ConfigureAwait(false);
+
+                List<Entities.Debit> debits = await this._context
+                    .Debits
+                    .Where(e => e.AccountId.Equals(accountId))
+                    .ToListAsync()
+                    .ConfigureAwait(false);
+
+                findAccount.Credits
+                    .AddRange(credits);
+                findAccount.Debits
+                    .AddRange(debits);
+
+                return findAccount;
+            }
+
+            return AccountNull.Instance;
+        }
     }
 }

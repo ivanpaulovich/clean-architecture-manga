@@ -4,23 +4,29 @@
 
 namespace UnitTests.Presenters
 {
-    using Application.Boundaries.Deposit;
+    using Application.Services;
+    using Application.UseCases.Deposit;
+    using Domain.Accounts;
+    using Domain.Accounts.Credits;
 
     /// <summary>
     ///     Deposit Presenter.
     /// </summary>
-    public sealed class DepositPresenterFake : IDepositOutputPort
+    public sealed class DepositPresenterFake : IOutputPort
     {
-        public DepositOutput? StandardOutput { get; private set; }
+        public Account? Account { get; private set; }
+        public Credit? Credit { get; private set; }
+        public bool IsNotFound { get; private set; }
+        public Notification? ModelState { get; private set; }
 
-        public string? NotFoundOutput { get; private set; }
+        public void Invalid(Notification modelState) => this.ModelState = modelState;
 
-        public string? ErrorOutput { get; private set; }
+        public void Ok(Credit credit, Account account)
+        {
+            this.Credit = credit;
+            this.Account = account;
+        }
 
-        public void Standard(DepositOutput output) => this.StandardOutput = output;
-
-        public void NotFound(string message) => this.NotFoundOutput = message;
-
-        public void WriteError(string message) => this.ErrorOutput = message;
+        public void NotFound() => this.IsNotFound = true;
     }
 }

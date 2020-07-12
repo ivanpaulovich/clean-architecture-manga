@@ -14,9 +14,10 @@ namespace WebApi.ViewModels
         /// </summary>
         public CustomerModel(Customer customer)
         {
-            this.CustomerId = customer.Id.ToGuid();
-            this.SSN = customer.SSN.ToString();
-            this.Name = customer.Name.ToString();
+            this.CustomerId = customer.CustomerId.Id;
+            this.SSN = customer.SSN.Text;
+            this.FirstName = customer.FirstName.Text;
+            this.LastName = customer.LastName.Text;
         }
 
         /// <summary>
@@ -35,6 +36,12 @@ namespace WebApi.ViewModels
         ///     Gets name.
         /// </summary>
         [Required]
-        public string Name { get; }
+        public string FirstName { get; }
+
+        /// <summary>
+        ///     Gets name.
+        /// </summary>
+        [Required]
+        public string LastName { get; }
     }
 }

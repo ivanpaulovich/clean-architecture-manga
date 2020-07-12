@@ -1,17 +1,16 @@
 namespace UnitTests.Presenters
 {
-    using Application.Boundaries.GetAccount;
+    using Application.Services;
+    using Application.UseCases.GetAccount;
+    using Domain.Accounts;
 
-    public sealed class GetAccountPresenterFake : IGetAccountOutputPort
+    public sealed class GetAccountPresenterFake : IOutputPort
     {
-        public GetAccountOutput? StandardOutput { get; private set; }
-        public string? NotFoundOutput { get; private set; }
-        public string? ErrorOutput { get; private set; }
-
-        public void Standard(GetAccountOutput output) => this.StandardOutput = output;
-
-        public void NotFound(string message) => this.NotFoundOutput = message;
-
-        public void WriteError(string message) => this.ErrorOutput = message;
+        public Account? Account { get; private set; }
+        public bool InvalidOutput { get; private set; }
+        public bool NotFoundOutput { get; private set; }
+        public void Invalid(Notification notification) => this.InvalidOutput = true;
+        public void NotFound() => this.NotFoundOutput = true;
+        public void Ok(Account account) => this.Account = account;
     }
 }

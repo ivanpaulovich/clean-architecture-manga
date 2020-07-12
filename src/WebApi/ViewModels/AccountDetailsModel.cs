@@ -16,17 +16,16 @@ namespace WebApi.ViewModels
         /// <summary>
         ///     Account Details constructor.
         /// </summary>
-        public AccountDetailsModel(IAccount account)
+        public AccountDetailsModel(Account account)
         {
-            var accountEntity = (Account)account;
-            this.AccountId = accountEntity.Id.ToGuid();
-            this.CurrentBalance = accountEntity.GetCurrentBalance().ToDecimal();
-            this.Credits = accountEntity
+            this.AccountId = account.AccountId.Id;
+            this.CurrentBalance = account.GetCurrentBalance().Amount;
+            this.Credits = account
                 .Credits
                 .Select(e => new CreditModel((Credit)e))
                 .ToList();
 
-            this.Debits = accountEntity
+            this.Debits = account
                 .Debits
                 .Select(e => new DebitModel((Debit)e))
                 .ToList();
@@ -48,12 +47,12 @@ namespace WebApi.ViewModels
         ///     Gets Credits.
         /// </summary>
         [Required]
-        public List<CreditModel> Credits { get; } = new List<CreditModel>();
+        public List<CreditModel> Credits { get; }
 
         /// <summary>
         ///     Gets Debits.
         /// </summary>
         [Required]
-        public List<DebitModel> Debits { get; } = new List<DebitModel>();
+        public List<DebitModel> Debits { get; }
     }
 }

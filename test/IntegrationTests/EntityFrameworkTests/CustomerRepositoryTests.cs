@@ -1,68 +1,103 @@
 namespace IntegrationTests.EntityFrameworkTests
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using Domain.Customers;
+    using Common;
     using Domain.Customers.ValueObjects;
-    using Domain.Security;
-    using Domain.Security.ValueObjects;
     using Infrastructure.DataAccess;
+    using Infrastructure.DataAccess.Entities;
     using Infrastructure.DataAccess.Repositories;
     using Microsoft.EntityFrameworkCore;
     using Xunit;
 
-    public sealed class CustomerRepositoryTests
+    public sealed class CustomerRepositoryTests : IClassFixture<StandardFixture>
     {
+        private readonly StandardFixture _fixture;
+
+        public CustomerRepositoryTests(StandardFixture fixture) => this._fixture = fixture;
+
         [Fact]
-        public async Task Add_ChangesDatabase()
+        public async Task Add()
         {
-            DbContextOptions<MangaContext> options = new DbContextOptionsBuilder<MangaContext>()
-                .UseInMemoryDatabase("test_database")
-                .Options;
+            CustomerRepository customerRepository = new CustomerRepository(this._fixture.Context);
 
-            await using MangaContext context = new MangaContext(options);
-            await context.Database.EnsureCreatedAsync()
+            Customer customer = new Customer(
+                new CustomerId(Guid.NewGuid()),
+                new Name("Ivan"),
+                new Name("Paulovich"),
+                new SSN("1234567890"),
+                SeedData.DefaultUserId
+            );
+
+            await customerRepository
+                .Add(customer)
                 .ConfigureAwait(false);
 
-            EntityFactory factory = new EntityFactory();
-
-            ICustomer customer = factory.NewCustomer(
-                new SSN("198608177955"),
-                new Name("Ivan Paulovich"));
-
-            IUser user = factory.NewUser(
-                customer.Id,
-                new ExternalUserId("github/ivanpaulovich"),
-                new Name("Ivan Paulovich"));
-
-            UserRepository userRepository = new UserRepository(context);
-            await userRepository.Add(user)
+            await this._fixture
+                .Context
+                .SaveChangesAsync()
                 .ConfigureAwait(false);
 
-            CustomerRepository customerRepository = new CustomerRepository(context);
-            await customerRepository.Add(customer)
-                .ConfigureAwait(false);
+            bool hasAny = this._fixture
+                .Context
+                .Customers
+                .Any(e => e.CustomerId == customer.CustomerId);
 
-            await context.SaveChangesAsync()
-                .ConfigureAwait(false);
-
-            Assert.Equal(2, context.Customers.Count());
+            Assert.True(hasAny);
         }
 
         [Fact]
-        public async Task Get_ReturnsCustomer()
+        public async Task Update()
         {
-            DbContextOptions<MangaContext> options = new DbContextOptionsBuilder<MangaContext>()
-                .UseInMemoryDatabase("test_database")
-                .Options;
-            await using MangaContext context = new MangaContext(options);
-            await context.Database.EnsureCreatedAsync()
+            CustomerRepository customerRepository = new CustomerRepository(this._fixture.Context);
+
+            Customer customer = new Customer(
+                new CustomerId(Guid.NewGuid()),
+                new Name("Ivan"),
+                new Name("Paulovich"),
+                new SSN("1234567890"),
+                SeedData.DefaultUserId
+            );
+
+            await customerRepository
+                .Add(customer)
                 .ConfigureAwait(false);
 
-            CustomerRepository repository = new CustomerRepository(context);
-            ICustomer customer = await repository.GetBy(SeedData.DefaultCustomerId)
+            await this._fixture
+                .Context
+                .SaveChangesAsync()
                 .ConfigureAwait(false);
-            Assert.NotNull(customer);
+
+            Customer getCustomer = await this._fixture
+                .Context
+                .Customers
+                .Where(c => c.CustomerId == customer.CustomerId)
+                .SingleOrDefaultAsync()
+                .ConfigureAwait(false);
+
+            SSN updatedSSN = new SSN("555555555");
+
+            getCustomer.Update(
+                updatedSSN,
+                new Name("Ivan"),
+                new Name("Paulovich"));
+
+            await customerRepository
+                .Update(getCustomer)
+                .ConfigureAwait(false);
+
+            await this._fixture
+                .Context
+                .SaveChangesAsync()
+                .ConfigureAwait(false);
+
+            bool hasAny = this._fixture
+                .Context
+                .Customers
+                .Any(e => e.CustomerId == customer.CustomerId && e.SSN == updatedSSN);
+
+            Assert.True(hasAny);
         }
     }
 }

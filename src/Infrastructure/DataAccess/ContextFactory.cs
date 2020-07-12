@@ -25,6 +25,7 @@ namespace Infrastructure.DataAccess
 
             var builder = new DbContextOptionsBuilder<MangaContext>();
             builder.UseSqlServer(connectionString);
+            builder.EnableSensitiveDataLogging();
             return new MangaContext(builder.Options);
         }
 

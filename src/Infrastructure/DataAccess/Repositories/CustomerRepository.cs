@@ -5,12 +5,13 @@
 namespace Infrastructure.DataAccess.Repositories
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Common;
+    using Domain.Accounts.ValueObjects;
     using Domain.Customers;
-    using Domain.Customers.ValueObjects;
     using Microsoft.EntityFrameworkCore;
-    using Customer = Entities.Customer;
 
     public sealed class CustomerRepository : ICustomerRepository
     {
@@ -20,29 +21,27 @@ namespace Infrastructure.DataAccess.Repositories
                                                                            throw new ArgumentNullException(
                                                                                nameof(context));
 
-        public async Task Add(ICustomer customer) =>
-            await this._context
-                .Customers
-                .AddAsync((Customer)customer)
-                .ConfigureAwait(false);
-
-        public async Task<ICustomer> GetBy(CustomerId customerId)
+        public async Task<ICustomer> Find(UserId userId)
         {
-            Customer customer = await this._context
+            //
+            // I am using FirstOrDefault because I can't guarantee the DB wll have only one Customer
+            //
+
+            Entities.Customer customer = await this._context
                 .Customers
-                .Where(c => c.Id.Equals(customerId))
-                .SingleOrDefaultAsync()
+                .Where(c => c.UserId == userId)
+                .FirstOrDefaultAsync()
                 .ConfigureAwait(false);
 
             if (customer is null)
             {
-                return null!;
+                return CustomerNull.Instance;
             }
 
-            var accounts = this._context
+            List<AccountId> accounts = this._context
                 .Accounts
-                .Where(e => e.CustomerId.Equals(customer.Id))
-                .Select(e => e.Id)
+                .Where(e => e.CustomerId == customer.CustomerId)
+                .Select(e => e.AccountId)
                 .ToList();
 
             customer.Accounts
@@ -51,11 +50,17 @@ namespace Infrastructure.DataAccess.Repositories
             return customer;
         }
 
-        public async Task Update(ICustomer customer)
+        public async Task Add(Customer customer) =>
+            await this._context
+                .Customers
+                .AddAsync((Entities.Customer)customer)
+                .ConfigureAwait(false);
+
+        public async Task Update(Customer customer)
         {
             this._context
                 .Customers
-                .Update((Customer)customer);
+                .Update((Entities.Customer)customer);
 
             await Task.CompletedTask
                 .ConfigureAwait(false);

@@ -1,14 +1,14 @@
 namespace UnitTests.UseCaseTests.CloseAccount
 {
+    using System;
     using System.Threading.Tasks;
-    using Application.Boundaries.CloseAccount;
-    using Application.Boundaries.GetAccount;
-    using Application.Boundaries.Withdraw;
-    using Application.UseCases;
+    using Application.UseCases.CloseAccount;
+    using Application.UseCases.GetAccount;
+    using Application.UseCases.Withdraw;
+    using Common;
     using Domain.Accounts;
+    using Domain.Accounts.Credits;
     using Domain.Accounts.ValueObjects;
-    using Domain.Customers;
-    using Domain.Customers.ValueObjects;
     using Infrastructure.DataAccess;
     using Presenters;
     using Xunit;
@@ -21,15 +21,17 @@ namespace UnitTests.UseCaseTests.CloseAccount
 
         [Theory]
         [ClassData(typeof(ValidDataSetup))]
-        public void PositiveBalance_Should_Not_Allow_Closing(decimal amount)
+        public void IsClosingAllowed_Returns_False_When_Account_Has_Funds(decimal amount)
         {
-            ICustomer customer = this._fixture.EntityFactory.NewCustomer(
-                new SSN("198608178899"),
-                new Name("Ivan Paulovich"));
+            Account account = this._fixture
+                .EntityFactory
+                .NewAccount(new CustomerId(Guid.NewGuid()), Currency.Dollar);
 
-            IAccount account = this._fixture.EntityFactory.NewAccount(customer.Id);
+            Credit credit = this._fixture
+                .EntityFactory
+                .NewCredit(account, new PositiveMoney(amount, Currency.Dollar), DateTime.Now);
 
-            account.Deposit(this._fixture.EntityFactory, new PositiveMoney(amount));
+            account.Deposit(credit);
 
             bool actual = account.IsClosingAllowed();
 
@@ -37,52 +39,54 @@ namespace UnitTests.UseCaseTests.CloseAccount
         }
 
         [Fact]
-        public async Task NewAccount_Should_Allows_Closing2()
+        public void IsClosingAllowed_Returns_True_When_Account_Does_Not_Has_Funds()
         {
-            GetAccountPresenterFake getAccountPresenter = new GetAccountPresenterFake();
-            CloseAccountPresenterFake closeAccountPresenter = new CloseAccountPresenterFake();
-            WithdrawPresenterFake withdrawPresenter = new WithdrawPresenterFake();
+            IAccount account = this._fixture.EntityFactory
+                .NewAccount(new CustomerId(), Currency.Dollar);
 
-            GetAccountUseCase getAccountUseCase = new GetAccountUseCase(
-                getAccountPresenter,
-                this._fixture.AccountRepositoryFake);
-
-            WithdrawUseCase withdrawUseCase = new WithdrawUseCase(
-                this._fixture.AccountService,
-                withdrawPresenter,
-                this._fixture.AccountRepositoryFake,
-                this._fixture.UnitOfWork);
-
-            CloseAccountUseCase sut = new CloseAccountUseCase(
-                closeAccountPresenter,
-                this._fixture.AccountRepositoryFake);
-
-            await getAccountUseCase.Execute(new GetAccountInput(
-                MangaContextFake.DefaultAccountId.ToGuid()));
-            GetAccountOutput getAccountDetailOutput = getAccountPresenter.StandardOutput!;
-
-            await withdrawUseCase.Execute(new WithdrawInput(
-                MangaContextFake.DefaultAccountId.ToGuid(),
-                getAccountDetailOutput.Account.GetCurrentBalance().ToDecimal()));
-
-            CloseAccountInput input = new CloseAccountInput(
-                MangaContextFake.DefaultAccountId.ToGuid());
-            await sut.Execute(input);
-
-            Assert.Equal(input.AccountId, closeAccountPresenter.StandardOutput!.Account.Id);
-        }
-
-        [Fact]
-        public void ZeroBalance_Should_Allow_Closing()
-        {
-            ICustomer customer = this._fixture.EntityFactory.NewCustomer(
-                new SSN("198608178899"),
-                new Name("Ivan Paulovich"));
-
-            IAccount account = this._fixture.EntityFactory.NewAccount(customer.Id);
             bool actual = account.IsClosingAllowed();
 
             Assert.True(actual);
+        }
+
+        [Fact]
+        public async Task CloseAccountUseCase_Returns_Closed_Account_Id_When_Account_Has_Zero_Balance()
+        {
+            var getAccountPresenter = new GetAccountPresenterFake();
+            var closeAccountPresenter = new CloseAccountPresenterFake();
+
+            GetAccountUseCase getAccountUseCase = new GetAccountUseCase(this._fixture.AccountRepositoryFake);
+
+            WithdrawUseCase withdrawUseCase = new WithdrawUseCase(
+                this._fixture.AccountRepositoryFake,
+                this._fixture.UnitOfWork,
+                this._fixture.EntityFactory,
+                this._fixture.TestUserService,
+                this._fixture.UserRepositoryFake,
+                this._fixture.CustomerRepositoryFake,
+                this._fixture.CurrencyExchangeFake);
+
+            CloseAccountUseCase sut = new CloseAccountUseCase(
+                this._fixture.AccountRepositoryFake,
+                this._fixture.CustomerRepositoryFake,
+                this._fixture.TestUserService,
+                this._fixture.UnitOfWork,
+                this._fixture.UserRepositoryFake);
+
+            sut.SetOutputPort(closeAccountPresenter);
+            getAccountUseCase.SetOutputPort(getAccountPresenter);
+
+            await getAccountUseCase.Execute(new GetAccountInput(SeedData.DefaultAccountId.Id));
+            IAccount getAccountDetailOutput = getAccountPresenter.Account!;
+
+            await withdrawUseCase.Execute(new WithdrawInput(
+                SeedData.DefaultAccountId.Id,
+                getAccountDetailOutput.GetCurrentBalance().Amount,
+                getAccountDetailOutput.GetCurrentBalance().Currency.Code));
+
+            await sut.Execute(new CloseAccountInput(SeedData.DefaultAccountId.Id));
+
+            Assert.Equal(SeedData.DefaultAccountId.Id, closeAccountPresenter.Account!.AccountId.Id);
         }
     }
 }

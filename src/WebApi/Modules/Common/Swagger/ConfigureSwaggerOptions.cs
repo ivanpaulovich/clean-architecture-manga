@@ -1,6 +1,7 @@
 namespace WebApi.Modules.Common.Swagger
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
@@ -16,6 +17,13 @@ namespace WebApi.Modules.Common.Swagger
     /// </remarks>
     public sealed class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
     {
+        [SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "<Pending>")]
+        private const string UriString = "http://paulovich.net";
+
+        [SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "<Pending>")]
+        private const string UriString1 =
+            "https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/README.md";
+
         private readonly IApiVersionDescriptionProvider _provider;
 
         /// <summary>
@@ -46,12 +54,12 @@ namespace WebApi.Modules.Common.Swagger
                 Version = description.ApiVersion.ToString(),
                 Description = "Clean Architecture, DDD and TDD implementation.",
                 Contact = new OpenApiContact {Name = "Ivan Paulovich", Email = "ivan@paulovich.net"},
-                TermsOfService = new Uri("http://paulovich.net"),
+                TermsOfService = new Uri(UriString),
                 License = new OpenApiLicense
                 {
                     Name = "Apache License",
                     Url = new Uri(
-                        "https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/README.md")
+                        UriString1)
                 }
             };
 

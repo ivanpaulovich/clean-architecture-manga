@@ -1,17 +1,16 @@
 namespace WebApi.Modules
 {
-    using Application.Boundaries.CloseAccount;
-    using Application.Boundaries.Deposit;
-    using Application.Boundaries.GetAccount;
-    using Application.Boundaries.GetAccounts;
-    using Application.Boundaries.GetCustomer;
-    using Application.Boundaries.Register;
-    using Application.Boundaries.Transfer;
-    using Application.Boundaries.Withdraw;
-    using Application.UseCases;
-    using Domain.Accounts;
-    using Domain.Customers;
-    using Domain.Security;
+    using Application.UseCases.CloseAccount;
+    using Application.UseCases.Deposit;
+    using Application.UseCases.GetAccount;
+    using Application.UseCases.GetAccounts;
+    using Application.UseCases.GetCustomer;
+    using Application.UseCases.OnBoardCustomer;
+    using Application.UseCases.OpenAccount;
+    using Application.UseCases.SignUp;
+    using Application.UseCases.Transfer;
+    using Application.UseCases.UpdateCustomer;
+    using Application.UseCases.Withdraw;
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
@@ -31,13 +30,12 @@ namespace WebApi.Modules
             services.AddScoped<IGetAccountUseCase, GetAccountUseCase>();
             services.AddScoped<IGetAccountsUseCase, GetAccountsUseCase>();
             services.AddScoped<IGetCustomerUseCase, GetCustomerUseCase>();
-            services.AddScoped<IRegisterUseCase, RegisterUseCase>();
-            services.AddScoped<IWithdrawUseCase, WithdrawUseCase>();
+            services.AddScoped<IOnBoardCustomerUseCase, OnBoardCustomerUseCase>();
+            services.AddScoped<IOpenAccountUseCase, OpenAccountUseCase>();
+            services.AddScoped<ISignUpUseCase, SignUpUseCase>();
             services.AddScoped<ITransferUseCase, TransferUseCase>();
-
-            services.AddScoped<CustomerService>();
-            services.AddScoped<SecurityService>();
-            services.AddScoped<AccountService>();
+            services.AddScoped<IUpdateCustomerUseCase, UpdateCustomerUseCase>();
+            services.AddScoped<IWithdrawUseCase, WithdrawUseCase>();
 
             return services;
         }

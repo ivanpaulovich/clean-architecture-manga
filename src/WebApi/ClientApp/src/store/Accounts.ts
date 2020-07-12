@@ -54,7 +54,6 @@ export const reducer: Reducer<AccountsState> = (
         return {
             accounts: action.accounts,
         };
-        break;
     }
 
     return state;

@@ -7,10 +7,6 @@
     /// </summary>
     public interface ICurrencyExchange
     {
-        /// <summary>
-        /// </summary>
-        /// <param name="money"></param>
-        /// <returns></returns>
-        Task<PositiveMoney> ConvertToUSD(PositiveMoney money);
+        Task<PositiveMoney> Convert(PositiveMoney originalAmount, Currency destinationCurrency);
     }
 }

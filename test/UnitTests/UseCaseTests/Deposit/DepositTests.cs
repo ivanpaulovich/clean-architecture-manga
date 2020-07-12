@@ -1,11 +1,10 @@
 namespace UnitTests.UseCaseTests.Deposit
 {
     using System.Threading.Tasks;
-    using Application.Boundaries.Deposit;
-    using Application.UseCases;
+    using Application.UseCases.Deposit;
+    using Domain.Accounts.Credits;
     using Domain.Accounts.ValueObjects;
     using Infrastructure.DataAccess;
-    using Infrastructure.DataAccess.Entities;
     using Presenters;
     using Xunit;
 
@@ -17,43 +16,46 @@ namespace UnitTests.UseCaseTests.Deposit
 
         [Theory]
         [ClassData(typeof(ValidDataSetup))]
-        public async Task Deposit_ChangesBalance(decimal amount)
+        public async Task DepositUseCase_Returns_Transaction(decimal amount)
         {
             DepositPresenterFake presenter = new DepositPresenterFake();
             DepositUseCase sut = new DepositUseCase(
-                this._fixture.AccountService,
-                presenter,
                 this._fixture.AccountRepositoryFake,
-                this._fixture.CurrencyExchange,
-                this._fixture.UnitOfWork);
+                this._fixture.UnitOfWork,
+                this._fixture.EntityFactory,
+                this._fixture.CurrencyExchangeFake);
+
+            sut.SetOutputPort(presenter);
 
             await sut.Execute(
                 new DepositInput(
-                    MangaContextFake.DefaultAccountId.ToGuid(),
-                    amount));
+                    SeedData.DefaultAccountId.Id,
+                    amount,
+                    Currency.Dollar.Code));
 
-            DepositOutput output = presenter.StandardOutput!;
-            Credit actualCredit = Assert.IsType<Credit>(output.Transaction);
-            Assert.Equal(amount, actualCredit.Amount.ToMoney().ToDecimal());
+            Credit? output = presenter.Credit!;
+            Assert.Equal(amount, output.Amount.Amount);
         }
 
         [Theory]
         [ClassData(typeof(InvalidDataSetup))]
-        public async Task Deposit_ShouldNot_ChangesBalance_WhenNegative(decimal amount)
+        public async Task DepositUseCase_Returns_Invalid_When_Negative_Amount(decimal amount)
         {
             DepositPresenterFake presenter = new DepositPresenterFake();
             DepositUseCase sut = new DepositUseCase(
-                this._fixture.AccountService,
-                presenter,
                 this._fixture.AccountRepositoryFake,
-                this._fixture.CurrencyExchange,
-                this._fixture.UnitOfWork);
+                this._fixture.UnitOfWork,
+                this._fixture.EntityFactory,
+                this._fixture.CurrencyExchangeFake);
 
-            await Assert.ThrowsAsync<MoneyShouldBePositiveException>(() =>
-                sut.Execute(
-                    new DepositInput(
-                        MangaContextFake.DefaultAccountId.ToGuid(),
-                        amount)));
+            sut.SetOutputPort(presenter);
+
+            await sut.Execute(
+                new DepositInput(SeedData.DefaultAccountId.Id,
+                    amount,
+                    Currency.Dollar.Code));
+
+            Assert.True(presenter.ModelState!.IsInvalid);
         }
     }
 }

@@ -8,7 +8,6 @@ namespace Infrastructure.DataAccess.Repositories
     using System.Threading.Tasks;
     using Domain.Security;
     using Domain.Security.ValueObjects;
-    using User = Entities.User;
 
     public sealed class UserRepositoryFake : IUserRepository
     {
@@ -16,23 +15,28 @@ namespace Infrastructure.DataAccess.Repositories
 
         public UserRepositoryFake(MangaContextFake context) => this._context = context;
 
-        public async Task Add(IUser user)
+        public async Task<IUser> Find(ExternalUserId externalUserId)
         {
-            this._context
-                .Users
-                .Add((User)user);
-
-            await Task.CompletedTask
-                .ConfigureAwait(false);
-        }
-
-        public async Task<IUser> GetUser(ExternalUserId externalUserId)
-        {
-            Domain.Security.User user = this._context
+            User user = this._context
                 .Users
                 .SingleOrDefault(e => e.ExternalUserId.Equals(externalUserId));
 
+            if (user is null)
+            {
+                return UserNull.Instance;
+            }
+
             return await Task.FromResult(user)
+                .ConfigureAwait(false);
+        }
+
+        public async Task Add(User user)
+        {
+            this._context
+                .Users
+                .Add((Entities.User)user);
+
+            await Task.CompletedTask
                 .ConfigureAwait(false);
         }
     }

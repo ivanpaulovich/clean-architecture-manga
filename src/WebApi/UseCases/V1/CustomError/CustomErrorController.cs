@@ -13,7 +13,6 @@ namespace WebApi.UseCases.V1.CustomError
     /// </summary>
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
-    [ApiController]
     public sealed class CustomErrorController : Controller
     {
         /// <summary>

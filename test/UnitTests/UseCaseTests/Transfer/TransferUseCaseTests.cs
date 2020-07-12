@@ -1,8 +1,8 @@
 namespace UnitTests.UseCaseTests.Transfer
 {
     using System.Threading.Tasks;
-    using Application.Boundaries.Transfer;
-    using Application.UseCases;
+    using Application.UseCases.Transfer;
+    using Domain.Accounts;
     using Infrastructure.DataAccess;
     using Presenters;
     using Xunit;
@@ -15,25 +15,27 @@ namespace UnitTests.UseCaseTests.Transfer
 
         [Theory]
         [ClassData(typeof(ValidDataSetup))]
-        public async Task Transfer_ChangesBalance_WhenAccountExists(
+        public async Task TransferUseCase_Updates_Balance(
             decimal amount,
             decimal expectedOriginBalance)
         {
             TransferPresenterFake presenter = new TransferPresenterFake();
             TransferUseCase sut = new TransferUseCase(
-                this._fixture.AccountService,
-                presenter,
                 this._fixture.AccountRepositoryFake,
-                this._fixture.UnitOfWork);
+                this._fixture.UnitOfWork,
+                this._fixture.EntityFactory,
+                this._fixture.CurrencyExchangeFake);
 
-            await sut.Execute(
-                new TransferInput(
-                    MangaContextFake.DefaultAccountId.ToGuid(),
-                    MangaContextFake.SecondAccountId.ToGuid(),
-                    amount));
+            sut.SetOutputPort(presenter);
 
-            TransferOutput actual = presenter.TransferOutput!;
-            Assert.Equal(expectedOriginBalance, actual.UpdatedBalance.ToDecimal());
+            await sut.Execute(new TransferInput(
+                SeedData.DefaultAccountId.Id,
+                SeedData.SecondAccountId.Id,
+                amount,
+                "USD"));
+
+            Account? actual = presenter.OriginAccount!;
+            Assert.Equal(expectedOriginBalance, actual.GetCurrentBalance().Amount);
         }
     }
 }

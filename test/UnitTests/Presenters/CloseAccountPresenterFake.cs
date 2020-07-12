@@ -1,46 +1,25 @@
 namespace UnitTests.Presenters
 {
-    using Application.Boundaries.CloseAccount;
+    using Application.Services;
+    using Application.UseCases.CloseAccount;
+    using Domain.Accounts;
 
     /// <summary>
     ///     Close Account Presenter.
     /// </summary>
-    public sealed class CloseAccountPresenterFake : ICloseAccountOutputPort
+    public sealed class CloseAccountPresenterFake : IOutputPort
     {
-        /// <summary>
-        ///     Gets the ClosedAccount.
-        /// </summary>
-        /// <value></value>
-        public CloseAccountOutput? StandardOutput { get; private set; }
+        internal Account? Account { get; private set; }
+        internal Notification? ModelState { get; private set; }
+        internal bool NotFoundOutput { get; private set; }
+        internal bool HasFundsOutput { get; private set; }
 
-        /// <summary>
-        ///     Gets the NotFound.
-        /// </summary>
-        /// <value></value>
-        public string? NotFoundOutput { get; private set; }
+        public void Invalid(Notification modelState) => this.ModelState = modelState;
 
-        /// <summary>
-        ///     Gets the Error.
-        /// </summary>
-        /// <value></value>
-        public string? ErrorOutput { get; private set; }
+        public void NotFound() => this.NotFoundOutput = true;
 
-        /// <summary>
-        ///     Standard Output
-        /// </summary>
-        /// <param name="output">Output message.</param>
-        public void Standard(CloseAccountOutput output) => this.StandardOutput = output;
+        public void Ok(Account account) => this.Account = account;
 
-        /// <summary>
-        ///     Not Found
-        /// </summary>
-        /// <param name="message">Output message.</param>
-        public void NotFound(string message) => this.NotFoundOutput = message;
-
-        /// <summary>
-        ///     Error
-        /// </summary>
-        /// <param name="message">Error message.</param>
-        public void WriteError(string message) => this.ErrorOutput = message;
+        public void HasFunds() => this.HasFundsOutput = true;
     }
 }

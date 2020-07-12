@@ -5,7 +5,6 @@
 namespace Infrastructure.DataAccess.Entities
 {
     using System;
-    using Domain.Accounts.Credits;
     using Domain.Accounts.ValueObjects;
 
     /// <summary>
@@ -13,19 +12,15 @@ namespace Infrastructure.DataAccess.Entities
     /// </summary>
     public sealed class Credit : Domain.Accounts.Credits.Credit
     {
-        public Credit()
+        public Credit(CreditId creditId, AccountId accountId, DateTime transactionDate, decimal value, string currency)
         {
-        }
-
-        public Credit(CreditId id, AccountId accountId, PositiveMoney amount, DateTime transactionDate)
-        {
-            this.Id = id;
+            this.CreditId = creditId;
             this.AccountId = accountId;
-            this.Amount = amount;
             this.TransactionDate = transactionDate;
+            this.Amount = new PositiveMoney(value, new Currency(currency));
         }
 
-        public override CreditId Id { get; }
+        public override CreditId CreditId { get; }
 
         /// <summary>
         ///     Gets or sets AccountId.
@@ -34,6 +29,12 @@ namespace Infrastructure.DataAccess.Entities
 
         public override PositiveMoney Amount { get; }
 
+        public decimal Value => this.Amount.Amount;
+
+        public string Currency => this.Amount.Currency.Code;
+
         public override DateTime TransactionDate { get; }
+
+        public Account? Account { get; set; }
     }
 }

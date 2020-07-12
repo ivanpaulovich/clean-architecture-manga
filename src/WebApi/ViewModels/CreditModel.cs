@@ -14,8 +14,8 @@ namespace WebApi.ViewModels
         /// </summary>
         public CreditModel(Credit credit)
         {
-            this.TransactionId = credit.Id.ToGuid();
-            this.Amount = credit.Amount.ToMoney().ToDecimal();
+            this.TransactionId = credit.CreditId.Id;
+            this.Amount = credit.Amount.Amount;
             this.Description = "Credit";
             this.TransactionDate = credit.TransactionDate;
         }
