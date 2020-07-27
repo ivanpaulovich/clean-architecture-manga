@@ -36,7 +36,7 @@ popd
 dotnet run --project src/WebApi/WebApi.csproj --launch-profile Development
 ```
 
-Then navigate to:
+Then browse to:
 
 - App: `http://localhost:5001`
 - Swagger: `http://localhost:5001/swagger/index.html`
@@ -50,6 +50,16 @@ docker run -p 6001:80 my-app
 
 - App: `http://localhost:6001`
 - Swagger: `http://localhost:6001/swagger/index.html`
+
+## Production Environment Setup
+
+```sh
+dotnet ef migrations add "InitialCreate" -o "DataAccess/Migrations" --project src/Infrastructure --startup-project src/Infrastructure
+```
+
+```sh
+dotnet ef database update --project src/Infrastructure --startup-project src/Infrastructure
+```
 
 ## Motivation
 

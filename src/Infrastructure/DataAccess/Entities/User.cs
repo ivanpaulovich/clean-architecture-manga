@@ -4,7 +4,8 @@
 
 namespace Infrastructure.DataAccess.Entities
 {
-    using Domain.Customers.ValueObjects;
+    using System.Collections.Generic;
+    using Common;
     using Domain.Security.ValueObjects;
 
     /// <summary>
@@ -12,24 +13,19 @@ namespace Infrastructure.DataAccess.Entities
     /// </summary>
     public sealed class User : Domain.Security.User
     {
-        public User()
+        public User(UserId userId, ExternalUserId externalUserId)
         {
-        }
-
-        public User(ExternalUserId externalUserId, Name name, CustomerId? customerId)
-        {
+            this.UserId = userId;
             this.ExternalUserId = externalUserId;
-            this.Name = name;
-            this.CustomerId = customerId;
         }
 
-        /// <inheritdoc />
-        public ExternalUserId ExternalUserId { get; }
+        /// <summary>
+        /// </summary>
+        public override UserId UserId { get; }
 
         /// <inheritdoc />
-        public override Name Name { get; }
+        public override ExternalUserId ExternalUserId { get; }
 
-        /// <inheritdoc />
-        public override CustomerId? CustomerId { get; protected set; }
+        public ICollection<Customer> CustomersCollection { get; } = new List<Customer>();
     }
 }

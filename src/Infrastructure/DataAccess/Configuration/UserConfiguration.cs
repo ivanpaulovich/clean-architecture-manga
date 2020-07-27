@@ -5,7 +5,7 @@
 namespace Infrastructure.DataAccess.Configuration
 {
     using System;
-    using Domain.Customers.ValueObjects;
+    using Common;
     using Domain.Security.ValueObjects;
     using Entities;
     using Microsoft.EntityFrameworkCore;
@@ -31,18 +31,23 @@ namespace Infrastructure.DataAccess.Configuration
 
             builder.Property(b => b.ExternalUserId)
                 .HasConversion(
-                    v => v.ToString(),
-                    v => new ExternalUserId(v))
+                    v => v.Text,
+                    v => new ExternalUserId(v!))
                 .IsRequired();
 
-            builder.Property(b => b.CustomerId)
+            builder.Property(b => b.UserId)
                 .HasConversion(
-                    v => v.HasValue ? v.Value.ToGuid() : Guid.Empty,
-                    v => new CustomerId(v))
+                    v => v.Id,
+                    v => new UserId(v))
                 .IsRequired();
 
             builder.HasKey(
-                c => new {c.ExternalUserId, c.CustomerId});
+                c => new {c.UserId});
+
+            builder.HasMany(x => x.CustomersCollection)
+                .WithOne(b => b.User!)
+                .HasForeignKey(b => b.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

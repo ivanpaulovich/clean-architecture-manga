@@ -79,6 +79,24 @@ namespace Infrastructure {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 9084272C-C324-4ECE-8186-90AB47E2F308.
+        /// </summary>
+        internal static string UserId {
+            get {
+                return ResourceManager.GetString("UserId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to D0923768-B6D5-4298-AF6F-4903A15553C0.
+        /// </summary>
+        internal static string UserId1 {
+            get {
+                return ResourceManager.GetString("UserId1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ivan Paulovich.
         /// </summary>
         internal static string UserName {

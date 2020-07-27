@@ -1,5 +1,4 @@
 import * as React from "react";
-import { connect } from "react-redux";
 import { Form, Field } from "react-final-form";
 import TextInput from "../components/TextInput";
 import NumberInput from "../components/NumberInput";
@@ -67,4 +66,4 @@ const Register: React.FC = () => (
     </Styles>
 );
 
-export default connect()(Register);
+export default connect()(Register);;;;;

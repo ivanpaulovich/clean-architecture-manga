@@ -4,6 +4,8 @@
 
 namespace Infrastructure.DataAccess.Entities
 {
+    using System.Collections.Generic;
+    using Common;
     using Domain.Customers;
     using Domain.Customers.ValueObjects;
 
@@ -14,23 +16,27 @@ namespace Infrastructure.DataAccess.Entities
         {
         }
 
-        public Customer(CustomerId id, Name name, SSN ssn)
+        public Customer(CustomerId id, Name firstName, Name lastName, SSN ssn, UserId userId)
         {
-            this.Id = id;
-            this.Name = name;
+            this.CustomerId = id;
+            this.FirstName = firstName;
+            this.LastName = lastName;
             this.SSN = ssn;
+            this.UserId = userId;
         }
 
         /// <inheritdoc />
-        public override Name Name { get; }
+        public override CustomerId CustomerId { get; }
 
-        /// <inheritdoc />
-        public override SSN SSN { get; }
-
-        /// <inheritdoc />
-        public override CustomerId Id { get; }
+        /// <summary>
+        /// </summary>
+        public UserId UserId { get; }
 
         /// <inheritdoc />
         public override AccountCollection Accounts { get; } = new AccountCollection();
+
+        public User? User { get; set; }
+
+        public ICollection<Account> AccountsCollection { get; } = new List<Account>();
     }
 }

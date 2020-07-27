@@ -5,11 +5,10 @@
 namespace Infrastructure.DataAccess.Configuration
 {
     using System;
-    using Domain.Accounts.Debits;
     using Domain.Accounts.ValueObjects;
+    using Entities;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using Debit = Entities.Debit;
 
     /// <summary>
     ///     Debit Configuration.
@@ -29,25 +28,27 @@ namespace Infrastructure.DataAccess.Configuration
 
             builder.ToTable("Debit");
 
-            builder.Property(debit => debit.Amount)
-                .HasConversion(
-                    value => value.ToMoney().ToDecimal(),
-                    value => new PositiveMoney(value, "USD"))
+            builder.Ignore(e => e.Amount);
+
+            builder.Property(debit => debit.Value)
                 .IsRequired();
 
-            builder.Property(debit => debit.Id)
+            builder.Property(debit => debit.Currency)
+                .IsRequired();
+
+            builder.Property(debit => debit.DebitId)
                 .HasConversion(
-                    value => value.ToGuid(),
+                    value => value.Id,
                     value => new DebitId(value))
                 .IsRequired();
 
             builder.Property(debit => debit.AccountId)
                 .HasConversion(
-                    value => value.ToGuid(),
+                    value => value.Id,
                     value => new AccountId(value))
                 .IsRequired();
 
-            builder.Property(credit => credit.TransactionDate)
+            builder.Property(debit => debit.TransactionDate)
                 .IsRequired();
         }
     }

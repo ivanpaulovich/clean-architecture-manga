@@ -12,11 +12,12 @@ namespace WebApi.ViewModels
         /// <summary>
         ///     Account Details constructor.
         /// </summary>
-        public AccountModel(IAccount account)
+        public AccountModel(Account account)
         {
-            var accountEntity = (Account)account;
-            this.AccountId = accountEntity.Id.ToGuid();
-            this.CurrentBalance = accountEntity.GetCurrentBalance().ToDecimal();
+            this.AccountId = account.AccountId.Id;
+            this.CurrentBalance = account
+                .GetCurrentBalance()
+                .Amount;
         }
 
         /// <summary>

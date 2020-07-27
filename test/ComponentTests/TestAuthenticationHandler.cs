@@ -30,9 +30,9 @@ namespace ComponentTests
         {
             Claim[] claims =
             {
-                new Claim(ClaimTypes.NameIdentifier, "test"), new Claim(ClaimTypes.Name, "test"),
-                new Claim("id", "92b93e37-0995-4849-a7ed-149e8706d8ef"),
-                new Claim("customerid", MangaContextFake.DefaultCustomerId.ToString())
+                new Claim(ClaimTypes.NameIdentifier, "test"),
+                new Claim(ClaimTypes.Name, "test"),
+                new Claim("id", "92b93e37-0995-4849-a7ed-149e8706d8ef")
             };
 
             ClaimsIdentity identity = new ClaimsIdentity(claims, this.Scheme.Name);

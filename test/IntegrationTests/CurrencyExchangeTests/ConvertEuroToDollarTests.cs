@@ -13,19 +13,19 @@
         [Fact]
         public async Task Convert()
         {
-            var serviceCollection = new ServiceCollection();
+            ServiceCollection serviceCollection = new ServiceCollection();
 
             serviceCollection.AddHttpClient(CurrencyExchangeService.HttpClientName);
             serviceCollection.AddSingleton<CurrencyExchangeService>();
 
-            var serviceProvider = serviceCollection.BuildServiceProvider();
-            var sut = serviceProvider.GetRequiredService<CurrencyExchangeService>();
+            ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            CurrencyExchangeService sut = serviceProvider.GetRequiredService<CurrencyExchangeService>();
 
-            PositiveMoney usdMoney = new PositiveMoney(100, "EUR");
-            PositiveMoney actual = await sut.ConvertToUSD(usdMoney);
+            PositiveMoney usdMoney = new PositiveMoney(100, Currency.Euro);
+            PositiveMoney actual = await sut.Convert(usdMoney, Currency.Dollar);
 
-            Assert.True(actual.ToMoney().ToDecimal() > 100);
-            Assert.Equal("USD", actual.GetCurrency().ToString());
+            Assert.True(actual.Amount > 100);
+            Assert.Equal("USD", actual.Currency.Code);
         }
     }
 }

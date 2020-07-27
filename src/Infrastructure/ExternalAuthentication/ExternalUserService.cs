@@ -4,11 +4,9 @@
 
 namespace Infrastructure.ExternalAuthentication
 {
-    using System;
     using System.Security.Claims;
-    using Domain.Customers.ValueObjects;
+    using Application.Services;
     using Domain.Security;
-    using Domain.Security.Services;
     using Domain.Security.ValueObjects;
     using Microsoft.AspNetCore.Http;
 
@@ -31,28 +29,16 @@ namespace Infrastructure.ExternalAuthentication
         }
 
         /// <inheritdoc />
-        public IUser GetUser()
+        public ExternalUserId GetCurrentUser()
         {
             ClaimsPrincipal user = this._httpContextAccessor
                 .HttpContext
                 .User;
 
-            string id = user.FindFirst(c => c.Type == "id")?.Value!;
+            string id = user.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
             ExternalUserId externalUserId = new ExternalUserId($"{user.Identity.AuthenticationType}/{id}");
-            Name username = new Name(user.Identity.Name!);
 
-            CustomerId? customerId = null;
-            if (user.FindFirst(c => c.Type == "customerid") is { } value)
-            {
-                customerId = new CustomerId(new Guid(value.Value));
-            }
-
-            IUser domainUser = this._userFactory.NewUser(
-                customerId,
-                externalUserId,
-                username);
-
-            return domainUser;
+            return externalUserId;
         }
     }
 }

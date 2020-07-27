@@ -1,5 +1,6 @@
 ﻿namespace Infrastructure.CurrencyExchange
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Application.Services;
     using Domain.Accounts.ValueObjects;
@@ -9,61 +10,27 @@
     /// </summary>
     public sealed class CurrencyExchangeFake : ICurrencyExchange
     {
-        /// <summary>
-        ///     Converts allowed currencies into USD.
-        /// </summary>
-        /// <param name="money">Money.</param>
-        /// <returns>Money.</returns>
-        public Task<PositiveMoney> ConvertToUSD(PositiveMoney money)
+        private readonly Dictionary<Currency, decimal> _usdRates = new Dictionary<Currency, decimal>
+        {
+            {Currency.Dollar, 1m},
+            {Currency.Euro, 0.89021m},
+            {Currency.Canadian, 1.35737m},
+            {Currency.BritishPound, 0.80668m},
+            {Currency.Krona, 9.31944m},
+            {Currency.Real, 5.46346m}
+        };
+
+        public Task<PositiveMoney> Convert(PositiveMoney originalAmount, Currency destinationCurrency)
         {
             // hardcoded rates from https://www.xe.com/currency/usd-us-dollar
 
-            if (money.GetCurrency() == Currency.Dollar)
-            {
-                return Task.FromResult(money);
-            }
+            decimal usdAmount = this._usdRates[originalAmount.Currency] / originalAmount.Amount;
+            decimal destinationAmount = this._usdRates[destinationCurrency] / usdAmount;
 
-            if (money.GetCurrency() == Currency.Euro)
-            {
-                return Task.FromResult(
-                    new PositiveMoney(
-                        money.ToMoney().ToDecimal() * 0.89021m,
-                        Currency.Euro.ToString()));
-            }
-
-            if (money.GetCurrency() == Currency.Canadian)
-            {
-                return Task.FromResult(
-                    new PositiveMoney(
-                        money.ToMoney().ToDecimal() * 1.35737m,
-                        Currency.Canadian.ToString()));
-            }
-
-            if (money.GetCurrency() == Currency.BritishPound)
-            {
-                return Task.FromResult(
-                    new PositiveMoney(
-                        money.ToMoney().ToDecimal() * 0.80668m,
-                        Currency.BritishPound.ToString()));
-            }
-
-            if (money.GetCurrency() == Currency.Krona)
-            {
-                return Task.FromResult(
-                    new PositiveMoney(
-                        money.ToMoney().ToDecimal() * 9.31944m,
-                        Currency.Krona.ToString()));
-            }
-
-            if (money.GetCurrency() == Currency.Real)
-            {
-                return Task.FromResult(
-                    new PositiveMoney(
-                        money.ToMoney().ToDecimal() * 5.46346m,
-                        Currency.Krona.ToString()));
-            }
-
-            throw new CurrencyNotAllowedException();
+            return Task.FromResult(
+                new PositiveMoney(
+                    destinationAmount,
+                    destinationCurrency));
         }
     }
 }

@@ -5,11 +5,10 @@
 namespace Infrastructure.DataAccess.Configuration
 {
     using System;
-    using Domain.Accounts.Credits;
     using Domain.Accounts.ValueObjects;
+    using Entities;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using Credit = Entities.Credit;
 
     /// <summary>
     ///     Credit Configuration.
@@ -29,21 +28,23 @@ namespace Infrastructure.DataAccess.Configuration
 
             builder.ToTable("Credit");
 
-            builder.Property(credit => credit.Amount)
-                .HasConversion(
-                    value => value.ToMoney().ToDecimal(),
-                    value => new PositiveMoney(value, "USD"))
+            builder.Ignore(e => e.Amount);
+
+            builder.Property(credit => credit.Value)
                 .IsRequired();
 
-            builder.Property(credit => credit.Id)
+            builder.Property(credit => credit.Currency)
+                .IsRequired();
+
+            builder.Property(credit => credit.CreditId)
                 .HasConversion(
-                    value => value.ToGuid(),
+                    value => value.Id,
                     value => new CreditId(value))
                 .IsRequired();
 
             builder.Property(credit => credit.AccountId)
                 .HasConversion(
-                    value => value.ToGuid(),
+                    value => value.Id,
                     value => new AccountId(value))
                 .IsRequired();
 

@@ -5,6 +5,7 @@
 namespace Infrastructure.DataAccess.Configuration
 {
     using System;
+    using Common;
     using Domain.Customers.ValueObjects;
     using Entities;
     using Microsoft.EntityFrameworkCore;
@@ -31,19 +32,31 @@ namespace Infrastructure.DataAccess.Configuration
 
             builder.Property(b => b.SSN)
                 .HasConversion(
-                    v => v.ToString(),
+                    v => v.Text,
                     v => new SSN(v))
                 .IsRequired();
 
-            builder.Property(b => b.Name)
+            builder.Property(b => b.FirstName)
                 .HasConversion(
-                    v => v.ToString(),
+                    v => v.Text,
                     v => new Name(v))
                 .IsRequired();
 
-            builder.Property(b => b.Id)
+            builder.Property(b => b.LastName)
                 .HasConversion(
-                    v => v.ToGuid(),
+                    v => v.Text,
+                    v => new Name(v))
+                .IsRequired();
+
+            builder.Property(b => b.UserId)
+                .HasConversion(
+                    v => v.Id,
+                    v => new UserId(v))
+                .IsRequired();
+
+            builder.Property(b => b.CustomerId)
+                .HasConversion(
+                    v => v.Id,
                     v => new CustomerId(v))
                 .IsRequired();
 

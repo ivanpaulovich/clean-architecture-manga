@@ -35,10 +35,7 @@ namespace WebApi
             .AddFeatureFlags(this.Configuration)
             .AddVersioning()
             .AddSwagger()
-            .AddMediator()
             .AddUseCases()
-            .AddPresentersV1()
-            .AddPresentersV2()
             .AddCustomControllers()
             .AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
 

@@ -1,14 +1,18 @@
 namespace WebApi.UseCases.V2.GetAccount
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
+    using System.Data;
     using System.Threading.Tasks;
-    using Application.Boundaries.GetAccount;
-    using FluentMediator;
+    using Application.Services;
+    using Application.UseCases.GetAccount;
+    using Domain.Accounts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;
     using Modules.Common.FeatureFlags;
+    using OfficeOpenXml;
 
     /// <summary>
     ///     Accounts
@@ -21,13 +25,45 @@ namespace WebApi.UseCases.V2.GetAccount
     [ApiVersion("2.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    public sealed class AccountsController : ControllerBase
+    public sealed class AccountsController : ControllerBase, IOutputPort
     {
+        private IActionResult? _viewModel;
+
+        void IOutputPort.Invalid(Notification notification)
+        {
+            var problemDetails = new ValidationProblemDetails(notification.ModelState);
+            this._viewModel = this.BadRequest(problemDetails);
+        }
+
+        void IOutputPort.NotFound() => this._viewModel = this.NotFound();
+
+        void IOutputPort.Ok(Account account)
+        {
+            using var dataTable = new DataTable();
+            dataTable.Columns.Add("AccountId", typeof(Guid));
+            dataTable.Columns.Add("Amount", typeof(decimal));
+
+            dataTable.Rows.Add(account.AccountId.Id, account.GetCurrentBalance().Amount);
+
+            byte[] fileContents;
+
+            using (ExcelPackage pck = new ExcelPackage())
+            {
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add(account.AccountId.ToString());
+                ws.Cells["A1"].LoadFromDataTable(dataTable, true);
+                ws.Row(1).Style.Font.Bold = true;
+                ws.Column(3).Style.Numberformat.Format = "dd/MM/yyyy HH:mm";
+                fileContents = pck.GetAsByteArray();
+            }
+
+            this._viewModel = new FileContentResult(fileContents,
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
         /// <summary>
         ///     Get an account details.
         /// </summary>
-        /// <param name="mediator"></param>
-        /// <param name="presenter"></param>
+        /// <param name="useCase"></param>
         /// <param name="request">A <see cref="GetAccountDetailsRequestV2"></see>.</param>
         /// <returns>An asynchronous <see cref="IActionResult" />.</returns>
         [Authorize]
@@ -37,14 +73,15 @@ namespace WebApi.UseCases.V2.GetAccount
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get(
-            [FromServices] IMediator mediator,
-            [FromServices] GetAccountDetailsPresenterV2 presenter,
-            [FromRoute][Required] GetAccountDetailsRequestV2 request)
+            [FromServices] IGetAccountUseCase useCase,
+            [FromRoute] [Required] GetAccountDetailsRequestV2 request)
         {
-            var input = new GetAccountInput(request.AccountId);
-            await mediator.PublishAsync(input, "GetAccountDetailsV2")
+            useCase.SetOutputPort(this);
+
+            await useCase.Execute(new GetAccountInput(request.AccountId))
                 .ConfigureAwait(false);
-            return presenter.ViewModel;
+
+            return this._viewModel!;
         }
     }
 }

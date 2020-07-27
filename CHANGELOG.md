@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.0] - 2020-07-27
+
+### Added
+
+- Update Customer Use Case.
+- End to End tests.
+- Notification service that aggregates error messages.
+- GitHub Actions.
+- Null Object pattern.
+
+### Changed
+
+- Register Account Use Case split in Signup, On-board and Open Account use cases.
+- Domain split in Accounts, Customers and Security Bounded Contexts.
+- Common project with strong typed IDs.
+- Controllers are now built-in Presenters.
+
+### Removed
+
+- FluentMediator.
+- Exception thrown from Value Objects.
+- Azure Pipelines.
+
 ## [3.0.12] - 2020-07-04
 
 ### Added

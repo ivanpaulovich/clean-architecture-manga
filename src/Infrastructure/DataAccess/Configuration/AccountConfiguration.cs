@@ -5,8 +5,8 @@
 namespace Infrastructure.DataAccess.Configuration
 {
     using System;
+    using Common;
     using Domain.Accounts.ValueObjects;
-    using Domain.Customers.ValueObjects;
     using Entities;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -29,20 +29,36 @@ namespace Infrastructure.DataAccess.Configuration
 
             builder.ToTable("Account");
 
-            builder.Property(b => b.Id)
+            builder.Property(b => b.AccountId)
                 .HasConversion(
-                    v => v.ToGuid(),
+                    v => v.Id,
                     v => new AccountId(v))
                 .IsRequired();
 
             builder.Property(b => b.CustomerId)
                 .HasConversion(
-                    v => v.ToGuid(),
+                    v => v.Id,
                     v => new CustomerId(v))
                 .IsRequired();
 
-            builder.Ignore(p => p.Credits)
-                .Ignore(p => p.Debits);
+            builder.Property(credit => credit.Currency)
+                .HasConversion(
+                    value => value.Code,
+                    value => new Currency(value))
+                .IsRequired();
+
+            builder.Ignore(p => p.Credits);
+            builder.Ignore(p => p.Debits);
+
+            builder.HasMany(x => x.CreditsCollection)
+                .WithOne(b => b.Account!)
+                .HasForeignKey(b => b.AccountId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasMany(x => x.DebitsCollection)
+                .WithOne(b => b.Account!)
+                .HasForeignKey(b => b.AccountId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

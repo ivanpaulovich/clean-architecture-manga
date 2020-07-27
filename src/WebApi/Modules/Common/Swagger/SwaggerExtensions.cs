@@ -1,6 +1,7 @@
 namespace WebApi.Modules.Common.Swagger
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Reflection;
     using Microsoft.AspNetCore.Builder;
@@ -13,7 +14,7 @@ namespace WebApi.Modules.Common.Swagger
     using Swashbuckle.AspNetCore.SwaggerGen;
 
     /// <summary>
-    ///     Swagger Extenions.
+    ///     Swagger Extensions.
     /// </summary>
     public static class SwaggerExtensions
     {
@@ -27,13 +28,15 @@ namespace WebApi.Modules.Common.Swagger
             }
         }
 
+
         /// <summary>
         ///     Add Swagger Configuration dependencies.
         /// </summary>
+        [SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "<Pending>")]
         public static IServiceCollection AddSwagger(this IServiceCollection services)
         {
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
-            services.AddSwaggerGen(
+            _ = services.AddSwaggerGen(
                 c =>
                 {
                     c.IncludeXmlComments(XmlCommentsFilePath);

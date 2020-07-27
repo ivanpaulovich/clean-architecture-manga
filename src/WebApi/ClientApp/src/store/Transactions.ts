@@ -69,7 +69,6 @@ export const reducer: Reducer<TransactionsState> = (
     switch (action.type) {
     case "RECEIVE_TRANSACTIONS":
         return action.transactionState;
-        break;
     }
 
     return state;
