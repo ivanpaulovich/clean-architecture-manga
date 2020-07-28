@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  accounts-api:
+    image: ${DOCKER_REGISTRY-}accounts
+    build:
+      context: ../accounts-api/
+      dockerfile: src/WebApi/Dockerfile
+  identity-server:
+    image: ${DOCKER_REGISTRY-}identityserver
+    build:
+      context: ../
+      dockerfile: identity-server/Dockerfile
+  wallet-spa:
+   image: ${DOCKER_REGISTRY-}wallet
+   build:
+     context: ../wallet-spa/
+  sql1:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
