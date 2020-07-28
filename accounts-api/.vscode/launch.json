@@ -1,0 +1,74 @@
+{
+    // Use IntelliSense to find out which attributes exist for C# debugging
+    // Use hover for the description of the existing attributes
+    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch IdentityServer",
+            "type": "chrome",
+            "request": "launch",
+            "url": "https://localhost:5000",
+            "webRoot": "${workspaceFolder}/src/IdentityServer"
+        },
+        {
+            "name": "Launch localhost",
+            "type": "chrome",
+            "request": "launch",
+            "url": "https://localhost:5005",
+            "webRoot": "${workspaceFolder}/src/WebApi/ClientApp"
+        },
+        {
+            "name": "Attach to url with files served from ./src/WebApi/ClientApp",
+            "type": "chrome",
+            "request": "attach",
+            "port": 9222,
+            "url": "https://localhost:5005",
+            "webRoot": "${workspaceFolder}/src/WebApi/ClientApp"
+        },
+        {
+            "name": "Development",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/src/WebApi/bin/Debug/netcoreapp3.1/WebApi.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/WebApi",
+            "stopAtEntry": false,
+            // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": "Production",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/src/WebApi/bin/Debug/netcoreapp3.1/WebApi.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/WebApi",
+            "stopAtEntry": false,
+            // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Production"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        }
+    ]
+}

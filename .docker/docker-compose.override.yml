@@ -1,0 +1,36 @@
+version: '3.4'
+
+services:
+  accounts-api:
+    ports:
+      - "5005:5005"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:5005
+      - ASPNETCORE_HTTPS_PORT=5005
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=MyCertificatePassword
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ${USERPROFILE}\.aspnet\https:/https:ro
+  identity-server:
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:5000
+      - ASPNETCORE_HTTPS_PORT=5000
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=MyCertificatePassword
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ${USERPROFILE}\.aspnet\https:/https:ro
+  wallet-spa:
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    ports:
+      - "5010:5010"
+  sql1:
+    environment:
+        SA_PASSWORD: "<YourStrong!Passw0rd>"
+        ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"

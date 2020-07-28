@@ -29,37 +29,80 @@ We also support the React client:
 
 ## Build & Run
 
+Run the following commands:
+
+Spin up SQL Server:
+
 ```sh
-pushd src/WebApi/ClientApp
+cd .docker
+docker-compose build
+docker-compose up -d sql1
+dotnet tool update --global dotnet-ef --version 3.1.7
+dotnet ef database update --project ../accounts-api/src/Infrastructure --startup-project ../accounts-api/src/WebApi
+docker-compose up -d
+```
+
+Then the following containers should be runnning:
+
+| Application 	    | Port 	| Protocol |
+|------------------ | ----- |--------- |
+| Wallet SPA 	      | 5010 	| HTTPS    |
+| Accounts API 	    | 5005 	| HTTPS    |
+| Identity Server 	| 5000 	| HTTPS	   |
+| SQL Server 	      | 1433 	| TCP 	   |
+
+Browse to `https://localhost:5010` then click on Log In. Trust the [self-signed certificate](https://stackoverflow.com/questions/21397809/create-a-trusted-self-signed-ssl-cert-for-localhost-for-use-with-express-node).
+
+
+If you are prefer dotnet commands then start each service individually:
+
+<details>
+    <summary>Expand to get the dotnet run steps.</summary>
+
+### Generate Self Signed Certificate
+
+```sh
+dotnet dev-certs https --clean
+dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\aspnetapp.pfx -p MyCertificatePassword
+```
+
+### Spin up SQL Server in a Docker container
+
+```sh
+docker pull mcr.microsoft.com/mssql/server:2017-latest
+docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=<YourStrong!Passw0rd>' -p 1433:1433 --name sql1 -d mcr.microsoft.com/mssql/server:2017-latest
+```
+
+### Create and Seed Accounts Database
+
+```sh
+dotnet tool update --global dotnet-ef --version 3.1.6
+dotnet ef database update --project accounts-api/src/Infrastructure --startup-project accounts-api/src/WebApi
+```
+
+### Running Services
+
+#### Identity Server
+
+```sh
+dotnet run --project identity-server/src/IdentityServer.csproj
+```
+#### Account API
+
+```sh
+dotnet run --project accounts-api/src/WebApi/WebApi.csproj
+```
+
+#### Wallett SPA
+
+```sh
+pushd wallet-spa/src/ClientApp
 npm install
 popd
-dotnet run --project src/WebApi/WebApi.csproj --launch-profile Development
+dotnet run --project wallet-spa/src/WalletSPA.csproj --launch-profile WalletSPA
 ```
 
-Then authenticate into the API by browsing to `https://localhost:5001/api/v1/Login/Google?returnUrl=%2Fswagger%2Findex.html`.
-
-- App: `http://localhost:5001`
-- Swagger: `http://localhost:5001/swagger/index.html`
-
-or try the Docker approach:
-
-```sh
-docker build -t my-app . -f src/WebApi/Dockerfile
-docker run -p 6001:80 my-app
-```
-
-- App: `http://localhost:6001`
-- Swagger: `http://localhost:6001/swagger/index.html`
-
-## Production Environment Setup
-
-```sh
-dotnet ef migrations add "InitialCreate" -o "DataAccess/Migrations" --project src/Infrastructure --startup-project src/Infrastructure
-```
-
-```sh
-dotnet ef database update --project src/Infrastructure --startup-project src/Infrastructure
-```
+</details>
 
 ## Motivation
 
