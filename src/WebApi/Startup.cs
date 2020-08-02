@@ -31,14 +31,15 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services) => services
             .AddCurrencyExchange(this.Configuration)
             .AddPersistence(this.Configuration)
+            .AddHealthChecks(this.Configuration)
             .AddAuthentication(this.Configuration)
             .AddFeatureFlags(this.Configuration)
             .AddVersioning()
             .AddSwagger()
             .AddUseCases()
-            .AddCustomControllers()
+            .AddCustomControllers()            
             .AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
-
+            
         /// <summary>
         ///     Configure http request pipeline.
         /// </summary>
@@ -67,7 +68,8 @@ namespace WebApi
                 .UseVersionedSwagger(provider, this.Configuration)
                 .UseAuthentication()
                 .UseAuthorization()
-                .UseEndpoints(endpoints => { endpoints.MapControllers(); })
+                .UseHealthChecks()
+                .UseEndpoints(endpoints => { endpoints.MapControllers(); })                
                 .UseSpa(spa =>
                 {
                     spa.Options.SourcePath = "ClientApp";
