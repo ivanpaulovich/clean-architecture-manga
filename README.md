@@ -204,6 +204,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/cuno92"><img src="https://avatars0.githubusercontent.com/u/58431215?v=4" width="100px;" alt=""/><br /><sub><b>cuno92</b></sub></a><br /><a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=cuno92" title="Code">💻</a></td>
     <td align="center"><a href="http://vmamore.com.br"><img src="https://avatars0.githubusercontent.com/u/26505439?v=4" width="100px;" alt=""/><br /><sub><b>Vinícius Mamoré</b></sub></a><br /><a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=vmamore" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/dyavolick"><img src="https://avatars1.githubusercontent.com/u/3098528?v=4" width="100px;" alt=""/><br /><sub><b>dyavolick</b></sub></a><br /><a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=dyavolick" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/felipetofoli"><img src="https://avatars0.githubusercontent.com/u/1364311?v=4" width="100px;" alt=""/><br /><sub><b>felipetofoli</b></sub></a><br /><a href="#design-felipetofoli" title="Design">🎨</a> <a href="https://github.com/ivanpaulovich/clean-architecture-manga/commits?author=felipetofoli" title="Code">💻</a></td>
   </tr>
 </table>
 
