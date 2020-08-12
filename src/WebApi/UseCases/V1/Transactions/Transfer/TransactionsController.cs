@@ -31,7 +31,7 @@ namespace WebApi.UseCases.V1.Transactions.Transfer
     {
         private IActionResult? _viewModel;
 
-        public void OutOfFunds() => this._viewModel = this.BadRequest("Out of funds.");
+        void IOutputPort.OutOfFunds() => this._viewModel = this.BadRequest("Out of funds.");
 
         void IOutputPort.Invalid(Notification notification)
         {
