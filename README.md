@@ -36,7 +36,7 @@ popd
 dotnet run --project src/WebApi/WebApi.csproj --launch-profile Development
 ```
 
-Then browse to:
+Then authenticate into the API by browsing to `https://localhost:5001/api/v1/Login/Google?returnUrl=%2Fswagger%2Findex.html`.
 
 - App: `http://localhost:5001`
 - Swagger: `http://localhost:5001/swagger/index.html`
