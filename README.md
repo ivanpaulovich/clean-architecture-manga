@@ -31,18 +31,15 @@ We also support the React client:
 
 Run the following commands:
 
-Spin up SQL Server:
+Startup the whole solution:
 
 ```sh
 cd .docker
-docker-compose build
-docker-compose up -d sql1
-dotnet tool update --global dotnet-ef --version 3.1.7
-dotnet ef database update --project ../accounts-api/src/Infrastructure --startup-project ../accounts-api/src/WebApi
-docker-compose up -d
+chmod 777 startup.sh
+./startup.sh
 ```
 
-Then the following containers should be runnning:
+Then the following containers should be running `docker ps`:
 
 | Application 	    | Port 	| Protocol |
 |------------------ | ----- |--------- |
@@ -69,8 +66,8 @@ dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\aspnetapp.pfx -p MyCer
 ### Spin up SQL Server in a Docker container
 
 ```sh
-docker pull mcr.microsoft.com/mssql/server:2017-latest
-docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=<YourStrong!Passw0rd>' -p 1433:1433 --name sql1 -d mcr.microsoft.com/mssql/server:2017-latest
+docker pull mcr.microsoft.com/mssql/server:2019-latest
+docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=<YourStrong!Passw0rd>' -p 1433:1433 --name sql1 -d mcr.microsoft.com/mssql/server:2019-latest
 ```
 
 ### Create and Seed Accounts Database

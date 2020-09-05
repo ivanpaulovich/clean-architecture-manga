@@ -11,7 +11,7 @@ services:
       - ASPNETCORE_Kestrel__Certificates__Default__Password=MyCertificatePassword
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
     volumes:
-      - ${USERPROFILE}\.aspnet\https:/https:ro
+      - ~/.aspnet/https:/https:ro
   identity-server:
     ports:
       - "5000:5000"
@@ -22,7 +22,7 @@ services:
       - ASPNETCORE_Kestrel__Certificates__Default__Password=MyCertificatePassword
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
     volumes:
-      - ${USERPROFILE}\.aspnet\https:/https:ro
+      - ~/.aspnet/https:/https:ro
   wallet-spa:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
