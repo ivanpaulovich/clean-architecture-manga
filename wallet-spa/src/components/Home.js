@@ -22,7 +22,7 @@ export class Home extends PureComponent {
             if (user) {
                 this.setState({ isLoggedIn: true, userName: user.profile.preferred_username });
                 axios.get('/api/v1/Accounts', {
-                    baseURL: 'https://localhost:5005',
+                    baseURL: 'https://wallet.local/accounts-api',
                     headers: { 'Authorization': 'Bearer ' + user.access_token }
                 }).then((response) => {
                     this.setState({ accounts: response.data.accounts })

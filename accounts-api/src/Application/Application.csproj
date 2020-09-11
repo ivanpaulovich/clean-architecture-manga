@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- Code Analyzers -->
     <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="3.3.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>

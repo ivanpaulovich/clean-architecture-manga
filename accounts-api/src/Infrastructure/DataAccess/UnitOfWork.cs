@@ -8,7 +8,6 @@ namespace Infrastructure.DataAccess
     using System.Threading.Tasks;
     using Application.Services;
 
-    /// <inheritdoc />
     public sealed class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly MangaContext _context;
@@ -20,7 +19,6 @@ namespace Infrastructure.DataAccess
         public void Dispose()
         {
             this.Dispose(true);
-            GC.SuppressFinalize(this);
         }
 
         /// <inheritdoc />

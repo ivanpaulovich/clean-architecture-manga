@@ -12,10 +12,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="appsettings.Production.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="appsettings.Production.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
@@ -24,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- Code Analyzers -->
     <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="3.3.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>

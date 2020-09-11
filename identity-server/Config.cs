@@ -54,9 +54,9 @@ namespace test3
                 RequireClientSecret = false,
                 AllowedGrantTypes = GrantTypes.Code,
 
-                RedirectUris = { "https://localhost:5010/callback" },
-                PostLogoutRedirectUris = { "https://localhost:5010" },
-                AllowedCorsOrigins = { "https://localhost:5010" },
+                RedirectUris = { "https://wallet.local/callback" },
+                PostLogoutRedirectUris = { "https://wallet.local" },
+                AllowedCorsOrigins = { "https://wallet.local" },
 
                 AllowedScopes =
                 {

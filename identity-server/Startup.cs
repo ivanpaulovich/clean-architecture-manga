@@ -5,7 +5,10 @@
 using IdentityServer4;
 using IdentityServerHost.Quickstart.UI;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,15 +31,15 @@ namespace test3
             services.AddControllersWithViews();
 
             var builder = services.AddIdentityServer(options =>
-            {
-                options.Events.RaiseErrorEvents = true;
-                options.Events.RaiseInformationEvents = true;
-                options.Events.RaiseFailureEvents = true;
-                options.Events.RaiseSuccessEvents = true;
+                {
+                    options.Events.RaiseErrorEvents = true;
+                    options.Events.RaiseInformationEvents = true;
+                    options.Events.RaiseFailureEvents = true;
+                    options.Events.RaiseSuccessEvents = true;
 
-                // see https://identityserver4.readthedocs.io/en/latest/topics/resources.html
-                options.EmitStaticAudienceClaim = true;
-            })
+                    // see https://identityserver4.readthedocs.io/en/latest/topics/resources.html
+                    options.EmitStaticAudienceClaim = true;
+                })
                 .AddTestUsers(TestUsers.Users);
 
             // in-memory, code config
@@ -57,6 +60,25 @@ namespace test3
                     options.ClientId = "556852823610-st4qd2e8v7eu3unu6copt35dse8l34c7.apps.googleusercontent.com";
                     options.ClientSecret = "WIAHI8YIT-Rg7ywSQnmYZZir";
                 });
+
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders =
+                    ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+            });
+
+            services.AddDataProtection()
+                .SetApplicationName("identity-server")
+                .PersistKeysToFileSystem(new System.IO.DirectoryInfo(@"./"));
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+            });
         }
 
         public void Configure(IApplicationBuilder app)
@@ -66,7 +88,20 @@ namespace test3
                 app.UseDeveloperExceptionPage();
             }
 
+            app.Use((context, next) =>
+            {
+                context.Request.PathBase = new PathString("/identity-server");
+                return next();
+            });
+ 
             app.UseStaticFiles();
+            // app.UseCookiePolicy();
+            // app.UseCors("CorsPolicy");
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
 
             app.UseRouting();
             app.UseIdentityServer();
