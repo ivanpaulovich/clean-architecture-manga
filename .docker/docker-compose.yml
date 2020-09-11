@@ -1,19 +1,35 @@
 version: '3.4'
 
 services:
+  nginx:
+    build: ../nginx
+    container_name: wallet.local
+    ports:
+      - "80:80"
+      - "443:443"
+    links:
+      - accounts-api
+      - identity-server
+      - wallet-spa
   accounts-api:
     image: ${DOCKER_REGISTRY-}accounts
     build:
       context: ../accounts-api/
       dockerfile: src/WebApi/Dockerfile
+    container_name: "accounts-api"
+    depends_on:
+      - sql1
+      - identity-server
   identity-server:
     image: ${DOCKER_REGISTRY-}identityserver
+    container_name: "identity-server"
     build:
       context: ../
       dockerfile: identity-server/Dockerfile
   wallet-spa:
-   image: ${DOCKER_REGISTRY-}wallet
-   build:
-     context: ../wallet-spa/
+    image: ${DOCKER_REGISTRY-}wallet
+    container_name: "wallet-spa"
+    build:
+      context: ../wallet-spa/
   sql1:
     image: "mcr.microsoft.com/mssql/server:2019-latest"

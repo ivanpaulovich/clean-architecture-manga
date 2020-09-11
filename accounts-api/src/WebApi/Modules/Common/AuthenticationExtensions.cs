@@ -4,6 +4,7 @@ namespace WebApi.Modules.Common
     using Infrastructure.ExternalAuthentication;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.AspNetCore.Builder;
 
     /// <summary>
     ///     Authentication Extensions.
@@ -30,11 +31,11 @@ namespace WebApi.Modules.Common
 
             services
                 .AddAuthentication("Bearer")
-                .AddJwtBearer("Bearer", options =>
+                .AddIdentityServerAuthentication("Bearer", options =>
                 {
                     // set the Identity.API service as the authority on authentication/authorization
-                    options.Authority = "https://localhost:5000";
-                    options.Audience = "api1";
+                    options.Authority = configuration["AuthenticationModule:AuthorityUrl"];
+                    options.ApiName = "api1";
 
                     options.RequireHttpsMetadata = false;
 
