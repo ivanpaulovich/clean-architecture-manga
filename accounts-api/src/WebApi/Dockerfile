@@ -22,6 +22,6 @@ RUN dotnet publish "WebApi.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-#RUN cp /https/cert.crt /usr/local/share/ca-certificates/cert.crt
-#RUN chmod 644 /usr/local/share/ca-certificates/cert.crt && update-ca-certificates
-ENTRYPOINT ["dotnet", "WebApi.dll"]
+COPY /src/WebApi/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+CMD ["entrypoint.sh"]

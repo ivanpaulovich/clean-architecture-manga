@@ -11,6 +11,7 @@ services:
       - ASPNETCORE_HTTPS_PORT=443
       - ASPNETCORE_Kestrel__Certificates__Default__Password=MyCertificatePassword
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
+      - PersistenceModule__DefaultConnection=Server=sql1;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts;
     volumes:
       - ~/.aspnet/https:/https:ro
   identity-server:
