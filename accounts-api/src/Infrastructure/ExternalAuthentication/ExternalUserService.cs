@@ -27,8 +27,7 @@ namespace Infrastructure.ExternalAuthentication
                 .HttpContext
                 .User;
 
-            string id = user.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
-
+            var id = user.FindFirst("sub")?.Value!;
             return id;
         }
     }

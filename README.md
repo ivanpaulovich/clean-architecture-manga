@@ -35,23 +35,24 @@ Startup the whole solution:
 
 ```sh
 cd .docker
-chmod 777 startup.sh
+./makecert.sh
+./trustcert-mac.sh
 ./startup.sh
 ```
 
 Then the following containers should be running `docker ps`:
 
-| Application 	    | Port 	| Protocol |
-|------------------ | ----- |--------- |
-| Wallet SPA 	      | 5010 	| HTTPS    |
-| Accounts API 	    | 5005 	| HTTPS    |
-| Identity Server 	| 5000 	| HTTPS	   |
-| SQL Server 	      | 1433 	| TCP 	   |
+| Application 	    | Port 	 | URL |
+|------------------ | ------ |--------------------------------------- |
+| NGINX 	          | 80/443 | https://wallet.local                   |
+| Wallet SPA 	      | 80/443 | https://wallet.local                   |
+| Accounts API 	    | 80/443 | https://wallet.local/accounts-api      |
+| Identity Server 	| 80/443 | https://wallet.local/identity-server	  |
+| SQL Server 	      | 1433 	 |                                        |
 
-Browse to `https://localhost:5010` then click on Log In. Trust the [self-signed certificate](https://stackoverflow.com/questions/21397809/create-a-trusted-self-signed-ssl-cert-for-localhost-for-use-with-express-node).
+Browse to `https://wallet.local` then click on Log In. Trust the [self-signed certificate](https://stackoverflow.com/questions/21397809/create-a-trusted-self-signed-ssl-cert-for-localhost-for-use-with-express-node).
 
-
-If you are prefer dotnet commands then start each service individually:
+If you prefer dotnet commands then start each service individually:
 
 <details>
     <summary>Expand to get the dotnet run steps.</summary>

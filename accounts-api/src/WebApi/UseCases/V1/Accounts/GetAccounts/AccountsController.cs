@@ -21,6 +21,13 @@ namespace WebApi.UseCases.V1.Accounts.GetAccounts
     [ApiController]
     public sealed class AccountsController : ControllerBase, IOutputPort
     {
+        private readonly IGetAccountsUseCase _useCase;
+
+        public AccountsController(IGetAccountsUseCase useCase)
+        {
+            this._useCase = useCase;
+        }
+
         private IActionResult? _viewModel;
 
         void IOutputPort.Ok(IList<Account> accounts) => this._viewModel = this.Ok(new GetAccountsResponse(accounts));
@@ -30,17 +37,16 @@ namespace WebApi.UseCases.V1.Accounts.GetAccounts
         /// </summary>
         /// <response code="200">The List of Accounts.</response>
         /// <response code="404">Not Found.</response>
-        /// <param name="useCase">Use case.</param>
         /// <returns>An asynchronous <see cref="IActionResult" />.</returns>
         [Authorize]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetAccountsResponse))]
         [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
-        public async Task<IActionResult> Get([FromServices] IGetAccountsUseCase useCase)
+        public async Task<IActionResult> Get()
         {
-            useCase.SetOutputPort(this);
+            this._useCase.SetOutputPort(this);
 
-            await useCase.Execute()
+            await this._useCase.Execute()
                 .ConfigureAwait(false);
 
             return this._viewModel!;

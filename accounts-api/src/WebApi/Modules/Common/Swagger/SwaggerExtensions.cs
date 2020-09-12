@@ -11,6 +11,8 @@ namespace WebApi.Modules.Common.Swagger
     using Microsoft.Extensions.PlatformAbstractions;
     using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Hosting;
 
     /// <summary>
     ///     Swagger Extensions.
@@ -70,7 +72,8 @@ namespace WebApi.Modules.Common.Swagger
         public static IApplicationBuilder UseVersionedSwagger(
             this IApplicationBuilder app,
             IApiVersionDescriptionProvider provider,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IWebHostEnvironment env)
         {
             app.UseSwagger();
             app.UseSwaggerUI(
@@ -78,8 +81,15 @@ namespace WebApi.Modules.Common.Swagger
                 {
                     foreach (ApiVersionDescription description in provider.ApiVersionDescriptions)
                     {
-                        options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
-                            description.GroupName.ToUpperInvariant());
+                        if (env.IsDevelopment())
+                        {
+                            options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
+                                description.GroupName.ToUpperInvariant());
+                        }
+                        else
+                        {
+                            options.SwaggerEndpoint($"/accounts-api/swagger/{description.GroupName}/swagger.json", "Accounts-API Reverse proxy");
+                        }
                     }
                 });
 
