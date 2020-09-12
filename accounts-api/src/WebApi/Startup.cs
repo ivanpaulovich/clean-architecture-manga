@@ -32,16 +32,16 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services
-            .AddCurrencyExchange(this.Configuration)
-            .AddPersistence(this.Configuration)
-            .AddHealthChecks(this.Configuration)
-            .AddAuthentication(this.Configuration)
-            .AddFeatureFlags(this.Configuration)
-            .AddVersioning()
-            .AddSwagger()
-            .AddUseCases()
-            .AddCustomControllers()
-            .AddCustomCors();
+                .AddCurrencyExchange(this.Configuration)
+                .AddPersistence(this.Configuration)
+                .AddHealthChecks(this.Configuration)
+                .AddAuthentication(this.Configuration)
+                .AddFeatureFlags(this.Configuration)
+                .AddVersioning()
+                .AddSwagger()
+                .AddUseCases()
+                .AddCustomControllers()
+                .AddCustomCors();
 
             services.Configure<ForwardedHeadersOptions>(options =>
             {
@@ -79,13 +79,13 @@ namespace WebApi
             {
                 app.UseExceptionHandler("/api/V1/CustomError")
                     .UseHsts();
-            }
 
-            app.Use((context, next) =>
-            {
-                context.Request.PathBase = new PathString("/accounts-api");
-                return next();
-            });
+                app.Use((context, next) =>
+                {
+                    context.Request.PathBase = new PathString("/accounts-api");
+                    return next();
+                });
+            }
 
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
@@ -98,7 +98,7 @@ namespace WebApi
                 .UseCustomCors()
                 .UseCustomHttpMetrics()
                 .UseRouting()
-                .UseVersionedSwagger(provider, this.Configuration)
+                .UseVersionedSwagger(provider, this.Configuration, env)
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseEndpoints(endpoints => { endpoints.MapControllers(); });

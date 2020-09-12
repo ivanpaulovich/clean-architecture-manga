@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.3.0] - 2020-09-13
+
+### Added
+
+- Identity Server 4.
+- NGINX
+
 ## [3.2.0] - 2020-08-04
 
 ### Added

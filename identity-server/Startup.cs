@@ -87,12 +87,14 @@ namespace test3
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.Use((context, next) =>
+            else
             {
-                context.Request.PathBase = new PathString("/identity-server");
-                return next();
-            });
+                app.Use((context, next) =>
+                {
+                    context.Request.PathBase = new PathString("/identity-server");
+                    return next();
+                });
+            }
  
             app.UseStaticFiles();
             // app.UseCookiePolicy();
