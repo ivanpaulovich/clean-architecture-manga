@@ -1,9 +1,10 @@
 version: '3.4'
 
 services:
-  # nginx:
-  #   volumes:
-  #     - ~/.aspnet/https:/https:ro
+  nginx:
+    volumes:
+      - ../.docker/https/localhost.crt:/etc/ssl/certs/localhost.crt:ro
+      - ../.docker/https/localhost.key:/etc/ssl/private/localhost.key:ro
   accounts-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
@@ -13,7 +14,7 @@ services:
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
       - PersistenceModule__DefaultConnection=Server=sql1;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts;
     volumes:
-      - ~/.aspnet/https:/https:ro
+      - ../.docker/https:/https:ro
   identity-server:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
@@ -22,7 +23,7 @@ services:
       - ASPNETCORE_Kestrel__Certificates__Default__Password=MyCertificatePassword
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
     volumes:
-      - ~/.aspnet/https:/https:ro
+      - ../.docker/https:/https:ro
   wallet-spa:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
