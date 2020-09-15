@@ -37,6 +37,7 @@ Startup the whole solution:
 cd .docker
 ./makecert.sh
 ./trustcert-mac.sh
+#./trustcert-windows.sh
 ./startup.sh
 ```
 

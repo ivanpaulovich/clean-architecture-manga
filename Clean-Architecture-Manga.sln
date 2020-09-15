@@ -56,6 +56,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docker", ".docker", "{FAA0
 		.docker\startup-backend-only.sh = .docker\startup-backend-only.sh
 		.docker\startup.sh = .docker\startup.sh
 		.docker\trustcert-mac.sh = .docker\trustcert-mac.sh
+		.docker\trustcert-windows.sh = .docker\trustcert-windows.sh
 	EndProjectSection
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", ".docker\docker-compose.dcproj", "{A0517AF3-3B35-443A-80DC-FF94F10CF056}"

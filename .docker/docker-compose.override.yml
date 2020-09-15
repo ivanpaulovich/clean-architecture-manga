@@ -1,6 +1,10 @@
 version: '3.4'
 
 services:
+  nginx:
+    volumes:
+      - ../.docker/https/localhost.crt:/etc/ssl/certs/localhost.crt:ro
+      - ../.docker/https/localhost.key:/etc/ssl/private/localhost.key:ro
   accounts-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production

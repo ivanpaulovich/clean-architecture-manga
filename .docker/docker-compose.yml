@@ -5,8 +5,8 @@ services:
     build: ../nginx
     container_name: wallet.local
     ports:
-      - "8080:80"
-      - "8081:443"
+      - "80:80"
+      - "443:443"
     links:
       - accounts-api
       - identity-server
