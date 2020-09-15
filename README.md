@@ -63,6 +63,7 @@ If you prefer dotnet commands then start each service individually:
 ```sh
 dotnet dev-certs https --clean
 dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\aspnetapp.pfx -p MyCertificatePassword
+dotnet dev-certs https --trust
 ```
 
 ### Spin up SQL Server in a Docker container
