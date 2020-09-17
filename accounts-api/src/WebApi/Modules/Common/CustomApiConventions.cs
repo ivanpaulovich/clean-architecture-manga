@@ -1,8 +1,8 @@
 namespace WebApi.Modules.Common
 {
-    using System.Diagnostics.CodeAnalysis;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// </summary>

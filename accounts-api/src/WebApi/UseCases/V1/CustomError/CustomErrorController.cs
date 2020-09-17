@@ -1,8 +1,8 @@
 namespace WebApi.UseCases.V1.CustomError
 {
-    using System.Diagnostics;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using System.Diagnostics;
 
     /// <summary>
     ///     CustomError
@@ -23,7 +23,7 @@ namespace WebApi.UseCases.V1.CustomError
         [AllowAnonymous]
         public IActionResult CustomError()
         {
-            var model = new CustomErrorResponse {RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier};
+            var model = new CustomErrorResponse { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier };
 
             return this.View("~/UseCases/V1/CustomError/CustomError.cshtml", model);
         }

@@ -15,7 +15,9 @@ namespace WebApi.Modules.Common
         {
             var problemDetails = new ProblemDetails
             {
-                Status = 400, Title = "Bad Request", Detail = context.Exception.Message
+                Status = 400,
+                Title = "Bad Request",
+                Detail = context.Exception.Message
             };
 
             context.Result = new BadRequestObjectResult(problemDetails);

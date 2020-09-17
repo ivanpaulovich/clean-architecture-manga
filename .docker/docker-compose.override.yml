@@ -2,34 +2,20 @@ version: '3.4'
 
 services:
   nginx:
-    volumes:
-      - ../.docker/https/localhost.crt:/etc/ssl/certs/localhost.crt:ro
-      - ../.docker/https/localhost.key:/etc/ssl/private/localhost.key:ro
+    ports:
+      - "8080:80"
+      - "8081:443"
   accounts-api:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=https://+;http://+
-      - ASPNETCORE_HTTPS_PORT=443
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=MyCertificatePassword
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
-      - PersistenceModule__DefaultConnection=Server=sql1;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts;
-    volumes:
-      - ../.docker/https:/https:ro
+      - ASPNETCORE_ENVIRONMENT=Development
   identity-server:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=https://+;http://+
-      - ASPNETCORE_HTTPS_PORT=443
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=MyCertificatePassword
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
-    volumes:
-      - ../.docker/https:/https:ro
+      - ASPNETCORE_ENVIRONMENT=Development
+      - IDENTITY_SERVER_ORIGIN=https://wallet.local:8081
+      - RedirectUris=https://wallet.local:8081/callback
+      - PostLogoutRedirectUris=https://wallet.local:8081
+      - AllowedCorsOrigins=https://wallet.local:8081
   wallet-spa:
-    stdin_open: true # docker run -i
-    tty: true        # docker run -t
-  sql1:
-    environment:
-        SA_PASSWORD: "<YourStrong!Passw0rd>"
-        ACCEPT_EULA: "Y"
-    ports:
-      - "1433:1433"
+    build:
+      args:
+        ENV: Development

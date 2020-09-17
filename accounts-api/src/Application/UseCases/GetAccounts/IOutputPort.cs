@@ -4,8 +4,8 @@
 
 namespace Application.UseCases.GetAccounts
 {
-    using System.Collections.Generic;
     using Domain;
+    using System.Collections.Generic;
 
     /// <summary>
     ///     Output Port.

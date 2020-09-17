@@ -1,18 +1,18 @@
 namespace WebApi.Modules.Common.Swagger
 {
-    using System.Diagnostics.CodeAnalysis;
-    using System.IO;
-    using System.Reflection;
     using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Options;
     using Microsoft.Extensions.PlatformAbstractions;
     using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.Hosting;
+    using System.Diagnostics.CodeAnalysis;
+    using System.IO;
+    using System.Reflection;
 
     /// <summary>
     ///     Swagger Extensions.
@@ -81,15 +81,20 @@ namespace WebApi.Modules.Common.Swagger
                 {
                     foreach (ApiVersionDescription description in provider.ApiVersionDescriptions)
                     {
-                        if (env.IsDevelopment())
+                        string swaggerEndpoint;
+
+                        string basePath = configuration["ASPNETCORE_BASEPATH"];
+
+                        if (!string.IsNullOrEmpty(basePath))
                         {
-                            options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
-                                description.GroupName.ToUpperInvariant());
+                            swaggerEndpoint = $"{basePath}/swagger/{description.GroupName}/swagger.json";
                         }
                         else
                         {
-                            options.SwaggerEndpoint($"/accounts-api/swagger/{description.GroupName}/swagger.json", "Accounts-API Reverse proxy");
+                            swaggerEndpoint = $"/swagger/{description.GroupName}/swagger.json";
                         }
+
+                        options.SwaggerEndpoint(swaggerEndpoint, description.GroupName.ToUpperInvariant());
                     }
                 });
 

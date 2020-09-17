@@ -1,10 +1,10 @@
 namespace UnitTests.UseCaseTests.Transfer
 {
-    using System.Threading.Tasks;
     using Application.UseCases.Transfer;
     using Domain;
     using Infrastructure.DataAccess;
     using Presenters;
+    using System.Threading.Tasks;
     using Xunit;
 
     public sealed class TransferUseCaseTests : IClassFixture<StandardFixture>

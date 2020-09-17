@@ -1,10 +1,10 @@
 namespace UnitTests.Presenters
 {
-    using System;
     using Application.Services;
     using Application.UseCases.Withdraw;
     using Domain;
     using Domain.Debits;
+    using System;
 
     public sealed class WithdrawPresenterFake : IOutputPort
     {

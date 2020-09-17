@@ -1,8 +1,5 @@
 namespace WebApi.Modules
 {
-    using System.Linq;
-    using System.Net.Mime;
-    using System.Threading.Tasks;
     using Infrastructure.DataAccess;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -12,6 +9,9 @@ namespace WebApi.Modules
     using Microsoft.Extensions.Diagnostics.HealthChecks;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
+    using System.Linq;
+    using System.Net.Mime;
+    using System.Threading.Tasks;
 
     /// <summary>
     ///     HealthChecks Extensions.
@@ -43,7 +43,7 @@ namespace WebApi.Modules
             this IApplicationBuilder app)
         {
             app.UseHealthChecks("/health",
-                new HealthCheckOptions {ResponseWriter = WriteResponse});
+                new HealthCheckOptions { ResponseWriter = WriteResponse });
 
             return app;
         }

@@ -1,11 +1,11 @@
 namespace WebApi.Modules.Common.Swagger
 {
-    using System;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
     using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
+    using System;
 
     /// <summary>
     ///     Configures the Swagger generation options.
@@ -49,7 +49,7 @@ namespace WebApi.Modules.Common.Swagger
                 Title = "Clean Architecture Manga API",
                 Version = description.ApiVersion.ToString(),
                 Description = "Clean Architecture, DDD and TDD implementation.",
-                Contact = new OpenApiContact {Name = "Ivan Paulovich", Email = "ivan@paulovich.net"},
+                Contact = new OpenApiContact { Name = "Ivan Paulovich", Email = "ivan@paulovich.net" },
                 TermsOfService = new Uri(UriString),
                 License = new OpenApiLicense
                 {

@@ -1,10 +1,10 @@
 namespace UnitTests.UseCaseTests.Withdraw
 {
-    using System.Threading.Tasks;
     using Application.UseCases.Withdraw;
     using Domain;
     using Infrastructure.DataAccess;
     using Presenters;
+    using System.Threading.Tasks;
     using Xunit;
 
     public sealed class WithdrawTests : IClassFixture<StandardFixture>

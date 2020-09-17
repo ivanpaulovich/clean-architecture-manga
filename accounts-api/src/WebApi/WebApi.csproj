@@ -16,13 +16,10 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <IsPackable>false</IsPackable>
-    <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
     <UserSecretsId>9ad8d4da-a604-4436-acc9-d7ee7c0e590c</UserSecretsId>
-    <DockerfileContext>..\..\..</DockerfileContext>
-    <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Development' ">
+  <!--<PropertyGroup Condition=" '$(RunConfiguration)' == 'Development' ">
     <StartAction>Project</StartAction>
     <ExternalConsole>true</ExternalConsole>
     <EnvironmentVariables>
@@ -38,7 +35,7 @@
       <Variable name="ASPNETCORE_ENVIRONMENT" value="Production" />
     </EnvironmentVariables>
     <ApplicationURL>https://localhost:5005</ApplicationURL>
-  </PropertyGroup>
+  </PropertyGroup>-->
 
   <ItemGroup>
     <!-- Code Analyzers -->

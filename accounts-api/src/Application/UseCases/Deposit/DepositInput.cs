@@ -4,9 +4,9 @@
 
 namespace Application.UseCases.Deposit
 {
-    using System;
     using Domain.ValueObjects;
     using Services;
+    using System;
 
     /// <summary>
     ///     Deposit Input Message.

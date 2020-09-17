@@ -4,8 +4,8 @@
 
 namespace Infrastructure.DataAccess
 {
-    using System.Threading.Tasks;
     using Application.Services;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// </summary>

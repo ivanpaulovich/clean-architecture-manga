@@ -2,10 +2,10 @@ namespace WebApi.Modules.Common
 {
     using Application.Services;
     using Infrastructure.ExternalAuthentication;
+    using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Authentication;
 
     /// <summary>
     ///     Authentication Extensions.

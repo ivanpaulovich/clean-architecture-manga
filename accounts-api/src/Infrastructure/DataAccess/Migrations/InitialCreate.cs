@@ -1,7 +1,7 @@
 ﻿namespace Infrastructure.DataAccess.Migrations
 {
-    using System;
     using Microsoft.EntityFrameworkCore.Migrations;
+    using System;
 
     public partial class InitialCreate : Migration
     {
@@ -61,7 +61,7 @@
 
             migrationBuilder.InsertData(
                 "Account",
-                new[] {"AccountId", "Currency", "ExternalUserId"},
+                new[] { "AccountId", "Currency", "ExternalUserId" },
                 new object[]
                 {
                     new Guid("4c510cfe-5d61-4a46-a3d9-c4313426655f"), "USD", "197d0438-e04b-453d-b5de-eca05960c6ae"
@@ -69,7 +69,7 @@
 
             migrationBuilder.InsertData(
                 "Credit",
-                new[] {"CreditId", "AccountId", "Currency", "TransactionDate", "Value"},
+                new[] { "CreditId", "AccountId", "Currency", "TransactionDate", "Value" },
                 new object[]
                 {
                     new Guid("7bf066ba-379a-4e72-a59b-9755fda432ce"),
@@ -79,7 +79,7 @@
 
             migrationBuilder.InsertData(
                 "Debit",
-                new[] {"DebitId", "AccountId", "Currency", "TransactionDate", "Value"},
+                new[] { "DebitId", "AccountId", "Currency", "TransactionDate", "Value" },
                 new object[]
                 {
                     new Guid("31ade963-bd69-4afb-9df7-611ae2cfa651"),

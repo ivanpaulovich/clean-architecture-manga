@@ -1,8 +1,8 @@
 namespace WebApi.ViewModels
 {
+    using Domain;
     using System;
     using System.ComponentModel.DataAnnotations;
-    using Domain;
 
     /// <summary>
     ///     Account Details.

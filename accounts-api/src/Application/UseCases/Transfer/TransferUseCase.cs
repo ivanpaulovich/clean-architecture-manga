@@ -4,13 +4,13 @@
 
 namespace Application.UseCases.Transfer
 {
-    using System;
-    using System.Threading.Tasks;
     using Domain;
     using Domain.Credits;
     using Domain.Debits;
     using Domain.ValueObjects;
     using Services;
+    using System;
+    using System.Threading.Tasks;
 
     /// <inheritdoc />
     public sealed class TransferUseCase : ITransferUseCase

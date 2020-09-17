@@ -1,11 +1,11 @@
 namespace UnitTests.UseCaseTests.Deposit
 {
-    using System.Threading.Tasks;
     using Application.UseCases.Deposit;
     using Domain.Credits;
     using Domain.ValueObjects;
     using Infrastructure.DataAccess;
     using Presenters;
+    using System.Threading.Tasks;
     using Xunit;
 
     public sealed class DepositTests : IClassFixture<StandardFixture>

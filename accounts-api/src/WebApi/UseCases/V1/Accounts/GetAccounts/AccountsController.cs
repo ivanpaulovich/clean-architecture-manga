@@ -1,13 +1,13 @@
 namespace WebApi.UseCases.V1.Accounts.GetAccounts
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
     using Application.UseCases.GetAccounts;
     using Domain;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Modules.Common;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     /// <summary>
     ///     Accounts

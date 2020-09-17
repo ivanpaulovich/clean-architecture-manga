@@ -4,12 +4,12 @@
 
 namespace Application.UseCases.Withdraw
 {
-    using System;
-    using System.Threading.Tasks;
     using Domain;
     using Domain.Debits;
     using Domain.ValueObjects;
     using Services;
+    using System;
+    using System.Threading.Tasks;
 
     /// <inheritdoc />
     public sealed class WithdrawUseCase : IWithdrawUseCase

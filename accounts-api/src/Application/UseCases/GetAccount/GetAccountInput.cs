@@ -4,9 +4,9 @@
 
 namespace Application.UseCases.GetAccount
 {
-    using System;
     using Domain.ValueObjects;
     using Services;
+    using System;
 
     /// <summary>
     ///     Get Account Details Input Message.

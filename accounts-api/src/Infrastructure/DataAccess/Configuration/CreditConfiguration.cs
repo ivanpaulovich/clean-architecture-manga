@@ -4,11 +4,11 @@
 
 namespace Infrastructure.DataAccess.Configuration
 {
-    using System;
     using Domain.Credits;
     using Domain.ValueObjects;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using System;
 
     /// <summary>
     ///     Credit Configuration.

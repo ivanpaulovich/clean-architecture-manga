@@ -1,11 +1,11 @@
 namespace UnitTests.Presenters
 {
-    using System;
     using Application.Services;
     using Application.UseCases.Transfer;
     using Domain;
     using Domain.Credits;
     using Domain.Debits;
+    using System;
 
     public sealed class TransferPresenterFake : IOutputPort
     {

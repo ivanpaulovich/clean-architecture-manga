@@ -4,9 +4,9 @@
 
 namespace Application.UseCases.Transfer
 {
-    using System;
     using Domain.ValueObjects;
     using Services;
+    using System;
 
     /// <summary>
     ///     Transfer Input Message.

@@ -4,9 +4,9 @@
 
 namespace Domain
 {
-    using System;
     using Credits;
     using Debits;
+    using System;
     using ValueObjects;
 
     /// <summary>

@@ -1,8 +1,8 @@
 namespace WebApi.ViewModels
 {
+    using Domain.Debits;
     using System;
     using System.ComponentModel.DataAnnotations;
-    using Domain.Debits;
 
     /// <summary>
     ///     Debit.

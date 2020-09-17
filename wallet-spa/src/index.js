@@ -10,12 +10,12 @@ const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const rootElement = document.getElementById('root');
 
 const config = {
-    authority: "https://wallet.local/identity-server",
+    authority: process.env.REACT_APP_AUTHORITY,
     client_id: "spa",
-    redirect_uri: "https://wallet.local/callback",
+    redirect_uri: process.env.REACT_APP_REDIRECT_URI,
     response_type: "code",
     scope: "openid profile api1.full_access",
-    post_logout_redirect_uri: "https://wallet.local",
+    post_logout_redirect_uri: process.env.REACT_APP_POST_LOGOUT_REDIRECT_URI,
 };
 
 const openIdManager = new Oidc.UserManager(config);

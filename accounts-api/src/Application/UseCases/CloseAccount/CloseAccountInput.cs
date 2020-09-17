@@ -4,9 +4,9 @@
 
 namespace Application.UseCases.CloseAccount
 {
-    using System;
     using Domain.ValueObjects;
     using Services;
+    using System;
 
     /// <summary>
     ///     Close Account Input Message.

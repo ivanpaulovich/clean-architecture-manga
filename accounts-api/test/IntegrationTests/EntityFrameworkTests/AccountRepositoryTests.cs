@@ -1,13 +1,13 @@
 namespace IntegrationTests.EntityFrameworkTests
 {
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
     using Domain;
     using Domain.Credits;
     using Domain.ValueObjects;
     using Infrastructure.DataAccess;
     using Infrastructure.DataAccess.Repositories;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Xunit;
 
     public sealed class AccountRepositoryTests : IClassFixture<StandardFixture>

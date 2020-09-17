@@ -36,20 +36,19 @@ Startup the whole solution:
 ```sh
 cd .docker
 ./makecert.sh
-./trustcert-mac.sh
-#./trustcert-windows.sh
+./trustcert.sh
 ./startup.sh
 ```
 
 Then the following containers should be running `docker ps`:
 
-| Application 	    | Port 	 | URL |
-|------------------ | ------ |--------------------------------------- |
-| NGINX 	          | 80/443 | https://wallet.local                   |
-| Wallet SPA 	      | 80/443 | https://wallet.local                   |
-| Accounts API 	    | 80/443 | https://wallet.local/accounts-api      |
-| Identity Server 	| 80/443 | https://wallet.local/identity-server	  |
-| SQL Server 	      | 1433 	 |                                        |
+| Application 	    | URL |
+|------------------ | -------------------------------------- |
+| NGINX 	          | https://wallet.local:8081                   |
+| Wallet SPA 	      | https://wallet.local:8081              |
+| Accounts API 	    | https://wallet.local:8081/accounts-api      |
+| Identity Server 	| https://wallet.local:8081/identity-server	  |
+| SQL Server 	      | Server=sql1;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts; |
 
 Browse to `https://wallet.local` then click on Log In. Trust the [self-signed certificate](https://stackoverflow.com/questions/21397809/create-a-trusted-self-signed-ssl-cert-for-localhost-for-use-with-express-node).
 

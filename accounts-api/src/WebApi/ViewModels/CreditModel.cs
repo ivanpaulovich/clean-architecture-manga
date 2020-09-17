@@ -1,8 +1,8 @@
 namespace WebApi.ViewModels
 {
+    using Domain.Credits;
     using System;
     using System.ComponentModel.DataAnnotations;
-    using Domain.Credits;
 
     /// <summary>
     ///     Credit.

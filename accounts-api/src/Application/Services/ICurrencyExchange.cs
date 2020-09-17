@@ -1,7 +1,7 @@
 ﻿namespace Application.Services
 {
-    using System.Threading.Tasks;
     using Domain.ValueObjects;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// </summary>

@@ -3,6 +3,7 @@
 
 
 using IdentityServer4.Models;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 
 namespace test3
@@ -44,7 +45,7 @@ namespace test3
             };
         }
 
-        public static IEnumerable<Client> GetClients()
+        public static IEnumerable<Client> GetClients(IConfiguration configuration)
         {
             authorizationCodeFlowClient = new Client
             {
@@ -54,9 +55,9 @@ namespace test3
                 RequireClientSecret = false,
                 AllowedGrantTypes = GrantTypes.Code,
 
-                RedirectUris = { "https://wallet.local/callback" },
-                PostLogoutRedirectUris = { "https://wallet.local" },
-                AllowedCorsOrigins = { "https://wallet.local" },
+                RedirectUris = { configuration["RedirectUris"] },
+                PostLogoutRedirectUris = { configuration["PostLogoutRedirectUris"] },
+                AllowedCorsOrigins = { configuration["AllowedCorsOrigins"] },
 
                 AllowedScopes =
                 {

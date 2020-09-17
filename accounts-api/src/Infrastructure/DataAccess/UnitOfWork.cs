@@ -4,9 +4,9 @@
 
 namespace Infrastructure.DataAccess
 {
+    using Application.Services;
     using System;
     using System.Threading.Tasks;
-    using Application.Services;
 
     public sealed class UnitOfWork : IUnitOfWork, IDisposable
     {

@@ -1,8 +1,8 @@
 ﻿namespace IntegrationTests.EntityFrameworkTests
 {
-    using System;
     using Infrastructure.DataAccess;
     using Microsoft.EntityFrameworkCore;
+    using System;
 
     public sealed class StandardFixture : IDisposable
     {
