@@ -4,11 +4,11 @@
 
 namespace Application.UseCases.CloseAccount
 {
-    using System;
-    using System.Threading.Tasks;
     using Domain;
     using Domain.ValueObjects;
     using Services;
+    using System;
+    using System.Threading.Tasks;
 
     /// <inheritdoc />
     public sealed class CloseAccountUseCase : ICloseAccountUseCase

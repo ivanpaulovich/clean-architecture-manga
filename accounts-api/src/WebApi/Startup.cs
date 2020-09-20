@@ -10,9 +10,6 @@ namespace WebApi
     using Modules.Common;
     using Modules.Common.FeatureFlags;
     using Modules.Common.Swagger;
-    using Microsoft.AspNetCore.HttpOverrides;
-    using Microsoft.AspNetCore.DataProtection;
-    using Microsoft.AspNetCore.Http;
 
     /// <summary>
     ///     Startup.
@@ -41,26 +38,9 @@ namespace WebApi
                 .AddSwagger()
                 .AddUseCases()
                 .AddCustomControllers()
-                .AddCustomCors();
-
-            services.Configure<ForwardedHeadersOptions>(options =>
-            {
-                options.ForwardedHeaders =
-                    ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-            });
-
-            services.AddDataProtection()
-                .SetApplicationName("accounts-api")
-                .PersistKeysToFileSystem(new System.IO.DirectoryInfo(@"./"));
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder
-                        .AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
-            });
+                .AddCustomCors()
+                .AddProxy()
+                .AddCustomDataProtection();
         }
 
         /// <summary>
@@ -79,22 +59,11 @@ namespace WebApi
             {
                 app.UseExceptionHandler("/api/V1/CustomError")
                     .UseHsts();
-
-                app.Use((context, next) =>
-                {
-                    context.Request.PathBase = new PathString("/accounts-api");
-                    return next();
-                });
             }
 
-            app.UseForwardedHeaders(new ForwardedHeadersOptions
-            {
-                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-            });
-
             app
+                .UseProxy(this.Configuration)
                 .UseHealthChecks()
-                .UseHttpsRedirection()
                 .UseCustomCors()
                 .UseCustomHttpMetrics()
                 .UseRouting()

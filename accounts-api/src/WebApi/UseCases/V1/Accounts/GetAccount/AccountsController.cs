@@ -1,8 +1,5 @@
 namespace WebApi.UseCases.V1.Accounts.GetAccount
 {
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using System.Threading.Tasks;
     using Application.Services;
     using Application.UseCases.GetAccount;
     using Domain;
@@ -10,6 +7,9 @@ namespace WebApi.UseCases.V1.Accounts.GetAccount
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Modules.Common;
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.Threading.Tasks;
 
     /// <summary>
     ///     Accounts
@@ -49,7 +49,7 @@ namespace WebApi.UseCases.V1.Accounts.GetAccount
         [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Find))]
         public async Task<IActionResult> Get(
             [FromServices] IGetAccountUseCase useCase,
-            [FromRoute] [Required] Guid accountId)
+            [FromRoute][Required] Guid accountId)
         {
             useCase.SetOutputPort(this);
 

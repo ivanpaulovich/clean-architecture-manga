@@ -4,15 +4,15 @@
 
 namespace Infrastructure.DataAccess.Repositories
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using Domain;
     using Domain.Credits;
     using Domain.Debits;
     using Domain.ValueObjects;
     using Microsoft.EntityFrameworkCore;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     /// <inheritdoc />
     public sealed class AccountRepository : IAccountRepository

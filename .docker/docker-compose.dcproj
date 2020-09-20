@@ -5,13 +5,25 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>a0517af3-3b35-443a-80dc-ff94f10cf056</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/{Scheme}://{ServiceHost}:{ServicePort}</DockerServiceUrl>
-    <DockerServiceName>webapi</DockerServiceName>
+    <DockerServiceUrl>https://wallet.local:8081</DockerServiceUrl>
+    <DockerServiceName>wallet-spa</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="docker-compose.production.yml">
+      <DependentUpon>docker-compose.yml</DependentUpon>
+    </None>
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>
     <None Include="docker-compose.yml" />
+    <None Include="https\localhost.crt" />
+    <None Include="https\localhost.key" />
+    <None Include="https\localhost.pfx" />
+    <None Include="makecert.sh" />
+    <None Include="ssl-selfsigned.cnf" />
+    <None Include="startup-production.sh" />
+    <None Include="startup.sh" />
+    <None Include="trustcert.sh" />
+    <None Include="trustcert-windows.ps1" />
   </ItemGroup>
 </Project>

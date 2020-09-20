@@ -4,11 +4,11 @@
 
 namespace Infrastructure.DataAccess
 {
-    using System;
     using Domain;
     using Domain.Credits;
     using Domain.Debits;
     using Domain.ValueObjects;
+    using System;
 
     /// <summary>
     ///     <see

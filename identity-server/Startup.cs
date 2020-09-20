@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using IdentityServer4;
+using IdentityServer.Modules.Common;
 using IdentityServerHost.Quickstart.UI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
@@ -46,7 +46,7 @@ namespace test3
             builder.AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryApiResources(Config.GetApis())
-                .AddInMemoryClients(Config.GetClients());
+                .AddInMemoryClients(Config.GetClients(Configuration));
 
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
@@ -61,24 +61,10 @@ namespace test3
                     options.ClientSecret = "WIAHI8YIT-Rg7ywSQnmYZZir";
                 });
 
-            services.Configure<ForwardedHeadersOptions>(options =>
-            {
-                options.ForwardedHeaders =
-                    ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-            });
-
-            services.AddDataProtection()
-                .SetApplicationName("identity-server")
-                .PersistKeysToFileSystem(new System.IO.DirectoryInfo(@"./"));
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder
-                        .AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
-            });
+            services
+                .AddCustomCors()
+                .AddProxy()
+                .AddCustomDataProtection();
         }
 
         public void Configure(IApplicationBuilder app)
@@ -87,23 +73,11 @@ namespace test3
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.Use((context, next) =>
-                {
-                    context.Request.PathBase = new PathString("/identity-server");
-                    return next();
-                });
-            }
- 
-            app.UseStaticFiles();
-            // app.UseCookiePolicy();
-            // app.UseCors("CorsPolicy");
 
-            app.UseForwardedHeaders(new ForwardedHeadersOptions
-            {
-                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-            });
+            app.UseProxy(this.Configuration);
+            app.UseCustomCors();
+
+            app.UseStaticFiles();
 
             app.UseRouting();
             app.UseIdentityServer();

@@ -1,13 +1,13 @@
 namespace ComponentTests.V1
 {
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
     using Xunit;
 
     public sealed class SunnyDayTests : IClassFixture<CustomWebApplicationFactory>
@@ -28,7 +28,7 @@ namespace ComponentTests.V1
                 .ConfigureAwait(false);
 
             using StringReader stringReader = new StringReader(actualResponseString);
-            using JsonTextReader reader = new JsonTextReader(stringReader) {DateParseHandling = DateParseHandling.None};
+            using JsonTextReader reader = new JsonTextReader(stringReader) { DateParseHandling = DateParseHandling.None };
 
             JObject jsonResponse = await JObject.LoadAsync(reader)
                 .ConfigureAwait(false);
@@ -48,7 +48,7 @@ namespace ComponentTests.V1
                 .ConfigureAwait(false);
 
             using StringReader stringReader = new StringReader(actualResponseString);
-            using JsonTextReader reader = new JsonTextReader(stringReader) {DateParseHandling = DateParseHandling.None};
+            using JsonTextReader reader = new JsonTextReader(stringReader) { DateParseHandling = DateParseHandling.None };
 
             JObject jsonResponse = await JObject.LoadAsync(reader)
                 .ConfigureAwait(false);

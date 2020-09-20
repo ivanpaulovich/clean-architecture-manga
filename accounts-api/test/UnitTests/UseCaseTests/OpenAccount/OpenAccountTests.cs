@@ -1,8 +1,8 @@
 namespace UnitTests.UseCaseTests.OpenAccount
 {
-    using System.Threading.Tasks;
     using Application.UseCases.OpenAccount;
     using Presenters;
+    using System.Threading.Tasks;
     using Xunit;
 
     public sealed class OpenAccountTests : IClassFixture<StandardFixture>

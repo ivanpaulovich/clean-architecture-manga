@@ -1,8 +1,5 @@
 namespace WebApi.UseCases.V1.Transactions.Deposit
 {
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using System.Threading.Tasks;
     using Application.Services;
     using Application.UseCases.Deposit;
     using Domain;
@@ -11,6 +8,9 @@ namespace WebApi.UseCases.V1.Transactions.Deposit
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Modules.Common;
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.Threading.Tasks;
     using ViewModels;
 
     /// <summary>
@@ -55,9 +55,9 @@ namespace WebApi.UseCases.V1.Transactions.Deposit
         [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Patch))]
         public async Task<IActionResult> Deposit(
             [FromServices] IDepositUseCase useCase,
-            [FromRoute] [Required] Guid accountId,
-            [FromForm] [Required] decimal amount,
-            [FromForm] [Required] string currency)
+            [FromRoute][Required] Guid accountId,
+            [FromForm][Required] decimal amount,
+            [FromForm][Required] string currency)
         {
             useCase.SetOutputPort(this);
 

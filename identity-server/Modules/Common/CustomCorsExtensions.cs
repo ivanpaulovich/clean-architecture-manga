@@ -1,4 +1,4 @@
-namespace WebApi.Modules.Common
+namespace IdentityServer.Modules.Common
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.DependencyInjection;
@@ -6,9 +6,9 @@ namespace WebApi.Modules.Common
     /// <summary>
     ///     CORS Extensions.
     /// </summary>
-    public static class CorsExtensions
+    public static class CustomCorsExtensions
     {
-        private const string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        private const string AllowsAny = "_allowsAny";
 
         /// <summary>
         ///     Add CORS.
@@ -17,11 +17,14 @@ namespace WebApi.Modules.Common
         {
             services.AddCors(options =>
             {
-                options.AddPolicy(MyAllowSpecificOrigins,
+                options.AddPolicy(AllowsAny,
                     builder =>
                     {
                         // Not a permanent solution, but just trying to isolate the problem
-                        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                        builder
+                            .AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
                     });
             });
 
@@ -34,8 +37,7 @@ namespace WebApi.Modules.Common
         /// </summary>
         public static IApplicationBuilder UseCustomCors(this IApplicationBuilder app)
         {
-            app.UseCors(MyAllowSpecificOrigins);
-
+            app.UseCors(AllowsAny);
             return app;
         }
     }

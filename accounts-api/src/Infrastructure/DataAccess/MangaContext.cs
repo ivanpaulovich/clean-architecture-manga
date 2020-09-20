@@ -4,11 +4,11 @@
 
 namespace Infrastructure.DataAccess
 {
-    using System;
     using Domain;
     using Domain.Credits;
     using Domain.Debits;
     using Microsoft.EntityFrameworkCore;
+    using System;
 
     /// <inheritdoc />
     public sealed class MangaContext : DbContext

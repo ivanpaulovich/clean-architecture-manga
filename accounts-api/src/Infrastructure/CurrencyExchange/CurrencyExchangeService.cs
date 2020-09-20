@@ -1,13 +1,13 @@
 ﻿namespace Infrastructure.CurrencyExchange
 {
+    using Application.Services;
+    using Domain.ValueObjects;
+    using Newtonsoft.Json.Linq;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using Application.Services;
-    using Domain.ValueObjects;
-    using Newtonsoft.Json.Linq;
 
     /// <summary>
     ///     Real implementation of the Exchange Service using external data source

@@ -11,6 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "accounts-api", "accounts-api", "{51331007-CACA-4676-934B-217999A6B1E2}"
+	ProjectSection(SolutionItems) = preProject
+		accounts-api\.editorconfig = accounts-api\.editorconfig
+		accounts-api\Directory.Build.props = accounts-api\Directory.Build.props
+		accounts-api\nuget.config = accounts-api\nuget.config
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "identity-server", "identity-server", "{5829A64A-52DE-4656-A6C0-C06B1A6195E7}"
 EndProject
@@ -50,18 +55,33 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "identity-server\IdentityServer.csproj", "{01537DBF-3C0F-4B83-A089-0D12E5CA06C6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docker", ".docker", "{FAA0BAC6-0AA8-4908-A287-D550E9F9CBA8}"
-	ProjectSection(SolutionItems) = preProject
-		.docker\makecert.sh = .docker\makecert.sh
-		.docker\ssl-selfsigned.cnf = .docker\ssl-selfsigned.cnf
-		.docker\startup-backend-only.sh = .docker\startup-backend-only.sh
-		.docker\startup.sh = .docker\startup.sh
-		.docker\trustcert-mac.sh = .docker\trustcert-mac.sh
-		.docker\trustcert-windows.sh = .docker\trustcert-windows.sh
-	EndProjectSection
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", ".docker\docker-compose.dcproj", "{A0517AF3-3B35-443A-80DC-FF94F10CF056}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "accounts-api\src\Domain\Domain.csproj", "{0925FCA6-083A-4478-80F3-2391987AAF2C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nginx", "nginx", "{720A8717-3A95-4D5E-9B7A-330F48AFDC84}"
+	ProjectSection(SolutionItems) = preProject
+		nginx\Dockerfile = nginx\Dockerfile
+		nginx\nginx.conf = nginx\nginx.conf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "accounts-api-seed", "accounts-api-seed", "{A583F2FD-391A-4658-BDC9-C7EFD363C13A}"
+	ProjectSection(SolutionItems) = preProject
+		accounts-api-seed\Dockerfile = accounts-api-seed\Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "wallet-spa", "wallet-spa", "{231C4C02-5F48-45CE-AF73-65B441017D57}"
+	ProjectSection(SolutionItems) = preProject
+		wallet-spa\.dockerignore = wallet-spa\.dockerignore
+		wallet-spa\.env = wallet-spa\.env
+		wallet-spa\.env.vs.debug = wallet-spa\.env.vs.debug
+		wallet-spa\.gitignore = wallet-spa\.gitignore
+		wallet-spa\Dockerfile = wallet-spa\Dockerfile
+		wallet-spa\package-lock.json = wallet-spa\package-lock.json
+		wallet-spa\package.json = wallet-spa\package.json
+		wallet-spa\README.md = wallet-spa\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

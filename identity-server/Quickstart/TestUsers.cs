@@ -3,11 +3,11 @@
 
 
 using IdentityModel;
+using IdentityServer4;
 using IdentityServer4.Test;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Text.Json;
-using IdentityServer4;
 
 namespace IdentityServerHost.Quickstart.UI
 {
@@ -24,7 +24,7 @@ namespace IdentityServerHost.Quickstart.UI
                     postal_code = 69118,
                     country = "Germany"
                 };
-                
+
                 return new List<TestUser>
                 {
                     new TestUser

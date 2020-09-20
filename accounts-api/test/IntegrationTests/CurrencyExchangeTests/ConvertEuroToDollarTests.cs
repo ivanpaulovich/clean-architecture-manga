@@ -1,9 +1,9 @@
 ﻿namespace IntegrationTests.CurrencyExchangeTests
 {
-    using System.Threading.Tasks;
     using Domain.ValueObjects;
     using Infrastructure.CurrencyExchange;
     using Microsoft.Extensions.DependencyInjection;
+    using System.Threading.Tasks;
     using Xunit;
 
     /// <summary>

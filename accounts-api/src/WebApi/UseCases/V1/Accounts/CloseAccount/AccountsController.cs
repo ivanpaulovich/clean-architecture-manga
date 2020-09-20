@@ -1,8 +1,5 @@
 namespace WebApi.UseCases.V1.Accounts.CloseAccount
 {
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using System.Threading.Tasks;
     using Application.Services;
     using Application.UseCases.CloseAccount;
     using Domain;
@@ -10,6 +7,9 @@ namespace WebApi.UseCases.V1.Accounts.CloseAccount
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Modules.Common;
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.Threading.Tasks;
 
     /// <summary>
     ///     Accounts
@@ -52,7 +52,7 @@ namespace WebApi.UseCases.V1.Accounts.CloseAccount
         [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Delete))]
         public async Task<IActionResult> Close(
             [FromServices] ICloseAccountUseCase useCase,
-            [FromRoute] [Required] Guid accountId)
+            [FromRoute][Required] Guid accountId)
         {
             useCase.SetOutputPort(this);
 

@@ -1,7 +1,5 @@
 namespace UnitTests.UseCaseTests.CloseAccount
 {
-    using System;
-    using System.Threading.Tasks;
     using Application.UseCases.CloseAccount;
     using Application.UseCases.GetAccount;
     using Application.UseCases.Withdraw;
@@ -10,6 +8,8 @@ namespace UnitTests.UseCaseTests.CloseAccount
     using Domain.ValueObjects;
     using Infrastructure.DataAccess;
     using Presenters;
+    using System;
+    using System.Threading.Tasks;
     using Xunit;
 
     public sealed class CloseAccountTests : IClassFixture<StandardFixture>

@@ -1,7 +1,5 @@
 namespace WebApi.UseCases.V1.Accounts.OpenAccount
 {
-    using System.ComponentModel.DataAnnotations;
-    using System.Threading.Tasks;
     using Application.Services;
     using Application.UseCases.OpenAccount;
     using Domain;
@@ -9,6 +7,8 @@ namespace WebApi.UseCases.V1.Accounts.OpenAccount
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Modules.Common;
+    using System.ComponentModel.DataAnnotations;
+    using System.Threading.Tasks;
     using ViewModels;
 
     /// <summary>
@@ -53,8 +53,8 @@ namespace WebApi.UseCases.V1.Accounts.OpenAccount
         [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Post))]
         public async Task<IActionResult> Post(
             [FromServices] IOpenAccountUseCase useCase,
-            [FromForm] [Required] decimal amount,
-            [FromForm] [Required] string currency)
+            [FromForm][Required] decimal amount,
+            [FromForm][Required] string currency)
         {
             useCase.SetOutputPort(this);
 

@@ -4,12 +4,12 @@
 
 namespace Application.UseCases.Deposit
 {
-    using System;
-    using System.Threading.Tasks;
     using Domain;
     using Domain.Credits;
     using Domain.ValueObjects;
     using Services;
+    using System;
+    using System.Threading.Tasks;
 
     /// <inheritdoc />
     public sealed class DepositUseCase : IDepositUseCase

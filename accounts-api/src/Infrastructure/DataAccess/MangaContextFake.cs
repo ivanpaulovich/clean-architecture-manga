@@ -4,12 +4,12 @@
 
 namespace Infrastructure.DataAccess
 {
-    using System;
-    using System.Collections.ObjectModel;
     using Domain;
     using Domain.Credits;
     using Domain.Debits;
     using Domain.ValueObjects;
+    using System;
+    using System.Collections.ObjectModel;
 
     /// <summary>
     /// </summary>
