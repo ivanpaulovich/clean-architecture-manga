@@ -1,4 +1,4 @@
-// <copyright file="DepositGetAccountsPresenter.cs" company="Ivan Paulovich">
+// <copyright file="DepositPresenterFake.cs" company="Ivan Paulovich">
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
@@ -19,14 +19,14 @@ namespace UnitTests.Presenters
         public bool IsNotFound { get; private set; }
         public Notification? ModelState { get; private set; }
 
-        public void Invalid(Notification modelState) => this.ModelState = modelState;
+        void IOutputPort.Invalid(Notification modelState) => this.ModelState = modelState;
 
-        public void Ok(Credit credit, Account account)
+        void IOutputPort.Ok(Credit credit, Account account)
         {
             this.Credit = credit;
             this.Account = account;
         }
 
-        public void NotFound() => this.IsNotFound = true;
+        void IOutputPort.NotFound() => this.IsNotFound = true;
     }
 }

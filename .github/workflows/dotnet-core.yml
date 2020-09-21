@@ -4,16 +4,18 @@ on: [push]
 
 jobs:
   build_docker_image:
+    env:
+      PersistenceModule__DefaultConnection: Server=localhost;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts;
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v1
     - name: Setup Database then Run Tests
       run: |
-        docker pull mcr.microsoft.com/mssql/server:2017-latest
-        docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=<YourStrong!Passw0rd>' -p 1433:1433 --name sql1 -d mcr.microsoft.com/mssql/server:2017-latest
+        docker pull mcr.microsoft.com/mssql/server:2019-latest
+        docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=<YourStrong!Passw0rd>' -p 1433:1433 --name sql1 -d mcr.microsoft.com/mssql/server:2019-latest
         sleep 10
         pushd accounts-api
-        dotnet tool update --global dotnet-ef --version 3.1.7
+        dotnet tool update --global dotnet-ef --version 3.1.8
         dotnet ef database update --project src/Infrastructure --startup-project src/WebApi
         popd
         dotnet build
