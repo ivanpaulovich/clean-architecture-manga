@@ -29,15 +29,10 @@ We also support the React client:
 
 ## Build & Run
 
-Run the following commands:
-
-Startup the whole solution:
+To startup the whole solution, execute the following command:
 
 ```sh
-cd .docker
-./makecert.sh
-./trustcert.sh
-./startup.sh
+cd .docker; ./makecert.sh && ./trustcert.sh && ./startup.sh; popd;
 ```
 
 Then the following containers should be running `docker ps`:
