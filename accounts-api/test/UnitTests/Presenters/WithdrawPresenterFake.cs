@@ -4,7 +4,6 @@ namespace UnitTests.Presenters
     using Application.UseCases.Withdraw;
     using Domain;
     using Domain.Debits;
-    using System;
 
     public sealed class WithdrawPresenterFake : IOutputPort
     {
@@ -12,9 +11,11 @@ namespace UnitTests.Presenters
         public Debit? Debit { get; private set; }
         public bool InvalidOutput { get; private set; }
         public bool NotFoundOutput { get; private set; }
-        public void Invalid(Notification notification) => this.InvalidOutput = true;
-        public void NotFound() => this.NotFoundOutput = true;
-        public void OutOfFunds() => throw new NotImplementedException();
+        public bool OutOfFundsOutput { get; private set; }
+
+        void IOutputPort.Invalid(Notification notification) => this.InvalidOutput = true;
+        void IOutputPort.NotFound() => this.NotFoundOutput = true;
+        void IOutputPort.OutOfFunds() => this.OutOfFundsOutput = true;
 
         public void Ok(Debit debit, Account account)
         {

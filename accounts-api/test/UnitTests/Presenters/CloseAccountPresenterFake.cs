@@ -14,12 +14,12 @@ namespace UnitTests.Presenters
         internal bool NotFoundOutput { get; private set; }
         internal bool HasFundsOutput { get; private set; }
 
-        public void Invalid(Notification modelState) => this.ModelState = modelState;
+        void IOutputPort.Invalid(Notification modelState) => this.ModelState = modelState;
 
-        public void NotFound() => this.NotFoundOutput = true;
+        void IOutputPort.NotFound() => this.NotFoundOutput = true;
 
-        public void Ok(Account account) => this.Account = account;
+        void IOutputPort.Ok(Account account) => this.Account = account;
 
-        public void HasFunds() => this.HasFundsOutput = true;
+        void IOutputPort.HasFunds() => this.HasFundsOutput = true;
     }
 }

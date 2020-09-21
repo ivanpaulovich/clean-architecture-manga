@@ -12,10 +12,10 @@ namespace UnitTests.Presenters
         public bool InvalidOutput { get; private set; }
         public bool NotFoundOutput { get; private set; }
 
-        public void Invalid(Notification notification) => this.InvalidOutput = true;
+        void IOutputPort.Invalid(Notification notification) => this.InvalidOutput = true;
 
-        public void NotFound() => this.NotFoundOutput = true;
+        void IOutputPort.NotFound() => this.NotFoundOutput = true;
 
-        public void Ok(Account account) => this.Account = account;
+        void IOutputPort.Ok(Account account) => this.Account = account;
     }
 }

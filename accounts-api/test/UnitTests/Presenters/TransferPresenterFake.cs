@@ -5,7 +5,6 @@ namespace UnitTests.Presenters
     using Domain;
     using Domain.Credits;
     using Domain.Debits;
-    using System;
 
     public sealed class TransferPresenterFake : IOutputPort
     {
@@ -15,10 +14,12 @@ namespace UnitTests.Presenters
         public Debit? Debit { get; private set; }
         public bool InvalidOutput { get; private set; }
         public bool NotFoundOutput { get; private set; }
-        public void Invalid(Notification notification) => this.InvalidOutput = true;
-        public void NotFound() => this.NotFoundOutput = true;
+        public bool OutOfFundsOutput { get; private set; }
 
-        public void Ok(Account originAccount, Debit debit, Account destinationAccount, Credit credit)
+        void IOutputPort.Invalid(Notification notification) => this.InvalidOutput = true;
+        void IOutputPort.NotFound() => this.NotFoundOutput = true;
+
+        void IOutputPort.Ok(Account originAccount, Debit debit, Account destinationAccount, Credit credit)
         {
             this.OriginAccount = originAccount;
             this.Debit = debit;
@@ -26,6 +27,6 @@ namespace UnitTests.Presenters
             this.Credit = credit;
         }
 
-        public void OutOfFunds() => throw new NotImplementedException();
+        void IOutputPort.OutOfFunds() => this.OutOfFundsOutput = true;
     }
 }

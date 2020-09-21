@@ -24,7 +24,7 @@ We also support the React client:
   Run the Docker container in less than 2 minutes using Play With Docker:
   <br>
   <br>
-  <a href="https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/docker-compose.yml&amp;stack_name=clean-architecture-manga" rel="nofollow"><img src="https://raw.githubusercontent.com/play-with-docker/stacks/master/assets/images/button.png" alt="Try in PWD" style="max-width:100%;"></a>
+  <a href="https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/.docker/docker-compose.yml&amp;stack_name=clean-architecture-manga" rel="nofollow"><img src="https://raw.githubusercontent.com/play-with-docker/stacks/master/assets/images/button.png" alt="Try in PWD" style="max-width:100%;"></a>
 </p>
 
 ## Build & Run
@@ -48,9 +48,9 @@ Then the following containers should be running `docker ps`:
 | Wallet SPA 	      | https://wallet.local:8081              |
 | Accounts API 	    | https://wallet.local:8081/accounts-api      |
 | Identity Server 	| https://wallet.local:8081/identity-server	  |
-| SQL Server 	      | Server=sql1;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts; |
+| SQL Server 	      | Server=localhost;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts; |
 
-Browse to `https://wallet.local` then click on Log In. Trust the [self-signed certificate](https://stackoverflow.com/questions/21397809/create-a-trusted-self-signed-ssl-cert-for-localhost-for-use-with-express-node).
+Browse to `https://wallet.local:8081` then click on Log In. Trust the [self-signed certificate](https://stackoverflow.com/questions/21397809/create-a-trusted-self-signed-ssl-cert-for-localhost-for-use-with-express-node).
 
 If you prefer dotnet commands then start each service individually:
 
