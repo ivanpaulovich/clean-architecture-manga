@@ -33,16 +33,15 @@ namespace Application.UseCases.GetAccounts
         public void SetOutputPort(IOutputPort outputPort) => this._outputPort = outputPort;
 
         /// <inheritdoc />
-        public async Task Execute()
+        public Task Execute()
         {
             string externalUserId = this._userService
                 .GetCurrentUserId();
 
-            await this.GetAccountsInternal(externalUserId)
-                .ConfigureAwait(false);
+            return this.GetAccounts(externalUserId);
         }
 
-        private async Task GetAccountsInternal(string externalUserId)
+        private async Task GetAccounts(string externalUserId)
         {
             IList<Account>? accounts = await this._accountRepository
                 .GetAccounts(externalUserId)

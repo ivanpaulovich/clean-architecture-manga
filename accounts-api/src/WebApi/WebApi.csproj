@@ -19,7 +19,7 @@
     <UserSecretsId>9ad8d4da-a604-4436-acc9-d7ee7c0e590c</UserSecretsId>
   </PropertyGroup>
 
-  <!--<PropertyGroup Condition=" '$(RunConfiguration)' == 'Development' ">
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Development' ">
     <StartAction>Project</StartAction>
     <ExternalConsole>true</ExternalConsole>
     <EnvironmentVariables>
@@ -35,7 +35,7 @@
       <Variable name="ASPNETCORE_ENVIRONMENT" value="Production" />
     </EnvironmentVariables>
     <ApplicationURL>https://localhost:5005</ApplicationURL>
-  </PropertyGroup>-->
+  </PropertyGroup>
 
   <ItemGroup>
     <!-- Code Analyzers -->
@@ -78,6 +78,8 @@
     <PackageReference Include="prometheus-net.AspNetCore" Version="4.0.0-pre-000134-2fea549" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
     <PackageReference Include="EPPlus.Core" Version="1.5.4" />
+    <!-- Decorator injection comparison https://greatrexpectations.com/2018/10/25/decorators-in-net-core-with-dependency-injection -->
+    <PackageReference Include="Scrutor" Version="3.2.2" />
   </ItemGroup>
 
   <ItemGroup>

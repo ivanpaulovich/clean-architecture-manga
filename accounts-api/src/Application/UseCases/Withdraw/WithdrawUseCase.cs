@@ -47,20 +47,12 @@ namespace Application.UseCases.Withdraw
         public void SetOutputPort(IOutputPort outputPort) => this._outputPort = outputPort;
 
         /// <inheritdoc />
-        public Task Execute(Guid accountId, decimal amount, string currency)
-        {
-            var input = new WithdrawInput(accountId, amount, currency);
+        public Task Execute(Guid accountId, decimal amount, string currency) =>
+            this.Withdraw(
+                new AccountId(accountId),
+                new PositiveMoney(amount, new Currency(currency)));
 
-            if (input.ModelState.IsValid)
-            {
-                return this.WithdrawInternal(input.AccountId, input.Amount);
-            }
-
-            this._outputPort?.Invalid(input.ModelState);
-            return Task.CompletedTask;
-        }
-
-        private async Task WithdrawInternal(AccountId accountId, PositiveMoney withdrawAmount)
+        private async Task Withdraw(AccountId accountId, PositiveMoney withdrawAmount)
         {
             string externalUserId = this._userService
                 .GetCurrentUserId();
