@@ -44,24 +44,13 @@ namespace Application.UseCases.Transfer
         public void SetOutputPort(IOutputPort outputPort) => this._outputPort = outputPort;
 
         /// <inheritdoc />
-        public Task Execute(Guid originAccountId, Guid destinationAccountId, decimal amount, string currency)
-        {
-            var input = new TransferInput(
-                originAccountId,
-                destinationAccountId,
-                amount,
-                currency);
+        public Task Execute(Guid originAccountId, Guid destinationAccountId, decimal amount, string currency) =>
+            this.Transfer(
+                new AccountId(originAccountId),
+                new AccountId(destinationAccountId),
+                new PositiveMoney(amount, new Currency(currency)));
 
-            if (input.ModelState.IsValid)
-            {
-                return this.TransferInternal(input.OriginAccountId, input.DestinationAccountId, input.TransferAmount);
-            }
-
-            this._outputPort?.Invalid(input.ModelState);
-            return Task.CompletedTask;
-        }
-
-        private async Task TransferInternal(AccountId originAccountId, AccountId destinationAccountId,
+        private async Task Transfer(AccountId originAccountId, AccountId destinationAccountId,
             PositiveMoney transferAmount)
         {
             IAccount originAccount = await this._accountRepository

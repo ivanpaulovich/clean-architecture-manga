@@ -45,18 +45,12 @@ namespace Application.UseCases.Deposit
         /// <inheritdoc />
         public Task Execute(Guid accountId, decimal amount, string currency)
         {
-            var input = new DepositInput(accountId, amount, currency);
-
-            if (input.ModelState.IsValid)
-            {
-                return this.DepositInternal(input.AccountId, input.Amount);
-            }
-
-            this._outputPort?.Invalid(input.ModelState);
-            return Task.CompletedTask;
+            return this.Deposit(
+                new AccountId(accountId),
+                new PositiveMoney(amount, new Currency(currency)));
         }
 
-        private async Task DepositInternal(AccountId accountId, PositiveMoney amount)
+        private async Task Deposit(AccountId accountId, PositiveMoney amount)
         {
             IAccount account = await this._accountRepository
                 .GetAccount(accountId)
@@ -64,13 +58,13 @@ namespace Application.UseCases.Deposit
 
             if (account is Account depositAccount)
             {
-                PositiveMoney amountInAccountCurrency =
+                PositiveMoney convertedAmount =
                     await this._currencyExchange
                         .Convert(amount, depositAccount.Currency)
                         .ConfigureAwait(false);
 
                 Credit credit = this._accountFactory
-                    .NewCredit(depositAccount, amountInAccountCurrency, DateTime.Now);
+                    .NewCredit(depositAccount, convertedAmount, DateTime.Now);
 
                 await this.Deposit(depositAccount, credit)
                     .ConfigureAwait(false);

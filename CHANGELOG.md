@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.4.0] - 2020-09-22
+
+### Changed
+
+- Input validation moved to composition of use cases.
+
+### Added
+
+- Scrutor library.
+
 ## [3.3.1] - 2020-09-20
 
 ### Added

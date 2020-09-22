@@ -41,11 +41,15 @@ namespace UnitTests.UseCaseTests.Deposit
         public async Task DepositUseCase_Returns_Invalid_When_Negative_Amount(decimal amount)
         {
             DepositPresenterFake presenter = new DepositPresenterFake();
-            DepositUseCase sut = new DepositUseCase(
+
+            DepositUseCase depositUseCase = new DepositUseCase(
                 this._fixture.AccountRepositoryFake,
                 this._fixture.UnitOfWork,
                 this._fixture.EntityFactory,
                 this._fixture.CurrencyExchangeFake);
+
+            DepositValidationUseCase sut = new DepositValidationUseCase(
+                depositUseCase);
 
             sut.SetOutputPort(presenter);
 

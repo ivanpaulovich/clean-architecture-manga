@@ -29,6 +29,7 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .AddInvalidRequestLogging()
                 .AddCurrencyExchange(this.Configuration)
                 .AddPersistence(this.Configuration)
                 .AddHealthChecks(this.Configuration)
