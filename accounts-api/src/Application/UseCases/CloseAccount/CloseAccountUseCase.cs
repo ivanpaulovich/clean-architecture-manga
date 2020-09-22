@@ -41,19 +41,10 @@ namespace Application.UseCases.CloseAccount
         /// <inheritdoc />
         public Task Execute(Guid accountId)
         {
-            var input = new CloseAccountInput(accountId);
+            string externalUserId = this._userService
+                .GetCurrentUserId();
 
-            if (input.ModelState.IsValid)
-            {
-                string externalUserId = this._userService
-                    .GetCurrentUserId();
-
-                return this.CloseAccountInternal(input.AccountId, externalUserId);
-            }
-
-            this._outputPort?.Invalid(input.ModelState);
-
-            return Task.CompletedTask;
+            return this.CloseAccountInternal(new AccountId(accountId), externalUserId);
         }
 
         private async Task CloseAccountInternal(AccountId accountId, string externalUserId)

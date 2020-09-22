@@ -2,11 +2,9 @@ namespace WebApi.Modules.Common
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// </summary>
-    [SuppressMessage("Ignore", "CA1801:Ignore", MessageId = "Ignore")]
     public static class CustomApiConventions
     {
         /// <summary>

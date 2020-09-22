@@ -25,18 +25,8 @@ namespace Application.UseCases.GetAccount
         public void SetOutputPort(IOutputPort outputPort) => this._outputPort = outputPort;
 
         /// <inheritdoc />
-        public Task Execute(Guid accountId)
-        {
-            var input = new GetAccountInput(accountId);
-
-            if (input.ModelState.IsValid)
-            {
-                return this.GetAccountInternal(input.AccountId);
-            }
-
-            this._outputPort?.Invalid(input.ModelState);
-            return Task.CompletedTask;
-        }
+        public Task Execute(Guid accountId) =>
+            this.GetAccountInternal(new AccountId(accountId));
 
         private async Task GetAccountInternal(AccountId accountId)
         {
