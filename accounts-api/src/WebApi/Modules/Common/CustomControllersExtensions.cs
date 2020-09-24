@@ -1,6 +1,11 @@
 namespace WebApi.Modules.Common
 {
+    using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.FeatureManagement;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
+    using WebApi.Modules.Common.FeatureFlags;
 
     /// <summary>
     ///     Custom Controller Extensions.
@@ -12,12 +17,36 @@ namespace WebApi.Modules.Common
         /// </summary>
         public static IServiceCollection AddCustomControllers(this IServiceCollection services)
         {
-            services
-                .AddMvc(options => { options.Filters.Add(typeof(ExceptionFilter)); });
+            IFeatureManager featureManager = services
+                .BuildServiceProvider()
+                .GetRequiredService<IFeatureManager>();
+
+            bool isErrorFilterEnabled = featureManager
+                .IsEnabledAsync(nameof(CustomFeature.ErrorFilter))
+                .ConfigureAwait(false)
+                .GetAwaiter()
+                .GetResult();
 
             services
                 .AddHttpContextAccessor()
-                .AddControllers()
+                .AddMvc(options =>
+                {
+                    options.OutputFormatters.RemoveType<TextOutputFormatter>();
+                    options.OutputFormatters.RemoveType<StreamOutputFormatter>();
+                    options.RespectBrowserAcceptHeader = true;
+
+                    if (isErrorFilterEnabled)
+                    {
+                        options.Filters.Add(new ExceptionFilter());
+                    }
+                })
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+                    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                    options.JsonSerializerOptions.Converters.Add(
+                        new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+                })
                 .AddControllersAsServices();
 
             return services;

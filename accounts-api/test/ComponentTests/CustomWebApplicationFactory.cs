@@ -16,8 +16,8 @@ namespace ComponentTests
                 config.AddInMemoryCollection(
                     new Dictionary<string, string>
                     {
-                        ["PersistenceModule:UseFake"] = "true",
-                        ["CurrencyExchangeModule:UseFake"] = "true"
+                        ["FeatureManagement:SQLServer"] = "false",
+                        ["FeatureManagement:CurrencyExchangeModule"] = "false"
                     });
             });
     }

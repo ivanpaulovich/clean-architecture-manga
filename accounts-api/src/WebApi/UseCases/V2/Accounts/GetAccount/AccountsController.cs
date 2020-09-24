@@ -1,4 +1,4 @@
-namespace WebApi.UseCases.V2.GetAccount
+namespace WebApi.UseCases.V2.Accounts.GetAccount
 {
     using Application.Services;
     using Application.UseCases.GetAccount;
@@ -21,7 +21,7 @@ namespace WebApi.UseCases.V2.GetAccount
     ///     </see>
     ///     .
     /// </summary>
-    [FeatureGate(CustomFeature.GetAccountDetailsV2)]
+    [FeatureGate(CustomFeature.GetAccountV2)]
     [ApiVersion("2.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]

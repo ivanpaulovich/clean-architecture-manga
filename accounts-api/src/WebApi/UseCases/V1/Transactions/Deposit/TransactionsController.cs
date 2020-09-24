@@ -7,11 +7,13 @@ namespace WebApi.UseCases.V1.Transactions.Deposit
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.FeatureManagement.Mvc;
     using Modules.Common;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using ViewModels;
+    using WebApi.Modules.Common.FeatureFlags;
 
     /// <summary>
     ///     Accounts
@@ -21,6 +23,7 @@ namespace WebApi.UseCases.V1.Transactions.Deposit
     ///     .
     /// </summary>
     [ApiVersion("1.0")]
+    [FeatureGate(CustomFeature.Deposit)]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public sealed class TransactionsController : ControllerBase, IOutputPort

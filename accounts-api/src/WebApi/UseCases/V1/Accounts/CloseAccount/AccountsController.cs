@@ -6,10 +6,12 @@ namespace WebApi.UseCases.V1.Accounts.CloseAccount
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.FeatureManagement.Mvc;
     using Modules.Common;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
+    using WebApi.Modules.Common.FeatureFlags;
 
     /// <summary>
     ///     Accounts
@@ -19,6 +21,7 @@ namespace WebApi.UseCases.V1.Accounts.CloseAccount
     ///     .
     /// </summary>
     [ApiVersion("1.0")]
+    [FeatureGate(CustomFeature.CloseAccount)]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public sealed class AccountsController : ControllerBase, IOutputPort

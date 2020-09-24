@@ -16,9 +16,9 @@ namespace EndToEndTests
                 config.AddInMemoryCollection(
                     new Dictionary<string, string>
                     {
-                        ["PersistenceModule:UseFake"] = "false",
+                        ["FeatureManagement:SQLServer"] = "true",
                         ["PersistenceModule:DefaultConnection"] = "Server=localhost;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts;",
-                        ["CurrencyExchangeModule:UseFake"] = "false"
+                        ["FeatureManagement:CurrencyExchangeModule"] = "true"
                     });
             });
     }

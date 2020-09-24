@@ -4,6 +4,8 @@ namespace WebApi.Modules
     using Infrastructure.CurrencyExchange;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.FeatureManagement;
+    using WebApi.Modules.Common.FeatureFlags;
 
     /// <summary>
     ///     Currency Exchange Extensions.
@@ -17,15 +19,24 @@ namespace WebApi.Modules
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            bool useFake = configuration.GetValue<bool>("CurrencyExchangeModule:UseFake");
-            if (useFake)
-            {
-                services.AddScoped<ICurrencyExchange, CurrencyExchangeFake>();
-            }
-            else
+            IFeatureManager featureManager = services
+                .BuildServiceProvider()
+                .GetRequiredService<IFeatureManager>();
+
+            bool isEnabled = featureManager
+                .IsEnabledAsync(nameof(CustomFeature.CurrencyExchange))
+                .ConfigureAwait(false)
+                .GetAwaiter()
+                .GetResult();
+
+            if (isEnabled)
             {
                 services.AddHttpClient(CurrencyExchangeService.HttpClientName);
                 services.AddScoped<ICurrencyExchange, CurrencyExchangeService>();
+            }
+            else
+            {
+                services.AddScoped<ICurrencyExchange, CurrencyExchangeFake>();
             }
 
             return services;

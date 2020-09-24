@@ -5,9 +5,11 @@ namespace WebApi.UseCases.V1.Accounts.GetAccounts
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.FeatureManagement.Mvc;
     using Modules.Common;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using WebApi.Modules.Common.FeatureFlags;
 
     /// <summary>
     ///     Accounts
@@ -17,6 +19,7 @@ namespace WebApi.UseCases.V1.Accounts.GetAccounts
     ///     .
     /// </summary>
     [ApiVersion("1.0")]
+    [FeatureGate(CustomFeature.GetAccounts)]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public sealed class AccountsController : ControllerBase, IOutputPort

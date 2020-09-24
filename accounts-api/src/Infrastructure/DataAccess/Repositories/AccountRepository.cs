@@ -50,7 +50,9 @@ namespace Infrastructure.DataAccess.Repositories
 
             if (account != null)
             {
-                this._context.Accounts.Remove(account);
+                this._context
+                    .Accounts
+                    .Remove(account);
             }
         }
 
@@ -108,6 +110,12 @@ namespace Infrastructure.DataAccess.Repositories
                 .Where(e => e.ExternalUserId == externalUserId)
                 .ToListAsync()
                 .ConfigureAwait(false);
+
+            foreach(Account findAccount in accounts)
+            {
+                await this.LoadTransactions(findAccount.AccountId, findAccount)
+                    .ConfigureAwait(false);
+            }
 
             return accounts;
         }

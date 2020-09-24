@@ -6,10 +6,12 @@ namespace WebApi.UseCases.V1.Accounts.OpenAccount
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.FeatureManagement.Mvc;
     using Modules.Common;
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using ViewModels;
+    using WebApi.Modules.Common.FeatureFlags;
 
     /// <summary>
     ///     Customers
@@ -19,6 +21,7 @@ namespace WebApi.UseCases.V1.Accounts.OpenAccount
     ///     .
     /// </summary>
     [ApiVersion("1.0")]
+    [FeatureGate(CustomFeature.OpenAccount)]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public sealed class AccountsController : ControllerBase, IOutputPort

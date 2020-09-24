@@ -7,11 +7,13 @@ namespace WebApi.Modules
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Diagnostics.HealthChecks;
+    using Microsoft.FeatureManagement;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
     using System.Linq;
     using System.Net.Mime;
     using System.Threading.Tasks;
+    using WebApi.Modules.Common.FeatureFlags;
 
     /// <summary>
     ///     HealthChecks Extensions.
@@ -27,8 +29,17 @@ namespace WebApi.Modules
         {
             IHealthChecksBuilder healthChecks = services.AddHealthChecks();
 
-            bool useFake = configuration.GetValue<bool>("PersistenceModule:UseFake");
-            if (!useFake)
+            IFeatureManager featureManager = services
+                .BuildServiceProvider()
+                .GetRequiredService<IFeatureManager>();
+
+            bool isEnabled = featureManager
+                .IsEnabledAsync(nameof(CustomFeature.SQLServer))
+                .ConfigureAwait(false)
+                .GetAwaiter()
+                .GetResult();
+
+            if (isEnabled)
             {
                 healthChecks.AddDbContextCheck<MangaContext>("MangaDbContext");
             }
