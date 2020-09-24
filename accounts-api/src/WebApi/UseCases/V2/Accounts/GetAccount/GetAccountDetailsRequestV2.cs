@@ -1,4 +1,4 @@
-namespace WebApi.UseCases.V2.GetAccount
+namespace WebApi.UseCases.V2.Accounts.GetAccount
 {
     using System;
     using System.ComponentModel.DataAnnotations;

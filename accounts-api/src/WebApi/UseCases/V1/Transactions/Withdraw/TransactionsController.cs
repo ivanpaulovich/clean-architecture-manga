@@ -7,11 +7,14 @@ namespace WebApi.UseCases.V1.Transactions.Withdraw
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.FeatureManagement.Mvc;
     using Modules.Common;
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using ViewModels;
+    using WebApi.Modules.Common.FeatureFlags;
 
     /// <summary>
     ///     Accounts
@@ -21,13 +24,23 @@ namespace WebApi.UseCases.V1.Transactions.Withdraw
     ///     .
     /// </summary>
     [ApiVersion("1.0")]
+    [FeatureGate(CustomFeature.Withdraw)]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public sealed class TransactionsController : ControllerBase, IOutputPort
     {
         private IActionResult? _viewModel;
 
-        void IOutputPort.OutOfFunds() => this._viewModel = this.BadRequest("Out of funds.");
+        void IOutputPort.OutOfFunds()
+        {
+            var messages = new Dictionary<string, string[]>()
+            {
+                { "", new [] { "Out of funds." } }
+            };
+
+            var problemDetails = new ValidationProblemDetails(messages);
+            this._viewModel = this.BadRequest(problemDetails);
+        }
 
         void IOutputPort.Invalid(Notification notification)
         {

@@ -12,7 +12,7 @@ namespace WebApi.Modules
     /// <summary>
     ///     Adds Use Cases classes.
     /// </summary>
-    public static class ApplicationExtensions
+    public static class UseCasesExtensions
     {
         /// <summary>
         ///     Adds Use Cases to the ServiceCollection.

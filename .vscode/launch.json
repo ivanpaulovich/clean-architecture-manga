@@ -4,6 +4,15 @@
    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
    "version": "0.2.0",
    "configurations": [
+    {
+        "name": "Docker .NET Core Attach (Accounts APi)",
+        "type": "docker",
+        "request": "attach",
+        "platform": "netCore",
+        "sourceFileMap": {
+            "/src": "${workspaceFolder}/accounts-api"
+        }
+    },
        {
            "name": "Docker .NET Core Attach (Preview)",
            "type": "docker",

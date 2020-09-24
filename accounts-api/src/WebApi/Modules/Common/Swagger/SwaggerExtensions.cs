@@ -8,11 +8,13 @@ namespace WebApi.Modules.Common.Swagger
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Options;
     using Microsoft.Extensions.PlatformAbstractions;
+    using Microsoft.FeatureManagement;
     using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Reflection;
+    using WebApi.Modules.Common.FeatureFlags;
 
     /// <summary>
     ///     Swagger Extensions.
@@ -33,35 +35,48 @@ namespace WebApi.Modules.Common.Swagger
         /// <summary>
         ///     Add Swagger Configuration dependencies.
         /// </summary>
-        [SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "<Pending>")]
         public static IServiceCollection AddSwagger(this IServiceCollection services)
         {
-            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
-            _ = services.AddSwaggerGen(
-                c =>
-                {
-                    c.IncludeXmlComments(XmlCommentsFilePath);
-                    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                    {
-                        In = ParameterLocation.Header,
-                        Description = "Please insert JWT with Bearer into field",
-                        Name = "Authorization",
-                        Type = SecuritySchemeType.ApiKey
-                    });
-                    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-                    {
-                        new OpenApiSecurityScheme
+            IFeatureManager featureManager = services
+                .BuildServiceProvider()
+                .GetRequiredService<IFeatureManager>();
+
+            bool isEnabled = featureManager
+                .IsEnabledAsync(nameof(CustomFeature.Swagger))
+                .ConfigureAwait(false)
+                .GetAwaiter()
+                .GetResult();
+
+            if (isEnabled)
+            {
+                services
+                    .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
+                    .AddSwaggerGen(
+                        c =>
                         {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
-                        },
-                        new string[] { }
-                    }
-                    });
-                });
+                            c.IncludeXmlComments(XmlCommentsFilePath);
+                            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                            {
+                                In = ParameterLocation.Header,
+                                Description = "Please insert JWT with Bearer into field",
+                                Name = "Authorization",
+                                Type = SecuritySchemeType.ApiKey
+                            });
+                            c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                            {
+                                new OpenApiSecurityScheme
+                                {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                }
+                                },
+                                new string[] { }
+                            }
+                            });
+                        });
+            }
 
             return services;
         }

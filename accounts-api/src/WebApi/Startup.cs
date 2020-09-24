@@ -10,6 +10,7 @@ namespace WebApi
     using Modules.Common;
     using Modules.Common.FeatureFlags;
     using Modules.Common.Swagger;
+    using Prometheus;
 
     /// <summary>
     ///     Startup.
@@ -29,12 +30,12 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .AddFeatureFlags(this.Configuration) // should be the first one.
                 .AddInvalidRequestLogging()
                 .AddCurrencyExchange(this.Configuration)
-                .AddPersistence(this.Configuration)
+                .AddSQLServer(this.Configuration)
                 .AddHealthChecks(this.Configuration)
                 .AddAuthentication(this.Configuration)
-                .AddFeatureFlags(this.Configuration)
                 .AddVersioning()
                 .AddSwagger()
                 .AddUseCases()
@@ -71,7 +72,11 @@ namespace WebApi
                 .UseVersionedSwagger(provider, this.Configuration, env)
                 .UseAuthentication()
                 .UseAuthorization()
-                .UseEndpoints(endpoints => { endpoints.MapControllers(); });
+                .UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                    endpoints.MapMetrics();
+                });
         }
     }
 }

@@ -12,15 +12,13 @@ namespace WebApi.Modules.Common
         ///     Add Prometheus dependencies.
         /// </summary>
         public static IApplicationBuilder UseCustomHttpMetrics(this IApplicationBuilder appBuilder) =>
-            appBuilder.UseMetricServer()
+            appBuilder
+                .UseMetricServer()
                 .UseHttpMetrics(options =>
             {
-                options.RequestDuration.Enabled = false;
-                options.InProgress.Enabled = false;
-                options.RequestCount.Counter = Metrics.CreateCounter(
-                    "http_requests_total",
-                    "HTTP Requests Total",
-                    new CounterConfiguration { LabelNames = new[] { "controller", "method", "code" } });
+                options.RequestDuration.Enabled = true;
+                options.InProgress.Enabled = true;
+                options.RequestCount.Enabled = true;
             });
     }
 }

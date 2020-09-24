@@ -6,6 +6,8 @@ namespace WebApi.Modules.Common
     using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.FeatureManagement;
+    using WebApi.Modules.Common.FeatureFlags;
 
     /// <summary>
     ///     Authentication Extensions.
@@ -19,20 +21,17 @@ namespace WebApi.Modules.Common
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            bool useFake = configuration.GetValue<bool>("AuthenticationModule:UseFake");
+            IFeatureManager featureManager = services
+                .BuildServiceProvider()
+                .GetRequiredService<IFeatureManager>();
 
-            if (useFake)
-            {
-                services.AddScoped<IUserService, TestUserService>();
+            bool isEnabled = featureManager
+                .IsEnabledAsync(nameof(CustomFeature.Authentication))
+                .ConfigureAwait(false)
+                .GetAwaiter()
+                .GetResult();
 
-                services.AddAuthentication(x =>
-                {
-                    x.DefaultAuthenticateScheme = "Test";
-                    x.DefaultChallengeScheme = "Test";
-                }).AddScheme<AuthenticationSchemeOptions, TestAuthenticationHandler>(
-                    "Test", options => { });
-            }
-            else
+            if (isEnabled)
             {
                 services.AddScoped<IUserService, ExternalUserService>();
 
@@ -49,7 +48,17 @@ namespace WebApi.Modules.Common
                         // set the name of the API that's talking to the Identity API
                     });
             }
+            else
+            {
+                services.AddScoped<IUserService, TestUserService>();
 
+                services.AddAuthentication(x =>
+                {
+                    x.DefaultAuthenticateScheme = "Test";
+                    x.DefaultChallengeScheme = "Test";
+                }).AddScheme<AuthenticationSchemeOptions, TestAuthenticationHandler>(
+                    "Test", options => { });
+            }
 
             return services;
         }

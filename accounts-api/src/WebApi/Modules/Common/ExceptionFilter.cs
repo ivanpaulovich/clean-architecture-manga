@@ -15,12 +15,11 @@ namespace WebApi.Modules.Common
         {
             var problemDetails = new ProblemDetails
             {
-                Status = 400,
-                Title = "Bad Request",
-                Detail = context.Exception.Message
+                Status = 500,
+                Title = "Bad Request"
             };
 
-            context.Result = new BadRequestObjectResult(problemDetails);
+            context.Result = new JsonResult(problemDetails);
             context.Exception = null;
         }
     }
