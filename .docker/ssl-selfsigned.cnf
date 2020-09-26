@@ -215,7 +215,12 @@ basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 
 [ v3_ca ]
-subjectAltName = DNS:wallet.local
+subjectAltName = DNS:wallet.local, DNS:localhost
+
+[ alternate_names ]
+
+DNS.1       = localhost
+DNS.2       = wallet.local
 
 # Extensions for a typical CA
 
