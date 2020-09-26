@@ -65,7 +65,7 @@ namespace Infrastructure.DataAccess
                         DebitId = DefaultDebitId,
                         AccountId = DefaultAccountId,
                         TransactionDate = DateTime.UtcNow,
-                        Value = 400m,
+                        Value = 50m,
                         Currency = Currency.Dollar.Code
                     });
         }

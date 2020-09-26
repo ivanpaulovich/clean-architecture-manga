@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.6.0] - 2020-09-26
+
+### Changed
+
+- Fix transactions query.
+
 ## [3.5.0] - 2020-09-23
 
 ### Changed

@@ -68,7 +68,8 @@ namespace Infrastructure.DataAccess.Repositories
 
             if (account is Account findAccount)
             {
-                return await this.LoadTransactions(accountId, findAccount).ConfigureAwait(false);
+                await this.LoadTransactions(findAccount)
+                    .ConfigureAwait(false);
             }
 
             return AccountNull.Instance;
@@ -97,7 +98,8 @@ namespace Infrastructure.DataAccess.Repositories
 
             if (account is Account findAccount)
             {
-                return await this.LoadTransactions(accountId, findAccount).ConfigureAwait(false);
+                await this.LoadTransactions(findAccount)
+                    .ConfigureAwait(false);
             }
 
             return AccountNull.Instance;
@@ -113,33 +115,26 @@ namespace Infrastructure.DataAccess.Repositories
 
             foreach(Account findAccount in accounts)
             {
-                await this.LoadTransactions(findAccount.AccountId, findAccount)
+                await this.LoadTransactions(findAccount)
                     .ConfigureAwait(false);
             }
 
             return accounts;
         }
 
-        private async Task<IAccount> LoadTransactions(AccountId accountId, Account findAccount)
+        private async Task LoadTransactions(Account account)
         {
-            List<Credit> credits = await this._context
+            await this._context
                 .Credits
-                .Where(e => e.AccountId.Equals(accountId))
+                .Where(e => e.AccountId.Equals(account.AccountId))
                 .ToListAsync()
                 .ConfigureAwait(false);
 
-            List<Debit> debits = await this._context
+            await this._context
                 .Debits
-                .Where(e => e.AccountId.Equals(accountId))
+                .Where(e => e.AccountId.Equals(account.AccountId))
                 .ToListAsync()
                 .ConfigureAwait(false);
-
-            findAccount.CreditsCollection
-                .AddRange(credits);
-            findAccount.DebitsCollection
-                .AddRange(debits);
-
-            return findAccount;
         }
     }
 }
