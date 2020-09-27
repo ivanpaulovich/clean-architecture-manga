@@ -1,0 +1,59 @@
+version: '3.4'
+
+services:
+  accounts-api:
+    image: ${DOCKER_REGISTRY-}accounts
+    container_name: "accounts-api"
+    build:
+      context: ../accounts-api/
+      dockerfile: src/WebApi/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://*:5001
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=MyCertificatePassword
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
+      - PersistenceModule__DefaultConnection=Server=sql1;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts;
+    volumes:
+      - ../.docker/https:/https:ro
+    depends_on:
+      - sql1
+      - accounts-api-seed
+      - identity-server
+    ports:
+      - "5001:5001"
+  accounts-api-seed:
+    container_name: "accounts-api-seed"
+    build:
+      context: ../accounts-api/
+      dockerfile: ../accounts-api-seed/Dockerfile
+    environment:
+      - PersistenceModule__DefaultConnection=Server=sql1;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts;
+    command: bash -c "/root/.dotnet/tools/dotnet-ef database update --project src/Infrastructure --startup-project src/WebApi"
+    depends_on:
+      - sql1
+  identity-server:
+    image: ${DOCKER_REGISTRY-}identityserver
+    container_name: "identity-server"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://*:5000
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=MyCertificatePassword
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
+      - IDENTITY_SERVER_ORIGIN=https://localhost:5000
+      - RedirectUris=https://localhost:5002/callback
+      - PostLogoutRedirectUris=https://localhost:5002
+      - AllowedCorsOrigins=https://localhost:5002
+    volumes:
+      - ../.docker/https:/https:ro
+    build:
+      context: ../
+      dockerfile: identity-server/Dockerfile
+    ports:
+      - "5000:5000"
+  sql1:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    environment:
+      SA_PASSWORD: "<YourStrong!Passw0rd>"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
