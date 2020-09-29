@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import * as axios from "axios";
+import { OpenAccountUI } from "./OpenAccount";
 
 export class Home extends PureComponent {
     static displayName = Home.name;
@@ -13,24 +14,28 @@ export class Home extends PureComponent {
         this.state = {
             isLoggedIn: false,
             userName: null,
-            accounts: []
+            accounts: [],
+            user: null
         }
     }
 
     componentDidMount() {
-        this.props.openIdManager.getUser().then((user) => {
-            if (user) {
-                this.setState({ isLoggedIn: true, userName: user.profile.preferred_username });
-                axios.get('/api/v1/Accounts', {
-                    baseURL: process.env.REACT_APP_ACCOUNTS_API,
-                    headers: { 'Authorization': 'Bearer ' + user.access_token }
-                }).then((response) => {
-                    this.setState({ accounts: response.data.accounts })
-                }).catch(e => console.error(e))
-            } else {
-                this.setState({ isLoggedIn: false, userName: null, accounts: [] });
-            }
-        });
+        this.props
+            .openIdManager
+            .getUser()
+            .then((user) => {
+                if (user) {
+                    this.setState({ isLoggedIn: true, userName: user.profile.preferred_username, user: user });
+                    axios.get('/api/v1/Accounts', {
+                        baseURL: process.env.REACT_APP_ACCOUNTS_API,
+                        headers: { 'Authorization': 'Bearer ' + user.access_token }
+                    }).then((response) => {
+                        this.setState({ accounts: response.data.accounts })
+                    }).catch(e => console.error(e))
+                } else {
+                    this.setState({ isLoggedIn: false, userName: null, accounts: [], user: null });
+                }
+            });
     }
 
     render() {
@@ -85,6 +90,7 @@ export class Home extends PureComponent {
                     )}
                     </tbody>
                 </table>
+                <OpenAccountUI {...this.state.user} />
             </React.Fragment>
         )
     }
