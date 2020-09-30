@@ -70,6 +70,8 @@ namespace Infrastructure.DataAccess.Repositories
             {
                 await this.LoadTransactions(findAccount)
                     .ConfigureAwait(false);
+
+                return account;
             }
 
             return AccountNull.Instance;

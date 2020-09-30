@@ -82,7 +82,7 @@ export class Home extends PureComponent {
                         {
                             return <tr key={account.accountId}>
                                 <td>
-                                    <a className="text-dark" href={`/transactions/${account.accountId}`}>Transactions</a>
+                                    <a className="text-dark" href={`/accounts/${account.accountId}`}>Details</a>
                                 </td>
                                 <td>{account.currentBalance}</td>
                             </tr>;
