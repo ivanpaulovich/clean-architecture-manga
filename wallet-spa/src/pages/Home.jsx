@@ -25,7 +25,7 @@ class Home extends React.Component {
         <div className={classes.root}>
           <TopMenu />
           <SideMenu openIdManager={this.props.openIdManager} />
-          <MainContent />
+          <MainContent openIdManager={this.props.openIdManager} />
           <Footer />
         </div>
       );

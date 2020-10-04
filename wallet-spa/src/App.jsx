@@ -1,11 +1,11 @@
 import "./App.css";
 import React from "react";
 import { Route } from "react-router";
-import { Layout } from "./components/Layout";
 import Home from "./pages/Home";
 import { AccountUI } from "./components/Account";
 import { AuthCallback } from "./pages/AuthCallback";
 import { Component } from "react";
+import { Container } from 'reactstrap';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -16,7 +16,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <Layout>
+      <Container>
         <Route
           exact
           path="/"
@@ -38,7 +38,7 @@ export default class App extends Component {
           }}
         />
 
-      </Layout>
+      </Container>
     )
   };
 }
