@@ -30,7 +30,7 @@ function Footer() {
   return (
     <AppBar position='fixed' className={classes.appBar}>
       <Typography variant='h6' className={classes.footer}>
-        © Copyright 2019
+        © Copyright 2020
       </Typography>
     </AppBar>
   );
