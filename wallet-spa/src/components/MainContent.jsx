@@ -89,8 +89,9 @@ class MainContent extends Component {
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
                 <TableRow>
+                  <TableCell>Account</TableCell>
                   <TableCell>Balance</TableCell>
-                  <TableCell align="right">Details</TableCell>
+                  <TableCell>Currency</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -98,8 +99,9 @@ class MainContent extends Component {
                   this.state.accounts.map((account) => {
                     return (
                       <TableRow key={account.accountId}>
-                        <TableCell>{account.currentBalance} {account.currency}</TableCell>
-                        <TableCell align="right"><a className="text-dark" href={`/transactions/${account.accountId}`}>Transactions</a></TableCell>
+                        <TableCell><a className="text-dark" href={`/transactions/${account.accountId}`}>{account.accountId}</a></TableCell>
+                        <TableCell>{account.currentBalance}</TableCell>
+                        <TableCell>{account.currency}</TableCell>
                       </TableRow>
                     )
                   })
