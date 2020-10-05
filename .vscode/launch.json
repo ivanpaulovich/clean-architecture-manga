@@ -71,6 +71,13 @@
       "type": "coreclr",
       "request": "attach",
       "processId": "${command:pickProcess}"
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against localhost",
+      "url": "https://localhost:5002",
+      "webRoot": "${workspaceFolder}/wallet-spa"
     }
   ]
 }

@@ -18,6 +18,7 @@ namespace WebApi.ViewModels
             this.CurrentBalance = account
                 .GetCurrentBalance()
                 .Amount;
+            this.Currency = account.Currency.Code;
         }
 
         /// <summary>
@@ -31,5 +32,11 @@ namespace WebApi.ViewModels
         /// </summary>
         [Required]
         public decimal CurrentBalance { get; }
+
+        /// <summary>
+        ///     Gets current Balance.
+        /// </summary>
+        [Required]
+        public string Currency { get; }
     }
 }
