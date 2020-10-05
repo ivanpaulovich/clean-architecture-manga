@@ -7,6 +7,7 @@ import { Container } from 'reactstrap';
 import Accounts from "../pages/Accounts";
 import Account from "../pages/Account";
 import { AuthCallback } from "../pages/AuthCallback";
+import OpenAccount from "../pages/OpenAccount";
 
 const styles = theme => ({
   toolbar: theme.mixins.toolbar,
@@ -43,6 +44,13 @@ class MainContent extends Component {
   render() {
     return (
       <Container>
+          <Route
+            exact
+            path="/OpenAccount"
+            render={() => {
+              return <OpenAccount openIdManager={this.props.openIdManager} />;
+            }}
+          />
           <Route
             exact
             path="/"

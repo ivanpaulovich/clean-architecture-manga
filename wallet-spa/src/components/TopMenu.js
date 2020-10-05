@@ -44,6 +44,13 @@ function TopMenu() {
             </a>
           </Typography>
         </MenuItem>
+        <MenuItem>
+          <Typography variant="h6" className={classes.title}>
+            <a className="text-dark" href="/OpenAccount">
+              Open Account
+            </a>
+          </Typography>
+        </MenuItem>
       </Toolbar>
     </AppBar>
   );

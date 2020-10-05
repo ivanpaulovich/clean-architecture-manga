@@ -1,17 +1,9 @@
 import PropTypes from 'prop-types';
 
-import React, { Component } from "react";
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
+import React from "react";
 import { Typography } from '@material-ui/core';
 import accountsService from "../store/accountsService";
 import { withStyles } from "@material-ui/core/styles";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useParams,
-} from "react-router-dom";
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
