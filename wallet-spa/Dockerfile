@@ -9,9 +9,8 @@ RUN npm install
 COPY . .
 
 ARG ENV
-
-RUN if [ "$ENV" = "Development" ]; then echo "Building for Development"; rm .env; mv .env.vs.debug .env; else echo "Building for Production"; fi
+ENV ENV ${ENV}
 
 #Expose port and start application
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD npm run start-${ENV}

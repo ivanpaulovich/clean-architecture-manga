@@ -18,4 +18,4 @@ services:
   wallet-spa:
     build:
       args:
-        ENV: Development
+        ENV: development

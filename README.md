@@ -32,7 +32,8 @@ We also support the React client:
 To startup the whole solution, execute the following command:
 
 ```sh
-cd .docker; ./makecert.sh && ./trustcert.sh && ./startup.sh; popd;
+$ cd .docker; ./makecert.sh && ./trustcert.sh && sudo ./hostsadd.sh; popd;
+$ cd .docker; ./startup.sh; popd;
 ```
 
 Then the following containers should be running `docker ps`:
