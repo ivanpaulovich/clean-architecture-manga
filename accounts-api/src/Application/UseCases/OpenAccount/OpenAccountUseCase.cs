@@ -37,9 +37,9 @@ namespace Application.UseCases.OpenAccount
 
         /// <inheritdoc />
         public Task Execute(decimal amount, string currency) =>
-            this.OpenAccount(new PositiveMoney(amount, new Currency(currency)));
+            this.OpenAccount(new Money(amount, new Currency(currency)));
 
-        private async Task OpenAccount(PositiveMoney amountToDeposit)
+        private async Task OpenAccount(Money amountToDeposit)
         {
             string externalUserId = this._userService
                 .GetCurrentUserId();

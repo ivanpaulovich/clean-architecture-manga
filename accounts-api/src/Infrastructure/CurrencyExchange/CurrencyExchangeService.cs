@@ -30,7 +30,7 @@
         ///     Converts allowed currencies into USD.
         /// </summary>
         /// <returns>Money.</returns>
-        public async Task<PositiveMoney> Convert(PositiveMoney originalAmount, Currency destinationCurrency)
+        public async Task<Money> Convert(Money originalAmount, Currency destinationCurrency)
         {
             HttpClient httpClient = this._httpClientFactory.CreateClient(HttpClientName);
             Uri requestUri = new Uri(_exchangeUrl);
@@ -50,7 +50,7 @@
             decimal usdAmount = this._usdRates[originalAmount.Currency] / originalAmount.Amount;
             decimal destinationAmount = this._usdRates[destinationCurrency] / usdAmount;
 
-            return new PositiveMoney(
+            return new Money(
                 destinationAmount,
                 destinationCurrency);
         }

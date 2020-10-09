@@ -43,17 +43,20 @@ namespace Infrastructure.DataAccess.Repositories
         /// <inheritdoc />
         public async Task Delete(AccountId accountId)
         {
-            Account account = await this._context
-                .Accounts
-                .FindAsync(accountId)
+            await this._context
+                .Database
+                .ExecuteSqlRawAsync("DELETE FROM Debit WHERE AccountId=@p0", accountId.Id)
                 .ConfigureAwait(false);
 
-            if (account != null)
-            {
-                this._context
-                    .Accounts
-                    .Remove(account);
-            }
+            await this._context
+                .Database
+                .ExecuteSqlRawAsync("DELETE FROM Credit WHERE AccountId=@p0", accountId.Id)
+                .ConfigureAwait(false);
+
+            await this._context
+                .Database
+                .ExecuteSqlRawAsync("DELETE FROM Account WHERE AccountId=@p0", accountId.Id)
+                .ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -102,6 +105,8 @@ namespace Infrastructure.DataAccess.Repositories
             {
                 await this.LoadTransactions(findAccount)
                     .ConfigureAwait(false);
+
+                return account;
             }
 
             return AccountNull.Instance;

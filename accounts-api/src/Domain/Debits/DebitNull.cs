@@ -19,6 +19,6 @@ namespace Domain.Debits
     {
         public static DebitNull Instance { get; } = new DebitNull();
         public DebitId DebitId { get; } = new DebitId(Guid.Empty);
-        public PositiveMoney Amount { get; } = new PositiveMoney(0, new Currency(string.Empty));
+        public Money Amount { get; } = new Money(0, new Currency(string.Empty));
     }
 }

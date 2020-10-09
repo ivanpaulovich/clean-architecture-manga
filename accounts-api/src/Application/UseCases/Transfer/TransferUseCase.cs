@@ -48,10 +48,10 @@ namespace Application.UseCases.Transfer
             this.Transfer(
                 new AccountId(originAccountId),
                 new AccountId(destinationAccountId),
-                new PositiveMoney(amount, new Currency(currency)));
+                new Money(amount, new Currency(currency)));
 
         private async Task Transfer(AccountId originAccountId, AccountId destinationAccountId,
-            PositiveMoney transferAmount)
+            Money transferAmount)
         {
             IAccount originAccount = await this._accountRepository
                 .GetAccount(originAccountId)
@@ -63,7 +63,7 @@ namespace Application.UseCases.Transfer
 
             if (originAccount is Account withdrawAccount && destinationAccount is Account depositAccount)
             {
-                PositiveMoney localCurrencyAmount =
+                Money localCurrencyAmount =
                     await this._currencyExchange
                         .Convert(transferAmount, withdrawAccount.Currency)
                         .ConfigureAwait(false);
@@ -71,7 +71,7 @@ namespace Application.UseCases.Transfer
                 Debit debit = this._accountFactory
                     .NewDebit(withdrawAccount, localCurrencyAmount, DateTime.Now);
 
-                if (withdrawAccount.GetCurrentBalance().Amount - debit.Amount.Amount < 0)
+                if (withdrawAccount.GetCurrentBalance().Subtract(debit.Amount).Amount < 0)
                 {
                     this._outputPort?.OutOfFunds();
                     return;
@@ -80,7 +80,7 @@ namespace Application.UseCases.Transfer
                 await this.Withdraw(withdrawAccount, debit)
                     .ConfigureAwait(false);
 
-                PositiveMoney destinationCurrencyAmount =
+                Money destinationCurrencyAmount =
                     await this._currencyExchange
                         .Convert(transferAmount, depositAccount.Currency)
                         .ConfigureAwait(false);

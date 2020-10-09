@@ -28,7 +28,7 @@ namespace UnitTests.UseCaseTests.CloseAccount
 
             Credit credit = this._fixture
                 .EntityFactory
-                .NewCredit(account, new PositiveMoney(amount, Currency.Dollar), DateTime.Now);
+                .NewCredit(account, new Money(amount, Currency.Dollar), DateTime.Now);
 
             account.Deposit(credit);
 

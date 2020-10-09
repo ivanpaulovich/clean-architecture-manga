@@ -21,8 +21,8 @@
             ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
             CurrencyExchangeService sut = serviceProvider.GetRequiredService<CurrencyExchangeService>();
 
-            PositiveMoney usdMoney = new PositiveMoney(100, Currency.Euro);
-            PositiveMoney actual = await sut.Convert(usdMoney, Currency.Dollar);
+            Money usdMoney = new Money(100, Currency.Euro);
+            Money actual = await sut.Convert(usdMoney, Currency.Dollar);
 
             Assert.True(actual.Amount > 100);
             Assert.Equal("USD", actual.Currency.Code);

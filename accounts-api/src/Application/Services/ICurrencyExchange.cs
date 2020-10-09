@@ -7,6 +7,6 @@
     /// </summary>
     public interface ICurrencyExchange
     {
-        Task<PositiveMoney> Convert(PositiveMoney originalAmount, Currency destinationCurrency);
+        Task<Money> Convert(Money originalAmount, Currency destinationCurrency);
     }
 }

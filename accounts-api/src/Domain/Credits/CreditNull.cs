@@ -19,6 +19,6 @@ namespace Domain.Credits
     {
         public static CreditNull Instance { get; } = new CreditNull();
         public CreditId CreditId { get; } = new CreditId(Guid.Empty);
-        public PositiveMoney Amount { get; } = new PositiveMoney(0, new Currency(string.Empty));
+        public Money Amount { get; } = new Money(0, new Currency(string.Empty));
     }
 }

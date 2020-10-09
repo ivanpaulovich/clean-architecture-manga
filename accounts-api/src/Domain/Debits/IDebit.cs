@@ -16,6 +16,6 @@ namespace Domain.Debits
         /// <summary>
         ///     Gets the Amount.
         /// </summary>
-        PositiveMoney Amount { get; }
+        Money Amount { get; }
     }
 }

@@ -38,6 +38,11 @@ namespace Domain.ValueObjects
 
         public bool IsZero() => this.Amount == 0;
 
+        public Money Subtract(Money debit) =>
+            new Money(Math.Round(this.Amount - debit.Amount, 2), this.Currency);
+
+        public Money Add(Money amount) => new Money(Math.Round(this.Amount + amount.Amount, 2), this.Currency);
+
         public override string ToString() => string.Format($"{this.Amount} {this.Currency}");
     }
 }

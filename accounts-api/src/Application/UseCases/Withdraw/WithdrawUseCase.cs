@@ -50,9 +50,9 @@ namespace Application.UseCases.Withdraw
         public Task Execute(Guid accountId, decimal amount, string currency) =>
             this.Withdraw(
                 new AccountId(accountId),
-                new PositiveMoney(amount, new Currency(currency)));
+                new Money(amount, new Currency(currency)));
 
-        private async Task Withdraw(AccountId accountId, PositiveMoney withdrawAmount)
+        private async Task Withdraw(AccountId accountId, Money withdrawAmount)
         {
             string externalUserId = this._userService
                 .GetCurrentUserId();
@@ -63,7 +63,7 @@ namespace Application.UseCases.Withdraw
 
             if (account is Account withdrawAccount)
             {
-                PositiveMoney localCurrencyAmount =
+                Money localCurrencyAmount =
                     await this._currencyExchange
                         .Convert(withdrawAmount, withdrawAccount.Currency)
                         .ConfigureAwait(false);
@@ -71,7 +71,7 @@ namespace Application.UseCases.Withdraw
                 Debit debit = this._accountFactory
                     .NewDebit(withdrawAccount, localCurrencyAmount, DateTime.Now);
 
-                if (withdrawAccount.GetCurrentBalance().Amount - debit.Amount.Amount < 0)
+                if (withdrawAccount.GetCurrentBalance().Subtract(debit.Amount).Amount < 0)
                 {
                     this._outputPort?.OutOfFunds();
                     return;

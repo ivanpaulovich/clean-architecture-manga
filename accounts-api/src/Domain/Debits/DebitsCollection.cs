@@ -22,17 +22,17 @@ namespace Domain.Debits
         ///     Gets Total amount.
         /// </summary>
         /// <returns>Total.</returns>
-        public PositiveMoney GetTotal()
+        public Money GetTotal()
         {
             if (this.Count == 0)
             {
-                return new PositiveMoney(0, new Currency(string.Empty));
+                return new Money(0, new Currency(string.Empty));
             }
 
-            PositiveMoney total = new PositiveMoney(0, this.First().Amount.Currency);
+            Money total = new Money(0, this.First().Amount.Currency);
 
             return this.Aggregate(total, (current, credit) =>
-                new PositiveMoney(current.Amount + credit.Amount.Amount, current.Currency));
+                new Money(current.Amount + credit.Amount.Amount, current.Currency));
         }
     }
 }

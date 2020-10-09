@@ -8,6 +8,10 @@ import Accounts from "../pages/Accounts";
 import Account from "../pages/Account";
 import { AuthCallback } from "../pages/AuthCallback";
 import OpenAccount from "../pages/OpenAccount";
+import Deposit from "../pages/Deposit";
+import Withdraw from "../pages/Withdraw";
+import Transfer from "../pages/Transfer";
+import CloseAccount from "../pages/CloseAccount";
 
 const styles = theme => ({
   toolbar: theme.mixins.toolbar,
@@ -56,6 +60,34 @@ class MainContent extends Component {
             path="/"
             render={() => {
               return <Accounts openIdManager={this.props.openIdManager} />;
+            }}
+          />
+          <Route
+            exact
+            path="/accounts/:accountId/close"
+            render={() => {
+              return <CloseAccount openIdManager={this.props.openIdManager} />;
+            }}
+          />
+          <Route
+            exact
+            path="/accounts/:accountId/transfer"
+            render={() => {
+              return <Transfer openIdManager={this.props.openIdManager} />;
+            }}
+          />
+          <Route
+            exact
+            path="/accounts/:accountId/deposit"
+            render={() => {
+              return <Deposit openIdManager={this.props.openIdManager} />;
+            }}
+          />
+          <Route
+            exact
+            path="/accounts/:accountId/withdraw"
+            render={() => {
+              return <Withdraw openIdManager={this.props.openIdManager} />;
             }}
           />
           <Route

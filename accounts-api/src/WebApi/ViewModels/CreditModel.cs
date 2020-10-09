@@ -16,30 +16,37 @@ namespace WebApi.ViewModels
         {
             this.TransactionId = credit.CreditId.Id;
             this.Amount = credit.Amount.Amount;
+            this.Currency = credit.Amount.Currency.Code;
             this.Description = "Credit";
             this.TransactionDate = credit.TransactionDate;
         }
 
         /// <summary>
-        ///     Gets Amount.
+        ///     Gets the TransactionId.
         /// </summary>
         [Required]
         public Guid TransactionId { get; }
 
         /// <summary>
-        ///     Gets Amount.
+        ///     Gets the Amount.
         /// </summary>
         [Required]
         public decimal Amount { get; }
 
         /// <summary>
-        ///     Gets Description.
+        ///     Gets the Currency.
+        /// </summary>
+        [Required]
+        public string Currency { get; }
+
+        /// <summary>
+        ///     Gets the Description.
         /// </summary>
         [Required]
         public string Description { get; }
 
         /// <summary>
-        ///     Gets Transaction Date.
+        ///     Gets the Transaction Date.
         /// </summary>
         [Required]
         public DateTime TransactionDate { get; }

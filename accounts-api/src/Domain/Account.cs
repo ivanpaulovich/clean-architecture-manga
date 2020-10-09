@@ -54,10 +54,10 @@ namespace Domain
         /// <inheritdoc />
         public Money GetCurrentBalance()
         {
-            PositiveMoney totalCredits = this.CreditsCollection
+            Money totalCredits = this.CreditsCollection
                 .GetTotal();
 
-            PositiveMoney totalDebits = this.DebitsCollection
+            Money totalDebits = this.DebitsCollection
                 .GetTotal();
 
             Money totalAmount = totalCredits

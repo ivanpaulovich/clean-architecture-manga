@@ -22,7 +22,7 @@ namespace Domain.Credits
             this.CreditId = creditId;
             this.AccountId = accountId;
             this.TransactionDate = transactionDate;
-            this.Amount = new PositiveMoney(value, new Currency(currency));
+            this.Amount = new Money(value, new Currency(currency));
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Domain.Credits
         /// <summary>
         ///     Gets or sets Amount.
         /// </summary>
-        public PositiveMoney Amount { get; }
+        public Money Amount { get; }
 
         /// <summary>
         ///     Calculate the sum of positive amounts.

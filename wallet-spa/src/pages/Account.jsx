@@ -57,14 +57,14 @@ class Account extends React.Component {
     super(props);
 
     this.state = {
+      accountId: this.props.match.params.accountId,
       account: {
         credits: [],
         debits: []
       }
     }
 
-    const accountId = this.props.match.params.accountId;
-    this.fetchData(accountId);
+    this.fetchData(this.state.accountId);
   }
 
   fetchData = id => {
@@ -138,6 +138,36 @@ class Account extends React.Component {
                 )}
               </tbody>
             </table>
+
+
+            <table className="table table-striped" aria-labelledby="tabelLabel">
+              <thead>
+                <tr>
+                  <th>Transaction ID</th>
+                  <th>Amount</th>
+                  <th>Transaction Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.account.debits && this.state.account.debits.map((debit) => {
+                  return <tr>
+                    <td>
+                      {debit.transactionId}
+                    </td>
+                    <td>
+                      {debit.amount}
+                    </td>
+                    <td>{debit.transactionDate}</td>
+                  </tr>;
+                }
+                )}
+              </tbody>
+            </table>
+
+            <a className="text-dark" href={`/accounts/${this.state.accountId}/Deposit`}>Deposit</a>
+            <a className="text-dark" href={`/accounts/${this.state.accountId}/Withdraw`}>Withdraw</a>
+            <a className="text-dark" href={`/accounts/${this.state.accountId}/Transfer`}>Transfer</a>
+            <a className="text-dark" href={`/accounts/${this.state.accountId}/Close`}>Close</a>
           </React.Fragment>
         </div>
       </main>

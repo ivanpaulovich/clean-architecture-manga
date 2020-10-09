@@ -1,5 +1,5 @@
 import React, { } from "react";
-import accountsService from "../store/accountsService";
+import transactionService from "../store/transactionService";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from 'prop-types';
 import { withRouter } from "react-router";
@@ -35,23 +35,25 @@ const styles = theme => ({
   },
 });
 
-class OpenAccount extends React.Component {
+class Deposit extends React.Component {
 
-  static displayName = OpenAccount.name;
+  static displayName = Deposit.name;
 
   constructor(props) {
     super(props);
 
     this.state = {
-      id: null,
+      accountId: this.props.match.params.accountId,
+      transactionId: "",
+      transactionDate: "",
       amount: "",
       currency: "",
       submitted: false
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.saveAccount = this.saveAccount.bind(this);
-    this.newAccount = this.newAccount.bind(this);
+    this.saveDeposit = this.saveDeposit.bind(this);
+    this.newDeposit = this.newDeposit.bind(this);
   }
 
   handleInputChange = event => {
@@ -64,20 +66,19 @@ class OpenAccount extends React.Component {
       })
   };
 
-  saveAccount = () => {
+  saveDeposit = () => {
     this.props.openIdManager.getUser().then((user) => {
       if (user) {
         var bodyFormData = new FormData();
         bodyFormData.append('amount', this.state.amount);
         bodyFormData.append('currency', this.state.currency);
 
-        accountsService
-          .openAccount(user, bodyFormData)
+        transactionService
+          .deposit(user, this.state.accountId, bodyFormData)
           .then(response => {
             this.setState({
-              id: response.data.account.accountId,
-              title: response.data.account.accountId,
-              description: response.data.account.accountId
+              transactionId: response.data.transaction.transactionId,
+              transactionDate: response.data.transaction.transactionDate
             });
             this.setSubmitted(true);
             console.log(response.data);
@@ -89,9 +90,11 @@ class OpenAccount extends React.Component {
     })
   };
 
-  newAccount = () => {
+  newDeposit = () => {
     this.setState({
-      id: null,
+      accountId: this.props.match.params.accountId,
+      transactionId: "",
+      transactionDate: "",
       amount: "",
       currency: "",
       submitted: false
@@ -108,7 +111,7 @@ class OpenAccount extends React.Component {
       <main className={classes.fullWidth}>
         <div className={classes.toolbar} />
         <div className={classes.title}>
-          <Typography variant='h6'>My Accounts</Typography>
+          <Typography variant='h6'>Deposit</Typography>
         </div>
         <div className={classes.content}>
 
@@ -116,7 +119,7 @@ class OpenAccount extends React.Component {
             {this.submitted ? (
               <div>
                 <h4>You submitted successfully!</h4>
-                <button className="btn btn-success" onClick={this.newAccount}>
+                <button className="btn btn-success" onClick={this.newDeposit}>
                   Add
             </button>
               </div>
@@ -148,24 +151,21 @@ class OpenAccount extends React.Component {
                     />
                   </div>
 
-                  <button onClick={this.saveAccount} className="btn btn-success">
+                  <button onClick={this.saveDeposit} className="btn btn-success">
                     Submit
             </button>
                 </div>
               )}
           </div>
 
-
-
         </div>
       </main>
-
     );
   }
 }
 
-OpenAccount.propTypes = {
+Deposit.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(withRouter(OpenAccount));
+export default withStyles(styles)(withRouter(Deposit));

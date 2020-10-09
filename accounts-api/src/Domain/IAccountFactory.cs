@@ -35,7 +35,7 @@ namespace Domain
         /// <param name="amountToDeposit">Amount to Deposit.</param>
         /// <param name="transactionDate">Transaction date.</param>
         /// <returns>New Credit instance.</returns>
-        Credit NewCredit(Account account, PositiveMoney amountToDeposit, DateTime transactionDate);
+        Credit NewCredit(Account account, Money amountToDeposit, DateTime transactionDate);
 
         /// <summary>
         ///     Creates a new Debit.
@@ -44,6 +44,6 @@ namespace Domain
         /// <param name="amountToWithdraw">Amount to Withdraw.</param>
         /// <param name="transactionDate">Transaction date.</param>
         /// <returns>New Debit instance.</returns>
-        Debit NewDebit(Account account, PositiveMoney amountToWithdraw, DateTime transactionDate);
+        Debit NewDebit(Account account, Money amountToWithdraw, DateTime transactionDate);
     }
 }

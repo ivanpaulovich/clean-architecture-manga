@@ -22,7 +22,7 @@ namespace Domain.Debits
             this.DebitId = DebitId;
             this.AccountId = accountId;
             this.TransactionDate = transactionDate;
-            this.Amount = new PositiveMoney(value, new Currency(currency));
+            this.Amount = new Money(value, new Currency(currency));
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Domain.Debits
         /// <summary>
         ///     Gets the AccountId.
         /// </summary>
-        public AccountId AccountId { get; }
+        public AccountId    AccountId { get; }
 
         public Account? Account { get; set; }
 
@@ -54,7 +54,7 @@ namespace Domain.Debits
         /// <summary>
         ///     Gets or sets Amount.
         /// </summary>
-        public PositiveMoney Amount { get; }
+        public Money Amount { get; }
 
         /// <summary>
         ///     Calculate the sum of positive amounts.

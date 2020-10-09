@@ -27,7 +27,7 @@ namespace Infrastructure.DataAccess
         /// <inheritdoc />
         public Credit NewCredit(
             Account account,
-            PositiveMoney amountToDeposit,
+            Money amountToDeposit,
             DateTime transactionDate) =>
             new Credit(new CreditId(Guid.NewGuid()), account.AccountId, transactionDate,
                 amountToDeposit.Amount, amountToDeposit.Currency.Code);
@@ -35,7 +35,7 @@ namespace Infrastructure.DataAccess
         /// <inheritdoc />
         public Debit NewDebit(
             Account account,
-            PositiveMoney amountToWithdraw,
+            Money amountToWithdraw,
             DateTime transactionDate) =>
             new Debit(new DebitId(Guid.NewGuid()), account.AccountId, transactionDate, amountToWithdraw.Amount,
                 amountToWithdraw.Currency.Code);

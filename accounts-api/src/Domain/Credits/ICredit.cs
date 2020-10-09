@@ -16,6 +16,6 @@ namespace Domain.Credits
         /// <summary>
         ///     Gets the Amount.
         /// </summary>
-        PositiveMoney Amount { get; }
+        Money Amount { get; }
     }
 }

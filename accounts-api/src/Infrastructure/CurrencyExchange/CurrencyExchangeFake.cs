@@ -20,7 +20,7 @@
             {Currency.Real, 5.46346m}
         };
 
-        public Task<PositiveMoney> Convert(PositiveMoney originalAmount, Currency destinationCurrency)
+        public Task<Money> Convert(Money originalAmount, Currency destinationCurrency)
         {
             // hardcoded rates from https://www.xe.com/currency/usd-us-dollar
 
@@ -28,7 +28,7 @@
             decimal destinationAmount = this._usdRates[destinationCurrency] / usdAmount;
 
             return Task.FromResult(
-                new PositiveMoney(
+                new Money(
                     destinationAmount,
                     destinationCurrency));
         }

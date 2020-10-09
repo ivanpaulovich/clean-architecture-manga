@@ -35,23 +35,21 @@ const styles = theme => ({
   },
 });
 
-class OpenAccount extends React.Component {
+class CloseAccount extends React.Component {
 
-  static displayName = OpenAccount.name;
+  static displayName = CloseAccount.name;
 
   constructor(props) {
     super(props);
 
     this.state = {
-      id: null,
-      amount: "",
-      currency: "",
+      accountId: this.props.match.params.accountId,
       submitted: false
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.saveAccount = this.saveAccount.bind(this);
-    this.newAccount = this.newAccount.bind(this);
+    this.saveCloseAccount = this.saveCloseAccount.bind(this);
+    this.newCloseAccount = this.newCloseAccount.bind(this);
   }
 
   handleInputChange = event => {
@@ -64,20 +62,14 @@ class OpenAccount extends React.Component {
       })
   };
 
-  saveAccount = () => {
+  saveCloseAccount = () => {
     this.props.openIdManager.getUser().then((user) => {
       if (user) {
-        var bodyFormData = new FormData();
-        bodyFormData.append('amount', this.state.amount);
-        bodyFormData.append('currency', this.state.currency);
-
         accountsService
-          .openAccount(user, bodyFormData)
+          .closeAccount(user, this.state.accountId)
           .then(response => {
             this.setState({
-              id: response.data.account.accountId,
-              title: response.data.account.accountId,
-              description: response.data.account.accountId
+              accountId: response.data.accountId,
             });
             this.setSubmitted(true);
             console.log(response.data);
@@ -89,11 +81,9 @@ class OpenAccount extends React.Component {
     })
   };
 
-  newAccount = () => {
+  newCloseAccount = () => {
     this.setState({
-      id: null,
-      amount: "",
-      currency: "",
+      accountId: this.props.match.params.accountId,
       submitted: false
     });
     this.setSubmitted(false);
@@ -108,7 +98,7 @@ class OpenAccount extends React.Component {
       <main className={classes.fullWidth}>
         <div className={classes.toolbar} />
         <div className={classes.title}>
-          <Typography variant='h6'>My Accounts</Typography>
+          <Typography variant='h6'>Close Account</Typography>
         </div>
         <div className={classes.content}>
 
@@ -116,56 +106,27 @@ class OpenAccount extends React.Component {
             {this.submitted ? (
               <div>
                 <h4>You submitted successfully!</h4>
-                <button className="btn btn-success" onClick={this.newAccount}>
+                <button className="btn btn-success" onClick={this.newCloseAccount}>
                   Add
             </button>
               </div>
             ) : (
                 <div>
-                  <div className="form-group">
-                    <label htmlFor="amount">Amount</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="amount"
-                      required
-                      value={this.state.amount}
-                      onChange={this.handleInputChange}
-                      name="amount"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="currency">Currency</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="currency"
-                      required
-                      value={this.state.currency}
-                      onChange={this.handleInputChange}
-                      name="currency"
-                    />
-                  </div>
-
-                  <button onClick={this.saveAccount} className="btn btn-success">
+                  <button onClick={this.saveCloseAccount} className="btn btn-success">
                     Submit
-            </button>
+                  </button>
                 </div>
               )}
           </div>
 
-
-
         </div>
       </main>
-
     );
   }
 }
 
-OpenAccount.propTypes = {
+CloseAccount.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(withRouter(OpenAccount));
+export default withStyles(styles)(withRouter(CloseAccount));

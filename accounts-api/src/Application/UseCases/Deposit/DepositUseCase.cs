@@ -47,10 +47,10 @@ namespace Application.UseCases.Deposit
         {
             return this.Deposit(
                 new AccountId(accountId),
-                new PositiveMoney(amount, new Currency(currency)));
+                new Money(amount, new Currency(currency)));
         }
 
-        private async Task Deposit(AccountId accountId, PositiveMoney amount)
+        private async Task Deposit(AccountId accountId, Money amount)
         {
             IAccount account = await this._accountRepository
                 .GetAccount(accountId)
@@ -58,7 +58,7 @@ namespace Application.UseCases.Deposit
 
             if (account is Account depositAccount)
             {
-                PositiveMoney convertedAmount =
+                Money convertedAmount =
                     await this._currencyExchange
                         .Convert(amount, depositAccount.Currency)
                         .ConfigureAwait(false);
