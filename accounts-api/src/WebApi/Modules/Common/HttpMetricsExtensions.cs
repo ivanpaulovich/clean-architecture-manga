@@ -15,10 +15,10 @@ namespace WebApi.Modules.Common
             appBuilder
                 .UseMetricServer()
                 .UseHttpMetrics(options =>
-            {
-                options.RequestDuration.Enabled = true;
-                options.InProgress.Enabled = true;
-                options.RequestCount.Enabled = true;
-            });
+                {
+                    options.RequestDuration.Enabled = true;
+                    options.InProgress.Enabled = true;
+                    options.RequestCount.Enabled = true;
+                });
     }
 }

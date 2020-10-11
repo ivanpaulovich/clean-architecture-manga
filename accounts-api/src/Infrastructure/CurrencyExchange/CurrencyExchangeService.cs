@@ -1,13 +1,13 @@
 ﻿namespace Infrastructure.CurrencyExchange
 {
-    using Application.Services;
-    using Domain.ValueObjects;
-    using Newtonsoft.Json.Linq;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using Application.Services;
+    using Domain.ValueObjects;
+    using Newtonsoft.Json.Linq;
 
     /// <summary>
     ///     Real implementation of the Exchange Service using external data source
@@ -57,7 +57,7 @@
 
         private void ParseCurrencies(string responseJson)
         {
-            var rates = JObject.Parse(responseJson);
+            JObject? rates = JObject.Parse(responseJson);
             decimal eur = rates["rates"]![Currency.Euro.Code]!.Value<decimal>();
             decimal cad = rates["rates"]![Currency.Canadian.Code]!.Value<decimal>();
             decimal gbh = rates["rates"]![Currency.BritishPound.Code]!.Value<decimal>();

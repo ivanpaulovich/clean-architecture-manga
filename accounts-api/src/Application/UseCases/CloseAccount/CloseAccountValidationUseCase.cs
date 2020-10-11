@@ -4,9 +4,9 @@
 
 namespace Application.UseCases.CloseAccount
 {
-    using Application.Services;
     using System;
     using System.Threading.Tasks;
+    using Services;
 
     /// <inheritdoc />
     public sealed class CloseAccountValidationUseCase : ICloseAccountUseCase
@@ -17,10 +17,7 @@ namespace Application.UseCases.CloseAccount
         /// <summary>
         ///     Initializes a new instance of the <see cref="CloseAccountValidationUseCase" /> class.
         /// </summary>
-        public CloseAccountValidationUseCase(ICloseAccountUseCase useCase)
-        {
-            this._useCase = useCase;
-        }
+        public CloseAccountValidationUseCase(ICloseAccountUseCase useCase) => this._useCase = useCase;
 
         /// <inheritdoc />
         public void SetOutputPort(IOutputPort outputPort)
@@ -32,7 +29,7 @@ namespace Application.UseCases.CloseAccount
         /// <inheritdoc />
         public Task Execute(Guid accountId)
         {
-            var modelState = new Notification();
+            Notification modelState = new Notification();
 
             if (accountId == Guid.Empty)
             {

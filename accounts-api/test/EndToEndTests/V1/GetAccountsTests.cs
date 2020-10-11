@@ -8,9 +8,8 @@ namespace EndToEndTests.V1
     [Collection("WebApi Collection")]
     public sealed class GetAccountsTests
     {
-        public GetAccountsTests(CustomWebApplicationFactoryFixture fixture) => this._fixture = fixture;
-
         private readonly CustomWebApplicationFactoryFixture _fixture;
+        public GetAccountsTests(CustomWebApplicationFactoryFixture fixture) => this._fixture = fixture;
 
         [Fact]
         public async Task GetAccountsReturnsList()

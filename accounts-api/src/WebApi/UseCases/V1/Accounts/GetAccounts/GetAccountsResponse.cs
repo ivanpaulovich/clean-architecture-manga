@@ -1,8 +1,8 @@
 namespace WebApi.UseCases.V1.Accounts.GetAccounts
 {
-    using Domain;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Domain;
     using ViewModels;
 
     /// <summary>
@@ -17,7 +17,7 @@ namespace WebApi.UseCases.V1.Accounts.GetAccounts
         {
             foreach (Account account in accounts)
             {
-                var accountModel = new AccountModel(account);
+                AccountModel accountModel = new AccountModel(account);
                 this.Accounts.Add(accountModel);
             }
         }

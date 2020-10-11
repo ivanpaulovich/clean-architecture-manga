@@ -4,9 +4,9 @@
 
 namespace Application.UseCases.OpenAccount
 {
+    using System.Threading.Tasks;
     using Domain.ValueObjects;
     using Services;
-    using System.Threading.Tasks;
 
     /// <inheritdoc />
     public sealed class OpenAccountValidationUseCase : IOpenAccountUseCase
@@ -15,10 +15,8 @@ namespace Application.UseCases.OpenAccount
         private IOutputPort? _outputPort;
 
         public OpenAccountValidationUseCase(
-            IOpenAccountUseCase useCase)
-        {
+            IOpenAccountUseCase useCase) =>
             this._useCase = useCase;
-        }
 
         /// <inheritdoc />
         public void SetOutputPort(IOutputPort outputPort)
@@ -30,7 +28,7 @@ namespace Application.UseCases.OpenAccount
         /// <inheritdoc />
         public Task Execute(decimal amount, string currency)
         {
-            var modelState = new Notification();
+            Notification modelState = new Notification();
 
             if (currency != Currency.Dollar.Code &&
                 currency != Currency.Euro.Code &&

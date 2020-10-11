@@ -38,7 +38,7 @@ namespace Domain.Debits
         /// <summary>
         ///     Gets the AccountId.
         /// </summary>
-        public AccountId    AccountId { get; }
+        public AccountId AccountId { get; }
 
         public Account? Account { get; set; }
 

@@ -1,20 +1,18 @@
 namespace WebApi.Modules.Common.Swagger
 {
+    using System.IO;
+    using System.Reflection;
+    using FeatureFlags;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Options;
     using Microsoft.Extensions.PlatformAbstractions;
     using Microsoft.FeatureManagement;
     using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
-    using System.Diagnostics.CodeAnalysis;
-    using System.IO;
-    using System.Reflection;
-    using WebApi.Modules.Common.FeatureFlags;
 
     /// <summary>
     ///     Swagger Extensions.
@@ -55,25 +53,26 @@ namespace WebApi.Modules.Common.Swagger
                         c =>
                         {
                             c.IncludeXmlComments(XmlCommentsFilePath);
-                            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                            {
-                                In = ParameterLocation.Header,
-                                Description = "Please insert JWT with Bearer into field",
-                                Name = "Authorization",
-                                Type = SecuritySchemeType.ApiKey
-                            });
-                            c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-                            {
+                            c.AddSecurityDefinition("Bearer",
                                 new OpenApiSecurityScheme
                                 {
-                                Reference = new OpenApiReference
+                                    In = ParameterLocation.Header,
+                                    Description = "Please insert JWT with Bearer into field",
+                                    Name = "Authorization",
+                                    Type = SecuritySchemeType.ApiKey
+                                });
+                            c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                            {
                                 {
-                                    Type = ReferenceType.SecurityScheme,
-                                    Id = "Bearer"
+                                    new OpenApiSecurityScheme
+                                    {
+                                        Reference = new OpenApiReference
+                                        {
+                                            Type = ReferenceType.SecurityScheme, Id = "Bearer"
+                                        }
+                                    },
+                                    new string[] { }
                                 }
-                                },
-                                new string[] { }
-                            }
                             });
                         });
             }

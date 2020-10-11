@@ -4,10 +4,10 @@
 
 namespace Application.UseCases.Transfer
 {
-    using Domain.ValueObjects;
-    using Services;
     using System;
     using System.Threading.Tasks;
+    using Domain.ValueObjects;
+    using Services;
 
     /// <inheritdoc />
     public sealed class TransferValidationUseCase : ITransferUseCase
@@ -18,10 +18,7 @@ namespace Application.UseCases.Transfer
         /// <summary>
         ///     Initializes a new instance of the <see cref="TransferUseCase" /> class.
         /// </summary>
-        public TransferValidationUseCase(ITransferUseCase transferUseCase)
-        {
-            this._useCase = transferUseCase;
-        }
+        public TransferValidationUseCase(ITransferUseCase transferUseCase) => this._useCase = transferUseCase;
 
         /// <inheritdoc />
         public void SetOutputPort(IOutputPort outputPort)
@@ -33,7 +30,7 @@ namespace Application.UseCases.Transfer
         /// <inheritdoc />
         public Task Execute(Guid originAccountId, Guid destinationAccountId, decimal amount, string currency)
         {
-            var modelState = new Notification();
+            Notification modelState = new Notification();
 
             if (originAccountId == Guid.Empty)
             {

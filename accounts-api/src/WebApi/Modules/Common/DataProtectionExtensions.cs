@@ -1,6 +1,6 @@
 namespace WebApi.Modules.Common
 {
-    using Microsoft.AspNetCore.Builder;
+    using System.IO;
     using Microsoft.AspNetCore.DataProtection;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -16,7 +16,7 @@ namespace WebApi.Modules.Common
         {
             services.AddDataProtection()
                 .SetApplicationName("accounts-api")
-                .PersistKeysToFileSystem(new System.IO.DirectoryInfo(@"./"));
+                .PersistKeysToFileSystem(new DirectoryInfo(@"./"));
 
             return services;
         }

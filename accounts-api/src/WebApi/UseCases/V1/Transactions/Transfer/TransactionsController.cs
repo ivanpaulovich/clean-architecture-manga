@@ -1,5 +1,8 @@
 namespace WebApi.UseCases.V1.Transactions.Transfer
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.Threading.Tasks;
     using Application.Services;
     using Application.UseCases.Transfer;
     using Domain;
@@ -11,9 +14,6 @@ namespace WebApi.UseCases.V1.Transactions.Transfer
     using Microsoft.FeatureManagement.Mvc;
     using Modules.Common;
     using Modules.Common.FeatureFlags;
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using System.Threading.Tasks;
     using ViewModels;
 
     /// <summary>
@@ -35,7 +35,7 @@ namespace WebApi.UseCases.V1.Transactions.Transfer
 
         void IOutputPort.Invalid(Notification notification)
         {
-            var problemDetails = new ValidationProblemDetails(notification.ModelState);
+            ValidationProblemDetails problemDetails = new ValidationProblemDetails(notification.ModelState);
             this._viewModel = this.BadRequest(problemDetails);
         }
 
@@ -62,10 +62,10 @@ namespace WebApi.UseCases.V1.Transactions.Transfer
         [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Patch))]
         public async Task<IActionResult> Transfer(
             [FromServices] ITransferUseCase useCase,
-            [FromRoute][Required] Guid accountId,
-            [FromRoute][Required] Guid destinationAccountId,
-            [FromForm][Required] decimal amount,
-            [FromForm][Required] string currency)
+            [FromRoute] [Required] Guid accountId,
+            [FromRoute] [Required] Guid destinationAccountId,
+            [FromForm] [Required] decimal amount,
+            [FromForm] [Required] string currency)
         {
             useCase.SetOutputPort(this);
 

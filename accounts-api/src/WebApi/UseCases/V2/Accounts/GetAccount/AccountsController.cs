@@ -1,5 +1,9 @@
 namespace WebApi.UseCases.V2.Accounts.GetAccount
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.Data;
+    using System.Threading.Tasks;
     using Application.Services;
     using Application.UseCases.GetAccount;
     using Domain;
@@ -9,10 +13,6 @@ namespace WebApi.UseCases.V2.Accounts.GetAccount
     using Microsoft.FeatureManagement.Mvc;
     using Modules.Common.FeatureFlags;
     using OfficeOpenXml;
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using System.Data;
-    using System.Threading.Tasks;
 
     /// <summary>
     ///     Accounts
@@ -31,7 +31,7 @@ namespace WebApi.UseCases.V2.Accounts.GetAccount
 
         void IOutputPort.Invalid(Notification notification)
         {
-            var problemDetails = new ValidationProblemDetails(notification.ModelState);
+            ValidationProblemDetails problemDetails = new ValidationProblemDetails(notification.ModelState);
             this._viewModel = this.BadRequest(problemDetails);
         }
 
@@ -39,7 +39,7 @@ namespace WebApi.UseCases.V2.Accounts.GetAccount
 
         void IOutputPort.Ok(Account account)
         {
-            using var dataTable = new DataTable();
+            using DataTable dataTable = new DataTable();
             dataTable.Columns.Add("AccountId", typeof(Guid));
             dataTable.Columns.Add("Amount", typeof(decimal));
 
@@ -74,7 +74,7 @@ namespace WebApi.UseCases.V2.Accounts.GetAccount
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get(
             [FromServices] IGetAccountUseCase useCase,
-            [FromRoute][Required] GetAccountDetailsRequestV2 request)
+            [FromRoute] [Required] GetAccountDetailsRequestV2 request)
         {
             useCase.SetOutputPort(this);
 

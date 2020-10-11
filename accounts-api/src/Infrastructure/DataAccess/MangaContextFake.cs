@@ -4,12 +4,12 @@
 
 namespace Infrastructure.DataAccess
 {
+    using System;
+    using System.Collections.ObjectModel;
     using Domain;
     using Domain.Credits;
     using Domain.Debits;
     using Domain.ValueObjects;
-    using System;
-    using System.Collections.ObjectModel;
 
     /// <summary>
     /// </summary>
@@ -19,21 +19,21 @@ namespace Infrastructure.DataAccess
         /// </summary>
         public MangaContextFake()
         {
-            var credit = new Credit(
+            Credit credit = new Credit(
                 new CreditId(Guid.NewGuid()),
                 SeedData.DefaultAccountId,
                 DateTime.Now,
                 800,
                 Currency.Dollar.Code);
 
-            var debit = new Debit(
+            Debit debit = new Debit(
                 new DebitId(Guid.NewGuid()),
                 SeedData.DefaultAccountId,
                 DateTime.Now,
                 300,
                 Currency.Dollar.Code);
 
-            var account = new Account(
+            Account account = new Account(
                 SeedData.DefaultAccountId,
                 SeedData.DefaultExternalUserId,
                 Currency.Dollar);
@@ -45,7 +45,7 @@ namespace Infrastructure.DataAccess
             this.Credits.Add(credit);
             this.Debits.Add(debit);
 
-            var account2 = new Account(
+            Account account2 = new Account(
                 SeedData.SecondAccountId,
                 SeedData.SecondExternalUserId,
                 Currency.Dollar);

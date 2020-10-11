@@ -27,8 +27,7 @@ namespace WebApi
         /// <summary>
         ///     Configure dependencies from application.
         /// </summary>
-        public void ConfigureServices(IServiceCollection services)
-        {
+        public void ConfigureServices(IServiceCollection services) =>
             services
                 .AddFeatureFlags(this.Configuration) // should be the first one.
                 .AddInvalidRequestLogging()
@@ -43,7 +42,6 @@ namespace WebApi
                 .AddCustomCors()
                 .AddProxy()
                 .AddCustomDataProtection();
-        }
 
         /// <summary>
         ///     Configure http request pipeline.

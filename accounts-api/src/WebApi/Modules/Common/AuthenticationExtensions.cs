@@ -1,13 +1,13 @@
 namespace WebApi.Modules.Common
 {
     using Application.Services;
+    using FeatureFlags;
     using Infrastructure.ExternalAuthentication;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.FeatureManagement;
-    using WebApi.Modules.Common.FeatureFlags;
 
     /// <summary>
     ///     Authentication Extensions.

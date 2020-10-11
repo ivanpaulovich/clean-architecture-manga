@@ -1,14 +1,15 @@
 ﻿namespace IntegrationTests.EntityFrameworkTests
 {
+    using System;
     using Infrastructure.DataAccess;
     using Microsoft.EntityFrameworkCore;
-    using System;
 
     public sealed class StandardFixture : IDisposable
     {
         public StandardFixture()
         {
-            const string connectionString = "Server=localhost;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts;";
+            const string connectionString =
+                "Server=localhost;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts;";
 
             DbContextOptions<MangaContext> options = new DbContextOptionsBuilder<MangaContext>()
                 .UseSqlServer(connectionString)

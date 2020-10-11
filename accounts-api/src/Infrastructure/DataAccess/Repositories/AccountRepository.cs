@@ -4,15 +4,15 @@
 
 namespace Infrastructure.DataAccess.Repositories
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Domain;
     using Domain.Credits;
     using Domain.Debits;
     using Domain.ValueObjects;
     using Microsoft.EntityFrameworkCore;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     /// <inheritdoc />
     public sealed class AccountRepository : IAccountRepository
@@ -114,13 +114,13 @@ namespace Infrastructure.DataAccess.Repositories
 
         public async Task<IList<Account>> GetAccounts(string externalUserId)
         {
-            var accounts = await this._context
+            List<Account> accounts = await this._context
                 .Accounts
                 .Where(e => e.ExternalUserId == externalUserId)
                 .ToListAsync()
                 .ConfigureAwait(false);
 
-            foreach(Account findAccount in accounts)
+            foreach (Account findAccount in accounts)
             {
                 await this.LoadTransactions(findAccount)
                     .ConfigureAwait(false);
