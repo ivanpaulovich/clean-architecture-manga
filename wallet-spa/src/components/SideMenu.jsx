@@ -5,29 +5,113 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import HomeIcon from '@material-ui/icons/Home';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import ExitToApp from "@material-ui/icons/ExitToApp";
+import AddIcon from '@material-ui/icons/Add';
 import { Avatar } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import classNames from "classnames";
+import { fade } from "@material-ui/core/styles/colorManipulator";
 
-const drawerWidth = 240;
-
-const styles = theme => ({
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-    backgroundImage: `linear-gradient(#cfd9df,#e2ebf0)`,
-    color: "grey",
-  },
-  bigAvatar: {
-    margin: 30,
-    width: 100,
-    height: 100,
-  },
-});
+const drawStyles = theme => {
+  return {
+    drawerPaper: {
+      width: theme.drawer.width,
+      backgroundColor: "rgb(33, 33, 33)",
+      color: "white",
+      borderRight: "0px",
+      boxShadow: "rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px"
+    },
+    drawerPaperClose: {
+      overflowX: "hidden",
+      transition: theme.transitions.create("width", {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen
+      }),
+      width: theme.drawer.miniWidth
+    },
+    logo: {
+      cursor: "pointer",
+      fontSize: 22,
+      color: "white",
+      lineHeight: "64px",
+      fontWeight: 300,
+      backgroundColor: theme.palette.primary[500],
+      paddingLeft: 40,
+      height: 64
+    },
+    avatarRoot: {
+      padding: "16px 0 10px 15px",
+      backgroundImage: "url(" + require("../images/material_bg.png") + ")",
+      height: 100,
+      display: "flex"
+    },
+    avatarRootMini: {
+      padding: "15px 0 10px 10px"
+    },
+    avatarIcon: {
+      float: "left",
+      display: "block",
+      boxShadow: "0px 0px 0px 8px rgba(0,0,0,0.2)"
+    },
+    avatarSpan: {
+      paddingTop: 8,
+      paddingLeft: 24,
+      display: "block",
+      color: "white",
+      fontWeight: 300,
+      textShadow: "1px 1px #444"
+    },
+    menuItem: {
+      color: "white",
+      fontSize: 14
+    },
+    chevronIcon: {
+      float: "right",
+      marginLeft: "auto"
+    },
+    subMenus: {
+      paddingLeft: 20
+    },
+    popupSubMenus: {
+      backgroundColor: "rgb(33, 33, 33)",
+      color: "white",
+      boxShadow: "rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px"
+    },
+    menuItem: {
+      padding: "10px 16px",
+      color: "white",
+      fontSize: 14,
+      "&:focus": {
+        backgroundColor: theme.palette.primary.main,
+        "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
+          color: theme.palette.common.white
+        }
+      }
+    },
+    miniMenuItem: {
+      color: "white",
+      margin: "10px 0",
+      fontSize: 14,
+      "&:focus": {
+        backgroundColor: theme.palette.primary.main,
+        "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
+          color: theme.palette.common.white
+        }
+      }
+    },
+    miniIcon: {
+      margin: "0 auto",
+      color: "white",
+      "&:hover": {
+        backgroundColor: fade(theme.palette.common.white, 0.5)
+      },
+      minWidth: "24px"
+    }
+  };
+};
 
 class SideMenu extends Component {
   constructor(props) {
@@ -53,57 +137,69 @@ class SideMenu extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { user } = this.state;
+    const { classes, navDrawerOpen, handleChangeNavDrawer } = this.props;
     return (
-      <Drawer
-        open={true}
-        variant='permanent'
-        anchor='left'
-        className={classes.drawer}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <Grid container justify='center' alignItems='center'>
-          <Avatar
-            src='https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg'
-            className={classes.bigAvatar}
-          />
-        </Grid>
-        { this.state.isLoggedIn ? this.renderWhenTrue() : this.renderWhenFalse()}
-      </Drawer>
+      <div>
+        <Drawer
+          open={navDrawerOpen}
+          variant="permanent"
+          classes={{
+            paper: classNames(classes.drawerPaper, !navDrawerOpen && classes.drawerPaperClose)
+          }}
+        >
+
+          <div>
+            <div className={classes.logo}>My Wallet</div>
+            {this.state.isLoggedIn && <div className={classNames(classes.avatarRoot, !navDrawerOpen && classes.avatarRootMini)}>
+              <Avatar size={navDrawerOpen ? 48 : 32} classes={{ root: classes.avatarIcon }} />
+              <span className={classes.avatarSpan}>{user.profile.name}</span>
+            </div>}
+            <List>
+              {this.state.isLoggedIn ? this.renderWhenTrue() : this.renderWhenFalse()}
+            </List>
+          </div>
+
+        </Drawer>
+      </div>
     );
   }
 
   renderWhenTrue() {
     return (
-      <List>
-        <ListItem button>
-          <ListItemIcon>
-            <AccountCircle />
+      <React.Fragment>
+        <ListItem button component="a" href="/">
+          <ListItemIcon style={{ color: "white" }}>
+            <AccountBalanceIcon />
           </ListItemIcon>
-          <ListItemText primary={this.state.user.profile.name} />
+          <ListItemText primary="My Accounts" />
+        </ListItem>
+        <ListItem button component="a" href="/OpenAccount">
+          <ListItemIcon style={{ color: "white" }}>
+            <AddIcon />
+          </ListItemIcon>
+          <ListItemText primary="Open an Account" />
         </ListItem>
         <ListItem button>
-          <ListItemIcon>
+          <ListItemIcon style={{ color: "white" }}>
             <ExitToApp />
           </ListItemIcon>
           <ListItemText primary="Sign Out" onClick={this.performLogout} />
         </ListItem>
-      </List>
+      </React.Fragment>
     )
   }
 
   renderWhenFalse() {
     return (
-      <List>
+      <React.Fragment>
         <ListItem button>
-          <ListItemIcon>
+          <ListItemIcon style={{ color: "white" }}>
             <AccountCircle />
           </ListItemIcon>
           <ListItemText primary="Sign In" onClick={this.performLogin} />
         </ListItem>
-      </List>
+      </React.Fragment>
     )
   }
 
@@ -116,4 +212,4 @@ class SideMenu extends Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(SideMenu);
+export default withStyles(drawStyles, { withTheme: true })(SideMenu);

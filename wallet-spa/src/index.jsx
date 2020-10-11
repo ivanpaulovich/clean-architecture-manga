@@ -4,8 +4,9 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import 'fontsource-roboto';
 import * as Oidc from "oidc-client";
+import "./styles.scss";
+import "font-awesome/css/font-awesome.css";
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const rootElement = document.getElementById('root');

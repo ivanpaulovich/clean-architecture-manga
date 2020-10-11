@@ -17,6 +17,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { Typography } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 
 const styles = theme => ({
@@ -164,10 +166,22 @@ class Account extends React.Component {
               </tbody>
             </table>
 
-            <a className="text-dark" href={`/accounts/${this.state.accountId}/Deposit`}>Deposit</a>
-            <a className="text-dark" href={`/accounts/${this.state.accountId}/Withdraw`}>Withdraw</a>
-            <a className="text-dark" href={`/accounts/${this.state.accountId}/Transfer`}>Transfer</a>
-            <a className="text-dark" href={`/accounts/${this.state.accountId}/Close`}>Close</a>
+            <Button component={ Link } to={`/accounts/${this.state.accountId}/Deposit`} variant="contained" color="primary">
+              Deposit
+            </Button>
+
+            <Button component={ Link } to={`/accounts/${this.state.accountId}/Withdraw`} variant="contained" color="primary">
+            Withdraw
+            </Button>
+
+            <Button component={ Link } to={`/accounts/${this.state.accountId}/Transfer`} variant="contained" color="primary">
+            Transfer
+            </Button>
+
+            <Button component={ Link } to={`/accounts/${this.state.accountId}/Close`} variant="contained" color="secondary">
+            Close
+            </Button>
+
           </React.Fragment>
         </div>
       </main>
