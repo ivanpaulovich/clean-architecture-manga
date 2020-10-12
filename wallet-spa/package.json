@@ -10,7 +10,6 @@
     "@testing-library/user-event": "^7.2.1",
     "@types/node": "^14.11.2",
     "axios": "^0.19.0",
-    "bootstrap": "^4.3.1",
     "font-awesome": "^4.7.0",
     "fontsource-roboto": "^3.0.3",
     "jquery": "^3.4.1",

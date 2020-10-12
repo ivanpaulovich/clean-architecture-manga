@@ -11,6 +11,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import PageBase from "../components/PageBase";
+
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Divider from "@material-ui/core/Divider";
 
 const styles = theme => ({
   root: {
@@ -70,46 +75,41 @@ class Accounts extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
     return (
-      <main className={classes.fullWidth}>
-        <div className={classes.toolbar} />
-        <div className={classes.title}>
-          <Typography variant='h6'>My Accounts</Typography>
-        </div>
-        <div className={classes.content}>
-          <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Account</TableCell>
-                  <TableCell>Balance</TableCell>
-                  <TableCell>Currency</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {
-                  this.state.accounts.map((account) => {
-                    return (
-                      <TableRow key={account.accountId}>
-                        <TableCell><a className="text-dark" href={`/accounts/${account.accountId}`}>{account.accountId}</a></TableCell>
-                        <TableCell>{account.currentBalance}</TableCell>
-                        <TableCell>{account.currency}</TableCell>
-                      </TableRow>
-                    )
-                  })
-                }
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </div>
-      </main>
+
+      <Card>
+        <CardContent>
+          <Typography color="textSecondary" gutterBottom>
+            Accounts
+        </Typography>
+          <Divider />
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Account</TableCell>
+                <TableCell>Balance</TableCell>
+                <TableCell>Currency</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {
+                this.state.accounts.map((account) => {
+                  return (
+                    <TableRow key={account.accountId}>
+                      <TableCell><a className="text-dark" href={`/accounts/${account.accountId}`}>{account.accountId}</a></TableCell>
+                      <TableCell>{account.currentBalance}</TableCell>
+                      <TableCell>{account.currency}</TableCell>
+                    </TableRow>
+                  )
+                })
+              }
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+
     );
   }
 }
 
-Accounts.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(Accounts);
+export default Accounts;
