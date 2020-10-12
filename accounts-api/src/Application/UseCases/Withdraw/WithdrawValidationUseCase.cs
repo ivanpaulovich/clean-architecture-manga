@@ -4,10 +4,10 @@
 
 namespace Application.UseCases.Withdraw
 {
-    using Domain.ValueObjects;
-    using Services;
     using System;
     using System.Threading.Tasks;
+    using Domain.ValueObjects;
+    using Services;
 
     /// <inheritdoc />
     public sealed class WithdrawValidationUseCase : IWithdrawUseCase
@@ -18,10 +18,7 @@ namespace Application.UseCases.Withdraw
         /// <summary>
         ///     Initializes a new instance of the <see cref="WithdrawValidationUseCase" /> class.
         /// </summary>
-        public WithdrawValidationUseCase(IWithdrawUseCase withdrawUseCase)
-        {
-            this._useCase = withdrawUseCase;
-        }
+        public WithdrawValidationUseCase(IWithdrawUseCase withdrawUseCase) => this._useCase = withdrawUseCase;
 
         /// <inheritdoc />
         public void SetOutputPort(IOutputPort outputPort)
@@ -33,7 +30,7 @@ namespace Application.UseCases.Withdraw
         /// <inheritdoc />
         public Task Execute(Guid accountId, decimal amount, string currency)
         {
-            var modelState = new Notification();
+            Notification modelState = new Notification();
 
             if (accountId == Guid.Empty)
             {

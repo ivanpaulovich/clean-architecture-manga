@@ -1,18 +1,17 @@
 namespace ComponentTests.V2
 {
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
     using System;
     using System.IO;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
     using Xunit;
 
     public sealed class SunnyDayTests : IClassFixture<CustomWebApplicationFactory>
     {
-        public SunnyDayTests(CustomWebApplicationFactory factory) => this._factory = factory;
-
         private readonly CustomWebApplicationFactory _factory;
+        public SunnyDayTests(CustomWebApplicationFactory factory) => this._factory = factory;
 
         private async Task<Tuple<Guid, decimal>> GetAccounts()
         {
@@ -26,7 +25,7 @@ namespace ComponentTests.V2
                 .ConfigureAwait(false);
 
             using StringReader stringReader = new StringReader(actualResponseString);
-            using JsonTextReader reader = new JsonTextReader(stringReader) { DateParseHandling = DateParseHandling.None };
+            using JsonTextReader reader = new JsonTextReader(stringReader) {DateParseHandling = DateParseHandling.None};
 
             JObject jsonResponse = await JObject.LoadAsync(reader)
                 .ConfigureAwait(false);
@@ -48,7 +47,7 @@ namespace ComponentTests.V2
         [Fact]
         public async Task GetAccounts_GetAccount()
         {
-            var account = await this.GetAccounts()
+            Tuple<Guid, decimal> account = await this.GetAccounts()
                 .ConfigureAwait(false);
             await this.GetAccount(account.Item1.ToString())
                 .ConfigureAwait(false);

@@ -1,5 +1,7 @@
 namespace UnitTests.UseCaseTests.CloseAccount
 {
+    using System;
+    using System.Threading.Tasks;
     using Application.UseCases.CloseAccount;
     using Application.UseCases.GetAccount;
     using Application.UseCases.Withdraw;
@@ -8,15 +10,12 @@ namespace UnitTests.UseCaseTests.CloseAccount
     using Domain.ValueObjects;
     using Infrastructure.DataAccess;
     using Presenters;
-    using System;
-    using System.Threading.Tasks;
     using Xunit;
 
     public sealed class CloseAccountTests : IClassFixture<StandardFixture>
     {
-        public CloseAccountTests(StandardFixture fixture) => this._fixture = fixture;
-
         private readonly StandardFixture _fixture;
+        public CloseAccountTests(StandardFixture fixture) => this._fixture = fixture;
 
         [Theory]
         [ClassData(typeof(ValidDataSetup))]
@@ -40,8 +39,8 @@ namespace UnitTests.UseCaseTests.CloseAccount
         [Fact]
         public async Task CloseAccountUseCase_Returns_Closed_Account_Id_When_Account_Has_Zero_Balance()
         {
-            var getAccountPresenter = new GetAccountPresenterFake();
-            var closeAccountPresenter = new CloseAccountPresenterFake();
+            GetAccountPresenterFake getAccountPresenter = new GetAccountPresenterFake();
+            CloseAccountPresenterFake closeAccountPresenter = new CloseAccountPresenterFake();
 
             GetAccountUseCase getAccountUseCase = new GetAccountUseCase(this._fixture.AccountRepositoryFake);
 

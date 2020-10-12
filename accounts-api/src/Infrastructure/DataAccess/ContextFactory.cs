@@ -4,11 +4,11 @@
 
 namespace Infrastructure.DataAccess
 {
+    using System;
+    using System.IO;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Design;
     using Microsoft.Extensions.Configuration;
-    using System;
-    using System.IO;
 
     /// <summary>
     ///     ContextFactory.
@@ -24,7 +24,7 @@ namespace Infrastructure.DataAccess
         {
             string connectionString = ReadDefaultConnectionStringFromAppSettings();
 
-            var builder = new DbContextOptionsBuilder<MangaContext>();
+            DbContextOptionsBuilder<MangaContext> builder = new DbContextOptionsBuilder<MangaContext>();
             Console.WriteLine(connectionString);
             builder.UseSqlServer(connectionString);
             builder.EnableSensitiveDataLogging();
@@ -33,12 +33,12 @@ namespace Infrastructure.DataAccess
 
         private static string ReadDefaultConnectionStringFromAppSettings()
         {
-            var envName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            string? envName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(Path.Combine(Directory.GetCurrentDirectory()))
-                .AddJsonFile("appsettings.json", optional: false)
-                .AddJsonFile($"appsettings.{envName}.json", optional: false)
+                .AddJsonFile("appsettings.json", false)
+                .AddJsonFile($"appsettings.{envName}.json", false)
                 .AddEnvironmentVariables()
                 .Build();
 

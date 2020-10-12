@@ -19,37 +19,11 @@ import TableRow from '@material-ui/core/TableRow';
 import { Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-
-
-const styles = theme => ({
-  root: {
-    display: 'flex'
-  },
-  toolbar: theme.mixins.toolbar,
-  title: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing(3),
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-  fullWidth: {
-    width: '100%',
-  },
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-  table: {
-    minWidth: 650,
-  },
-});
+import PageBase from "../components/PageBase";
+import { grey } from "@material-ui/core/colors";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Divider from "@material-ui/core/Divider";
 
 class Account extends React.Component {
 
@@ -90,107 +64,140 @@ class Account extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+
+    const styles = {
+      toggleDiv: {
+        marginTop: 20,
+        marginBottom: 5
+      },
+      toggleLabel: {
+        color: grey[400],
+        fontWeight: 100
+      },
+      buttons: {
+        marginTop: 30,
+        float: "right"
+      },
+      saveButton: {
+        marginLeft: 5
+      }
+    };
+
     return (
-      <main className={classes.fullWidth}>
-        <div className={classes.toolbar} />
-        <div className={classes.title}>
-          <Typography variant='h6'>Account Details</Typography>
-        </div>
-        <div className={classes.content}>
 
-          <React.Fragment>
-            <table className="table table-striped" aria-labelledby="tabelLabel">
-              <thead>
-                <tr>
-                  <th>Account</th>
-                  <th>Current Balance</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    {this.state.account.accountId}
-                  </td>
-                  <td>{this.state.account.currentBalance}</td>
-                </tr>
-              </tbody>
-            </table>
+      <React.Fragment>
+        <Card>
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Account Summary
+        </Typography>
+            <Divider />
 
-            <table className="table table-striped" aria-labelledby="tabelLabel">
-              <thead>
-                <tr>
-                  <th>Transaction ID</th>
-                  <th>Amount</th>
-                  <th>Transaction Date</th>
-                </tr>
-              </thead>
-              <tbody>
+
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Account</TableCell>
+                  <TableCell>Current Balance</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell>{this.state.account.accountId}</TableCell>
+                  <TableCell>{this.state.account.currentBalance}</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+
+          </CardContent>
+        </Card>
+
+
+        <Card>
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Credits
+        </Typography>
+            <Divider />
+
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Transaction ID</TableCell>
+                  <TableCell>Amount</TableCell>
+                  <TableCell>Transaction Date</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+
                 {this.state.account.credits && this.state.account.credits.map((credit) => {
-                  return <tr>
-                    <td>
-                      {credit.transactionId}
-                    </td>
-                    <td>
-                      {credit.amount}
-                    </td>
-                    <td>{credit.transactionDate}</td>
-                  </tr>;
+                  return <TableRow>
+                    <TableCell>{credit.transactionId}</TableCell>
+                    <TableCell>{credit.amount}</TableCell>
+                    <TableCell>{credit.transactionDate}</TableCell>
+                  </TableRow>;
                 }
                 )}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
 
+          </CardContent>
+        </Card>
 
-            <table className="table table-striped" aria-labelledby="tabelLabel">
-              <thead>
-                <tr>
-                  <th>Transaction ID</th>
-                  <th>Amount</th>
-                  <th>Transaction Date</th>
-                </tr>
-              </thead>
-              <tbody>
+        <Card>
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Debits
+  </Typography>
+            <Divider />
+
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Transaction ID</TableCell>
+                  <TableCell>Amount</TableCell>
+                  <TableCell>Transaction Date</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+
                 {this.state.account.debits && this.state.account.debits.map((debit) => {
-                  return <tr>
-                    <td>
-                      {debit.transactionId}
-                    </td>
-                    <td>
-                      {debit.amount}
-                    </td>
-                    <td>{debit.transactionDate}</td>
-                  </tr>;
+                  return <TableRow>
+                    <TableCell>{debit.transactionId}</TableCell>
+                    <TableCell>{debit.amount}</TableCell>
+                    <TableCell>{debit.transactionDate}</TableCell>
+                  </TableRow>;
                 }
                 )}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
 
-            <Button component={ Link } to={`/accounts/${this.state.accountId}/Deposit`} variant="contained" color="primary">
-              Deposit
+          </CardContent>
+        </Card>
+
+        <div style={styles.buttons}>
+
+          <Button component={Link} to={`/accounts/${this.state.accountId}/Deposit`} variant="contained" color="primary">
+            Deposit
             </Button>
 
-            <Button component={ Link } to={`/accounts/${this.state.accountId}/Withdraw`} variant="contained" color="primary">
+          <Button component={Link} to={`/accounts/${this.state.accountId}/Withdraw`} variant="contained" color="primary">
             Withdraw
             </Button>
 
-            <Button component={ Link } to={`/accounts/${this.state.accountId}/Transfer`} variant="contained" color="primary">
+          <Button component={Link} to={`/accounts/${this.state.accountId}/Transfer`} variant="contained" color="primary">
             Transfer
             </Button>
 
-            <Button component={ Link } to={`/accounts/${this.state.accountId}/Close`} variant="contained" color="secondary">
+          <Button component={Link} to={`/accounts/${this.state.accountId}/Close`} variant="contained" color="secondary">
             Close
             </Button>
 
-          </React.Fragment>
         </div>
-      </main>
+
+      </React.Fragment>
     );
   }
 }
 
-Account.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(withRouter(Account));
+export default withRouter(Account);

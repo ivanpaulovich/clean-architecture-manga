@@ -1,19 +1,19 @@
 namespace IntegrationTests.EntityFrameworkTests
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Domain;
     using Domain.Credits;
     using Domain.ValueObjects;
     using Infrastructure.DataAccess;
     using Infrastructure.DataAccess.Repositories;
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
     using Xunit;
 
     public sealed class AccountRepositoryTests : IClassFixture<StandardFixture>
     {
-        public AccountRepositoryTests(StandardFixture fixture) => this._fixture = fixture;
         private readonly StandardFixture _fixture;
+        public AccountRepositoryTests(StandardFixture fixture) => this._fixture = fixture;
 
         [Fact]
         public async Task Add()

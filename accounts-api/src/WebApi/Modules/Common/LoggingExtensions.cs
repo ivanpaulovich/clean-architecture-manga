@@ -1,10 +1,11 @@
 ﻿namespace WebApi.Modules.Common
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text.Json;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
-    using System.Linq;
-    using System.Text.Json;
 
     /// <summary>
     /// </summary>
@@ -25,7 +26,7 @@
                         .RequestServices
                         .GetRequiredService<ILogger<Startup>>();
 
-                    var errors = actionContext.ModelState
+                    List<string> errors = actionContext.ModelState
                         .Values
                         .SelectMany(x => x.Errors)
                         .Select(x => x.ErrorMessage)
@@ -34,7 +35,7 @@
                     string jsonModelState = JsonSerializer.Serialize(errors);
                     logger.LogWarning("Invalid request.", jsonModelState);
 
-                    var problemDetails = new ValidationProblemDetails(actionContext.ModelState);
+                    ValidationProblemDetails problemDetails = new ValidationProblemDetails(actionContext.ModelState);
                     return new BadRequestObjectResult(problemDetails);
                 };
             });

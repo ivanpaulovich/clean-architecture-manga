@@ -1,11 +1,11 @@
 namespace WebApi.Modules.Common
 {
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
+    using FeatureFlags;
     using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.FeatureManagement;
-    using System.Text.Json;
-    using System.Text.Json.Serialization;
-    using WebApi.Modules.Common.FeatureFlags;
 
     /// <summary>
     ///     Custom Controller Extensions.

@@ -4,10 +4,10 @@
 
 namespace Application.UseCases.Deposit
 {
-    using Domain.ValueObjects;
-    using Services;
     using System;
     using System.Threading.Tasks;
+    using Domain.ValueObjects;
+    using Services;
 
     /// <inheritdoc />
     public sealed class DepositValidationUseCase : IDepositUseCase
@@ -19,10 +19,7 @@ namespace Application.UseCases.Deposit
         ///     Initializes a new instance of the <see cref="DepositValidationUseCase" /> class.
         /// </summary>
         /// <param name="useCase"></param>
-        public DepositValidationUseCase(IDepositUseCase useCase)
-        {
-            this._useCase = useCase;
-        }
+        public DepositValidationUseCase(IDepositUseCase useCase) => this._useCase = useCase;
 
         /// <inheritdoc />
         public void SetOutputPort(IOutputPort outputPort)
@@ -34,7 +31,7 @@ namespace Application.UseCases.Deposit
         /// <inheritdoc />
         public Task Execute(Guid accountId, decimal amount, string currency)
         {
-            var modelState = new Notification();
+            Notification modelState = new Notification();
 
             if (accountId == Guid.Empty)
             {

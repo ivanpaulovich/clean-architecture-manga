@@ -4,9 +4,9 @@
 
 namespace Application.UseCases.GetAccount
 {
-    using Application.Services;
     using System;
     using System.Threading.Tasks;
+    using Services;
 
     /// <inheritdoc />
     public sealed class GetAccountValidationUseCase : IGetAccountUseCase
@@ -17,10 +17,7 @@ namespace Application.UseCases.GetAccount
         /// <summary>
         ///     Initializes a new instance of the <see cref="GetAccountValidationUseCase" /> class.
         /// </summary>
-        public GetAccountValidationUseCase(IGetAccountUseCase useCase)
-        {
-            this._useCase = useCase;
-        }
+        public GetAccountValidationUseCase(IGetAccountUseCase useCase) => this._useCase = useCase;
 
         /// <inheritdoc />
         public void SetOutputPort(IOutputPort outputPort)
@@ -32,7 +29,7 @@ namespace Application.UseCases.GetAccount
         /// <inheritdoc />
         public Task Execute(Guid accountId)
         {
-            var modelState = new Notification();
+            Notification modelState = new Notification();
 
             if (accountId == Guid.Empty)
             {

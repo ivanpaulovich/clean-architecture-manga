@@ -1,5 +1,7 @@
 namespace WebApi.UseCases.V1.Accounts.GetAccounts
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
     using Application.UseCases.GetAccounts;
     using Domain;
     using Microsoft.AspNetCore.Authorization;
@@ -7,9 +9,7 @@ namespace WebApi.UseCases.V1.Accounts.GetAccounts
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;
     using Modules.Common;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using WebApi.Modules.Common.FeatureFlags;
+    using Modules.Common.FeatureFlags;
 
     /// <summary>
     ///     Accounts
@@ -26,12 +26,9 @@ namespace WebApi.UseCases.V1.Accounts.GetAccounts
     {
         private readonly IGetAccountsUseCase _useCase;
 
-        public AccountsController(IGetAccountsUseCase useCase)
-        {
-            this._useCase = useCase;
-        }
-
         private IActionResult? _viewModel;
+
+        public AccountsController(IGetAccountsUseCase useCase) => this._useCase = useCase;
 
         void IOutputPort.Ok(IList<Account> accounts) => this._viewModel = this.Ok(new GetAccountsResponse(accounts));
 

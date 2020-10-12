@@ -4,9 +4,9 @@
 
 namespace Infrastructure.ExternalAuthentication
 {
+    using System.Security.Claims;
     using Application.Services;
     using Microsoft.AspNetCore.Http;
-    using System.Security.Claims;
 
     /// <inheritdoc />
     public sealed class ExternalUserService : IUserService
@@ -27,7 +27,7 @@ namespace Infrastructure.ExternalAuthentication
                 .HttpContext
                 .User;
 
-            var id = user.FindFirst("sub")?.Value!;
+            string id = user.FindFirst("sub")?.Value!;
             return id;
         }
     }

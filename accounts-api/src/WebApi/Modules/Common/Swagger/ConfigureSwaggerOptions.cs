@@ -1,11 +1,11 @@
 namespace WebApi.Modules.Common.Swagger
 {
+    using System;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
     using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
-    using System;
 
     /// <summary>
     ///     Configures the Swagger generation options.
@@ -17,6 +17,7 @@ namespace WebApi.Modules.Common.Swagger
     public sealed class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
     {
         private const string UriString = "http://paulovich.net";
+
         private const string UriString1 =
             "https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/README.md";
 
@@ -44,12 +45,12 @@ namespace WebApi.Modules.Common.Swagger
 
         private static OpenApiInfo CreateInfoForApiVersion(ApiVersionDescription description)
         {
-            var info = new OpenApiInfo
+            OpenApiInfo info = new OpenApiInfo
             {
                 Title = "Clean Architecture Manga API",
                 Version = description.ApiVersion.ToString(),
                 Description = "Clean Architecture, DDD and TDD implementation.",
-                Contact = new OpenApiContact { Name = "Ivan Paulovich", Email = "ivan@paulovich.net" },
+                Contact = new OpenApiContact {Name = "Ivan Paulovich", Email = "ivan@paulovich.net"},
                 TermsOfService = new Uri(UriString),
                 License = new OpenApiLicense
                 {

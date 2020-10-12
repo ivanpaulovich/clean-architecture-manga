@@ -1,6 +1,7 @@
 namespace WebApi.Modules
 {
     using Application.Services;
+    using Common.FeatureFlags;
     using Domain;
     using Infrastructure.DataAccess;
     using Infrastructure.DataAccess.Repositories;
@@ -8,7 +9,6 @@ namespace WebApi.Modules
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.FeatureManagement;
-    using WebApi.Modules.Common.FeatureFlags;
 
     /// <summary>
     ///     Persistence Extensions.

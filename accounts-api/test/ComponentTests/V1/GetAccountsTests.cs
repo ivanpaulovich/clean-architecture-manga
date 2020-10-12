@@ -1,20 +1,19 @@
 namespace ComponentTests.V1
 {
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
     using System;
     using System.IO;
     using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
     using Xunit;
 
     [Collection("WebApi Collection")]
     public sealed class GetAccountsTests
     {
-        public GetAccountsTests(CustomWebApplicationFactoryFixture fixture) => this._fixture = fixture;
-
         private readonly CustomWebApplicationFactoryFixture _fixture;
+        public GetAccountsTests(CustomWebApplicationFactoryFixture fixture) => this._fixture = fixture;
 
         [Fact]
         public async Task GetAccountsReturnsList()
@@ -34,7 +33,7 @@ namespace ComponentTests.V1
             Assert.Equal(HttpStatusCode.OK, actualResponse.StatusCode);
 
             using StringReader stringReader = new StringReader(actualResponseString);
-            using JsonTextReader reader = new JsonTextReader(stringReader) { DateParseHandling = DateParseHandling.None };
+            using JsonTextReader reader = new JsonTextReader(stringReader) {DateParseHandling = DateParseHandling.None};
             JObject jsonResponse = await JObject.LoadAsync(reader)
                 .ConfigureAwait(false);
 

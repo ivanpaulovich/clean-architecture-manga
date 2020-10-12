@@ -16,7 +16,7 @@
         {
             get
             {
-                var modelState = this._errorMessages
+                Dictionary<string, string[]> modelState = this._errorMessages
                     .ToDictionary(item => item.Key, item => item.Value.ToArray());
 
                 return modelState;

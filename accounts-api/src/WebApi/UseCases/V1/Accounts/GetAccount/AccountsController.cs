@@ -1,5 +1,8 @@
 namespace WebApi.UseCases.V1.Accounts.GetAccount
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.Threading.Tasks;
     using Application.Services;
     using Application.UseCases.GetAccount;
     using Domain;
@@ -8,10 +11,7 @@ namespace WebApi.UseCases.V1.Accounts.GetAccount
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;
     using Modules.Common;
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using System.Threading.Tasks;
-    using WebApi.Modules.Common.FeatureFlags;
+    using Modules.Common.FeatureFlags;
 
     /// <summary>
     ///     Accounts
@@ -30,7 +30,7 @@ namespace WebApi.UseCases.V1.Accounts.GetAccount
 
         void IOutputPort.Invalid(Notification notification)
         {
-            var problemDetails = new ValidationProblemDetails(notification.ModelState);
+            ValidationProblemDetails problemDetails = new ValidationProblemDetails(notification.ModelState);
             this._viewModel = this.BadRequest(problemDetails);
         }
 
@@ -52,7 +52,7 @@ namespace WebApi.UseCases.V1.Accounts.GetAccount
         [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Find))]
         public async Task<IActionResult> Get(
             [FromServices] IGetAccountUseCase useCase,
-            [FromRoute][Required] Guid accountId)
+            [FromRoute] [Required] Guid accountId)
         {
             useCase.SetOutputPort(this);
 

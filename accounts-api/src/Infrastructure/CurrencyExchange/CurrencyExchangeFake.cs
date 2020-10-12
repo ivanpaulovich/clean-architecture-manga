@@ -1,9 +1,9 @@
 ﻿namespace Infrastructure.CurrencyExchange
 {
-    using Application.Services;
-    using Domain.ValueObjects;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Application.Services;
+    using Domain.ValueObjects;
 
     /// <summary>
     ///     Fake implementation of the Exchange Service using hardcoded rates

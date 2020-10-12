@@ -1,5 +1,7 @@
 namespace WebApi.UseCases.V1.Accounts.OpenAccount
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.Threading.Tasks;
     using Application.Services;
     using Application.UseCases.OpenAccount;
     using Domain;
@@ -8,10 +10,8 @@ namespace WebApi.UseCases.V1.Accounts.OpenAccount
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.FeatureManagement.Mvc;
     using Modules.Common;
-    using System.ComponentModel.DataAnnotations;
-    using System.Threading.Tasks;
+    using Modules.Common.FeatureFlags;
     using ViewModels;
-    using WebApi.Modules.Common.FeatureFlags;
 
     /// <summary>
     ///     Customers
@@ -30,7 +30,7 @@ namespace WebApi.UseCases.V1.Accounts.OpenAccount
 
         void IOutputPort.Invalid(Notification notification)
         {
-            var problemDetails = new ValidationProblemDetails(notification.ModelState);
+            ValidationProblemDetails problemDetails = new ValidationProblemDetails(notification.ModelState);
             this._viewModel = this.BadRequest(problemDetails);
         }
 
@@ -56,8 +56,8 @@ namespace WebApi.UseCases.V1.Accounts.OpenAccount
         [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Post))]
         public async Task<IActionResult> Post(
             [FromServices] IOpenAccountUseCase useCase,
-            [FromForm][Required] decimal amount,
-            [FromForm][Required] string currency)
+            [FromForm] [Required] decimal amount,
+            [FromForm] [Required] string currency)
         {
             useCase.SetOutputPort(this);
 

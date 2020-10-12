@@ -4,12 +4,12 @@
 
 namespace Application.UseCases.Deposit
 {
+    using System;
+    using System.Threading.Tasks;
     using Domain;
     using Domain.Credits;
     using Domain.ValueObjects;
     using Services;
-    using System;
-    using System.Threading.Tasks;
 
     /// <inheritdoc />
     public sealed class DepositUseCase : IDepositUseCase
@@ -43,12 +43,10 @@ namespace Application.UseCases.Deposit
         public void SetOutputPort(IOutputPort outputPort) => this._outputPort = outputPort;
 
         /// <inheritdoc />
-        public Task Execute(Guid accountId, decimal amount, string currency)
-        {
-            return this.Deposit(
+        public Task Execute(Guid accountId, decimal amount, string currency) =>
+            this.Deposit(
                 new AccountId(accountId),
                 new Money(amount, new Currency(currency)));
-        }
 
         private async Task Deposit(AccountId accountId, Money amount)
         {

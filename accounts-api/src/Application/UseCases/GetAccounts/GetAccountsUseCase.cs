@@ -4,10 +4,10 @@
 
 namespace Application.UseCases.GetAccounts
 {
-    using Domain;
-    using Services;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Domain;
+    using Services;
 
     /// <inheritdoc />
     public sealed class GetAccountsUseCase : IGetAccountsUseCase

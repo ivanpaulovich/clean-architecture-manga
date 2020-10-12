@@ -4,10 +4,10 @@
 
 namespace Domain
 {
-    using Credits;
-    using Debits;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Credits;
+    using Debits;
     using ValueObjects;
 
     /// <summary>
