@@ -1,39 +1,10 @@
 import React, { } from "react";
 import accountsService from "../store/accountsService";
-import { withStyles } from "@material-ui/core/styles";
-import PropTypes from 'prop-types';
 import { withRouter } from "react-router";
-import { Typography } from '@material-ui/core';
-
-const styles = theme => ({
-  root: {
-    display: 'flex'
-  },
-  toolbar: theme.mixins.toolbar,
-  title: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing(3),
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-  fullWidth: {
-    width: '100%',
-  },
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-  table: {
-    minWidth: 650,
-  },
-});
+import PageBase from "../components/PageBase";
+import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import { grey } from "@material-ui/core/colors";
 
 class CloseAccount extends React.Component {
 
@@ -55,9 +26,9 @@ class CloseAccount extends React.Component {
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState(
-      prevState => {
-        return { 
-          [name]: value 
+      () => {
+        return {
+          [name]: value
         };
       })
   };
@@ -70,9 +41,8 @@ class CloseAccount extends React.Component {
           .then(response => {
             this.setState({
               accountId: response.data.accountId,
+              submitted: true
             });
-            this.setSubmitted(true);
-            console.log(response.data);
           })
           .catch(e => {
             console.log(e);
@@ -86,47 +56,67 @@ class CloseAccount extends React.Component {
       accountId: this.props.match.params.accountId,
       submitted: false
     });
-    this.setSubmitted(false);
   };
 
   render() {
 
-    const { classes } = this.props;
+    const styles = {
+      toggleDiv: {
+        marginTop: 20,
+        marginBottom: 5
+      },
+      toggleLabel: {
+        color: grey[400],
+        fontWeight: 100
+      },
+      buttons: {
+        marginTop: 30,
+        float: "right"
+      },
+      saveButton: {
+        marginLeft: 5
+      }
+    };
 
     return (
 
-      <main className={classes.fullWidth}>
-        <div className={classes.toolbar} />
-        <div className={classes.title}>
-          <Typography variant='h6'>Close Account</Typography>
-        </div>
-        <div className={classes.content}>
+      <PageBase title="Close Account" navigation="My Accounts / Close Account">
 
-          <div className="submit-form">
-            {this.submitted ? (
-              <div>
-                <h4>You submitted successfully!</h4>
-                <button className="btn btn-success" onClick={this.newCloseAccount}>
-                  Add
-            </button>
-              </div>
-            ) : (
-                <div>
-                  <button onClick={this.saveCloseAccount} className="btn btn-success">
-                    Submit
-                  </button>
-                </div>
-              )}
+        {this.state.submitted ? (
+          <div>
+            <div style={styles.buttons}>
+              <Button
+                style={styles.saveButton}
+                variant="contained"
+                type="submit"
+                color="primary"
+                onClick={this.newCloseAccount}
+              >
+                Another one
+                  </Button>
+            </div>
           </div>
+        ) : (
+            <div style={styles.buttons}>
+              <Link to="/">
+                <Button variant="contained">Cancel</Button>
+              </Link>
 
-        </div>
-      </main>
+              <Button
+                style={styles.saveButton}
+                variant="contained"
+                type="submit"
+                color="primary"
+                onClick={this.saveCloseAccount}
+              >
+                Save
+                      </Button>
+            </div>
+          )}
+
+      </PageBase>
     );
   }
 }
 
-CloseAccount.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(withRouter(CloseAccount));
+export default withRouter(CloseAccount);

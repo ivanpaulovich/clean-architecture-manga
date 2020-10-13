@@ -1,39 +1,15 @@
 import React, { } from "react";
 import transactionService from "../store/transactionService";
-import { withStyles } from "@material-ui/core/styles";
-import PropTypes from 'prop-types';
 import { withRouter } from "react-router";
-import { Typography } from '@material-ui/core';
-
-const styles = theme => ({
-  root: {
-    display: 'flex'
-  },
-  toolbar: theme.mixins.toolbar,
-  title: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing(3),
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-  fullWidth: {
-    width: '100%',
-  },
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-  table: {
-    minWidth: 650,
-  },
-});
+import PageBase from "../components/PageBase";
+import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import MenuItem from "@material-ui/core/MenuItem";
+import TextField from "@material-ui/core/TextField";
+import Select from "@material-ui/core/Select";
+import { grey } from "@material-ui/core/colors";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
 
 class Withdraw extends React.Component {
 
@@ -59,9 +35,9 @@ class Withdraw extends React.Component {
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState(
-      prevState => {
-        return { 
-          [name]: value 
+      () => {
+        return {
+          [name]: value
         };
       })
   };
@@ -78,9 +54,9 @@ class Withdraw extends React.Component {
           .then(response => {
             this.setState({
               transactionId: response.data.transaction.transactionId,
-              transactionDate: response.data.transaction.transactionDate
+              transactionDate: response.data.transaction.transactionDate,
+              submitted: true
             });
-            this.setSubmitted(true);
             console.log(response.data);
           })
           .catch(e => {
@@ -99,73 +75,101 @@ class Withdraw extends React.Component {
       currency: "",
       submitted: false
     });
-    this.setSubmitted(false);
   };
 
   render() {
 
-    const { classes } = this.props;
+    const styles = {
+      toggleDiv: {
+        marginTop: 20,
+        marginBottom: 5
+      },
+      toggleLabel: {
+        color: grey[400],
+        fontWeight: 100
+      },
+      buttons: {
+        marginTop: 30,
+        float: "right"
+      },
+      saveButton: {
+        marginLeft: 5
+      }
+    };
 
     return (
 
-      <main className={classes.fullWidth}>
-        <div className={classes.toolbar} />
-        <div className={classes.title}>
-          <Typography variant='h6'>Withdraw</Typography>
-        </div>
-        <div className={classes.content}>
+      <PageBase title="Withdraw" navigation="My Accounts / Withdraw">
 
-          <div className="submit-form">
-            {this.submitted ? (
-              <div>
-                <h4>You submitted successfully!</h4>
-                <button className="btn btn-success" onClick={this.newWithdraw}>
-                  Add
-            </button>
-              </div>
-            ) : (
-                <div>
-                  <div className="form-group">
-                    <label htmlFor="amount">Amount</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="amount"
-                      required
-                      value={this.state.amount}
-                      onChange={this.handleInputChange}
-                      name="amount"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="currency">Currency</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="currency"
-                      required
-                      value={this.state.currency}
-                      onChange={this.handleInputChange}
-                      name="currency"
-                    />
-                  </div>
-
-                  <button onClick={this.saveWithdraw} className="btn btn-success">
-                    Submit
-                  </button>
-                </div>
-              )}
+        {this.state.submitted ? (
+          <div>
+            <div style={styles.buttons}>
+              <Button
+                style={styles.saveButton}
+                variant="contained"
+                type="submit"
+                color="primary"
+                onClick={this.newWithdraw}
+              >
+                Another one
+                  </Button>
+            </div>
           </div>
+        ) : (
+            <div>
 
-        </div>
-      </main>
+              <TextField
+                hintText="Amount"
+                label="Amount"
+                fullWidth={true}
+                margin="normal"
+                value={this.state.amount}
+                onChange={this.handleInputChange}
+                name="amount"
+                id="amount"
+                required
+              />
+
+              <FormControl fullWidth={true}>
+                <InputLabel htmlFor="Currency">Currency</InputLabel>
+                <Select
+                  fullWidth={true}
+                  margin="normal"
+                  value={this.state.currency}
+                  onChange={this.handleInputChange}
+                  id="currency"
+                  name="currency"
+                  required
+                >
+                  <MenuItem value={"USD"}>USD</MenuItem>
+                  <MenuItem value={"EUR"}>EUR</MenuItem>
+                  <MenuItem value={"SEK"}>SEK</MenuItem>
+                </Select>
+              </FormControl>
+
+              <div style={styles.buttons}>
+                <Link to="/">
+                  <Button variant="contained">Cancel</Button>
+                </Link>
+
+                <Button
+                  style={styles.saveButton}
+                  variant="contained"
+                  type="submit"
+                  color="primary"
+                  onClick={this.saveWithdraw}
+                >
+                  Save
+                      </Button>
+              </div>
+
+            </div>
+          )}
+
+
+      </PageBase>
     );
   }
 }
 
-Withdraw.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(withRouter(Withdraw));
+export default withRouter(Withdraw);

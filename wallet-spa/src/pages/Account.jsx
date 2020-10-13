@@ -1,25 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, {  } from "react";
 import accountsService from "../store/accountsService";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useParams,
-} from "react-router-dom";
-import { withStyles } from "@material-ui/core/styles";
-import PropTypes from 'prop-types';
 import { withRouter } from "react-router";
-import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import PageBase from "../components/PageBase";
 import { grey } from "@material-ui/core/colors";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -148,7 +137,7 @@ class Account extends React.Component {
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
               Debits
-  </Typography>
+            </Typography>
             <Divider />
 
             <Table>
