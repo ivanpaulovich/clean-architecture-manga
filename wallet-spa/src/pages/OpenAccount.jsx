@@ -1,7 +1,5 @@
 import React, { } from "react";
 import accountsService from "../store/accountsService";
-import { withStyles } from "@material-ui/core/styles";
-import PropTypes from 'prop-types';
 import { withRouter } from "react-router";
 import PageBase from "../components/PageBase";
 import { Link } from "react-router-dom";
@@ -9,10 +7,7 @@ import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import Select from "@material-ui/core/Select";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
 import { grey } from "@material-ui/core/colors";
-import Divider from "@material-ui/core/Divider";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 
@@ -38,7 +33,7 @@ class OpenAccount extends React.Component {
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState(
-      prevState => {
+      () => {
         return {
           [name]: value
         };

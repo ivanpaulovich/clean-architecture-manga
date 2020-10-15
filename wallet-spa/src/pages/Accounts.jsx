@@ -11,7 +11,6 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Divider from "@material-ui/core/Divider";
 
-
 class Accounts extends React.Component {
   static displayName = Accounts.name;
 

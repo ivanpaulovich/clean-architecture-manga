@@ -26,6 +26,7 @@
     "start": "NODE_ENV=localhost react-scripts start",
     "start-localhost": "NODE_ENV=localhost react-scripts start",
     "start-development": "NODE_ENV=development react-scripts start",
+    "start-docker": "NODE_ENV=docker react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
