@@ -13,13 +13,20 @@ namespace Application.UseCases.Deposit
     public sealed class DepositValidationUseCase : IDepositUseCase
     {
         private readonly IDepositUseCase _useCase;
-        private IOutputPort? _outputPort;
+        private readonly Notification _notification;
+        private IOutputPort _outputPort;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DepositValidationUseCase" /> class.
         /// </summary>
         /// <param name="useCase"></param>
-        public DepositValidationUseCase(IDepositUseCase useCase) => this._useCase = useCase;
+        /// <param name="notification"></param>
+        public DepositValidationUseCase(IDepositUseCase useCase, Notification notification)
+        {
+            this._useCase = useCase;
+            this._notification = notification;
+            this._outputPort = new DepositPresenter();
+        }
 
         /// <inheritdoc />
         public void SetOutputPort(IOutputPort outputPort)
@@ -29,13 +36,12 @@ namespace Application.UseCases.Deposit
         }
 
         /// <inheritdoc />
-        public Task Execute(Guid accountId, decimal amount, string currency)
+        public async Task Execute(Guid accountId, decimal amount, string currency)
         {
-            Notification modelState = new Notification();
-
             if (accountId == Guid.Empty)
             {
-                modelState.Add(nameof(accountId), "AccountId is required.");
+                this._notification
+                    .Add(nameof(accountId), "AccountId is required.");
             }
 
             if (currency != Currency.Dollar.Code &&
@@ -45,24 +51,27 @@ namespace Application.UseCases.Deposit
                 currency != Currency.Real.Code &&
                 currency != Currency.Krona.Code)
             {
-                modelState.Add(nameof(currency), "Currency is required.");
+                this._notification
+                    .Add(nameof(currency), "Currency is required.");
             }
 
             if (amount <= 0)
             {
-                modelState.Add(nameof(amount), "Amount should be positive.");
+                this._notification
+                    .Add(nameof(amount), "Amount should be positive.");
             }
 
-            if (modelState.IsValid)
+            if (this._notification
+                .IsInvalid)
             {
-                return this._useCase
-                    .Execute(accountId, amount, currency);
+                this._outputPort
+                    .Invalid();
+                return;
             }
 
-            this._outputPort?
-                .Invalid(modelState);
-
-            return Task.CompletedTask;
+            await this._useCase
+                .Execute(accountId, amount, currency)
+                .ConfigureAwait(false);
         }
     }
 }

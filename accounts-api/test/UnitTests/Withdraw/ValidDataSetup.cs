@@ -1,4 +1,4 @@
-namespace UnitTests.UseCaseTests.Withdraw
+namespace UnitTests.Withdraw
 {
     using Xunit;
 

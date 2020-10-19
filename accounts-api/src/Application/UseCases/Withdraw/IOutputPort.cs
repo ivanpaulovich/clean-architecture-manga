@@ -6,7 +6,6 @@ namespace Application.UseCases.Withdraw
 {
     using Domain;
     using Domain.Debits;
-    using Services;
 
     /// <summary>
     ///     Output Port.
@@ -21,7 +20,7 @@ namespace Application.UseCases.Withdraw
         /// <summary>
         ///     Invalid input.
         /// </summary>
-        void Invalid(Notification notification);
+        void Invalid();
 
         /// <summary>
         ///     Resource not closed.
@@ -29,9 +28,10 @@ namespace Application.UseCases.Withdraw
         void NotFound();
 
         /// <summary>
+        ///     Withdraw success.
         /// </summary>
-        /// <param name="debit"></param>
-        /// <param name="account"></param>
+        /// <param name="debit">Debit Transaction.</param>
+        /// <param name="account">Account Transaction</param>
         void Ok(Debit debit, Account account);
     }
 }

@@ -13,13 +13,17 @@ namespace Application.UseCases.GetAccount
     public sealed class GetAccountUseCase : IGetAccountUseCase
     {
         private readonly IAccountRepository _accountRepository;
-        private IOutputPort? _outputPort;
+        private IOutputPort _outputPort;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="GetAccountUseCase" /> class.
         /// </summary>
         /// <param name="accountRepository">Account Repository.</param>
-        public GetAccountUseCase(IAccountRepository accountRepository) => this._accountRepository = accountRepository;
+        public GetAccountUseCase(IAccountRepository accountRepository)
+        {
+            this._accountRepository = accountRepository;
+            this._outputPort = new GetAccountPresenter();
+        }
 
         /// <inheritdoc />
         public void SetOutputPort(IOutputPort outputPort) => this._outputPort = outputPort;
@@ -36,11 +40,11 @@ namespace Application.UseCases.GetAccount
 
             if (account is Account getAccount)
             {
-                this._outputPort?.Ok(getAccount);
+                this._outputPort.Ok(getAccount);
                 return;
             }
 
-            this._outputPort?.NotFound();
+            this._outputPort.NotFound();
         }
     }
 }

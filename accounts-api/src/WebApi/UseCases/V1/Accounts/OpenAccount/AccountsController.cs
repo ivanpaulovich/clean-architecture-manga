@@ -26,11 +26,18 @@ namespace WebApi.UseCases.V1.Accounts.OpenAccount
     [ApiController]
     public sealed class AccountsController : ControllerBase, IOutputPort
     {
+        private readonly Notification _notification;
+
+        public AccountsController(Notification notification)
+        {
+            this._notification = notification;
+        }
+
         private IActionResult? _viewModel;
 
-        void IOutputPort.Invalid(Notification notification)
+        void IOutputPort.Invalid()
         {
-            ValidationProblemDetails problemDetails = new ValidationProblemDetails(notification.ModelState);
+            ValidationProblemDetails problemDetails = new ValidationProblemDetails(this._notification.ModelState);
             this._viewModel = this.BadRequest(problemDetails);
         }
 

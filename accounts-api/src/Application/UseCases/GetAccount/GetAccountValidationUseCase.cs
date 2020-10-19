@@ -4,20 +4,26 @@
 
 namespace Application.UseCases.GetAccount
 {
+    using Application.Services;
     using System;
     using System.Threading.Tasks;
-    using Services;
 
     /// <inheritdoc />
     public sealed class GetAccountValidationUseCase : IGetAccountUseCase
     {
         private readonly IGetAccountUseCase _useCase;
-        private IOutputPort? _outputPort;
+        private readonly Notification _notification;
+        private IOutputPort _outputPort;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="GetAccountValidationUseCase" /> class.
         /// </summary>
-        public GetAccountValidationUseCase(IGetAccountUseCase useCase) => this._useCase = useCase;
+        public GetAccountValidationUseCase(IGetAccountUseCase useCase, Notification notification)
+        {
+            this._useCase = useCase;
+            this._notification = notification;
+            this._outputPort = new GetAccountPresenter();
+        }
 
         /// <inheritdoc />
         public void SetOutputPort(IOutputPort outputPort)
@@ -27,25 +33,24 @@ namespace Application.UseCases.GetAccount
         }
 
         /// <inheritdoc />
-        public Task Execute(Guid accountId)
+        public async Task Execute(Guid accountId)
         {
-            Notification modelState = new Notification();
-
             if (accountId == Guid.Empty)
             {
-                modelState.Add(nameof(accountId), "AccountId is required.");
+                this._notification
+                    .Add(nameof(accountId), "AccountId is required.");
             }
 
-            if (modelState.IsValid)
+            if (this._notification
+                .IsInvalid)
             {
-                return this._useCase
-                    .Execute(accountId);
+                this._outputPort.Invalid();
+                return;
             }
 
-            this._outputPort?
-                .Invalid(modelState);
-
-            return Task.CompletedTask;
+            await this._useCase
+                .Execute(accountId)
+                .ConfigureAwait(false);
         }
     }
 }

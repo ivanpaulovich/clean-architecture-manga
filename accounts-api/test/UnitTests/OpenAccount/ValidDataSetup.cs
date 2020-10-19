@@ -1,4 +1,4 @@
-namespace UnitTests.UseCaseTests.OpenAccount
+namespace UnitTests.OpenAccount
 {
     using Xunit;
 

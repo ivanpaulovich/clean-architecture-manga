@@ -26,11 +26,20 @@ namespace WebApi.UseCases.V1.Accounts.CloseAccount
     [ApiController]
     public sealed class AccountsController : ControllerBase, IOutputPort
     {
+        private readonly ICloseAccountUseCase _useCase;
+        private readonly Notification _notification;
+
+        public AccountsController(ICloseAccountUseCase useCase, Notification notification)
+        {
+            this._useCase = useCase;
+            this._notification = notification;
+        }
+
         private IActionResult? _viewModel;
 
-        void IOutputPort.Invalid(Notification notification)
+        void IOutputPort.Invalid()
         {
-            ValidationProblemDetails problemDetails = new ValidationProblemDetails(notification.ModelState);
+            ValidationProblemDetails problemDetails = new ValidationProblemDetails(this._notification.ModelState);
             this._viewModel = this.BadRequest(problemDetails);
         }
 
@@ -46,7 +55,6 @@ namespace WebApi.UseCases.V1.Accounts.CloseAccount
         /// <response code="200">The closed account id.</response>
         /// <response code="400">Bad request.</response>
         /// <response code="404">Not Found.</response>
-        /// <param name="useCase">Use case.</param>
         /// <param name="accountId">The AccountId.</param>
         /// <returns>ViewModel.</returns>
         [Authorize]
@@ -54,12 +62,11 @@ namespace WebApi.UseCases.V1.Accounts.CloseAccount
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CloseAccountResponse))]
         [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Delete))]
         public async Task<IActionResult> Close(
-            [FromServices] ICloseAccountUseCase useCase,
             [FromRoute] [Required] Guid accountId)
         {
-            useCase.SetOutputPort(this);
+            this._useCase.SetOutputPort(this);
 
-            await useCase.Execute(accountId)
+            await this._useCase.Execute(accountId)
                 .ConfigureAwait(false);
 
             return this._viewModel!;

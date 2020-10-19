@@ -17,7 +17,7 @@ namespace Application.UseCases.CloseAccount
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserService _userService;
 
-        private IOutputPort? _outputPort;
+        private IOutputPort _outputPort;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CloseAccountUseCase" /> class.
@@ -33,6 +33,7 @@ namespace Application.UseCases.CloseAccount
             this._accountRepository = accountRepository;
             this._userService = userService;
             this._unitOfWork = unitOfWork;
+            this._outputPort = new CloseAccountPresenter();
         }
 
         /// <inheritdoc />
@@ -57,18 +58,18 @@ namespace Application.UseCases.CloseAccount
             {
                 if (!closingAccount.IsClosingAllowed())
                 {
-                    this._outputPort?.HasFunds();
+                    this._outputPort.HasFunds();
                     return;
                 }
 
                 await this.Close(closingAccount)
                     .ConfigureAwait(false);
 
-                this._outputPort?.Ok(closingAccount);
+                this._outputPort.Ok(closingAccount);
                 return;
             }
 
-            this._outputPort?.NotFound();
+            this._outputPort.NotFound();
         }
 
         private async Task Close(Account closeAccount)

@@ -18,7 +18,7 @@ namespace Application.UseCases.OpenAccount
         private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserService _userService;
-        private IOutputPort? _outputPort;
+        private IOutputPort _outputPort;
 
         public OpenAccountUseCase(
             IAccountRepository accountRepository,
@@ -30,6 +30,7 @@ namespace Application.UseCases.OpenAccount
             this._unitOfWork = unitOfWork;
             this._userService = userService;
             this._accountFactory = accountFactory;
+            this._outputPort = new OpenAccountPresenter();
         }
 
         /// <inheritdoc />

@@ -1,10 +1,9 @@
-namespace UnitTests.UseCaseTests.Withdraw
+namespace UnitTests.Withdraw
 {
     using System.Threading.Tasks;
     using Application.UseCases.Withdraw;
     using Domain;
     using Infrastructure.DataAccess;
-    using Presenters;
     using Xunit;
 
     public sealed class WithdrawTests : IClassFixture<StandardFixture>
@@ -19,7 +18,7 @@ namespace UnitTests.UseCaseTests.Withdraw
             decimal amount,
             decimal expectedBalance)
         {
-            WithdrawPresenterFake presenter = new WithdrawPresenterFake();
+            WithdrawPresenter presenter = new WithdrawPresenter();
             WithdrawUseCase sut = new WithdrawUseCase(
                 this._fixture.AccountRepositoryFake,
                 this._fixture.UnitOfWork,

@@ -14,7 +14,7 @@ namespace Application.UseCases.GetAccounts
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IUserService _userService;
-        private IOutputPort? _outputPort;
+        private IOutputPort _outputPort;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="GetAccountsUseCase" /> class.
@@ -27,6 +27,7 @@ namespace Application.UseCases.GetAccounts
         {
             this._userService = userService;
             this._accountRepository = accountRepository;
+            this._outputPort = new GetAccountPresenter();
         }
 
         /// <inheritdoc />
@@ -47,7 +48,7 @@ namespace Application.UseCases.GetAccounts
                 .GetAccounts(externalUserId)
                 .ConfigureAwait(false);
 
-            this._outputPort?.Ok(accounts);
+            this._outputPort.Ok(accounts);
         }
     }
 }

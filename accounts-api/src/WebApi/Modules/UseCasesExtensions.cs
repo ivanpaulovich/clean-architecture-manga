@@ -1,5 +1,6 @@
 namespace WebApi.Modules
 {
+    using Application.Services;
     using Application.UseCases.CloseAccount;
     using Application.UseCases.Deposit;
     using Application.UseCases.GetAccount;
@@ -21,6 +22,8 @@ namespace WebApi.Modules
         /// <returns>The modified instance.</returns>
         public static IServiceCollection AddUseCases(this IServiceCollection services)
         {
+            services.AddScoped<Notification, Notification>();
+
             services.AddScoped<ICloseAccountUseCase, CloseAccountUseCase>();
             services.Decorate<ICloseAccountUseCase, CloseAccountValidationUseCase>();
 

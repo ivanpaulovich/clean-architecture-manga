@@ -1,4 +1,4 @@
-namespace UnitTests.UseCaseTests
+namespace UnitTests
 {
     using Infrastructure.CurrencyExchange;
     using Infrastructure.DataAccess;

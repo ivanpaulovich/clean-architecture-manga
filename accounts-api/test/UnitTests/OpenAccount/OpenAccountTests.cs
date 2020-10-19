@@ -1,8 +1,7 @@
-namespace UnitTests.UseCaseTests.OpenAccount
+namespace UnitTests.OpenAccount
 {
     using System.Threading.Tasks;
     using Application.UseCases.OpenAccount;
-    using Presenters;
     using Xunit;
 
     public sealed class OpenAccountTests : IClassFixture<StandardFixture>
@@ -14,7 +13,7 @@ namespace UnitTests.UseCaseTests.OpenAccount
         [ClassData(typeof(ValidDataSetup))]
         public async Task OpenAccount_Returns_Ok(decimal amount, string currency)
         {
-            OpenAccountPresenterFake presenter = new OpenAccountPresenterFake();
+            OpenAccountPresenter presenter = new OpenAccountPresenter();
 
             OpenAccountUseCase sut = new OpenAccountUseCase(
                 this._fixture.AccountRepositoryFake,

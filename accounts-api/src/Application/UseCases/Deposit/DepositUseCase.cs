@@ -18,7 +18,7 @@ namespace Application.UseCases.Deposit
         private readonly IAccountRepository _accountRepository;
         private readonly ICurrencyExchange _currencyExchange;
         private readonly IUnitOfWork _unitOfWork;
-        private IOutputPort? _outputPort;
+        private IOutputPort _outputPort;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DepositUseCase" /> class.
@@ -37,6 +37,7 @@ namespace Application.UseCases.Deposit
             this._unitOfWork = unitOfWork;
             this._accountFactory = accountFactory;
             this._currencyExchange = currencyExchange;
+            this._outputPort = new DepositPresenter();
         }
 
         /// <inheritdoc />
@@ -67,11 +68,11 @@ namespace Application.UseCases.Deposit
                 await this.Deposit(depositAccount, credit)
                     .ConfigureAwait(false);
 
-                this._outputPort?.Ok(credit, depositAccount);
+                this._outputPort.Ok(credit, depositAccount);
                 return;
             }
 
-            this._outputPort?.NotFound();
+            this._outputPort.NotFound();
         }
 
         private async Task Deposit(Account account, Credit credit)

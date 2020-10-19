@@ -13,12 +13,18 @@ namespace Application.UseCases.Transfer
     public sealed class TransferValidationUseCase : ITransferUseCase
     {
         private readonly ITransferUseCase _useCase;
-        private IOutputPort? _outputPort;
+        private readonly Notification _notification;
+        private IOutputPort _outputPort;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="TransferUseCase" /> class.
         /// </summary>
-        public TransferValidationUseCase(ITransferUseCase transferUseCase) => this._useCase = transferUseCase;
+        public TransferValidationUseCase(ITransferUseCase useCase, Notification notification)
+        {
+            this._useCase = useCase;
+            this._notification = notification;
+            this._outputPort = new TransferPresenter();
+        }
 
         /// <inheritdoc />
         public void SetOutputPort(IOutputPort outputPort)
@@ -28,18 +34,18 @@ namespace Application.UseCases.Transfer
         }
 
         /// <inheritdoc />
-        public Task Execute(Guid originAccountId, Guid destinationAccountId, decimal amount, string currency)
+        public async Task Execute(Guid originAccountId, Guid destinationAccountId, decimal amount, string currency)
         {
-            Notification modelState = new Notification();
-
             if (originAccountId == Guid.Empty)
             {
-                modelState.Add(nameof(originAccountId), "AccountId is required.");
+                this._notification
+                    .Add(nameof(originAccountId), "AccountId is required.");
             }
 
             if (destinationAccountId == Guid.Empty)
             {
-                modelState.Add(nameof(destinationAccountId), "AccountId is required.");
+                this._notification
+                    .Add(nameof(destinationAccountId), "AccountId is required.");
             }
 
             if (currency != Currency.Dollar.Code &&
@@ -49,24 +55,27 @@ namespace Application.UseCases.Transfer
                 currency != Currency.Real.Code &&
                 currency != Currency.Krona.Code)
             {
-                modelState.Add(nameof(currency), "Currency is required.");
+                this._notification
+                    .Add(nameof(currency), "Currency is required.");
             }
 
             if (amount <= 0)
             {
-                modelState.Add(nameof(amount), "Amount should be positive.");
+                this._notification
+                    .Add(nameof(amount), "Amount should be positive.");
             }
 
-            if (modelState.IsValid)
+            if (this._notification
+                .IsInvalid)
             {
-                return this._useCase
-                    .Execute(originAccountId, destinationAccountId, amount, currency);
+                this._outputPort
+                    .Invalid();
+                return;
             }
 
-            this._outputPort?
-                .Invalid(modelState);
-
-            return Task.CompletedTask;
+            await this._useCase
+                .Execute(originAccountId, destinationAccountId, amount, currency)
+                .ConfigureAwait(false);
         }
     }
 }

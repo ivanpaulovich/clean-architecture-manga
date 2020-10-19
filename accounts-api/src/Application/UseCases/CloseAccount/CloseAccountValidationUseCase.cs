@@ -12,12 +12,18 @@ namespace Application.UseCases.CloseAccount
     public sealed class CloseAccountValidationUseCase : ICloseAccountUseCase
     {
         private readonly ICloseAccountUseCase _useCase;
-        private IOutputPort? _outputPort;
+        private readonly Notification _notification;
+        private IOutputPort _outputPort;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CloseAccountValidationUseCase" /> class.
         /// </summary>
-        public CloseAccountValidationUseCase(ICloseAccountUseCase useCase) => this._useCase = useCase;
+        public CloseAccountValidationUseCase(ICloseAccountUseCase useCase, Notification notification)
+        {
+            this._useCase = useCase;
+            this._notification = notification;
+            this._outputPort = new CloseAccountPresenter();
+        }
 
         /// <inheritdoc />
         public void SetOutputPort(IOutputPort outputPort)
@@ -27,25 +33,24 @@ namespace Application.UseCases.CloseAccount
         }
 
         /// <inheritdoc />
-        public Task Execute(Guid accountId)
+        public async Task Execute(Guid accountId)
         {
-            Notification modelState = new Notification();
-
             if (accountId == Guid.Empty)
             {
-                modelState.Add(nameof(accountId), "AccountId is required.");
+                this._notification
+                    .Add(nameof(accountId), "AccountId is required.");
             }
 
-            if (modelState.IsValid)
+            if (this._notification
+                .IsValid)
             {
-                return this._useCase
-                    .Execute(accountId);
+                this._outputPort
+                    .Invalid();
             }
 
-            this._outputPort?
-                .Invalid(modelState);
-
-            return Task.CompletedTask;
+            await this._useCase
+                .Execute(accountId)
+                .ConfigureAwait(false);
         }
     }
 }

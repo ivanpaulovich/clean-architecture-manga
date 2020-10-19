@@ -29,13 +29,20 @@ namespace WebApi.UseCases.V1.Transactions.Transfer
     [ApiController]
     public sealed class TransactionsController : ControllerBase, IOutputPort
     {
+        private readonly Notification _notification;
+
+        public TransactionsController(Notification notification)
+        {
+            this._notification = notification;
+        }
+
         private IActionResult? _viewModel;
 
         void IOutputPort.OutOfFunds() => this._viewModel = this.BadRequest("Out of funds.");
 
-        void IOutputPort.Invalid(Notification notification)
+        void IOutputPort.Invalid()
         {
-            ValidationProblemDetails problemDetails = new ValidationProblemDetails(notification.ModelState);
+            ValidationProblemDetails problemDetails = new ValidationProblemDetails(this._notification.ModelState);
             this._viewModel = this.BadRequest(problemDetails);
         }
 
