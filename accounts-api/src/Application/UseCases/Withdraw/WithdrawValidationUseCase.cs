@@ -60,7 +60,7 @@ namespace Application.UseCases.Withdraw
             }
 
             if (this._notification
-                .IsValid)
+                .IsInvalid)
             {
                 this._outputPort?
                     .Invalid();
