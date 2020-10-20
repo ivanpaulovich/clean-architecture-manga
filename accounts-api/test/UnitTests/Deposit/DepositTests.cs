@@ -1,5 +1,6 @@
 namespace UnitTests.Deposit
 {
+    using Application.Services;
     using System.Threading.Tasks;
     using Application.UseCases.Deposit;
     using Domain.Credits;
@@ -39,6 +40,7 @@ namespace UnitTests.Deposit
         [ClassData(typeof(InvalidDataSetup))]
         public async Task DepositUseCase_Returns_Invalid_When_Negative_Amount(decimal amount)
         {
+            Notification notification = new Notification();
             DepositPresenter presenter = new DepositPresenter();
 
             DepositUseCase depositUseCase = new DepositUseCase(
@@ -48,7 +50,7 @@ namespace UnitTests.Deposit
                 this._fixture.CurrencyExchangeFake);
 
             DepositValidationUseCase sut = new DepositValidationUseCase(
-                depositUseCase);
+                depositUseCase, notification);
 
             sut.SetOutputPort(presenter);
 
@@ -57,7 +59,7 @@ namespace UnitTests.Deposit
                 amount,
                 Currency.Dollar.Code);
 
-            Assert.True(presenter.ModelState!.IsInvalid);
+            Assert.True(presenter.InvalidOutput);
         }
     }
 }

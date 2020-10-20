@@ -4,14 +4,12 @@ namespace UnitTests.CloseAccount
     using System.Threading.Tasks;
     using Application.UseCases.CloseAccount;
     using Application.UseCases.GetAccount;
-    using Application.UseCases.GetAccounts;
     using Application.UseCases.Withdraw;
     using Domain;
     using Domain.Credits;
     using Domain.ValueObjects;
     using Infrastructure.DataAccess;
     using Xunit;
-    using GetAccountPresenter = Application.UseCases.GetAccounts.GetAccountPresenter;
 
     public sealed class CloseAccountTests : IClassFixture<StandardFixture>
     {
