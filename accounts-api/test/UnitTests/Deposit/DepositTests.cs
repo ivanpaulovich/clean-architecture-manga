@@ -1,11 +1,11 @@
-namespace UnitTests.UseCaseTests.Deposit
+namespace UnitTests.Deposit
 {
+    using Application.Services;
     using System.Threading.Tasks;
     using Application.UseCases.Deposit;
     using Domain.Credits;
     using Domain.ValueObjects;
     using Infrastructure.DataAccess;
-    using Presenters;
     using Xunit;
 
     public sealed class DepositTests : IClassFixture<StandardFixture>
@@ -18,7 +18,7 @@ namespace UnitTests.UseCaseTests.Deposit
         [ClassData(typeof(ValidDataSetup))]
         public async Task DepositUseCase_Returns_Transaction(decimal amount)
         {
-            DepositPresenterFake presenter = new DepositPresenterFake();
+            DepositPresenter presenter = new DepositPresenter();
             DepositUseCase sut = new DepositUseCase(
                 this._fixture.AccountRepositoryFake,
                 this._fixture.UnitOfWork,
@@ -40,7 +40,8 @@ namespace UnitTests.UseCaseTests.Deposit
         [ClassData(typeof(InvalidDataSetup))]
         public async Task DepositUseCase_Returns_Invalid_When_Negative_Amount(decimal amount)
         {
-            DepositPresenterFake presenter = new DepositPresenterFake();
+            Notification notification = new Notification();
+            DepositPresenter presenter = new DepositPresenter();
 
             DepositUseCase depositUseCase = new DepositUseCase(
                 this._fixture.AccountRepositoryFake,
@@ -49,7 +50,7 @@ namespace UnitTests.UseCaseTests.Deposit
                 this._fixture.CurrencyExchangeFake);
 
             DepositValidationUseCase sut = new DepositValidationUseCase(
-                depositUseCase);
+                depositUseCase, notification);
 
             sut.SetOutputPort(presenter);
 
@@ -58,7 +59,7 @@ namespace UnitTests.UseCaseTests.Deposit
                 amount,
                 Currency.Dollar.Code);
 
-            Assert.True(presenter.ModelState!.IsInvalid);
+            Assert.True(presenter.InvalidOutput);
         }
     }
 }

@@ -1,12 +1,10 @@
-namespace UnitTests.Presenters
+namespace Application.UseCases.Transfer
 {
-    using Application.Services;
-    using Application.UseCases.Transfer;
     using Domain;
     using Domain.Credits;
     using Domain.Debits;
 
-    public sealed class TransferPresenterFake : IOutputPort
+    public sealed class TransferPresenter : IOutputPort
     {
         public Account? OriginAccount { get; private set; }
         public Account? DestinationAccount { get; private set; }
@@ -15,18 +13,15 @@ namespace UnitTests.Presenters
         public bool InvalidOutput { get; private set; }
         public bool NotFoundOutput { get; private set; }
         public bool OutOfFundsOutput { get; private set; }
-
-        void IOutputPort.Invalid(Notification notification) => this.InvalidOutput = true;
-        void IOutputPort.NotFound() => this.NotFoundOutput = true;
-
-        void IOutputPort.Ok(Account originAccount, Debit debit, Account destinationAccount, Credit credit)
+        public void Invalid() => this.InvalidOutput = true;
+        public void NotFound() => this.NotFoundOutput = true;
+        public void Ok(Account originAccount, Debit debit, Account destinationAccount, Credit credit)
         {
             this.OriginAccount = originAccount;
             this.Debit = debit;
             this.DestinationAccount = destinationAccount;
             this.Credit = credit;
         }
-
-        void IOutputPort.OutOfFunds() => this.OutOfFundsOutput = true;
+        public void OutOfFunds() => this.OutOfFundsOutput = true;
     }
 }

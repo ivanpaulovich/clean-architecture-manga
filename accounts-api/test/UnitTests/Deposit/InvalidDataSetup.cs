@@ -1,4 +1,4 @@
-namespace UnitTests.UseCaseTests.Deposit
+namespace UnitTests.Deposit
 {
     using Xunit;
 

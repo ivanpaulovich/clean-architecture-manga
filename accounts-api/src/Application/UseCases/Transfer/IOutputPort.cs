@@ -7,7 +7,6 @@ namespace Application.UseCases.Transfer
     using Domain;
     using Domain.Credits;
     using Domain.Debits;
-    using Services;
 
     /// <summary>
     ///     Transfer Output Port.
@@ -17,7 +16,7 @@ namespace Application.UseCases.Transfer
         /// <summary>
         ///     Invalid input.
         /// </summary>
-        void Invalid(Notification notification);
+        void Invalid();
 
         /// <summary>
         ///     Resource not found.

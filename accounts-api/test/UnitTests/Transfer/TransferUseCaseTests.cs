@@ -1,10 +1,9 @@
-namespace UnitTests.UseCaseTests.Transfer
+namespace UnitTests.Transfer
 {
     using System.Threading.Tasks;
     using Application.UseCases.Transfer;
     using Domain;
     using Infrastructure.DataAccess;
-    using Presenters;
     using Xunit;
 
     public sealed class TransferUseCaseTests : IClassFixture<StandardFixture>
@@ -19,7 +18,7 @@ namespace UnitTests.UseCaseTests.Transfer
             decimal amount,
             decimal expectedOriginBalance)
         {
-            TransferPresenterFake presenter = new TransferPresenterFake();
+            TransferPresenter presenter = new TransferPresenter();
             TransferUseCase sut = new TransferUseCase(
                 this._fixture.AccountRepositoryFake,
                 this._fixture.UnitOfWork,

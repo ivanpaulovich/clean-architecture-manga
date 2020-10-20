@@ -19,7 +19,7 @@ namespace Application.UseCases.Withdraw
         private readonly ICurrencyExchange _currencyExchange;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserService _userService;
-        private IOutputPort? _outputPort;
+        private IOutputPort _outputPort;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="WithdrawUseCase" /> class.
@@ -41,6 +41,7 @@ namespace Application.UseCases.Withdraw
             this._accountFactory = accountFactory;
             this._userService = userService;
             this._currencyExchange = currencyExchange;
+            this._outputPort = new WithdrawPresenter();
         }
 
         /// <inheritdoc />
@@ -80,11 +81,11 @@ namespace Application.UseCases.Withdraw
                 await this.Withdraw(withdrawAccount, debit)
                     .ConfigureAwait(false);
 
-                this._outputPort?.Ok(debit, withdrawAccount);
+                this._outputPort.Ok(debit, withdrawAccount);
                 return;
             }
 
-            this._outputPort?.NotFound();
+            this._outputPort.NotFound();
         }
 
         private async Task Withdraw(Account account, Debit debit)

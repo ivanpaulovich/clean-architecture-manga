@@ -38,6 +38,7 @@ namespace Application.UseCases.Transfer
             this._unitOfWork = unitOfWork;
             this._accountFactory = accountFactory;
             this._currencyExchange = currencyExchange;
+            this._outputPort = new TransferPresenter();
         }
 
         /// <inheritdoc />

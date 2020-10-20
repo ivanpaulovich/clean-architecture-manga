@@ -1,4 +1,4 @@
-namespace UnitTests.UseCaseTests.CloseAccount
+namespace UnitTests.CloseAccount
 {
     using Xunit;
 

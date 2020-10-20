@@ -1,4 +1,4 @@
-namespace UnitTests.UseCaseTests.Transfer
+namespace UnitTests.Transfer
 {
     using Xunit;
 

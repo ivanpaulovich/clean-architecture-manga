@@ -1,11 +1,10 @@
-// <copyright file="IGetAccountOutputPort.cs" company="Ivan Paulovich">
+// <copyright file="IOutputPort.cs" company="Ivan Paulovich">
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
 namespace Application.UseCases.GetAccount
 {
     using Domain;
-    using Services;
 
     /// <summary>
     ///     Output Port.
@@ -15,16 +14,16 @@ namespace Application.UseCases.GetAccount
         /// <summary>
         ///     Invalid input.
         /// </summary>
-        void Invalid(Notification notification);
-
-        /// <summary>
-        ///     Account closed.
-        /// </summary>
-        void Ok(Account account);
+        void Invalid();
 
         /// <summary>
         ///     Account closed.
         /// </summary>
         void NotFound();
+
+        /// <summary>
+        ///     Account closed.
+        /// </summary>
+        void Ok(Account account);
     }
 }

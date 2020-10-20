@@ -5,7 +5,6 @@
 namespace Application.UseCases.OpenAccount
 {
     using Domain;
-    using Services;
 
     /// <summary>
     ///     Open Account Output Port.
@@ -25,6 +24,6 @@ namespace Application.UseCases.OpenAccount
         /// <summary>
         ///     Invalid input.
         /// </summary>
-        void Invalid(Notification notification);
+        void Invalid();
     }
 }

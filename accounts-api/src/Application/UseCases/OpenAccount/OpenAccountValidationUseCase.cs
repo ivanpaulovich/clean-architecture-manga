@@ -12,11 +12,15 @@ namespace Application.UseCases.OpenAccount
     public sealed class OpenAccountValidationUseCase : IOpenAccountUseCase
     {
         private readonly IOpenAccountUseCase _useCase;
-        private IOutputPort? _outputPort;
+        private readonly Notification _notification;
+        private IOutputPort _outputPort;
 
-        public OpenAccountValidationUseCase(
-            IOpenAccountUseCase useCase) =>
+        public OpenAccountValidationUseCase(IOpenAccountUseCase useCase, Notification notification)
+        {
             this._useCase = useCase;
+            this._notification = notification;
+            this._outputPort = new OpenAccountPresenter();
+        }
 
         /// <inheritdoc />
         public void SetOutputPort(IOutputPort outputPort)
@@ -26,10 +30,8 @@ namespace Application.UseCases.OpenAccount
         }
 
         /// <inheritdoc />
-        public Task Execute(decimal amount, string currency)
+        public async Task Execute(decimal amount, string currency)
         {
-            Notification modelState = new Notification();
-
             if (currency != Currency.Dollar.Code &&
                 currency != Currency.Euro.Code &&
                 currency != Currency.BritishPound.Code &&
@@ -37,24 +39,27 @@ namespace Application.UseCases.OpenAccount
                 currency != Currency.Real.Code &&
                 currency != Currency.Krona.Code)
             {
-                modelState.Add(nameof(currency), "Currency is required.");
+                this._notification
+                    .Add(nameof(currency), "Currency is required.");
             }
 
             if (amount <= 0)
             {
-                modelState.Add(nameof(amount), "Amount should be positive.");
+                this._notification
+                    .Add(nameof(amount), "Amount should be positive.");
             }
 
-            if (modelState.IsValid)
+            if (this._notification
+                .IsInvalid)
             {
-                return this._useCase
-                    .Execute(amount, currency);
+                this._outputPort
+                    .Invalid();
+                return;
             }
 
-            this._outputPort?
-                .Invalid(modelState);
-
-            return Task.CompletedTask;
+            await this._useCase
+                .Execute(amount, currency)
+                .ConfigureAwait(false);
         }
     }
 }

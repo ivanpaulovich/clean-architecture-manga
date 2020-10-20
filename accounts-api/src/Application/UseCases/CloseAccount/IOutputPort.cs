@@ -5,7 +5,6 @@
 namespace Application.UseCases.CloseAccount
 {
     using Domain;
-    using Services;
 
     /// <summary>
     ///     Output Port.
@@ -15,7 +14,7 @@ namespace Application.UseCases.CloseAccount
         /// <summary>
         ///     Invalid input.
         /// </summary>
-        void Invalid(Notification notification);
+        void Invalid();
 
         /// <summary>
         ///     Account closed successfully.
