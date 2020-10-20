@@ -41,11 +41,12 @@ namespace Application.UseCases.CloseAccount
                     .Add(nameof(accountId), "AccountId is required.");
             }
 
-            if (this._notification
+            if (!this._notification
                 .IsValid)
             {
                 this._outputPort
                     .Invalid();
+                return;
             }
 
             await this._useCase
