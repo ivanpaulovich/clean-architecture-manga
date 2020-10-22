@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^7.2.1",
     "@types/node": "^14.11.2",
     "axios": "^0.19.0",
+    "env-cmd": "^10.1.0",
     "font-awesome": "^4.7.0",
     "fontsource-roboto": "^3.0.3",
     "jquery": "^3.4.1",
@@ -23,10 +24,10 @@
     "reactstrap": "^8.0.0"
   },
   "scripts": {
-    "start": "NODE_ENV=localhost react-scripts start",
-    "start-localhost": "NODE_ENV=localhost react-scripts start",
-    "start-development": "NODE_ENV=development react-scripts start",
-    "start-docker": "NODE_ENV=docker react-scripts start",
+    "start": "env-cmd -f .env.localhost react-scripts start",
+    "start-localhost": "env-cmd -f .env.localhost react-scripts start",
+    "start-development": "env-cmd -f .env.development react-scripts start",
+    "start-docker": "env-cmd -f .env.docker react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

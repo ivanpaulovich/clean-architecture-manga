@@ -3,27 +3,15 @@
   // Use hover for the description of the existing attributes
   // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
   "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Identity Server & Accounts API & SPA",
+      "configurations": ["Accounts API", "Identity Server", "SPA"]
+    }
+  ],
   "configurations": [
     {
-      "name": "Docker .NET Core Attach (Accounts APi)",
-      "type": "docker",
-      "request": "attach",
-      "platform": "netCore",
-      "sourceFileMap": {
-        "/src": "${workspaceFolder}/accounts-api"
-      }
-    },
-    {
-      "name": "Docker .NET Core Attach (Preview)",
-      "type": "docker",
-      "request": "attach",
-      "platform": "netCore",
-      "sourceFileMap": {
-        "/src": "${workspaceFolder}"
-      }
-    },
-    {
-      "name": ".NET Core Launch (Identity Server)",
+      "name": "Identity Server",
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
@@ -38,14 +26,20 @@
         "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
       },
       "env": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "https://localhost:5000",
+        "ASPNETCORE_HTTPS_PORT": "5000",
+        "IDENTITY_SERVER_ORIGIN": "https://localhost:5000",
+        "RedirectUris": "https://localhost:5002/callback",
+        "PostLogoutRedirectUris": "https://localhost:5002",
+        "AllowedCorsOrigins": "https://localhost:5002"
       },
       "sourceFileMap": {
         "/Views": "${workspaceFolder}/Views"
       }
     },
     {
-      "name": ".NET Core Launch (Accounts API)",
+      "name": "Accounts API",
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
@@ -60,24 +54,39 @@
         "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
       },
       "env": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "https://localhost:5001",
+        "ASPNETCORE_HTTPS_PORT": "5001",
+        "PersistenceModule__DefaultConnection": "Server=localhost;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts;",
+        "AuthenticationModule__AuthorityUrl": "https://localhost:5000"
       },
       "sourceFileMap": {
         "/Views": "${workspaceFolder}/Views"
       }
     },
     {
-      "name": ".NET Core Attach",
-      "type": "coreclr",
-      "request": "attach",
-      "processId": "${command:pickProcess}"
+      "name": "SPA",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/wallet-spa",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run-script", "start"]
     },
     {
       "type": "chrome",
       "request": "launch",
-      "name": "Launch Chrome against localhost",
+      "name": "Debug SPA",
       "url": "https://localhost:5002",
       "webRoot": "${workspaceFolder}/wallet-spa"
+    },
+    {
+      "name": "Accounts API (Docker)",
+      "type": "docker",
+      "request": "attach",
+      "platform": "netCore",
+      "sourceFileMap": {
+        "/src": "${workspaceFolder}/accounts-api"
+      }
     }
   ]
 }

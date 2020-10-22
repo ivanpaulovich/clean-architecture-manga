@@ -37,6 +37,20 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "seeddb",
+            "command": "docker-compose",
+            "type": "process",
+            "args": [
+                "up",
+                "-d",
+                "accounts-api-seed"
+            ],
+            "problemMatcher": "$msCompile",
+            "options": {
+                "cwd": "${workspaceFolder}/.docker"
+            },
         }
     ]
 }
