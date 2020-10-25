@@ -5,15 +5,14 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import HomeIcon from '@material-ui/icons/Home';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import ExitToApp from "@material-ui/icons/ExitToApp";
 import AddIcon from '@material-ui/icons/Add';
 import { Avatar } from "@material-ui/core";
-import { Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
 import { fade } from "@material-ui/core/styles/colorManipulator";
+import { userContext } from '../userContext';
 
 const drawStyles = theme => {
   return {
@@ -116,28 +115,9 @@ const drawStyles = theme => {
 class SideMenu extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      isLoggedIn: false,
-      user: null
-    }
-
-    this.performLogin = this.performLogin.bind(this);
-    this.performLogout = this.performLogout.bind(this);
-  }
-
-  componentDidMount() {
-    this.props.openIdManager.getUser().then((user) => {
-      if (user) {
-        this.setState({ isLoggedIn: true, user: user });
-      } else {
-        this.setState({ isLoggedIn: false, user: null });
-      }
-    });
   }
 
   render() {
-    const { user } = this.state;
     const { classes, navDrawerOpen, handleChangeNavDrawer } = this.props;
     return (
       <div>
@@ -149,23 +129,28 @@ class SideMenu extends Component {
           }}
         >
 
-          <div>
-            <div className={classes.logo}>My Wallet</div>
-            {this.state.isLoggedIn && <div className={classNames(classes.avatarRoot, !navDrawerOpen && classes.avatarRootMini)}>
-              <Avatar size={navDrawerOpen ? 48 : 32} classes={{ root: classes.avatarIcon }} />
-              <span className={classes.avatarSpan}>{user.profile.name}</span>
-            </div>}
-            <List>
-              {this.state.isLoggedIn ? this.renderWhenTrue() : this.renderWhenFalse()}
-            </List>
-          </div>
-
+          <userContext.Consumer>
+            {({ user, loginUser, logoutUser }) => {
+              return (
+                <div>
+                  <div className={classes.logo}>My Wallet</div>
+                  {Object.keys(user).length !== 0 && <div className={classNames(classes.avatarRoot, !navDrawerOpen && classes.avatarRootMini)}>
+                    <Avatar size={navDrawerOpen ? 48 : 32} classes={{ root: classes.avatarIcon }} />
+                    <span className={classes.avatarSpan}>{user.profile.name}</span>
+                  </div>}
+                  <List>
+                    {Object.keys(user).length !== 0 ? this.renderWhenTrue(logoutUser) : this.renderWhenFalse(loginUser)}
+                  </List>
+                </div>
+              );
+            }}
+          </userContext.Consumer>
         </Drawer>
       </div>
     );
   }
 
-  renderWhenTrue() {
+  renderWhenTrue(logoutUser) {
     return (
       <React.Fragment>
         <ListItem button component="a" href="/">
@@ -184,31 +169,23 @@ class SideMenu extends Component {
           <ListItemIcon style={{ color: "white" }}>
             <ExitToApp />
           </ListItemIcon>
-          <ListItemText primary="Sign Out" onClick={this.performLogout} />
+          <ListItemText primary="Sign Out" onClick={logoutUser} />
         </ListItem>
       </React.Fragment>
     )
   }
 
-  renderWhenFalse() {
+  renderWhenFalse(loginUser) {
     return (
       <React.Fragment>
         <ListItem button>
           <ListItemIcon style={{ color: "white" }}>
             <AccountCircle />
           </ListItemIcon>
-          <ListItemText primary="Sign In" onClick={this.performLogin} />
+          <ListItemText primary="Sign In" onClick={loginUser} />
         </ListItem>
       </React.Fragment>
     )
-  }
-
-  performLogin() {
-    this.props.openIdManager.signinRedirect();
-  }
-
-  performLogout() {
-    this.props.openIdManager.signoutRedirect();
   }
 }
 

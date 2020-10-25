@@ -44,26 +44,22 @@ class Transfer extends React.Component {
   };
 
   saveTransfer = () => {
-    this.props.openIdManager.getUser().then((user) => {
-      if (user) {
-        var bodyFormData = new FormData();
-        bodyFormData.append('amount', this.state.amount);
-        bodyFormData.append('currency', this.state.currency);
+    var bodyFormData = new FormData();
+    bodyFormData.append('amount', this.state.amount);
+    bodyFormData.append('currency', this.state.currency);
 
-        transactionService
-          .transfer(user, this.state.accountId, this.state.destinationAccountId, bodyFormData)
-          .then(response => {
-            this.setState({
-              transactionId: response.data.transaction.transactionId,
-              transactionDate: response.data.transaction.transactionDate,
-              submitted: true
-            });
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      }
-    })
+    transactionService
+      .transfer(user, this.state.accountId, this.state.destinationAccountId, bodyFormData)
+      .then(response => {
+        this.setState({
+          transactionId: response.data.transaction.transactionId,
+          transactionDate: response.data.transaction.transactionDate,
+          submitted: true
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
 
   newTransfer = () => {

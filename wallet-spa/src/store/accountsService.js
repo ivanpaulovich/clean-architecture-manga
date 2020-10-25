@@ -1,26 +1,22 @@
-import http from "./http-common"
+import axios from "axios";
 
-const getAccounts = (user) => {
-  return http
-    .createAxios(user)
+const getAccounts = () => {
+  return axios
     .get("/api/v1/accounts");
 };
 
-const getAccount = (user, id) => {
-  return http
-    .createAxios(user)
+const getAccount = (id) => {
+  return axios
     .get(`/api/v1/accounts/${id}`);
 };
 
-const openAccount = (user, data) => {
-  return http
-    .createAxios(user)
+const openAccount = (data) => {
+  return axios
     .post("/api/v1/accounts", data);
 };
 
-const closeAccount = (user, id) => {
-  return http
-    .createAxios(user)
+const closeAccount = (id) => {
+  return axios
     .delete(`/api/v1/accounts/${id}`);
 };
 

@@ -1,20 +1,17 @@
-import http from "./http-common"
+import axios from "axios";
 
-const deposit = (user, accountId, data) => {
-  return http
-    .createAxios(user)
+const deposit = (accountId, data) => {
+  return axios
     .patch(`/api/v1/transactions/${accountId}/deposit`, data);
 };
 
-const withdraw = (user, accountId, data) => {
-  return http
-    .createAxios(user)
+const withdraw = (accountId, data) => {
+  return axios
     .patch(`/api/v1/transactions/${accountId}/withdraw`, data);
 };
 
-const transfer = (user, originAccountId, destinationAccountId, data) => {
-  return http
-    .createAxios(user)
+const transfer = (originAccountId, destinationAccountId, data) => {
+  return axios
     .patch(`/api/v1/transactions/${originAccountId}/${destinationAccountId}`, data);
 };
 

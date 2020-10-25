@@ -41,27 +41,23 @@ class OpenAccount extends React.Component {
   };
 
   saveAccount = () => {
-    this.props.openIdManager.getUser().then((user) => {
-      if (user) {
-        var bodyFormData = new FormData();
-        bodyFormData.append('amount', this.state.amount);
-        bodyFormData.append('currency', this.state.currency);
+    var bodyFormData = new FormData();
+    bodyFormData.append('amount', this.state.amount);
+    bodyFormData.append('currency', this.state.currency);
 
-        accountsService
-          .openAccount(user, bodyFormData)
-          .then(response => {
-            this.setState({
-              id: response.data.account.accountId,
-              title: response.data.account.accountId,
-              description: response.data.account.accountId,
-              submitted: true
-            });
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      }
-    })
+    accountsService
+      .openAccount(user, bodyFormData)
+      .then(response => {
+        this.setState({
+          id: response.data.account.accountId,
+          title: response.data.account.accountId,
+          description: response.data.account.accountId,
+          submitted: true
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
 
   newAccount = () => {

@@ -52,49 +52,49 @@ class MainContent extends Component {
             exact
             path="/OpenAccount"
             render={() => {
-              return <OpenAccount openIdManager={this.props.openIdManager} />;
+              return <OpenAccount />;
             }}
           />
           <Route
             exact
             path="/"
             render={() => {
-              return <Accounts openIdManager={this.props.openIdManager} />;
+              return <Accounts />;
             }}
           />
           <Route
             exact
             path="/accounts/:accountId/close"
             render={() => {
-              return <CloseAccount openIdManager={this.props.openIdManager} />;
+              return <CloseAccount />;
             }}
           />
           <Route
             exact
             path="/accounts/:accountId/transfer"
             render={() => {
-              return <Transfer openIdManager={this.props.openIdManager} />;
+              return <Transfer />;
             }}
           />
           <Route
             exact
             path="/accounts/:accountId/deposit"
             render={() => {
-              return <Deposit openIdManager={this.props.openIdManager} />;
+              return <Deposit />;
             }}
           />
           <Route
             exact
             path="/accounts/:accountId/withdraw"
             render={() => {
-              return <Withdraw openIdManager={this.props.openIdManager} />;
+              return <Withdraw />;
             }}
           />
           <Route
             exact
             path="/accounts/:accountId"
             render={() => {
-              return <Account openIdManager={this.props.openIdManager} />;
+              return <Account />;
             }}
           />
           <Route

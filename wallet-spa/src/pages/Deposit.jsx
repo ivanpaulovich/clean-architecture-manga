@@ -43,27 +43,23 @@ class Deposit extends React.Component {
   };
 
   saveDeposit = () => {
-    this.props.openIdManager.getUser().then((user) => {
-      if (user) {
-        var bodyFormData = new FormData();
-        bodyFormData.append('amount', this.state.amount);
-        bodyFormData.append('currency', this.state.currency);
+    var bodyFormData = new FormData();
+    bodyFormData.append('amount', this.state.amount);
+    bodyFormData.append('currency', this.state.currency);
 
-        transactionService
-          .deposit(user, this.state.accountId, bodyFormData)
-          .then(response => {
-            this.setState({
-              transactionId: response.data.transaction.transactionId,
-              transactionDate: response.data.transaction.transactionDate,
-              submitted: true
-            });
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      }
-    })
+    transactionService
+      .deposit(user, this.state.accountId, bodyFormData)
+      .then(response => {
+        this.setState({
+          transactionId: response.data.transaction.transactionId,
+          transactionDate: response.data.transaction.transactionDate,
+          submitted: true
+        });
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
 
   newDeposit = () => {
@@ -78,7 +74,6 @@ class Deposit extends React.Component {
   };
 
   render() {
-
     const styles = {
       toggleDiv: {
         marginTop: 20,

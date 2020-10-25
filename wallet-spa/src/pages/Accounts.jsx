@@ -23,19 +23,15 @@ class Accounts extends React.Component {
 
   }
   componentDidMount() {
-    this.props.openIdManager.getUser().then((user) => {
-      if (user) {
-        accountsService
-          .getAccounts(user)
-          .then((response) => {
-            this.setState(response.data);
-            console.log(response.data);
-          })
-          .catch((e) => {
-            console.log(e);
-          });
-      }
-    });
+    accountsService
+      .getAccounts()
+      .then((response) => {
+        this.setState(response.data);
+        console.log(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   render() {

@@ -6,7 +6,7 @@ import SideMenu from "../components/SideMenu";
 import Footer from "../components/Footer";
 import MainContent from "../components/MainContent";
 import { ThemeProvider } from "@material-ui/core/styles";
-import defaultTheme, { customTheme } from "../theme";
+import defaultTheme from "../theme";
 import classNames from "classnames";
 
 const styles = () => ({
@@ -69,10 +69,9 @@ class Layout extends React.Component {
     return (
       <ThemeProvider theme={theme}>
         <Header handleChangeNavDrawer={this.handleChangeNavDrawer} navDrawerOpen={navDrawerOpen} />
-        <SideMenu openIdManager={this.props.openIdManager} navDrawerOpen={navDrawerOpen}
-          handleChangeNavDrawer={this.handleChangeNavDrawer} />
+        <SideMenu navDrawerOpen={navDrawerOpen} handleChangeNavDrawer={this.handleChangeNavDrawer} />
         <div className={classNames(classes.container, !navDrawerOpen && classes.containerFull)}>
-          <MainContent openIdManager={this.props.openIdManager} />
+          <MainContent />
         </div>
         <Footer />
       </ThemeProvider>

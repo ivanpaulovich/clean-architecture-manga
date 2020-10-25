@@ -34,21 +34,17 @@ class CloseAccount extends React.Component {
   };
 
   saveCloseAccount = () => {
-    this.props.openIdManager.getUser().then((user) => {
-      if (user) {
-        accountsService
-          .closeAccount(user, this.state.accountId)
-          .then(response => {
-            this.setState({
-              accountId: response.data.accountId,
-              submitted: true
-            });
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      }
-    })
+    accountsService
+      .closeAccount(user, this.state.accountId)
+      .then(response => {
+        this.setState({
+          accountId: response.data.accountId,
+          submitted: true
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
 
   newCloseAccount = () => {

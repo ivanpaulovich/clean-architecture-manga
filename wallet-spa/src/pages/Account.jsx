@@ -33,19 +33,15 @@ class Account extends React.Component {
   }
 
   fetchData = id => {
-    this.props.openIdManager.getUser().then((user) => {
-      if (user) {
-        accountsService
-          .getAccount(user, id)
-          .then((response) => {
-            this.setState(response.data);
-            console.log(response.data);
-          })
-          .catch((e) => {
-            console.log(e);
-          });
-      }
-    });
+    accountsService
+      .getAccount(id)
+      .then((response) => {
+        this.setState(response.data);
+        console.log(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   componentDidMount() {
