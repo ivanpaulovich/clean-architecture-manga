@@ -48,7 +48,7 @@ class Withdraw extends React.Component {
     bodyFormData.append('currency', this.state.currency);
 
     transactionService
-      .withdraw(user, this.state.accountId, bodyFormData)
+      .withdraw(this.state.accountId, bodyFormData)
       .then(response => {
         this.setState({
           transactionId: response.data.transaction.transactionId,

@@ -5,8 +5,8 @@
   "version": "0.2.0",
   "compounds": [
     {
-      "name": "Identity Server & Accounts API & SPA",
-      "configurations": ["Accounts API", "Identity Server", "SPA"]
+      "name": "Solution",
+      "configurations": ["Accounts API", "Identity Server", "Start SPA", "Debug SPA"]
     }
   ],
   "configurations": [
@@ -65,7 +65,7 @@
       }
     },
     {
-      "name": "SPA",
+      "name": "Start SPA",
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceFolder}/wallet-spa",
@@ -77,7 +77,8 @@
       "request": "launch",
       "name": "Debug SPA",
       "url": "https://localhost:5002",
-      "webRoot": "${workspaceFolder}/wallet-spa"
+      "webRoot": "${workspaceFolder}/wallet-spa",
+      "runtimeExecutable": "canary"
     },
     {
       "name": "Accounts API (Docker)",

@@ -35,7 +35,7 @@ class CloseAccount extends React.Component {
 
   saveCloseAccount = () => {
     accountsService
-      .closeAccount(user, this.state.accountId)
+      .closeAccount(this.state.accountId)
       .then(response => {
         this.setState({
           accountId: response.data.accountId,

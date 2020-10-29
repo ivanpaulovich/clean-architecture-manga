@@ -46,7 +46,7 @@ class OpenAccount extends React.Component {
     bodyFormData.append('currency', this.state.currency);
 
     accountsService
-      .openAccount(user, bodyFormData)
+      .openAccount(bodyFormData)
       .then(response => {
         this.setState({
           id: response.data.account.accountId,

@@ -49,7 +49,7 @@ class Transfer extends React.Component {
     bodyFormData.append('currency', this.state.currency);
 
     transactionService
-      .transfer(user, this.state.accountId, this.state.destinationAccountId, bodyFormData)
+      .transfer(this.state.accountId, this.state.destinationAccountId, bodyFormData)
       .then(response => {
         this.setState({
           transactionId: response.data.transaction.transactionId,

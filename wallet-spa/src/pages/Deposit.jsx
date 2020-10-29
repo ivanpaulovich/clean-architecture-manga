@@ -48,7 +48,7 @@ class Deposit extends React.Component {
     bodyFormData.append('currency', this.state.currency);
 
     transactionService
-      .deposit(user, this.state.accountId, bodyFormData)
+      .deposit(this.state.accountId, bodyFormData)
       .then(response => {
         this.setState({
           transactionId: response.data.transaction.transactionId,
