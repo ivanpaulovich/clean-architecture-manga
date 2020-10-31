@@ -1,22 +1,22 @@
-import axios from "axios";
+import api from "./oauth"
 
 const getAccounts = () => {
-  return axios
+  return api
     .get("/api/v1/accounts");
 };
 
 const getAccount = (id) => {
-  return axios
+  return api
     .get(`/api/v1/accounts/${id}`);
 };
 
 const openAccount = (data) => {
-  return axios
+  return api
     .post("/api/v1/accounts", data);
 };
 
 const closeAccount = (id) => {
-  return axios
+  return api
     .delete(`/api/v1/accounts/${id}`);
 };
 

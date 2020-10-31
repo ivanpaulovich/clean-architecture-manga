@@ -56,7 +56,7 @@ class Accounts extends React.Component {
                 this.state.accounts.map((account) => {
                   return (
                     <TableRow key={account.accountId}>
-                      <TableCell><a className="text-dark" href={`/accounts/${account.accountId}`}>{account.accountId}</a></TableCell>
+                      <TableCell><a className="text-dark" href={`/dashboard/accounts/${account.accountId}`}>{account.accountId}</a></TableCell>
                       <TableCell>{account.currentBalance}</TableCell>
                       <TableCell>{account.currency}</TableCell>
                     </TableRow>

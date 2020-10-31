@@ -1,17 +1,17 @@
-import axios from "axios";
+import api from "./oauth"
 
 const deposit = (accountId, data) => {
-  return axios
+  return api
     .patch(`/api/v1/transactions/${accountId}/deposit`, data);
 };
 
 const withdraw = (accountId, data) => {
-  return axios
+  return api
     .patch(`/api/v1/transactions/${accountId}/withdraw`, data);
 };
 
 const transfer = (originAccountId, destinationAccountId, data) => {
-  return axios
+  return api
     .patch(`/api/v1/transactions/${originAccountId}/${destinationAccountId}`, data);
 };
 

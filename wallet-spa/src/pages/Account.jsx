@@ -162,19 +162,19 @@ class Account extends React.Component {
 
         <div style={styles.buttons}>
 
-          <Button component={Link} to={`/accounts/${this.state.accountId}/Deposit`} variant="contained" color="primary">
+          <Button component={Link} to={`/dashboard/accounts/${this.state.accountId}/Deposit`} variant="contained" color="primary">
             Deposit
             </Button>
 
-          <Button component={Link} to={`/accounts/${this.state.accountId}/Withdraw`} variant="contained" color="primary">
+          <Button component={Link} to={`/dashboard/accounts/${this.state.accountId}/Withdraw`} variant="contained" color="primary">
             Withdraw
             </Button>
 
-          <Button component={Link} to={`/accounts/${this.state.accountId}/Transfer`} variant="contained" color="primary">
+          <Button component={Link} to={`/dashboard/accounts/${this.state.accountId}/Transfer`} variant="contained" color="primary">
             Transfer
             </Button>
 
-          <Button component={Link} to={`/accounts/${this.state.accountId}/Close`} variant="contained" color="secondary">
+          <Button component={Link} to={`/dashboard/accounts/${this.state.accountId}/Close`} variant="contained" color="secondary">
             Close
             </Button>
 
