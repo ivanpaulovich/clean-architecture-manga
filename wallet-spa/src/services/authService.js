@@ -31,9 +31,14 @@ export default class AuthService {
   }
 
   signinRedirectCallback = () => {
-    this.UserManager.signinRedirectCallback().then(() => {
-      "";
-    });
+    this.UserManager
+      .signinRedirectCallback()
+      .then(() => {
+        "";
+      })
+      .catch(function (e) {
+        console.error(e);
+      });
   };
 
   getUser = async () => {

@@ -30,7 +30,7 @@
         "ASPNETCORE_URLS": "https://localhost:5000",
         "ASPNETCORE_HTTPS_PORT": "5000",
         "IDENTITY_SERVER_ORIGIN": "https://localhost:5000",
-        "RedirectUris": "https://localhost:5002/callback",
+        "RedirectUris": "https://localhost:5002/signin-oidc",
         "PostLogoutRedirectUris": "https://localhost:5002",
         "AllowedCorsOrigins": "https://localhost:5002"
       },
