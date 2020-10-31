@@ -12,7 +12,7 @@ import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import { AuthConsumer } from "../providers/authProvider"
-import AuthService from "../services/authService";
+import AuthService from "../store/authService";
 
 const drawStyles = theme => {
   return {
@@ -109,7 +109,11 @@ class SideMenu extends Component {
     super(props);
 
     this.state = {
-      user: {}
+      user: {
+        profile: {
+          name: ""
+        }
+      }
     }
 
     this.authService = new AuthService();
@@ -137,15 +141,16 @@ class SideMenu extends Component {
             <div className={classes.logo}>My Wallet</div>
             <div className={classNames(classes.avatarRoot, !navDrawerOpen && classes.avatarRootMini)}>
               <Avatar size={navDrawerOpen ? 48 : 32} classes={{ root: classes.avatarIcon }} />
+              <span className={classes.avatarSpan}>{this.state.user.profile.name}</span>
             </div>
             <List>
-              <ListItem button component="a" href="/">
+              <ListItem button component="a" href="/Dashboard">
                 <ListItemIcon style={{ color: "white" }}>
                   <AccountBalanceIcon />
                 </ListItemIcon>
                 <ListItemText primary="My Accounts" />
               </ListItem>
-              <ListItem button component="a" href="/OpenAccount">
+              <ListItem button component="a" href="/Dashboard/OpenAccount">
                 <ListItemIcon style={{ color: "white" }}>
                   <AddIcon />
                 </ListItemIcon>

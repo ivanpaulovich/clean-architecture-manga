@@ -1,5 +1,6 @@
 import { IDENTITY_CONFIG, METADATA_OIDC } from "../utils/authConst";
 import { UserManager, WebStorageStateStore, Log } from "oidc-client";
+import { axios } from "axios";
 
 export default class AuthService {
   UserManager;
@@ -31,10 +32,12 @@ export default class AuthService {
   }
 
   signinRedirectCallback = () => {
-    this.UserManager
-      .signinRedirectCallback()
-      .then(() => {
-        "";
+    this.UserManager.signinRedirectCallback()
+      .then((user) => {
+        axios.defaults.headers.common = {
+          Authorization: `bearer ${user.access_token}`,
+        };
+        axios.defaults.baseURL = "https://localhost:5001/";
       })
       .catch(function (e) {
         console.error(e);

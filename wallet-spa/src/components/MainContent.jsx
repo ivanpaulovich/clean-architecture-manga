@@ -44,55 +44,13 @@ class MainContent extends Component {
   render() {
     return (
       <Container>
-          <Route
-            exact
-            path="/OpenAccount"
-            render={() => {
-              return <OpenAccount />;
-            }}
-          />
-          <Route
-            exact
-            path="/"
-            render={() => {
-              return <Accounts />;
-            }}
-          />
-          <Route
-            exact
-            path="/accounts/:accountId/close"
-            render={() => {
-              return <CloseAccount />;
-            }}
-          />
-          <Route
-            exact
-            path="/accounts/:accountId/transfer"
-            render={() => {
-              return <Transfer />;
-            }}
-          />
-          <Route
-            exact
-            path="/accounts/:accountId/deposit"
-            render={() => {
-              return <Deposit />;
-            }}
-          />
-          <Route
-            exact
-            path="/accounts/:accountId/withdraw"
-            render={() => {
-              return <Withdraw />;
-            }}
-          />
-          <Route
-            exact
-            path="/accounts/:accountId"
-            render={() => {
-              return <Account />;
-            }}
-          />
+          <Route exact={true} path="/dashboard/openaccount" component={OpenAccount} />
+          <Route exact={true} path="/dashboard/accounts/:accountId/close" component={CloseAccount} />
+          <Route exact={true} path="/dashboard/accounts/:accountId/transfer" component={Transfer} />
+          <Route exact={true} path="/dashboard/accounts/:accountId/deposit" component={Deposit} />
+          <Route exact={true} path="/dashboard/accounts/:accountId/withdraw" component={Withdraw} />
+          <Route exact={true} path="/dashboard/accounts/:accountId" component={Account} />
+          <Route exact={true} path="/dashboard" component={Accounts} />
         </Container>
     )
   }

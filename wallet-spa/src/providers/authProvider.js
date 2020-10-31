@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AuthService from "../services/authService";
+import AuthService from "../store/authService";
 
 const AuthContext = React.createContext({
     signinRedirectCallback: () => ({}),

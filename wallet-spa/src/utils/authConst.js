@@ -8,8 +8,8 @@ export const IDENTITY_CONFIG = {
   response_type: "code",
   response_mode: "query",
   automaticSilentRenew: false,
-  loadUserInfo: false,
-  scope: process.env.REACT_APP_SCOPE,
+  loadUserInfo: true,
+  scope: "openid profile api1.full_access",
 };
 
 export const METADATA_OIDC = {
