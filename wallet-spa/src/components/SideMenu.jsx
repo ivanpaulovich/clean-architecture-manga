@@ -4,7 +4,6 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import ExitToApp from "@material-ui/icons/ExitToApp";
 import AddIcon from '@material-ui/icons/Add';
@@ -12,7 +11,8 @@ import { Avatar } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
 import { fade } from "@material-ui/core/styles/colorManipulator";
-import { userContext } from '../userContext';
+import { AuthConsumer } from "../providers/authProvider"
+import AuthService from "../services/authService";
 
 const drawStyles = theme => {
   return {
@@ -79,17 +79,6 @@ const drawStyles = theme => {
       color: "white",
       boxShadow: "rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px"
     },
-    menuItem: {
-      padding: "10px 16px",
-      color: "white",
-      fontSize: 14,
-      "&:focus": {
-        backgroundColor: theme.palette.primary.main,
-        "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
-          color: theme.palette.common.white
-        }
-      }
-    },
     miniMenuItem: {
       color: "white",
       margin: "10px 0",
@@ -113,12 +102,29 @@ const drawStyles = theme => {
 };
 
 class SideMenu extends Component {
+
+  authService;
+
   constructor(props) {
     super(props);
+
+    this.state = {
+      user: {}
+    }
+
+    this.authService = new AuthService();
+  }
+
+  componentDidMount() {
+    this.authService
+      .getUser()
+      .then((user) => {
+        this.setState({ user: user });
+      });
   }
 
   render() {
-    const { classes, navDrawerOpen, handleChangeNavDrawer } = this.props;
+    const { classes, navDrawerOpen } = this.props;
     return (
       <div>
         <Drawer
@@ -126,66 +132,43 @@ class SideMenu extends Component {
           variant="permanent"
           classes={{
             paper: classNames(classes.drawerPaper, !navDrawerOpen && classes.drawerPaperClose)
-          }}
-        >
+          }} >
+          <div>
+            <div className={classes.logo}>My Wallet</div>
+            <div className={classNames(classes.avatarRoot, !navDrawerOpen && classes.avatarRootMini)}>
+              <Avatar size={navDrawerOpen ? 48 : 32} classes={{ root: classes.avatarIcon }} />
+            </div>
+            <List>
+              <ListItem button component="a" href="/">
+                <ListItemIcon style={{ color: "white" }}>
+                  <AccountBalanceIcon />
+                </ListItemIcon>
+                <ListItemText primary="My Accounts" />
+              </ListItem>
+              <ListItem button component="a" href="/OpenAccount">
+                <ListItemIcon style={{ color: "white" }}>
+                  <AddIcon />
+                </ListItemIcon>
+                <ListItemText primary="Open an Account" />
+              </ListItem>
+              <ListItem button>
+                <ListItemIcon style={{ color: "white" }}>
+                  <ExitToApp />
+                </ListItemIcon>
+                <AuthConsumer>
+                  {({ logout }) => {
+                    return (
+                      <ListItemText primary="Sign Out" onClick={logout} />
+                    );
+                  }}
+                </AuthConsumer>
+              </ListItem>
+            </List>
+          </div>
 
-          <userContext.Consumer>
-            {({ user, loginUser, logoutUser }) => {
-              return (
-                <div>
-                  <div className={classes.logo}>My Wallet</div>
-                  {Object.keys(user).length !== 0 && <div className={classNames(classes.avatarRoot, !navDrawerOpen && classes.avatarRootMini)}>
-                    <Avatar size={navDrawerOpen ? 48 : 32} classes={{ root: classes.avatarIcon }} />
-                    <span className={classes.avatarSpan}>{user.profile.name}</span>
-                  </div>}
-                  <List>
-                    {Object.keys(user).length !== 0 ? this.renderWhenTrue(logoutUser) : this.renderWhenFalse(loginUser)}
-                  </List>
-                </div>
-              );
-            }}
-          </userContext.Consumer>
         </Drawer>
       </div>
     );
-  }
-
-  renderWhenTrue(logoutUser) {
-    return (
-      <React.Fragment>
-        <ListItem button component="a" href="/">
-          <ListItemIcon style={{ color: "white" }}>
-            <AccountBalanceIcon />
-          </ListItemIcon>
-          <ListItemText primary="My Accounts" />
-        </ListItem>
-        <ListItem button component="a" href="/OpenAccount">
-          <ListItemIcon style={{ color: "white" }}>
-            <AddIcon />
-          </ListItemIcon>
-          <ListItemText primary="Open an Account" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon style={{ color: "white" }}>
-            <ExitToApp />
-          </ListItemIcon>
-          <ListItemText primary="Sign Out" onClick={logoutUser} />
-        </ListItem>
-      </React.Fragment>
-    )
-  }
-
-  renderWhenFalse(loginUser) {
-    return (
-      <React.Fragment>
-        <ListItem button>
-          <ListItemIcon style={{ color: "white" }}>
-            <AccountCircle />
-          </ListItemIcon>
-          <ListItemText primary="Sign In" onClick={loginUser} />
-        </ListItem>
-      </React.Fragment>
-    )
   }
 }
 

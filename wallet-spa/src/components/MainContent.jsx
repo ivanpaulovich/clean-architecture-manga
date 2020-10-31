@@ -6,7 +6,6 @@ import {
 import { Container } from 'reactstrap';
 import Accounts from "../pages/Accounts";
 import Account from "../pages/Account";
-import { AuthCallback } from "../pages/AuthCallback";
 import OpenAccount from "../pages/OpenAccount";
 import Deposit from "../pages/Deposit";
 import Withdraw from "../pages/Withdraw";
@@ -41,9 +40,6 @@ const styles = theme => ({
 });
 
 class MainContent extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (
@@ -95,12 +91,6 @@ class MainContent extends Component {
             path="/accounts/:accountId"
             render={() => {
               return <Account />;
-            }}
-          />
-          <Route
-            path="/callback"
-            render={() => {
-              return <AuthCallback />;
             }}
           />
         </Container>

@@ -20,8 +20,8 @@ class Accounts extends React.Component {
     this.state = {
       accounts: []
     }
-
   }
+  
   componentDidMount() {
     accountsService
       .getAccounts()
