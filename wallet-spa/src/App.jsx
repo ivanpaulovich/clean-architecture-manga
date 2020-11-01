@@ -1,18 +1,14 @@
-import "./App.css";
-import React from "react";
-import { Component } from "react";
-import Layout from "./components/Layout";
+import React, { Component } from "react";
+import { AuthProvider } from "./providers/authProvider";
+import { BrowserRouter } from "react-router-dom";
+import { Routes } from "./routes/routes";
 
 export default class App extends Component {
-  static displayName = App.name;
-  
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return (
-      <Layout openIdManager={this.props.openIdManager}/>
+      <AuthProvider>
+        <BrowserRouter children={Routes} basename={"/"} />
+      </AuthProvider>
     )
   };
 }

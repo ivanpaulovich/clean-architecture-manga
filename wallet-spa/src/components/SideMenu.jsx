@@ -4,16 +4,15 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import HomeIcon from '@material-ui/icons/Home';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import ExitToApp from "@material-ui/icons/ExitToApp";
 import AddIcon from '@material-ui/icons/Add';
 import { Avatar } from "@material-ui/core";
-import { Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
 import { fade } from "@material-ui/core/styles/colorManipulator";
+import { AuthConsumer } from "../providers/authProvider"
+import AuthService from "../store/authService";
 
 const drawStyles = theme => {
   return {
@@ -80,17 +79,6 @@ const drawStyles = theme => {
       color: "white",
       boxShadow: "rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px"
     },
-    menuItem: {
-      padding: "10px 16px",
-      color: "white",
-      fontSize: 14,
-      "&:focus": {
-        backgroundColor: theme.palette.primary.main,
-        "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
-          color: theme.palette.common.white
-        }
-      }
-    },
     miniMenuItem: {
       color: "white",
       margin: "10px 0",
@@ -114,31 +102,33 @@ const drawStyles = theme => {
 };
 
 class SideMenu extends Component {
+
+  authService;
+
   constructor(props) {
     super(props);
 
     this.state = {
-      isLoggedIn: false,
-      user: null
+      user: {
+        profile: {
+          name: ""
+        }
+      }
     }
 
-    this.performLogin = this.performLogin.bind(this);
-    this.performLogout = this.performLogout.bind(this);
+    this.authService = new AuthService();
   }
 
   componentDidMount() {
-    this.props.openIdManager.getUser().then((user) => {
-      if (user) {
-        this.setState({ isLoggedIn: true, user: user });
-      } else {
-        this.setState({ isLoggedIn: false, user: null });
-      }
-    });
+    this.authService
+      .getUser()
+      .then((user) => {
+        this.setState({ user: user });
+      });
   }
 
   render() {
-    const { user } = this.state;
-    const { classes, navDrawerOpen, handleChangeNavDrawer } = this.props;
+    const { classes, navDrawerOpen } = this.props;
     return (
       <div>
         <Drawer
@@ -146,69 +136,44 @@ class SideMenu extends Component {
           variant="permanent"
           classes={{
             paper: classNames(classes.drawerPaper, !navDrawerOpen && classes.drawerPaperClose)
-          }}
-        >
-
+          }} >
           <div>
             <div className={classes.logo}>My Wallet</div>
-            {this.state.isLoggedIn && <div className={classNames(classes.avatarRoot, !navDrawerOpen && classes.avatarRootMini)}>
+            <div className={classNames(classes.avatarRoot, !navDrawerOpen && classes.avatarRootMini)}>
               <Avatar size={navDrawerOpen ? 48 : 32} classes={{ root: classes.avatarIcon }} />
-              <span className={classes.avatarSpan}>{user.profile.name}</span>
-            </div>}
+              <span className={classes.avatarSpan}>{this.state.user.profile.name}</span>
+            </div>
             <List>
-              {this.state.isLoggedIn ? this.renderWhenTrue() : this.renderWhenFalse()}
+              <ListItem button component="a" href="/Dashboard">
+                <ListItemIcon style={{ color: "white" }}>
+                  <AccountBalanceIcon />
+                </ListItemIcon>
+                <ListItemText primary="My Accounts" />
+              </ListItem>
+              <ListItem button component="a" href="/Dashboard/OpenAccount">
+                <ListItemIcon style={{ color: "white" }}>
+                  <AddIcon />
+                </ListItemIcon>
+                <ListItemText primary="Open an Account" />
+              </ListItem>
+              <ListItem button>
+                <ListItemIcon style={{ color: "white" }}>
+                  <ExitToApp />
+                </ListItemIcon>
+                <AuthConsumer>
+                  {({ logout }) => {
+                    return (
+                      <ListItemText primary="Sign Out" onClick={logout} />
+                    );
+                  }}
+                </AuthConsumer>
+              </ListItem>
             </List>
           </div>
 
         </Drawer>
       </div>
     );
-  }
-
-  renderWhenTrue() {
-    return (
-      <React.Fragment>
-        <ListItem button component="a" href="/">
-          <ListItemIcon style={{ color: "white" }}>
-            <AccountBalanceIcon />
-          </ListItemIcon>
-          <ListItemText primary="My Accounts" />
-        </ListItem>
-        <ListItem button component="a" href="/OpenAccount">
-          <ListItemIcon style={{ color: "white" }}>
-            <AddIcon />
-          </ListItemIcon>
-          <ListItemText primary="Open an Account" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon style={{ color: "white" }}>
-            <ExitToApp />
-          </ListItemIcon>
-          <ListItemText primary="Sign Out" onClick={this.performLogout} />
-        </ListItem>
-      </React.Fragment>
-    )
-  }
-
-  renderWhenFalse() {
-    return (
-      <React.Fragment>
-        <ListItem button>
-          <ListItemIcon style={{ color: "white" }}>
-            <AccountCircle />
-          </ListItemIcon>
-          <ListItemText primary="Sign In" onClick={this.performLogin} />
-        </ListItem>
-      </React.Fragment>
-    )
-  }
-
-  performLogin() {
-    this.props.openIdManager.signinRedirect();
-  }
-
-  performLogout() {
-    this.props.openIdManager.signoutRedirect();
   }
 }
 

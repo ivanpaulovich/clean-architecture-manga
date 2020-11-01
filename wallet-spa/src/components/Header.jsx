@@ -95,10 +95,6 @@ const styles = (theme) => ({
 
 class Header extends React.Component {
 
-  constructor(props) {
-    super(props)
-  }
-
   render() {
 
     const { handleChangeNavDrawer, navDrawerOpen, classes } = this.props

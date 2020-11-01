@@ -6,7 +6,6 @@ import {
 import { Container } from 'reactstrap';
 import Accounts from "../pages/Accounts";
 import Account from "../pages/Account";
-import { AuthCallback } from "../pages/AuthCallback";
 import OpenAccount from "../pages/OpenAccount";
 import Deposit from "../pages/Deposit";
 import Withdraw from "../pages/Withdraw";
@@ -41,68 +40,17 @@ const styles = theme => ({
 });
 
 class MainContent extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (
       <Container>
-          <Route
-            exact
-            path="/OpenAccount"
-            render={() => {
-              return <OpenAccount openIdManager={this.props.openIdManager} />;
-            }}
-          />
-          <Route
-            exact
-            path="/"
-            render={() => {
-              return <Accounts openIdManager={this.props.openIdManager} />;
-            }}
-          />
-          <Route
-            exact
-            path="/accounts/:accountId/close"
-            render={() => {
-              return <CloseAccount openIdManager={this.props.openIdManager} />;
-            }}
-          />
-          <Route
-            exact
-            path="/accounts/:accountId/transfer"
-            render={() => {
-              return <Transfer openIdManager={this.props.openIdManager} />;
-            }}
-          />
-          <Route
-            exact
-            path="/accounts/:accountId/deposit"
-            render={() => {
-              return <Deposit openIdManager={this.props.openIdManager} />;
-            }}
-          />
-          <Route
-            exact
-            path="/accounts/:accountId/withdraw"
-            render={() => {
-              return <Withdraw openIdManager={this.props.openIdManager} />;
-            }}
-          />
-          <Route
-            exact
-            path="/accounts/:accountId"
-            render={() => {
-              return <Account openIdManager={this.props.openIdManager} />;
-            }}
-          />
-          <Route
-            path="/callback"
-            render={() => {
-              return <AuthCallback />;
-            }}
-          />
+          <Route exact={true} path="/dashboard/openaccount" component={OpenAccount} />
+          <Route exact={true} path="/dashboard/accounts/:accountId/close" component={CloseAccount} />
+          <Route exact={true} path="/dashboard/accounts/:accountId/transfer" component={Transfer} />
+          <Route exact={true} path="/dashboard/accounts/:accountId/deposit" component={Deposit} />
+          <Route exact={true} path="/dashboard/accounts/:accountId/withdraw" component={Withdraw} />
+          <Route exact={true} path="/dashboard/accounts/:accountId" component={Account} />
+          <Route exact={true} path="/dashboard" component={Accounts} />
         </Container>
     )
   }

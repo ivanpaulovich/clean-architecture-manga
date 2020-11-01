@@ -10,6 +10,7 @@ import Select from "@material-ui/core/Select";
 import { grey } from "@material-ui/core/colors";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
+import {Redirect} from "react-router-dom";
 
 class Withdraw extends React.Component {
 
@@ -43,27 +44,23 @@ class Withdraw extends React.Component {
   };
 
   saveWithdraw = () => {
-    this.props.openIdManager.getUser().then((user) => {
-      if (user) {
-        var bodyFormData = new FormData();
-        bodyFormData.append('amount', this.state.amount);
-        bodyFormData.append('currency', this.state.currency);
+    var bodyFormData = new FormData();
+    bodyFormData.append('amount', this.state.amount);
+    bodyFormData.append('currency', this.state.currency);
 
-        transactionService
-          .withdraw(user, this.state.accountId, bodyFormData)
-          .then(response => {
-            this.setState({
-              transactionId: response.data.transaction.transactionId,
-              transactionDate: response.data.transaction.transactionDate,
-              submitted: true
-            });
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      }
-    })
+    transactionService
+      .withdraw(this.state.accountId, bodyFormData)
+      .then(response => {
+        this.setState({
+          transactionId: response.data.transaction.transactionId,
+          transactionDate: response.data.transaction.transactionDate,
+          submitted: true
+        });
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
 
   newWithdraw = () => {
@@ -102,20 +99,8 @@ class Withdraw extends React.Component {
       <PageBase title="Withdraw" navigation="My Accounts / Withdraw">
 
         {this.state.submitted ? (
-          <div>
-            <div style={styles.buttons}>
-              <Button
-                style={styles.saveButton}
-                variant="contained"
-                type="submit"
-                color="primary"
-                onClick={this.newWithdraw}
-              >
-                Another one
-                  </Button>
-            </div>
-          </div>
-        ) : (
+          <Redirect to={`/dashboard/accounts/${this.state.accountId}`} push />
+        )  : (
             <div>
 
               <TextField

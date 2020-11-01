@@ -10,6 +10,7 @@ import Select from "@material-ui/core/Select";
 import { grey } from "@material-ui/core/colors";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
+import {Redirect} from "react-router-dom";
 
 class Deposit extends React.Component {
 
@@ -43,27 +44,23 @@ class Deposit extends React.Component {
   };
 
   saveDeposit = () => {
-    this.props.openIdManager.getUser().then((user) => {
-      if (user) {
-        var bodyFormData = new FormData();
-        bodyFormData.append('amount', this.state.amount);
-        bodyFormData.append('currency', this.state.currency);
+    var bodyFormData = new FormData();
+    bodyFormData.append('amount', this.state.amount);
+    bodyFormData.append('currency', this.state.currency);
 
-        transactionService
-          .deposit(user, this.state.accountId, bodyFormData)
-          .then(response => {
-            this.setState({
-              transactionId: response.data.transaction.transactionId,
-              transactionDate: response.data.transaction.transactionDate,
-              submitted: true
-            });
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      }
-    })
+    transactionService
+      .deposit(this.state.accountId, bodyFormData)
+      .then(response => {
+        this.setState({
+          transactionId: response.data.transaction.transactionId,
+          transactionDate: response.data.transaction.transactionDate,
+          submitted: true
+        });
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
 
   newDeposit = () => {
@@ -78,7 +75,6 @@ class Deposit extends React.Component {
   };
 
   render() {
-
     const styles = {
       toggleDiv: {
         marginTop: 20,
@@ -102,19 +98,7 @@ class Deposit extends React.Component {
       <PageBase title="Deposit" navigation="My Accounts / Deposit">
 
         {this.state.submitted ? (
-          <div>
-            <div style={styles.buttons}>
-              <Button
-                style={styles.saveButton}
-                variant="contained"
-                type="submit"
-                color="primary"
-                onClick={this.newDeposit}
-              >
-                Another one
-                  </Button>
-            </div>
-          </div>
+          <Redirect to={`/dashboard/accounts/${this.state.accountId}`} push />
         ) : (
             <div>
 

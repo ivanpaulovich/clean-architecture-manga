@@ -20,22 +20,18 @@ class Accounts extends React.Component {
     this.state = {
       accounts: []
     }
-
   }
+  
   componentDidMount() {
-    this.props.openIdManager.getUser().then((user) => {
-      if (user) {
-        accountsService
-          .getAccounts(user)
-          .then((response) => {
-            this.setState(response.data);
-            console.log(response.data);
-          })
-          .catch((e) => {
-            console.log(e);
-          });
-      }
-    });
+    accountsService
+      .getAccounts()
+      .then((response) => {
+        this.setState(response.data);
+        console.log(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   render() {
@@ -60,7 +56,7 @@ class Accounts extends React.Component {
                 this.state.accounts.map((account) => {
                   return (
                     <TableRow key={account.accountId}>
-                      <TableCell><a className="text-dark" href={`/accounts/${account.accountId}`}>{account.accountId}</a></TableCell>
+                      <TableCell><a className="text-dark" href={`/dashboard/accounts/${account.accountId}`}>{account.accountId}</a></TableCell>
                       <TableCell>{account.currentBalance}</TableCell>
                       <TableCell>{account.currency}</TableCell>
                     </TableRow>

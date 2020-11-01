@@ -10,6 +10,7 @@ import Select from "@material-ui/core/Select";
 import { grey } from "@material-ui/core/colors";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
+import {Redirect} from "react-router-dom";
 
 class Transfer extends React.Component {
 
@@ -44,26 +45,22 @@ class Transfer extends React.Component {
   };
 
   saveTransfer = () => {
-    this.props.openIdManager.getUser().then((user) => {
-      if (user) {
-        var bodyFormData = new FormData();
-        bodyFormData.append('amount', this.state.amount);
-        bodyFormData.append('currency', this.state.currency);
+    var bodyFormData = new FormData();
+    bodyFormData.append('amount', this.state.amount);
+    bodyFormData.append('currency', this.state.currency);
 
-        transactionService
-          .transfer(user, this.state.accountId, this.state.destinationAccountId, bodyFormData)
-          .then(response => {
-            this.setState({
-              transactionId: response.data.transaction.transactionId,
-              transactionDate: response.data.transaction.transactionDate,
-              submitted: true
-            });
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      }
-    })
+    transactionService
+      .transfer(this.state.accountId, this.state.destinationAccountId, bodyFormData)
+      .then(response => {
+        this.setState({
+          transactionId: response.data.transaction.transactionId,
+          transactionDate: response.data.transaction.transactionDate,
+          submitted: true
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
 
   newTransfer = () => {
@@ -103,20 +100,8 @@ class Transfer extends React.Component {
       <PageBase title="Transfer" navigation="My Accounts / Transfer">
 
         {this.state.submitted ? (
-          <div>
-            <div style={styles.buttons}>
-              <Button
-                style={styles.saveButton}
-                variant="contained"
-                type="submit"
-                color="primary"
-                onClick={this.newTransfer}
-              >
-                Another one
-                  </Button>
-            </div>
-          </div>
-        ) : (
+          <Redirect to={`/dashboard/accounts/${this.state.accountId}`} push />
+        )  : (
             <div>
 
               <TextField
