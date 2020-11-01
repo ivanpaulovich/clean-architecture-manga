@@ -5,6 +5,7 @@ import PageBase from "../components/PageBase";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { grey } from "@material-ui/core/colors";
+import {Redirect} from "react-router-dom";
 
 class CloseAccount extends React.Component {
 
@@ -79,20 +80,8 @@ class CloseAccount extends React.Component {
       <PageBase title="Close Account" navigation="My Accounts / Close Account">
 
         {this.state.submitted ? (
-          <div>
-            <div style={styles.buttons}>
-              <Button
-                style={styles.saveButton}
-                variant="contained"
-                type="submit"
-                color="primary"
-                onClick={this.newCloseAccount}
-              >
-                Another one
-                  </Button>
-            </div>
-          </div>
-        ) : (
+          <Redirect to={`/dashboard`} push />
+        )  : (
             <div style={styles.buttons}>
               <Link to="/">
                 <Button variant="contained">Cancel</Button>

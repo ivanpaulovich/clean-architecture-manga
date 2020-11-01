@@ -10,6 +10,7 @@ import Select from "@material-ui/core/Select";
 import { grey } from "@material-ui/core/colors";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
+import {Redirect} from "react-router-dom";
 
 class Deposit extends React.Component {
 
@@ -97,19 +98,7 @@ class Deposit extends React.Component {
       <PageBase title="Deposit" navigation="My Accounts / Deposit">
 
         {this.state.submitted ? (
-          <div>
-            <div style={styles.buttons}>
-              <Button
-                style={styles.saveButton}
-                variant="contained"
-                type="submit"
-                color="primary"
-                onClick={this.newDeposit}
-              >
-                Another one
-                  </Button>
-            </div>
-          </div>
+          <Redirect to={`/dashboard/accounts/${this.state.accountId}`} push />
         ) : (
             <div>
 

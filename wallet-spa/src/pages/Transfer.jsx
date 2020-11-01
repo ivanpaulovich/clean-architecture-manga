@@ -10,6 +10,7 @@ import Select from "@material-ui/core/Select";
 import { grey } from "@material-ui/core/colors";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
+import {Redirect} from "react-router-dom";
 
 class Transfer extends React.Component {
 
@@ -99,20 +100,8 @@ class Transfer extends React.Component {
       <PageBase title="Transfer" navigation="My Accounts / Transfer">
 
         {this.state.submitted ? (
-          <div>
-            <div style={styles.buttons}>
-              <Button
-                style={styles.saveButton}
-                variant="contained"
-                type="submit"
-                color="primary"
-                onClick={this.newTransfer}
-              >
-                Another one
-                  </Button>
-            </div>
-          </div>
-        ) : (
+          <Redirect to={`/dashboard/accounts/${this.state.accountId}`} push />
+        )  : (
             <div>
 
               <TextField

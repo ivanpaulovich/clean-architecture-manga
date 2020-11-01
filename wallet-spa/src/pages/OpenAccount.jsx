@@ -10,6 +10,7 @@ import Select from "@material-ui/core/Select";
 import { grey } from "@material-ui/core/colors";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
+import {Redirect} from "react-router-dom";
 
 class OpenAccount extends React.Component {
 
@@ -94,20 +95,8 @@ class OpenAccount extends React.Component {
       <PageBase title="Open a New Account" navigation="My Accounts / Open a New Account">
 
         {this.state.submitted ? (
-          <div>
-              <div style={styles.buttons}>
-                <Button
-                  style={styles.saveButton}
-                  variant="contained"
-                  type="submit"
-                  color="primary"
-                  onClick={this.newAccount}
-                >
-                  Another one
-                  </Button>
-              </div>
-          </div>
-        ) : (
+          <Redirect to={`/dashboard`} push />
+        )  : (
             <div>
 
               <TextField
