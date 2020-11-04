@@ -13,6 +13,7 @@ services:
       - ASPNETCORE_Kestrel__Certificates__Default__Password=MyCertificatePassword
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
       - PersistenceModule__DefaultConnection=Server=sql1;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts;
+      - AuthenticationModule__AuthorityUrl=https://localhost:5000
     volumes:
       - ../.docker/https:/https:ro
     depends_on:
@@ -40,7 +41,7 @@ services:
       - ASPNETCORE_Kestrel__Certificates__Default__Password=MyCertificatePassword
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
       - IDENTITY_SERVER_ORIGIN=https://localhost:5000
-      - RedirectUris=https://localhost:5002/callback
+      - RedirectUris=https://localhost:5002/signin-oidc
       - PostLogoutRedirectUris=https://localhost:5002
       - AllowedCorsOrigins=https://localhost:5002
     volumes:

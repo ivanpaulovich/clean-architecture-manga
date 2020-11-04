@@ -8,13 +8,14 @@ services:
   accounts-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+      - AuthenticationModule__AuthorityUrl=https://wallet.local
   identity-server:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - IDENTITY_SERVER_ORIGIN=https://wallet.local
-      - RedirectUris=https://wallet.local/callback
+      - RedirectUris=https://wallet.local/signin-oidc
       - PostLogoutRedirectUris=https://wallet.local
-      - AllowedCorsOrigins=https://wallet.local
+      - AllowedCorsOrigins=https://wallet.local      
   wallet-spa:
     build:
       args:

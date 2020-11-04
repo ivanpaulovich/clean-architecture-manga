@@ -4,7 +4,7 @@ const api = axios.create({
     headers: {
       'Content-Type': 'application/json'
     },
-    baseURL: "https://localhost:5001/"
+    baseURL: `${process.env.REACT_APP_ACCOUNTS_API}`
   });
 
 api.interceptors.request.use(

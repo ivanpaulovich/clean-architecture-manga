@@ -8,11 +8,12 @@ services:
   accounts-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - AuthenticationModule__AuthorityUrl=https://wallet.local:8081
   identity-server:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - IDENTITY_SERVER_ORIGIN=https://wallet.local:8081
-      - RedirectUris=https://wallet.local:8081/callback
+      - RedirectUris=https://wallet.local:8081/signin-oidc
       - PostLogoutRedirectUris=https://wallet.local:8081
       - AllowedCorsOrigins=https://wallet.local:8081
   wallet-spa:
