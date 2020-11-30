@@ -1,11 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <Nullable>enable</Nullable>
     <NullableReferenceTypes>true</NullableReferenceTypes>
-    <LangVersion>8.0</LangVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NeutralLanguage>en</NeutralLanguage>
@@ -13,13 +12,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0-preview-20200921-01" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.0-preview-20201123-03" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.0" />
     <PackageReference Include="coverlet.msbuild" Version="2.9.0" />
   </ItemGroup>
 

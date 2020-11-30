@@ -1,11 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <NoWarn>$(NoWarn);CA1062;1591;CA1801;S1128;S1481;S1075</NoWarn>
     <Nullable>enable</Nullable>
     <NullableReferenceTypes>true</NullableReferenceTypes>
-    <LangVersion>8.0</LangVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NeutralLanguage>en</NeutralLanguage>
@@ -39,11 +38,11 @@
 
   <ItemGroup>
     <!-- Code Analyzers -->
-    <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="3.3.0">
+    <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="3.3.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.14.0.22654">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.15.0.24505">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -56,19 +55,19 @@
 
   <ItemGroup>
     <!-- Microsoft -->
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.8">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="3.1.8" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.2.0-rc.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.2.0-rc.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0-preview.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0-preview.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
     <PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="2.2.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.8" />
-    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="5.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
   </ItemGroup>
@@ -79,7 +78,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="EPPlus.Core" Version="1.5.4" />
     <!-- Decorator injection comparison https://greatrexpectations.com/2018/10/25/decorators-in-net-core-with-dependency-injection -->
-    <PackageReference Include="Scrutor" Version="3.2.2" />
+    <PackageReference Include="Scrutor" Version="3.3.0" />
   </ItemGroup>
 
   <ItemGroup>

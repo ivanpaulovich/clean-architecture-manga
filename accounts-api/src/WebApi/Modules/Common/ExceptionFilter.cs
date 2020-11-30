@@ -16,7 +16,7 @@ namespace WebApi.Modules.Common
             ProblemDetails problemDetails = new ProblemDetails {Status = 500, Title = "Bad Request"};
 
             context.Result = new JsonResult(problemDetails);
-            context.Exception = null;
+            context.Exception = null!;
         }
     }
 }

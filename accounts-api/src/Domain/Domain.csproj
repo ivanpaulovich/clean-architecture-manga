@@ -1,10 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <NoWarn>$(NoWarn);CA1062;1591</NoWarn>
     <Nullable>enable</Nullable>
     <NullableReferenceTypes>true</NullableReferenceTypes>
-    <LangVersion>8.0</LangVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NeutralLanguage>en</NeutralLanguage>

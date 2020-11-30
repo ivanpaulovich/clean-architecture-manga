@@ -63,8 +63,8 @@ namespace ComponentTests.V1
             HttpClient client = this._factory.CreateClient();
             FormUrlEncodedContent content = new FormUrlEncodedContent(new[]
             {
-                new KeyValuePair<string, string>("amount", amount.ToString(CultureInfo.InvariantCulture)),
-                new KeyValuePair<string, string>("currency", "USD")
+                new KeyValuePair<string?, string?>("amount", amount.ToString(CultureInfo.InvariantCulture)),
+                new KeyValuePair<string?, string?>("currency", "USD")
             });
 
             HttpResponseMessage response = await client.PatchAsync($"api/v1/Transactions/{account}/Deposit", content)
@@ -83,8 +83,8 @@ namespace ComponentTests.V1
 
             FormUrlEncodedContent content = new FormUrlEncodedContent(new[]
             {
-                new KeyValuePair<string, string>("amount", amount.ToString(CultureInfo.InvariantCulture)),
-                new KeyValuePair<string, string>("currency", "USD")
+                new KeyValuePair<string?, string?>("amount", amount.ToString(CultureInfo.InvariantCulture)),
+                new KeyValuePair<string?, string?>("currency", "USD")
             });
 
             HttpResponseMessage response = await client.PatchAsync($"api/v1/Transactions/{account}/Withdraw", content)
