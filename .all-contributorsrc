@@ -246,6 +246,15 @@
         "design",
         "code"
       ]
+    },
+    {
+      "login": "charithdesilva",
+      "name": "Charith De Silva",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5924323?v=4",
+      "profile": "https://github.com/charithdesilva",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5,
