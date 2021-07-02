@@ -61,7 +61,9 @@ namespace WebApi.UseCases.V1.Accounts.OpenAccount
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(OpenAccountResponse))]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(OpenAccountResponse))]
         [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Post))]
+#pragma warning disable SCS0016 // Controller method is potentially vulnerable to Cross Site Request Forgery (CSRF).
         public async Task<IActionResult> Post(
+#pragma warning restore SCS0016 // Controller method is potentially vulnerable to Cross Site Request Forgery (CSRF).
             [FromServices] IOpenAccountUseCase useCase,
             [FromForm] [Required] decimal amount,
             [FromForm] [Required] string currency)

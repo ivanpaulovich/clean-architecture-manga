@@ -55,6 +55,16 @@ If you prefer dotnet commands then start each service individually:
 
 ### Generate Self Signed Certificate
 
+For Windows:
+
+```sh
+dotnet dev-certs https --clean
+dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p MyCertificatePassword
+dotnet dev-certs https --trust
+```
+
+For Mac:
+
 ```sh
 dotnet dev-certs https --clean
 dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\aspnetapp.pfx -p MyCertificatePassword
@@ -80,7 +90,7 @@ dotnet ef database update --project accounts-api/src/Infrastructure --startup-pr
 #### Identity Server
 
 ```sh
-dotnet run --project identity-server/src/IdentityServer.csproj
+dotnet run --project identity-server/IdentityServer.csproj
 ```
 #### Account API
 
