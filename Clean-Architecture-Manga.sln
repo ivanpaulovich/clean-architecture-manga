@@ -83,6 +83,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "wallet-spa", "wallet-spa", 
 		wallet-spa\README.md = wallet-spa\README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3A9E410D-D37D-469C-BAE3-153943AE70FF}"
+	ProjectSection(SolutionItems) = preProject
+		.all-contributorsrc = .all-contributorsrc
+		.dockerignore = .dockerignore
+		.gitignore = .gitignore
+		CHANGELOG.md = CHANGELOG.md
+		FUNDING.yml = FUNDING.yml
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

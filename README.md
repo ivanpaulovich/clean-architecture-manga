@@ -38,12 +38,12 @@ $ cd .docker; ./startup.sh; popd;
 
 Then the following containers should be running `docker ps`:
 
-| Application 	    | URL |
-|------------------ | -------------------------------------- |
+| Application 	      | URL                                         |
+|-------------------- | ------------------------------------------- |
 | NGINX 	          | https://wallet.local:8081                   |
-| Wallet SPA 	      | https://wallet.local:8081              |
-| Accounts API 	    | https://wallet.local:8081/accounts-api      |
-| Identity Server 	| https://wallet.local:8081/identity-server	  |
+| Wallet SPA 	      | https://wallet.local:8081                   |
+| Accounts API 	      | https://wallet.local:8081/accounts-api      |
+| Identity Server 	  | https://wallet.local:8081/identity-server	|
 | SQL Server 	      | Server=localhost;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts; |
 
 Browse to `https://wallet.local:8081` then click on Log In. Trust the [self-signed certificate](https://stackoverflow.com/questions/21397809/create-a-trusted-self-signed-ssl-cert-for-localhost-for-use-with-express-node).
