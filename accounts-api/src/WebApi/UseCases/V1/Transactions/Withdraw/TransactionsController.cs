@@ -72,7 +72,9 @@ namespace WebApi.UseCases.V1.Transactions.Withdraw
         [HttpPatch("{accountId:guid}/Withdraw")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WithdrawResponse))]
         [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Patch))]
+#pragma warning disable SCS0016 // Controller method is potentially vulnerable to Cross Site Request Forgery (CSRF).
         public async Task<IActionResult> Withdraw(
+#pragma warning restore SCS0016 // Controller method is potentially vulnerable to Cross Site Request Forgery (CSRF).
             [FromServices] IWithdrawUseCase useCase,
             [FromRoute] [Required] Guid accountId,
             [FromForm] [Required] decimal amount,

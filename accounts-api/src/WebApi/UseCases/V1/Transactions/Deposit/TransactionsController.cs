@@ -63,7 +63,9 @@ namespace WebApi.UseCases.V1.Transactions.Deposit
         [HttpPatch("{accountId:guid}/Deposit")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DepositResponse))]
         [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Patch))]
+#pragma warning disable SCS0016 // Controller method is potentially vulnerable to Cross Site Request Forgery (CSRF).
         public async Task<IActionResult> Deposit(
+#pragma warning restore SCS0016 // Controller method is potentially vulnerable to Cross Site Request Forgery (CSRF).
             [FromServices] IDepositUseCase useCase,
             [FromRoute] [Required] Guid accountId,
             [FromForm] [Required] decimal amount,

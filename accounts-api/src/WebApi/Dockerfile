@@ -24,4 +24,8 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 COPY /src/WebApi/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
+
+RUN apk add icu-libs
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+
 CMD ["entrypoint.sh"]

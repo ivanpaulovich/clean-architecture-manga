@@ -67,7 +67,9 @@ namespace WebApi.UseCases.V1.Transactions.Transfer
         [HttpPatch("{accountId:guid}/{destinationAccountId:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransferResponse))]
         [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Patch))]
+#pragma warning disable SCS0016 // Controller method is potentially vulnerable to Cross Site Request Forgery (CSRF).
         public async Task<IActionResult> Transfer(
+#pragma warning restore SCS0016 // Controller method is potentially vulnerable to Cross Site Request Forgery (CSRF).
             [FromServices] ITransferUseCase useCase,
             [FromRoute] [Required] Guid accountId,
             [FromRoute] [Required] Guid destinationAccountId,
