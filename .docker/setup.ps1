@@ -10,6 +10,7 @@ certutil -addstore -f "ROOT" ./https/localhost.crt
 
 # 3. hostadd
 
+Add-Content -Path $env:windir\System32\drivers\etc\hosts -Value "`n127.0.0.1`twallet.local" -Force
 
 # 4. build
 
