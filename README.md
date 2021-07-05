@@ -54,67 +54,6 @@ Then the following containers should be running on `docker ps`:
 
 Browse to [https://wallet.local:8081](https://wallet.local:8081) then click on Log In. If asked trust the [self-signed certificate](https://stackoverflow.com/questions/21397809/create-a-trusted-self-signed-ssl-cert-for-localhost-for-use-with-express-node).
 
-If you prefer dotnet commands then start each service individually:
-
-<details>
-    <summary>Expand to get the dotnet run steps.</summary>
-
-### Generate Self Signed Certificate
-
-For Windows:
-
-```sh
-dotnet dev-certs https --clean
-dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p MyCertificatePassword
-dotnet dev-certs https --trust
-```
-
-For Mac:
-
-```sh
-dotnet dev-certs https --clean
-dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\aspnetapp.pfx -p MyCertificatePassword
-dotnet dev-certs https --trust
-```
-
-### Spin up SQL Server in a Docker container
-
-```sh
-docker pull mcr.microsoft.com/mssql/server:2019-latest
-docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=<YourStrong!Passw0rd>' -p 1433:1433 --name sql1 -d mcr.microsoft.com/mssql/server:2019-latest
-```
-
-### Create and Seed Accounts Database
-
-```sh
-dotnet tool update --global dotnet-ef --version 3.1.6
-dotnet ef database update --project accounts-api/src/Infrastructure --startup-project accounts-api/src/WebApi
-```
-
-### Running Services
-
-#### Identity Server
-
-```sh
-dotnet run --project identity-server/IdentityServer.csproj
-```
-#### Account API
-
-```sh
-dotnet run --project accounts-api/src/WebApi/WebApi.csproj
-```
-
-#### Wallett SPA
-
-```sh
-pushd wallet-spa/src/ClientApp
-npm install
-popd
-dotnet run --project wallet-spa/src/WalletSPA.csproj --launch-profile WalletSPA
-```
-
-</details>
-
 ## Motivation
 
 > Learn how to design modular applications.
