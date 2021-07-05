@@ -1,16 +1,20 @@
-FROM node:latest
-# Create app directory
-WORKDIR /usr/src/app
-# Install app dependencies
-COPY package*.json ./
+FROM node:9-alpine
 
-RUN npm install
-# Copy app source code
-COPY . .
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY . /usr/src/app
 
 ARG ENV
 ENV ENV ${ENV}
 
-#Expose port and start application
+# --no-cache: download package index on-the-fly, no need to cleanup afterwards
+# --virtual: bundle packages, remove whole bundle at once, when done
+RUN apk --no-cache --virtual build-dependencies add \
+    python \
+    make \
+    g++ \
+    && npm install \
+    && apk del build-dependencies
+
 EXPOSE 3000
 CMD npm run start-${ENV}

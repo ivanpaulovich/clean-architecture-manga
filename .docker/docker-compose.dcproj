@@ -22,11 +22,9 @@
     <None Include="https\localhost.crt" />
     <None Include="https\localhost.key" />
     <None Include="https\localhost.pfx" />
-    <None Include="makecert.sh" />
+    <None Include="setup.sh" />
     <None Include="ssl-selfsigned.cnf" />
-    <None Include="startup-production.sh" />
-    <None Include="startup.sh" />
-    <None Include="trustcert.sh" />
-    <None Include="trustcert-windows.ps1" />
+    <None Include="setup.production.sh" />
+    <None Include="setup.ps1" />
   </ItemGroup>
 </Project>

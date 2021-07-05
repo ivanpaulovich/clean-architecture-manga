@@ -3,14 +3,14 @@
 
 Sample implementation of the **Clean Architecture Principles with .NET Core**. Use cases as central organizing structure, decoupled from frameworks and technology details. Built by small components that are developed and tested in isolation.
 
-We maintain two versions:
+We support two versions:
 
-- [Latest .NET Core 3.1 release](https://github.com/ivanpaulovich/clean-architecture-manga) - Check the .NET Core SDK on `global.json`.
-- [.NET 5](https://github.com/ivanpaulovich/clean-architecture-manga/tree/dotnet5) - Experimental features and .NET 5.
+- [.NET Core 3.1](https://github.com/ivanpaulovich/clean-architecture-manga) - .NET Core.
+- [.NET 5](https://github.com/ivanpaulovich/clean-architecture-manga/tree/dotnet5) - .NET 5 version.
 
 > Hit the `WATCH` button to get the latest Clean Architecture updates. <img src="https://emojis.slackmojis.com/emojis/images/1471045863/884/ninja.gif?1471045863" width="32" height="32" />
 
-Manga is a Virtual Wallet software in which the customer register an account then manage the balance by `Deposits`, `Withdraws` and `Transfers`.
+Manga is a Virtual Wallet Solution in which the customer register an account then manage the balance by `Deposits`, `Withdraws` and `Transfers` operations.
 
 The Web API's demo is hosted on Azure servers and there's a beautiful [Swagger Client](https://clean-architecture-manga.azurewebsites.net/swagger/index.html) available.
 [![Swagger Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/docs/docs/clean-architecture-manga-swagger-v2.jpg)](https://clean-architecture-manga.azurewebsites.net/swagger/index.html)
@@ -18,7 +18,6 @@ The Web API's demo is hosted on Azure servers and there's a beautiful [Swagger C
 We also support the React client:
 
 [![React+Redux Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/docs/docs/clean-architecture-manga-react.png)](https://clean-architecture-manga.azurewebsites.net)
-
 
 <p align="center">
   Run the Docker container in less than 2 minutes using Play With Docker:
@@ -31,22 +30,29 @@ We also support the React client:
 
 To startup the whole solution, execute the following command:
 
-```sh
-$ cd .docker; ./makecert.sh && ./trustcert.sh && sudo ./hostsadd.sh; popd;
-$ cd .docker; ./startup.sh; popd;
+Windows:
+
+```ps1
+PS cd docker && ./setup.ps1
 ```
 
-Then the following containers should be running `docker ps`:
+MacOS:
 
-| Application 	      | URL                                         |
-|-------------------- | ------------------------------------------- |
-| NGINX 	          | https://wallet.local:8081                   |
-| Wallet SPA 	      | https://wallet.local:8081                   |
-| Accounts API 	      | https://wallet.local:8081/accounts-api      |
-| Identity Server 	  | https://wallet.local:8081/identity-server	|
+```sh
+$ cd docker && ./setup.sh
+```
+
+Then the following containers should be running on `docker ps`:
+
+| Application 	      | URL                                                                           |
+|-------------------- | ----------------------------------------------------------------------------- |
+| NGINX 	          | https://wallet.local:8081                                                     |
+| Wallet SPA 	      | https://wallet.local:8081                                                     |
+| Accounts API 	      | https://wallet.local:8081/accounts-api                                        |
+| Identity Server 	  | https://wallet.local:8081/identity-server	                                  |
 | SQL Server 	      | Server=localhost;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts; |
 
-Browse to `https://wallet.local:8081` then click on Log In. Trust the [self-signed certificate](https://stackoverflow.com/questions/21397809/create-a-trusted-self-signed-ssl-cert-for-localhost-for-use-with-express-node).
+Browse to [https://wallet.local:8081](https://wallet.local:8081) then click on Log In. If asked trust the [self-signed certificate](https://stackoverflow.com/questions/21397809/create-a-trusted-self-signed-ssl-cert-for-localhost-for-use-with-express-node).
 
 If you prefer dotnet commands then start each service individually:
 
