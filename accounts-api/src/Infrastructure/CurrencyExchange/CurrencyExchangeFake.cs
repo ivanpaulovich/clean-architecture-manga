@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Application.Services;
     using Domain.ValueObjects;
 
     /// <summary>

@@ -16,9 +16,7 @@ namespace Application.UseCases.GetAccount
         public bool? InvalidOutput { get; private set; }
         public void Invalid() => this.InvalidOutput = true;
         public void NotFound() => this.IsNotFound = true;
-        public void Ok(Account account)
-        {
-            this.Account = account;
-        }
+
+        public void Ok(Account account) => this.Account = account;
     }
 }

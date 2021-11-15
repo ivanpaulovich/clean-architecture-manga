@@ -12,8 +12,8 @@ namespace Application.UseCases.Deposit
     /// <inheritdoc />
     public sealed class DepositValidationUseCase : IDepositUseCase
     {
-        private readonly IDepositUseCase _useCase;
         private readonly Notification _notification;
+        private readonly IDepositUseCase _useCase;
         private IOutputPort _outputPort;
 
         /// <summary>

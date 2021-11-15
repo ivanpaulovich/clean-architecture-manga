@@ -1,6 +1,6 @@
 namespace IdentityServer.Modules.Common
 {
-    using Microsoft.AspNetCore.Builder;
+    using System.IO;
     using Microsoft.AspNetCore.DataProtection;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -16,7 +16,7 @@ namespace IdentityServer.Modules.Common
         {
             services.AddDataProtection()
                 .SetApplicationName("identity-server")
-                .PersistKeysToFileSystem(new System.IO.DirectoryInfo(@"./"));
+                .PersistKeysToFileSystem(new DirectoryInfo(@"./"));
 
             return services;
         }

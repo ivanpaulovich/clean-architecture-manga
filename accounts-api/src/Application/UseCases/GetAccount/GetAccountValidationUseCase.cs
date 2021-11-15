@@ -4,15 +4,15 @@
 
 namespace Application.UseCases.GetAccount
 {
-    using Application.Services;
     using System;
     using System.Threading.Tasks;
+    using Services;
 
     /// <inheritdoc />
     public sealed class GetAccountValidationUseCase : IGetAccountUseCase
     {
-        private readonly IGetAccountUseCase _useCase;
         private readonly Notification _notification;
+        private readonly IGetAccountUseCase _useCase;
         private IOutputPort _outputPort;
 
         /// <summary>

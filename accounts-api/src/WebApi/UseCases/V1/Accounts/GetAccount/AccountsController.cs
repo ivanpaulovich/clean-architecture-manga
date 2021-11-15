@@ -27,12 +27,10 @@ namespace WebApi.UseCases.V1.Accounts.GetAccount
     public sealed class AccountsController : ControllerBase, IOutputPort
     {
         private readonly Notification _notification;
-        public AccountsController(Notification notification)
-        {
-            this._notification = notification;
-        }
 
         private IActionResult? _viewModel;
+
+        public AccountsController(Notification notification) => this._notification = notification;
 
         void IOutputPort.Invalid()
         {

@@ -12,8 +12,8 @@ namespace Application.UseCases.Transfer
     /// <inheritdoc />
     public sealed class TransferValidationUseCase : ITransferUseCase
     {
-        private readonly ITransferUseCase _useCase;
         private readonly Notification _notification;
+        private readonly ITransferUseCase _useCase;
         private IOutputPort _outputPort;
 
         /// <summary>

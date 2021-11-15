@@ -11,8 +11,8 @@ namespace Application.UseCases.CloseAccount
     /// <inheritdoc />
     public sealed class CloseAccountValidationUseCase : ICloseAccountUseCase
     {
-        private readonly ICloseAccountUseCase _useCase;
         private readonly Notification _notification;
+        private readonly ICloseAccountUseCase _useCase;
         private IOutputPort _outputPort;
 
         /// <summary>

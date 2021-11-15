@@ -28,12 +28,9 @@ namespace WebApi.UseCases.V1.Accounts.OpenAccount
     {
         private readonly Notification _notification;
 
-        public AccountsController(Notification notification)
-        {
-            this._notification = notification;
-        }
-
         private IActionResult? _viewModel;
+
+        public AccountsController(Notification notification) => this._notification = notification;
 
         void IOutputPort.Invalid()
         {

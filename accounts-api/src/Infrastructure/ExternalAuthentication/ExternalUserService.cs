@@ -24,7 +24,7 @@ namespace Infrastructure.ExternalAuthentication
         public string GetCurrentUserId()
         {
             ClaimsPrincipal user = this._httpContextAccessor
-                .HttpContext!
+                    .HttpContext!
                 .User;
 
             string id = user.FindFirst("sub")?.Value!;

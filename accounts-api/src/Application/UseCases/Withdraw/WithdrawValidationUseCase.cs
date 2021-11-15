@@ -12,8 +12,8 @@ namespace Application.UseCases.Withdraw
     /// <inheritdoc />
     public sealed class WithdrawValidationUseCase : IWithdrawUseCase
     {
-        private readonly IWithdrawUseCase _useCase;
         private readonly Notification _notification;
+        private readonly IWithdrawUseCase _useCase;
         private IOutputPort _outputPort;
 
         /// <summary>

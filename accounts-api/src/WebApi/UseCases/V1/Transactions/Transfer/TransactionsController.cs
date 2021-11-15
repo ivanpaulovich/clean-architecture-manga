@@ -31,12 +31,9 @@ namespace WebApi.UseCases.V1.Transactions.Transfer
     {
         private readonly Notification _notification;
 
-        public TransactionsController(Notification notification)
-        {
-            this._notification = notification;
-        }
-
         private IActionResult? _viewModel;
+
+        public TransactionsController(Notification notification) => this._notification = notification;
 
         void IOutputPort.OutOfFunds() => this._viewModel = this.BadRequest("Out of funds.");
 

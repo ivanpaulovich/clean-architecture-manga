@@ -5,7 +5,6 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using Application.Services;
     using Domain.ValueObjects;
     using Newtonsoft.Json.Linq;
 
