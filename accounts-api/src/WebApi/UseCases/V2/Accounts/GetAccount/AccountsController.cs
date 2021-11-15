@@ -78,7 +78,7 @@ namespace WebApi.UseCases.V2.Accounts.GetAccount
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get(
             [FromServices] IGetAccountUseCase useCase,
-            [FromRoute] [Required] GetAccountDetailsRequestV2 request)
+            [FromRoute][Required] GetAccountDetailsRequestV2 request)
         {
             useCase.SetOutputPort(this);
 

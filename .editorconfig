@@ -183,6 +183,5 @@ end_of_line = lf
 [*.{cmd, bat}]
 end_of_line = crlf
 
-# CSharp formatting rules:
 [*.cs]
 csharp_style_namespace_declarations = file_scoped

@@ -68,10 +68,10 @@ namespace WebApi.UseCases.V1.Transactions.Transfer
         public async Task<IActionResult> Transfer(
 #pragma warning restore SCS0016 // Controller method is potentially vulnerable to Cross Site Request Forgery (CSRF).
             [FromServices] ITransferUseCase useCase,
-            [FromRoute] [Required] Guid accountId,
-            [FromRoute] [Required] Guid destinationAccountId,
-            [FromForm] [Required] decimal amount,
-            [FromForm] [Required] string currency)
+            [FromRoute][Required] Guid accountId,
+            [FromRoute][Required] Guid destinationAccountId,
+            [FromForm][Required] decimal amount,
+            [FromForm][Required] string currency)
         {
             useCase.SetOutputPort(this);
 
