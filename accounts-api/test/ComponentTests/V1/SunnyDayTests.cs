@@ -27,7 +27,7 @@ namespace ComponentTests.V1
                 .ConfigureAwait(false);
 
             using StringReader stringReader = new StringReader(actualResponseString);
-            using JsonTextReader reader = new JsonTextReader(stringReader) {DateParseHandling = DateParseHandling.None};
+            using JsonTextReader reader = new JsonTextReader(stringReader) { DateParseHandling = DateParseHandling.None };
 
             JObject jsonResponse = await JObject.LoadAsync(reader)
                 .ConfigureAwait(false);
@@ -47,7 +47,7 @@ namespace ComponentTests.V1
                 .ConfigureAwait(false);
 
             using StringReader stringReader = new StringReader(actualResponseString);
-            using JsonTextReader reader = new JsonTextReader(stringReader) {DateParseHandling = DateParseHandling.None};
+            using JsonTextReader reader = new JsonTextReader(stringReader) { DateParseHandling = DateParseHandling.None };
 
             JObject jsonResponse = await JObject.LoadAsync(reader)
                 .ConfigureAwait(false);

@@ -62,7 +62,7 @@ namespace WebApi.UseCases.V1.Accounts.CloseAccount
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CloseAccountResponse))]
         [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Delete))]
         public async Task<IActionResult> Close(
-            [FromRoute] [Required] Guid accountId)
+            [FromRoute][Required] Guid accountId)
         {
             this._useCase.SetOutputPort(this);
 

@@ -4,9 +4,9 @@
 
 namespace Application.UseCases.GetAccount
 {
-    using Application.Services;
     using System;
     using System.Threading.Tasks;
+    using Application.Services;
 
     /// <inheritdoc />
     public sealed class GetAccountValidationUseCase : IGetAccountUseCase

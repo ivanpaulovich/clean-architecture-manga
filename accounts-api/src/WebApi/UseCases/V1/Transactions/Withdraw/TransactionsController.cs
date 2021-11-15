@@ -40,7 +40,7 @@ namespace WebApi.UseCases.V1.Transactions.Withdraw
 
         void IOutputPort.OutOfFunds()
         {
-            Dictionary<string, string[]> messages = new Dictionary<string, string[]> {{"", new[] {"Out of funds."}}};
+            Dictionary<string, string[]> messages = new Dictionary<string, string[]> { { "", new[] { "Out of funds." } } };
 
             ValidationProblemDetails problemDetails = new ValidationProblemDetails(messages);
             this._viewModel = this.BadRequest(problemDetails);
@@ -76,9 +76,9 @@ namespace WebApi.UseCases.V1.Transactions.Withdraw
         public async Task<IActionResult> Withdraw(
 #pragma warning restore SCS0016 // Controller method is potentially vulnerable to Cross Site Request Forgery (CSRF).
             [FromServices] IWithdrawUseCase useCase,
-            [FromRoute] [Required] Guid accountId,
-            [FromForm] [Required] decimal amount,
-            [FromForm] [Required] string currency)
+            [FromRoute][Required] Guid accountId,
+            [FromForm][Required] decimal amount,
+            [FromForm][Required] string currency)
         {
             useCase.SetOutputPort(this);
 

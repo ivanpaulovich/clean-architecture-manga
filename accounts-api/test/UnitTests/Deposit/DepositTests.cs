@@ -1,7 +1,7 @@
 namespace UnitTests.Deposit
 {
-    using Application.Services;
     using System.Threading.Tasks;
+    using Application.Services;
     using Application.UseCases.Deposit;
     using Domain.Credits;
     using Domain.ValueObjects;

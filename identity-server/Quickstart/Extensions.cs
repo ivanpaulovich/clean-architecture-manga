@@ -1,6 +1,6 @@
+using System;
 using IdentityServer4.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace IdentityServerHost.Quickstart.UI
 {
