@@ -1,13 +1,12 @@
-namespace UnitTests.Deposit
-{
-    using Xunit;
+namespace UnitTests.Deposit;
 
-    internal sealed class ValidDataSetup : TheoryData<decimal>
+using Xunit;
+
+internal sealed class ValidDataSetup : TheoryData<decimal>
+{
+    public ValidDataSetup()
     {
-        public ValidDataSetup()
-        {
-            this.Add(100);
-            this.Add(200);
-        }
+        this.Add(100);
+        this.Add(200);
     }
 }

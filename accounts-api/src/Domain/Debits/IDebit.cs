@@ -2,20 +2,19 @@
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
-namespace Domain.Debits
+namespace Domain.Debits;
+
+using ValueObjects;
+
+/// <summary>
+///     Debit.
+/// </summary>
+public interface IDebit
 {
-    using ValueObjects;
+    DebitId DebitId { get; }
 
     /// <summary>
-    ///     Debit.
+    ///     Gets the Amount.
     /// </summary>
-    public interface IDebit
-    {
-        DebitId DebitId { get; }
-
-        /// <summary>
-        ///     Gets the Amount.
-        /// </summary>
-        Money Amount { get; }
-    }
+    Money Amount { get; }
 }

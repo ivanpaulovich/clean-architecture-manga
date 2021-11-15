@@ -1,31 +1,30 @@
-namespace UnitTests.OpenAccount
+namespace UnitTests.OpenAccount;
+
+using System.Threading.Tasks;
+using Application.UseCases.OpenAccount;
+using Xunit;
+
+public sealed class OpenAccountTests : IClassFixture<StandardFixture>
 {
-    using System.Threading.Tasks;
-    using Application.UseCases.OpenAccount;
-    using Xunit;
+    private readonly StandardFixture _fixture;
+    public OpenAccountTests(StandardFixture fixture) => this._fixture = fixture;
 
-    public sealed class OpenAccountTests : IClassFixture<StandardFixture>
+    [Theory]
+    [ClassData(typeof(ValidDataSetup))]
+    public async Task OpenAccount_Returns_Ok(decimal amount, string currency)
     {
-        private readonly StandardFixture _fixture;
-        public OpenAccountTests(StandardFixture fixture) => this._fixture = fixture;
+        OpenAccountPresenter presenter = new OpenAccountPresenter();
 
-        [Theory]
-        [ClassData(typeof(ValidDataSetup))]
-        public async Task OpenAccount_Returns_Ok(decimal amount, string currency)
-        {
-            OpenAccountPresenter presenter = new OpenAccountPresenter();
+        OpenAccountUseCase sut = new OpenAccountUseCase(
+            this._fixture.AccountRepositoryFake,
+            this._fixture.UnitOfWork,
+            this._fixture.TestUserService,
+            this._fixture.EntityFactory);
 
-            OpenAccountUseCase sut = new OpenAccountUseCase(
-                this._fixture.AccountRepositoryFake,
-                this._fixture.UnitOfWork,
-                this._fixture.TestUserService,
-                this._fixture.EntityFactory);
+        sut.SetOutputPort(presenter);
 
-            sut.SetOutputPort(presenter);
+        await sut.Execute(amount, currency);
 
-            await sut.Execute(amount, currency);
-
-            Assert.NotNull(presenter.Account);
-        }
+        Assert.NotNull(presenter.Account);
     }
 }

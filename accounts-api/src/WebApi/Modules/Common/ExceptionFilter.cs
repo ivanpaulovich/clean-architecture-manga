@@ -1,22 +1,21 @@
-namespace WebApi.Modules.Common
+namespace WebApi.Modules.Common;
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+
+/// <summary>
+///     Exception Filter.
+/// </summary>
+public sealed class ExceptionFilter : IExceptionFilter
 {
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Filters;
-
     /// <summary>
-    ///     Exception Filter.
+    ///     Add Problem Details when occurs Domain Exception.
     /// </summary>
-    public sealed class ExceptionFilter : IExceptionFilter
+    public void OnException(ExceptionContext context)
     {
-        /// <summary>
-        ///     Add Problem Details when occurs Domain Exception.
-        /// </summary>
-        public void OnException(ExceptionContext context)
-        {
-            ProblemDetails problemDetails = new ProblemDetails {Status = 500, Title = "Bad Request"};
+        ProblemDetails problemDetails = new ProblemDetails { Status = 500, Title = "Bad Request" };
 
-            context.Result = new JsonResult(problemDetails);
-            context.Exception = null!;
-        }
+        context.Result = new JsonResult(problemDetails);
+        context.Exception = null!;
     }
 }

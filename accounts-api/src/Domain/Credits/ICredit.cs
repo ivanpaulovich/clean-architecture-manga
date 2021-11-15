@@ -2,20 +2,19 @@
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
-namespace Domain.Credits
+namespace Domain.Credits;
+
+using ValueObjects;
+
+/// <summary>
+///     Credit Entity Interface.
+/// </summary>
+public interface ICredit
 {
-    using ValueObjects;
+    CreditId CreditId { get; }
 
     /// <summary>
-    ///     Credit Entity Interface.
+    ///     Gets the Amount.
     /// </summary>
-    public interface ICredit
-    {
-        CreditId CreditId { get; }
-
-        /// <summary>
-        ///     Gets the Amount.
-        /// </summary>
-        Money Amount { get; }
-    }
+    Money Amount { get; }
 }

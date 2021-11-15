@@ -1,9 +1,8 @@
-namespace UnitTests.Withdraw
-{
-    using Xunit;
+namespace UnitTests.Withdraw;
 
-    internal sealed class ValidDataSetup : TheoryData<decimal, decimal>
-    {
-        public ValidDataSetup() => this.Add(100, 400);
-    }
+using Xunit;
+
+internal sealed class ValidDataSetup : TheoryData<decimal, decimal>
+{
+    public ValidDataSetup() => this.Add(100, 400);
 }

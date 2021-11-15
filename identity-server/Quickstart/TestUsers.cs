@@ -1,31 +1,37 @@
 // Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Text.Json;
+using IdentityModel;
+using IdentityServer4;
+using IdentityServer4.Test;
 
-namespace IdentityServerHost.Quickstart.UI
+namespace IdentityServer.Quickstart;
+
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Text.Json;
+using IdentityModel;
+using IdentityServer4;
+using IdentityServer4.Test;
+
+public class TestUsers
 {
-    using System.Collections.Generic;
-    using System.Security.Claims;
-    using System.Text.Json;
-    using IdentityModel;
-    using IdentityServer4;
-    using IdentityServer4.Test;
-
-    public class TestUsers
+    public static List<TestUser> Users
     {
-        public static List<TestUser> Users
+        get
         {
-            get
+            var address = new
             {
-                var address = new
-                {
-                    street_address = "One Hacker Way",
-                    locality = "Heidelberg",
-                    postal_code = 69118,
-                    country = "Germany"
-                };
+                street_address = "One Hacker Way",
+                locality = "Heidelberg",
+                postal_code = 69118,
+                country = "Germany"
+            };
 
-                return new List<TestUser>
+            return new List<TestUser>
                 {
                     new TestUser
                     {
@@ -62,7 +68,6 @@ namespace IdentityServerHost.Quickstart.UI
                         }
                     }
                 };
-            }
         }
     }
 }

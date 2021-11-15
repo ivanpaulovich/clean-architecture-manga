@@ -2,15 +2,14 @@
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
-namespace Infrastructure.ExternalAuthentication
-{
-    using Application.Services;
-    using DataAccess;
+namespace Infrastructure.ExternalAuthentication;
 
+using Application.Services;
+using DataAccess;
+
+/// <inheritdoc />
+public sealed class TestUserService : IUserService
+{
     /// <inheritdoc />
-    public sealed class TestUserService : IUserService
-    {
-        /// <inheritdoc />
-        public string GetCurrentUserId() => SeedData.DefaultExternalUserId;
-    }
+    public string GetCurrentUserId() => SeedData.DefaultExternalUserId;
 }

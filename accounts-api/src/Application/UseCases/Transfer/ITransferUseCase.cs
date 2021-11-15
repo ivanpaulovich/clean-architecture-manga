@@ -2,30 +2,29 @@
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
-namespace Application.UseCases.Transfer
+namespace Application.UseCases.Transfer;
+
+using System;
+using System.Threading.Tasks;
+
+/// <summary>
+///     Transfer
+///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">
+///         Use
+///         Case Domain-Driven Design Pattern
+///     </see>
+///     .
+/// </summary>
+public interface ITransferUseCase
 {
-    using System;
-    using System.Threading.Tasks;
+    /// <summary>
+    ///     Executes the use case.
+    /// </summary>
+    Task Execute(Guid originAccountId, Guid destinationAccountId, decimal amount, string currency);
 
     /// <summary>
-    ///     Transfer
-    ///     <see href="https://github.com/ivanpaulovich/clean-architecture-manga/wiki/Domain-Driven-Design-Patterns#use-case">
-    ///         Use
-    ///         Case Domain-Driven Design Pattern
-    ///     </see>
-    ///     .
+    ///     Sets the Output Port.
     /// </summary>
-    public interface ITransferUseCase
-    {
-        /// <summary>
-        ///     Executes the use case.
-        /// </summary>
-        Task Execute(Guid originAccountId, Guid destinationAccountId, decimal amount, string currency);
-
-        /// <summary>
-        ///     Sets the Output Port.
-        /// </summary>
-        /// <param name="outputPort">Output Port</param>
-        void SetOutputPort(IOutputPort outputPort);
-    }
+    /// <param name="outputPort">Output Port</param>
+    void SetOutputPort(IOutputPort outputPort);
 }

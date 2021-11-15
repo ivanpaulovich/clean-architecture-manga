@@ -2,72 +2,71 @@
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
-namespace Application.UseCases.OpenAccount
+namespace Application.UseCases.OpenAccount;
+
+using System;
+using System.Threading.Tasks;
+using Domain;
+using Domain.Credits;
+using Domain.ValueObjects;
+using Services;
+
+/// <inheritdoc />
+public sealed class OpenAccountUseCase : IOpenAccountUseCase
 {
-    using System;
-    using System.Threading.Tasks;
-    using Domain;
-    using Domain.Credits;
-    using Domain.ValueObjects;
-    using Services;
+    private readonly IAccountFactory _accountFactory;
+    private readonly IAccountRepository _accountRepository;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IUserService _userService;
+    private IOutputPort _outputPort;
+
+    public OpenAccountUseCase(
+        IAccountRepository accountRepository,
+        IUnitOfWork unitOfWork,
+        IUserService userService,
+        IAccountFactory accountFactory)
+    {
+        this._accountRepository = accountRepository;
+        this._unitOfWork = unitOfWork;
+        this._userService = userService;
+        this._accountFactory = accountFactory;
+        this._outputPort = new OpenAccountPresenter();
+    }
 
     /// <inheritdoc />
-    public sealed class OpenAccountUseCase : IOpenAccountUseCase
+    public void SetOutputPort(IOutputPort outputPort) => this._outputPort = outputPort;
+
+    /// <inheritdoc />
+    public Task Execute(decimal amount, string currency) =>
+        this.OpenAccount(new Money(amount, new Currency(currency)));
+
+    private async Task OpenAccount(Money amountToDeposit)
     {
-        private readonly IAccountFactory _accountFactory;
-        private readonly IAccountRepository _accountRepository;
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IUserService _userService;
-        private IOutputPort _outputPort;
+        string externalUserId = this._userService
+            .GetCurrentUserId();
 
-        public OpenAccountUseCase(
-            IAccountRepository accountRepository,
-            IUnitOfWork unitOfWork,
-            IUserService userService,
-            IAccountFactory accountFactory)
-        {
-            this._accountRepository = accountRepository;
-            this._unitOfWork = unitOfWork;
-            this._userService = userService;
-            this._accountFactory = accountFactory;
-            this._outputPort = new OpenAccountPresenter();
-        }
+        Account account = this._accountFactory
+            .NewAccount(externalUserId, amountToDeposit.Currency);
 
-        /// <inheritdoc />
-        public void SetOutputPort(IOutputPort outputPort) => this._outputPort = outputPort;
+        Credit credit = this._accountFactory
+            .NewCredit(account, amountToDeposit, DateTime.Now);
 
-        /// <inheritdoc />
-        public Task Execute(decimal amount, string currency) =>
-            this.OpenAccount(new Money(amount, new Currency(currency)));
+        await this.Deposit(account, credit)
+            .ConfigureAwait(false);
 
-        private async Task OpenAccount(Money amountToDeposit)
-        {
-            string externalUserId = this._userService
-                .GetCurrentUserId();
+        this._outputPort?.Ok(account);
+    }
 
-            Account account = this._accountFactory
-                .NewAccount(externalUserId, amountToDeposit.Currency);
+    private async Task Deposit(Account account, Credit credit)
+    {
+        account.Deposit(credit);
 
-            Credit credit = this._accountFactory
-                .NewCredit(account, amountToDeposit, DateTime.Now);
+        await this._accountRepository
+            .Add(account, credit)
+            .ConfigureAwait(false);
 
-            await this.Deposit(account, credit)
-                .ConfigureAwait(false);
-
-            this._outputPort?.Ok(account);
-        }
-
-        private async Task Deposit(Account account, Credit credit)
-        {
-            account.Deposit(credit);
-
-            await this._accountRepository
-                .Add(account, credit)
-                .ConfigureAwait(false);
-
-            await this._unitOfWork
-                .Save()
-                .ConfigureAwait(false);
-        }
+        await this._unitOfWork
+            .Save()
+            .ConfigureAwait(false);
     }
 }

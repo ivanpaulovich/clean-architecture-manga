@@ -2,39 +2,38 @@
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
-namespace Infrastructure.DataAccess
+namespace Infrastructure.DataAccess;
+
+using System;
+using System.Threading.Tasks;
+using Application.Services;
+
+public sealed class UnitOfWork : IUnitOfWork, IDisposable
 {
-    using System;
-    using System.Threading.Tasks;
-    using Application.Services;
+    private readonly MangaContext _context;
+    private bool _disposed;
 
-    public sealed class UnitOfWork : IUnitOfWork, IDisposable
+    public UnitOfWork(MangaContext context) => this._context = context;
+
+    /// <inheritdoc />
+    public void Dispose() => this.Dispose(true);
+
+    /// <inheritdoc />
+    public async Task<int> Save()
     {
-        private readonly MangaContext _context;
-        private bool _disposed;
+        int affectedRows = await this._context
+            .SaveChangesAsync()
+            .ConfigureAwait(false);
+        return affectedRows;
+    }
 
-        public UnitOfWork(MangaContext context) => this._context = context;
-
-        /// <inheritdoc />
-        public void Dispose() => this.Dispose(true);
-
-        /// <inheritdoc />
-        public async Task<int> Save()
+    private void Dispose(bool disposing)
+    {
+        if (!this._disposed && disposing)
         {
-            int affectedRows = await this._context
-                .SaveChangesAsync()
-                .ConfigureAwait(false);
-            return affectedRows;
+            this._context.Dispose();
         }
 
-        private void Dispose(bool disposing)
-        {
-            if (!this._disposed && disposing)
-            {
-                this._context.Dispose();
-            }
-
-            this._disposed = true;
-        }
+        this._disposed = true;
     }
 }

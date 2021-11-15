@@ -1,23 +1,22 @@
-namespace WebApi.UseCases.V1.Accounts.GetAccount
+namespace WebApi.UseCases.V1.Accounts.GetAccount;
+
+using System.ComponentModel.DataAnnotations;
+using Domain;
+using ViewModels;
+
+/// <summary>
+///     Get Account Response.
+/// </summary>
+public sealed class GetAccountResponse
 {
-    using System.ComponentModel.DataAnnotations;
-    using Domain;
-    using ViewModels;
+    /// <summary>
+    ///     The Get Account Response constructor.
+    /// </summary>
+    public GetAccountResponse(Account account) => this.Account = new AccountDetailsModel(account);
 
     /// <summary>
-    ///     Get Account Response.
+    ///     Gets account ID.
     /// </summary>
-    public sealed class GetAccountResponse
-    {
-        /// <summary>
-        ///     The Get Account Response constructor.
-        /// </summary>
-        public GetAccountResponse(Account account) => this.Account = new AccountDetailsModel(account);
-
-        /// <summary>
-        ///     Gets account ID.
-        /// </summary>
-        [Required]
-        public AccountDetailsModel Account { get; }
-    }
+    [Required]
+    public AccountDetailsModel Account { get; }
 }

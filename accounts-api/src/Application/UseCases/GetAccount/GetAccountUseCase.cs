@@ -2,49 +2,48 @@
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
-namespace Application.UseCases.GetAccount
+namespace Application.UseCases.GetAccount;
+
+using System;
+using System.Threading.Tasks;
+using Domain;
+using Domain.ValueObjects;
+
+/// <inheritdoc />
+public sealed class GetAccountUseCase : IGetAccountUseCase
 {
-    using System;
-    using System.Threading.Tasks;
-    using Domain;
-    using Domain.ValueObjects;
+    private readonly IAccountRepository _accountRepository;
+    private IOutputPort _outputPort;
+
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="GetAccountUseCase" /> class.
+    /// </summary>
+    /// <param name="accountRepository">Account Repository.</param>
+    public GetAccountUseCase(IAccountRepository accountRepository)
+    {
+        this._accountRepository = accountRepository;
+        this._outputPort = new GetAccountPresenter();
+    }
 
     /// <inheritdoc />
-    public sealed class GetAccountUseCase : IGetAccountUseCase
+    public void SetOutputPort(IOutputPort outputPort) => this._outputPort = outputPort;
+
+    /// <inheritdoc />
+    public Task Execute(Guid accountId) =>
+        this.GetAccountInternal(new AccountId(accountId));
+
+    private async Task GetAccountInternal(AccountId accountId)
     {
-        private readonly IAccountRepository _accountRepository;
-        private IOutputPort _outputPort;
+        IAccount account = await this._accountRepository
+            .GetAccount(accountId)
+            .ConfigureAwait(false);
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="GetAccountUseCase" /> class.
-        /// </summary>
-        /// <param name="accountRepository">Account Repository.</param>
-        public GetAccountUseCase(IAccountRepository accountRepository)
+        if (account is Account getAccount)
         {
-            this._accountRepository = accountRepository;
-            this._outputPort = new GetAccountPresenter();
+            this._outputPort.Ok(getAccount);
+            return;
         }
 
-        /// <inheritdoc />
-        public void SetOutputPort(IOutputPort outputPort) => this._outputPort = outputPort;
-
-        /// <inheritdoc />
-        public Task Execute(Guid accountId) =>
-            this.GetAccountInternal(new AccountId(accountId));
-
-        private async Task GetAccountInternal(AccountId accountId)
-        {
-            IAccount account = await this._accountRepository
-                .GetAccount(accountId)
-                .ConfigureAwait(false);
-
-            if (account is Account getAccount)
-            {
-                this._outputPort.Ok(getAccount);
-                return;
-            }
-
-            this._outputPort.NotFound();
-        }
+        this._outputPort.NotFound();
     }
 }

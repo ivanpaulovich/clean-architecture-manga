@@ -1,14 +1,13 @@
-namespace UnitTests.OpenAccount
-{
-    using Xunit;
+namespace UnitTests.OpenAccount;
 
-    internal sealed class ValidDataSetup : TheoryData<decimal, string>
+using Xunit;
+
+internal sealed class ValidDataSetup : TheoryData<decimal, string>
+{
+    public ValidDataSetup()
     {
-        public ValidDataSetup()
-        {
-            this.Add(100, "SEK");
-            this.Add(25, "BRL");
-            this.Add(10, "USD");
-        }
+        this.Add(100, "SEK");
+        this.Add(25, "BRL");
+        this.Add(10, "USD");
     }
 }
