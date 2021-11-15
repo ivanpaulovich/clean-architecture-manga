@@ -21,6 +21,7 @@ jobs:
         sleep 10
         pushd accounts-api
         dotnet tool update --global dotnet-ef
+        dotnet build
         dotnet ef database update --project src/Infrastructure --startup-project src/WebApi
         popd
         dotnet build
