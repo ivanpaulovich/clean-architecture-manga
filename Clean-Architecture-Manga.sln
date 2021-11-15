@@ -16,14 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F4408BAF-2D2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{54ECA5D5-FCB9-4427-98A1-6915E0C2C71B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{B3ABDDAF-9164-4FC4-862D-07A2D9F62F5D}"
-	ProjectSection(SolutionItems) = preProject
-		accounts-api\scripts\build.sh = accounts-api\scripts\build.sh
-		accounts-api\scripts\download-tools.sh = accounts-api\scripts\download-tools.sh
-		accounts-api\scripts\format.sh = accounts-api\scripts\format.sh
-		accounts-api\scripts\sql-docker-up.sh = accounts-api\scripts\sql-docker-up.sh
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "accounts-api\src\Application\Application.csproj", "{80E73E2B-3507-4160-BF51-5B1BD3F94E4B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "accounts-api\src\WebApi\WebApi.csproj", "{5286EDF8-AE3D-4E7B-89B3-3AA1CE86C082}"
@@ -137,7 +129,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F4408BAF-2D26-4D97-808C-7A96C4A7F636} = {51331007-CACA-4676-934B-217999A6B1E2}
 		{54ECA5D5-FCB9-4427-98A1-6915E0C2C71B} = {51331007-CACA-4676-934B-217999A6B1E2}
-		{B3ABDDAF-9164-4FC4-862D-07A2D9F62F5D} = {51331007-CACA-4676-934B-217999A6B1E2}
 		{80E73E2B-3507-4160-BF51-5B1BD3F94E4B} = {F4408BAF-2D26-4D97-808C-7A96C4A7F636}
 		{5286EDF8-AE3D-4E7B-89B3-3AA1CE86C082} = {F4408BAF-2D26-4D97-808C-7A96C4A7F636}
 		{C38A01E0-F1C3-40C5-A8A8-5B3ECD5F59AB} = {F4408BAF-2D26-4D97-808C-7A96C4A7F636}
