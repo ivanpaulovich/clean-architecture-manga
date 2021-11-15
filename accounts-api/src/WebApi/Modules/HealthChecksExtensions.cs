@@ -54,7 +54,7 @@ namespace WebApi.Modules
             this IApplicationBuilder app)
         {
             app.UseHealthChecks("/health",
-                new HealthCheckOptions { ResponseWriter = WriteResponse });
+                new HealthCheckOptions {ResponseWriter = WriteResponse});
 
             return app;
         }

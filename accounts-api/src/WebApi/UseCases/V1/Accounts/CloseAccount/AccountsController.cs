@@ -26,16 +26,16 @@ namespace WebApi.UseCases.V1.Accounts.CloseAccount
     [ApiController]
     public sealed class AccountsController : ControllerBase, IOutputPort
     {
-        private readonly ICloseAccountUseCase _useCase;
         private readonly Notification _notification;
+        private readonly ICloseAccountUseCase _useCase;
+
+        private IActionResult? _viewModel;
 
         public AccountsController(ICloseAccountUseCase useCase, Notification notification)
         {
             this._useCase = useCase;
             this._notification = notification;
         }
-
-        private IActionResult? _viewModel;
 
         void IOutputPort.Invalid()
         {
@@ -62,7 +62,7 @@ namespace WebApi.UseCases.V1.Accounts.CloseAccount
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CloseAccountResponse))]
         [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Delete))]
         public async Task<IActionResult> Close(
-            [FromRoute][Required] Guid accountId)
+            [FromRoute] [Required] Guid accountId)
         {
             this._useCase.SetOutputPort(this);
 

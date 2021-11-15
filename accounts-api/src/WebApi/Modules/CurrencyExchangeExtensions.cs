@@ -1,6 +1,5 @@
 namespace WebApi.Modules
 {
-    using Application.Services;
     using Common.FeatureFlags;
     using Infrastructure.CurrencyExchange;
     using Microsoft.Extensions.Configuration;

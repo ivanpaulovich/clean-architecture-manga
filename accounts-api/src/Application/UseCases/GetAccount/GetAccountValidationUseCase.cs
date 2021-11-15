@@ -6,13 +6,13 @@ namespace Application.UseCases.GetAccount
 {
     using System;
     using System.Threading.Tasks;
-    using Application.Services;
+    using Services;
 
     /// <inheritdoc />
     public sealed class GetAccountValidationUseCase : IGetAccountUseCase
     {
-        private readonly IGetAccountUseCase _useCase;
         private readonly Notification _notification;
+        private readonly IGetAccountUseCase _useCase;
         private IOutputPort _outputPort;
 
         /// <summary>

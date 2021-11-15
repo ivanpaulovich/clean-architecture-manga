@@ -18,6 +18,7 @@ namespace Application.UseCases.Deposit
         public bool? InvalidOutput { get; private set; }
         public void Invalid() => this.InvalidOutput = true;
         public void NotFound() => this.IsNotFound = true;
+
         public void Ok(Credit credit, Account account)
         {
             this.Credit = credit;

@@ -40,7 +40,7 @@ namespace WebApi.Modules.Common
                 });
             }
 
-            app.UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.All });
+            app.UseForwardedHeaders(new ForwardedHeadersOptions {ForwardedHeaders = ForwardedHeaders.All});
 
             return app;
         }

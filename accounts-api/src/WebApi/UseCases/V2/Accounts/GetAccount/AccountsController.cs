@@ -29,12 +29,9 @@ namespace WebApi.UseCases.V2.Accounts.GetAccount
     {
         private readonly Notification _notification;
 
-        public AccountsController(Notification notification)
-        {
-            this._notification = notification;
-        }
-
         private IActionResult? _viewModel;
+
+        public AccountsController(Notification notification) => this._notification = notification;
 
         void IOutputPort.Invalid()
         {
@@ -81,7 +78,7 @@ namespace WebApi.UseCases.V2.Accounts.GetAccount
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get(
             [FromServices] IGetAccountUseCase useCase,
-            [FromRoute][Required] GetAccountDetailsRequestV2 request)
+            [FromRoute] [Required] GetAccountDetailsRequestV2 request)
         {
             useCase.SetOutputPort(this);
 

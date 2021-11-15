@@ -2,35 +2,32 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using IdentityServer.Modules.Common;
-using IdentityServerHost.Quickstart.UI;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-
 namespace test3
 {
+    using IdentityServer.Modules.Common;
+    using IdentityServerHost.Quickstart.UI;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+
     public class Startup
     {
-        public IWebHostEnvironment Environment { get; }
-        public IConfiguration Configuration { get; }
-
         public Startup(IWebHostEnvironment environment, IConfiguration configuration)
         {
-            Environment = environment;
-            Configuration = configuration;
+            this.Environment = environment;
+            this.Configuration = configuration;
         }
+
+        public IWebHostEnvironment Environment { get; }
+        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
 
-            var builder = services.AddIdentityServer(options =>
+            IIdentityServerBuilder builder = services.AddIdentityServer(options =>
                 {
                     options.Events.RaiseErrorEvents = true;
                     options.Events.RaiseInformationEvents = true;
@@ -46,7 +43,7 @@ namespace test3
             builder.AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryApiResources(Config.GetApis())
-                .AddInMemoryClients(Config.GetClients(Configuration));
+                .AddInMemoryClients(Config.GetClients(this.Configuration));
 
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
@@ -69,7 +66,7 @@ namespace test3
 
         public void Configure(IApplicationBuilder app)
         {
-            if (Environment.IsDevelopment())
+            if (this.Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -82,10 +79,7 @@ namespace test3
             app.UseRouting();
             app.UseIdentityServer();
             app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapDefaultControllerRoute(); });
         }
     }
 }

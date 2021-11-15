@@ -31,12 +31,9 @@ namespace WebApi.UseCases.V1.Transactions.Transfer
     {
         private readonly Notification _notification;
 
-        public TransactionsController(Notification notification)
-        {
-            this._notification = notification;
-        }
-
         private IActionResult? _viewModel;
+
+        public TransactionsController(Notification notification) => this._notification = notification;
 
         void IOutputPort.OutOfFunds() => this._viewModel = this.BadRequest("Out of funds.");
 
@@ -71,10 +68,10 @@ namespace WebApi.UseCases.V1.Transactions.Transfer
         public async Task<IActionResult> Transfer(
 #pragma warning restore SCS0016 // Controller method is potentially vulnerable to Cross Site Request Forgery (CSRF).
             [FromServices] ITransferUseCase useCase,
-            [FromRoute][Required] Guid accountId,
-            [FromRoute][Required] Guid destinationAccountId,
-            [FromForm][Required] decimal amount,
-            [FromForm][Required] string currency)
+            [FromRoute] [Required] Guid accountId,
+            [FromRoute] [Required] Guid destinationAccountId,
+            [FromForm] [Required] decimal amount,
+            [FromForm] [Required] string currency)
         {
             useCase.SetOutputPort(this);
 

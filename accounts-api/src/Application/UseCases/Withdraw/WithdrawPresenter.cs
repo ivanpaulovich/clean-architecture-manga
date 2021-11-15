@@ -13,6 +13,7 @@ namespace Application.UseCases.Withdraw
         public void Invalid() => this.InvalidOutput = true;
         public void NotFound() => this.NotFoundOutput = true;
         public void OutOfFunds() => this.OutOfFundsOutput = true;
+
         public void Ok(Debit debit, Account account)
         {
             this.Account = account;

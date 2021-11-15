@@ -11,8 +11,8 @@ namespace Application.UseCases.OpenAccount
     /// <inheritdoc />
     public sealed class OpenAccountValidationUseCase : IOpenAccountUseCase
     {
-        private readonly IOpenAccountUseCase _useCase;
         private readonly Notification _notification;
+        private readonly IOpenAccountUseCase _useCase;
         private IOutputPort _outputPort;
 
         public OpenAccountValidationUseCase(IOpenAccountUseCase useCase, Notification notification)

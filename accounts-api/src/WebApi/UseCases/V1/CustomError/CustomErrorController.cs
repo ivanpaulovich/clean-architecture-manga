@@ -24,7 +24,7 @@ namespace WebApi.UseCases.V1.CustomError
         public IActionResult CustomError()
         {
             CustomErrorResponse model =
-                new CustomErrorResponse { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier };
+                new CustomErrorResponse {RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier};
 
             return this.View("~/UseCases/V1/CustomError/CustomError.cshtml", model);
         }

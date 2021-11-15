@@ -2,15 +2,15 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Text.Json;
-using IdentityModel;
-using IdentityServer4;
-using IdentityServer4.Test;
-
 namespace IdentityServerHost.Quickstart.UI
 {
+    using System.Collections.Generic;
+    using System.Security.Claims;
+    using System.Text.Json;
+    using IdentityModel;
+    using IdentityServer4;
+    using IdentityServer4.Test;
+
     public class TestUsers
     {
         public static List<TestUser> Users
@@ -40,7 +40,8 @@ namespace IdentityServerHost.Quickstart.UI
                             new Claim(JwtClaimTypes.Email, "AliceSmith@email.com"),
                             new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
                             new Claim(JwtClaimTypes.WebSite, "http://alice.com"),
-                            new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address), IdentityServerConstants.ClaimValueTypes.Json)
+                            new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address),
+                                IdentityServerConstants.ClaimValueTypes.Json)
                         }
                     },
                     new TestUser
@@ -56,7 +57,8 @@ namespace IdentityServerHost.Quickstart.UI
                             new Claim(JwtClaimTypes.Email, "BobSmith@email.com"),
                             new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
                             new Claim(JwtClaimTypes.WebSite, "http://bob.com"),
-                            new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address), IdentityServerConstants.ClaimValueTypes.Json)
+                            new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address),
+                                IdentityServerConstants.ClaimValueTypes.Json)
                         }
                     }
                 };
