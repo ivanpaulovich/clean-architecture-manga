@@ -1,67 +1,70 @@
 // Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
+using System.Threading.Tasks;
+using IdentityServer4.Models;
+using IdentityServer4.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
-namespace IdentityServerHost.Quickstart.UI
+namespace IdentityServer.Quickstart.Home;
+
+using System.Threading.Tasks;
+using IdentityServer4.Models;
+using IdentityServer4.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+
+[SecurityHeaders]
+[AllowAnonymous]
+public class HomeController : Controller
 {
-    using System.Threading.Tasks;
-    using IdentityServer4.Models;
-    using IdentityServer4.Services;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Hosting;
-    using Microsoft.Extensions.Logging;
+    private readonly IWebHostEnvironment _environment;
+    private readonly IIdentityServerInteractionService _interaction;
+    private readonly ILogger _logger;
 
-    [SecurityHeaders]
-    [AllowAnonymous]
-    public class HomeController : Controller
+    public HomeController(IIdentityServerInteractionService interaction, IWebHostEnvironment environment,
+        ILogger<HomeController> logger)
     {
-        private readonly IWebHostEnvironment _environment;
-        private readonly IIdentityServerInteractionService _interaction;
-        private readonly ILogger _logger;
+        _interaction = interaction;
+        _environment = environment;
+        _logger = logger;
+    }
 
-        public HomeController(IIdentityServerInteractionService interaction, IWebHostEnvironment environment,
-            ILogger<HomeController> logger)
-        {
-            this._interaction = interaction;
-            this._environment = environment;
-            this._logger = logger;
-        }
+    public IActionResult Index()
+    {
+        if (_environment.IsDevelopment())
+            // only show in development
+            return View();
 
-        public IActionResult Index()
+        _logger.LogInformation("Homepage is disabled in production. Returning 404.");
+        return NotFound();
+    }
+
+    /// <summary>
+    ///     Shows the error page
+    /// </summary>
+    public async Task<IActionResult> Error(string errorId)
+    {
+        var vm = new ErrorViewModel();
+
+        // retrieve error details from identityserver
+        var message = await _interaction.GetErrorContextAsync(errorId);
+        if (message != null)
         {
-            if (this._environment.IsDevelopment())
-            {
+            vm.Error = message;
+
+            if (!_environment.IsDevelopment())
                 // only show in development
-                return this.View();
-            }
-
-            this._logger.LogInformation("Homepage is disabled in production. Returning 404.");
-            return this.NotFound();
+                message.ErrorDescription = null;
         }
 
-        /// <summary>
-        ///     Shows the error page
-        /// </summary>
-        public async Task<IActionResult> Error(string errorId)
-        {
-            ErrorViewModel vm = new ErrorViewModel();
-
-            // retrieve error details from identityserver
-            ErrorMessage message = await this._interaction.GetErrorContextAsync(errorId);
-            if (message != null)
-            {
-                vm.Error = message;
-
-                if (!this._environment.IsDevelopment())
-                {
-                    // only show in development
-                    message.ErrorDescription = null;
-                }
-            }
-
-            return this.View("Error", vm);
-        }
+        return View("Error", vm);
     }
 }

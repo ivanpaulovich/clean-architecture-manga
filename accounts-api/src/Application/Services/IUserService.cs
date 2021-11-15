@@ -2,17 +2,16 @@
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
-namespace Application.Services
+namespace Application.Services;
+
+/// <summary>
+///     User Service.
+/// </summary>
+public interface IUserService
 {
     /// <summary>
-    ///     User Service.
+    ///     Gets the Current User Id.
     /// </summary>
-    public interface IUserService
-    {
-        /// <summary>
-        ///     Gets the Current User Id.
-        /// </summary>
-        /// <returns>User.</returns>
-        string GetCurrentUserId();
-    }
+    /// <returns>User.</returns>
+    string GetCurrentUserId();
 }

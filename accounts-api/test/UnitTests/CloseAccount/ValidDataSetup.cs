@@ -1,14 +1,13 @@
-namespace UnitTests.CloseAccount
-{
-    using Xunit;
+namespace UnitTests.CloseAccount;
 
-    internal sealed class ValidDataSetup : TheoryData<decimal>
+using Xunit;
+
+internal sealed class ValidDataSetup : TheoryData<decimal>
+{
+    public ValidDataSetup()
     {
-        public ValidDataSetup()
-        {
-            this.Add(0.5M);
-            this.Add(100M);
-            this.Add(200M);
-        }
+        this.Add(0.5M);
+        this.Add(100M);
+        this.Add(200M);
     }
 }

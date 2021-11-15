@@ -4,11 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "accounts-api", "accounts-api", "{51331007-CACA-4676-934B-217999A6B1E2}"
-	ProjectSection(SolutionItems) = preProject
-		accounts-api\.editorconfig = accounts-api\.editorconfig
-		accounts-api\Directory.Build.props = accounts-api\Directory.Build.props
-		accounts-api\nuget.config = accounts-api\nuget.config
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "identity-server", "identity-server", "{5829A64A-52DE-4656-A6C0-C06B1A6195E7}"
 EndProject

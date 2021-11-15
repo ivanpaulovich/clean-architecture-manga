@@ -1,9 +1,8 @@
-namespace EndToEndTests
-{
-    using Xunit;
+namespace EndToEndTests;
 
-    [CollectionDefinition("WebApi Collection")]
-    public sealed class CustomWebApplicationFactoryCollection : ICollectionFixture<CustomWebApplicationFactoryFixture>
-    {
-    }
+using Xunit;
+
+[CollectionDefinition("WebApi Collection")]
+public sealed class CustomWebApplicationFactoryCollection : ICollectionFixture<CustomWebApplicationFactoryFixture>
+{
 }

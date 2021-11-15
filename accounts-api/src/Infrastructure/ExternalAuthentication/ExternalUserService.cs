@@ -2,33 +2,32 @@
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
-namespace Infrastructure.ExternalAuthentication
+namespace Infrastructure.ExternalAuthentication;
+
+using System.Security.Claims;
+using Application.Services;
+using Microsoft.AspNetCore.Http;
+
+/// <inheritdoc />
+public sealed class ExternalUserService : IUserService
 {
-    using System.Security.Claims;
-    using Application.Services;
-    using Microsoft.AspNetCore.Http;
+    private readonly IHttpContextAccessor _httpContextAccessor;
+
+    /// <summary>
+    /// </summary>
+    /// <param name="httpContextAccessor"></param>
+    public ExternalUserService(
+        IHttpContextAccessor httpContextAccessor) =>
+        this._httpContextAccessor = httpContextAccessor;
 
     /// <inheritdoc />
-    public sealed class ExternalUserService : IUserService
+    public string GetCurrentUserId()
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        ClaimsPrincipal user = this._httpContextAccessor
+                .HttpContext!
+            .User;
 
-        /// <summary>
-        /// </summary>
-        /// <param name="httpContextAccessor"></param>
-        public ExternalUserService(
-            IHttpContextAccessor httpContextAccessor) =>
-            this._httpContextAccessor = httpContextAccessor;
-
-        /// <inheritdoc />
-        public string GetCurrentUserId()
-        {
-            ClaimsPrincipal user = this._httpContextAccessor
-                    .HttpContext!
-                .User;
-
-            string id = user.FindFirst("sub")?.Value!;
-            return id;
-        }
+        string id = user.FindFirst("sub")?.Value!;
+        return id;
     }
 }

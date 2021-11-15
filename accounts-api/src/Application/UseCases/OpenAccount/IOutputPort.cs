@@ -2,28 +2,27 @@
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
-namespace Application.UseCases.OpenAccount
+namespace Application.UseCases.OpenAccount;
+
+using Domain;
+
+/// <summary>
+///     Open Account Output Port.
+/// </summary>
+public interface IOutputPort
 {
-    using Domain;
+    /// <summary>
+    ///     Account open.
+    /// </summary>
+    void Ok(Account account);
 
     /// <summary>
-    ///     Open Account Output Port.
+    ///     Resource not found.
     /// </summary>
-    public interface IOutputPort
-    {
-        /// <summary>
-        ///     Account open.
-        /// </summary>
-        void Ok(Account account);
+    void NotFound();
 
-        /// <summary>
-        ///     Resource not found.
-        /// </summary>
-        void NotFound();
-
-        /// <summary>
-        ///     Invalid input.
-        /// </summary>
-        void Invalid();
-    }
+    /// <summary>
+    ///     Invalid input.
+    /// </summary>
+    void Invalid();
 }

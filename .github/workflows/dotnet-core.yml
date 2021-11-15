@@ -6,17 +6,22 @@ jobs:
   build_docker_image:
     env:
       PersistenceModule__DefaultConnection: Server=localhost;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts;
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+    - uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0.x'
+        include-prerelease: true
     - name: Setup Database then Run Tests
       run: |
+        dotnet --version
         docker pull mcr.microsoft.com/mssql/server:2019-latest
         docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=<YourStrong!Passw0rd>' -p 1433:1433 --name sql1 -d mcr.microsoft.com/mssql/server:2019-latest
         sleep 10
+        dotnet build
         pushd accounts-api
-        dotnet tool update --global dotnet-ef --version 3.1.8
+        dotnet tool update --global dotnet-ef
         dotnet ef database update --project src/Infrastructure --startup-project src/WebApi
         popd
-        dotnet build
         dotnet test

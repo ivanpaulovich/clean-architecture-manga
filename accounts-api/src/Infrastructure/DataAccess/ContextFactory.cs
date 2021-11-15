@@ -2,48 +2,47 @@
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
-namespace Infrastructure.DataAccess
+namespace Infrastructure.DataAccess;
+
+using System;
+using System.IO;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
+
+/// <summary>
+///     ContextFactory.
+/// </summary>
+public sealed class ContextFactory : IDesignTimeDbContextFactory<MangaContext>
 {
-    using System;
-    using System.IO;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Design;
-    using Microsoft.Extensions.Configuration;
-
     /// <summary>
-    ///     ContextFactory.
+    ///     Instantiate a MangaContext.
     /// </summary>
-    public sealed class ContextFactory : IDesignTimeDbContextFactory<MangaContext>
+    /// <param name="args">Command line args.</param>
+    /// <returns>Manga Context.</returns>
+    public MangaContext CreateDbContext(string[] args)
     {
-        /// <summary>
-        ///     Instantiate a MangaContext.
-        /// </summary>
-        /// <param name="args">Command line args.</param>
-        /// <returns>Manga Context.</returns>
-        public MangaContext CreateDbContext(string[] args)
-        {
-            string connectionString = ReadDefaultConnectionStringFromAppSettings();
+        string connectionString = ReadDefaultConnectionStringFromAppSettings();
 
-            DbContextOptionsBuilder<MangaContext> builder = new DbContextOptionsBuilder<MangaContext>();
-            Console.WriteLine(connectionString);
-            builder.UseSqlServer(connectionString);
-            builder.EnableSensitiveDataLogging();
-            return new MangaContext(builder.Options);
-        }
+        DbContextOptionsBuilder<MangaContext> builder = new DbContextOptionsBuilder<MangaContext>();
+        Console.WriteLine(connectionString);
+        builder.UseSqlServer(connectionString);
+        builder.EnableSensitiveDataLogging();
+        return new MangaContext(builder.Options);
+    }
 
-        private static string ReadDefaultConnectionStringFromAppSettings()
-        {
-            string? envName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+    private static string ReadDefaultConnectionStringFromAppSettings()
+    {
+        string? envName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory()))
-                .AddJsonFile("appsettings.json", false)
-                .AddJsonFile($"appsettings.{envName}.json", false)
-                .AddEnvironmentVariables()
-                .Build();
+        IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(Path.Combine(Directory.GetCurrentDirectory()))
+            .AddJsonFile("appsettings.json", false)
+            .AddJsonFile($"appsettings.{envName}.json", false)
+            .AddEnvironmentVariables()
+            .Build();
 
-            string connectionString = configuration.GetValue<string>("PersistenceModule:DefaultConnection");
-            return connectionString;
-        }
+        string connectionString = configuration.GetValue<string>("PersistenceModule:DefaultConnection");
+        return connectionString;
     }
 }

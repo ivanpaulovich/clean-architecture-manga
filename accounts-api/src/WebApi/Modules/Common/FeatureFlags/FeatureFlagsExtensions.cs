@@ -1,30 +1,29 @@
-namespace WebApi.Modules.Common.FeatureFlags
+namespace WebApi.Modules.Common.FeatureFlags;
+
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.FeatureManagement;
+
+/// <summary>
+///     Feature Flags Extension.
+/// </summary>
+public static class FeatureFlagsExtensions
 {
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.FeatureManagement;
-
     /// <summary>
-    ///     Feature Flags Extension.
+    ///     Add Feature Flags dependencies.
     /// </summary>
-    public static class FeatureFlagsExtensions
+    public static IServiceCollection AddFeatureFlags(this IServiceCollection services, IConfiguration configuration)
     {
-        /// <summary>
-        ///     Add Feature Flags dependencies.
-        /// </summary>
-        public static IServiceCollection AddFeatureFlags(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddFeatureManagement(configuration);
+        services.AddFeatureManagement(configuration);
 
-            IFeatureManager featureManager = services.BuildServiceProvider()
-                .GetRequiredService<IFeatureManager>();
+        IFeatureManager featureManager = services.BuildServiceProvider()
+            .GetRequiredService<IFeatureManager>();
 
-            services.AddMvc()
-                .ConfigureApplicationPartManager(apm =>
-                    apm.FeatureProviders.Add(
-                        new CustomControllerFeatureProvider(featureManager)));
+        services.AddMvc()
+            .ConfigureApplicationPartManager(apm =>
+                apm.FeatureProviders.Add(
+                    new CustomControllerFeatureProvider(featureManager)));
 
-            return services;
-        }
+        return services;
     }
 }

@@ -1,28 +1,27 @@
-namespace EndToEndTests.V1
+namespace EndToEndTests.V1;
+
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Xunit;
+
+[Collection("WebApi Collection")]
+public sealed class GetAccountsTests
 {
-    using System.Net;
-    using System.Net.Http;
-    using System.Threading.Tasks;
-    using Xunit;
+    private readonly CustomWebApplicationFactoryFixture _fixture;
+    public GetAccountsTests(CustomWebApplicationFactoryFixture fixture) => this._fixture = fixture;
 
-    [Collection("WebApi Collection")]
-    public sealed class GetAccountsTests
+    [Fact]
+    public async Task GetAccountsReturnsList()
     {
-        private readonly CustomWebApplicationFactoryFixture _fixture;
-        public GetAccountsTests(CustomWebApplicationFactoryFixture fixture) => this._fixture = fixture;
+        HttpClient client = this._fixture
+            .CustomWebApplicationFactory
+            .CreateClient();
 
-        [Fact]
-        public async Task GetAccountsReturnsList()
-        {
-            HttpClient client = this._fixture
-                .CustomWebApplicationFactory
-                .CreateClient();
+        HttpResponseMessage actualResponse = await client
+            .GetAsync("/api/v1/Accounts/")
+            .ConfigureAwait(false);
 
-            HttpResponseMessage actualResponse = await client
-                .GetAsync("/api/v1/Accounts/")
-                .ConfigureAwait(false);
-
-            Assert.Equal(HttpStatusCode.OK, actualResponse.StatusCode);
-        }
+        Assert.Equal(HttpStatusCode.OK, actualResponse.StatusCode);
     }
 }

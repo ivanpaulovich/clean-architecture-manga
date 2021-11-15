@@ -1,18 +1,17 @@
-namespace ComponentTests
+namespace ComponentTests;
+
+using System;
+
+/// <summary>
+/// </summary>
+public sealed class CustomWebApplicationFactoryFixture : IDisposable
 {
-    using System;
+    public CustomWebApplicationFactoryFixture() =>
+        this.CustomWebApplicationFactory = new CustomWebApplicationFactory();
 
     /// <summary>
     /// </summary>
-    public sealed class CustomWebApplicationFactoryFixture : IDisposable
-    {
-        public CustomWebApplicationFactoryFixture() =>
-            this.CustomWebApplicationFactory = new CustomWebApplicationFactory();
+    public CustomWebApplicationFactory CustomWebApplicationFactory { get; }
 
-        /// <summary>
-        /// </summary>
-        public CustomWebApplicationFactory CustomWebApplicationFactory { get; }
-
-        public void Dispose() => this.CustomWebApplicationFactory?.Dispose();
-    }
+    public void Dispose() => this.CustomWebApplicationFactory?.Dispose();
 }

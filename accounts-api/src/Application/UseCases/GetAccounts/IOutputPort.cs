@@ -2,19 +2,18 @@
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
-namespace Application.UseCases.GetAccounts
-{
-    using System.Collections.Generic;
-    using Domain;
+namespace Application.UseCases.GetAccounts;
 
+using System.Collections.Generic;
+using Domain;
+
+/// <summary>
+///     Output Port.
+/// </summary>
+public interface IOutputPort
+{
     /// <summary>
-    ///     Output Port.
+    ///     Listed accounts.
     /// </summary>
-    public interface IOutputPort
-    {
-        /// <summary>
-        ///     Listed accounts.
-        /// </summary>
-        void Ok(IList<Account> accounts);
-    }
+    void Ok(IList<Account> accounts);
 }

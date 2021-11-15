@@ -2,55 +2,54 @@
 // Copyright © Ivan Paulovich. All rights reserved.
 // </copyright>
 
-namespace Application.UseCases.GetAccount
+namespace Application.UseCases.GetAccount;
+
+using System;
+using System.Threading.Tasks;
+using Services;
+
+/// <inheritdoc />
+public sealed class GetAccountValidationUseCase : IGetAccountUseCase
 {
-    using System;
-    using System.Threading.Tasks;
-    using Services;
+    private readonly Notification _notification;
+    private readonly IGetAccountUseCase _useCase;
+    private IOutputPort _outputPort;
+
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="GetAccountValidationUseCase" /> class.
+    /// </summary>
+    public GetAccountValidationUseCase(IGetAccountUseCase useCase, Notification notification)
+    {
+        this._useCase = useCase;
+        this._notification = notification;
+        this._outputPort = new GetAccountPresenter();
+    }
 
     /// <inheritdoc />
-    public sealed class GetAccountValidationUseCase : IGetAccountUseCase
+    public void SetOutputPort(IOutputPort outputPort)
     {
-        private readonly Notification _notification;
-        private readonly IGetAccountUseCase _useCase;
-        private IOutputPort _outputPort;
+        this._outputPort = outputPort;
+        this._useCase.SetOutputPort(outputPort);
+    }
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="GetAccountValidationUseCase" /> class.
-        /// </summary>
-        public GetAccountValidationUseCase(IGetAccountUseCase useCase, Notification notification)
+    /// <inheritdoc />
+    public async Task Execute(Guid accountId)
+    {
+        if (accountId == Guid.Empty)
         {
-            this._useCase = useCase;
-            this._notification = notification;
-            this._outputPort = new GetAccountPresenter();
+            this._notification
+                .Add(nameof(accountId), "AccountId is required.");
         }
 
-        /// <inheritdoc />
-        public void SetOutputPort(IOutputPort outputPort)
+        if (this._notification
+            .IsInvalid)
         {
-            this._outputPort = outputPort;
-            this._useCase.SetOutputPort(outputPort);
+            this._outputPort.Invalid();
+            return;
         }
 
-        /// <inheritdoc />
-        public async Task Execute(Guid accountId)
-        {
-            if (accountId == Guid.Empty)
-            {
-                this._notification
-                    .Add(nameof(accountId), "AccountId is required.");
-            }
-
-            if (this._notification
-                .IsInvalid)
-            {
-                this._outputPort.Invalid();
-                return;
-            }
-
-            await this._useCase
-                .Execute(accountId)
-                .ConfigureAwait(false);
-        }
+        await this._useCase
+            .Execute(accountId)
+            .ConfigureAwait(false);
     }
 }
