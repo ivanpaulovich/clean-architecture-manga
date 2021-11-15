@@ -14,11 +14,12 @@ jobs:
     - uses: actions/checkout@v2
     - name: Setup Database then Run Tests
       run: |
+        dotnet --version
         docker pull mcr.microsoft.com/mssql/server:2019-latest
         docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=<YourStrong!Passw0rd>' -p 1433:1433 --name sql1 -d mcr.microsoft.com/mssql/server:2019-latest
         sleep 10
         pushd accounts-api
-        dotnet tool update --global dotnet-ef --version 3.1.8
+        dotnet tool update --global dotnet-ef
         dotnet ef database update --project src/Infrastructure --startup-project src/WebApi
         popd
         dotnet build
