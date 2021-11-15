@@ -56,7 +56,7 @@ namespace WebApi.UseCases.V1.Accounts.GetAccount
         [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Find))]
         public async Task<IActionResult> Get(
             [FromServices] IGetAccountUseCase useCase,
-            [FromRoute][Required] Guid accountId)
+            [FromRoute] [Required] Guid accountId)
         {
             useCase.SetOutputPort(this);
 

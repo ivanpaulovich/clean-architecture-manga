@@ -64,9 +64,9 @@ namespace WebApi.UseCases.V1.Transactions.Deposit
         public async Task<IActionResult> Deposit(
 #pragma warning restore SCS0016 // Controller method is potentially vulnerable to Cross Site Request Forgery (CSRF).
             [FromServices] IDepositUseCase useCase,
-            [FromRoute][Required] Guid accountId,
-            [FromForm][Required] decimal amount,
-            [FromForm][Required] string currency)
+            [FromRoute] [Required] Guid accountId,
+            [FromForm] [Required] decimal amount,
+            [FromForm] [Required] string currency)
         {
             useCase.SetOutputPort(this);
 

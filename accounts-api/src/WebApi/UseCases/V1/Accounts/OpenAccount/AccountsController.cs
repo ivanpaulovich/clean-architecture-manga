@@ -62,8 +62,8 @@ namespace WebApi.UseCases.V1.Accounts.OpenAccount
         public async Task<IActionResult> Post(
 #pragma warning restore SCS0016 // Controller method is potentially vulnerable to Cross Site Request Forgery (CSRF).
             [FromServices] IOpenAccountUseCase useCase,
-            [FromForm][Required] decimal amount,
-            [FromForm][Required] string currency)
+            [FromForm] [Required] decimal amount,
+            [FromForm] [Required] string currency)
         {
             useCase.SetOutputPort(this);
 
