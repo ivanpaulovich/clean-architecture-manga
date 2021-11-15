@@ -6,9 +6,12 @@ jobs:
   build_docker_image:
     env:
       PersistenceModule__DefaultConnection: Server=localhost;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts;
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: ['6.0.x' ]
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Setup Database then Run Tests
       run: |
         docker pull mcr.microsoft.com/mssql/server:2019-latest
