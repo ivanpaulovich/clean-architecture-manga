@@ -5,26 +5,17 @@ Sample implementation of the **Clean Architecture Principles with .NET Core**. U
 
 We support two versions:
 
-- [.NET Core 3.1](https://github.com/ivanpaulovich/clean-architecture-manga) - .NET Core.
-- [.NET 5](https://github.com/ivanpaulovich/clean-architecture-manga/tree/dotnet5) - .NET 5 version.
+- [.NET 6](https://github.com/ivanpaulovich/clean-architecture-manga/tree/main) - .NET 6.
+- [.NET 5](https://github.com/ivanpaulovich/clean-architecture-manga/tree/dotnet5.0) - .NET 5.
+- [.NET Core 3.1](https://github.com/ivanpaulovich/clean-architecture-manga/tree/dotnet3.1) - .NET Core 3.1.
 
-> Hit the `WATCH` button to get the latest Clean Architecture updates. <img src="https://emojis.slackmojis.com/emojis/images/1471045863/884/ninja.gif?1471045863" width="32" height="32" />
+> Hit the `WATCH` button to get the latest Clean Architecture updates.
 
-Manga is a Virtual Wallet Solution in which the customer register an account then manage the balance by `Deposits`, `Withdraws` and `Transfers` operations.
-
-The Web API's demo is hosted on Azure servers and there's a beautiful [Swagger Client](https://clean-architecture-manga.azurewebsites.net/swagger/index.html) available.
-[![Swagger Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/docs/docs/clean-architecture-manga-swagger-v2.jpg)](https://clean-architecture-manga.azurewebsites.net/swagger/index.html)
+Manga is a Virtual Wallet Solution in which the customer register an account then manage the balance by `Deposit`, `Withdraw` and `Transfer` operations.
 
 We also support the React client:
 
 [![React+Redux Demo](https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/docs/docs/clean-architecture-manga-react.png)](https://clean-architecture-manga.azurewebsites.net)
-
-<p align="center">
-  Run the Docker container in less than 2 minutes using Play With Docker:
-  <br>
-  <br>
-  <a href="https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/ivanpaulovich/clean-architecture-manga/master/.docker/docker-compose.yml&amp;stack_name=clean-architecture-manga" rel="nofollow"><img src="https://raw.githubusercontent.com/play-with-docker/stacks/master/assets/images/button.png" alt="Try in PWD" style="max-width:100%;"></a>
-</p>
 
 ## Build & Run
 
@@ -33,13 +24,13 @@ To startup the whole solution, execute the following command:
 Windows:
 
 ```ps1
-PS cd docker && ./setup.ps1
+PS cd .docker && ./setup.ps1
 ```
 
 MacOS:
 
 ```sh
-$ cd docker && ./setup.sh
+$ cd .docker && ./setup.sh
 ```
 
 Then the following containers should be running on `docker ps`:
