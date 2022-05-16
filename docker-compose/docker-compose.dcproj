@@ -27,4 +27,7 @@
     <None Include="setup.production.sh" />
     <None Include="setup.ps1" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="https\**" />
+  </ItemGroup>
 </Project>
