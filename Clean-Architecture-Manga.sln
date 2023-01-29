@@ -34,7 +34,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".vscode", ".vscode", "{02D5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "identity-server\IdentityServer.csproj", "{01537DBF-3C0F-4B83-A089-0D12E5CA06C6}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", ".docker\docker-compose.dcproj", "{A0517AF3-3B35-443A-80DC-FF94F10CF056}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose\docker-compose.dcproj", "{A0517AF3-3B35-443A-80DC-FF94F10CF056}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "accounts-api\src\Domain\Domain.csproj", "{0925FCA6-083A-4478-80F3-2391987AAF2C}"
 EndProject
