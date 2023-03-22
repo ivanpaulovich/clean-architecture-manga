@@ -16,10 +16,10 @@ public sealed class ConvertEuroToDollarTests
         ServiceCollection serviceCollection = new ServiceCollection();
 
         serviceCollection.AddHttpClient(CurrencyExchangeService.HttpClientName);
-        serviceCollection.AddSingleton<CurrencyExchangeService>();
+        serviceCollection.AddSingleton<CurrencyExchangeFake>();
 
         ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
-        CurrencyExchangeService sut = serviceProvider.GetRequiredService<CurrencyExchangeService>();
+        CurrencyExchangeFake sut = serviceProvider.GetRequiredService<CurrencyExchangeFake>();
 
         Money usdMoney = new Money(100, Currency.Euro);
         Money actual = await sut.Convert(usdMoney, Currency.Dollar);
