@@ -57,7 +57,7 @@ public sealed class CurrencyExchangeService : ICurrencyExchange
 
     private void ParseCurrencies(string responseJson)
     {
-        JObject? rates = JObject.Parse(responseJson);
+        JObject rates = JObject.Parse(responseJson);
         decimal eur = rates["rates"]![Currency.Euro.Code]!.Value<decimal>();
         decimal cad = rates["rates"]![Currency.Canadian.Code]!.Value<decimal>();
         decimal gbh = rates["rates"]![Currency.BritishPound.Code]!.Value<decimal>();

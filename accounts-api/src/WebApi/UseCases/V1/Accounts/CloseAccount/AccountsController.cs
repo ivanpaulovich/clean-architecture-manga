@@ -29,7 +29,7 @@ public sealed class AccountsController : ControllerBase, IOutputPort
     private readonly Notification _notification;
     private readonly ICloseAccountUseCase _useCase;
 
-    private IActionResult? _viewModel;
+    private IActionResult _viewModel;
 
     public AccountsController(ICloseAccountUseCase useCase, Notification notification)
     {

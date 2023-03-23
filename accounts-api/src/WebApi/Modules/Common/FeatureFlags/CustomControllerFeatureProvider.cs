@@ -43,7 +43,7 @@ public sealed class CustomControllerFeatureProvider : IApplicationFeatureProvide
                     continue;
                 }
 
-                foreach (object? argumentValue in arguments)
+                foreach (object argumentValue in arguments)
                 {
                     CustomAttributeTypedArgument typedArgument = (CustomAttributeTypedArgument)argumentValue!;
                     CustomFeature typedArgumentValue = (CustomFeature)(int)typedArgument.Value!;

@@ -28,7 +28,7 @@ public sealed class AccountsController : ControllerBase, IOutputPort
 {
     private readonly Notification _notification;
 
-    private IActionResult? _viewModel;
+    private IActionResult _viewModel;
 
     public AccountsController(Notification notification) => this._notification = notification;
 

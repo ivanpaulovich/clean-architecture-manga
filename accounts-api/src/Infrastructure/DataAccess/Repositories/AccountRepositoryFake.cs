@@ -40,7 +40,7 @@ public sealed class AccountRepositoryFake : IAccountRepository
     /// <inheritdoc />
     public async Task Delete(AccountId accountId)
     {
-        Account? accountOld = this._context
+        Account accountOld = this._context
             .Accounts
             .SingleOrDefault(e => e.AccountId.Equals(accountId));
 
@@ -59,7 +59,7 @@ public sealed class AccountRepositoryFake : IAccountRepository
 
     public async Task<IAccount> Find(AccountId accountId, string externalUserId)
     {
-        Account? account = this._context
+        Account account = this._context
             .Accounts
             .Where(e => e.ExternalUserId == externalUserId && e.AccountId.Equals(accountId))
             .Select(e => e)
@@ -77,7 +77,7 @@ public sealed class AccountRepositoryFake : IAccountRepository
     /// <inheritdoc />
     public async Task<IAccount> GetAccount(AccountId accountId)
     {
-        Account? account = this._context
+        Account account = this._context
             .Accounts
             .SingleOrDefault(e => e.AccountId.Equals(accountId));
 
@@ -105,7 +105,7 @@ public sealed class AccountRepositoryFake : IAccountRepository
     /// <inheritdoc />
     public async Task Update(Account account, Credit credit)
     {
-        Account? accountOld = this._context
+        Account accountOld = this._context
             .Accounts
             .SingleOrDefault(e => e.AccountId.Equals(account.AccountId));
 
@@ -124,7 +124,7 @@ public sealed class AccountRepositoryFake : IAccountRepository
     /// <inheritdoc />
     public async Task Update(Account account, Debit debit)
     {
-        Account? accountOld = this._context
+        Account accountOld = this._context
             .Accounts
             .SingleOrDefault(e => e.AccountId.Equals(account.AccountId));
 

@@ -26,7 +26,7 @@ public sealed class AccountsController : ControllerBase, IOutputPort
 {
     private readonly IGetAccountsUseCase _useCase;
 
-    private IActionResult? _viewModel;
+    private IActionResult _viewModel;
 
     public AccountsController(IGetAccountsUseCase useCase) => this._useCase = useCase;
 

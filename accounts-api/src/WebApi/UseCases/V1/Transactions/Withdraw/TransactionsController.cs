@@ -31,7 +31,7 @@ public sealed class TransactionsController : ControllerBase, IOutputPort
 {
     private readonly Notification _notification;
 
-    private IActionResult? _viewModel;
+    private IActionResult _viewModel;
 
     public TransactionsController(Notification notification) => this._notification = notification;
 
