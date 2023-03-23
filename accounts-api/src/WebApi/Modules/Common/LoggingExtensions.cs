@@ -21,7 +21,7 @@ public static class LoggingExtensions
         {
             o.InvalidModelStateResponseFactory = actionContext =>
             {
-                ILogger<Startup>? logger = actionContext
+                ILogger<Startup> logger = actionContext
                     .HttpContext
                     .RequestServices
                     .GetRequiredService<ILogger<Startup>>();

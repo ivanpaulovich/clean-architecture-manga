@@ -63,8 +63,8 @@ public sealed class SunnyDayTests : IClassFixture<CustomWebApplicationFactory>
         HttpClient client = this._factory.CreateClient();
         FormUrlEncodedContent content = new FormUrlEncodedContent(new[]
         {
-                new KeyValuePair<string?, string?>("amount", amount.ToString(CultureInfo.InvariantCulture)),
-                new KeyValuePair<string?, string?>("currency", "USD")
+                new KeyValuePair<string, string>("amount", amount.ToString(CultureInfo.InvariantCulture)),
+                new KeyValuePair<string, string>("currency", "USD")
             });
 
         HttpResponseMessage response = await client.PatchAsync($"api/v1/Transactions/{account}/Deposit", content)
@@ -83,8 +83,8 @@ public sealed class SunnyDayTests : IClassFixture<CustomWebApplicationFactory>
 
         FormUrlEncodedContent content = new FormUrlEncodedContent(new[]
         {
-                new KeyValuePair<string?, string?>("amount", amount.ToString(CultureInfo.InvariantCulture)),
-                new KeyValuePair<string?, string?>("currency", "USD")
+                new KeyValuePair<string, string>("amount", amount.ToString(CultureInfo.InvariantCulture)),
+                new KeyValuePair<string, string>("currency", "USD")
             });
 
         HttpResponseMessage response = await client.PatchAsync($"api/v1/Transactions/{account}/Withdraw", content)

@@ -33,7 +33,7 @@ public sealed class ContextFactory : IDesignTimeDbContextFactory<MangaContext>
 
     private static string ReadDefaultConnectionStringFromAppSettings()
     {
-        string? envName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+        string envName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
         IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(Path.Combine(Directory.GetCurrentDirectory()))
