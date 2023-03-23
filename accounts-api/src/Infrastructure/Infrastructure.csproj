@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <LangVersion>preview</LangVersion>
     <NoWarn>$(NoWarn);CA1062;1591</NoWarn>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <NullableReferenceTypes>true</NullableReferenceTypes>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
