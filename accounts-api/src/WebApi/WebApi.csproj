@@ -43,7 +43,7 @@
     <PackageReference Include="prometheus-net.AspNetCore" Version="8.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <!-- Decorator injection comparison https://greatrexpectations.com/2018/10/25/decorators-in-net-core-with-dependency-injection -->
-    <PackageReference Include="Scrutor" Version="4.2.1" />
+    <PackageReference Include="Scrutor" Version="4.2.2" />
   </ItemGroup>
 
   <ItemGroup>
