@@ -56,5 +56,6 @@ services:
     environment:
       SA_PASSWORD: "<YourStrong!Passw0rd>"
       ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
     ports:
       - "1433:1433"
