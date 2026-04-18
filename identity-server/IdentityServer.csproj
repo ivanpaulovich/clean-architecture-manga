@@ -7,7 +7,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="IdentityServer4" Version="4.1.2" />
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="7.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="7.0.8" />
 		<PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
 	</ItemGroup>
