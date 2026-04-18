@@ -1,4 +1,4 @@
-import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import { createTheme } from "@material-ui/core/styles";
 import { blue, grey, pink, red, deepOrange, orange, teal, green, amber, lime, purple } from "@material-ui/core/colors";
 
 export const availableThemes = [
@@ -58,10 +58,10 @@ const defaultTheme = {
   }
 };
 
-const theme = createMuiTheme(defaultTheme);
+const theme = createTheme(defaultTheme);
 
 export const customTheme = option => {
-  return createMuiTheme({ ...defaultTheme, ...option });
+  return createTheme({ ...defaultTheme, ...option });
 };
 
 export default theme;

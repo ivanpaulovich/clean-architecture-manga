@@ -6,8 +6,8 @@ services:
       context: ../nginx/
     container_name: wallet.local
     volumes:
-      - ../.docker/https/localhost.crt:/etc/ssl/certs/localhost.crt:ro
-      - ../.docker/https/localhost.key:/etc/ssl/private/localhost.key:ro
+      - ../docker-compose/https/localhost.crt:/etc/ssl/certs/localhost.crt:ro
+      - ../docker-compose/https/localhost.key:/etc/ssl/private/localhost.key:ro
     links:
       - accounts-api
       - identity-server
@@ -24,9 +24,9 @@ services:
       - ASPNETCORE_BASEPATH=/accounts-api
       - ASPNETCORE_Kestrel__Certificates__Default__Password=MyCertificatePassword
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
-      - PersistenceModule__DefaultConnection=Server=sql1;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts;
+      - PersistenceModule__DefaultConnection=Server=sql1;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts;TrustServerCertificate=true;
     volumes:
-      - ../.docker/https:/https:ro
+      - ../docker-compose/https:/https:ro
     depends_on:
       - sql1
       - accounts-api-seed
@@ -37,7 +37,7 @@ services:
       context: ../accounts-api/
       dockerfile: ../accounts-api-seed/Dockerfile
     environment:
-      - PersistenceModule__DefaultConnection=Server=sql1;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts;
+      - PersistenceModule__DefaultConnection=Server=sql1;User Id=sa;Password=<YourStrong!Passw0rd>;Database=Accounts;TrustServerCertificate=true;
     command: bash -c "/root/.dotnet/tools/dotnet-ef database update --project src/Infrastructure --startup-project src/WebApi"
     depends_on:
       - sql1
@@ -51,7 +51,7 @@ services:
       - ASPNETCORE_Kestrel__Certificates__Default__Password=MyCertificatePassword
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
     volumes:
-      - ../.docker/https:/https:ro
+      - ../docker-compose/https:/https:ro
     build:
       context: ../
       dockerfile: identity-server/Dockerfile
@@ -63,9 +63,10 @@ services:
     build:
       context: ../wallet-spa/
   sql1:
-    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
     environment:
-      SA_PASSWORD: "<YourStrong!Passw0rd>"
+      MSSQL_SA_PASSWORD: "<YourStrong!Passw0rd>"
       ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
     ports:
       - "1433:1433"
