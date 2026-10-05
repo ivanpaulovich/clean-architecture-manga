@@ -20,6 +20,20 @@ We also support the React client:
 ## Build & Run
 
 To startup the whole solution, execute the following command:
+### 🔍 Docker Environment & Upstream NGINX Initialization Troubleshooting
+
+If the `docker_nginx` container fails to initialize during startup with an upstream resolution error (e.g., `[emerg] host not found in upstream "accounts-api"`), this indicates a sequential runtime lifecycle synchronization bottleneck within your local virtual networks. 
+
+To resolve this environment conflict, apply the following decoupling configuration verifications:
+1. **Verify Host Network Binding:** Ensure your local configuration layout includes the necessary loopback mapping. Explicitly verify that `127.0.0.1 wallet.local` is bound inside your system's host file architecture.
+2. **Sequential Container Upstream Checks:** If the Nginx routing container initializes before the core backend endpoints (`accounts-api`) complete their operational bootstrap sequences, Nginx will fail to resolve the upstream target. Execute a complete teardown and enforce a forced cache sequence alignment:
+   ```
+   docker-compose down --volumes
+   docker-compose build --no-cache
+   docker-compose up -d --force-recreate
+   ``` 
+3. **Verify API Migration Completions:** Confirm that database initialization containers (`docker_accounts-api-seeds`) have completely finished executing migration pipelines before verifying frontend portal traffic routes.
+
 
 Windows:
 
